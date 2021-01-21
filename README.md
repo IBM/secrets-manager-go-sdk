@@ -22,7 +22,7 @@ The IBM Cloud Secrets Manager Go SDK allows developers to programmatically inter
 
 Service name | Package name
 --- | --- 
-[Secrets Manager](https://cloud.ibm.com/apidocs/secrets-manager)  |ibmcloudsecretsmanagerapiv1 
+[Secrets Manager](https://cloud.ibm.com/apidocs/secrets-manager)  | ibm-cloud-secrets-manager-api-v1 
 
 ## Prerequisites
 
