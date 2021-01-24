@@ -1,0 +1,22 @@
+on: [push, pull_request]
+name: Run tests
+jobs:
+  test:
+    strategy:
+      matrix:
+        go-version: [1.14.x, 1.15.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Integration tests
+      run: go test ./...
+      env:
+        SECRETS_MANAGER_API_AUTH_TYPE: iam
+        SECRETS_MANAGER_API_APIKEY: ${{ secrets.SECRETS_MANAGER_API_APIKEY }}
+        SERVICE_URL: https://9476d663-dc80-4132-aff6-4585ebbdfb2d.us-south.secrets-manager.appdomain.cloud
