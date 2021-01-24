@@ -15,7 +15,7 @@ jobs:
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-          BUILD_NUMBER: ${{ GITHUB_RUN_NUMBER }}
+          BUILD_NUMBER: ${ GITHUB_RUN_NUMBER }
         with:
           tag_name: 0.0.${BUILD_NUMBER}
           release_name: Release 0.0.${BUILD_NUMBER}
