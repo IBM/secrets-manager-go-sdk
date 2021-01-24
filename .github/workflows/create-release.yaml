@@ -9,18 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Changelog
+        uses: scottbrenner/generate-changelog-action@master
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-          BUILD_NUMBER: ${ GITHUB_RUN_NUMBER }
         with:
-          tag_name: 0.0.${BUILD_NUMBER}
-          release_name: Release 0.0.${BUILD_NUMBER}
+          tag_name: 0.0.${{ github.run_number }}
+          release_name: Release 0.0.${{ github.run_number }}
           body: |
-            Changes in this Release
-            - ...
+            ${{ steps.Changelog.outputs.changelog }}
           draft: false
           prerelease: false
