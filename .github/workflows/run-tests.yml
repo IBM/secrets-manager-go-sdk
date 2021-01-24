@@ -1,10 +1,12 @@
-on: [push, pull_request]
+on: 
+- pull_request
 name: Run tests
 jobs:
   test:
     strategy:
       matrix:
-        go-version: [1.14.x, 1.15.x]
+        go-version: 
+        - 1.14.x
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
