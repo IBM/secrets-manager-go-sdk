@@ -1,6 +1,6 @@
-module github.ibm.com/security-services/secrets-manager-sdk-golang
+module github.com/IBM/secrets-manager-go-sdk
 
-go 1.15
+go 1.14
 
 require (
 	github.com/IBM/go-sdk-core/v4 v4.9.0
