@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package ibm_cloud_secrets_manager_api_v1_test
+package ibm_cloud_secrets_manager_api_v1
 
 import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/IBM/go-sdk-core/v4/core"
-	"github.com/IBM/secrets-manager-go-sdk/ibm-cloud-secrets-manager-api-v1"
+	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -37,22 +36,22 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 	var testServer *httptest.Server
 	Describe(`Service constructor tests`, func() {
 		It(`Instantiate service client`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 			Expect(serviceErr).To(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid URL`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 			Expect(ibmCloudSecretsManagerApiService).To(BeNil())
 			Expect(serviceErr).ToNot(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid Auth`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
-				URL: "https://ibm-cloud-secrets-manager-api-v1/api",
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
+				URL: "https://ibmcloudsecretsmanagerapiv1/api",
 				Authenticator: &core.BasicAuthenticator{
 					Username: "",
 					Password: "",
@@ -66,13 +65,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -85,7 +85,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 					URL: "https://testService/api",
 				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -101,7 +101,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -119,12 +120,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(ibmCloudSecretsManagerApiService).To(BeNil())
@@ -135,11 +137,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "NOAuth",
+				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 
@@ -154,7 +156,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		It(`GetServiceURLForRegion(region string)`, func() {
 			var url string
 			var err error
-			url, err = ibm_cloud_secrets_manager_api_v1.GetServiceURLForRegion("INVALID_REGION")
+			url, err = GetServiceURLForRegion("INVALID_REGION")
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
@@ -192,7 +194,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke PutConfig successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -205,11 +207,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 
 				// Construct an instance of the EngineConfigOneOfIAMSecretEngineRootConfig model
-				engineConfigOneOfModel := new(ibm_cloud_secrets_manager_api_v1.EngineConfigOneOfIAMSecretEngineRootConfig)
+				engineConfigOneOfModel := new(EngineConfigOneOfIAMSecretEngineRootConfig)
 				engineConfigOneOfModel.ApiKey = core.StringPtr("API_KEY")
 
 				// Construct an instance of the PutConfigOptions model
-				putConfigOptionsModel := new(ibm_cloud_secrets_manager_api_v1.PutConfigOptions)
+				putConfigOptionsModel := new(PutConfigOptions)
 				putConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
 				putConfigOptionsModel.EngineConfigOneOf = engineConfigOneOfModel
 				putConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -220,7 +222,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).ToNot(BeNil())
 			})
 			It(`Invoke PutConfig with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -228,11 +230,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the EngineConfigOneOfIAMSecretEngineRootConfig model
-				engineConfigOneOfModel := new(ibm_cloud_secrets_manager_api_v1.EngineConfigOneOfIAMSecretEngineRootConfig)
+				engineConfigOneOfModel := new(EngineConfigOneOfIAMSecretEngineRootConfig)
 				engineConfigOneOfModel.ApiKey = core.StringPtr("API_KEY")
 
 				// Construct an instance of the PutConfigOptions model
-				putConfigOptionsModel := new(ibm_cloud_secrets_manager_api_v1.PutConfigOptions)
+				putConfigOptionsModel := new(PutConfigOptions)
 				putConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
 				putConfigOptionsModel.EngineConfigOneOf = engineConfigOneOfModel
 				putConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -244,7 +246,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				// Construct a second instance of the PutConfigOptions model with no property values
-				putConfigOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.PutConfigOptions)
+				putConfigOptionsModelNew := new(PutConfigOptions)
 				// Invoke operation with invalid model (negative test)
 				response, operationErr = ibmCloudSecretsManagerApiService.PutConfig(putConfigOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -271,7 +273,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke GetConfig with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -279,7 +281,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetConfigOptions model
-				getConfigOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetConfigOptions)
+				getConfigOptionsModel := new(GetConfigOptions)
 				getConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
 				getConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -322,7 +324,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke GetConfig successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -331,7 +333,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the GetConfigOptions model
-				getConfigOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetConfigOptions)
+				getConfigOptionsModel := new(GetConfigOptions)
 				getConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
 				getConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -376,7 +378,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke GetConfig successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -390,7 +392,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the GetConfigOptions model
-				getConfigOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetConfigOptions)
+				getConfigOptionsModel := new(GetConfigOptions)
 				getConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
 				getConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -402,7 +404,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke GetConfig with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -410,7 +412,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetConfigOptions model
-				getConfigOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetConfigOptions)
+				getConfigOptionsModel := new(GetConfigOptions)
 				getConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
 				getConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -422,7 +424,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the GetConfigOptions model with no property values
-				getConfigOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.GetConfigOptions)
+				getConfigOptionsModelNew := new(GetConfigOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.GetConfig(getConfigOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -436,22 +438,22 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 	})
 	Describe(`Service constructor tests`, func() {
 		It(`Instantiate service client`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 			Expect(serviceErr).To(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid URL`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 			Expect(ibmCloudSecretsManagerApiService).To(BeNil())
 			Expect(serviceErr).ToNot(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid Auth`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
-				URL: "https://ibm-cloud-secrets-manager-api-v1/api",
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
+				URL: "https://ibmcloudsecretsmanagerapiv1/api",
 				Authenticator: &core.BasicAuthenticator{
 					Username: "",
 					Password: "",
@@ -465,13 +467,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -484,7 +487,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 					URL: "https://testService/api",
 				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -500,7 +503,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -518,12 +522,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(ibmCloudSecretsManagerApiService).To(BeNil())
@@ -534,11 +539,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "NOAuth",
+				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 
@@ -553,7 +558,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		It(`GetServiceURLForRegion(region string)`, func() {
 			var url string
 			var err error
-			url, err = ibm_cloud_secrets_manager_api_v1.GetServiceURLForRegion("INVALID_REGION")
+			url, err = GetServiceURLForRegion("INVALID_REGION")
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
@@ -570,14 +575,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putPolicyPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.URL.Query()["policy"]).To(Equal([]string{"rotation"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutPolicy with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -585,26 +589,26 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
+				collectionMetadataModel := new(CollectionMetadata)
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotationRotation)
+				secretPolicyRotationRotationModel := new(SecretPolicyRotationRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
-				secretPolicyRotationRotationModel.Unit = core.StringPtr("month")
+				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
 				// Construct an instance of the SecretPolicyRotation model
-				secretPolicyRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation)
+				secretPolicyRotationModel := new(SecretPolicyRotation)
 				secretPolicyRotationModel.Type = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
 				secretPolicyRotationModel.Rotation = secretPolicyRotationRotationModel
 
 				// Construct an instance of the PutPolicyOptions model
-				putPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.PutPolicyOptions)
+				putPolicyOptionsModel := new(PutPolicyOptions)
 				putPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				putPolicyOptionsModel.ID = core.StringPtr("testString")
 				putPolicyOptionsModel.Metadata = collectionMetadataModel
-				putPolicyOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{*secretPolicyRotationModel}
+				putPolicyOptionsModel.Resources = []SecretPolicyRotation{*secretPolicyRotationModel}
 				putPolicyOptionsModel.Policy = core.StringPtr("rotation")
 				putPolicyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -654,18 +658,17 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.URL.Query()["policy"]).To(Equal([]string{"rotation"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke PutPolicy successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -674,26 +677,26 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
+				collectionMetadataModel := new(CollectionMetadata)
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotationRotation)
+				secretPolicyRotationRotationModel := new(SecretPolicyRotationRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
-				secretPolicyRotationRotationModel.Unit = core.StringPtr("month")
+				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
 				// Construct an instance of the SecretPolicyRotation model
-				secretPolicyRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation)
+				secretPolicyRotationModel := new(SecretPolicyRotation)
 				secretPolicyRotationModel.Type = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
 				secretPolicyRotationModel.Rotation = secretPolicyRotationRotationModel
 
 				// Construct an instance of the PutPolicyOptions model
-				putPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.PutPolicyOptions)
+				putPolicyOptionsModel := new(PutPolicyOptions)
 				putPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				putPolicyOptionsModel.ID = core.StringPtr("testString")
 				putPolicyOptionsModel.Metadata = collectionMetadataModel
-				putPolicyOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{*secretPolicyRotationModel}
+				putPolicyOptionsModel.Resources = []SecretPolicyRotation{*secretPolicyRotationModel}
 				putPolicyOptionsModel.Policy = core.StringPtr("rotation")
 				putPolicyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -748,15 +751,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.URL.Query()["policy"]).To(Equal([]string{"rotation"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke PutPolicy successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -770,26 +772,26 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
+				collectionMetadataModel := new(CollectionMetadata)
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotationRotation)
+				secretPolicyRotationRotationModel := new(SecretPolicyRotationRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
-				secretPolicyRotationRotationModel.Unit = core.StringPtr("month")
+				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
 				// Construct an instance of the SecretPolicyRotation model
-				secretPolicyRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation)
+				secretPolicyRotationModel := new(SecretPolicyRotation)
 				secretPolicyRotationModel.Type = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
 				secretPolicyRotationModel.Rotation = secretPolicyRotationRotationModel
 
 				// Construct an instance of the PutPolicyOptions model
-				putPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.PutPolicyOptions)
+				putPolicyOptionsModel := new(PutPolicyOptions)
 				putPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				putPolicyOptionsModel.ID = core.StringPtr("testString")
 				putPolicyOptionsModel.Metadata = collectionMetadataModel
-				putPolicyOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{*secretPolicyRotationModel}
+				putPolicyOptionsModel.Resources = []SecretPolicyRotation{*secretPolicyRotationModel}
 				putPolicyOptionsModel.Policy = core.StringPtr("rotation")
 				putPolicyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -801,7 +803,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke PutPolicy with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -809,26 +811,26 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
+				collectionMetadataModel := new(CollectionMetadata)
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotationRotation)
+				secretPolicyRotationRotationModel := new(SecretPolicyRotationRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
-				secretPolicyRotationRotationModel.Unit = core.StringPtr("month")
+				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
 				// Construct an instance of the SecretPolicyRotation model
-				secretPolicyRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation)
+				secretPolicyRotationModel := new(SecretPolicyRotation)
 				secretPolicyRotationModel.Type = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
 				secretPolicyRotationModel.Rotation = secretPolicyRotationRotationModel
 
 				// Construct an instance of the PutPolicyOptions model
-				putPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.PutPolicyOptions)
+				putPolicyOptionsModel := new(PutPolicyOptions)
 				putPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				putPolicyOptionsModel.ID = core.StringPtr("testString")
 				putPolicyOptionsModel.Metadata = collectionMetadataModel
-				putPolicyOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{*secretPolicyRotationModel}
+				putPolicyOptionsModel.Resources = []SecretPolicyRotation{*secretPolicyRotationModel}
 				putPolicyOptionsModel.Policy = core.StringPtr("rotation")
 				putPolicyOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -840,7 +842,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the PutPolicyOptions model with no property values
-				putPolicyOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.PutPolicyOptions)
+				putPolicyOptionsModelNew := new(PutPolicyOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.PutPolicy(putPolicyOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -863,14 +865,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getPolicyPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["policy"]).To(Equal([]string{"rotation"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetPolicy with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -878,7 +879,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetPolicyOptions model
-				getPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetPolicyOptions)
+				getPolicyOptionsModel := new(GetPolicyOptions)
 				getPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				getPolicyOptionsModel.ID = core.StringPtr("testString")
 				getPolicyOptionsModel.Policy = core.StringPtr("rotation")
@@ -914,18 +915,17 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["policy"]).To(Equal([]string{"rotation"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke GetPolicy successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -934,7 +934,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the GetPolicyOptions model
-				getPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetPolicyOptions)
+				getPolicyOptionsModel := new(GetPolicyOptions)
 				getPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				getPolicyOptionsModel.ID = core.StringPtr("testString")
 				getPolicyOptionsModel.Policy = core.StringPtr("rotation")
@@ -975,15 +975,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["policy"]).To(Equal([]string{"rotation"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke GetPolicy successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -997,7 +996,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the GetPolicyOptions model
-				getPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetPolicyOptions)
+				getPolicyOptionsModel := new(GetPolicyOptions)
 				getPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				getPolicyOptionsModel.ID = core.StringPtr("testString")
 				getPolicyOptionsModel.Policy = core.StringPtr("rotation")
@@ -1011,7 +1010,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke GetPolicy with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1019,7 +1018,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetPolicyOptions model
-				getPolicyOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetPolicyOptions)
+				getPolicyOptionsModel := new(GetPolicyOptions)
 				getPolicyOptionsModel.SecretType = core.StringPtr("username_password")
 				getPolicyOptionsModel.ID = core.StringPtr("testString")
 				getPolicyOptionsModel.Policy = core.StringPtr("rotation")
@@ -1033,7 +1032,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the GetPolicyOptions model with no property values
-				getPolicyOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.GetPolicyOptions)
+				getPolicyOptionsModelNew := new(GetPolicyOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.GetPolicy(getPolicyOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -1047,22 +1046,22 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 	})
 	Describe(`Service constructor tests`, func() {
 		It(`Instantiate service client`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 			Expect(serviceErr).To(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid URL`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 			Expect(ibmCloudSecretsManagerApiService).To(BeNil())
 			Expect(serviceErr).ToNot(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid Auth`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
-				URL: "https://ibm-cloud-secrets-manager-api-v1/api",
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
+				URL: "https://ibmcloudsecretsmanagerapiv1/api",
 				Authenticator: &core.BasicAuthenticator{
 					Username: "",
 					Password: "",
@@ -1076,13 +1075,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -1095,7 +1095,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 					URL: "https://testService/api",
 				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -1111,7 +1111,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -1129,12 +1130,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(ibmCloudSecretsManagerApiService).To(BeNil())
@@ -1145,11 +1147,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "NOAuth",
+				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 
@@ -1164,7 +1166,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		It(`GetServiceURLForRegion(region string)`, func() {
 			var url string
 			var err error
-			url, err = ibm_cloud_secrets_manager_api_v1.GetServiceURLForRegion("INVALID_REGION")
+			url, err = GetServiceURLForRegion("INVALID_REGION")
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
@@ -1186,7 +1188,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke CreateSecretGroup with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1194,20 +1196,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupResource model
-				secretGroupResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupResource)
+				secretGroupResourceModel := new(SecretGroupResource)
 				secretGroupResourceModel.Name = core.StringPtr("my-secret-group")
 				secretGroupResourceModel.Description = core.StringPtr("Extended description for this group.")
 				secretGroupResourceModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the CreateSecretGroupOptions model
-				createSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretGroupOptions)
+				createSecretGroupOptionsModel := new(CreateSecretGroupOptions)
 				createSecretGroupOptionsModel.Metadata = collectionMetadataModel
-				createSecretGroupOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupResource{*secretGroupResourceModel}
+				createSecretGroupOptionsModel.Resources = []SecretGroupResource{*secretGroupResourceModel}
 				createSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmCloudSecretsManagerApiService.CreateSecretGroup(createSecretGroupOptionsModel)
@@ -1261,11 +1263,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke CreateSecretGroup successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1274,20 +1276,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupResource model
-				secretGroupResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupResource)
+				secretGroupResourceModel := new(SecretGroupResource)
 				secretGroupResourceModel.Name = core.StringPtr("my-secret-group")
 				secretGroupResourceModel.Description = core.StringPtr("Extended description for this group.")
 				secretGroupResourceModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the CreateSecretGroupOptions model
-				createSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretGroupOptions)
+				createSecretGroupOptionsModel := new(CreateSecretGroupOptions)
 				createSecretGroupOptionsModel.Metadata = collectionMetadataModel
-				createSecretGroupOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupResource{*secretGroupResourceModel}
+				createSecretGroupOptionsModel.Resources = []SecretGroupResource{*secretGroupResourceModel}
 				createSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1343,11 +1345,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke CreateSecretGroup successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1361,20 +1363,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupResource model
-				secretGroupResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupResource)
+				secretGroupResourceModel := new(SecretGroupResource)
 				secretGroupResourceModel.Name = core.StringPtr("my-secret-group")
 				secretGroupResourceModel.Description = core.StringPtr("Extended description for this group.")
 				secretGroupResourceModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the CreateSecretGroupOptions model
-				createSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretGroupOptions)
+				createSecretGroupOptionsModel := new(CreateSecretGroupOptions)
 				createSecretGroupOptionsModel.Metadata = collectionMetadataModel
-				createSecretGroupOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupResource{*secretGroupResourceModel}
+				createSecretGroupOptionsModel.Resources = []SecretGroupResource{*secretGroupResourceModel}
 				createSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1385,7 +1387,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke CreateSecretGroup with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1393,20 +1395,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupResource model
-				secretGroupResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupResource)
+				secretGroupResourceModel := new(SecretGroupResource)
 				secretGroupResourceModel.Name = core.StringPtr("my-secret-group")
 				secretGroupResourceModel.Description = core.StringPtr("Extended description for this group.")
 				secretGroupResourceModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the CreateSecretGroupOptions model
-				createSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretGroupOptions)
+				createSecretGroupOptionsModel := new(CreateSecretGroupOptions)
 				createSecretGroupOptionsModel.Metadata = collectionMetadataModel
-				createSecretGroupOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupResource{*secretGroupResourceModel}
+				createSecretGroupOptionsModel.Resources = []SecretGroupResource{*secretGroupResourceModel}
 				createSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("")
@@ -1417,7 +1419,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the CreateSecretGroupOptions model with no property values
-				createSecretGroupOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.CreateSecretGroupOptions)
+				createSecretGroupOptionsModelNew := new(CreateSecretGroupOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.CreateSecretGroup(createSecretGroupOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -1445,7 +1447,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke ListSecretGroups with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1453,7 +1455,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the ListSecretGroupsOptions model
-				listSecretGroupsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretGroupsOptions)
+				listSecretGroupsOptionsModel := new(ListSecretGroupsOptions)
 				listSecretGroupsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmCloudSecretsManagerApiService.ListSecretGroups(listSecretGroupsOptionsModel)
@@ -1491,11 +1493,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretGroups successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1504,7 +1506,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the ListSecretGroupsOptions model
-				listSecretGroupsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretGroupsOptions)
+				listSecretGroupsOptionsModel := new(ListSecretGroupsOptions)
 				listSecretGroupsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1544,11 +1546,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretGroups successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1562,7 +1564,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the ListSecretGroupsOptions model
-				listSecretGroupsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretGroupsOptions)
+				listSecretGroupsOptionsModel := new(ListSecretGroupsOptions)
 				listSecretGroupsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1573,7 +1575,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke ListSecretGroups with error: Operation request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1581,7 +1583,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the ListSecretGroupsOptions model
-				listSecretGroupsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretGroupsOptions)
+				listSecretGroupsOptionsModel := new(ListSecretGroupsOptions)
 				listSecretGroupsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("")
@@ -1613,7 +1615,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke GetSecretGroup with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1621,7 +1623,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetSecretGroupOptions model
-				getSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretGroupOptions)
+				getSecretGroupOptionsModel := new(GetSecretGroupOptions)
 				getSecretGroupOptionsModel.ID = core.StringPtr("testString")
 				getSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -1660,11 +1662,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretGroup successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1673,7 +1675,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the GetSecretGroupOptions model
-				getSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretGroupOptions)
+				getSecretGroupOptionsModel := new(GetSecretGroupOptions)
 				getSecretGroupOptionsModel.ID = core.StringPtr("testString")
 				getSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -1714,11 +1716,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretGroup successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1732,7 +1734,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the GetSecretGroupOptions model
-				getSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretGroupOptions)
+				getSecretGroupOptionsModel := new(GetSecretGroupOptions)
 				getSecretGroupOptionsModel.ID = core.StringPtr("testString")
 				getSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -1744,7 +1746,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke GetSecretGroup with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1752,7 +1754,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetSecretGroupOptions model
-				getSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretGroupOptions)
+				getSecretGroupOptionsModel := new(GetSecretGroupOptions)
 				getSecretGroupOptionsModel.ID = core.StringPtr("testString")
 				getSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -1764,7 +1766,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the GetSecretGroupOptions model with no property values
-				getSecretGroupOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.GetSecretGroupOptions)
+				getSecretGroupOptionsModelNew := new(GetSecretGroupOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.GetSecretGroup(getSecretGroupOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -1792,7 +1794,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke UpdateSecretGroupMetadata with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1800,20 +1802,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupMetadataUpdatable model
-				secretGroupMetadataUpdatableModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable)
+				secretGroupMetadataUpdatableModel := new(SecretGroupMetadataUpdatable)
 				secretGroupMetadataUpdatableModel.Name = core.StringPtr("updated-secret-group-name")
 				secretGroupMetadataUpdatableModel.Description = core.StringPtr("Updated description for this group.")
 
 				// Construct an instance of the UpdateSecretGroupMetadataOptions model
-				updateSecretGroupMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretGroupMetadataOptions)
+				updateSecretGroupMetadataOptionsModel := new(UpdateSecretGroupMetadataOptions)
 				updateSecretGroupMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretGroupMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretGroupMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
+				updateSecretGroupMetadataOptionsModel.Resources = []SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
 				updateSecretGroupMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmCloudSecretsManagerApiService.UpdateSecretGroupMetadata(updateSecretGroupMetadataOptionsModel)
@@ -1867,11 +1869,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretGroupMetadata successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1880,20 +1882,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupMetadataUpdatable model
-				secretGroupMetadataUpdatableModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable)
+				secretGroupMetadataUpdatableModel := new(SecretGroupMetadataUpdatable)
 				secretGroupMetadataUpdatableModel.Name = core.StringPtr("updated-secret-group-name")
 				secretGroupMetadataUpdatableModel.Description = core.StringPtr("Updated description for this group.")
 
 				// Construct an instance of the UpdateSecretGroupMetadataOptions model
-				updateSecretGroupMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretGroupMetadataOptions)
+				updateSecretGroupMetadataOptionsModel := new(UpdateSecretGroupMetadataOptions)
 				updateSecretGroupMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretGroupMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretGroupMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
+				updateSecretGroupMetadataOptionsModel.Resources = []SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
 				updateSecretGroupMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1949,11 +1951,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2019-01-01T12:00:00", "last_update_date": "2019-01-01T12:00:00", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretGroupMetadata successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1967,20 +1969,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupMetadataUpdatable model
-				secretGroupMetadataUpdatableModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable)
+				secretGroupMetadataUpdatableModel := new(SecretGroupMetadataUpdatable)
 				secretGroupMetadataUpdatableModel.Name = core.StringPtr("updated-secret-group-name")
 				secretGroupMetadataUpdatableModel.Description = core.StringPtr("Updated description for this group.")
 
 				// Construct an instance of the UpdateSecretGroupMetadataOptions model
-				updateSecretGroupMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretGroupMetadataOptions)
+				updateSecretGroupMetadataOptionsModel := new(UpdateSecretGroupMetadataOptions)
 				updateSecretGroupMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretGroupMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretGroupMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
+				updateSecretGroupMetadataOptionsModel.Resources = []SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
 				updateSecretGroupMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1991,7 +1993,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke UpdateSecretGroupMetadata with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -1999,20 +2001,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretGroupMetadataUpdatable model
-				secretGroupMetadataUpdatableModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable)
+				secretGroupMetadataUpdatableModel := new(SecretGroupMetadataUpdatable)
 				secretGroupMetadataUpdatableModel.Name = core.StringPtr("updated-secret-group-name")
 				secretGroupMetadataUpdatableModel.Description = core.StringPtr("Updated description for this group.")
 
 				// Construct an instance of the UpdateSecretGroupMetadataOptions model
-				updateSecretGroupMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretGroupMetadataOptions)
+				updateSecretGroupMetadataOptionsModel := new(UpdateSecretGroupMetadataOptions)
 				updateSecretGroupMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretGroupMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretGroupMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
+				updateSecretGroupMetadataOptionsModel.Resources = []SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}
 				updateSecretGroupMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("")
@@ -2023,7 +2025,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the UpdateSecretGroupMetadataOptions model with no property values
-				updateSecretGroupMetadataOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretGroupMetadataOptions)
+				updateSecretGroupMetadataOptionsModelNew := new(UpdateSecretGroupMetadataOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.UpdateSecretGroupMetadata(updateSecretGroupMetadataOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -2051,7 +2053,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke DeleteSecretGroup successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2064,7 +2066,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 
 				// Construct an instance of the DeleteSecretGroupOptions model
-				deleteSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.DeleteSecretGroupOptions)
+				deleteSecretGroupOptionsModel := new(DeleteSecretGroupOptions)
 				deleteSecretGroupOptionsModel.ID = core.StringPtr("testString")
 				deleteSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -2074,7 +2076,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).ToNot(BeNil())
 			})
 			It(`Invoke DeleteSecretGroup with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2082,7 +2084,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the DeleteSecretGroupOptions model
-				deleteSecretGroupOptionsModel := new(ibm_cloud_secrets_manager_api_v1.DeleteSecretGroupOptions)
+				deleteSecretGroupOptionsModel := new(DeleteSecretGroupOptions)
 				deleteSecretGroupOptionsModel.ID = core.StringPtr("testString")
 				deleteSecretGroupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -2093,7 +2095,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				// Construct a second instance of the DeleteSecretGroupOptions model with no property values
-				deleteSecretGroupOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.DeleteSecretGroupOptions)
+				deleteSecretGroupOptionsModelNew := new(DeleteSecretGroupOptions)
 				// Invoke operation with invalid model (negative test)
 				response, operationErr = ibmCloudSecretsManagerApiService.DeleteSecretGroup(deleteSecretGroupOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -2106,22 +2108,22 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 	})
 	Describe(`Service constructor tests`, func() {
 		It(`Instantiate service client`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 			Expect(serviceErr).To(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid URL`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 			Expect(ibmCloudSecretsManagerApiService).To(BeNil())
 			Expect(serviceErr).ToNot(BeNil())
 		})
 		It(`Instantiate service client with error: Invalid Auth`, func() {
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
-				URL: "https://ibm-cloud-secrets-manager-api-v1/api",
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
+				URL: "https://ibmcloudsecretsmanagerapiv1/api",
 				Authenticator: &core.BasicAuthenticator{
 					Username: "",
 					Password: "",
@@ -2135,13 +2137,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -2154,7 +2157,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 					URL: "https://testService/api",
 				})
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -2170,7 +2173,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+				})
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -2188,12 +2192,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_URL":       "https://ibm-cloud-secrets-manager-api-v1/api",
+				"IBM_CLOUD_SECRETS_MANAGER_API_URL": "https://ibmcloudsecretsmanagerapiv1/api",
 				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{})
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(ibmCloudSecretsManagerApiService).To(BeNil())
@@ -2204,11 +2209,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE": "NOAuth",
+				"IBM_CLOUD_SECRETS_MANAGER_API_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1UsingExternalConfig(&IbmCloudSecretsManagerApiV1Options{
 				URL: "{BAD_URL_STRING",
 			})
 
@@ -2223,7 +2228,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 		It(`GetServiceURLForRegion(region string)`, func() {
 			var url string
 			var err error
-			url, err = ibm_cloud_secrets_manager_api_v1.GetServiceURLForRegion("INVALID_REGION")
+			url, err = GetServiceURLForRegion("INVALID_REGION")
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
@@ -2245,7 +2250,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke CreateSecret with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2253,29 +2258,25 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretVersion model
-				secretVersionModel := new(ibm_cloud_secrets_manager_api_v1.SecretVersion)
-
 				// Construct an instance of the SecretResourceArbitrarySecretResource model
-				secretResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretResourceArbitrarySecretResource)
+				secretResourceModel := new(SecretResourceArbitrarySecretResource)
 				secretResourceModel.Type = core.StringPtr("testString")
-				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
-				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
-				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Name = core.StringPtr("testString")
+				secretResourceModel.Description = core.StringPtr("testString")
+				secretResourceModel.SecretGroupID = core.StringPtr("testString")
 				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.Versions = []ibm_cloud_secrets_manager_api_v1.SecretVersion{*secretVersionModel}
 				secretResourceModel.ExpirationDate = CreateMockDateTime()
-				secretResourceModel.Payload = core.StringPtr("secret-data")
+				secretResourceModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the CreateSecretOptions model
-				createSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretOptions)
+				createSecretOptionsModel := new(CreateSecretOptions)
 				createSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				createSecretOptionsModel.Metadata = collectionMetadataModel
-				createSecretOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{secretResourceModel}
+				createSecretOptionsModel.Resources = []SecretResourceIntf{secretResourceModel}
 				createSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmCloudSecretsManagerApiService.CreateSecret(createSecretOptionsModel)
@@ -2329,11 +2330,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2342,29 +2343,25 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretVersion model
-				secretVersionModel := new(ibm_cloud_secrets_manager_api_v1.SecretVersion)
-
 				// Construct an instance of the SecretResourceArbitrarySecretResource model
-				secretResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretResourceArbitrarySecretResource)
+				secretResourceModel := new(SecretResourceArbitrarySecretResource)
 				secretResourceModel.Type = core.StringPtr("testString")
-				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
-				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
-				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Name = core.StringPtr("testString")
+				secretResourceModel.Description = core.StringPtr("testString")
+				secretResourceModel.SecretGroupID = core.StringPtr("testString")
 				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.Versions = []ibm_cloud_secrets_manager_api_v1.SecretVersion{*secretVersionModel}
 				secretResourceModel.ExpirationDate = CreateMockDateTime()
-				secretResourceModel.Payload = core.StringPtr("secret-data")
+				secretResourceModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the CreateSecretOptions model
-				createSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretOptions)
+				createSecretOptionsModel := new(CreateSecretOptions)
 				createSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				createSecretOptionsModel.Metadata = collectionMetadataModel
-				createSecretOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{secretResourceModel}
+				createSecretOptionsModel.Resources = []SecretResourceIntf{secretResourceModel}
 				createSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2420,11 +2417,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2438,29 +2435,25 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretVersion model
-				secretVersionModel := new(ibm_cloud_secrets_manager_api_v1.SecretVersion)
-
 				// Construct an instance of the SecretResourceArbitrarySecretResource model
-				secretResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretResourceArbitrarySecretResource)
+				secretResourceModel := new(SecretResourceArbitrarySecretResource)
 				secretResourceModel.Type = core.StringPtr("testString")
-				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
-				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
-				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Name = core.StringPtr("testString")
+				secretResourceModel.Description = core.StringPtr("testString")
+				secretResourceModel.SecretGroupID = core.StringPtr("testString")
 				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.Versions = []ibm_cloud_secrets_manager_api_v1.SecretVersion{*secretVersionModel}
 				secretResourceModel.ExpirationDate = CreateMockDateTime()
-				secretResourceModel.Payload = core.StringPtr("secret-data")
+				secretResourceModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the CreateSecretOptions model
-				createSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretOptions)
+				createSecretOptionsModel := new(CreateSecretOptions)
 				createSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				createSecretOptionsModel.Metadata = collectionMetadataModel
-				createSecretOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{secretResourceModel}
+				createSecretOptionsModel.Resources = []SecretResourceIntf{secretResourceModel}
 				createSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2471,7 +2464,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke CreateSecret with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2479,29 +2472,25 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretVersion model
-				secretVersionModel := new(ibm_cloud_secrets_manager_api_v1.SecretVersion)
-
 				// Construct an instance of the SecretResourceArbitrarySecretResource model
-				secretResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretResourceArbitrarySecretResource)
+				secretResourceModel := new(SecretResourceArbitrarySecretResource)
 				secretResourceModel.Type = core.StringPtr("testString")
-				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
-				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
-				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Name = core.StringPtr("testString")
+				secretResourceModel.Description = core.StringPtr("testString")
+				secretResourceModel.SecretGroupID = core.StringPtr("testString")
 				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.Versions = []ibm_cloud_secrets_manager_api_v1.SecretVersion{*secretVersionModel}
 				secretResourceModel.ExpirationDate = CreateMockDateTime()
-				secretResourceModel.Payload = core.StringPtr("secret-data")
+				secretResourceModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the CreateSecretOptions model
-				createSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.CreateSecretOptions)
+				createSecretOptionsModel := new(CreateSecretOptions)
 				createSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				createSecretOptionsModel.Metadata = collectionMetadataModel
-				createSecretOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{secretResourceModel}
+				createSecretOptionsModel.Resources = []SecretResourceIntf{secretResourceModel}
 				createSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("")
@@ -2512,7 +2501,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the CreateSecretOptions model with no property values
-				createSecretOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.CreateSecretOptions)
+				createSecretOptionsModelNew := new(CreateSecretOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.CreateSecret(createSecretOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -2535,16 +2524,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listSecretsPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListSecrets with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2552,7 +2539,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the ListSecretsOptions model
-				listSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretsOptions)
+				listSecretsOptionsModel := new(ListSecretsOptions)
 				listSecretsOptionsModel.SecretType = core.StringPtr("arbitrary")
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -2588,20 +2575,18 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2610,7 +2595,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the ListSecretsOptions model
-				listSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretsOptions)
+				listSecretsOptionsModel := new(ListSecretsOptions)
 				listSecretsOptionsModel.SecretType = core.StringPtr("arbitrary")
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -2651,17 +2636,15 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2675,7 +2658,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the ListSecretsOptions model
-				listSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretsOptions)
+				listSecretsOptionsModel := new(ListSecretsOptions)
 				listSecretsOptionsModel.SecretType = core.StringPtr("arbitrary")
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -2689,7 +2672,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke ListSecrets with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2697,7 +2680,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the ListSecretsOptions model
-				listSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListSecretsOptions)
+				listSecretsOptionsModel := new(ListSecretsOptions)
 				listSecretsOptionsModel.SecretType = core.StringPtr("arbitrary")
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
@@ -2711,7 +2694,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the ListSecretsOptions model with no property values
-				listSecretsOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.ListSecretsOptions)
+				listSecretsOptionsModelNew := new(ListSecretsOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.ListSecrets(listSecretsOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -2734,16 +2717,16 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listAllSecretsPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["sort_by"]).To(Equal([]string{"id"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke ListAllSecrets with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2751,9 +2734,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the ListAllSecretsOptions model
-				listAllSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListAllSecretsOptions)
+				listAllSecretsOptionsModel := new(ListAllSecretsOptions)
 				listAllSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
+				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmCloudSecretsManagerApiService.ListAllSecrets(listAllSecretsOptionsModel)
@@ -2786,20 +2771,20 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["sort_by"]).To(Equal([]string{"id"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListAllSecrets successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2808,9 +2793,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the ListAllSecretsOptions model
-				listAllSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListAllSecretsOptions)
+				listAllSecretsOptionsModel := new(ListAllSecretsOptions)
 				listAllSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
+				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2848,17 +2835,17 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
-
 					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
-
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["sort_by"]).To(Equal([]string{"id"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListAllSecrets successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2872,9 +2859,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the ListAllSecretsOptions model
-				listAllSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListAllSecretsOptions)
+				listAllSecretsOptionsModel := new(ListAllSecretsOptions)
 				listAllSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
+				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2885,7 +2874,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke ListAllSecrets with error: Operation request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2893,9 +2882,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the ListAllSecretsOptions model
-				listAllSecretsOptionsModel := new(ibm_cloud_secrets_manager_api_v1.ListAllSecretsOptions)
+				listAllSecretsOptionsModel := new(ListAllSecretsOptions)
 				listAllSecretsOptionsModel.Limit = core.Int64Ptr(int64(1))
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
+				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("")
@@ -2927,7 +2918,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke GetSecret with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2935,7 +2926,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetSecretOptions model
-				getSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretOptions)
+				getSecretOptionsModel := new(GetSecretOptions)
 				getSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretOptionsModel.ID = core.StringPtr("testString")
 				getSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2975,11 +2966,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -2988,7 +2979,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the GetSecretOptions model
-				getSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretOptions)
+				getSecretOptionsModel := new(GetSecretOptions)
 				getSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretOptionsModel.ID = core.StringPtr("testString")
 				getSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3030,11 +3021,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3048,7 +3039,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the GetSecretOptions model
-				getSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretOptions)
+				getSecretOptionsModel := new(GetSecretOptions)
 				getSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretOptionsModel.ID = core.StringPtr("testString")
 				getSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3061,7 +3052,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke GetSecret with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3069,7 +3060,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetSecretOptions model
-				getSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretOptions)
+				getSecretOptionsModel := new(GetSecretOptions)
 				getSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretOptionsModel.ID = core.StringPtr("testString")
 				getSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3082,7 +3073,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the GetSecretOptions model with no property values
-				getSecretOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.GetSecretOptions)
+				getSecretOptionsModelNew := new(GetSecretOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.GetSecret(getSecretOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -3105,14 +3096,13 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(updateSecretPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.URL.Query()["action"]).To(Equal([]string{"rotate"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke UpdateSecret with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3120,11 +3110,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the SecretActionOneOfRotateArbitrarySecretBody model
-				secretActionOneOfModel := new(ibm_cloud_secrets_manager_api_v1.SecretActionOneOfRotateArbitrarySecretBody)
-				secretActionOneOfModel.Payload = core.StringPtr("new-secret-data")
+				secretActionOneOfModel := new(SecretActionOneOfRotateArbitrarySecretBody)
+				secretActionOneOfModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateSecretOptions model
-				updateSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretOptions)
+				updateSecretOptionsModel := new(UpdateSecretOptions)
 				updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretOptionsModel.ID = core.StringPtr("testString")
 				updateSecretOptionsModel.Action = core.StringPtr("rotate")
@@ -3177,18 +3167,17 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.URL.Query()["action"]).To(Equal([]string{"rotate"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecret successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3197,11 +3186,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the SecretActionOneOfRotateArbitrarySecretBody model
-				secretActionOneOfModel := new(ibm_cloud_secrets_manager_api_v1.SecretActionOneOfRotateArbitrarySecretBody)
-				secretActionOneOfModel.Payload = core.StringPtr("new-secret-data")
+				secretActionOneOfModel := new(SecretActionOneOfRotateArbitrarySecretBody)
+				secretActionOneOfModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateSecretOptions model
-				updateSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretOptions)
+				updateSecretOptionsModel := new(UpdateSecretOptions)
 				updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretOptionsModel.ID = core.StringPtr("testString")
 				updateSecretOptionsModel.Action = core.StringPtr("rotate")
@@ -3259,15 +3248,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.URL.Query()["action"]).To(Equal([]string{"rotate"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2019-01-01T12:00:00", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"type": "Type", "id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "auto_rotated": false}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecret successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3281,11 +3269,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the SecretActionOneOfRotateArbitrarySecretBody model
-				secretActionOneOfModel := new(ibm_cloud_secrets_manager_api_v1.SecretActionOneOfRotateArbitrarySecretBody)
-				secretActionOneOfModel.Payload = core.StringPtr("new-secret-data")
+				secretActionOneOfModel := new(SecretActionOneOfRotateArbitrarySecretBody)
+				secretActionOneOfModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateSecretOptions model
-				updateSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretOptions)
+				updateSecretOptionsModel := new(UpdateSecretOptions)
 				updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretOptionsModel.ID = core.StringPtr("testString")
 				updateSecretOptionsModel.Action = core.StringPtr("rotate")
@@ -3300,7 +3288,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke UpdateSecret with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3308,11 +3296,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the SecretActionOneOfRotateArbitrarySecretBody model
-				secretActionOneOfModel := new(ibm_cloud_secrets_manager_api_v1.SecretActionOneOfRotateArbitrarySecretBody)
-				secretActionOneOfModel.Payload = core.StringPtr("new-secret-data")
+				secretActionOneOfModel := new(SecretActionOneOfRotateArbitrarySecretBody)
+				secretActionOneOfModel.Payload = core.StringPtr("testString")
 
 				// Construct an instance of the UpdateSecretOptions model
-				updateSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretOptions)
+				updateSecretOptionsModel := new(UpdateSecretOptions)
 				updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretOptionsModel.ID = core.StringPtr("testString")
 				updateSecretOptionsModel.Action = core.StringPtr("rotate")
@@ -3327,7 +3315,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the UpdateSecretOptions model with no property values
-				updateSecretOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretOptions)
+				updateSecretOptionsModelNew := new(UpdateSecretOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.UpdateSecret(updateSecretOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -3355,7 +3343,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke DeleteSecret successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3368,7 +3356,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 
 				// Construct an instance of the DeleteSecretOptions model
-				deleteSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.DeleteSecretOptions)
+				deleteSecretOptionsModel := new(DeleteSecretOptions)
 				deleteSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				deleteSecretOptionsModel.ID = core.StringPtr("testString")
 				deleteSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3379,7 +3367,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).ToNot(BeNil())
 			})
 			It(`Invoke DeleteSecret with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3387,7 +3375,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the DeleteSecretOptions model
-				deleteSecretOptionsModel := new(ibm_cloud_secrets_manager_api_v1.DeleteSecretOptions)
+				deleteSecretOptionsModel := new(DeleteSecretOptions)
 				deleteSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 				deleteSecretOptionsModel.ID = core.StringPtr("testString")
 				deleteSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3399,7 +3387,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				// Construct a second instance of the DeleteSecretOptions model with no property values
-				deleteSecretOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.DeleteSecretOptions)
+				deleteSecretOptionsModelNew := new(DeleteSecretOptions)
 				// Invoke operation with invalid model (negative test)
 				response, operationErr = ibmCloudSecretsManagerApiService.DeleteSecret(deleteSecretOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -3426,7 +3414,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke GetSecretMetadata with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3434,7 +3422,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetSecretMetadataOptions model
-				getSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretMetadataOptions)
+				getSecretMetadataOptionsModel := new(GetSecretMetadataOptions)
 				getSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				getSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3474,11 +3462,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2019-01-01T12:00:00", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2019-01-01T12:00:00"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3487,7 +3475,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the GetSecretMetadataOptions model
-				getSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretMetadataOptions)
+				getSecretMetadataOptionsModel := new(GetSecretMetadataOptions)
 				getSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				getSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3529,11 +3517,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2019-01-01T12:00:00", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2019-01-01T12:00:00"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3547,7 +3535,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the GetSecretMetadataOptions model
-				getSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretMetadataOptions)
+				getSecretMetadataOptionsModel := new(GetSecretMetadataOptions)
 				getSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				getSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3560,7 +3548,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke GetSecretMetadata with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3568,7 +3556,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the GetSecretMetadataOptions model
-				getSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.GetSecretMetadataOptions)
+				getSecretMetadataOptionsModel := new(GetSecretMetadataOptions)
 				getSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				getSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				getSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3581,7 +3569,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the GetSecretMetadataOptions model with no property values
-				getSecretMetadataOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.GetSecretMetadataOptions)
+				getSecretMetadataOptionsModelNew := new(GetSecretMetadataOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.GetSecretMetadata(getSecretMetadataOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -3609,7 +3597,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata with error: Operation response processing error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3617,24 +3605,24 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretMetadata model
-				secretMetadataModel := new(ibm_cloud_secrets_manager_api_v1.SecretMetadata)
-				secretMetadataModel.Labels = []string{"testString"}
-				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
-				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel := new(SecretMetadata)
+				secretMetadataModel.Labels = []string{"dev", "us-south"}
+				secretMetadataModel.Name = core.StringPtr("example-secret")
+				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
 				secretMetadataModel.ExpirationDate = CreateMockDateTime()
 				secretMetadataModel.TTL = core.StringPtr("24h")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
-				updateSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretMetadataOptions)
+				updateSecretMetadataOptionsModel := new(UpdateSecretMetadataOptions)
 				updateSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretMetadata{*secretMetadataModel}
+				updateSecretMetadataOptionsModel.Resources = []SecretMetadata{*secretMetadataModel}
 				updateSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := ibmCloudSecretsManagerApiService.UpdateSecretMetadata(updateSecretMetadataOptionsModel)
@@ -3688,11 +3676,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2019-01-01T12:00:00", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2019-01-01T12:00:00"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3701,24 +3689,24 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				ibmCloudSecretsManagerApiService.EnableRetries(0, 0)
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretMetadata model
-				secretMetadataModel := new(ibm_cloud_secrets_manager_api_v1.SecretMetadata)
-				secretMetadataModel.Labels = []string{"testString"}
-				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
-				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel := new(SecretMetadata)
+				secretMetadataModel.Labels = []string{"dev", "us-south"}
+				secretMetadataModel.Name = core.StringPtr("example-secret")
+				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
 				secretMetadataModel.ExpirationDate = CreateMockDateTime()
 				secretMetadataModel.TTL = core.StringPtr("24h")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
-				updateSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretMetadataOptions)
+				updateSecretMetadataOptionsModel := new(UpdateSecretMetadataOptions)
 				updateSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretMetadata{*secretMetadataModel}
+				updateSecretMetadataOptionsModel.Resources = []SecretMetadata{*secretMetadataModel}
 				updateSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3774,11 +3762,11 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2019-01-01T12:00:00", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2019-01-01T12:00:00", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2019-01-01T12:00:00"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3792,24 +3780,24 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(result).To(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretMetadata model
-				secretMetadataModel := new(ibm_cloud_secrets_manager_api_v1.SecretMetadata)
-				secretMetadataModel.Labels = []string{"testString"}
-				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
-				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel := new(SecretMetadata)
+				secretMetadataModel.Labels = []string{"dev", "us-south"}
+				secretMetadataModel.Name = core.StringPtr("example-secret")
+				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
 				secretMetadataModel.ExpirationDate = CreateMockDateTime()
 				secretMetadataModel.TTL = core.StringPtr("24h")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
-				updateSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretMetadataOptions)
+				updateSecretMetadataOptionsModel := new(UpdateSecretMetadataOptions)
 				updateSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretMetadata{*secretMetadataModel}
+				updateSecretMetadataOptionsModel.Resources = []SecretMetadata{*secretMetadataModel}
 				updateSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3820,7 +3808,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 			})
 			It(`Invoke UpdateSecretMetadata with error: Operation validation and request error`, func() {
-				ibmCloudSecretsManagerApiService, serviceErr := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+				ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
 				})
@@ -3828,24 +3816,24 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
 
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the SecretMetadata model
-				secretMetadataModel := new(ibm_cloud_secrets_manager_api_v1.SecretMetadata)
-				secretMetadataModel.Labels = []string{"testString"}
-				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
-				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel := new(SecretMetadata)
+				secretMetadataModel.Labels = []string{"dev", "us-south"}
+				secretMetadataModel.Name = core.StringPtr("example-secret")
+				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
 				secretMetadataModel.ExpirationDate = CreateMockDateTime()
 				secretMetadataModel.TTL = core.StringPtr("24h")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
-				updateSecretMetadataOptionsModel := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretMetadataOptions)
+				updateSecretMetadataOptionsModel := new(UpdateSecretMetadataOptions)
 				updateSecretMetadataOptionsModel.SecretType = core.StringPtr("arbitrary")
 				updateSecretMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretMetadataOptionsModel.Resources = []ibm_cloud_secrets_manager_api_v1.SecretMetadata{*secretMetadataModel}
+				updateSecretMetadataOptionsModel.Resources = []SecretMetadata{*secretMetadataModel}
 				updateSecretMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := ibmCloudSecretsManagerApiService.SetServiceURL("")
@@ -3856,7 +3844,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 				// Construct a second instance of the UpdateSecretMetadataOptions model with no property values
-				updateSecretMetadataOptionsModelNew := new(ibm_cloud_secrets_manager_api_v1.UpdateSecretMetadataOptions)
+				updateSecretMetadataOptionsModelNew := new(UpdateSecretMetadataOptions)
 				// Invoke operation with invalid model (negative test)
 				result, response, operationErr = ibmCloudSecretsManagerApiService.UpdateSecretMetadata(updateSecretMetadataOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
@@ -3870,7 +3858,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
-			ibmCloudSecretsManagerApiService, _ := ibm_cloud_secrets_manager_api_v1.NewIbmCloudSecretsManagerApiV1(&ibm_cloud_secrets_manager_api_v1.IbmCloudSecretsManagerApiV1Options{
+			ibmCloudSecretsManagerApiService, _ := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
 				URL:           "http://ibmcloudsecretsmanagerapiv1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
@@ -3882,14 +3870,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewCreateSecret successfully`, func() {
-				var metadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				resources := []ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{}
+				var metadata *CollectionMetadata = nil
+				resources := []SecretResourceIntf{}
 				_, err := ibmCloudSecretsManagerApiService.NewCreateSecret(metadata, resources)
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewCreateSecretGroupOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
@@ -3897,7 +3885,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the SecretGroupResource model
-				secretGroupResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupResource)
+				secretGroupResourceModel := new(SecretGroupResource)
 				Expect(secretGroupResourceModel).ToNot(BeNil())
 				secretGroupResourceModel.Name = core.StringPtr("my-secret-group")
 				secretGroupResourceModel.Description = core.StringPtr("Extended description for this group.")
@@ -3908,63 +3896,57 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(secretGroupResourceModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CreateSecretGroupOptions model
-				var createSecretGroupOptionsMetadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				createSecretGroupOptionsResources := []ibm_cloud_secrets_manager_api_v1.SecretGroupResource{}
+				var createSecretGroupOptionsMetadata *CollectionMetadata = nil
+				createSecretGroupOptionsResources := []SecretGroupResource{}
 				createSecretGroupOptionsModel := ibmCloudSecretsManagerApiService.NewCreateSecretGroupOptions(createSecretGroupOptionsMetadata, createSecretGroupOptionsResources)
 				createSecretGroupOptionsModel.SetMetadata(collectionMetadataModel)
-				createSecretGroupOptionsModel.SetResources([]ibm_cloud_secrets_manager_api_v1.SecretGroupResource{*secretGroupResourceModel})
+				createSecretGroupOptionsModel.SetResources([]SecretGroupResource{*secretGroupResourceModel})
 				createSecretGroupOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createSecretGroupOptionsModel).ToNot(BeNil())
 				Expect(createSecretGroupOptionsModel.Metadata).To(Equal(collectionMetadataModel))
-				Expect(createSecretGroupOptionsModel.Resources).To(Equal([]ibm_cloud_secrets_manager_api_v1.SecretGroupResource{*secretGroupResourceModel}))
+				Expect(createSecretGroupOptionsModel.Resources).To(Equal([]SecretGroupResource{*secretGroupResourceModel}))
 				Expect(createSecretGroupOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecretOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
-				// Construct an instance of the SecretVersion model
-				secretVersionModel := new(ibm_cloud_secrets_manager_api_v1.SecretVersion)
-				Expect(secretVersionModel).ToNot(BeNil())
-
 				// Construct an instance of the SecretResourceArbitrarySecretResource model
-				secretResourceModel := new(ibm_cloud_secrets_manager_api_v1.SecretResourceArbitrarySecretResource)
+				secretResourceModel := new(SecretResourceArbitrarySecretResource)
 				Expect(secretResourceModel).ToNot(BeNil())
 				secretResourceModel.Type = core.StringPtr("testString")
-				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
-				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
-				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Name = core.StringPtr("testString")
+				secretResourceModel.Description = core.StringPtr("testString")
+				secretResourceModel.SecretGroupID = core.StringPtr("testString")
 				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.Versions = []ibm_cloud_secrets_manager_api_v1.SecretVersion{*secretVersionModel}
 				secretResourceModel.ExpirationDate = CreateMockDateTime()
-				secretResourceModel.Payload = core.StringPtr("secret-data")
+				secretResourceModel.Payload = core.StringPtr("testString")
 				Expect(secretResourceModel.Type).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.Name).To(Equal(core.StringPtr("example-arbitrary-secret")))
-				Expect(secretResourceModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
-				Expect(secretResourceModel.SecretGroupID).To(Equal(core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")))
+				Expect(secretResourceModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(secretResourceModel.Description).To(Equal(core.StringPtr("testString")))
+				Expect(secretResourceModel.SecretGroupID).To(Equal(core.StringPtr("testString")))
 				Expect(secretResourceModel.Labels).To(Equal([]string{"testString"}))
-				Expect(secretResourceModel.Versions).To(Equal([]ibm_cloud_secrets_manager_api_v1.SecretVersion{*secretVersionModel}))
 				Expect(secretResourceModel.ExpirationDate).To(Equal(CreateMockDateTime()))
-				Expect(secretResourceModel.Payload).To(Equal(core.StringPtr("secret-data")))
+				Expect(secretResourceModel.Payload).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CreateSecretOptions model
 				secretType := "arbitrary"
-				var createSecretOptionsMetadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				createSecretOptionsResources := []ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{}
+				var createSecretOptionsMetadata *CollectionMetadata = nil
+				createSecretOptionsResources := []SecretResourceIntf{}
 				createSecretOptionsModel := ibmCloudSecretsManagerApiService.NewCreateSecretOptions(secretType, createSecretOptionsMetadata, createSecretOptionsResources)
 				createSecretOptionsModel.SetSecretType("arbitrary")
 				createSecretOptionsModel.SetMetadata(collectionMetadataModel)
-				createSecretOptionsModel.SetResources([]ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{secretResourceModel})
+				createSecretOptionsModel.SetResources([]SecretResourceIntf{secretResourceModel})
 				createSecretOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createSecretOptionsModel).ToNot(BeNil())
 				Expect(createSecretOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
 				Expect(createSecretOptionsModel.Metadata).To(Equal(collectionMetadataModel))
-				Expect(createSecretOptionsModel.Resources).To(Equal([]ibm_cloud_secrets_manager_api_v1.SecretResourceIntf{secretResourceModel}))
+				Expect(createSecretOptionsModel.Resources).To(Equal([]SecretResourceIntf{secretResourceModel}))
 				Expect(createSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteSecretGroupOptions successfully`, func() {
@@ -4056,10 +4038,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				listAllSecretsOptionsModel := ibmCloudSecretsManagerApiService.NewListAllSecretsOptions()
 				listAllSecretsOptionsModel.SetLimit(int64(1))
 				listAllSecretsOptionsModel.SetOffset(int64(0))
+				listAllSecretsOptionsModel.SetSearch("testString")
+				listAllSecretsOptionsModel.SetSortBy("id")
 				listAllSecretsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listAllSecretsOptionsModel).ToNot(BeNil())
 				Expect(listAllSecretsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listAllSecretsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listAllSecretsOptionsModel.Search).To(Equal(core.StringPtr("testString")))
+				Expect(listAllSecretsOptionsModel.SortBy).To(Equal(core.StringPtr("id")))
 				Expect(listAllSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretGroupsOptions successfully`, func() {
@@ -4085,14 +4071,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Invoke NewPutConfigOptions successfully`, func() {
 				// Construct an instance of the EngineConfigOneOfIAMSecretEngineRootConfig model
-				engineConfigOneOfModel := new(ibm_cloud_secrets_manager_api_v1.EngineConfigOneOfIAMSecretEngineRootConfig)
+				engineConfigOneOfModel := new(EngineConfigOneOfIAMSecretEngineRootConfig)
 				Expect(engineConfigOneOfModel).ToNot(BeNil())
 				engineConfigOneOfModel.ApiKey = core.StringPtr("API_KEY")
 				Expect(engineConfigOneOfModel.ApiKey).To(Equal(core.StringPtr("API_KEY")))
 
 				// Construct an instance of the PutConfigOptions model
 				secretType := "iam_credentials"
-				var engineConfigOneOf ibm_cloud_secrets_manager_api_v1.EngineConfigOneOfIntf = nil
+				var engineConfigOneOf EngineConfigOneOfIntf = nil
 				putConfigOptionsModel := ibmCloudSecretsManagerApiService.NewPutConfigOptions(secretType, engineConfigOneOf)
 				putConfigOptionsModel.SetSecretType("iam_credentials")
 				putConfigOptionsModel.SetEngineConfigOneOf(engineConfigOneOfModel)
@@ -4104,23 +4090,23 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Invoke NewPutPolicyOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotationRotation)
+				secretPolicyRotationRotationModel := new(SecretPolicyRotationRotation)
 				Expect(secretPolicyRotationRotationModel).ToNot(BeNil())
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
-				secretPolicyRotationRotationModel.Unit = core.StringPtr("month")
+				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 				Expect(secretPolicyRotationRotationModel.Interval).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(secretPolicyRotationRotationModel.Unit).To(Equal(core.StringPtr("month")))
+				Expect(secretPolicyRotationRotationModel.Unit).To(Equal(core.StringPtr("day")))
 
 				// Construct an instance of the SecretPolicyRotation model
-				secretPolicyRotationModel := new(ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation)
+				secretPolicyRotationModel := new(SecretPolicyRotation)
 				Expect(secretPolicyRotationModel).ToNot(BeNil())
 				secretPolicyRotationModel.Type = core.StringPtr("application/vnd.ibm.secrets-manager.secret.policy+json")
 				secretPolicyRotationModel.Rotation = secretPolicyRotationRotationModel
@@ -4130,26 +4116,26 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				// Construct an instance of the PutPolicyOptions model
 				secretType := "username_password"
 				id := "testString"
-				var putPolicyOptionsMetadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				putPolicyOptionsResources := []ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{}
+				var putPolicyOptionsMetadata *CollectionMetadata = nil
+				putPolicyOptionsResources := []SecretPolicyRotation{}
 				putPolicyOptionsModel := ibmCloudSecretsManagerApiService.NewPutPolicyOptions(secretType, id, putPolicyOptionsMetadata, putPolicyOptionsResources)
 				putPolicyOptionsModel.SetSecretType("username_password")
 				putPolicyOptionsModel.SetID("testString")
 				putPolicyOptionsModel.SetMetadata(collectionMetadataModel)
-				putPolicyOptionsModel.SetResources([]ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{*secretPolicyRotationModel})
+				putPolicyOptionsModel.SetResources([]SecretPolicyRotation{*secretPolicyRotationModel})
 				putPolicyOptionsModel.SetPolicy("rotation")
 				putPolicyOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putPolicyOptionsModel).ToNot(BeNil())
 				Expect(putPolicyOptionsModel.SecretType).To(Equal(core.StringPtr("username_password")))
 				Expect(putPolicyOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(putPolicyOptionsModel.Metadata).To(Equal(collectionMetadataModel))
-				Expect(putPolicyOptionsModel.Resources).To(Equal([]ibm_cloud_secrets_manager_api_v1.SecretPolicyRotation{*secretPolicyRotationModel}))
+				Expect(putPolicyOptionsModel.Resources).To(Equal([]SecretPolicyRotation{*secretPolicyRotationModel}))
 				Expect(putPolicyOptionsModel.Policy).To(Equal(core.StringPtr("rotation")))
 				Expect(putPolicyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewSecretGroupDef successfully`, func() {
-				var metadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				resources := []ibm_cloud_secrets_manager_api_v1.SecretGroupResource{}
+				var metadata *CollectionMetadata = nil
+				resources := []SecretGroupResource{}
 				_, err := ibmCloudSecretsManagerApiService.NewSecretGroupDef(metadata, resources)
 				Expect(err).ToNot(BeNil())
 			})
@@ -4160,14 +4146,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewSecretMetadataRequest successfully`, func() {
-				var metadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				resources := []ibm_cloud_secrets_manager_api_v1.SecretMetadata{}
+				var metadata *CollectionMetadata = nil
+				resources := []SecretMetadata{}
 				_, err := ibmCloudSecretsManagerApiService.NewSecretMetadataRequest(metadata, resources)
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewSecretPolicyRotation successfully`, func() {
 				typeVar := "application/vnd.ibm.secrets-manager.secret.policy+json"
-				var rotation *ibm_cloud_secrets_manager_api_v1.SecretPolicyRotationRotation = nil
+				var rotation *SecretPolicyRotationRotation = nil
 				_, err := ibmCloudSecretsManagerApiService.NewSecretPolicyRotation(typeVar, rotation)
 				Expect(err).ToNot(BeNil())
 			})
@@ -4180,7 +4166,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 			})
 			It(`Invoke NewUpdateSecretGroupMetadataOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret.group+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
@@ -4188,7 +4174,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the SecretGroupMetadataUpdatable model
-				secretGroupMetadataUpdatableModel := new(ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable)
+				secretGroupMetadataUpdatableModel := new(SecretGroupMetadataUpdatable)
 				Expect(secretGroupMetadataUpdatableModel).ToNot(BeNil())
 				secretGroupMetadataUpdatableModel.Name = core.StringPtr("updated-secret-group-name")
 				secretGroupMetadataUpdatableModel.Description = core.StringPtr("Updated description for this group.")
@@ -4197,22 +4183,22 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 
 				// Construct an instance of the UpdateSecretGroupMetadataOptions model
 				id := "testString"
-				var updateSecretGroupMetadataOptionsMetadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				updateSecretGroupMetadataOptionsResources := []ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{}
+				var updateSecretGroupMetadataOptionsMetadata *CollectionMetadata = nil
+				updateSecretGroupMetadataOptionsResources := []SecretGroupMetadataUpdatable{}
 				updateSecretGroupMetadataOptionsModel := ibmCloudSecretsManagerApiService.NewUpdateSecretGroupMetadataOptions(id, updateSecretGroupMetadataOptionsMetadata, updateSecretGroupMetadataOptionsResources)
 				updateSecretGroupMetadataOptionsModel.SetID("testString")
 				updateSecretGroupMetadataOptionsModel.SetMetadata(collectionMetadataModel)
-				updateSecretGroupMetadataOptionsModel.SetResources([]ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel})
+				updateSecretGroupMetadataOptionsModel.SetResources([]SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel})
 				updateSecretGroupMetadataOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateSecretGroupMetadataOptionsModel).ToNot(BeNil())
 				Expect(updateSecretGroupMetadataOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(updateSecretGroupMetadataOptionsModel.Metadata).To(Equal(collectionMetadataModel))
-				Expect(updateSecretGroupMetadataOptionsModel.Resources).To(Equal([]ibm_cloud_secrets_manager_api_v1.SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}))
+				Expect(updateSecretGroupMetadataOptionsModel.Resources).To(Equal([]SecretGroupMetadataUpdatable{*secretGroupMetadataUpdatableModel}))
 				Expect(updateSecretGroupMetadataOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretMetadataOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
-				collectionMetadataModel := new(ibm_cloud_secrets_manager_api_v1.CollectionMetadata)
+				collectionMetadataModel := new(CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
@@ -4220,40 +4206,40 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the SecretMetadata model
-				secretMetadataModel := new(ibm_cloud_secrets_manager_api_v1.SecretMetadata)
+				secretMetadataModel := new(SecretMetadata)
 				Expect(secretMetadataModel).ToNot(BeNil())
-				secretMetadataModel.Labels = []string{"testString"}
-				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
-				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.Labels = []string{"dev", "us-south"}
+				secretMetadataModel.Name = core.StringPtr("example-secret")
+				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
 				secretMetadataModel.ExpirationDate = CreateMockDateTime()
 				secretMetadataModel.TTL = core.StringPtr("24h")
-				Expect(secretMetadataModel.Labels).To(Equal([]string{"testString"}))
-				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("updated-secret-name")))
-				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Updated description for this secret.")))
+				Expect(secretMetadataModel.Labels).To(Equal([]string{"dev", "us-south"}))
+				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("example-secret")))
+				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
 				Expect(secretMetadataModel.ExpirationDate).To(Equal(CreateMockDateTime()))
 				Expect(secretMetadataModel.TTL).To(Equal(core.StringPtr("24h")))
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				secretType := "arbitrary"
 				id := "testString"
-				var updateSecretMetadataOptionsMetadata *ibm_cloud_secrets_manager_api_v1.CollectionMetadata = nil
-				updateSecretMetadataOptionsResources := []ibm_cloud_secrets_manager_api_v1.SecretMetadata{}
+				var updateSecretMetadataOptionsMetadata *CollectionMetadata = nil
+				updateSecretMetadataOptionsResources := []SecretMetadata{}
 				updateSecretMetadataOptionsModel := ibmCloudSecretsManagerApiService.NewUpdateSecretMetadataOptions(secretType, id, updateSecretMetadataOptionsMetadata, updateSecretMetadataOptionsResources)
 				updateSecretMetadataOptionsModel.SetSecretType("arbitrary")
 				updateSecretMetadataOptionsModel.SetID("testString")
 				updateSecretMetadataOptionsModel.SetMetadata(collectionMetadataModel)
-				updateSecretMetadataOptionsModel.SetResources([]ibm_cloud_secrets_manager_api_v1.SecretMetadata{*secretMetadataModel})
+				updateSecretMetadataOptionsModel.SetResources([]SecretMetadata{*secretMetadataModel})
 				updateSecretMetadataOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateSecretMetadataOptionsModel).ToNot(BeNil())
 				Expect(updateSecretMetadataOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
 				Expect(updateSecretMetadataOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(updateSecretMetadataOptionsModel.Metadata).To(Equal(collectionMetadataModel))
-				Expect(updateSecretMetadataOptionsModel.Resources).To(Equal([]ibm_cloud_secrets_manager_api_v1.SecretMetadata{*secretMetadataModel}))
+				Expect(updateSecretMetadataOptionsModel.Resources).To(Equal([]SecretMetadata{*secretMetadataModel}))
 				Expect(updateSecretMetadataOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretOptions successfully`, func() {
 				// Construct an instance of the SecretActionOneOfRotateArbitrarySecretBody model
-				secretActionOneOfModel := new(ibm_cloud_secrets_manager_api_v1.SecretActionOneOfRotateArbitrarySecretBody)
+				secretActionOneOfModel := new(SecretActionOneOfRotateArbitrarySecretBody)
 				Expect(secretActionOneOfModel).ToNot(BeNil())
 				secretActionOneOfModel.Payload = core.StringPtr("testString")
 				Expect(secretActionOneOfModel.Payload).To(Equal(core.StringPtr("testString")))
@@ -4262,7 +4248,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1`, func() {
 				secretType := "arbitrary"
 				id := "testString"
 				action := "rotate"
-				var secretActionOneOf ibm_cloud_secrets_manager_api_v1.SecretActionOneOfIntf = nil
+				var secretActionOneOf SecretActionOneOfIntf = nil
 				updateSecretOptionsModel := ibmCloudSecretsManagerApiService.NewUpdateSecretOptions(secretType, id, action, secretActionOneOf)
 				updateSecretOptionsModel.SetSecretType("arbitrary")
 				updateSecretOptionsModel.SetID("testString")

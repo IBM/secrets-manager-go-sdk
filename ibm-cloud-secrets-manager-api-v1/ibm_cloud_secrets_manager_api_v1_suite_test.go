@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ibm_cloud_secrets_manager_api_v1_test
+package ibm_cloud_secrets_manager_api_v1
 
 import (
 	. "github.com/onsi/ginkgo"
