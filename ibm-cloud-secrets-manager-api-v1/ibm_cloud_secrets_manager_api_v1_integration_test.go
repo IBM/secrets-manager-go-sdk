@@ -17,6 +17,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		URL: os.Getenv("SERVICE_URL"),
 		Authenticator: &core.IamAuthenticator{
 			ApiKey: os.Getenv("SECRETS_MANAGER_API_APIKEY"),
+			URL:    os.Getenv("AUTH_URL"),
 		},
 	})
 	Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
@@ -57,6 +58,57 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			secret := getSecretRes.Resources[0].(*SecretResource)
 			secretData := secret.SecretData.(map[string]interface{})
 			Expect(secretData["payload"].(string)).To(Equal("secret-data"))
+			// delete arbitrary secret
+			resp, err = ibmCloudSecretsManagerApiService.DeleteSecret(&DeleteSecretOptions{
+				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+		})
+
+		It(`Creating a secret with the same name should result in a conflict`, func() {
+			secretName := "conflict_integration_test_secret"
+			// create arbitrary secret
+			createRes, resp, err := ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
+				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
+				Metadata: &CollectionMetadata{
+					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []SecretResourceIntf{
+					&SecretResourceArbitrarySecretResource{
+						Name:        core.StringPtr(secretName),
+						Description: core.StringPtr("Integration test generated"),
+						Payload:     core.StringPtr("secret-data"),
+					},
+				},
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			Expect(createRes.Resources[0].isaSecretResource()).To(BeTrue())
+			arbitrarySecretResource, ok := createRes.Resources[0].(*SecretResource)
+			Expect(ok).To(BeTrue())
+			secretId := arbitrarySecretResource.ID
+
+			// Now reuse the same secret name under the same secret type, should result in a conflict error.
+			createRes, resp, err = ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
+				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
+				Metadata: &CollectionMetadata{
+					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []SecretResourceIntf{
+					&SecretResourceArbitrarySecretResource{
+						Name:        core.StringPtr(secretName),
+						Description: core.StringPtr("Integration test generated"),
+						Payload:     core.StringPtr("secret-data"),
+					},
+				},
+			})
+			Expect(createRes).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusConflict))
+			Expect(err.Error()).To(Equal("Conflict"))
 			// delete arbitrary secret
 			resp, err = ibmCloudSecretsManagerApiService.DeleteSecret(&DeleteSecretOptions{
 				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
