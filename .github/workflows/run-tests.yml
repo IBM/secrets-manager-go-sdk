@@ -19,6 +19,7 @@ jobs:
     - name: Integration tests
       run: go test ./...
       env:
+        AUTH_URL: https://iam.cloud.ibm.com/identity/token
         SECRETS_MANAGER_API_AUTH_TYPE: iam
         SECRETS_MANAGER_API_APIKEY: ${{ secrets.SECRETS_MANAGER_API_APIKEY }}
         SERVICE_URL: https://9476d663-dc80-4132-aff6-4585ebbdfb2d.us-south.secrets-manager.appdomain.cloud

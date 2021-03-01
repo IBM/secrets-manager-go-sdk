@@ -295,7 +295,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicyWithConte
 
 	pathParamsMap := map[string]string{
 		"secret_type": *putPolicyOptions.SecretType,
-		"id": *putPolicyOptions.ID,
+		"id":          *putPolicyOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -371,7 +371,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicyWithConte
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getPolicyOptions.SecretType,
-		"id": *getPolicyOptions.ID,
+		"id":          *getPolicyOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -943,7 +943,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretWithConte
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getSecretOptions.SecretType,
-		"id": *getSecretOptions.ID,
+		"id":          *getSecretOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1005,7 +1005,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretWithCo
 
 	pathParamsMap := map[string]string{
 		"secret_type": *updateSecretOptions.SecretType,
-		"id": *updateSecretOptions.ID,
+		"id":          *updateSecretOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -1072,7 +1072,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretWithCo
 
 	pathParamsMap := map[string]string{
 		"secret_type": *deleteSecretOptions.SecretType,
-		"id": *deleteSecretOptions.ID,
+		"id":          *deleteSecretOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1124,7 +1124,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadataW
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getSecretMetadataOptions.SecretType,
-		"id": *getSecretMetadataOptions.ID,
+		"id":          *getSecretMetadataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1186,7 +1186,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretMetada
 
 	pathParamsMap := map[string]string{
 		"secret_type": *updateSecretMetadataOptions.SecretType,
-		"id": *updateSecretMetadataOptions.ID,
+		"id":          *updateSecretMetadataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1251,17 +1251,17 @@ type CollectionMetadata struct {
 // Constants associated with the CollectionMetadata.CollectionType property.
 // The type of resources in the resource array.
 const (
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerErrorJSON = "application/vnd.ibm.secrets-manager.error+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretGroupJSON = "application/vnd.ibm.secrets-manager.secret.group+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON = "application/vnd.ibm.secrets-manager.secret+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretPolicyJSON = "application/vnd.ibm.secrets-manager.secret.policy+json"
+	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerErrorJSON         = "application/vnd.ibm.secrets-manager.error+json"
+	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretGroupJSON   = "application/vnd.ibm.secrets-manager.secret.group+json"
+	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON        = "application/vnd.ibm.secrets-manager.secret+json"
+	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretPolicyJSON  = "application/vnd.ibm.secrets-manager.secret.policy+json"
 	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretVersionJSON = "application/vnd.ibm.secrets-manager.secret.version+json"
 )
 
 // NewCollectionMetadata : Instantiate CollectionMetadata (Generic Model Constructor)
 func (*IbmCloudSecretsManagerApiV1) NewCollectionMetadata(collectionType string, collectionTotal int64) (model *CollectionMetadata, err error) {
 	model = &CollectionMetadata{
-		CollectionType: core.StringPtr(collectionType),
+		CollectionType:  core.StringPtr(collectionType),
 		CollectionTotal: core.Int64Ptr(collectionTotal),
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -1295,7 +1295,7 @@ type CreateSecret struct {
 // NewCreateSecret : Instantiate CreateSecret (Generic Model Constructor)
 func (*IbmCloudSecretsManagerApiV1) NewCreateSecret(metadata *CollectionMetadata, resources []SecretResourceIntf) (model *CreateSecret, err error) {
 	model = &CreateSecret{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -1332,7 +1332,7 @@ type CreateSecretGroupOptions struct {
 // NewCreateSecretGroupOptions : Instantiate CreateSecretGroupOptions
 func (*IbmCloudSecretsManagerApiV1) NewCreateSecretGroupOptions(metadata *CollectionMetadata, resources []SecretGroupResource) *CreateSecretGroupOptions {
 	return &CreateSecretGroupOptions{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 }
@@ -1373,8 +1373,8 @@ type CreateSecretOptions struct {
 // Constants associated with the CreateSecretOptions.SecretType property.
 // The secret type.
 const (
-	CreateSecretOptions_SecretType_Arbitrary = "arbitrary"
-	CreateSecretOptions_SecretType_IamCredentials = "iam_credentials"
+	CreateSecretOptions_SecretType_Arbitrary        = "arbitrary"
+	CreateSecretOptions_SecretType_IamCredentials   = "iam_credentials"
 	CreateSecretOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -1382,8 +1382,8 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewCreateSecretOptions(secretType string, metadata *CollectionMetadata, resources []SecretResourceIntf) *CreateSecretOptions {
 	return &CreateSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		Metadata: metadata,
-		Resources: resources,
+		Metadata:   metadata,
+		Resources:  resources,
 	}
 }
 
@@ -1454,8 +1454,8 @@ type DeleteSecretOptions struct {
 // Constants associated with the DeleteSecretOptions.SecretType property.
 // The secret type.
 const (
-	DeleteSecretOptions_SecretType_Arbitrary = "arbitrary"
-	DeleteSecretOptions_SecretType_IamCredentials = "iam_credentials"
+	DeleteSecretOptions_SecretType_Arbitrary        = "arbitrary"
+	DeleteSecretOptions_SecretType_IamCredentials   = "iam_credentials"
 	DeleteSecretOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -1463,7 +1463,7 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewDeleteSecretOptions(secretType string, id string) *DeleteSecretOptions {
 	return &DeleteSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -1499,6 +1499,7 @@ type EngineConfigOneOf struct {
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
 	ApiKeyHash *string `json:"api_key_hash,omitempty"`
 }
+
 func (*EngineConfigOneOf) isaEngineConfigOneOf() bool {
 	return true
 }
@@ -1587,7 +1588,7 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewGetPolicyOptions(secretType string, id string) *GetPolicyOptions {
 	return &GetPolicyOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -1682,8 +1683,8 @@ type GetSecretMetadataOptions struct {
 // Constants associated with the GetSecretMetadataOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretMetadataOptions_SecretType_Arbitrary = "arbitrary"
-	GetSecretMetadataOptions_SecretType_IamCredentials = "iam_credentials"
+	GetSecretMetadataOptions_SecretType_Arbitrary        = "arbitrary"
+	GetSecretMetadataOptions_SecretType_IamCredentials   = "iam_credentials"
 	GetSecretMetadataOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -1691,7 +1692,7 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewGetSecretMetadataOptions(secretType string, id string) *GetSecretMetadataOptions {
 	return &GetSecretMetadataOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -1728,8 +1729,8 @@ type GetSecretOptions struct {
 // Constants associated with the GetSecretOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretOptions_SecretType_Arbitrary = "arbitrary"
-	GetSecretOptions_SecretType_IamCredentials = "iam_credentials"
+	GetSecretOptions_SecretType_Arbitrary        = "arbitrary"
+	GetSecretOptions_SecretType_IamCredentials   = "iam_credentials"
 	GetSecretOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -1737,7 +1738,7 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewGetSecretOptions(secretType string, id string) *GetSecretOptions {
 	return &GetSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -1769,6 +1770,7 @@ type GetSecretPoliciesOneOf struct {
 	// A collection of resources.
 	Resources []GetSecretPoliciesOneOfResourcesItem `json:"resources,omitempty"`
 }
+
 func (*GetSecretPoliciesOneOf) isaGetSecretPoliciesOneOf() bool {
 	return true
 }
@@ -1975,11 +1977,11 @@ type ListAllSecretsOptions struct {
 // **Usage:** To sort a list of secrets by their creation date, use
 // `../secrets/{secret-type}?sort_by=creation_date`.
 const (
-	ListAllSecretsOptions_SortBy_CreationDate = "creation_date"
+	ListAllSecretsOptions_SortBy_CreationDate   = "creation_date"
 	ListAllSecretsOptions_SortBy_ExpirationDate = "expiration_date"
-	ListAllSecretsOptions_SortBy_ID = "id"
-	ListAllSecretsOptions_SortBy_Name = "name"
-	ListAllSecretsOptions_SortBy_SecretType = "secret_type"
+	ListAllSecretsOptions_SortBy_ID             = "id"
+	ListAllSecretsOptions_SortBy_Name           = "name"
+	ListAllSecretsOptions_SortBy_SecretType     = "secret_type"
 )
 
 // NewListAllSecretsOptions : Instantiate ListAllSecretsOptions
@@ -2085,8 +2087,8 @@ type ListSecretsOptions struct {
 // Constants associated with the ListSecretsOptions.SecretType property.
 // The secret type.
 const (
-	ListSecretsOptions_SecretType_Arbitrary = "arbitrary"
-	ListSecretsOptions_SecretType_IamCredentials = "iam_credentials"
+	ListSecretsOptions_SecretType_Arbitrary        = "arbitrary"
+	ListSecretsOptions_SecretType_IamCredentials   = "iam_credentials"
 	ListSecretsOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -2141,7 +2143,7 @@ const (
 // NewPutConfigOptions : Instantiate PutConfigOptions
 func (*IbmCloudSecretsManagerApiV1) NewPutConfigOptions(secretType string, engineConfigOneOf EngineConfigOneOfIntf) *PutConfigOptions {
 	return &PutConfigOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:        core.StringPtr(secretType),
 		EngineConfigOneOf: engineConfigOneOf,
 	}
 }
@@ -2201,9 +2203,9 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewPutPolicyOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretPolicyRotation) *PutPolicyOptions {
 	return &PutPolicyOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		Metadata: metadata,
-		Resources: resources,
+		ID:         core.StringPtr(id),
+		Metadata:   metadata,
+		Resources:  resources,
 	}
 }
 
@@ -2258,6 +2260,7 @@ type SecretActionOneOf struct {
 	// The service ID that you want to delete. It is deleted together with its API key.
 	ServiceID *string `json:"service_id,omitempty"`
 }
+
 func (*SecretActionOneOf) isaSecretActionOneOf() bool {
 	return true
 }
@@ -2297,7 +2300,7 @@ type SecretGroupDef struct {
 // NewSecretGroupDef : Instantiate SecretGroupDef (Generic Model Constructor)
 func (*IbmCloudSecretsManagerApiV1) NewSecretGroupDef(metadata *CollectionMetadata, resources []SecretGroupResource) (model *SecretGroupDef, err error) {
 	model = &SecretGroupDef{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -2542,8 +2545,8 @@ type SecretMetadata struct {
 // Constants associated with the SecretMetadata.SecretType property.
 // The secret type.
 const (
-	SecretMetadata_SecretType_Arbitrary = "arbitrary"
-	SecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	SecretMetadata_SecretType_Arbitrary        = "arbitrary"
+	SecretMetadata_SecretType_IamCredentials   = "iam_credentials"
 	SecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
@@ -2631,7 +2634,7 @@ type SecretMetadataRequest struct {
 // NewSecretMetadataRequest : Instantiate SecretMetadataRequest (Generic Model Constructor)
 func (*IbmCloudSecretsManagerApiV1) NewSecretMetadataRequest(metadata *CollectionMetadata, resources []SecretMetadata) (model *SecretMetadataRequest, err error) {
 	model = &SecretMetadataRequest{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -2671,7 +2674,7 @@ const (
 // NewSecretPolicyRotation : Instantiate SecretPolicyRotation (Generic Model Constructor)
 func (*IbmCloudSecretsManagerApiV1) NewSecretPolicyRotation(typeVar string, rotation *SecretPolicyRotationRotation) (model *SecretPolicyRotation, err error) {
 	model = &SecretPolicyRotation{
-		Type: core.StringPtr(typeVar),
+		Type:     core.StringPtr(typeVar),
 		Rotation: rotation,
 	}
 	err = core.ValidateStruct(model, "required parameters")
@@ -2705,7 +2708,7 @@ type SecretPolicyRotationRotation struct {
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
 // Specifies the units for the secret rotation time interval.
 const (
-	SecretPolicyRotationRotation_Unit_Day = "day"
+	SecretPolicyRotationRotation_Unit_Day   = "day"
 	SecretPolicyRotationRotation_Unit_Month = "month"
 )
 
@@ -2713,7 +2716,7 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewSecretPolicyRotationRotation(interval int64, unit string) (model *SecretPolicyRotationRotation, err error) {
 	model = &SecretPolicyRotationRotation{
 		Interval: core.Int64Ptr(interval),
-		Unit: core.StringPtr(unit),
+		Unit:     core.StringPtr(unit),
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
@@ -2848,10 +2851,11 @@ type SecretResource struct {
 // Constants associated with the SecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResource_SecretType_Arbitrary = "arbitrary"
-	SecretResource_SecretType_IamCredentials = "iam_credentials"
+	SecretResource_SecretType_Arbitrary        = "arbitrary"
+	SecretResource_SecretType_IamCredentials   = "iam_credentials"
 	SecretResource_SecretType_UsernamePassword = "username_password"
 )
+
 func (*SecretResource) isaSecretResource() bool {
 	return true
 }
@@ -3019,8 +3023,8 @@ type UpdateSecretGroupMetadataOptions struct {
 // NewUpdateSecretGroupMetadataOptions : Instantiate UpdateSecretGroupMetadataOptions
 func (*IbmCloudSecretsManagerApiV1) NewUpdateSecretGroupMetadataOptions(id string, metadata *CollectionMetadata, resources []SecretGroupMetadataUpdatable) *UpdateSecretGroupMetadataOptions {
 	return &UpdateSecretGroupMetadataOptions{
-		ID: core.StringPtr(id),
-		Metadata: metadata,
+		ID:        core.StringPtr(id),
+		Metadata:  metadata,
 		Resources: resources,
 	}
 }
@@ -3070,8 +3074,8 @@ type UpdateSecretMetadataOptions struct {
 // Constants associated with the UpdateSecretMetadataOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretMetadataOptions_SecretType_Arbitrary = "arbitrary"
-	UpdateSecretMetadataOptions_SecretType_IamCredentials = "iam_credentials"
+	UpdateSecretMetadataOptions_SecretType_Arbitrary        = "arbitrary"
+	UpdateSecretMetadataOptions_SecretType_IamCredentials   = "iam_credentials"
 	UpdateSecretMetadataOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -3079,9 +3083,9 @@ const (
 func (*IbmCloudSecretsManagerApiV1) NewUpdateSecretMetadataOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretMetadata) *UpdateSecretMetadataOptions {
 	return &UpdateSecretMetadataOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		Metadata: metadata,
-		Resources: resources,
+		ID:         core.StringPtr(id),
+		Metadata:   metadata,
+		Resources:  resources,
 	}
 }
 
@@ -3136,8 +3140,8 @@ type UpdateSecretOptions struct {
 // Constants associated with the UpdateSecretOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretOptions_SecretType_Arbitrary = "arbitrary"
-	UpdateSecretOptions_SecretType_IamCredentials = "iam_credentials"
+	UpdateSecretOptions_SecretType_Arbitrary        = "arbitrary"
+	UpdateSecretOptions_SecretType_IamCredentials   = "iam_credentials"
 	UpdateSecretOptions_SecretType_UsernamePassword = "username_password"
 )
 
@@ -3145,15 +3149,15 @@ const (
 // The action to perform on the specified secret.
 const (
 	UpdateSecretOptions_Action_DeleteCredentials = "delete_credentials"
-	UpdateSecretOptions_Action_Rotate = "rotate"
+	UpdateSecretOptions_Action_Rotate            = "rotate"
 )
 
 // NewUpdateSecretOptions : Instantiate UpdateSecretOptions
 func (*IbmCloudSecretsManagerApiV1) NewUpdateSecretOptions(secretType string, id string, action string, secretActionOneOf SecretActionOneOfIntf) *UpdateSecretOptions {
 	return &UpdateSecretOptions{
-		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		Action: core.StringPtr(action),
+		SecretType:        core.StringPtr(secretType),
+		ID:                core.StringPtr(id),
+		Action:            core.StringPtr(action),
 		SecretActionOneOf: secretActionOneOf,
 	}
 }
@@ -3428,8 +3432,8 @@ type SecretResourceArbitrarySecretResource struct {
 // Constants associated with the SecretResourceArbitrarySecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceArbitrarySecretResource_SecretType_Arbitrary = "arbitrary"
-	SecretResourceArbitrarySecretResource_SecretType_IamCredentials = "iam_credentials"
+	SecretResourceArbitrarySecretResource_SecretType_Arbitrary        = "arbitrary"
+	SecretResourceArbitrarySecretResource_SecretType_IamCredentials   = "iam_credentials"
 	SecretResourceArbitrarySecretResource_SecretType_UsernamePassword = "username_password"
 )
 
@@ -3605,8 +3609,8 @@ type SecretResourceIAMSecretResource struct {
 // Constants associated with the SecretResourceIAMSecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceIAMSecretResource_SecretType_Arbitrary = "arbitrary"
-	SecretResourceIAMSecretResource_SecretType_IamCredentials = "iam_credentials"
+	SecretResourceIAMSecretResource_SecretType_Arbitrary        = "arbitrary"
+	SecretResourceIAMSecretResource_SecretType_IamCredentials   = "iam_credentials"
 	SecretResourceIAMSecretResource_SecretType_UsernamePassword = "username_password"
 )
 
@@ -3787,8 +3791,8 @@ type SecretResourceUsernamePasswordSecretResource struct {
 // Constants associated with the SecretResourceUsernamePasswordSecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceUsernamePasswordSecretResource_SecretType_Arbitrary = "arbitrary"
-	SecretResourceUsernamePasswordSecretResource_SecretType_IamCredentials = "iam_credentials"
+	SecretResourceUsernamePasswordSecretResource_SecretType_Arbitrary        = "arbitrary"
+	SecretResourceUsernamePasswordSecretResource_SecretType_IamCredentials   = "iam_credentials"
 	SecretResourceUsernamePasswordSecretResource_SecretType_UsernamePassword = "username_password"
 )
 
