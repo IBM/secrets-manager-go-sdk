@@ -15,49 +15,49 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.28.0-55613c9e-20210220-164656
+ * IBM OpenAPI SDK Code Generator Version: 3.29.0-cd9ba74f-20210305-183535
  */
 
-// Package ibmcloudsecretsmanagerapiv1 : Operations and models for the IbmCloudSecretsManagerApiV1 service
-package ibm_cloud_secrets_manager_api_v1
+// Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
+package secretsmanagerv1
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/secrets-manager-go-sdk/common"
+	common "github.com/IBM/secrets-manager-go-sdk/common"
 	"github.com/go-openapi/strfmt"
 	"net/http"
 	"reflect"
 	"time"
 )
 
-// IbmCloudSecretsManagerApiV1 : With IBM Cloud® Secrets Manager, you can create, lease, and centrally manage secrets
-// that are used in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated instance of
-// Secrets Manager, built on open source HashiCorp Vault.
+// SecretsManagerV1 : With IBM Cloud® Secrets Manager, you can create, lease, and centrally manage secrets that are used
+// in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated instance of Secrets
+// Manager, built on open source HashiCorp Vault.
 //
 // Version: 1.0.0
 // See: https://cloud.ibm.com/docs/secrets-manager
-type IbmCloudSecretsManagerApiV1 struct {
+type SecretsManagerV1 struct {
 	Service *core.BaseService
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://ibm-cloud-secrets-manager-api.cloud.ibm.com"
+const DefaultServiceURL = "https://secrets-manager.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
-const DefaultServiceName = "ibm_cloud_secrets_manager_api"
+const DefaultServiceName = "secrets_manager"
 
-// IbmCloudSecretsManagerApiV1Options : Service options
-type IbmCloudSecretsManagerApiV1Options struct {
+// SecretsManagerV1Options : Service options
+type SecretsManagerV1Options struct {
 	ServiceName   string
 	URL           string
 	Authenticator core.Authenticator
 }
 
-// NewIbmCloudSecretsManagerApiV1UsingExternalConfig : constructs an instance of IbmCloudSecretsManagerApiV1 with passed in options and external configuration.
-func NewIbmCloudSecretsManagerApiV1UsingExternalConfig(options *IbmCloudSecretsManagerApiV1Options) (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1, err error) {
+// NewSecretsManagerV1UsingExternalConfig : constructs an instance of SecretsManagerV1 with passed in options and external configuration.
+func NewSecretsManagerV1UsingExternalConfig(options *SecretsManagerV1Options) (secretsManager *SecretsManagerV1, err error) {
 	if options.ServiceName == "" {
 		options.ServiceName = DefaultServiceName
 	}
@@ -69,24 +69,24 @@ func NewIbmCloudSecretsManagerApiV1UsingExternalConfig(options *IbmCloudSecretsM
 		}
 	}
 
-	ibmCloudSecretsManagerApi, err = NewIbmCloudSecretsManagerApiV1(options)
+	secretsManager, err = NewSecretsManagerV1(options)
 	if err != nil {
 		return
 	}
 
-	err = ibmCloudSecretsManagerApi.Service.ConfigureService(options.ServiceName)
+	err = secretsManager.Service.ConfigureService(options.ServiceName)
 	if err != nil {
 		return
 	}
 
 	if options.URL != "" {
-		err = ibmCloudSecretsManagerApi.Service.SetServiceURL(options.URL)
+		err = secretsManager.Service.SetServiceURL(options.URL)
 	}
 	return
 }
 
-// NewIbmCloudSecretsManagerApiV1 : constructs an instance of IbmCloudSecretsManagerApiV1 with passed in options.
-func NewIbmCloudSecretsManagerApiV1(options *IbmCloudSecretsManagerApiV1Options) (service *IbmCloudSecretsManagerApiV1, err error) {
+// NewSecretsManagerV1 : constructs an instance of SecretsManagerV1 with passed in options.
+func NewSecretsManagerV1(options *SecretsManagerV1Options) (service *SecretsManagerV1, err error) {
 	serviceOptions := &core.ServiceOptions{
 		URL:           DefaultServiceURL,
 		Authenticator: options.Authenticator,
@@ -104,7 +104,7 @@ func NewIbmCloudSecretsManagerApiV1(options *IbmCloudSecretsManagerApiV1Options)
 		}
 	}
 
-	service = &IbmCloudSecretsManagerApiV1{
+	service = &SecretsManagerV1{
 		Service: baseService,
 	}
 
@@ -116,60 +116,60 @@ func GetServiceURLForRegion(region string) (string, error) {
 	return "", fmt.Errorf("service does not support regional URLs")
 }
 
-// Clone makes a copy of "ibmCloudSecretsManagerApi" suitable for processing requests.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) Clone() *IbmCloudSecretsManagerApiV1 {
-	if core.IsNil(ibmCloudSecretsManagerApi) {
+// Clone makes a copy of "secretsManager" suitable for processing requests.
+func (secretsManager *SecretsManagerV1) Clone() *SecretsManagerV1 {
+	if core.IsNil(secretsManager) {
 		return nil
 	}
-	clone := *ibmCloudSecretsManagerApi
-	clone.Service = ibmCloudSecretsManagerApi.Service.Clone()
+	clone := *secretsManager
+	clone.Service = secretsManager.Service.Clone()
 	return &clone
 }
 
 // SetServiceURL sets the service URL
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) SetServiceURL(url string) error {
-	return ibmCloudSecretsManagerApi.Service.SetServiceURL(url)
+func (secretsManager *SecretsManagerV1) SetServiceURL(url string) error {
+	return secretsManager.Service.SetServiceURL(url)
 }
 
 // GetServiceURL returns the service URL
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetServiceURL() string {
-	return ibmCloudSecretsManagerApi.Service.GetServiceURL()
+func (secretsManager *SecretsManagerV1) GetServiceURL() string {
+	return secretsManager.Service.GetServiceURL()
 }
 
 // SetDefaultHeaders sets HTTP headers to be sent in every request
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) SetDefaultHeaders(headers http.Header) {
-	ibmCloudSecretsManagerApi.Service.SetDefaultHeaders(headers)
+func (secretsManager *SecretsManagerV1) SetDefaultHeaders(headers http.Header) {
+	secretsManager.Service.SetDefaultHeaders(headers)
 }
 
 // SetEnableGzipCompression sets the service's EnableGzipCompression field
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) SetEnableGzipCompression(enableGzip bool) {
-	ibmCloudSecretsManagerApi.Service.SetEnableGzipCompression(enableGzip)
+func (secretsManager *SecretsManagerV1) SetEnableGzipCompression(enableGzip bool) {
+	secretsManager.Service.SetEnableGzipCompression(enableGzip)
 }
 
 // GetEnableGzipCompression returns the service's EnableGzipCompression field
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetEnableGzipCompression() bool {
-	return ibmCloudSecretsManagerApi.Service.GetEnableGzipCompression()
+func (secretsManager *SecretsManagerV1) GetEnableGzipCompression() bool {
+	return secretsManager.Service.GetEnableGzipCompression()
 }
 
 // EnableRetries enables automatic retries for requests invoked for this service instance.
 // If either parameter is specified as 0, then a default value is used instead.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) EnableRetries(maxRetries int, maxRetryInterval time.Duration) {
-	ibmCloudSecretsManagerApi.Service.EnableRetries(maxRetries, maxRetryInterval)
+func (secretsManager *SecretsManagerV1) EnableRetries(maxRetries int, maxRetryInterval time.Duration) {
+	secretsManager.Service.EnableRetries(maxRetries, maxRetryInterval)
 }
 
 // DisableRetries disables automatic retries for requests invoked for this service instance.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DisableRetries() {
-	ibmCloudSecretsManagerApi.Service.DisableRetries()
+func (secretsManager *SecretsManagerV1) DisableRetries() {
+	secretsManager.Service.DisableRetries()
 }
 
 // PutConfig : Configure secrets of a given type
 // Updates the configuration for the given secret type.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutConfig(putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.PutConfigWithContext(context.Background(), putConfigOptions)
+func (secretsManager *SecretsManagerV1) PutConfig(putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.PutConfigWithContext(context.Background(), putConfigOptions)
 }
 
 // PutConfigWithContext is an alternate form of the PutConfig method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutConfigWithContext(ctx context.Context, putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context, putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putConfigOptions, "putConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -185,8 +185,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutConfigWithConte
 
 	builder := core.NewRequestBuilder(core.PUT)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -195,7 +195,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutConfigWithConte
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "PutConfig")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "PutConfig")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -211,19 +211,19 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutConfigWithConte
 		return
 	}
 
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, nil)
+	response, err = secretsManager.Service.Request(request, nil)
 
 	return
 }
 
 // GetConfig : Get the configuration for a secret type
 // Retrieves the configuration that is associated with the given secret type.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetConfig(getConfigOptions *GetConfigOptions) (result EngineConfigOneOfIntf, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.GetConfigWithContext(context.Background(), getConfigOptions)
+func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result EngineConfigOneOfIntf, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigWithContext(context.Background(), getConfigOptions)
 }
 
 // GetConfigWithContext is an alternate form of the GetConfig method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetConfigWithContext(ctx context.Context, getConfigOptions *GetConfigOptions) (result EngineConfigOneOfIntf, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context, getConfigOptions *GetConfigOptions) (result EngineConfigOneOfIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getConfigOptions, "getConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -239,8 +239,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetConfigWithConte
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -249,7 +249,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetConfigWithConte
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "GetConfig")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfig")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -261,7 +261,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetConfigWithConte
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -278,12 +278,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetConfigWithConte
 // Creates or updates one or more policies, such as an [automatic rotation
 // policy](http://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-rotate-secrets#auto-rotate-secret), for the
 // specified secret.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.PutPolicyWithContext(context.Background(), putPolicyOptions)
+func (secretsManager *SecretsManagerV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
+	return secretsManager.PutPolicyWithContext(context.Background(), putPolicyOptions)
 }
 
 // PutPolicyWithContext is an alternate form of the PutPolicy method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicyWithContext(ctx context.Context, putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) PutPolicyWithContext(ctx context.Context, putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putPolicyOptions, "putPolicyOptions cannot be nil")
 	if err != nil {
 		return
@@ -300,8 +300,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicyWithConte
 
 	builder := core.NewRequestBuilder(core.PUT)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -310,7 +310,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicyWithConte
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "PutPolicy")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "PutPolicy")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -339,7 +339,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicyWithConte
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -354,12 +354,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) PutPolicyWithConte
 
 // GetPolicy : List secret policies
 // Retrieves a list of policies that are associated with a specified secret.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicy(getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.GetPolicyWithContext(context.Background(), getPolicyOptions)
+func (secretsManager *SecretsManagerV1) GetPolicy(getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
+	return secretsManager.GetPolicyWithContext(context.Background(), getPolicyOptions)
 }
 
 // GetPolicyWithContext is an alternate form of the GetPolicy method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicyWithContext(ctx context.Context, getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetPolicyWithContext(ctx context.Context, getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesOneOfIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getPolicyOptions, "getPolicyOptions cannot be nil")
 	if err != nil {
 		return
@@ -376,8 +376,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicyWithConte
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -386,7 +386,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicyWithConte
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "GetPolicy")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetPolicy")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -402,7 +402,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicyWithConte
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -420,12 +420,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetPolicyWithConte
 //
 // A successful request returns the ID value of the secret group, along with other metadata. To learn more about secret
 // groups, check out the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-groups).
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretGroup(createSecretGroupOptions *CreateSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.CreateSecretGroupWithContext(context.Background(), createSecretGroupOptions)
+func (secretsManager *SecretsManagerV1) CreateSecretGroup(createSecretGroupOptions *CreateSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateSecretGroupWithContext(context.Background(), createSecretGroupOptions)
 }
 
 // CreateSecretGroupWithContext is an alternate form of the CreateSecretGroup method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretGroupWithContext(ctx context.Context, createSecretGroupOptions *CreateSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) CreateSecretGroupWithContext(ctx context.Context, createSecretGroupOptions *CreateSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretGroupOptions, "createSecretGroupOptions cannot be nil")
 	if err != nil {
 		return
@@ -437,8 +437,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretGroupW
 
 	builder := core.NewRequestBuilder(core.POST)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secret_groups`, nil)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secret_groups`, nil)
 	if err != nil {
 		return
 	}
@@ -447,7 +447,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretGroupW
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "CreateSecretGroup")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateSecretGroup")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -472,7 +472,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretGroupW
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -487,12 +487,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretGroupW
 
 // ListSecretGroups : List secret groups
 // Retrieves the list of secret groups that are available in your Secrets Manager instance.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.ListSecretGroupsWithContext(context.Background(), listSecretGroupsOptions)
+func (secretsManager *SecretsManagerV1) ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+	return secretsManager.ListSecretGroupsWithContext(context.Background(), listSecretGroupsOptions)
 }
 
 // ListSecretGroupsWithContext is an alternate form of the ListSecretGroups method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretGroupsWithContext(ctx context.Context, listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) ListSecretGroupsWithContext(ctx context.Context, listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listSecretGroupsOptions, "listSecretGroupsOptions")
 	if err != nil {
 		return
@@ -500,8 +500,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretGroupsWi
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secret_groups`, nil)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secret_groups`, nil)
 	if err != nil {
 		return
 	}
@@ -510,7 +510,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretGroupsWi
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "ListSecretGroups")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "ListSecretGroups")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -522,7 +522,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretGroupsWi
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -537,12 +537,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretGroupsWi
 
 // GetSecretGroup : Get a secret group
 // Retrieves the metadata of an existing secret group by specifying the ID of the group.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.GetSecretGroupWithContext(context.Background(), getSecretGroupOptions)
+func (secretsManager *SecretsManagerV1) GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+	return secretsManager.GetSecretGroupWithContext(context.Background(), getSecretGroupOptions)
 }
 
 // GetSecretGroupWithContext is an alternate form of the GetSecretGroup method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretGroupWithContext(ctx context.Context, getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetSecretGroupWithContext(ctx context.Context, getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretGroupOptions, "getSecretGroupOptions cannot be nil")
 	if err != nil {
 		return
@@ -558,8 +558,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretGroupWith
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secret_groups/{id}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secret_groups/{id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -568,7 +568,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretGroupWith
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "GetSecretGroup")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetSecretGroup")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -580,7 +580,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretGroupWith
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -595,12 +595,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretGroupWith
 
 // UpdateSecretGroupMetadata : Update a secret group
 // Updates the metadata of an existing secret group, such as its name or description.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretGroupMetadata(updateSecretGroupMetadataOptions *UpdateSecretGroupMetadataOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.UpdateSecretGroupMetadataWithContext(context.Background(), updateSecretGroupMetadataOptions)
+func (secretsManager *SecretsManagerV1) UpdateSecretGroupMetadata(updateSecretGroupMetadataOptions *UpdateSecretGroupMetadataOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+	return secretsManager.UpdateSecretGroupMetadataWithContext(context.Background(), updateSecretGroupMetadataOptions)
 }
 
 // UpdateSecretGroupMetadataWithContext is an alternate form of the UpdateSecretGroupMetadata method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretGroupMetadataWithContext(ctx context.Context, updateSecretGroupMetadataOptions *UpdateSecretGroupMetadataOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) UpdateSecretGroupMetadataWithContext(ctx context.Context, updateSecretGroupMetadataOptions *UpdateSecretGroupMetadataOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretGroupMetadataOptions, "updateSecretGroupMetadataOptions cannot be nil")
 	if err != nil {
 		return
@@ -616,8 +616,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretGroupM
 
 	builder := core.NewRequestBuilder(core.PUT)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secret_groups/{id}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secret_groups/{id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -626,7 +626,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretGroupM
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "UpdateSecretGroupMetadata")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateSecretGroupMetadata")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -651,7 +651,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretGroupM
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -669,12 +669,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretGroupM
 //
 // **Note:** To delete a secret group, it must be empty. If you need to remove a secret group that contains secrets, you
 // must first [delete the secrets](#delete-secret) that are associated with the group.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretGroup(deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.DeleteSecretGroupWithContext(context.Background(), deleteSecretGroupOptions)
+func (secretsManager *SecretsManagerV1) DeleteSecretGroup(deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteSecretGroupWithContext(context.Background(), deleteSecretGroupOptions)
 }
 
 // DeleteSecretGroupWithContext is an alternate form of the DeleteSecretGroup method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretGroupWithContext(ctx context.Context, deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) DeleteSecretGroupWithContext(ctx context.Context, deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretGroupOptions, "deleteSecretGroupOptions cannot be nil")
 	if err != nil {
 		return
@@ -690,8 +690,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretGroupW
 
 	builder := core.NewRequestBuilder(core.DELETE)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secret_groups/{id}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secret_groups/{id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -700,7 +700,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretGroupW
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "DeleteSecretGroup")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteSecretGroup")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -710,7 +710,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretGroupW
 		return
 	}
 
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, nil)
+	response, err = secretsManager.Service.Request(request, nil)
 
 	return
 }
@@ -723,12 +723,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretGroupW
 //
 // To learn more about the types of secrets that you can create with Secrets Manager, check out the
 // [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-basics).
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecret(createSecretOptions *CreateSecretOptions) (result *CreateSecret, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.CreateSecretWithContext(context.Background(), createSecretOptions)
+func (secretsManager *SecretsManagerV1) CreateSecret(createSecretOptions *CreateSecretOptions) (result *CreateSecret, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateSecretWithContext(context.Background(), createSecretOptions)
 }
 
 // CreateSecretWithContext is an alternate form of the CreateSecret method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretWithContext(ctx context.Context, createSecretOptions *CreateSecretOptions) (result *CreateSecret, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) CreateSecretWithContext(ctx context.Context, createSecretOptions *CreateSecretOptions) (result *CreateSecret, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretOptions, "createSecretOptions cannot be nil")
 	if err != nil {
 		return
@@ -744,8 +744,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretWithCo
 
 	builder := core.NewRequestBuilder(core.POST)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -754,7 +754,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretWithCo
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "CreateSecret")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateSecret")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -779,7 +779,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretWithCo
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -794,12 +794,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) CreateSecretWithCo
 
 // ListSecrets : List secrets by type
 // Retrieves a list of secrets based on the type that you specify.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecrets(listSecretsOptions *ListSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.ListSecretsWithContext(context.Background(), listSecretsOptions)
+func (secretsManager *SecretsManagerV1) ListSecrets(listSecretsOptions *ListSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
+	return secretsManager.ListSecretsWithContext(context.Background(), listSecretsOptions)
 }
 
 // ListSecretsWithContext is an alternate form of the ListSecrets method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretsWithContext(ctx context.Context, listSecretsOptions *ListSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) ListSecretsWithContext(ctx context.Context, listSecretsOptions *ListSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listSecretsOptions, "listSecretsOptions cannot be nil")
 	if err != nil {
 		return
@@ -815,8 +815,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretsWithCon
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -825,7 +825,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretsWithCon
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "ListSecrets")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "ListSecrets")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -844,7 +844,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretsWithCon
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -859,12 +859,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListSecretsWithCon
 
 // ListAllSecrets : List all secrets
 // Retrieves a list of all secrets in your Secrets Manager instance.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListAllSecrets(listAllSecretsOptions *ListAllSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.ListAllSecretsWithContext(context.Background(), listAllSecretsOptions)
+func (secretsManager *SecretsManagerV1) ListAllSecrets(listAllSecretsOptions *ListAllSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
+	return secretsManager.ListAllSecretsWithContext(context.Background(), listAllSecretsOptions)
 }
 
 // ListAllSecretsWithContext is an alternate form of the ListAllSecrets method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListAllSecretsWithContext(ctx context.Context, listAllSecretsOptions *ListAllSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) ListAllSecretsWithContext(ctx context.Context, listAllSecretsOptions *ListAllSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listAllSecretsOptions, "listAllSecretsOptions")
 	if err != nil {
 		return
@@ -872,8 +872,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListAllSecretsWith
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets`, nil)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets`, nil)
 	if err != nil {
 		return
 	}
@@ -882,7 +882,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListAllSecretsWith
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "ListAllSecrets")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "ListAllSecrets")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -907,7 +907,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListAllSecretsWith
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -926,12 +926,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) ListAllSecretsWith
 // A successful request returns the secret data that is associated with your secret, along with other metadata. To view
 // only the details of a specified secret without retrieving its value, use the [Get secret
 // metadata](#get-secret-metadata) method.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecret(getSecretOptions *GetSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.GetSecretWithContext(context.Background(), getSecretOptions)
+func (secretsManager *SecretsManagerV1) GetSecret(getSecretOptions *GetSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
+	return secretsManager.GetSecretWithContext(context.Background(), getSecretOptions)
 }
 
 // GetSecretWithContext is an alternate form of the GetSecret method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretWithContext(ctx context.Context, getSecretOptions *GetSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context, getSecretOptions *GetSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretOptions, "getSecretOptions cannot be nil")
 	if err != nil {
 		return
@@ -948,8 +948,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretWithConte
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -958,7 +958,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretWithConte
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "GetSecret")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetSecret")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -970,7 +970,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretWithConte
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -988,12 +988,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretWithConte
 //
 // - `rotate`: Replace the value of an `arbitrary` or `username_password` secret.
 // - `delete_credentials`: Delete the API key that is associated with an `iam_credentials` secret.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.UpdateSecretWithContext(context.Background(), updateSecretOptions)
+func (secretsManager *SecretsManagerV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
+	return secretsManager.UpdateSecretWithContext(context.Background(), updateSecretOptions)
 }
 
 // UpdateSecretWithContext is an alternate form of the UpdateSecret method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretWithContext(ctx context.Context, updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) UpdateSecretWithContext(ctx context.Context, updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretOptions, "updateSecretOptions cannot be nil")
 	if err != nil {
 		return
@@ -1010,8 +1010,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretWithCo
 
 	builder := core.NewRequestBuilder(core.POST)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1020,7 +1020,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretWithCo
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "UpdateSecret")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateSecret")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -1040,7 +1040,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretWithCo
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -1055,12 +1055,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretWithCo
 
 // DeleteSecret : Delete a secret
 // Deletes a secret by specifying the ID of the secret.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecret(deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.DeleteSecretWithContext(context.Background(), deleteSecretOptions)
+func (secretsManager *SecretsManagerV1) DeleteSecret(deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteSecretWithContext(context.Background(), deleteSecretOptions)
 }
 
 // DeleteSecretWithContext is an alternate form of the DeleteSecret method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretWithContext(ctx context.Context, deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) DeleteSecretWithContext(ctx context.Context, deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretOptions, "deleteSecretOptions cannot be nil")
 	if err != nil {
 		return
@@ -1077,8 +1077,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretWithCo
 
 	builder := core.NewRequestBuilder(core.DELETE)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1087,7 +1087,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretWithCo
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "DeleteSecret")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteSecret")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -1097,7 +1097,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretWithCo
 		return
 	}
 
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, nil)
+	response, err = secretsManager.Service.Request(request, nil)
 
 	return
 }
@@ -1107,12 +1107,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) DeleteSecretWithCo
 //
 // A successful request returns only metadata about the secret, such as its name and creation date. To retrieve the
 // value of a secret, use the [Get a secret](#get-secret) method.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadata(getSecretMetadataOptions *GetSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.GetSecretMetadataWithContext(context.Background(), getSecretMetadataOptions)
+func (secretsManager *SecretsManagerV1) GetSecretMetadata(getSecretMetadataOptions *GetSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
+	return secretsManager.GetSecretMetadataWithContext(context.Background(), getSecretMetadataOptions)
 }
 
 // GetSecretMetadataWithContext is an alternate form of the GetSecretMetadata method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadataWithContext(ctx context.Context, getSecretMetadataOptions *GetSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetSecretMetadataWithContext(ctx context.Context, getSecretMetadataOptions *GetSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretMetadataOptions, "getSecretMetadataOptions cannot be nil")
 	if err != nil {
 		return
@@ -1129,8 +1129,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadataW
 
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/metadata`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/metadata`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1139,7 +1139,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadataW
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "GetSecretMetadata")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetSecretMetadata")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -1151,7 +1151,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadataW
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -1169,12 +1169,12 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) GetSecretMetadataW
 //
 // To update the actual contents of a secret, rotate the secret by using the [Invoke an action on a
 // secret](#update-secret) method.
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretMetadata(updateSecretMetadataOptions *UpdateSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
-	return ibmCloudSecretsManagerApi.UpdateSecretMetadataWithContext(context.Background(), updateSecretMetadataOptions)
+func (secretsManager *SecretsManagerV1) UpdateSecretMetadata(updateSecretMetadataOptions *UpdateSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
+	return secretsManager.UpdateSecretMetadataWithContext(context.Background(), updateSecretMetadataOptions)
 }
 
 // UpdateSecretMetadataWithContext is an alternate form of the UpdateSecretMetadata method which supports a Context parameter
-func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretMetadataWithContext(ctx context.Context, updateSecretMetadataOptions *UpdateSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) UpdateSecretMetadataWithContext(ctx context.Context, updateSecretMetadataOptions *UpdateSecretMetadataOptions) (result *SecretMetadataRequest, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretMetadataOptions, "updateSecretMetadataOptions cannot be nil")
 	if err != nil {
 		return
@@ -1191,8 +1191,8 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretMetada
 
 	builder := core.NewRequestBuilder(core.PUT)
 	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = ibmCloudSecretsManagerApi.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(ibmCloudSecretsManagerApi.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/metadata`, pathParamsMap)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/metadata`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1201,7 +1201,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretMetada
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("ibm_cloud_secrets_manager_api", "V1", "UpdateSecretMetadata")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateSecretMetadata")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -1226,7 +1226,7 @@ func (ibmCloudSecretsManagerApi *IbmCloudSecretsManagerApiV1) UpdateSecretMetada
 	}
 
 	var rawResponse map[string]json.RawMessage
-	response, err = ibmCloudSecretsManagerApi.Service.Request(request, &rawResponse)
+	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
 		return
 	}
@@ -1251,15 +1251,15 @@ type CollectionMetadata struct {
 // Constants associated with the CollectionMetadata.CollectionType property.
 // The type of resources in the resource array.
 const (
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerErrorJSON         = "application/vnd.ibm.secrets-manager.error+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretGroupJSON   = "application/vnd.ibm.secrets-manager.secret.group+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON        = "application/vnd.ibm.secrets-manager.secret+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretPolicyJSON  = "application/vnd.ibm.secrets-manager.secret.policy+json"
-	CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretVersionJSON = "application/vnd.ibm.secrets-manager.secret.version+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerErrorJSONConst         = "application/vnd.ibm.secrets-manager.error+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretGroupJSONConst   = "application/vnd.ibm.secrets-manager.secret.group+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst        = "application/vnd.ibm.secrets-manager.secret+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst  = "application/vnd.ibm.secrets-manager.secret.policy+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretVersionJSONConst = "application/vnd.ibm.secrets-manager.secret.version+json"
 )
 
 // NewCollectionMetadata : Instantiate CollectionMetadata (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewCollectionMetadata(collectionType string, collectionTotal int64) (model *CollectionMetadata, err error) {
+func (*SecretsManagerV1) NewCollectionMetadata(collectionType string, collectionTotal int64) (model *CollectionMetadata, err error) {
 	model = &CollectionMetadata{
 		CollectionType:  core.StringPtr(collectionType),
 		CollectionTotal: core.Int64Ptr(collectionTotal),
@@ -1293,7 +1293,7 @@ type CreateSecret struct {
 }
 
 // NewCreateSecret : Instantiate CreateSecret (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewCreateSecret(metadata *CollectionMetadata, resources []SecretResourceIntf) (model *CreateSecret, err error) {
+func (*SecretsManagerV1) NewCreateSecret(metadata *CollectionMetadata, resources []SecretResourceIntf) (model *CreateSecret, err error) {
 	model = &CreateSecret{
 		Metadata:  metadata,
 		Resources: resources,
@@ -1330,7 +1330,7 @@ type CreateSecretGroupOptions struct {
 }
 
 // NewCreateSecretGroupOptions : Instantiate CreateSecretGroupOptions
-func (*IbmCloudSecretsManagerApiV1) NewCreateSecretGroupOptions(metadata *CollectionMetadata, resources []SecretGroupResource) *CreateSecretGroupOptions {
+func (*SecretsManagerV1) NewCreateSecretGroupOptions(metadata *CollectionMetadata, resources []SecretGroupResource) *CreateSecretGroupOptions {
 	return &CreateSecretGroupOptions{
 		Metadata:  metadata,
 		Resources: resources,
@@ -1373,13 +1373,13 @@ type CreateSecretOptions struct {
 // Constants associated with the CreateSecretOptions.SecretType property.
 // The secret type.
 const (
-	CreateSecretOptions_SecretType_Arbitrary        = "arbitrary"
-	CreateSecretOptions_SecretType_IamCredentials   = "iam_credentials"
-	CreateSecretOptions_SecretType_UsernamePassword = "username_password"
+	CreateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	CreateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	CreateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewCreateSecretOptions : Instantiate CreateSecretOptions
-func (*IbmCloudSecretsManagerApiV1) NewCreateSecretOptions(secretType string, metadata *CollectionMetadata, resources []SecretResourceIntf) *CreateSecretOptions {
+func (*SecretsManagerV1) NewCreateSecretOptions(secretType string, metadata *CollectionMetadata, resources []SecretResourceIntf) *CreateSecretOptions {
 	return &CreateSecretOptions{
 		SecretType: core.StringPtr(secretType),
 		Metadata:   metadata,
@@ -1421,7 +1421,7 @@ type DeleteSecretGroupOptions struct {
 }
 
 // NewDeleteSecretGroupOptions : Instantiate DeleteSecretGroupOptions
-func (*IbmCloudSecretsManagerApiV1) NewDeleteSecretGroupOptions(id string) *DeleteSecretGroupOptions {
+func (*SecretsManagerV1) NewDeleteSecretGroupOptions(id string) *DeleteSecretGroupOptions {
 	return &DeleteSecretGroupOptions{
 		ID: core.StringPtr(id),
 	}
@@ -1454,13 +1454,13 @@ type DeleteSecretOptions struct {
 // Constants associated with the DeleteSecretOptions.SecretType property.
 // The secret type.
 const (
-	DeleteSecretOptions_SecretType_Arbitrary        = "arbitrary"
-	DeleteSecretOptions_SecretType_IamCredentials   = "iam_credentials"
-	DeleteSecretOptions_SecretType_UsernamePassword = "username_password"
+	DeleteSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	DeleteSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	DeleteSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewDeleteSecretOptions : Instantiate DeleteSecretOptions
-func (*IbmCloudSecretsManagerApiV1) NewDeleteSecretOptions(secretType string, id string) *DeleteSecretOptions {
+func (*SecretsManagerV1) NewDeleteSecretOptions(secretType string, id string) *DeleteSecretOptions {
 	return &DeleteSecretOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -1487,17 +1487,17 @@ func (options *DeleteSecretOptions) SetHeaders(param map[string]string) *DeleteS
 
 // EngineConfigOneOf : EngineConfigOneOf struct
 // Models which "extend" this model:
-// - EngineConfigOneOfIAMSecretEngineRootConfig
+// - EngineConfigOneOfIamSecretEngineRootConfig
 type EngineConfigOneOf struct {
 	// An IBM Cloud API key that has the capability to create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
 	// the IAM Identity Service. For more information, see [Enabling the IAM secrets
 	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-engines#configure-iam-engine).
-	ApiKey *string `json:"api_key,omitempty"`
+	APIKey *string `json:"api_key,omitempty"`
 
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
-	ApiKeyHash *string `json:"api_key_hash,omitempty"`
+	APIKeyHash *string `json:"api_key_hash,omitempty"`
 }
 
 func (*EngineConfigOneOf) isaEngineConfigOneOf() bool {
@@ -1511,11 +1511,11 @@ type EngineConfigOneOfIntf interface {
 // UnmarshalEngineConfigOneOf unmarshals an instance of EngineConfigOneOf from the specified map of raw messages.
 func UnmarshalEngineConfigOneOf(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(EngineConfigOneOf)
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.ApiKeyHash)
+	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
 	if err != nil {
 		return
 	}
@@ -1535,11 +1535,11 @@ type GetConfigOptions struct {
 // Constants associated with the GetConfigOptions.SecretType property.
 // The secret type.
 const (
-	GetConfigOptions_SecretType_IamCredentials = "iam_credentials"
+	GetConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
 )
 
 // NewGetConfigOptions : Instantiate GetConfigOptions
-func (*IbmCloudSecretsManagerApiV1) NewGetConfigOptions(secretType string) *GetConfigOptions {
+func (*SecretsManagerV1) NewGetConfigOptions(secretType string) *GetConfigOptions {
 	return &GetConfigOptions{
 		SecretType: core.StringPtr(secretType),
 	}
@@ -1575,17 +1575,17 @@ type GetPolicyOptions struct {
 // Constants associated with the GetPolicyOptions.SecretType property.
 // The secret type.
 const (
-	GetPolicyOptions_SecretType_UsernamePassword = "username_password"
+	GetPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // Constants associated with the GetPolicyOptions.Policy property.
 // The type of policy that is associated with the specified secret.
 const (
-	GetPolicyOptions_Policy_Rotation = "rotation"
+	GetPolicyOptionsPolicyRotationConst = "rotation"
 )
 
 // NewGetPolicyOptions : Instantiate GetPolicyOptions
-func (*IbmCloudSecretsManagerApiV1) NewGetPolicyOptions(secretType string, id string) *GetPolicyOptions {
+func (*SecretsManagerV1) NewGetPolicyOptions(secretType string, id string) *GetPolicyOptions {
 	return &GetPolicyOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -1650,7 +1650,7 @@ type GetSecretGroupOptions struct {
 }
 
 // NewGetSecretGroupOptions : Instantiate GetSecretGroupOptions
-func (*IbmCloudSecretsManagerApiV1) NewGetSecretGroupOptions(id string) *GetSecretGroupOptions {
+func (*SecretsManagerV1) NewGetSecretGroupOptions(id string) *GetSecretGroupOptions {
 	return &GetSecretGroupOptions{
 		ID: core.StringPtr(id),
 	}
@@ -1683,13 +1683,13 @@ type GetSecretMetadataOptions struct {
 // Constants associated with the GetSecretMetadataOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretMetadataOptions_SecretType_Arbitrary        = "arbitrary"
-	GetSecretMetadataOptions_SecretType_IamCredentials   = "iam_credentials"
-	GetSecretMetadataOptions_SecretType_UsernamePassword = "username_password"
+	GetSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewGetSecretMetadataOptions : Instantiate GetSecretMetadataOptions
-func (*IbmCloudSecretsManagerApiV1) NewGetSecretMetadataOptions(secretType string, id string) *GetSecretMetadataOptions {
+func (*SecretsManagerV1) NewGetSecretMetadataOptions(secretType string, id string) *GetSecretMetadataOptions {
 	return &GetSecretMetadataOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -1729,13 +1729,13 @@ type GetSecretOptions struct {
 // Constants associated with the GetSecretOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretOptions_SecretType_Arbitrary        = "arbitrary"
-	GetSecretOptions_SecretType_IamCredentials   = "iam_credentials"
-	GetSecretOptions_SecretType_UsernamePassword = "username_password"
+	GetSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewGetSecretOptions : Instantiate GetSecretOptions
-func (*IbmCloudSecretsManagerApiV1) NewGetSecretOptions(secretType string, id string) *GetSecretOptions {
+func (*SecretsManagerV1) NewGetSecretOptions(secretType string, id string) *GetSecretOptions {
 	return &GetSecretOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -1800,7 +1800,7 @@ type GetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem struct {
 	ID *string `json:"id" validate:"required"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the policy was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -1824,7 +1824,7 @@ type GetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem struct {
 // Constants associated with the GetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem.Type property.
 // The MIME type that represents the policy. Currently, only the default is supported.
 const (
-	GetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem_Type_ApplicationVndIbmSecretsManagerSecretPolicyJSON = "application/vnd.ibm.secrets-manager.secret.policy+json"
+	GetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItemTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst = "application/vnd.ibm.secrets-manager.secret.policy+json"
 )
 
 // UnmarshalGetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem unmarshals an instance of GetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem from the specified map of raw messages.
@@ -1834,7 +1834,7 @@ func UnmarshalGetSecretPoliciesOneOfGetSecretPolicyRotationResourcesItem(m map[s
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -1872,7 +1872,7 @@ type GetSecretPoliciesOneOfResourcesItem struct {
 	ID *string `json:"id" validate:"required"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the policy was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -1896,7 +1896,7 @@ type GetSecretPoliciesOneOfResourcesItem struct {
 // Constants associated with the GetSecretPoliciesOneOfResourcesItem.Type property.
 // The MIME type that represents the policy. Currently, only the default is supported.
 const (
-	GetSecretPoliciesOneOfResourcesItem_Type_ApplicationVndIbmSecretsManagerSecretPolicyJSON = "application/vnd.ibm.secrets-manager.secret.policy+json"
+	GetSecretPoliciesOneOfResourcesItemTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst = "application/vnd.ibm.secrets-manager.secret.policy+json"
 )
 
 // UnmarshalGetSecretPoliciesOneOfResourcesItem unmarshals an instance of GetSecretPoliciesOneOfResourcesItem from the specified map of raw messages.
@@ -1906,7 +1906,7 @@ func UnmarshalGetSecretPoliciesOneOfResourcesItem(m map[string]json.RawMessage, 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -1954,14 +1954,14 @@ type ListAllSecretsOptions struct {
 	// `../secrets/{secret-type}?offset=25&limit=25`.
 	Offset *int64
 
-	// Filters for secrets that contain the string that you specify. The fields that are searched include: id, name,
-	// description, labels, secret_type.
+	// Filter secrets that contain the specified string. The fields that are searched include: id, name, description,
+	// labels, secret_type.
 	//
 	// **Usage:** If you want to list only the secrets that contain the string "text", use
 	// `../secrets/{secret-type}?search=text`.
 	Search *string
 
-	// Sorts a list of secrets by the field that you specify.
+	// Sort a list of secrets by the specified field.
 	//
 	// **Usage:** To sort a list of secrets by their creation date, use
 	// `../secrets/{secret-type}?sort_by=creation_date`.
@@ -1972,20 +1972,20 @@ type ListAllSecretsOptions struct {
 }
 
 // Constants associated with the ListAllSecretsOptions.SortBy property.
-// Sorts a list of secrets by the field that you specify.
+// Sort a list of secrets by the specified field.
 //
 // **Usage:** To sort a list of secrets by their creation date, use
 // `../secrets/{secret-type}?sort_by=creation_date`.
 const (
-	ListAllSecretsOptions_SortBy_CreationDate   = "creation_date"
-	ListAllSecretsOptions_SortBy_ExpirationDate = "expiration_date"
-	ListAllSecretsOptions_SortBy_ID             = "id"
-	ListAllSecretsOptions_SortBy_Name           = "name"
-	ListAllSecretsOptions_SortBy_SecretType     = "secret_type"
+	ListAllSecretsOptionsSortByCreationDateConst   = "creation_date"
+	ListAllSecretsOptionsSortByExpirationDateConst = "expiration_date"
+	ListAllSecretsOptionsSortByIDConst             = "id"
+	ListAllSecretsOptionsSortByNameConst           = "name"
+	ListAllSecretsOptionsSortBySecretTypeConst     = "secret_type"
 )
 
 // NewListAllSecretsOptions : Instantiate ListAllSecretsOptions
-func (*IbmCloudSecretsManagerApiV1) NewListAllSecretsOptions() *ListAllSecretsOptions {
+func (*SecretsManagerV1) NewListAllSecretsOptions() *ListAllSecretsOptions {
 	return &ListAllSecretsOptions{}
 }
 
@@ -2027,7 +2027,7 @@ type ListSecretGroupsOptions struct {
 }
 
 // NewListSecretGroupsOptions : Instantiate ListSecretGroupsOptions
-func (*IbmCloudSecretsManagerApiV1) NewListSecretGroupsOptions() *ListSecretGroupsOptions {
+func (*SecretsManagerV1) NewListSecretGroupsOptions() *ListSecretGroupsOptions {
 	return &ListSecretGroupsOptions{}
 }
 
@@ -2087,13 +2087,13 @@ type ListSecretsOptions struct {
 // Constants associated with the ListSecretsOptions.SecretType property.
 // The secret type.
 const (
-	ListSecretsOptions_SecretType_Arbitrary        = "arbitrary"
-	ListSecretsOptions_SecretType_IamCredentials   = "iam_credentials"
-	ListSecretsOptions_SecretType_UsernamePassword = "username_password"
+	ListSecretsOptionsSecretTypeArbitraryConst        = "arbitrary"
+	ListSecretsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	ListSecretsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewListSecretsOptions : Instantiate ListSecretsOptions
-func (*IbmCloudSecretsManagerApiV1) NewListSecretsOptions(secretType string) *ListSecretsOptions {
+func (*SecretsManagerV1) NewListSecretsOptions(secretType string) *ListSecretsOptions {
 	return &ListSecretsOptions{
 		SecretType: core.StringPtr(secretType),
 	}
@@ -2128,6 +2128,7 @@ type PutConfigOptions struct {
 	// The secret type.
 	SecretType *string `validate:"required,ne="`
 
+	// The base request for setting secret engine configuration.
 	EngineConfigOneOf EngineConfigOneOfIntf `validate:"required"`
 
 	// Allows users to set headers on API requests
@@ -2137,11 +2138,11 @@ type PutConfigOptions struct {
 // Constants associated with the PutConfigOptions.SecretType property.
 // The secret type.
 const (
-	PutConfigOptions_SecretType_IamCredentials = "iam_credentials"
+	PutConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
 )
 
 // NewPutConfigOptions : Instantiate PutConfigOptions
-func (*IbmCloudSecretsManagerApiV1) NewPutConfigOptions(secretType string, engineConfigOneOf EngineConfigOneOfIntf) *PutConfigOptions {
+func (*SecretsManagerV1) NewPutConfigOptions(secretType string, engineConfigOneOf EngineConfigOneOfIntf) *PutConfigOptions {
 	return &PutConfigOptions{
 		SecretType:        core.StringPtr(secretType),
 		EngineConfigOneOf: engineConfigOneOf,
@@ -2190,17 +2191,17 @@ type PutPolicyOptions struct {
 // Constants associated with the PutPolicyOptions.SecretType property.
 // The secret type.
 const (
-	PutPolicyOptions_SecretType_UsernamePassword = "username_password"
+	PutPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // Constants associated with the PutPolicyOptions.Policy property.
 // The type of policy that is associated with the specified secret.
 const (
-	PutPolicyOptions_Policy_Rotation = "rotation"
+	PutPolicyOptionsPolicyRotationConst = "rotation"
 )
 
 // NewPutPolicyOptions : Instantiate PutPolicyOptions
-func (*IbmCloudSecretsManagerApiV1) NewPutPolicyOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretPolicyRotation) *PutPolicyOptions {
+func (*SecretsManagerV1) NewPutPolicyOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretPolicyRotation) *PutPolicyOptions {
 	return &PutPolicyOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -2249,7 +2250,7 @@ func (options *PutPolicyOptions) SetHeaders(param map[string]string) *PutPolicyO
 // Models which "extend" this model:
 // - SecretActionOneOfRotateArbitrarySecretBody
 // - SecretActionOneOfRotateUsernamePasswordSecretBody
-// - SecretActionOneOfDeleteCredentialsForIAMSecret
+// - SecretActionOneOfDeleteCredentialsForIamSecret
 type SecretActionOneOf struct {
 	// The new secret data to assign to an `arbitrary` secret.
 	Payload *string `json:"payload,omitempty"`
@@ -2298,7 +2299,7 @@ type SecretGroupDef struct {
 }
 
 // NewSecretGroupDef : Instantiate SecretGroupDef (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretGroupDef(metadata *CollectionMetadata, resources []SecretGroupResource) (model *SecretGroupDef, err error) {
+func (*SecretsManagerV1) NewSecretGroupDef(metadata *CollectionMetadata, resources []SecretGroupResource) (model *SecretGroupDef, err error) {
 	model = &SecretGroupDef{
 		Metadata:  metadata,
 		Resources: resources,
@@ -2530,7 +2531,7 @@ type SecretMetadata struct {
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies the resource.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the secret was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -2545,13 +2546,13 @@ type SecretMetadata struct {
 // Constants associated with the SecretMetadata.SecretType property.
 // The secret type.
 const (
-	SecretMetadata_SecretType_Arbitrary        = "arbitrary"
-	SecretMetadata_SecretType_IamCredentials   = "iam_credentials"
-	SecretMetadata_SecretType_UsernamePassword = "username_password"
+	SecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewSecretMetadata : Instantiate SecretMetadata (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretMetadata(name string) (model *SecretMetadata, err error) {
+func (*SecretsManagerV1) NewSecretMetadata(name string) (model *SecretMetadata, err error) {
 	model = &SecretMetadata{
 		Name: core.StringPtr(name),
 	}
@@ -2602,7 +2603,7 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -2632,7 +2633,7 @@ type SecretMetadataRequest struct {
 }
 
 // NewSecretMetadataRequest : Instantiate SecretMetadataRequest (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretMetadataRequest(metadata *CollectionMetadata, resources []SecretMetadata) (model *SecretMetadataRequest, err error) {
+func (*SecretsManagerV1) NewSecretMetadataRequest(metadata *CollectionMetadata, resources []SecretMetadata) (model *SecretMetadataRequest, err error) {
 	model = &SecretMetadataRequest{
 		Metadata:  metadata,
 		Resources: resources,
@@ -2668,11 +2669,11 @@ type SecretPolicyRotation struct {
 // Constants associated with the SecretPolicyRotation.Type property.
 // The MIME type that represents the policy. Currently, only the default is supported.
 const (
-	SecretPolicyRotation_Type_ApplicationVndIbmSecretsManagerSecretPolicyJSON = "application/vnd.ibm.secrets-manager.secret.policy+json"
+	SecretPolicyRotationTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst = "application/vnd.ibm.secrets-manager.secret.policy+json"
 )
 
 // NewSecretPolicyRotation : Instantiate SecretPolicyRotation (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretPolicyRotation(typeVar string, rotation *SecretPolicyRotationRotation) (model *SecretPolicyRotation, err error) {
+func (*SecretsManagerV1) NewSecretPolicyRotation(typeVar string, rotation *SecretPolicyRotationRotation) (model *SecretPolicyRotation, err error) {
 	model = &SecretPolicyRotation{
 		Type:     core.StringPtr(typeVar),
 		Rotation: rotation,
@@ -2708,12 +2709,12 @@ type SecretPolicyRotationRotation struct {
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
 // Specifies the units for the secret rotation time interval.
 const (
-	SecretPolicyRotationRotation_Unit_Day   = "day"
-	SecretPolicyRotationRotation_Unit_Month = "month"
+	SecretPolicyRotationRotationUnitDayConst   = "day"
+	SecretPolicyRotationRotationUnitMonthConst = "month"
 )
 
 // NewSecretPolicyRotationRotation : Instantiate SecretPolicyRotationRotation (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretPolicyRotationRotation(interval int64, unit string) (model *SecretPolicyRotationRotation, err error) {
+func (*SecretsManagerV1) NewSecretPolicyRotationRotation(interval int64, unit string) (model *SecretPolicyRotationRotation, err error) {
 	model = &SecretPolicyRotationRotation{
 		Interval: core.Int64Ptr(interval),
 		Unit:     core.StringPtr(unit),
@@ -2741,7 +2742,7 @@ func UnmarshalSecretPolicyRotationRotation(m map[string]json.RawMessage, result 
 // Models which "extend" this model:
 // - SecretResourceArbitrarySecretResource
 // - SecretResourceUsernamePasswordSecretResource
-// - SecretResourceIAMSecretResource
+// - SecretResourceIamSecretResource
 type SecretResource struct {
 	// The MIME type that represents the secret.
 	Type *string `json:"type,omitempty"`
@@ -2783,7 +2784,7 @@ type SecretResource struct {
 	SecretType *string `json:"secret_type,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the secret was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -2840,20 +2841,28 @@ type SecretResource struct {
 
 	// The API key that is generated for this secret.
 	//
-	// After the secret reaches the end of its lease (see the `ttl` field), the API key is revoked automatically.
-	ApiKey *string `json:"api_key,omitempty"`
+	// After the secret reaches the end of its lease (see the `ttl` field), the API key is deleted automatically. If you
+	// want to continue to use the same API key for future read operations, see the `reuse_api_key` field.
+	APIKey *string `json:"api_key,omitempty"`
 
 	// The service ID under which the API key (see the `api_key` field) is created. This service ID is added to the access
 	// groups that you assign for this secret.
 	ServiceID *string `json:"service_id,omitempty"`
+
+	// Set to `true` to reuse the service ID and API key for this secret.
+	//
+	// Use this field to control whether to use the same service ID and API key for future read operations on this secret.
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// generated each time that the secret is read or accessed.
+	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
 }
 
 // Constants associated with the SecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResource_SecretType_Arbitrary        = "arbitrary"
-	SecretResource_SecretType_IamCredentials   = "iam_credentials"
-	SecretResource_SecretType_UsernamePassword = "username_password"
+	SecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	SecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
 func (*SecretResource) isaSecretResource() bool {
@@ -2903,7 +2912,7 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -2955,11 +2964,15 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseAPIKey)
 	if err != nil {
 		return
 	}
@@ -3021,7 +3034,7 @@ type UpdateSecretGroupMetadataOptions struct {
 }
 
 // NewUpdateSecretGroupMetadataOptions : Instantiate UpdateSecretGroupMetadataOptions
-func (*IbmCloudSecretsManagerApiV1) NewUpdateSecretGroupMetadataOptions(id string, metadata *CollectionMetadata, resources []SecretGroupMetadataUpdatable) *UpdateSecretGroupMetadataOptions {
+func (*SecretsManagerV1) NewUpdateSecretGroupMetadataOptions(id string, metadata *CollectionMetadata, resources []SecretGroupMetadataUpdatable) *UpdateSecretGroupMetadataOptions {
 	return &UpdateSecretGroupMetadataOptions{
 		ID:        core.StringPtr(id),
 		Metadata:  metadata,
@@ -3074,13 +3087,13 @@ type UpdateSecretMetadataOptions struct {
 // Constants associated with the UpdateSecretMetadataOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretMetadataOptions_SecretType_Arbitrary        = "arbitrary"
-	UpdateSecretMetadataOptions_SecretType_IamCredentials   = "iam_credentials"
-	UpdateSecretMetadataOptions_SecretType_UsernamePassword = "username_password"
+	UpdateSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
+	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	UpdateSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewUpdateSecretMetadataOptions : Instantiate UpdateSecretMetadataOptions
-func (*IbmCloudSecretsManagerApiV1) NewUpdateSecretMetadataOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretMetadata) *UpdateSecretMetadataOptions {
+func (*SecretsManagerV1) NewUpdateSecretMetadataOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretMetadata) *UpdateSecretMetadataOptions {
 	return &UpdateSecretMetadataOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -3140,20 +3153,20 @@ type UpdateSecretOptions struct {
 // Constants associated with the UpdateSecretOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretOptions_SecretType_Arbitrary        = "arbitrary"
-	UpdateSecretOptions_SecretType_IamCredentials   = "iam_credentials"
-	UpdateSecretOptions_SecretType_UsernamePassword = "username_password"
+	UpdateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	UpdateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	UpdateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // Constants associated with the UpdateSecretOptions.Action property.
 // The action to perform on the specified secret.
 const (
-	UpdateSecretOptions_Action_DeleteCredentials = "delete_credentials"
-	UpdateSecretOptions_Action_Rotate            = "rotate"
+	UpdateSecretOptionsActionDeleteCredentialsConst = "delete_credentials"
+	UpdateSecretOptionsActionRotateConst            = "rotate"
 )
 
 // NewUpdateSecretOptions : Instantiate UpdateSecretOptions
-func (*IbmCloudSecretsManagerApiV1) NewUpdateSecretOptions(secretType string, id string, action string, secretActionOneOf SecretActionOneOfIntf) *UpdateSecretOptions {
+func (*SecretsManagerV1) NewUpdateSecretOptions(secretType string, id string, action string, secretActionOneOf SecretActionOneOfIntf) *UpdateSecretOptions {
 	return &UpdateSecretOptions{
 		SecretType:        core.StringPtr(secretType),
 		ID:                core.StringPtr(id),
@@ -3192,41 +3205,41 @@ func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateS
 	return options
 }
 
-// EngineConfigOneOfIAMSecretEngineRootConfig : Configuration that is used to generate IAM credentials.
+// EngineConfigOneOfIamSecretEngineRootConfig : Configuration that is used to generate IAM credentials.
 // This model "extends" EngineConfigOneOf
-type EngineConfigOneOfIAMSecretEngineRootConfig struct {
+type EngineConfigOneOfIamSecretEngineRootConfig struct {
 	// An IBM Cloud API key that has the capability to create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
 	// the IAM Identity Service. For more information, see [Enabling the IAM secrets
 	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-engines#configure-iam-engine).
-	ApiKey *string `json:"api_key" validate:"required"`
+	APIKey *string `json:"api_key" validate:"required"`
 
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
-	ApiKeyHash *string `json:"api_key_hash,omitempty"`
+	APIKeyHash *string `json:"api_key_hash,omitempty"`
 }
 
-// NewEngineConfigOneOfIAMSecretEngineRootConfig : Instantiate EngineConfigOneOfIAMSecretEngineRootConfig (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewEngineConfigOneOfIAMSecretEngineRootConfig(apiKey string) (model *EngineConfigOneOfIAMSecretEngineRootConfig, err error) {
-	model = &EngineConfigOneOfIAMSecretEngineRootConfig{
-		ApiKey: core.StringPtr(apiKey),
+// NewEngineConfigOneOfIamSecretEngineRootConfig : Instantiate EngineConfigOneOfIamSecretEngineRootConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewEngineConfigOneOfIamSecretEngineRootConfig(apiKey string) (model *EngineConfigOneOfIamSecretEngineRootConfig, err error) {
+	model = &EngineConfigOneOfIamSecretEngineRootConfig{
+		APIKey: core.StringPtr(apiKey),
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
 }
 
-func (*EngineConfigOneOfIAMSecretEngineRootConfig) isaEngineConfigOneOf() bool {
+func (*EngineConfigOneOfIamSecretEngineRootConfig) isaEngineConfigOneOf() bool {
 	return true
 }
 
-// UnmarshalEngineConfigOneOfIAMSecretEngineRootConfig unmarshals an instance of EngineConfigOneOfIAMSecretEngineRootConfig from the specified map of raw messages.
-func UnmarshalEngineConfigOneOfIAMSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(EngineConfigOneOfIAMSecretEngineRootConfig)
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+// UnmarshalEngineConfigOneOfIamSecretEngineRootConfig unmarshals an instance of EngineConfigOneOfIamSecretEngineRootConfig from the specified map of raw messages.
+func UnmarshalEngineConfigOneOfIamSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(EngineConfigOneOfIamSecretEngineRootConfig)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.ApiKeyHash)
+	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
 	if err != nil {
 		return
 	}
@@ -3263,29 +3276,29 @@ func UnmarshalGetSecretPoliciesOneOfGetSecretPolicyRotation(m map[string]json.Ra
 	return
 }
 
-// SecretActionOneOfDeleteCredentialsForIAMSecret : Delete the credentials that are associated with an `iam_credentials` secret.
+// SecretActionOneOfDeleteCredentialsForIamSecret : Delete the credentials that are associated with an `iam_credentials` secret.
 // This model "extends" SecretActionOneOf
-type SecretActionOneOfDeleteCredentialsForIAMSecret struct {
+type SecretActionOneOfDeleteCredentialsForIamSecret struct {
 	// The service ID that you want to delete. It is deleted together with its API key.
 	ServiceID *string `json:"service_id" validate:"required"`
 }
 
-// NewSecretActionOneOfDeleteCredentialsForIAMSecret : Instantiate SecretActionOneOfDeleteCredentialsForIAMSecret (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretActionOneOfDeleteCredentialsForIAMSecret(serviceID string) (model *SecretActionOneOfDeleteCredentialsForIAMSecret, err error) {
-	model = &SecretActionOneOfDeleteCredentialsForIAMSecret{
+// NewSecretActionOneOfDeleteCredentialsForIamSecret : Instantiate SecretActionOneOfDeleteCredentialsForIamSecret (Generic Model Constructor)
+func (*SecretsManagerV1) NewSecretActionOneOfDeleteCredentialsForIamSecret(serviceID string) (model *SecretActionOneOfDeleteCredentialsForIamSecret, err error) {
+	model = &SecretActionOneOfDeleteCredentialsForIamSecret{
 		ServiceID: core.StringPtr(serviceID),
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
 }
 
-func (*SecretActionOneOfDeleteCredentialsForIAMSecret) isaSecretActionOneOf() bool {
+func (*SecretActionOneOfDeleteCredentialsForIamSecret) isaSecretActionOneOf() bool {
 	return true
 }
 
-// UnmarshalSecretActionOneOfDeleteCredentialsForIAMSecret unmarshals an instance of SecretActionOneOfDeleteCredentialsForIAMSecret from the specified map of raw messages.
-func UnmarshalSecretActionOneOfDeleteCredentialsForIAMSecret(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretActionOneOfDeleteCredentialsForIAMSecret)
+// UnmarshalSecretActionOneOfDeleteCredentialsForIamSecret unmarshals an instance of SecretActionOneOfDeleteCredentialsForIamSecret from the specified map of raw messages.
+func UnmarshalSecretActionOneOfDeleteCredentialsForIamSecret(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretActionOneOfDeleteCredentialsForIamSecret)
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
 		return
@@ -3302,7 +3315,7 @@ type SecretActionOneOfRotateArbitrarySecretBody struct {
 }
 
 // NewSecretActionOneOfRotateArbitrarySecretBody : Instantiate SecretActionOneOfRotateArbitrarySecretBody (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretActionOneOfRotateArbitrarySecretBody(payload string) (model *SecretActionOneOfRotateArbitrarySecretBody, err error) {
+func (*SecretsManagerV1) NewSecretActionOneOfRotateArbitrarySecretBody(payload string) (model *SecretActionOneOfRotateArbitrarySecretBody, err error) {
 	model = &SecretActionOneOfRotateArbitrarySecretBody{
 		Payload: core.StringPtr(payload),
 	}
@@ -3333,7 +3346,7 @@ type SecretActionOneOfRotateUsernamePasswordSecretBody struct {
 }
 
 // NewSecretActionOneOfRotateUsernamePasswordSecretBody : Instantiate SecretActionOneOfRotateUsernamePasswordSecretBody (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretActionOneOfRotateUsernamePasswordSecretBody(password string) (model *SecretActionOneOfRotateUsernamePasswordSecretBody, err error) {
+func (*SecretsManagerV1) NewSecretActionOneOfRotateUsernamePasswordSecretBody(password string) (model *SecretActionOneOfRotateUsernamePasswordSecretBody, err error) {
 	model = &SecretActionOneOfRotateUsernamePasswordSecretBody{
 		Password: core.StringPtr(password),
 	}
@@ -3399,7 +3412,7 @@ type SecretResourceArbitrarySecretResource struct {
 	SecretType *string `json:"secret_type,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the secret was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -3432,13 +3445,13 @@ type SecretResourceArbitrarySecretResource struct {
 // Constants associated with the SecretResourceArbitrarySecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceArbitrarySecretResource_SecretType_Arbitrary        = "arbitrary"
-	SecretResourceArbitrarySecretResource_SecretType_IamCredentials   = "iam_credentials"
-	SecretResourceArbitrarySecretResource_SecretType_UsernamePassword = "username_password"
+	SecretResourceArbitrarySecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	SecretResourceArbitrarySecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretResourceArbitrarySecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewSecretResourceArbitrarySecretResource : Instantiate SecretResourceArbitrarySecretResource (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretResourceArbitrarySecretResource(name string) (model *SecretResourceArbitrarySecretResource, err error) {
+func (*SecretsManagerV1) NewSecretResourceArbitrarySecretResource(name string) (model *SecretResourceArbitrarySecretResource, err error) {
 	model = &SecretResourceArbitrarySecretResource{
 		Name: core.StringPtr(name),
 	}
@@ -3489,7 +3502,7 @@ func UnmarshalSecretResourceArbitrarySecretResource(m map[string]json.RawMessage
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -3525,9 +3538,9 @@ func UnmarshalSecretResourceArbitrarySecretResource(m map[string]json.RawMessage
 	return
 }
 
-// SecretResourceIAMSecretResource : The base schema for secrets.
+// SecretResourceIamSecretResource : The base schema for secrets.
 // This model "extends" SecretResource
-type SecretResourceIAMSecretResource struct {
+type SecretResourceIamSecretResource struct {
 	// The MIME type that represents the secret.
 	Type *string `json:"type,omitempty"`
 
@@ -3568,7 +3581,7 @@ type SecretResourceIAMSecretResource struct {
 	SecretType *string `json:"secret_type,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the secret was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -3598,38 +3611,46 @@ type SecretResourceIAMSecretResource struct {
 
 	// The API key that is generated for this secret.
 	//
-	// After the secret reaches the end of its lease (see the `ttl` field), the API key is revoked automatically.
-	ApiKey *string `json:"api_key,omitempty"`
+	// After the secret reaches the end of its lease (see the `ttl` field), the API key is deleted automatically. If you
+	// want to continue to use the same API key for future read operations, see the `reuse_api_key` field.
+	APIKey *string `json:"api_key,omitempty"`
 
 	// The service ID under which the API key (see the `api_key` field) is created. This service ID is added to the access
 	// groups that you assign for this secret.
 	ServiceID *string `json:"service_id,omitempty"`
+
+	// Set to `true` to reuse the service ID and API key for this secret.
+	//
+	// Use this field to control whether to use the same service ID and API key for future read operations on this secret.
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// generated each time that the secret is read or accessed.
+	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
 }
 
-// Constants associated with the SecretResourceIAMSecretResource.SecretType property.
+// Constants associated with the SecretResourceIamSecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceIAMSecretResource_SecretType_Arbitrary        = "arbitrary"
-	SecretResourceIAMSecretResource_SecretType_IamCredentials   = "iam_credentials"
-	SecretResourceIAMSecretResource_SecretType_UsernamePassword = "username_password"
+	SecretResourceIamSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	SecretResourceIamSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretResourceIamSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
-// NewSecretResourceIAMSecretResource : Instantiate SecretResourceIAMSecretResource (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretResourceIAMSecretResource(name string) (model *SecretResourceIAMSecretResource, err error) {
-	model = &SecretResourceIAMSecretResource{
+// NewSecretResourceIamSecretResource : Instantiate SecretResourceIamSecretResource (Generic Model Constructor)
+func (*SecretsManagerV1) NewSecretResourceIamSecretResource(name string) (model *SecretResourceIamSecretResource, err error) {
+	model = &SecretResourceIamSecretResource{
 		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
 }
 
-func (*SecretResourceIAMSecretResource) isaSecretResource() bool {
+func (*SecretResourceIamSecretResource) isaSecretResource() bool {
 	return true
 }
 
-// UnmarshalSecretResourceIAMSecretResource unmarshals an instance of SecretResourceIAMSecretResource from the specified map of raw messages.
-func UnmarshalSecretResourceIAMSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretResourceIAMSecretResource)
+// UnmarshalSecretResourceIamSecretResource unmarshals an instance of SecretResourceIamSecretResource from the specified map of raw messages.
+func UnmarshalSecretResourceIamSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretResourceIamSecretResource)
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		return
@@ -3666,7 +3687,7 @@ func UnmarshalSecretResourceIAMSecretResource(m map[string]json.RawMessage, resu
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -3694,11 +3715,15 @@ func UnmarshalSecretResourceIAMSecretResource(m map[string]json.RawMessage, resu
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseAPIKey)
 	if err != nil {
 		return
 	}
@@ -3749,7 +3774,7 @@ type SecretResourceUsernamePasswordSecretResource struct {
 	SecretType *string `json:"secret_type,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
-	Crn *string `json:"crn,omitempty"`
+	CRN *string `json:"crn,omitempty"`
 
 	// The date the secret was created. The date format follows RFC 3339.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
@@ -3791,13 +3816,13 @@ type SecretResourceUsernamePasswordSecretResource struct {
 // Constants associated with the SecretResourceUsernamePasswordSecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceUsernamePasswordSecretResource_SecretType_Arbitrary        = "arbitrary"
-	SecretResourceUsernamePasswordSecretResource_SecretType_IamCredentials   = "iam_credentials"
-	SecretResourceUsernamePasswordSecretResource_SecretType_UsernamePassword = "username_password"
+	SecretResourceUsernamePasswordSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	SecretResourceUsernamePasswordSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretResourceUsernamePasswordSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewSecretResourceUsernamePasswordSecretResource : Instantiate SecretResourceUsernamePasswordSecretResource (Generic Model Constructor)
-func (*IbmCloudSecretsManagerApiV1) NewSecretResourceUsernamePasswordSecretResource(name string) (model *SecretResourceUsernamePasswordSecretResource, err error) {
+func (*SecretsManagerV1) NewSecretResourceUsernamePasswordSecretResource(name string) (model *SecretResourceUsernamePasswordSecretResource, err error) {
 	model = &SecretResourceUsernamePasswordSecretResource{
 		Name: core.StringPtr(name),
 	}
@@ -3848,7 +3873,7 @@ func UnmarshalSecretResourceUsernamePasswordSecretResource(m map[string]json.Raw
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}

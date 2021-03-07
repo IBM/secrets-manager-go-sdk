@@ -1,7 +1,8 @@
-package ibm_cloud_secrets_manager_api_v1
+package secretsmanagerv1_test
 
 import (
 	"github.com/IBM/go-sdk-core/v5/core"
+	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -13,28 +14,28 @@ import (
 
 var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
-	ibmCloudSecretsManagerApiService, serviceErr := NewIbmCloudSecretsManagerApiV1(&IbmCloudSecretsManagerApiV1Options{
+	secretsManager, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 		URL: os.Getenv("SERVICE_URL"),
 		Authenticator: &core.IamAuthenticator{
 			ApiKey: os.Getenv("SECRETS_MANAGER_API_APIKEY"),
 			URL:    os.Getenv("AUTH_URL"),
 		},
 	})
-	Expect(ibmCloudSecretsManagerApiService).ToNot(BeNil())
+	Expect(secretsManager).ToNot(BeNil())
 	Expect(serviceErr).To(BeNil())
 
 	Context(`Create and delete secret`, func() {
 
 		It(`Should create an arbitrary secret`, func() {
 			// create arbitrary secret
-			createRes, resp, err := ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretResourceIntf{
-					&SecretResourceArbitrarySecretResource{
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.SecretResourceArbitrarySecretResource{
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1", "label2"},
@@ -45,22 +46,21 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
-			Expect(createRes.Resources[0].isaSecretResource()).To(BeTrue())
-			arbitrarySecretResource, ok := createRes.Resources[0].(*SecretResource)
+			arbitrarySecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			Expect(ok).To(BeTrue())
 			secretId := arbitrarySecretResource.ID
 			// get arbitrary secret
-			getSecretRes, resp, err := ibmCloudSecretsManagerApiService.GetSecret(&GetSecretOptions{
-				SecretType: core.StringPtr(GetSecretOptions_SecretType_Arbitrary),
+			getSecretRes, resp, err := secretsManager.GetSecret(&secretsmanagerv1.GetSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.GetSecretOptionsSecretTypeArbitraryConst),
 				ID:         secretId,
 			})
 			Expect(err).To(BeNil())
-			secret := getSecretRes.Resources[0].(*SecretResource)
+			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			secretData := secret.SecretData.(map[string]interface{})
 			Expect(secretData["payload"].(string)).To(Equal("secret-data"))
 			// delete arbitrary secret
-			resp, err = ibmCloudSecretsManagerApiService.DeleteSecret(&DeleteSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
 				ID:         secretId,
 			})
 			Expect(err).To(BeNil())
@@ -70,14 +70,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		It(`Creating a secret with the same name should result in a conflict`, func() {
 			secretName := "conflict_integration_test_secret"
 			// create arbitrary secret
-			createRes, resp, err := ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretResourceIntf{
-					&SecretResourceArbitrarySecretResource{
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.SecretResourceArbitrarySecretResource{
 						Name:        core.StringPtr(secretName),
 						Description: core.StringPtr("Integration test generated"),
 						Payload:     core.StringPtr("secret-data"),
@@ -86,20 +86,19 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
-			Expect(createRes.Resources[0].isaSecretResource()).To(BeTrue())
-			arbitrarySecretResource, ok := createRes.Resources[0].(*SecretResource)
+			arbitrarySecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			Expect(ok).To(BeTrue())
 			secretId := arbitrarySecretResource.ID
 
 			// Now reuse the same secret name under the same secret type, should result in a conflict error.
-			createRes, resp, err = ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+			createRes, resp, err = secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretResourceIntf{
-					&SecretResourceArbitrarySecretResource{
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.SecretResourceArbitrarySecretResource{
 						Name:        core.StringPtr(secretName),
 						Description: core.StringPtr("Integration test generated"),
 						Payload:     core.StringPtr("secret-data"),
@@ -110,8 +109,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusConflict))
 			Expect(err.Error()).To(Equal("Conflict"))
 			// delete arbitrary secret
-			resp, err = ibmCloudSecretsManagerApiService.DeleteSecret(&DeleteSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_Arbitrary),
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
 				ID:         secretId,
 			})
 			Expect(err).To(BeNil())
@@ -124,12 +123,12 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
 		It(`Should create a secret group and a secret belonging to this group`, func() {
 			// create a secret group
-			createGroupRes, resp, err := ibmCloudSecretsManagerApiService.CreateSecretGroup(&CreateSecretGroupOptions{
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretGroupJSON),
+			createGroupRes, resp, err := secretsManager.CreateSecretGroup(&secretsmanagerv1.CreateSecretGroupOptions{
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretGroupJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretGroupResource{
+				Resources: []secretsmanagerv1.SecretGroupResource{
 					{
 						Name:        core.StringPtr(generateName()),
 						Description: core.StringPtr("Integration test generated"),
@@ -140,14 +139,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
 			secretGroupId := createGroupRes.Resources[0].ID
 			// create username_password secret and associate it with our secret group
-			createRes, resp, err := ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_UsernamePassword),
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeUsernamePasswordConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretResourceIntf{
-					&SecretResourceUsernamePasswordSecretResource{
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.SecretResourceUsernamePasswordSecretResource{
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1"},
@@ -160,19 +159,18 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
-			Expect(createRes.Resources[0].isaSecretResource()).To(BeTrue())
-			usernamePasswordSecretResource, ok := createRes.Resources[0].(*SecretResource)
+			usernamePasswordSecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			Expect(ok).To(BeTrue())
 			secretId := usernamePasswordSecretResource.ID
 			// delete the username_password secret
-			resp, err = ibmCloudSecretsManagerApiService.DeleteSecret(&DeleteSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_UsernamePassword),
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeUsernamePasswordConst),
 				ID:         secretId,
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
 			// delete the secret group
-			resp, err = ibmCloudSecretsManagerApiService.DeleteSecretGroup(&DeleteSecretGroupOptions{
+			resp, err = secretsManager.DeleteSecretGroup(&secretsmanagerv1.DeleteSecretGroupOptions{
 				ID: secretGroupId,
 			})
 			Expect(err).To(BeNil())
@@ -185,14 +183,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
 		It(`Should be able to set a rotation policy for a secret`, func() {
 			// create username_password secret
-			createRes, resp, err := ibmCloudSecretsManagerApiService.CreateSecret(&CreateSecretOptions{
-				SecretType: core.StringPtr(CreateSecretOptions_SecretType_UsernamePassword),
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeUsernamePasswordConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretResourceIntf{
-					&SecretResourceUsernamePasswordSecretResource{
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.SecretResourceUsernamePasswordSecretResource{
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1"},
@@ -204,46 +202,45 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
-			Expect(createRes.Resources[0].isaSecretResource()).To(BeTrue())
-			usernamePasswordSecretResource, ok := createRes.Resources[0].(*SecretResource)
+			usernamePasswordSecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			Expect(ok).To(BeTrue())
 			secretId := usernamePasswordSecretResource.ID
 			// Create a rotation policy for the username_password secret type we have just created
-			putPolicyRes, resp, err := ibmCloudSecretsManagerApiService.PutPolicy(&PutPolicyOptions{
-				SecretType: core.StringPtr(SecretResource_SecretType_UsernamePassword),
+			putPolicyRes, resp, err := secretsManager.PutPolicy(&secretsmanagerv1.PutPolicyOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.PutPolicyOptionsSecretTypeUsernamePasswordConst),
 				ID:         secretId,
-				Metadata: &CollectionMetadata{
-					CollectionType:  core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretPolicyJSON),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst),
 					CollectionTotal: core.Int64Ptr(1),
 				},
-				Resources: []SecretPolicyRotation{
+				Resources: []secretsmanagerv1.SecretPolicyRotation{
 					{
-						Type: core.StringPtr(CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretPolicyJSON),
-						Rotation: &SecretPolicyRotationRotation{
+						Type: core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst),
+						Rotation: &secretsmanagerv1.SecretPolicyRotationRotation{
 							Interval: core.Int64Ptr(1),
 							Unit:     core.StringPtr("month"),
 						},
 					},
 				},
-				Policy: core.StringPtr(GetPolicyOptions_Policy_Rotation),
+				Policy: core.StringPtr(secretsmanagerv1.PutPolicyOptionsPolicyRotationConst),
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
-			Expect(putPolicyRes.isaGetSecretPoliciesOneOf()).To(BeTrue())
+			Expect(putPolicyRes).NotTo(BeNil())
 			// get username_password secret
-			getSecretRes, resp, err := ibmCloudSecretsManagerApiService.GetSecret(&GetSecretOptions{
-				SecretType: core.StringPtr(GetSecretOptions_SecretType_UsernamePassword),
+			getSecretRes, resp, err := secretsManager.GetSecret(&secretsmanagerv1.GetSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.GetSecretOptionsSecretTypeUsernamePasswordConst),
 				ID:         secretId,
 			})
 			Expect(err).To(BeNil())
-			secret := getSecretRes.Resources[0].(*SecretResource)
+			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			secretData := secret.SecretData.(map[string]interface{})
 			Expect(secretData["username"].(string)).To(Equal("test_user"))
 			Expect(secretData["password"].(string)).To(Equal("test_password"))
 			Expect(secret.NextRotationDate).NotTo(BeNil())
 			// delete the username_password secret
-			resp, err = ibmCloudSecretsManagerApiService.DeleteSecret(&DeleteSecretOptions{
-				SecretType: core.StringPtr(SecretResource_SecretType_UsernamePassword),
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeUsernamePasswordConst),
 				ID:         secretId,
 			})
 			Expect(err).To(BeNil())

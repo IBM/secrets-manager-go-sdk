@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ibm_cloud_secrets_manager_api_v1
+package secretsmanagerv1_test
 
 import (
 	. "github.com/onsi/ginkgo"
@@ -22,7 +22,7 @@ import (
 	"testing"
 )
 
-func TestIbmCloudSecretsManagerApiV1(t *testing.T) {
+func TestSecretsManagerV1(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "IbmCloudSecretsManagerApiV1 Suite")
+	RunSpecs(t, "SecretsManagerV1 Suite")
 }
