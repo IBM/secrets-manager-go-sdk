@@ -22,7 +22,7 @@ The IBM Cloud Secrets Manager Go SDK allows developers to programmatically inter
 
 Service name | Package name
 --- | --- 
-[Secrets Manager](https://cloud.ibm.com/apidocs/secrets-manager)  | ibm-cloud-secrets-manager-api-v1 
+[Secrets Manager](https://cloud.ibm.com/apidocs/secrets-manager)  | SecretsManagerV1 
 
 ## Prerequisites
 
@@ -51,7 +51,7 @@ If your application uses Go modules, you can add the following import to your Go
 
 ```go
 import (
-	"github.com/IBM/secrets-manager-go-sdk/ibm-cloud-secrets-manager-api-v1"
+	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
 )
 ```
 
@@ -79,7 +79,7 @@ Authentication for this SDK is accomplished by using [IAM authenticators](https:
 #### Programmatic credentials
 
 ```js
-import "github.com/IBM/go-sdk-core/v4/core"
+import "github.com/IBM/go-sdk-core/v5/core"
 
 authenticator := &core.IamAuthenticator{
   ApiKey: "{apikey}",
@@ -105,13 +105,13 @@ package main
 
 import (
     "fmt"
-    "github.com/IBM/go-sdk-core/v4/core"
-    sm "github.com/IBM/secrets-manager-go-sdk/ibm-cloud-secrets-manager-api-v1"
+    "github.com/IBM/go-sdk-core/v5/core"
+    sm "github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
 )
 
 func main() {
 
-    secretsManagerApi, err := sm.NewIbmCloudSecretsManagerApiV1(&sm.IbmCloudSecretsManagerApiV1Options{
+    secretsManager, err := sm.NewSecretsManagerV1(&sm.SecretsManagerV1Options{
         URL: "<SERVICE_URL>",
         Authenticator: &core.IamAuthenticator{
             ApiKey: "<IBM_CLOUD_API_KEY>",
@@ -122,10 +122,10 @@ func main() {
         panic(err)
     }
 
-    createRes, resp, err := secretsManagerApi.CreateSecret(&sm.CreateSecretOptions{
-        SecretType: core.StringPtr(sm.CreateSecretOptions_SecretType_Arbitrary),
+    createRes, resp, err := secretsManager.CreateSecret(&sm.CreateSecretOptions{
+        SecretType: core.StringPtr(sm.CreateSecretOptionsSecretTypeArbitraryConst),
         Metadata: &sm.CollectionMetadata{
-            CollectionType:  core.StringPtr(sm.CollectionMetadata_CollectionType_ApplicationVndIbmSecretsManagerSecretJSON),
+            CollectionType:  core.StringPtr(sm.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
             CollectionTotal: core.Int64Ptr(1),
         },
         Resources: []sm.SecretResourceIntf{
@@ -147,8 +147,8 @@ func main() {
 
     secretId := arbitrarySecretResource.ID
 
-    getSecretRes, resp, err := secretsManagerApi.GetSecret(&sm.GetSecretOptions{
-        SecretType: core.StringPtr(sm.GetSecretOptions_SecretType_Arbitrary),
+    getSecretRes, resp, err := secretsManager.GetSecret(&sm.GetSecretOptions{
+        SecretType: core.StringPtr(sm.GetSecretOptionsSecretTypeArbitraryConst),
         ID:         secretId,
     })
 
