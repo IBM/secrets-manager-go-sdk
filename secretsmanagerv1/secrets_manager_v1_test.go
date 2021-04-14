@@ -318,7 +318,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"api_key": "API_KEY", "api_key_hash": "a737c3a98ebfc16a0d5ddc6b277548491440780003e06f5924dc906bc8d78e91"}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"api_key": "API_KEY", "api_key_hash": "a737c3a98ebfc16a0d5ddc6b277548491440780003e06f5924dc906bc8d78e91"}]}`)
 				}))
 			})
 			It(`Invoke GetConfig successfully with retries`, func() {
@@ -372,7 +372,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"api_key": "API_KEY", "api_key_hash": "a737c3a98ebfc16a0d5ddc6b277548491440780003e06f5924dc906bc8d78e91"}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"api_key": "API_KEY", "api_key_hash": "a737c3a98ebfc16a0d5ddc6b277548491440780003e06f5924dc906bc8d78e91"}]}`)
 				}))
 			})
 			It(`Invoke GetConfig successfully`, func() {
@@ -2728,6 +2728,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
 				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
+				listAllSecretsOptionsModel.Groups = []string{"testString"}
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListAllSecrets(listAllSecretsOptionsModel)
@@ -2787,6 +2788,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
 				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
+				listAllSecretsOptionsModel.Groups = []string{"testString"}
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2853,6 +2855,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
 				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
+				listAllSecretsOptionsModel.Groups = []string{"testString"}
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2876,6 +2879,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				listAllSecretsOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listAllSecretsOptionsModel.Search = core.StringPtr("testString")
 				listAllSecretsOptionsModel.SortBy = core.StringPtr("id")
+				listAllSecretsOptionsModel.Groups = []string{"testString"}
 				listAllSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -3451,7 +3455,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "reuse_api_key": false, "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -3506,7 +3510,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "reuse_api_key": false, "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -3665,7 +3669,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "reuse_api_key": false, "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -3751,7 +3755,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "expiration_date": "2030-04-01T09:30:00.000Z", "ttl": "anyValue", "reuse_api_key": false, "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -4029,12 +4033,14 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				listAllSecretsOptionsModel.SetOffset(int64(0))
 				listAllSecretsOptionsModel.SetSearch("testString")
 				listAllSecretsOptionsModel.SetSortBy("id")
+				listAllSecretsOptionsModel.SetGroups([]string{"testString"})
 				listAllSecretsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listAllSecretsOptionsModel).ToNot(BeNil())
 				Expect(listAllSecretsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listAllSecretsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listAllSecretsOptionsModel.Search).To(Equal(core.StringPtr("testString")))
 				Expect(listAllSecretsOptionsModel.SortBy).To(Equal(core.StringPtr("id")))
+				Expect(listAllSecretsOptionsModel.Groups).To(Equal([]string{"testString"}))
 				Expect(listAllSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretGroupsOptions successfully`, func() {
