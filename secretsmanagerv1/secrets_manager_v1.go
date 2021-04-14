@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.29.0-cd9ba74f-20210305-183535
+ * IBM OpenAPI SDK Code Generator Version: 3.30.0-bd714324-20210406-200538
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -30,6 +30,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"net/http"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -218,12 +219,12 @@ func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context
 
 // GetConfig : Get the configuration for a secret type
 // Retrieves the configuration that is associated with the given secret type.
-func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result EngineConfigOneOfIntf, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigWithContext(context.Background(), getConfigOptions)
 }
 
 // GetConfigWithContext is an alternate form of the GetConfig method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context, getConfigOptions *GetConfigOptions) (result EngineConfigOneOfIntf, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context, getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getConfigOptions, "getConfigOptions cannot be nil")
 	if err != nil {
 		return
@@ -265,7 +266,7 @@ func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEngineConfigOneOf)
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetConfig)
 	if err != nil {
 		return
 	}
@@ -900,6 +901,9 @@ func (secretsManager *SecretsManagerV1) ListAllSecretsWithContext(ctx context.Co
 	if listAllSecretsOptions.SortBy != nil {
 		builder.AddQuery("sort_by", fmt.Sprint(*listAllSecretsOptions.SortBy))
 	}
+	if listAllSecretsOptions.Groups != nil {
+		builder.AddQuery("groups", strings.Join(listAllSecretsOptions.Groups, ","))
+	}
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1523,6 +1527,30 @@ func UnmarshalEngineConfigOneOf(m map[string]json.RawMessage, result interface{}
 	return
 }
 
+// GetConfig : Configuration that is used to generate IAM credentials.
+type GetConfig struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []IamSecretEngineRootConfig `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetConfig unmarshals an instance of GetConfig from the specified map of raw messages.
+func UnmarshalGetConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetConfig)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalIamSecretEngineRootConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // GetConfigOptions : The GetConfig options.
 type GetConfigOptions struct {
 	// The secret type.
@@ -1938,6 +1966,34 @@ func UnmarshalGetSecretPoliciesOneOfResourcesItem(m map[string]json.RawMessage, 
 	return
 }
 
+// IamSecretEngineRootConfig : Configuration that is used to generate IAM credentials.
+type IamSecretEngineRootConfig struct {
+	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	//
+	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
+	// the IAM Identity Service. For more information, see [Enabling the IAM secrets
+	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-engines#configure-iam-engine).
+	APIKey *string `json:"api_key" validate:"required"`
+
+	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
+	APIKeyHash *string `json:"api_key_hash,omitempty"`
+}
+
+// UnmarshalIamSecretEngineRootConfig unmarshals an instance of IamSecretEngineRootConfig from the specified map of raw messages.
+func UnmarshalIamSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IamSecretEngineRootConfig)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ListAllSecretsOptions : The ListAllSecrets options.
 type ListAllSecretsOptions struct {
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
@@ -1966,6 +2022,15 @@ type ListAllSecretsOptions struct {
 	// **Usage:** To sort a list of secrets by their creation date, use
 	// `../secrets/{secret-type}?sort_by=creation_date`.
 	SortBy *string
+
+	// Filter secrets by groups.
+	//
+	// You can apply multiple filters by using a comma-separated list of secret group IDs. If you need to filter secrets
+	// that are in the default secret group, use the `default` keyword.
+	//
+	// **Usage:** To retrieve a list of secrets that are associated with an existing secret group or the default group, use
+	// `../secrets?groups={secret_group_ID},default`.
+	Groups []string
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2010,6 +2075,12 @@ func (options *ListAllSecretsOptions) SetSearch(search string) *ListAllSecretsOp
 // SetSortBy : Allow user to set SortBy
 func (options *ListAllSecretsOptions) SetSortBy(sortBy string) *ListAllSecretsOptions {
 	options.SortBy = core.StringPtr(sortBy)
+	return options
+}
+
+// SetGroups : Allow user to set Groups
+func (options *ListAllSecretsOptions) SetGroups(groups []string) *ListAllSecretsOptions {
+	options.Groups = groups
 	return options
 }
 
@@ -2530,6 +2601,11 @@ type SecretMetadata struct {
 	// or `24h`.
 	TTL interface{} `json:"ttl,omitempty"`
 
+	// For `iam_credentials` secrets, this field controls whether to use the same service ID and API key for future read
+	// operations on this secret. If set to `true`, the service reuses the current credentials. If set to `false`, a new
+	// service ID and API key is generated each time that the secret is read or accessed.
+	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
+
 	// The Cloud Resource Name (CRN) that uniquely identifies the resource.
 	CRN *string `json:"crn,omitempty"`
 
@@ -2600,6 +2676,10 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseAPIKey)
 	if err != nil {
 		return
 	}
@@ -3143,7 +3223,7 @@ type UpdateSecretOptions struct {
 	// The action to perform on the specified secret.
 	Action *string `validate:"required"`
 
-	// The base request for invoking an action on a secret.
+	// The base request body for invoking an action on a secret.
 	SecretActionOneOf SecretActionOneOfIntf `validate:"required"`
 
 	// Allows users to set headers on API requests
