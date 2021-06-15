@@ -35,7 +35,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 					CollectionTotal: core.Int64Ptr(1),
 				},
 				Resources: []secretsmanagerv1.SecretResourceIntf{
-					&secretsmanagerv1.SecretResourceArbitrarySecretResource{
+					&secretsmanagerv1.ArbitrarySecretResource{
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1", "label2"},
@@ -77,7 +77,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 					CollectionTotal: core.Int64Ptr(1),
 				},
 				Resources: []secretsmanagerv1.SecretResourceIntf{
-					&secretsmanagerv1.SecretResourceArbitrarySecretResource{
+					&secretsmanagerv1.ArbitrarySecretResource{
 						Name:        core.StringPtr(secretName),
 						Description: core.StringPtr("Integration test generated"),
 						Payload:     core.StringPtr("secret-data"),
@@ -98,7 +98,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 					CollectionTotal: core.Int64Ptr(1),
 				},
 				Resources: []secretsmanagerv1.SecretResourceIntf{
-					&secretsmanagerv1.SecretResourceArbitrarySecretResource{
+					&secretsmanagerv1.ArbitrarySecretResource{
 						Name:        core.StringPtr(secretName),
 						Description: core.StringPtr("Integration test generated"),
 						Payload:     core.StringPtr("secret-data"),
@@ -146,7 +146,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 					CollectionTotal: core.Int64Ptr(1),
 				},
 				Resources: []secretsmanagerv1.SecretResourceIntf{
-					&secretsmanagerv1.SecretResourceUsernamePasswordSecretResource{
+					&secretsmanagerv1.UsernamePasswordSecretResource{
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1"},
@@ -190,7 +190,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 					CollectionTotal: core.Int64Ptr(1),
 				},
 				Resources: []secretsmanagerv1.SecretResourceIntf{
-					&secretsmanagerv1.SecretResourceUsernamePasswordSecretResource{
+					&secretsmanagerv1.UsernamePasswordSecretResource{
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1"},
