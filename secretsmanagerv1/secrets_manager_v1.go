@@ -3303,10 +3303,10 @@ type SecretResource struct {
 	// Updates when the actual secret is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [get
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
 
@@ -4144,10 +4144,10 @@ type ArbitrarySecretResource struct {
 	// Updates when the actual secret is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [get
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
 
@@ -4558,10 +4558,10 @@ type CertificateSecretResource struct {
 	// Updates when the actual secret is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [get
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
 
@@ -5190,10 +5190,10 @@ type IamCredentialsSecretResource struct {
 	// Updates when the actual secret is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [get
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
 
@@ -5678,10 +5678,10 @@ type UsernamePasswordSecretResource struct {
 	// Updates when the actual secret is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [get
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
 
