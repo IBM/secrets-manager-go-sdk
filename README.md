@@ -64,7 +64,7 @@ If your application is using the `dep` dependency management tool, you can add a
 ```
 [[constraint]]
   name = "github.com/IBM/secrets-manager-go-sdk"
-  version = "0.0.X"
+  version = "0.2.X"
 ```
 ## Authentication
 
@@ -129,7 +129,7 @@ func main() {
             CollectionTotal: core.Int64Ptr(1),
         },
         Resources: []sm.SecretResourceIntf{
-            &sm.SecretResourceArbitrarySecretResource{
+            &sm.ArbitrarySecretResource{
                 Name:        core.StringPtr("example-arbitrary-secret"),
                 Description: core.StringPtr("Extended description for this secret."),
                 Payload:     core.StringPtr("secret-data"),
