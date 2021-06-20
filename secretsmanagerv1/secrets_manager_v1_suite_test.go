@@ -17,9 +17,10 @@
 package secretsmanagerv1_test
 
 import (
+	"testing"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"testing"
 )
 
 func TestSecretsManagerV1(t *testing.T) {
