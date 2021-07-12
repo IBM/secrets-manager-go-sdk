@@ -4,8 +4,7 @@ Review the following guidelines for submitting questions, issues, or changes to 
 
 ## Questions
 
-If you have questions about using the IBM Cloud Secrets Manager SDKs, you can ask questions in 
-[Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-cloud+secrets-manager). Be sure to include the `ibm-cloud` and `secrets-manager` tags. 
+If you have questions about using the IBM Cloud Secrets Manager SDKs, you can ask questions in [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-secrets-manager). Be sure to include the `ibm-cloud` and `ibm-secrets-manager` tags.
 
 You can also check out the [Secrets Manager documentation](https://cloud.ibm.com/docs/secrets-manager) and [API reference](https://cloud.ibm.com/apidocs/secrets-manager) for more information about the service.
 
