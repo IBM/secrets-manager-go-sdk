@@ -108,7 +108,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(createRes).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusConflict))
-			Expect(err.Error()).To(	ContainSubstring("A secret with the same name already exists"))
+			Expect(err.Error()).To(ContainSubstring("A secret with the same name already exists"))
 			// delete arbitrary secret
 			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
@@ -365,15 +365,16 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(ok).To(BeTrue())
 			secretId := publicCertSecretResource.ID
 
-
-			getSecretRes, resp, err := secretsManager.GetSecret(&secretsmanagerv1.GetSecretOptions{
+			getSecretRes, _, err2 := secretsManager.GetSecret(&secretsmanagerv1.GetSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.GetSecretOptionsSecretTypePublicCertConst),
 				ID:         secretId,
 			})
-			Expect(err).To(BeNil())
+			Expect(err2).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
 
 			//Secret data is nil during order process.
+			//TODO Strange bug cause it to not be nill with some conents of the secrets while in Debug its do returned as nil
+			//Expect(secret.SecretData).To(BeNil())
 			Expect(secret.ID).To(Equal(secretId))
 
 			//Get Secret metadata
@@ -475,7 +476,6 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			configRes, resp, err := secretsManager.GetConfig(&secretsmanagerv1.GetConfigOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.GetConfigOptionsSecretTypePublicCertConst),
 			})
-
 
 			Expect(err).To(BeNil())
 			c := configRes.Resources[0].(*secretsmanagerv1.GetConfigResourcesItem)
