@@ -67,13 +67,14 @@ var _ = Describe(`SecretsManagerV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"SECRETS_MANAGER_URL":       "https://secretsmanagerv1/api",
+				"SECRETS_MANAGER_URL": "https://secretsmanagerv1/api",
 				"SECRETS_MANAGER_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1UsingExternalConfig(&secretsmanagerv1.SecretsManagerV1Options{})
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1UsingExternalConfig(&secretsmanagerv1.SecretsManagerV1Options{
+				})
 				Expect(secretsManagerService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -102,7 +103,8 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1UsingExternalConfig(&secretsmanagerv1.SecretsManagerV1Options{})
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1UsingExternalConfig(&secretsmanagerv1.SecretsManagerV1Options{
+				})
 				err := secretsManagerService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
@@ -120,12 +122,13 @@ var _ = Describe(`SecretsManagerV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"SECRETS_MANAGER_URL":       "https://secretsmanagerv1/api",
+				"SECRETS_MANAGER_URL": "https://secretsmanagerv1/api",
 				"SECRETS_MANAGER_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1UsingExternalConfig(&secretsmanagerv1.SecretsManagerV1Options{})
+			secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1UsingExternalConfig(&secretsmanagerv1.SecretsManagerV1Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(secretsManagerService).To(BeNil())
@@ -136,7 +139,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"SECRETS_MANAGER_AUTH_TYPE": "NOAuth",
+				"SECRETS_MANAGER_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -159,6 +162,1045 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			Expect(url).To(BeEmpty())
 			Expect(err).ToNot(BeNil())
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
+	Describe(`CreateSecretConfigElement(createSecretConfigElementOptions *CreateSecretConfigElementOptions) - Operation response error`, func() {
+		createSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createSecretConfigElementPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateSecretConfigElement with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the CreateSecretConfigElementOptions model
+				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateSecretConfigElement(createSecretConfigElementOptions *CreateSecretConfigElementOptions)`, func() {
+		createSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createSecretConfigElementPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke CreateSecretConfigElement successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateSecretConfigElementOptions model
+				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.CreateSecretConfigElementWithContext(ctx, createSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.CreateSecretConfigElementWithContext(ctx, createSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createSecretConfigElementPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke CreateSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateSecretConfigElementOptions model
+				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateSecretConfigElement with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the CreateSecretConfigElementOptions model
+				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateSecretConfigElementOptions model with no property values
+				createSecretConfigElementOptionsModelNew := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke CreateSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the CreateSecretConfigElementOptions model
+				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretConfigElement(getSecretConfigElementOptions *GetSecretConfigElementOptions) - Operation response error`, func() {
+		getSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretConfigElementPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSecretConfigElement with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretConfigElementOptions model
+				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretConfigElement(getSecretConfigElementOptions *GetSecretConfigElementOptions)`, func() {
+		getSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretConfigElementPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"certificate_authorities": [{"name": "Name", "type": "Type"}]}]}`)
+				}))
+			})
+			It(`Invoke GetSecretConfigElement successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSecretConfigElementOptions model
+				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.GetSecretConfigElementWithContext(ctx, getSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.GetSecretConfigElementWithContext(ctx, getSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretConfigElementPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"certificate_authorities": [{"name": "Name", "type": "Type"}]}]}`)
+				}))
+			})
+			It(`Invoke GetSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.GetSecretConfigElement(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSecretConfigElementOptions model
+				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSecretConfigElement with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretConfigElementOptions model
+				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSecretConfigElementOptions model with no property values
+				getSecretConfigElementOptionsModelNew := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretConfigElementOptions model
+				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateSecretConfigElement(updateSecretConfigElementOptions *UpdateSecretConfigElementOptions) - Operation response error`, func() {
+		updateSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSecretConfigElementPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateSecretConfigElement with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateSecretConfigElementOptions model
+				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateSecretConfigElement(updateSecretConfigElementOptions *UpdateSecretConfigElementOptions)`, func() {
+		updateSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSecretConfigElementPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke UpdateSecretConfigElement successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateSecretConfigElementOptions model
+				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.UpdateSecretConfigElementWithContext(ctx, updateSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.UpdateSecretConfigElementWithContext(ctx, updateSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSecretConfigElementPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke UpdateSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateSecretConfigElementOptions model
+				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateSecretConfigElement with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateSecretConfigElementOptions model
+				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateSecretConfigElementOptions model with no property values
+				updateSecretConfigElementOptionsModelNew := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateSecretConfigElementOptions model
+				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteSecretConfigElement(deleteSecretConfigElementOptions *DeleteSecretConfigElementOptions)`, func() {
+		deleteSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteSecretConfigElementPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := secretsManagerService.DeleteSecretConfigElement(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteSecretConfigElementOptions model
+				deleteSecretConfigElementOptionsModel := new(secretsmanagerv1.DeleteSecretConfigElementOptions)
+				deleteSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				deleteSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				deleteSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				deleteSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = secretsManagerService.DeleteSecretConfigElement(deleteSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteSecretConfigElement with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteSecretConfigElementOptions model
+				deleteSecretConfigElementOptionsModel := new(secretsmanagerv1.DeleteSecretConfigElementOptions)
+				deleteSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				deleteSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				deleteSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				deleteSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := secretsManagerService.DeleteSecretConfigElement(deleteSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteSecretConfigElementOptions model with no property values
+				deleteSecretConfigElementOptionsModelNew := new(secretsmanagerv1.DeleteSecretConfigElementOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = secretsManagerService.DeleteSecretConfigElement(deleteSecretConfigElementOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSingleSecretConfigElement(getSingleSecretConfigElementOptions *GetSingleSecretConfigElementOptions) - Operation response error`, func() {
+		getSingleSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSingleSecretConfigElementPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSingleSecretConfigElement with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSingleSecretConfigElementOptions model
+				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSingleSecretConfigElement(getSingleSecretConfigElementOptions *GetSingleSecretConfigElementOptions)`, func() {
+		getSingleSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSingleSecretConfigElementPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke GetSingleSecretConfigElement successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSingleSecretConfigElementOptions model
+				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.GetSingleSecretConfigElementWithContext(ctx, getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.GetSingleSecretConfigElementWithContext(ctx, getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSingleSecretConfigElementPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke GetSingleSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSingleSecretConfigElementOptions model
+				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSingleSecretConfigElement with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSingleSecretConfigElementOptions model
+				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSingleSecretConfigElementOptions model with no property values
+				getSingleSecretConfigElementOptionsModelNew := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSingleSecretConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSingleSecretConfigElementOptions model
+				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
 		})
 	})
 	Describe(`PutConfig(putConfigOptions *PutConfigOptions)`, func() {
@@ -204,14 +1246,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 
-				// Construct an instance of the IamCredentialsSecretEngineRootConfig model
-				engineConfigModel := new(secretsmanagerv1.IamCredentialsSecretEngineRootConfig)
-				engineConfigModel.APIKey = core.StringPtr("API_KEY")
-
 				// Construct an instance of the PutConfigOptions model
 				putConfigOptionsModel := new(secretsmanagerv1.PutConfigOptions)
 				putConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
-				putConfigOptionsModel.EngineConfig = engineConfigModel
 				putConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -227,14 +1264,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the IamCredentialsSecretEngineRootConfig model
-				engineConfigModel := new(secretsmanagerv1.IamCredentialsSecretEngineRootConfig)
-				engineConfigModel.APIKey = core.StringPtr("API_KEY")
-
 				// Construct an instance of the PutConfigOptions model
 				putConfigOptionsModel := new(secretsmanagerv1.PutConfigOptions)
 				putConfigOptionsModel.SecretType = core.StringPtr("iam_credentials")
-				putConfigOptionsModel.EngineConfig = engineConfigModel
 				putConfigOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -317,7 +1349,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"api_key": "API_KEY", "api_key_hash": "a737c3a98ebfc16a0d5ddc6b277548491440780003e06f5924dc906bc8d78e91"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"certificate_authorities": [{"name": "Name", "type": "Type"}], "dns_providers": [{"name": "Name", "type": "Type"}]}]}`)
 				}))
 			})
 			It(`Invoke GetConfig successfully with retries`, func() {
@@ -371,7 +1403,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"api_key": "API_KEY", "api_key_hash": "a737c3a98ebfc16a0d5ddc6b277548491440780003e06f5924dc906bc8d78e91"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"certificate_authorities": [{"name": "Name", "type": "Type"}], "dns_providers": [{"name": "Name", "type": "Type"}]}]}`)
 				}))
 			})
 			It(`Invoke GetConfig successfully`, func() {
@@ -493,11 +1525,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotation)
+				// Construct an instance of the SecretPolicyRotationRotationPolicyRotation model
+				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotationPolicyRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
 				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
@@ -566,7 +1598,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke PutPolicy successfully with retries`, func() {
@@ -580,11 +1612,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotation)
+				// Construct an instance of the SecretPolicyRotationRotationPolicyRotation model
+				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotationPolicyRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
 				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
@@ -656,7 +1688,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke PutPolicy successfully`, func() {
@@ -675,11 +1707,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotation)
+				// Construct an instance of the SecretPolicyRotationRotationPolicyRotation model
+				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotationPolicyRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
 				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
@@ -714,11 +1746,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotation)
+				// Construct an instance of the SecretPolicyRotationRotationPolicyRotation model
+				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotationPolicyRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
 				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
@@ -774,11 +1806,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotation)
+				// Construct an instance of the SecretPolicyRotationRotationPolicyRotation model
+				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotationPolicyRotation)
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
 				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
 
@@ -875,7 +1907,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke GetPolicy successfully with retries`, func() {
@@ -932,7 +1964,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "last_update_date": "2019-01-01T12:00:00.000Z", "updated_by": "UpdatedBy", "type": "application/vnd.ibm.secrets-manager.secret.policy+json", "rotation": {"interval": 1, "unit": "day"}}]}`)
 				}))
 			})
 			It(`Invoke GetPolicy successfully`, func() {
@@ -1124,7 +2156,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke CreateSecretGroup successfully with retries`, func() {
@@ -1206,7 +2238,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke CreateSecretGroup successfully`, func() {
@@ -1399,7 +2431,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretGroups successfully with retries`, func() {
@@ -1452,7 +2484,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretGroups successfully`, func() {
@@ -1600,7 +2632,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretGroup successfully with retries`, func() {
@@ -1654,7 +2686,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretGroup successfully`, func() {
@@ -1840,7 +2872,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretGroupMetadata successfully with retries`, func() {
@@ -1922,7 +2954,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "name": "my-secret-group", "description": "Extended description for this group.", "creation_date": "2018-04-12T23:20:50.520Z", "last_update_date": "2018-05-12T23:20:50.520Z", "type": "application/vnd.ibm.secrets-manager.secret.group+json"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretGroupMetadata successfully`, func() {
@@ -2147,7 +3179,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
@@ -2216,7 +3248,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
@@ -2230,7 +3262,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
@@ -2302,7 +3334,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -2321,7 +3353,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
@@ -2357,7 +3389,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
@@ -2414,7 +3446,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
@@ -2514,7 +3546,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -2572,7 +3604,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -2748,7 +3780,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListAllSecrets successfully with retries`, func() {
@@ -2810,7 +3842,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListAllSecrets successfully`, func() {
@@ -2974,7 +4006,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
@@ -3029,7 +4061,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
@@ -3215,7 +4247,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecret successfully with retries`, func() {
@@ -3293,7 +4325,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecret successfully`, func() {
@@ -3544,7 +4576,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "validity": {"not_before": "2020-10-05T21:33:11.000Z", "not_after": "2021-01-01T00:00:00.000Z"}, "serial_number": "SerialNumber", "expiration_date": "2030-04-01T09:30:00.000Z", "secret_data": {"certificate": "Certificate", "private_key": "PrivateKey", "intermediate": "Intermediate"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "validity": {"not_before": "2020-10-05T21:33:11.000Z", "not_after": "2021-01-01T00:00:00.000Z"}, "serial_number": "SerialNumber", "expiration_date": "2030-04-01T09:30:00.000Z", "secret_data": {"certificate": "Certificate", "private_key": "PrivateKey", "intermediate": "Intermediate"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully with retries`, func() {
@@ -3600,7 +4632,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "validity": {"not_before": "2020-10-05T21:33:11.000Z", "not_after": "2021-01-01T00:00:00.000Z"}, "serial_number": "SerialNumber", "expiration_date": "2030-04-01T09:30:00.000Z", "secret_data": {"certificate": "Certificate", "private_key": "PrivateKey", "intermediate": "Intermediate"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "validity": {"not_before": "2020-10-05T21:33:11.000Z", "not_after": "2021-01-01T00:00:00.000Z"}, "serial_number": "SerialNumber", "expiration_date": "2030-04-01T09:30:00.000Z", "secret_data": {"certificate": "Certificate", "private_key": "PrivateKey", "intermediate": "Intermediate"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully`, func() {
@@ -3766,7 +4798,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully with retries`, func() {
@@ -3822,7 +4854,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully`, func() {
@@ -3987,7 +5019,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -4042,7 +5074,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -4166,7 +5198,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
@@ -4234,7 +5266,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -4248,7 +5280,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
@@ -4319,7 +5351,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.secret+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 1, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -4338,7 +5370,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
@@ -4373,7 +5405,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
@@ -4429,7 +5461,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
@@ -4467,9 +5499,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			It(`Invoke NewCollectionMetadata successfully`, func() {
-				collectionType := "application/vnd.ibm.secrets-manager.secret+json"
+				collectionType := "application/vnd.ibm.secrets-manager.config+json"
 				collectionTotal := int64(1)
 				_model, err := secretsManagerService.NewCollectionMetadata(collectionType, collectionTotal)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewConfigElement successfully`, func() {
+				name := "testString"
+				typeVar := "testString"
+				config := map[string]interface{}{"anyKey": "anyValue"}
+				_model, err := secretsManagerService.NewConfigElement(name, typeVar, config)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -4478,6 +5518,28 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				resources := []secretsmanagerv1.SecretResourceIntf{}
 				_, err := secretsManagerService.NewCreateSecret(metadata, resources)
 				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewCreateSecretConfigElementOptions successfully`, func() {
+				// Construct an instance of the CreateSecretConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				createSecretConfigElementOptionsName := "testString"
+				createSecretConfigElementOptionsType := "testString"
+				createSecretConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
+				createSecretConfigElementOptionsModel := secretsManagerService.NewCreateSecretConfigElementOptions(secretType, configElement, createSecretConfigElementOptionsName, createSecretConfigElementOptionsType, createSecretConfigElementOptionsConfig)
+				createSecretConfigElementOptionsModel.SetSecretType("public_cert")
+				createSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				createSecretConfigElementOptionsModel.SetName("testString")
+				createSecretConfigElementOptionsModel.SetType("testString")
+				createSecretConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
+				createSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createSecretConfigElementOptionsModel).ToNot(BeNil())
+				Expect(createSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(createSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(createSecretConfigElementOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createSecretConfigElementOptionsModel.Type).To(Equal(core.StringPtr("testString")))
+				Expect(createSecretConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(createSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecretGroupOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
@@ -4499,6 +5561,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretGroupResourceModel.GetProperties()).ToNot(BeEmpty())
 				Expect(secretGroupResourceModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
 
+				secretGroupResourceModel.SetProperties(nil)
+				Expect(secretGroupResourceModel.GetProperties()).To(BeEmpty())
+
+				secretGroupResourceModelExpectedMap := make(map[string]interface{})
+				secretGroupResourceModelExpectedMap["foo"] = core.StringPtr("testString")
+				secretGroupResourceModel.SetProperties(secretGroupResourceModelExpectedMap)
+				secretGroupResourceModelActualMap := secretGroupResourceModel.GetProperties()
+				Expect(secretGroupResourceModelActualMap).To(Equal(secretGroupResourceModelExpectedMap))
+
 				// Construct an instance of the CreateSecretGroupOptions model
 				var createSecretGroupOptionsMetadata *secretsmanagerv1.CollectionMetadata = nil
 				createSecretGroupOptionsResources := []secretsmanagerv1.SecretGroupResource{}
@@ -4515,9 +5586,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ArbitrarySecretResource model
@@ -4550,6 +5621,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(createSecretOptionsModel.Metadata).To(Equal(collectionMetadataModel))
 				Expect(createSecretOptionsModel.Resources).To(Equal([]secretsmanagerv1.SecretResourceIntf{secretResourceModel}))
 				Expect(createSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewDeleteSecretConfigElementOptions successfully`, func() {
+				// Construct an instance of the DeleteSecretConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				configName := "testString"
+				deleteSecretConfigElementOptionsModel := secretsManagerService.NewDeleteSecretConfigElementOptions(secretType, configElement, configName)
+				deleteSecretConfigElementOptionsModel.SetSecretType("public_cert")
+				deleteSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				deleteSecretConfigElementOptionsModel.SetConfigName("testString")
+				deleteSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteSecretConfigElementOptionsModel).ToNot(BeNil())
+				Expect(deleteSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(deleteSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(deleteSecretConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(deleteSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteSecretGroupOptions successfully`, func() {
 				// Construct an instance of the DeleteSecretGroupOptions model
@@ -4598,6 +5685,19 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getPolicyOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(getPolicyOptionsModel.Policy).To(Equal(core.StringPtr("rotation")))
 				Expect(getPolicyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetSecretConfigElementOptions successfully`, func() {
+				// Construct an instance of the GetSecretConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				getSecretConfigElementOptionsModel := secretsManagerService.NewGetSecretConfigElementOptions(secretType, configElement)
+				getSecretConfigElementOptionsModel.SetSecretType("public_cert")
+				getSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				getSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSecretConfigElementOptionsModel).ToNot(BeNil())
+				Expect(getSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(getSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(getSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetSecretGroupOptions successfully`, func() {
 				// Construct an instance of the GetSecretGroupOptions model
@@ -4667,6 +5767,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getSecretVersionOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
 				Expect(getSecretVersionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetSingleSecretConfigElementOptions successfully`, func() {
+				// Construct an instance of the GetSingleSecretConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				configName := "testString"
+				getSingleSecretConfigElementOptionsModel := secretsManagerService.NewGetSingleSecretConfigElementOptions(secretType, configElement, configName)
+				getSingleSecretConfigElementOptionsModel.SetSecretType("public_cert")
+				getSingleSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				getSingleSecretConfigElementOptionsModel.SetConfigName("testString")
+				getSingleSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSingleSecretConfigElementOptionsModel).ToNot(BeNil())
+				Expect(getSingleSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(getSingleSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(getSingleSecretConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(getSingleSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewListAllSecretsOptions successfully`, func() {
 				// Construct an instance of the ListAllSecretsOptions model
 				listAllSecretsOptionsModel := secretsManagerService.NewListAllSecretsOptions()
@@ -4706,35 +5822,26 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(listSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutConfigOptions successfully`, func() {
-				// Construct an instance of the IamCredentialsSecretEngineRootConfig model
-				engineConfigModel := new(secretsmanagerv1.IamCredentialsSecretEngineRootConfig)
-				Expect(engineConfigModel).ToNot(BeNil())
-				engineConfigModel.APIKey = core.StringPtr("API_KEY")
-				Expect(engineConfigModel.APIKey).To(Equal(core.StringPtr("API_KEY")))
-
 				// Construct an instance of the PutConfigOptions model
 				secretType := "iam_credentials"
-				var engineConfig secretsmanagerv1.EngineConfigIntf = nil
-				putConfigOptionsModel := secretsManagerService.NewPutConfigOptions(secretType, engineConfig)
+				putConfigOptionsModel := secretsManagerService.NewPutConfigOptions(secretType)
 				putConfigOptionsModel.SetSecretType("iam_credentials")
-				putConfigOptionsModel.SetEngineConfig(engineConfigModel)
 				putConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putConfigOptionsModel).ToNot(BeNil())
 				Expect(putConfigOptionsModel.SecretType).To(Equal(core.StringPtr("iam_credentials")))
-				Expect(putConfigOptionsModel.EngineConfig).To(Equal(engineConfigModel))
 				Expect(putConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutPolicyOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
-				// Construct an instance of the SecretPolicyRotationRotation model
-				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotation)
+				// Construct an instance of the SecretPolicyRotationRotationPolicyRotation model
+				secretPolicyRotationRotationModel := new(secretsmanagerv1.SecretPolicyRotationRotationPolicyRotation)
 				Expect(secretPolicyRotationRotationModel).ToNot(BeNil())
 				secretPolicyRotationRotationModel.Interval = core.Int64Ptr(int64(1))
 				secretPolicyRotationRotationModel.Unit = core.StringPtr("day")
@@ -4783,16 +5890,31 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 			It(`Invoke NewSecretPolicyRotation successfully`, func() {
 				typeVar := "application/vnd.ibm.secrets-manager.secret.policy+json"
-				var rotation *secretsmanagerv1.SecretPolicyRotationRotation = nil
+				var rotation secretsmanagerv1.SecretPolicyRotationRotationIntf = nil
 				_, err := secretsManagerService.NewSecretPolicyRotation(typeVar, rotation)
 				Expect(err).ToNot(BeNil())
 			})
-			It(`Invoke NewSecretPolicyRotationRotation successfully`, func() {
-				interval := int64(1)
-				unit := "day"
-				_model, err := secretsManagerService.NewSecretPolicyRotationRotation(interval, unit)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
+			It(`Invoke NewUpdateSecretConfigElementOptions successfully`, func() {
+				// Construct an instance of the UpdateSecretConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				configName := "testString"
+				updateSecretConfigElementOptionsType := "testString"
+				updateSecretConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
+				updateSecretConfigElementOptionsModel := secretsManagerService.NewUpdateSecretConfigElementOptions(secretType, configElement, configName, updateSecretConfigElementOptionsType, updateSecretConfigElementOptionsConfig)
+				updateSecretConfigElementOptionsModel.SetSecretType("public_cert")
+				updateSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				updateSecretConfigElementOptionsModel.SetConfigName("testString")
+				updateSecretConfigElementOptionsModel.SetType("testString")
+				updateSecretConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
+				updateSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateSecretConfigElementOptionsModel).ToNot(BeNil())
+				Expect(updateSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(updateSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(updateSecretConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(updateSecretConfigElementOptionsModel.Type).To(Equal(core.StringPtr("testString")))
+				Expect(updateSecretConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(updateSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretGroupMetadataOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
@@ -4830,9 +5952,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
@@ -4938,6 +6060,18 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewPublicCertificateMetadataSecretResource successfully`, func() {
+				name := "testString"
+				_model, err := secretsManagerService.NewPublicCertificateMetadataSecretResource(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewPublicCertificateSecretResource successfully`, func() {
+				name := "testString"
+				_model, err := secretsManagerService.NewPublicCertificateSecretResource(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewRotateArbitrarySecretBody successfully`, func() {
 				payload := "testString"
 				_model, err := secretsManagerService.NewRotateArbitrarySecretBody(payload)
@@ -4950,9 +6084,29 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewRotatePublicCertBody successfully`, func() {
+				rotateKeys := true
+				_model, err := secretsManagerService.NewRotatePublicCertBody(rotateKeys)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewRotateUsernamePasswordSecretBody successfully`, func() {
 				password := "testString"
 				_model, err := secretsManagerService.NewRotateUsernamePasswordSecretBody(password)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretPolicyRotationRotationPolicyRotation successfully`, func() {
+				interval := int64(1)
+				unit := "day"
+				_model, err := secretsManagerService.NewSecretPolicyRotationRotationPolicyRotation(interval, unit)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretPolicyRotationRotationPublicCertPolicyRotation successfully`, func() {
+				autoRotate := false
+				rotateKeys := false
+				_model, err := secretsManagerService.NewSecretPolicyRotationRotationPublicCertPolicyRotation(autoRotate, rotateKeys)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
