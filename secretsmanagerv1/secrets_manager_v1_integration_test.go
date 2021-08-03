@@ -372,9 +372,6 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(err2).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
 
-			//Secret data is nil during order process.
-			//TODO Strange bug cause it to not be nill with some conents of the secrets while in Debug its do returned as nil
-			//Expect(secret.SecretData).To(BeNil())
 			Expect(secret.ID).To(Equal(secretId))
 
 			//Get Secret metadata
