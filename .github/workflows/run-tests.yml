@@ -23,3 +23,6 @@ jobs:
         SECRETS_MANAGER_API_AUTH_TYPE: iam
         SECRETS_MANAGER_API_APIKEY: ${{ secrets.SECRETS_MANAGER_API_APIKEY }}
         SERVICE_URL: https://9476d663-dc80-4132-aff6-4585ebbdfb2d.us-south.secrets-manager.appdomain.cloud
+        DNS_CONFIG_CRN: crn:v1:staging:public:internet-svcs-ci:global:a/791f5fb10986423e97aa8512f18b7e65:dc08a28a-9181-45db-bf0d-a8733a5796b6::
+        CA_CONFIG_PRIVATE_KEY: ${{ secrets.CA_CONFIG_PRIVATE_KEY }}
+        
