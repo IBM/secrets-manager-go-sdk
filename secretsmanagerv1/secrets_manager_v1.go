@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.36.0-6f5b0381-20210716-180747
+ * IBM OpenAPI SDK Code Generator Version: 3.37.0-a85661cd-20210802-190136
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -164,26 +164,26 @@ func (secretsManager *SecretsManagerV1) DisableRetries() {
 	secretsManager.Service.DisableRetries()
 }
 
-// CreateSecretConfigElement : Create config element
+// CreateConfigElement : Create config element
 // Create a config element.
-func (secretsManager *SecretsManagerV1) CreateSecretConfigElement(createSecretConfigElementOptions *CreateSecretConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretConfigElementWithContext(context.Background(), createSecretConfigElementOptions)
+func (secretsManager *SecretsManagerV1) CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateConfigElementWithContext(context.Background(), createConfigElementOptions)
 }
 
-// CreateSecretConfigElementWithContext is an alternate form of the CreateSecretConfigElement method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) CreateSecretConfigElementWithContext(ctx context.Context, createSecretConfigElementOptions *CreateSecretConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(createSecretConfigElementOptions, "createSecretConfigElementOptions cannot be nil")
+// CreateConfigElementWithContext is an alternate form of the CreateConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) CreateConfigElementWithContext(ctx context.Context, createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createConfigElementOptions, "createConfigElementOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(createSecretConfigElementOptions, "createSecretConfigElementOptions")
+	err = core.ValidateStruct(createConfigElementOptions, "createConfigElementOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type":    *createSecretConfigElementOptions.SecretType,
-		"config_element": *createSecretConfigElementOptions.ConfigElement,
+		"secret_type":    *createConfigElementOptions.SecretType,
+		"config_element": *createConfigElementOptions.ConfigElement,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -194,11 +194,11 @@ func (secretsManager *SecretsManagerV1) CreateSecretConfigElementWithContext(ctx
 		return
 	}
 
-	for headerName, headerValue := range createSecretConfigElementOptions.Headers {
+	for headerName, headerValue := range createConfigElementOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateSecretConfigElement")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateConfigElement")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -206,14 +206,14 @@ func (secretsManager *SecretsManagerV1) CreateSecretConfigElementWithContext(ctx
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if createSecretConfigElementOptions.Name != nil {
-		body["name"] = createSecretConfigElementOptions.Name
+	if createConfigElementOptions.Name != nil {
+		body["name"] = createConfigElementOptions.Name
 	}
-	if createSecretConfigElementOptions.Type != nil {
-		body["type"] = createSecretConfigElementOptions.Type
+	if createConfigElementOptions.Type != nil {
+		body["type"] = createConfigElementOptions.Type
 	}
-	if createSecretConfigElementOptions.Config != nil {
-		body["config"] = createSecretConfigElementOptions.Config
+	if createConfigElementOptions.Config != nil {
+		body["config"] = createConfigElementOptions.Config
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -241,26 +241,26 @@ func (secretsManager *SecretsManagerV1) CreateSecretConfigElementWithContext(ctx
 	return
 }
 
-// GetSecretConfigElement : Get config elements by type
+// GetConfigElements : Get config elements by type
 // Get a config elements.
-func (secretsManager *SecretsManagerV1) GetSecretConfigElement(getSecretConfigElementOptions *GetSecretConfigElementOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretConfigElementWithContext(context.Background(), getSecretConfigElementOptions)
+func (secretsManager *SecretsManagerV1) GetConfigElements(getConfigElementsOptions *GetConfigElementsOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigElementsWithContext(context.Background(), getConfigElementsOptions)
 }
 
-// GetSecretConfigElementWithContext is an alternate form of the GetSecretConfigElement method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetSecretConfigElementWithContext(ctx context.Context, getSecretConfigElementOptions *GetSecretConfigElementOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(getSecretConfigElementOptions, "getSecretConfigElementOptions cannot be nil")
+// GetConfigElementsWithContext is an alternate form of the GetConfigElements method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetConfigElementsWithContext(ctx context.Context, getConfigElementsOptions *GetConfigElementsOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getConfigElementsOptions, "getConfigElementsOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(getSecretConfigElementOptions, "getSecretConfigElementOptions")
+	err = core.ValidateStruct(getConfigElementsOptions, "getConfigElementsOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type":    *getSecretConfigElementOptions.SecretType,
-		"config_element": *getSecretConfigElementOptions.ConfigElement,
+		"secret_type":    *getConfigElementsOptions.SecretType,
+		"config_element": *getConfigElementsOptions.ConfigElement,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -271,11 +271,11 @@ func (secretsManager *SecretsManagerV1) GetSecretConfigElementWithContext(ctx co
 		return
 	}
 
-	for headerName, headerValue := range getSecretConfigElementOptions.Headers {
+	for headerName, headerValue := range getConfigElementsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetSecretConfigElement")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfigElements")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -302,27 +302,27 @@ func (secretsManager *SecretsManagerV1) GetSecretConfigElementWithContext(ctx co
 	return
 }
 
-// UpdateSecretConfigElement : Update config element
+// UpdateConfigElement : Update config element
 // Update a config element.
-func (secretsManager *SecretsManagerV1) UpdateSecretConfigElement(updateSecretConfigElementOptions *UpdateSecretConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	return secretsManager.UpdateSecretConfigElementWithContext(context.Background(), updateSecretConfigElementOptions)
+func (secretsManager *SecretsManagerV1) UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.UpdateConfigElementWithContext(context.Background(), updateConfigElementOptions)
 }
 
-// UpdateSecretConfigElementWithContext is an alternate form of the UpdateSecretConfigElement method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) UpdateSecretConfigElementWithContext(ctx context.Context, updateSecretConfigElementOptions *UpdateSecretConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(updateSecretConfigElementOptions, "updateSecretConfigElementOptions cannot be nil")
+// UpdateConfigElementWithContext is an alternate form of the UpdateConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) UpdateConfigElementWithContext(ctx context.Context, updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateConfigElementOptions, "updateConfigElementOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(updateSecretConfigElementOptions, "updateSecretConfigElementOptions")
+	err = core.ValidateStruct(updateConfigElementOptions, "updateConfigElementOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type":    *updateSecretConfigElementOptions.SecretType,
-		"config_element": *updateSecretConfigElementOptions.ConfigElement,
-		"config_name":    *updateSecretConfigElementOptions.ConfigName,
+		"secret_type":    *updateConfigElementOptions.SecretType,
+		"config_element": *updateConfigElementOptions.ConfigElement,
+		"config_name":    *updateConfigElementOptions.ConfigName,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -333,11 +333,11 @@ func (secretsManager *SecretsManagerV1) UpdateSecretConfigElementWithContext(ctx
 		return
 	}
 
-	for headerName, headerValue := range updateSecretConfigElementOptions.Headers {
+	for headerName, headerValue := range updateConfigElementOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateSecretConfigElement")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateConfigElement")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -345,11 +345,11 @@ func (secretsManager *SecretsManagerV1) UpdateSecretConfigElementWithContext(ctx
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if updateSecretConfigElementOptions.Type != nil {
-		body["type"] = updateSecretConfigElementOptions.Type
+	if updateConfigElementOptions.Type != nil {
+		body["type"] = updateConfigElementOptions.Type
 	}
-	if updateSecretConfigElementOptions.Config != nil {
-		body["config"] = updateSecretConfigElementOptions.Config
+	if updateConfigElementOptions.Config != nil {
+		body["config"] = updateConfigElementOptions.Config
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -377,27 +377,27 @@ func (secretsManager *SecretsManagerV1) UpdateSecretConfigElementWithContext(ctx
 	return
 }
 
-// DeleteSecretConfigElement : Delete config element
+// DeleteConfigElement : Delete config element
 // Delete a config element.
-func (secretsManager *SecretsManagerV1) DeleteSecretConfigElement(deleteSecretConfigElementOptions *DeleteSecretConfigElementOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteSecretConfigElementWithContext(context.Background(), deleteSecretConfigElementOptions)
+func (secretsManager *SecretsManagerV1) DeleteConfigElement(deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteConfigElementWithContext(context.Background(), deleteConfigElementOptions)
 }
 
-// DeleteSecretConfigElementWithContext is an alternate form of the DeleteSecretConfigElement method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) DeleteSecretConfigElementWithContext(ctx context.Context, deleteSecretConfigElementOptions *DeleteSecretConfigElementOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(deleteSecretConfigElementOptions, "deleteSecretConfigElementOptions cannot be nil")
+// DeleteConfigElementWithContext is an alternate form of the DeleteConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx context.Context, deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteConfigElementOptions, "deleteConfigElementOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(deleteSecretConfigElementOptions, "deleteSecretConfigElementOptions")
+	err = core.ValidateStruct(deleteConfigElementOptions, "deleteConfigElementOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type":    *deleteSecretConfigElementOptions.SecretType,
-		"config_element": *deleteSecretConfigElementOptions.ConfigElement,
-		"config_name":    *deleteSecretConfigElementOptions.ConfigName,
+		"secret_type":    *deleteConfigElementOptions.SecretType,
+		"config_element": *deleteConfigElementOptions.ConfigElement,
+		"config_name":    *deleteConfigElementOptions.ConfigName,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -408,11 +408,11 @@ func (secretsManager *SecretsManagerV1) DeleteSecretConfigElementWithContext(ctx
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretConfigElementOptions.Headers {
+	for headerName, headerValue := range deleteConfigElementOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteSecretConfigElement")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteConfigElement")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -427,27 +427,27 @@ func (secretsManager *SecretsManagerV1) DeleteSecretConfigElementWithContext(ctx
 	return
 }
 
-// GetSingleSecretConfigElement : Get config element
+// GetConfigElement : Get config element
 // Get a config element.
-func (secretsManager *SecretsManagerV1) GetSingleSecretConfigElement(getSingleSecretConfigElementOptions *GetSingleSecretConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSingleSecretConfigElementWithContext(context.Background(), getSingleSecretConfigElementOptions)
+func (secretsManager *SecretsManagerV1) GetConfigElement(getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigElementWithContext(context.Background(), getConfigElementOptions)
 }
 
-// GetSingleSecretConfigElementWithContext is an alternate form of the GetSingleSecretConfigElement method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetSingleSecretConfigElementWithContext(ctx context.Context, getSingleSecretConfigElementOptions *GetSingleSecretConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(getSingleSecretConfigElementOptions, "getSingleSecretConfigElementOptions cannot be nil")
+// GetConfigElementWithContext is an alternate form of the GetConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.Context, getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getConfigElementOptions, "getConfigElementOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(getSingleSecretConfigElementOptions, "getSingleSecretConfigElementOptions")
+	err = core.ValidateStruct(getConfigElementOptions, "getConfigElementOptions")
 	if err != nil {
 		return
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type":    *getSingleSecretConfigElementOptions.SecretType,
-		"config_element": *getSingleSecretConfigElementOptions.ConfigElement,
-		"config_name":    *getSingleSecretConfigElementOptions.ConfigName,
+		"secret_type":    *getConfigElementOptions.SecretType,
+		"config_element": *getConfigElementOptions.ConfigElement,
+		"config_name":    *getConfigElementOptions.ConfigName,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -458,11 +458,11 @@ func (secretsManager *SecretsManagerV1) GetSingleSecretConfigElementWithContext(
 		return
 	}
 
-	for headerName, headerValue := range getSingleSecretConfigElementOptions.Headers {
+	for headerName, headerValue := range getConfigElementOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetSingleSecretConfigElement")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfigElement")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -1870,6 +1870,86 @@ func UnmarshalConfigElementMetadata(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// CreateConfigElementOptions : The CreateConfigElement options.
+type CreateConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The Config element type.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// Config element name.
+	Name *string `json:"name" validate:"required"`
+
+	// Dns provider config type.
+	Type *string `json:"type" validate:"required"`
+
+	Config interface{} `json:"config" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the CreateConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	CreateConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the CreateConfigElementOptions.ConfigElement property.
+// The Config element type.
+const (
+	CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	CreateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// NewCreateConfigElementOptions : Instantiate CreateConfigElementOptions
+func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config interface{}) *CreateConfigElementOptions {
+	return &CreateConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		Name:          core.StringPtr(name),
+		Type:          core.StringPtr(typeVar),
+		Config:        config,
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *CreateConfigElementOptions) SetSecretType(secretType string) *CreateConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *CreateConfigElementOptions) SetConfigElement(configElement string) *CreateConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetName : Allow user to set Name
+func (_options *CreateConfigElementOptions) SetName(name string) *CreateConfigElementOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
+}
+
+// SetType : Allow user to set Type
+func (_options *CreateConfigElementOptions) SetType(typeVar string) *CreateConfigElementOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
+}
+
+// SetConfig : Allow user to set Config
+func (_options *CreateConfigElementOptions) SetConfig(config interface{}) *CreateConfigElementOptions {
+	_options.Config = config
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateConfigElementOptions) SetHeaders(param map[string]string) *CreateConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateSecret : Properties that describe a secret.
 type CreateSecret struct {
 	// The metadata that describes the resource array.
@@ -1904,93 +1984,13 @@ func UnmarshalCreateSecret(m map[string]json.RawMessage, result interface{}) (er
 	return
 }
 
-// CreateSecretConfigElementOptions : The CreateSecretConfigElement options.
-type CreateSecretConfigElementOptions struct {
-	// The secret type.
-	SecretType *string `validate:"required,ne="`
-
-	// The Config element type.
-	ConfigElement *string `validate:"required,ne="`
-
-	// Config element name.
-	Name *string `validate:"required"`
-
-	// Dns provider config type.
-	Type *string `validate:"required"`
-
-	Config interface{} `validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// Constants associated with the CreateSecretConfigElementOptions.SecretType property.
-// The secret type.
-const (
-	CreateSecretConfigElementOptionsSecretTypePublicCertConst = "public_cert"
-)
-
-// Constants associated with the CreateSecretConfigElementOptions.ConfigElement property.
-// The Config element type.
-const (
-	CreateSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	CreateSecretConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
-)
-
-// NewCreateSecretConfigElementOptions : Instantiate CreateSecretConfigElementOptions
-func (*SecretsManagerV1) NewCreateSecretConfigElementOptions(secretType string, configElement string, name string, typeVar string, config interface{}) *CreateSecretConfigElementOptions {
-	return &CreateSecretConfigElementOptions{
-		SecretType:    core.StringPtr(secretType),
-		ConfigElement: core.StringPtr(configElement),
-		Name:          core.StringPtr(name),
-		Type:          core.StringPtr(typeVar),
-		Config:        config,
-	}
-}
-
-// SetSecretType : Allow user to set SecretType
-func (_options *CreateSecretConfigElementOptions) SetSecretType(secretType string) *CreateSecretConfigElementOptions {
-	_options.SecretType = core.StringPtr(secretType)
-	return _options
-}
-
-// SetConfigElement : Allow user to set ConfigElement
-func (_options *CreateSecretConfigElementOptions) SetConfigElement(configElement string) *CreateSecretConfigElementOptions {
-	_options.ConfigElement = core.StringPtr(configElement)
-	return _options
-}
-
-// SetName : Allow user to set Name
-func (_options *CreateSecretConfigElementOptions) SetName(name string) *CreateSecretConfigElementOptions {
-	_options.Name = core.StringPtr(name)
-	return _options
-}
-
-// SetType : Allow user to set Type
-func (_options *CreateSecretConfigElementOptions) SetType(typeVar string) *CreateSecretConfigElementOptions {
-	_options.Type = core.StringPtr(typeVar)
-	return _options
-}
-
-// SetConfig : Allow user to set Config
-func (_options *CreateSecretConfigElementOptions) SetConfig(config interface{}) *CreateSecretConfigElementOptions {
-	_options.Config = config
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *CreateSecretConfigElementOptions) SetHeaders(param map[string]string) *CreateSecretConfigElementOptions {
-	options.Headers = param
-	return options
-}
-
 // CreateSecretGroupOptions : The CreateSecretGroup options.
 type CreateSecretGroupOptions struct {
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretGroupResource `validate:"required"`
+	Resources []SecretGroupResource `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2025,13 +2025,13 @@ func (options *CreateSecretGroupOptions) SetHeaders(param map[string]string) *Cr
 // CreateSecretOptions : The CreateSecret options.
 type CreateSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretResourceIntf `validate:"required"`
+	Resources []SecretResourceIntf `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2080,37 +2080,37 @@ func (options *CreateSecretOptions) SetHeaders(param map[string]string) *CreateS
 	return options
 }
 
-// DeleteSecretConfigElementOptions : The DeleteSecretConfigElement options.
-type DeleteSecretConfigElementOptions struct {
+// DeleteConfigElementOptions : The DeleteConfigElement options.
+type DeleteConfigElementOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The Config element type.
-	ConfigElement *string `validate:"required,ne="`
+	ConfigElement *string `json:"-" validate:"required,ne="`
 
 	// Config name.
-	ConfigName *string `validate:"required,ne="`
+	ConfigName *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
-// Constants associated with the DeleteSecretConfigElementOptions.SecretType property.
+// Constants associated with the DeleteConfigElementOptions.SecretType property.
 // The secret type.
 const (
-	DeleteSecretConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+	DeleteConfigElementOptionsSecretTypePublicCertConst = "public_cert"
 )
 
-// Constants associated with the DeleteSecretConfigElementOptions.ConfigElement property.
+// Constants associated with the DeleteConfigElementOptions.ConfigElement property.
 // The Config element type.
 const (
-	DeleteSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	DeleteSecretConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	DeleteConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
-// NewDeleteSecretConfigElementOptions : Instantiate DeleteSecretConfigElementOptions
-func (*SecretsManagerV1) NewDeleteSecretConfigElementOptions(secretType string, configElement string, configName string) *DeleteSecretConfigElementOptions {
-	return &DeleteSecretConfigElementOptions{
+// NewDeleteConfigElementOptions : Instantiate DeleteConfigElementOptions
+func (*SecretsManagerV1) NewDeleteConfigElementOptions(secretType string, configElement string, configName string) *DeleteConfigElementOptions {
+	return &DeleteConfigElementOptions{
 		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
 		ConfigName:    core.StringPtr(configName),
@@ -2118,25 +2118,25 @@ func (*SecretsManagerV1) NewDeleteSecretConfigElementOptions(secretType string, 
 }
 
 // SetSecretType : Allow user to set SecretType
-func (_options *DeleteSecretConfigElementOptions) SetSecretType(secretType string) *DeleteSecretConfigElementOptions {
+func (_options *DeleteConfigElementOptions) SetSecretType(secretType string) *DeleteConfigElementOptions {
 	_options.SecretType = core.StringPtr(secretType)
 	return _options
 }
 
 // SetConfigElement : Allow user to set ConfigElement
-func (_options *DeleteSecretConfigElementOptions) SetConfigElement(configElement string) *DeleteSecretConfigElementOptions {
+func (_options *DeleteConfigElementOptions) SetConfigElement(configElement string) *DeleteConfigElementOptions {
 	_options.ConfigElement = core.StringPtr(configElement)
 	return _options
 }
 
 // SetConfigName : Allow user to set ConfigName
-func (_options *DeleteSecretConfigElementOptions) SetConfigName(configName string) *DeleteSecretConfigElementOptions {
+func (_options *DeleteConfigElementOptions) SetConfigName(configName string) *DeleteConfigElementOptions {
 	_options.ConfigName = core.StringPtr(configName)
 	return _options
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *DeleteSecretConfigElementOptions) SetHeaders(param map[string]string) *DeleteSecretConfigElementOptions {
+func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *DeleteConfigElementOptions {
 	options.Headers = param
 	return options
 }
@@ -2144,7 +2144,7 @@ func (options *DeleteSecretConfigElementOptions) SetHeaders(param map[string]str
 // DeleteSecretGroupOptions : The DeleteSecretGroup options.
 type DeleteSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2172,10 +2172,10 @@ func (options *DeleteSecretGroupOptions) SetHeaders(param map[string]string) *De
 // DeleteSecretOptions : The DeleteSecret options.
 type DeleteSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2241,6 +2241,67 @@ func UnmarshalGetConfig(m map[string]json.RawMessage, result interface{}) (err e
 	return
 }
 
+// GetConfigElementOptions : The GetConfigElement options.
+type GetConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The Config element type.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// Config name.
+	ConfigName *string `json:"-" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the GetConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	GetConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the GetConfigElementOptions.ConfigElement property.
+// The Config element type.
+const (
+	GetConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	GetConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// NewGetConfigElementOptions : Instantiate GetConfigElementOptions
+func (*SecretsManagerV1) NewGetConfigElementOptions(secretType string, configElement string, configName string) *GetConfigElementOptions {
+	return &GetConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		ConfigName:    core.StringPtr(configName),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *GetConfigElementOptions) SetSecretType(secretType string) *GetConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *GetConfigElementOptions) SetConfigElement(configElement string) *GetConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetConfigName : Allow user to set ConfigName
+func (_options *GetConfigElementOptions) SetConfigName(configName string) *GetConfigElementOptions {
+	_options.ConfigName = core.StringPtr(configName)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetConfigElementOptions) SetHeaders(param map[string]string) *GetConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
 // GetConfigElements : Config elements.
 type GetConfigElements struct {
 	// The metadata that describes the resource array.
@@ -2263,6 +2324,57 @@ func UnmarshalGetConfigElements(m map[string]json.RawMessage, result interface{}
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// GetConfigElementsOptions : The GetConfigElements options.
+type GetConfigElementsOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The Config element type.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the GetConfigElementsOptions.SecretType property.
+// The secret type.
+const (
+	GetConfigElementsOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the GetConfigElementsOptions.ConfigElement property.
+// The Config element type.
+const (
+	GetConfigElementsOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	GetConfigElementsOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// NewGetConfigElementsOptions : Instantiate GetConfigElementsOptions
+func (*SecretsManagerV1) NewGetConfigElementsOptions(secretType string, configElement string) *GetConfigElementsOptions {
+	return &GetConfigElementsOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *GetConfigElementsOptions) SetSecretType(secretType string) *GetConfigElementsOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *GetConfigElementsOptions) SetConfigElement(configElement string) *GetConfigElementsOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetConfigElementsOptions) SetHeaders(param map[string]string) *GetConfigElementsOptions {
+	options.Headers = param
+	return options
 }
 
 // GetConfigElementsResourcesItem : GetConfigElementsResourcesItem struct
@@ -2301,7 +2413,7 @@ func UnmarshalGetConfigElementsResourcesItem(m map[string]json.RawMessage, resul
 // GetConfigOptions : The GetConfig options.
 type GetConfigOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2389,13 +2501,13 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 // GetPolicyOptions : The GetPolicy options.
 type GetPolicyOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The type of policy that is associated with the specified secret.
-	Policy *string
+	Policy *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2470,61 +2582,10 @@ func UnmarshalGetSecret(m map[string]json.RawMessage, result interface{}) (err e
 	return
 }
 
-// GetSecretConfigElementOptions : The GetSecretConfigElement options.
-type GetSecretConfigElementOptions struct {
-	// The secret type.
-	SecretType *string `validate:"required,ne="`
-
-	// The Config element type.
-	ConfigElement *string `validate:"required,ne="`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// Constants associated with the GetSecretConfigElementOptions.SecretType property.
-// The secret type.
-const (
-	GetSecretConfigElementOptionsSecretTypePublicCertConst = "public_cert"
-)
-
-// Constants associated with the GetSecretConfigElementOptions.ConfigElement property.
-// The Config element type.
-const (
-	GetSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	GetSecretConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
-)
-
-// NewGetSecretConfigElementOptions : Instantiate GetSecretConfigElementOptions
-func (*SecretsManagerV1) NewGetSecretConfigElementOptions(secretType string, configElement string) *GetSecretConfigElementOptions {
-	return &GetSecretConfigElementOptions{
-		SecretType:    core.StringPtr(secretType),
-		ConfigElement: core.StringPtr(configElement),
-	}
-}
-
-// SetSecretType : Allow user to set SecretType
-func (_options *GetSecretConfigElementOptions) SetSecretType(secretType string) *GetSecretConfigElementOptions {
-	_options.SecretType = core.StringPtr(secretType)
-	return _options
-}
-
-// SetConfigElement : Allow user to set ConfigElement
-func (_options *GetSecretConfigElementOptions) SetConfigElement(configElement string) *GetSecretConfigElementOptions {
-	_options.ConfigElement = core.StringPtr(configElement)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetSecretConfigElementOptions) SetHeaders(param map[string]string) *GetSecretConfigElementOptions {
-	options.Headers = param
-	return options
-}
-
 // GetSecretGroupOptions : The GetSecretGroup options.
 type GetSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2552,10 +2613,10 @@ func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSe
 // GetSecretMetadataOptions : The GetSecretMetadata options.
 type GetSecretMetadataOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2600,10 +2661,10 @@ func (options *GetSecretMetadataOptions) SetHeaders(param map[string]string) *Ge
 // GetSecretOptions : The GetSecret options.
 type GetSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2872,17 +2933,17 @@ func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result inte
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
 	// The secret type. Supported options include: imported_cert.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
 	// version.
 	//
 	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
 	// the response details.
-	VersionID *string `validate:"required,ne="`
+	VersionID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2930,17 +2991,17 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
 	// The secret type. Supported options include: imported_cert.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
 	// version.
 	//
 	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
 	// the response details.
-	VersionID *string `validate:"required,ne="`
+	VersionID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3007,67 +3068,6 @@ func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interf
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
-}
-
-// GetSingleSecretConfigElementOptions : The GetSingleSecretConfigElement options.
-type GetSingleSecretConfigElementOptions struct {
-	// The secret type.
-	SecretType *string `validate:"required,ne="`
-
-	// The Config element type.
-	ConfigElement *string `validate:"required,ne="`
-
-	// Config name.
-	ConfigName *string `validate:"required,ne="`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// Constants associated with the GetSingleSecretConfigElementOptions.SecretType property.
-// The secret type.
-const (
-	GetSingleSecretConfigElementOptionsSecretTypePublicCertConst = "public_cert"
-)
-
-// Constants associated with the GetSingleSecretConfigElementOptions.ConfigElement property.
-// The Config element type.
-const (
-	GetSingleSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	GetSingleSecretConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
-)
-
-// NewGetSingleSecretConfigElementOptions : Instantiate GetSingleSecretConfigElementOptions
-func (*SecretsManagerV1) NewGetSingleSecretConfigElementOptions(secretType string, configElement string, configName string) *GetSingleSecretConfigElementOptions {
-	return &GetSingleSecretConfigElementOptions{
-		SecretType:    core.StringPtr(secretType),
-		ConfigElement: core.StringPtr(configElement),
-		ConfigName:    core.StringPtr(configName),
-	}
-}
-
-// SetSecretType : Allow user to set SecretType
-func (_options *GetSingleSecretConfigElementOptions) SetSecretType(secretType string) *GetSingleSecretConfigElementOptions {
-	_options.SecretType = core.StringPtr(secretType)
-	return _options
-}
-
-// SetConfigElement : Allow user to set ConfigElement
-func (_options *GetSingleSecretConfigElementOptions) SetConfigElement(configElement string) *GetSingleSecretConfigElementOptions {
-	_options.ConfigElement = core.StringPtr(configElement)
-	return _options
-}
-
-// SetConfigName : Allow user to set ConfigName
-func (_options *GetSingleSecretConfigElementOptions) SetConfigName(configName string) *GetSingleSecretConfigElementOptions {
-	_options.ConfigName = core.StringPtr(configName)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetSingleSecretConfigElementOptions) SetHeaders(param map[string]string) *GetSingleSecretConfigElementOptions {
-	options.Headers = param
-	return options
 }
 
 // IssuanceInfo : Public certificate issuance info.
@@ -3147,27 +3147,27 @@ type ListAllSecretsOptions struct {
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
 	// `../secrets/{secret-type}?limit=5`.
-	Limit *int64
+	Limit *int64 `json:"-"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
 	// `../secrets/{secret-type}?offset=25&limit=25`.
-	Offset *int64
+	Offset *int64 `json:"-"`
 
 	// Filter secrets that contain the specified string. The fields that are searched include: id, name, description,
 	// labels, secret_type.
 	//
 	// **Usage:** If you want to list only the secrets that contain the string "text", use
 	// `../secrets/{secret-type}?search=text`.
-	Search *string
+	Search *string `json:"-"`
 
 	// Sort a list of secrets by the specified field.
 	//
 	// **Usage:** To sort a list of secrets by their creation date, use
 	// `../secrets/{secret-type}?sort_by=creation_date`.
-	SortBy *string
+	SortBy *string `json:"-"`
 
 	// Filter secrets by groups.
 	//
@@ -3176,7 +3176,7 @@ type ListAllSecretsOptions struct {
 	//
 	// **Usage:** To retrieve a list of secrets that are associated with an existing secret group or the default group, use
 	// `../secrets?groups={secret_group_ID},default`.
-	Groups []string
+	Groups []string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3281,21 +3281,21 @@ func UnmarshalListSecrets(m map[string]json.RawMessage, result interface{}) (err
 // ListSecretsOptions : The ListSecrets options.
 type ListSecretsOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
 	// set of items, use `limit` with `offset` to page through your available resources.
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
 	// `../secrets/{secret-type}?limit=5`.
-	Limit *int64
+	Limit *int64 `json:"-"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
 	// `../secrets/{secret-type}?offset=25&limit=25`.
-	Offset *int64
+	Offset *int64 `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3345,7 +3345,7 @@ func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecr
 // PutConfigOptions : The PutConfig options.
 type PutConfigOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3380,19 +3380,19 @@ func (options *PutConfigOptions) SetHeaders(param map[string]string) *PutConfigO
 // PutPolicyOptions : The PutPolicy options.
 type PutPolicyOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretPolicyRotation `validate:"required"`
+	Resources []SecretPolicyRotation `json:"resources" validate:"required"`
 
 	// The type of policy that is associated with the specified secret.
-	Policy *string
+	Policy *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4664,42 +4664,42 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// UpdateSecretConfigElementOptions : The UpdateSecretConfigElement options.
-type UpdateSecretConfigElementOptions struct {
+// UpdateConfigElementOptions : The UpdateConfigElement options.
+type UpdateConfigElementOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The Config element type.
-	ConfigElement *string `validate:"required,ne="`
+	ConfigElement *string `json:"-" validate:"required,ne="`
 
 	// Config name.
-	ConfigName *string `validate:"required,ne="`
+	ConfigName *string `json:"-" validate:"required,ne="`
 
 	// Dns provider config type.
-	Type *string `validate:"required"`
+	Type *string `json:"type" validate:"required"`
 
-	Config interface{} `validate:"required"`
+	Config interface{} `json:"config" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
-// Constants associated with the UpdateSecretConfigElementOptions.SecretType property.
+// Constants associated with the UpdateConfigElementOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+	UpdateConfigElementOptionsSecretTypePublicCertConst = "public_cert"
 )
 
-// Constants associated with the UpdateSecretConfigElementOptions.ConfigElement property.
+// Constants associated with the UpdateConfigElementOptions.ConfigElement property.
 // The Config element type.
 const (
-	UpdateSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	UpdateSecretConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	UpdateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	UpdateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
-// NewUpdateSecretConfigElementOptions : Instantiate UpdateSecretConfigElementOptions
-func (*SecretsManagerV1) NewUpdateSecretConfigElementOptions(secretType string, configElement string, configName string, typeVar string, config interface{}) *UpdateSecretConfigElementOptions {
-	return &UpdateSecretConfigElementOptions{
+// NewUpdateConfigElementOptions : Instantiate UpdateConfigElementOptions
+func (*SecretsManagerV1) NewUpdateConfigElementOptions(secretType string, configElement string, configName string, typeVar string, config interface{}) *UpdateConfigElementOptions {
+	return &UpdateConfigElementOptions{
 		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
 		ConfigName:    core.StringPtr(configName),
@@ -4709,37 +4709,37 @@ func (*SecretsManagerV1) NewUpdateSecretConfigElementOptions(secretType string, 
 }
 
 // SetSecretType : Allow user to set SecretType
-func (_options *UpdateSecretConfigElementOptions) SetSecretType(secretType string) *UpdateSecretConfigElementOptions {
+func (_options *UpdateConfigElementOptions) SetSecretType(secretType string) *UpdateConfigElementOptions {
 	_options.SecretType = core.StringPtr(secretType)
 	return _options
 }
 
 // SetConfigElement : Allow user to set ConfigElement
-func (_options *UpdateSecretConfigElementOptions) SetConfigElement(configElement string) *UpdateSecretConfigElementOptions {
+func (_options *UpdateConfigElementOptions) SetConfigElement(configElement string) *UpdateConfigElementOptions {
 	_options.ConfigElement = core.StringPtr(configElement)
 	return _options
 }
 
 // SetConfigName : Allow user to set ConfigName
-func (_options *UpdateSecretConfigElementOptions) SetConfigName(configName string) *UpdateSecretConfigElementOptions {
+func (_options *UpdateConfigElementOptions) SetConfigName(configName string) *UpdateConfigElementOptions {
 	_options.ConfigName = core.StringPtr(configName)
 	return _options
 }
 
 // SetType : Allow user to set Type
-func (_options *UpdateSecretConfigElementOptions) SetType(typeVar string) *UpdateSecretConfigElementOptions {
+func (_options *UpdateConfigElementOptions) SetType(typeVar string) *UpdateConfigElementOptions {
 	_options.Type = core.StringPtr(typeVar)
 	return _options
 }
 
 // SetConfig : Allow user to set Config
-func (_options *UpdateSecretConfigElementOptions) SetConfig(config interface{}) *UpdateSecretConfigElementOptions {
+func (_options *UpdateConfigElementOptions) SetConfig(config interface{}) *UpdateConfigElementOptions {
 	_options.Config = config
 	return _options
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *UpdateSecretConfigElementOptions) SetHeaders(param map[string]string) *UpdateSecretConfigElementOptions {
+func (options *UpdateConfigElementOptions) SetHeaders(param map[string]string) *UpdateConfigElementOptions {
 	options.Headers = param
 	return options
 }
@@ -4747,13 +4747,13 @@ func (options *UpdateSecretConfigElementOptions) SetHeaders(param map[string]str
 // UpdateSecretGroupMetadataOptions : The UpdateSecretGroupMetadata options.
 type UpdateSecretGroupMetadataOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretGroupMetadataUpdatable `validate:"required"`
+	Resources []SecretGroupMetadataUpdatable `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4795,16 +4795,16 @@ func (options *UpdateSecretGroupMetadataOptions) SetHeaders(param map[string]str
 // UpdateSecretMetadataOptions : The UpdateSecretMetadata options.
 type UpdateSecretMetadataOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretMetadataIntf `validate:"required"`
+	Resources []SecretMetadataIntf `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4863,16 +4863,16 @@ func (options *UpdateSecretMetadataOptions) SetHeaders(param map[string]string) 
 // UpdateSecretOptions : The UpdateSecret options.
 type UpdateSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The action to perform on the specified secret.
-	Action *string `validate:"required"`
+	Action *string `json:"-" validate:"required"`
 
 	// The properties to update for the secret.
-	SecretAction SecretActionIntf `validate:"required"`
+	SecretAction SecretActionIntf `json:"SecretAction" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string

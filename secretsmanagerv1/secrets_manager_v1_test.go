@@ -161,22 +161,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
-	Describe(`CreateSecretConfigElement(createSecretConfigElementOptions *CreateSecretConfigElementOptions) - Operation response error`, func() {
-		createSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+	Describe(`CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) - Operation response error`, func() {
+		createConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(createConfigElementPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke CreateSecretConfigElement with error: Operation response processing error`, func() {
+			It(`Invoke CreateConfigElement with error: Operation response processing error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -184,23 +184,23 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the CreateSecretConfigElementOptions model
-				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
-				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the CreateConfigElementOptions model
+				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
+				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				secretsManagerService.EnableRetries(0, 0)
-				result, response, operationErr = secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -210,15 +210,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`CreateSecretConfigElement(createSecretConfigElementOptions *CreateSecretConfigElementOptions)`, func() {
-		createSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+	Describe(`CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions)`, func() {
+		createConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(createConfigElementPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// For gzip-disabled operation, verify Content-Encoding is not set.
@@ -246,7 +246,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
-			It(`Invoke CreateSecretConfigElement successfully with retries`, func() {
+			It(`Invoke CreateConfigElement successfully with retries`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -255,25 +255,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the CreateSecretConfigElementOptions model
-				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
-				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the CreateConfigElementOptions model
+				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
+				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := secretsManagerService.CreateSecretConfigElementWithContext(ctx, createSecretConfigElementOptionsModel)
+				_, _, operationErr := secretsManagerService.CreateConfigElementWithContext(ctx, createConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				secretsManagerService.DisableRetries()
-				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -281,7 +281,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = secretsManagerService.CreateSecretConfigElementWithContext(ctx, createSecretConfigElementOptionsModel)
+				_, _, operationErr = secretsManagerService.CreateConfigElementWithContext(ctx, createConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -295,7 +295,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(createConfigElementPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// For gzip-disabled operation, verify Content-Encoding is not set.
@@ -320,7 +320,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
-			It(`Invoke CreateSecretConfigElement successfully`, func() {
+			It(`Invoke CreateConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -329,28 +329,28 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(nil)
+				result, response, operationErr := secretsManagerService.CreateConfigElement(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the CreateSecretConfigElementOptions model
-				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
-				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the CreateConfigElementOptions model
+				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
+				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke CreateSecretConfigElement with error: Operation validation and request error`, func() {
+			It(`Invoke CreateConfigElement with error: Operation validation and request error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -358,26 +358,26 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the CreateSecretConfigElementOptions model
-				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
-				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the CreateConfigElementOptions model
+				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
+				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the CreateSecretConfigElementOptions model with no property values
-				createSecretConfigElementOptionsModelNew := new(secretsmanagerv1.CreateSecretConfigElementOptions)
+				// Construct a second instance of the CreateConfigElementOptions model with no property values
+				createConfigElementOptionsModelNew := new(secretsmanagerv1.CreateConfigElementOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModelNew)
+				result, response, operationErr = secretsManagerService.CreateConfigElement(createConfigElementOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -395,7 +395,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					res.WriteHeader(201)
 				}))
 			})
-			It(`Invoke CreateSecretConfigElement successfully`, func() {
+			It(`Invoke CreateConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -403,17 +403,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the CreateSecretConfigElementOptions model
-				createSecretConfigElementOptionsModel := new(secretsmanagerv1.CreateSecretConfigElementOptions)
-				createSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				createSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createSecretConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				createSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				createSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the CreateConfigElementOptions model
+				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
+				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				createConfigElementOptionsModel.Name = core.StringPtr("testString")
+				createConfigElementOptionsModel.Type = core.StringPtr("testString")
+				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
-				result, response, operationErr := secretsManagerService.CreateSecretConfigElement(createSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -425,22 +425,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`GetSecretConfigElement(getSecretConfigElementOptions *GetSecretConfigElementOptions) - Operation response error`, func() {
-		getSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+	Describe(`GetConfigElements(getConfigElementsOptions *GetConfigElementsOptions) - Operation response error`, func() {
+		getConfigElementsPath := "/api/v1/config/public_cert/certificate_authorities"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getConfigElementsPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke GetSecretConfigElement with error: Operation response processing error`, func() {
+			It(`Invoke GetConfigElements with error: Operation response processing error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -448,20 +448,20 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the GetSecretConfigElementOptions model
-				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
-				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementsOptions model
+				getConfigElementsOptionsModel := new(secretsmanagerv1.GetConfigElementsOptions)
+				getConfigElementsOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementsOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElements(getConfigElementsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				secretsManagerService.EnableRetries(0, 0)
-				result, response, operationErr = secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.GetConfigElements(getConfigElementsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -471,15 +471,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`GetSecretConfigElement(getSecretConfigElementOptions *GetSecretConfigElementOptions)`, func() {
-		getSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities"
+	Describe(`GetConfigElements(getConfigElementsOptions *GetConfigElementsOptions)`, func() {
+		getConfigElementsPath := "/api/v1/config/public_cert/certificate_authorities"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getConfigElementsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
@@ -491,7 +491,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"certificate_authorities": [{"name": "Name", "type": "Type"}]}]}`)
 				}))
 			})
-			It(`Invoke GetSecretConfigElement successfully with retries`, func() {
+			It(`Invoke GetConfigElements successfully with retries`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -500,22 +500,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the GetSecretConfigElementOptions model
-				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
-				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementsOptions model
+				getConfigElementsOptionsModel := new(secretsmanagerv1.GetConfigElementsOptions)
+				getConfigElementsOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementsOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := secretsManagerService.GetSecretConfigElementWithContext(ctx, getSecretConfigElementOptionsModel)
+				_, _, operationErr := secretsManagerService.GetConfigElementsWithContext(ctx, getConfigElementsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				secretsManagerService.DisableRetries()
-				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElements(getConfigElementsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -523,7 +523,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = secretsManagerService.GetSecretConfigElementWithContext(ctx, getSecretConfigElementOptionsModel)
+				_, _, operationErr = secretsManagerService.GetConfigElementsWithContext(ctx, getConfigElementsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -537,7 +537,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getConfigElementsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// Set mock response
@@ -546,7 +546,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"certificate_authorities": [{"name": "Name", "type": "Type"}]}]}`)
 				}))
 			})
-			It(`Invoke GetSecretConfigElement successfully`, func() {
+			It(`Invoke GetConfigElements successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -555,25 +555,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := secretsManagerService.GetSecretConfigElement(nil)
+				result, response, operationErr := secretsManagerService.GetConfigElements(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the GetSecretConfigElementOptions model
-				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
-				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementsOptions model
+				getConfigElementsOptionsModel := new(secretsmanagerv1.GetConfigElementsOptions)
+				getConfigElementsOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementsOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.GetConfigElements(getConfigElementsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke GetSecretConfigElement with error: Operation validation and request error`, func() {
+			It(`Invoke GetConfigElements with error: Operation validation and request error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -581,23 +581,23 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the GetSecretConfigElementOptions model
-				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
-				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementsOptions model
+				getConfigElementsOptionsModel := new(secretsmanagerv1.GetConfigElementsOptions)
+				getConfigElementsOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementsOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElements(getConfigElementsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the GetSecretConfigElementOptions model with no property values
-				getSecretConfigElementOptionsModelNew := new(secretsmanagerv1.GetSecretConfigElementOptions)
+				// Construct a second instance of the GetConfigElementsOptions model with no property values
+				getConfigElementsOptionsModelNew := new(secretsmanagerv1.GetConfigElementsOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModelNew)
+				result, response, operationErr = secretsManagerService.GetConfigElements(getConfigElementsOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -615,7 +615,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					res.WriteHeader(200)
 				}))
 			})
-			It(`Invoke GetSecretConfigElement successfully`, func() {
+			It(`Invoke GetConfigElements successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -623,14 +623,14 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the GetSecretConfigElementOptions model
-				getSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSecretConfigElementOptions)
-				getSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementsOptions model
+				getConfigElementsOptionsModel := new(secretsmanagerv1.GetConfigElementsOptions)
+				getConfigElementsOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementsOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
-				result, response, operationErr := secretsManagerService.GetSecretConfigElement(getSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElements(getConfigElementsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -642,22 +642,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`UpdateSecretConfigElement(updateSecretConfigElementOptions *UpdateSecretConfigElementOptions) - Operation response error`, func() {
-		updateSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+	Describe(`UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions) - Operation response error`, func() {
+		updateConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(updateSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(updateConfigElementPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke UpdateSecretConfigElement with error: Operation response processing error`, func() {
+			It(`Invoke UpdateConfigElement with error: Operation response processing error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -665,23 +665,23 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the UpdateSecretConfigElementOptions model
-				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
-				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the UpdateConfigElementOptions model
+				updateConfigElementOptionsModel := new(secretsmanagerv1.UpdateConfigElementOptions)
+				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				secretsManagerService.EnableRetries(0, 0)
-				result, response, operationErr = secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -691,15 +691,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`UpdateSecretConfigElement(updateSecretConfigElementOptions *UpdateSecretConfigElementOptions)`, func() {
-		updateSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+	Describe(`UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions)`, func() {
+		updateConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(updateSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(updateConfigElementPath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// For gzip-disabled operation, verify Content-Encoding is not set.
@@ -727,7 +727,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
-			It(`Invoke UpdateSecretConfigElement successfully with retries`, func() {
+			It(`Invoke UpdateConfigElement successfully with retries`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -736,25 +736,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the UpdateSecretConfigElementOptions model
-				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
-				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the UpdateConfigElementOptions model
+				updateConfigElementOptionsModel := new(secretsmanagerv1.UpdateConfigElementOptions)
+				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := secretsManagerService.UpdateSecretConfigElementWithContext(ctx, updateSecretConfigElementOptionsModel)
+				_, _, operationErr := secretsManagerService.UpdateConfigElementWithContext(ctx, updateConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				secretsManagerService.DisableRetries()
-				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -762,7 +762,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = secretsManagerService.UpdateSecretConfigElementWithContext(ctx, updateSecretConfigElementOptionsModel)
+				_, _, operationErr = secretsManagerService.UpdateConfigElementWithContext(ctx, updateConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -776,7 +776,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(updateSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(updateConfigElementPath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// For gzip-disabled operation, verify Content-Encoding is not set.
@@ -801,7 +801,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
-			It(`Invoke UpdateSecretConfigElement successfully`, func() {
+			It(`Invoke UpdateConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -810,28 +810,28 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(nil)
+				result, response, operationErr := secretsManagerService.UpdateConfigElement(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the UpdateSecretConfigElementOptions model
-				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
-				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the UpdateConfigElementOptions model
+				updateConfigElementOptionsModel := new(secretsmanagerv1.UpdateConfigElementOptions)
+				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke UpdateSecretConfigElement with error: Operation validation and request error`, func() {
+			It(`Invoke UpdateConfigElement with error: Operation validation and request error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -839,26 +839,26 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the UpdateSecretConfigElementOptions model
-				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
-				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the UpdateConfigElementOptions model
+				updateConfigElementOptionsModel := new(secretsmanagerv1.UpdateConfigElementOptions)
+				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the UpdateSecretConfigElementOptions model with no property values
-				updateSecretConfigElementOptionsModelNew := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
+				// Construct a second instance of the UpdateConfigElementOptions model with no property values
+				updateConfigElementOptionsModelNew := new(secretsmanagerv1.UpdateConfigElementOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModelNew)
+				result, response, operationErr = secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -876,7 +876,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					res.WriteHeader(200)
 				}))
 			})
-			It(`Invoke UpdateSecretConfigElement successfully`, func() {
+			It(`Invoke UpdateConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -884,17 +884,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the UpdateSecretConfigElementOptions model
-				updateSecretConfigElementOptionsModel := new(secretsmanagerv1.UpdateSecretConfigElementOptions)
-				updateSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				updateSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				updateSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Type = core.StringPtr("testString")
-				updateSecretConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
-				updateSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the UpdateConfigElementOptions model
+				updateConfigElementOptionsModel := new(secretsmanagerv1.UpdateConfigElementOptions)
+				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Type = core.StringPtr("testString")
+				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
-				result, response, operationErr := secretsManagerService.UpdateSecretConfigElement(updateSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -906,21 +906,21 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`DeleteSecretConfigElement(deleteSecretConfigElementOptions *DeleteSecretConfigElementOptions)`, func() {
-		deleteSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+	Describe(`DeleteConfigElement(deleteConfigElementOptions *DeleteConfigElementOptions)`, func() {
+		deleteConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteConfigElementPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
 					res.WriteHeader(204)
 				}))
 			})
-			It(`Invoke DeleteSecretConfigElement successfully`, func() {
+			It(`Invoke DeleteConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -929,23 +929,23 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := secretsManagerService.DeleteSecretConfigElement(nil)
+				response, operationErr := secretsManagerService.DeleteConfigElement(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 
-				// Construct an instance of the DeleteSecretConfigElementOptions model
-				deleteSecretConfigElementOptionsModel := new(secretsmanagerv1.DeleteSecretConfigElementOptions)
-				deleteSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				deleteSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				deleteSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				deleteSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the DeleteConfigElementOptions model
+				deleteConfigElementOptionsModel := new(secretsmanagerv1.DeleteConfigElementOptions)
+				deleteConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				deleteConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				deleteConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				deleteConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = secretsManagerService.DeleteSecretConfigElement(deleteSecretConfigElementOptionsModel)
+				response, operationErr = secretsManagerService.DeleteConfigElement(deleteConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 			})
-			It(`Invoke DeleteSecretConfigElement with error: Operation validation and request error`, func() {
+			It(`Invoke DeleteConfigElement with error: Operation validation and request error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -953,23 +953,23 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the DeleteSecretConfigElementOptions model
-				deleteSecretConfigElementOptionsModel := new(secretsmanagerv1.DeleteSecretConfigElementOptions)
-				deleteSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				deleteSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				deleteSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				deleteSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the DeleteConfigElementOptions model
+				deleteConfigElementOptionsModel := new(secretsmanagerv1.DeleteConfigElementOptions)
+				deleteConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				deleteConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				deleteConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				deleteConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := secretsManagerService.DeleteSecretConfigElement(deleteSecretConfigElementOptionsModel)
+				response, operationErr := secretsManagerService.DeleteConfigElement(deleteConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
-				// Construct a second instance of the DeleteSecretConfigElementOptions model with no property values
-				deleteSecretConfigElementOptionsModelNew := new(secretsmanagerv1.DeleteSecretConfigElementOptions)
+				// Construct a second instance of the DeleteConfigElementOptions model with no property values
+				deleteConfigElementOptionsModelNew := new(secretsmanagerv1.DeleteConfigElementOptions)
 				// Invoke operation with invalid model (negative test)
-				response, operationErr = secretsManagerService.DeleteSecretConfigElement(deleteSecretConfigElementOptionsModelNew)
+				response, operationErr = secretsManagerService.DeleteConfigElement(deleteConfigElementOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 			})
@@ -978,22 +978,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`GetSingleSecretConfigElement(getSingleSecretConfigElementOptions *GetSingleSecretConfigElementOptions) - Operation response error`, func() {
-		getSingleSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+	Describe(`GetConfigElement(getConfigElementOptions *GetConfigElementOptions) - Operation response error`, func() {
+		getConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getSingleSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getConfigElementPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke GetSingleSecretConfigElement with error: Operation response processing error`, func() {
+			It(`Invoke GetConfigElement with error: Operation response processing error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1001,21 +1001,21 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the GetSingleSecretConfigElementOptions model
-				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
-				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementOptions model
+				getConfigElementOptionsModel := new(secretsmanagerv1.GetConfigElementOptions)
+				getConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElement(getConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				secretsManagerService.EnableRetries(0, 0)
-				result, response, operationErr = secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.GetConfigElement(getConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -1025,15 +1025,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`GetSingleSecretConfigElement(getSingleSecretConfigElementOptions *GetSingleSecretConfigElementOptions)`, func() {
-		getSingleSecretConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
+	Describe(`GetConfigElement(getConfigElementOptions *GetConfigElementOptions)`, func() {
+		getConfigElementPath := "/api/v1/config/public_cert/certificate_authorities/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getSingleSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getConfigElementPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
@@ -1045,7 +1045,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
-			It(`Invoke GetSingleSecretConfigElement successfully with retries`, func() {
+			It(`Invoke GetConfigElement successfully with retries`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1054,23 +1054,23 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the GetSingleSecretConfigElementOptions model
-				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
-				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementOptions model
+				getConfigElementOptionsModel := new(secretsmanagerv1.GetConfigElementOptions)
+				getConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := secretsManagerService.GetSingleSecretConfigElementWithContext(ctx, getSingleSecretConfigElementOptionsModel)
+				_, _, operationErr := secretsManagerService.GetConfigElementWithContext(ctx, getConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				secretsManagerService.DisableRetries()
-				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElement(getConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -1078,7 +1078,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = secretsManagerService.GetSingleSecretConfigElementWithContext(ctx, getSingleSecretConfigElementOptionsModel)
+				_, _, operationErr = secretsManagerService.GetConfigElementWithContext(ctx, getConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -1092,7 +1092,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getSingleSecretConfigElementPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getConfigElementPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// Set mock response
@@ -1101,7 +1101,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "Type", "config": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
-			It(`Invoke GetSingleSecretConfigElement successfully`, func() {
+			It(`Invoke GetConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1110,26 +1110,26 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(nil)
+				result, response, operationErr := secretsManagerService.GetConfigElement(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the GetSingleSecretConfigElementOptions model
-				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
-				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementOptions model
+				getConfigElementOptionsModel := new(secretsmanagerv1.GetConfigElementOptions)
+				getConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				result, response, operationErr = secretsManagerService.GetConfigElement(getConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke GetSingleSecretConfigElement with error: Operation validation and request error`, func() {
+			It(`Invoke GetConfigElement with error: Operation validation and request error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1137,24 +1137,24 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the GetSingleSecretConfigElementOptions model
-				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
-				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementOptions model
+				getConfigElementOptionsModel := new(secretsmanagerv1.GetConfigElementOptions)
+				getConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElement(getConfigElementOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the GetSingleSecretConfigElementOptions model with no property values
-				getSingleSecretConfigElementOptionsModelNew := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
+				// Construct a second instance of the GetConfigElementOptions model with no property values
+				getConfigElementOptionsModelNew := new(secretsmanagerv1.GetConfigElementOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModelNew)
+				result, response, operationErr = secretsManagerService.GetConfigElement(getConfigElementOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -1172,7 +1172,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					res.WriteHeader(200)
 				}))
 			})
-			It(`Invoke GetSingleSecretConfigElement successfully`, func() {
+			It(`Invoke GetConfigElement successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1180,15 +1180,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the GetSingleSecretConfigElementOptions model
-				getSingleSecretConfigElementOptionsModel := new(secretsmanagerv1.GetSingleSecretConfigElementOptions)
-				getSingleSecretConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
-				getSingleSecretConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				getSingleSecretConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				getSingleSecretConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetConfigElementOptions model
+				getConfigElementOptionsModel := new(secretsmanagerv1.GetConfigElementOptions)
+				getConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
+				getConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
+				getConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				getConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
-				result, response, operationErr := secretsManagerService.GetSingleSecretConfigElement(getSingleSecretConfigElementOptionsModel)
+				result, response, operationErr := secretsManagerService.GetConfigElement(getConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -5510,33 +5510,33 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewCreateConfigElementOptions successfully`, func() {
+				// Construct an instance of the CreateConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				createConfigElementOptionsName := "testString"
+				createConfigElementOptionsType := "testString"
+				createConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel := secretsManagerService.NewCreateConfigElementOptions(secretType, configElement, createConfigElementOptionsName, createConfigElementOptionsType, createConfigElementOptionsConfig)
+				createConfigElementOptionsModel.SetSecretType("public_cert")
+				createConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				createConfigElementOptionsModel.SetName("testString")
+				createConfigElementOptionsModel.SetType("testString")
+				createConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
+				createConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createConfigElementOptionsModel).ToNot(BeNil())
+				Expect(createConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(createConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(createConfigElementOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("testString")))
+				Expect(createConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(createConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreateSecret successfully`, func() {
 				var metadata *secretsmanagerv1.CollectionMetadata = nil
 				resources := []secretsmanagerv1.SecretResourceIntf{}
 				_, err := secretsManagerService.NewCreateSecret(metadata, resources)
 				Expect(err).ToNot(BeNil())
-			})
-			It(`Invoke NewCreateSecretConfigElementOptions successfully`, func() {
-				// Construct an instance of the CreateSecretConfigElementOptions model
-				secretType := "public_cert"
-				configElement := "certificate_authorities"
-				createSecretConfigElementOptionsName := "testString"
-				createSecretConfigElementOptionsType := "testString"
-				createSecretConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
-				createSecretConfigElementOptionsModel := secretsManagerService.NewCreateSecretConfigElementOptions(secretType, configElement, createSecretConfigElementOptionsName, createSecretConfigElementOptionsType, createSecretConfigElementOptionsConfig)
-				createSecretConfigElementOptionsModel.SetSecretType("public_cert")
-				createSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				createSecretConfigElementOptionsModel.SetName("testString")
-				createSecretConfigElementOptionsModel.SetType("testString")
-				createSecretConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
-				createSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createSecretConfigElementOptionsModel).ToNot(BeNil())
-				Expect(createSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
-				Expect(createSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(createSecretConfigElementOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createSecretConfigElementOptionsModel.Type).To(Equal(core.StringPtr("testString")))
-				Expect(createSecretConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(createSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecretGroupOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model
@@ -5619,21 +5619,21 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(createSecretOptionsModel.Resources).To(Equal([]secretsmanagerv1.SecretResourceIntf{secretResourceModel}))
 				Expect(createSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewDeleteSecretConfigElementOptions successfully`, func() {
-				// Construct an instance of the DeleteSecretConfigElementOptions model
+			It(`Invoke NewDeleteConfigElementOptions successfully`, func() {
+				// Construct an instance of the DeleteConfigElementOptions model
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
 				configName := "testString"
-				deleteSecretConfigElementOptionsModel := secretsManagerService.NewDeleteSecretConfigElementOptions(secretType, configElement, configName)
-				deleteSecretConfigElementOptionsModel.SetSecretType("public_cert")
-				deleteSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				deleteSecretConfigElementOptionsModel.SetConfigName("testString")
-				deleteSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(deleteSecretConfigElementOptionsModel).ToNot(BeNil())
-				Expect(deleteSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
-				Expect(deleteSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(deleteSecretConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
-				Expect(deleteSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+				deleteConfigElementOptionsModel := secretsManagerService.NewDeleteConfigElementOptions(secretType, configElement, configName)
+				deleteConfigElementOptionsModel.SetSecretType("public_cert")
+				deleteConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				deleteConfigElementOptionsModel.SetConfigName("testString")
+				deleteConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteConfigElementOptionsModel).ToNot(BeNil())
+				Expect(deleteConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(deleteConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(deleteConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(deleteConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteSecretGroupOptions successfully`, func() {
 				// Construct an instance of the DeleteSecretGroupOptions model
@@ -5657,6 +5657,35 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(deleteSecretOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
 				Expect(deleteSecretOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(deleteSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetConfigElementOptions successfully`, func() {
+				// Construct an instance of the GetConfigElementOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				configName := "testString"
+				getConfigElementOptionsModel := secretsManagerService.NewGetConfigElementOptions(secretType, configElement, configName)
+				getConfigElementOptionsModel.SetSecretType("public_cert")
+				getConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				getConfigElementOptionsModel.SetConfigName("testString")
+				getConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getConfigElementOptionsModel).ToNot(BeNil())
+				Expect(getConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(getConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(getConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(getConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetConfigElementsOptions successfully`, func() {
+				// Construct an instance of the GetConfigElementsOptions model
+				secretType := "public_cert"
+				configElement := "certificate_authorities"
+				getConfigElementsOptionsModel := secretsManagerService.NewGetConfigElementsOptions(secretType, configElement)
+				getConfigElementsOptionsModel.SetSecretType("public_cert")
+				getConfigElementsOptionsModel.SetConfigElement("certificate_authorities")
+				getConfigElementsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getConfigElementsOptionsModel).ToNot(BeNil())
+				Expect(getConfigElementsOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(getConfigElementsOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(getConfigElementsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetConfigOptions successfully`, func() {
 				// Construct an instance of the GetConfigOptions model
@@ -5682,19 +5711,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getPolicyOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(getPolicyOptionsModel.Policy).To(Equal(core.StringPtr("rotation")))
 				Expect(getPolicyOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewGetSecretConfigElementOptions successfully`, func() {
-				// Construct an instance of the GetSecretConfigElementOptions model
-				secretType := "public_cert"
-				configElement := "certificate_authorities"
-				getSecretConfigElementOptionsModel := secretsManagerService.NewGetSecretConfigElementOptions(secretType, configElement)
-				getSecretConfigElementOptionsModel.SetSecretType("public_cert")
-				getSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				getSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getSecretConfigElementOptionsModel).ToNot(BeNil())
-				Expect(getSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
-				Expect(getSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(getSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetSecretGroupOptions successfully`, func() {
 				// Construct an instance of the GetSecretGroupOptions model
@@ -5763,22 +5779,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getSecretVersionOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(getSecretVersionOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
 				Expect(getSecretVersionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewGetSingleSecretConfigElementOptions successfully`, func() {
-				// Construct an instance of the GetSingleSecretConfigElementOptions model
-				secretType := "public_cert"
-				configElement := "certificate_authorities"
-				configName := "testString"
-				getSingleSecretConfigElementOptionsModel := secretsManagerService.NewGetSingleSecretConfigElementOptions(secretType, configElement, configName)
-				getSingleSecretConfigElementOptionsModel.SetSecretType("public_cert")
-				getSingleSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				getSingleSecretConfigElementOptionsModel.SetConfigName("testString")
-				getSingleSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getSingleSecretConfigElementOptionsModel).ToNot(BeNil())
-				Expect(getSingleSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
-				Expect(getSingleSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(getSingleSecretConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
-				Expect(getSingleSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListAllSecretsOptions successfully`, func() {
 				// Construct an instance of the ListAllSecretsOptions model
@@ -5891,27 +5891,27 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				_, err := secretsManagerService.NewSecretPolicyRotation(typeVar, rotation)
 				Expect(err).ToNot(BeNil())
 			})
-			It(`Invoke NewUpdateSecretConfigElementOptions successfully`, func() {
-				// Construct an instance of the UpdateSecretConfigElementOptions model
+			It(`Invoke NewUpdateConfigElementOptions successfully`, func() {
+				// Construct an instance of the UpdateConfigElementOptions model
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
 				configName := "testString"
-				updateSecretConfigElementOptionsType := "testString"
-				updateSecretConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
-				updateSecretConfigElementOptionsModel := secretsManagerService.NewUpdateSecretConfigElementOptions(secretType, configElement, configName, updateSecretConfigElementOptionsType, updateSecretConfigElementOptionsConfig)
-				updateSecretConfigElementOptionsModel.SetSecretType("public_cert")
-				updateSecretConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				updateSecretConfigElementOptionsModel.SetConfigName("testString")
-				updateSecretConfigElementOptionsModel.SetType("testString")
-				updateSecretConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
-				updateSecretConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(updateSecretConfigElementOptionsModel).ToNot(BeNil())
-				Expect(updateSecretConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
-				Expect(updateSecretConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(updateSecretConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
-				Expect(updateSecretConfigElementOptionsModel.Type).To(Equal(core.StringPtr("testString")))
-				Expect(updateSecretConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(updateSecretConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+				updateConfigElementOptionsType := "testString"
+				updateConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
+				updateConfigElementOptionsModel := secretsManagerService.NewUpdateConfigElementOptions(secretType, configElement, configName, updateConfigElementOptionsType, updateConfigElementOptionsConfig)
+				updateConfigElementOptionsModel.SetSecretType("public_cert")
+				updateConfigElementOptionsModel.SetConfigElement("certificate_authorities")
+				updateConfigElementOptionsModel.SetConfigName("testString")
+				updateConfigElementOptionsModel.SetType("testString")
+				updateConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
+				updateConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateConfigElementOptionsModel).ToNot(BeNil())
+				Expect(updateConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
+				Expect(updateConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
+				Expect(updateConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(updateConfigElementOptionsModel.Type).To(Equal(core.StringPtr("testString")))
+				Expect(updateConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(updateConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretGroupMetadataOptions successfully`, func() {
 				// Construct an instance of the CollectionMetadata model

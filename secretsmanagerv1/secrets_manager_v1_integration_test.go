@@ -305,9 +305,9 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			caConfigName := generateName() + "le-stage-config"
 			privateKey := strings.ReplaceAll(os.Getenv("CA_CONFIG_PRIVATE_KEY"), `\n`, "\n")
 
-			_, resp, err := secretsManager.CreateSecretConfigElement(&secretsmanagerv1.CreateSecretConfigElementOptions{
-				SecretType:    core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+			_, resp, err := secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst),
 				Name:          &caConfigName,
 				Type:          core.StringPtr("letsencrypt-stage"),
 				Config: map[string]string{
@@ -321,9 +321,9 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			//Create DNS config
 			cis := "cis"
 			dnsConfigName := generateName() + "dns-config"
-			_, resp, err = secretsManager.CreateSecretConfigElement(&secretsmanagerv1.CreateSecretConfigElementOptions{
-				SecretType:    core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsConfigElementDNSProvidersConst),
+			_, resp, err = secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementDNSProvidersConst),
 				Name:          &dnsConfigName,
 				Type:          &cis,
 				Config: map[string]string{
@@ -393,17 +393,17 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
 
 			//Delete configs
-			resp, err = secretsManager.DeleteSecretConfigElement(&secretsmanagerv1.DeleteSecretConfigElementOptions{
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteSecretConfigElementOptionsConfigElementDNSProvidersConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementDNSProvidersConst),
 				ConfigName:    &dnsConfigName,
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
 
-			resp, err = secretsManager.DeleteSecretConfigElement(&secretsmanagerv1.DeleteSecretConfigElementOptions{
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst),
 				ConfigName:    &caConfigName,
 			})
 			Expect(err).To(BeNil())
@@ -416,9 +416,9 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			caConfigName := generateName() + "le-stage-config"
 			privateKey := strings.ReplaceAll(os.Getenv("CA_CONFIG_PRIVATE_KEY"), `\n`, "\n")
 
-			_, resp, err := secretsManager.CreateSecretConfigElement(&secretsmanagerv1.CreateSecretConfigElementOptions{
-				SecretType:    core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+			_, resp, err := secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst),
 				Name:          &caConfigName,
 				Type:          core.StringPtr("letsencrypt-stage"),
 				Config: map[string]string{
@@ -430,9 +430,9 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
 
 			//Get CA config
-			getConfigRes, resp, err := secretsManager.GetSingleSecretConfigElement(&secretsmanagerv1.GetSingleSecretConfigElementOptions{
+			getConfigRes, resp, err := secretsManager.GetConfigElement(&secretsmanagerv1.GetConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.GetConfigOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst),
 				ConfigName:    &caConfigName,
 			})
 			Expect(err).To(BeNil())
@@ -443,9 +443,9 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			//Create DNS config
 			cis := "cis"
 			dnsConfigName := generateName() + "dns-config"
-			_, resp, err = secretsManager.CreateSecretConfigElement(&secretsmanagerv1.CreateSecretConfigElementOptions{
-				SecretType:    core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsConfigElementDNSProvidersConst),
+			_, resp, err = secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementDNSProvidersConst),
 				Name:          &dnsConfigName,
 				Type:          &cis,
 				Config: map[string]string{
@@ -458,9 +458,9 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
 
 			//Get the DNS config
-			getConfigRes, resp, err = secretsManager.GetSingleSecretConfigElement(&secretsmanagerv1.GetSingleSecretConfigElementOptions{
+			getConfigRes, resp, err = secretsManager.GetConfigElement(&secretsmanagerv1.GetConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.GetConfigOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.CreateSecretConfigElementOptionsConfigElementDNSProvidersConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementDNSProvidersConst),
 				ConfigName:    &dnsConfigName,
 			})
 
@@ -481,17 +481,17 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(c.DNSProviders).ToNot(BeNil())
 
 			//Delete configs
-			resp, err = secretsManager.DeleteSecretConfigElement(&secretsmanagerv1.DeleteSecretConfigElementOptions{
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteSecretConfigElementOptionsConfigElementDNSProvidersConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementDNSProvidersConst),
 				ConfigName:    &dnsConfigName,
 			})
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
 
-			resp, err = secretsManager.DeleteSecretConfigElement(&secretsmanagerv1.DeleteSecretConfigElementOptions{
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
-				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteSecretConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst),
 				ConfigName:    &caConfigName,
 			})
 			Expect(err).To(BeNil())
