@@ -107,7 +107,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(createRes).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusConflict))
-			Expect(err.Error()).To(Equal("Conflict"))
+			Expect(err.Error()).To(Equal("A secret with the same name already exists: " + secretName))
 			// delete arbitrary secret
 			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
