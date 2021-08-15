@@ -1805,8 +1805,8 @@ func UnmarshalCollectionMetadata(m map[string]json.RawMessage, result interface{
 	return
 }
 
-// ConfigElement : Config element.
-type ConfigElement struct {
+// ConfigElementDef : Config element.
+type ConfigElementDef struct {
 	// Config element name.
 	Name *string `json:"name" validate:"required"`
 
@@ -1816,9 +1816,9 @@ type ConfigElement struct {
 	Config interface{} `json:"config" validate:"required"`
 }
 
-// NewConfigElement : Instantiate ConfigElement (Generic Model Constructor)
-func (*SecretsManagerV1) NewConfigElement(name string, typeVar string, config interface{}) (_model *ConfigElement, err error) {
-	_model = &ConfigElement{
+// NewConfigElementDef : Instantiate ConfigElementDef (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config interface{}) (_model *ConfigElementDef, err error) {
+	_model = &ConfigElementDef{
 		Name:   core.StringPtr(name),
 		Type:   core.StringPtr(typeVar),
 		Config: config,
@@ -1827,9 +1827,9 @@ func (*SecretsManagerV1) NewConfigElement(name string, typeVar string, config in
 	return
 }
 
-// UnmarshalConfigElement unmarshals an instance of ConfigElement from the specified map of raw messages.
-func UnmarshalConfigElement(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ConfigElement)
+// UnmarshalConfigElementDef unmarshals an instance of ConfigElementDef from the specified map of raw messages.
+func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDef)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
@@ -3052,7 +3052,7 @@ type GetSingleConfigElement struct {
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []ConfigElement `json:"resources" validate:"required"`
+	Resources []ConfigElementDef `json:"resources" validate:"required"`
 }
 
 // UnmarshalGetSingleConfigElement unmarshals an instance of GetSingleConfigElement from the specified map of raw messages.
@@ -3062,7 +3062,7 @@ func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalConfigElement)
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalConfigElementDef)
 	if err != nil {
 		return
 	}
@@ -3855,17 +3855,7 @@ type SecretMetadata struct {
 	// The alternative names that are defined for the certificate.
 	AltNames []string `json:"alt_names,omitempty"`
 
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
-	// secret version metadata](#get-secret-version-metadata).
-	Versions []map[string]interface{} `json:"versions,omitempty"`
-
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
-
-	// The configured ca name.
-	Ca *string `json:"ca,omitempty"`
-
-	// The configured dns provider.
-	DNS *string `json:"dns,omitempty"`
 
 	Rotation *Rotation `json:"rotation,omitempty"`
 
@@ -3879,6 +3869,7 @@ const (
 	SecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3993,19 +3984,7 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "dns", &obj.DNS)
 	if err != nil {
 		return
 	}
@@ -5030,6 +5009,7 @@ const (
 	ArbitrarySecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	ArbitrarySecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretMetadataSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5408,6 +5388,7 @@ const (
 	CertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	CertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -6114,6 +6095,7 @@ const (
 	IamCredentialsSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -6460,8 +6442,16 @@ func UnmarshalPublicCertSecretEngineRootConfig(m map[string]json.RawMessage, res
 // PublicCertificateMetadataSecretResource : Metadata properties that describe a public certificate secret.
 // This model "extends" SecretMetadata
 type PublicCertificateMetadataSecretResource struct {
-	// The v4 UUID that uniquely identifies the secret.
+	// The unique ID of the secret.
 	ID *string `json:"id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
 
 	// A human-readable alias to assign to your secret.
 	//
@@ -6478,14 +6468,6 @@ type PublicCertificateMetadataSecretResource struct {
 	// If you omit this parameter, your secret is assigned to the `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
-	// Labels that you can use to filter for secrets in your instance.
-	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
-	//
-	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
-	Labels []string `json:"labels,omitempty"`
-
 	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
 	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
 	State *int64 `json:"state,omitempty"`
@@ -6496,7 +6478,7 @@ type PublicCertificateMetadataSecretResource struct {
 	// The secret type.
 	SecretType *string `json:"secret_type,omitempty"`
 
-	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
+	// The Cloud Resource Name (CRN) that uniquely identifies the resource.
 	CRN *string `json:"crn,omitempty"`
 
 	// The date the secret was created. The date format follows RFC 3339.
@@ -6505,26 +6487,16 @@ type PublicCertificateMetadataSecretResource struct {
 	// The unique identifier for the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// Updates when the actual secret is modified. The date format follows RFC 3339.
+	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions that are associated with a secret.
+	// The number of versions the secret has.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
-
-	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
-	// secret version metadata](#get-secret-version-metadata).
-	Versions []map[string]interface{} `json:"versions,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
 
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
-
-	// The configured ca name.
-	Ca *string `json:"ca,omitempty"`
-
-	// The configured dns provider.
-	DNS *string `json:"dns,omitempty"`
 
 	// The identifier for the cryptographic algorthim to be used by the issuing certificate authority to sign the
 	// ceritificate.
@@ -6540,6 +6512,10 @@ type PublicCertificateMetadataSecretResource struct {
 	// The fully qualified domain name or host domain name for the certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
+	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
+
+	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
+
 	Rotation *Rotation `json:"rotation,omitempty"`
 
 	// Public certificate issuance info.
@@ -6552,6 +6528,7 @@ const (
 	PublicCertificateMetadataSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	PublicCertificateMetadataSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateMetadataSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateMetadataSecretResourceSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateMetadataSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -6585,6 +6562,10 @@ func UnmarshalPublicCertificateMetadataSecretResource(m map[string]json.RawMessa
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
@@ -6594,10 +6575,6 @@ func UnmarshalPublicCertificateMetadataSecretResource(m map[string]json.RawMessa
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
 		return
 	}
@@ -6633,23 +6610,11 @@ func UnmarshalPublicCertificateMetadataSecretResource(m map[string]json.RawMessa
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "dns", &obj.DNS)
 	if err != nil {
 		return
 	}
@@ -6666,6 +6631,14 @@ func UnmarshalPublicCertificateMetadataSecretResource(m map[string]json.RawMessa
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_included", &obj.PrivateKeyIncluded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_included", &obj.IntermediateIncluded)
 	if err != nil {
 		return
 	}
@@ -7203,6 +7176,7 @@ const (
 	UsernamePasswordSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 

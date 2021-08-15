@@ -5502,11 +5502,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
-			It(`Invoke NewConfigElement successfully`, func() {
+			It(`Invoke NewConfigElementDef successfully`, func() {
 				name := "testString"
 				typeVar := "testString"
 				config := map[string]interface{}{"anyKey": "anyValue"}
-				_model, err := secretsManagerService.NewConfigElement(name, typeVar, config)
+				_model, err := secretsManagerService.NewConfigElementDef(name, typeVar, config)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -6058,7 +6058,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewPublicCertificateMetadataSecretResource successfully`, func() {
-				name := "testString"
+				name := "example-secret"
 				_model, err := secretsManagerService.NewPublicCertificateMetadataSecretResource(name)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
