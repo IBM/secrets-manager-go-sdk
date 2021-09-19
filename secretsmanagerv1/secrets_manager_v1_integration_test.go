@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -296,6 +297,212 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
 		})
 
+	})
+
+	Context(`Order cert`, func() {
+		It(`Create config elements order new certificate, get and delete secret`, func() {
+			//Create CA config
+			caConfigName := generateName() + "le-stage-config"
+			privateKey := strings.ReplaceAll(os.Getenv("CA_CONFIG_PRIVATE_KEY"), `\n`, "\n")
+
+			leConfig := secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig{
+				PrivateKey: &privateKey,
+			}
+			_, resp, err := secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				Name:          &caConfigName,
+				Type:          core.StringPtr("letsencrypt-stage"),
+				Config:        &leConfig,
+			})
+
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
+
+			//Create DNS config
+			cis := "cis"
+			dnsConfigName := generateName() + "dns-config"
+
+			cisConfig := secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig{
+				CisCRN:    core.StringPtr(os.Getenv("DNS_CONFIG_CRN")),
+				CisApikey: core.StringPtr(os.Getenv("SECRETS_MANAGER_API_APIKEY")),
+			}
+			_, resp, err = secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementDNSProvidersConst),
+				Name:          &dnsConfigName,
+				Type:          &cis,
+				Config:        &cisConfig,
+			})
+
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
+
+			//Order certificate
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypePublicCertConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.PublicCertificateSecretResource{
+						Name:         core.StringPtr(generateName()),
+						Description:  core.StringPtr("Integration test generated"),
+						Labels:       []string{"label1", "label2"},
+						CommonName:   core.StringPtr("integration.secrets-manager.test.appdomain.cloud"),
+						AltNames:     []string{"integration.secrets-manager.test.appdomain.cloud"},
+						KeyAlgorithm: core.StringPtr("RSA2048"),
+						Ca:           &caConfigName,
+						DNS:          &dnsConfigName,
+						Rotation: &secretsmanagerv1.Rotation{
+							AutoRotate: core.BoolPtr(false),
+							RotateKeys: core.BoolPtr(false),
+						},
+					},
+				},
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusAccepted))
+			publicCertSecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
+			Expect(ok).To(BeTrue())
+			secretId := publicCertSecretResource.ID
+
+			getSecretRes, _, err2 := secretsManager.GetSecret(&secretsmanagerv1.GetSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.GetSecretOptionsSecretTypePublicCertConst),
+				ID:         secretId,
+			})
+			Expect(err2).To(BeNil())
+			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
+
+			Expect(secret.ID).To(Equal(secretId))
+
+			//Get Secret metadata
+			_, resp, err = secretsManager.GetSecretMetadata(&secretsmanagerv1.GetSecretMetadataOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.GetSecretMetadataOptionsSecretTypePublicCertConst),
+				ID:         secretId,
+			})
+
+			Expect(err).To(BeNil())
+
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// delete public secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+
+			//Delete configs
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementDNSProvidersConst),
+				ConfigName:    &dnsConfigName,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				ConfigName:    &caConfigName,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+
+		})
+
+		It("Create, Get, List and Delete config elements.", func() {
+			//Create CA config
+			caConfigName := generateName() + "le-stage-config"
+			privateKey := strings.ReplaceAll(os.Getenv("CA_CONFIG_PRIVATE_KEY"), `\n`, "\n")
+
+			leConfig := secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig{
+				PrivateKey: &privateKey,
+			}
+			_, resp, err := secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				Name:          &caConfigName,
+				Type:          core.StringPtr("letsencrypt-stage"),
+				Config:        &leConfig,
+			})
+
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
+
+			//Get CA config
+			getConfigRes, resp, err := secretsManager.GetConfigElement(&secretsmanagerv1.GetConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.GetConfigOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				ConfigName:    &caConfigName,
+			})
+			Expect(err).To(BeNil())
+			config := getConfigRes.Resources[0]
+			Expect(config).ToNot(BeNil())
+			Expect(*config.Name).To(Equal(caConfigName))
+
+			//Create DNS config
+			cis := "cis"
+			dnsConfigName := generateName() + "dns-config"
+
+			cisConfig := secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig{
+				CisCRN:    core.StringPtr(os.Getenv("DNS_CONFIG_CRN")),
+				CisApikey: core.StringPtr(os.Getenv("SECRETS_MANAGER_API_APIKEY")),
+			}
+			_, resp, err = secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementDNSProvidersConst),
+				Name:          &dnsConfigName,
+				Type:          &cis,
+				Config:        &cisConfig,
+			})
+
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
+
+			//Get the DNS config
+			getConfigRes, resp, err = secretsManager.GetConfigElement(&secretsmanagerv1.GetConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.GetConfigOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsConfigElementDNSProvidersConst),
+				ConfigName:    &dnsConfigName,
+			})
+
+			Expect(err).To(BeNil())
+			config = getConfigRes.Resources[0]
+			Expect(config).ToNot(BeNil())
+			Expect(*config.Name).To(Equal(dnsConfigName))
+
+			//Get all configs
+			configRes, resp, err := secretsManager.GetConfig(&secretsmanagerv1.GetConfigOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.GetConfigOptionsSecretTypePublicCertConst),
+			})
+
+			Expect(err).To(BeNil())
+			c := configRes.Resources[0].(*secretsmanagerv1.GetConfigResourcesItem)
+			Expect(c).ToNot(BeNil())
+			Expect(c.CertificateAuthorities).ToNot(BeNil())
+			Expect(c.DNSProviders).ToNot(BeNil())
+
+			//Delete configs
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementDNSProvidersConst),
+				ConfigName:    &dnsConfigName,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+
+			resp, err = secretsManager.DeleteConfigElement(&secretsmanagerv1.DeleteConfigElementOptions{
+				SecretType:    core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst),
+				ConfigElement: core.StringPtr(secretsmanagerv1.DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst),
+				ConfigName:    &caConfigName,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+		})
 	})
 
 })

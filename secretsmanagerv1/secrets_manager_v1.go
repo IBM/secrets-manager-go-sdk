@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.34.0-e2a502a2-20210616-185634
+ * IBM OpenAPI SDK Code Generator Version: 3.38.1-1037b405-20210908-184149
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -39,7 +39,7 @@ import (
 // in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated instance of Secrets
 // Manager, built on open source HashiCorp Vault.
 //
-// Version: 1.0.0
+// API Version: 1.0.0
 // See: https://cloud.ibm.com/docs/secrets-manager
 type SecretsManagerV1 struct {
 	Service *core.BaseService
@@ -162,265 +162,6 @@ func (secretsManager *SecretsManagerV1) EnableRetries(maxRetries int, maxRetryIn
 // DisableRetries disables automatic retries for requests invoked for this service instance.
 func (secretsManager *SecretsManagerV1) DisableRetries() {
 	secretsManager.Service.DisableRetries()
-}
-
-// PutConfig : Configure secrets of a given type
-// Updates the configuration for the given secret type.
-func (secretsManager *SecretsManagerV1) PutConfig(putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.PutConfigWithContext(context.Background(), putConfigOptions)
-}
-
-// PutConfigWithContext is an alternate form of the PutConfig method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context, putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(putConfigOptions, "putConfigOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(putConfigOptions, "putConfigOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"secret_type": *putConfigOptions.SecretType,
-	}
-
-	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range putConfigOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "PutConfig")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Content-Type", "application/json")
-
-	_, err = builder.SetBodyContentJSON(putConfigOptions.EngineConfig)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	response, err = secretsManager.Service.Request(request, nil)
-
-	return
-}
-
-// GetConfig : Get the configuration for a secret type
-// Retrieves the configuration that is associated with the given secret type.
-func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
-	return secretsManager.GetConfigWithContext(context.Background(), getConfigOptions)
-}
-
-// GetConfigWithContext is an alternate form of the GetConfig method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context, getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(getConfigOptions, "getConfigOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(getConfigOptions, "getConfigOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"secret_type": *getConfigOptions.SecretType,
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getConfigOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfig")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = secretsManager.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetConfig)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
-// PutPolicy : Set secret policies
-// Creates or updates one or more policies, such as an [automatic rotation
-// policy](http://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-rotate-secrets#auto-rotate-secret), for the
-// specified secret.
-func (secretsManager *SecretsManagerV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.PutPolicyWithContext(context.Background(), putPolicyOptions)
-}
-
-// PutPolicyWithContext is an alternate form of the PutPolicy method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) PutPolicyWithContext(ctx context.Context, putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(putPolicyOptions, "putPolicyOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(putPolicyOptions, "putPolicyOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"secret_type": *putPolicyOptions.SecretType,
-		"id":          *putPolicyOptions.ID,
-	}
-
-	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range putPolicyOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "PutPolicy")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-
-	if putPolicyOptions.Policy != nil {
-		builder.AddQuery("policy", fmt.Sprint(*putPolicyOptions.Policy))
-	}
-
-	body := make(map[string]interface{})
-	if putPolicyOptions.Metadata != nil {
-		body["metadata"] = putPolicyOptions.Metadata
-	}
-	if putPolicyOptions.Resources != nil {
-		body["resources"] = putPolicyOptions.Resources
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = secretsManager.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretPolicies)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
-// GetPolicy : List secret policies
-// Retrieves a list of policies that are associated with a specified secret.
-func (secretsManager *SecretsManagerV1) GetPolicy(getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetPolicyWithContext(context.Background(), getPolicyOptions)
-}
-
-// GetPolicyWithContext is an alternate form of the GetPolicy method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetPolicyWithContext(ctx context.Context, getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(getPolicyOptions, "getPolicyOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(getPolicyOptions, "getPolicyOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"secret_type": *getPolicyOptions.SecretType,
-		"id":          *getPolicyOptions.ID,
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getPolicyOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetPolicy")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	if getPolicyOptions.Policy != nil {
-		builder.AddQuery("policy", fmt.Sprint(*getPolicyOptions.Policy))
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = secretsManager.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretPolicies)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
 }
 
 // CreateSecretGroup : Create a secret group
@@ -1015,7 +756,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 // UpdateSecret : Invoke an action on a secret
 // Invokes an action on a specified secret. This method supports the following actions:
 //
-// - `rotate`: Replace the value of an `arbitrary`, `username_password` or `imported_cert` secret.
+// - `rotate`: Replace the value of an `arbitrary`, `username_password`, `public_cert` or `imported_cert` secret.
 // - `delete_credentials`: Delete the API key that is associated with an `iam_credentials` secret.
 func (secretsManager *SecretsManagerV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretWithContext(context.Background(), updateSecretOptions)
@@ -1403,6 +1144,598 @@ func (secretsManager *SecretsManagerV1) UpdateSecretMetadataWithContext(ctx cont
 	return
 }
 
+// PutPolicy : Set secret policies
+// Creates or updates one or more policies, such as an [automatic rotation
+// policy](http://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-rotate-secrets#auto-rotate-secret), for the
+// specified secret.
+func (secretsManager *SecretsManagerV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
+	return secretsManager.PutPolicyWithContext(context.Background(), putPolicyOptions)
+}
+
+// PutPolicyWithContext is an alternate form of the PutPolicy method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) PutPolicyWithContext(ctx context.Context, putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(putPolicyOptions, "putPolicyOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(putPolicyOptions, "putPolicyOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *putPolicyOptions.SecretType,
+		"id":          *putPolicyOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range putPolicyOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "PutPolicy")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	if putPolicyOptions.Policy != nil {
+		builder.AddQuery("policy", fmt.Sprint(*putPolicyOptions.Policy))
+	}
+
+	body := make(map[string]interface{})
+	if putPolicyOptions.Metadata != nil {
+		body["metadata"] = putPolicyOptions.Metadata
+	}
+	if putPolicyOptions.Resources != nil {
+		body["resources"] = putPolicyOptions.Resources
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretPolicies)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetPolicy : List secret policies
+// Retrieves a list of policies that are associated with a specified secret.
+func (secretsManager *SecretsManagerV1) GetPolicy(getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
+	return secretsManager.GetPolicyWithContext(context.Background(), getPolicyOptions)
+}
+
+// GetPolicyWithContext is an alternate form of the GetPolicy method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetPolicyWithContext(ctx context.Context, getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getPolicyOptions, "getPolicyOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getPolicyOptions, "getPolicyOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *getPolicyOptions.SecretType,
+		"id":          *getPolicyOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/policies`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getPolicyOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetPolicy")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getPolicyOptions.Policy != nil {
+		builder.AddQuery("policy", fmt.Sprint(*getPolicyOptions.Policy))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretPolicies)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// PutConfig : Set the configuration of a secret type
+// Sets the configuration for the specified secret type.
+//
+// Use this method to configure the IAM credentials (`iam_credentials`) engine for your service instance. Looking to set
+// up certificate ordering? To configure the public certificates (`public_cert`) engine, use the [Add a
+// configuration](#create_config_element) method.
+func (secretsManager *SecretsManagerV1) PutConfig(putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.PutConfigWithContext(context.Background(), putConfigOptions)
+}
+
+// PutConfigWithContext is an alternate form of the PutConfig method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context, putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(putConfigOptions, "putConfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(putConfigOptions, "putConfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *putConfigOptions.SecretType,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range putConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "PutConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
+// GetConfig : Get the configuration of a secret type
+// Retrieves the configuration that is associated with the specified secret type.
+func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigWithContext(context.Background(), getConfigOptions)
+}
+
+// GetConfigWithContext is an alternate form of the GetConfig method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context, getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getConfigOptions, "getConfigOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getConfigOptions, "getConfigOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *getConfigOptions.SecretType,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getConfigOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfig")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetConfig)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateConfigElement : Add a configuration
+// Adds a configuration element to the specified secret type.
+//
+// Use this method to define the configurations that are required to enable the  public certificates (`public_cert`)
+// engine. You can add up to 10 certificate authority and DNS provider configurations for your instance.
+func (secretsManager *SecretsManagerV1) CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateConfigElementWithContext(context.Background(), createConfigElementOptions)
+}
+
+// CreateConfigElementWithContext is an alternate form of the CreateConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) CreateConfigElementWithContext(ctx context.Context, createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createConfigElementOptions, "createConfigElementOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createConfigElementOptions, "createConfigElementOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *createConfigElementOptions.SecretType,
+		"config_element": *createConfigElementOptions.ConfigElement,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createConfigElementOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateConfigElement")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createConfigElementOptions.Name != nil {
+		body["name"] = createConfigElementOptions.Name
+	}
+	if createConfigElementOptions.Type != nil {
+		body["type"] = createConfigElementOptions.Type
+	}
+	if createConfigElementOptions.Config != nil {
+		body["config"] = createConfigElementOptions.Config
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSingleConfigElement)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetConfigElements : List configurations
+// Lists the configuration elements that are associated with a specified secret type.
+func (secretsManager *SecretsManagerV1) GetConfigElements(getConfigElementsOptions *GetConfigElementsOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigElementsWithContext(context.Background(), getConfigElementsOptions)
+}
+
+// GetConfigElementsWithContext is an alternate form of the GetConfigElements method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetConfigElementsWithContext(ctx context.Context, getConfigElementsOptions *GetConfigElementsOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getConfigElementsOptions, "getConfigElementsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getConfigElementsOptions, "getConfigElementsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *getConfigElementsOptions.SecretType,
+		"config_element": *getConfigElementsOptions.ConfigElement,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getConfigElementsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfigElements")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetConfigElements)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UpdateConfigElement : Update a configuration
+// Updates a configuration element that is associated with the specified secret type.
+func (secretsManager *SecretsManagerV1) UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.UpdateConfigElementWithContext(context.Background(), updateConfigElementOptions)
+}
+
+// UpdateConfigElementWithContext is an alternate form of the UpdateConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) UpdateConfigElementWithContext(ctx context.Context, updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateConfigElementOptions, "updateConfigElementOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updateConfigElementOptions, "updateConfigElementOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *updateConfigElementOptions.SecretType,
+		"config_element": *updateConfigElementOptions.ConfigElement,
+		"config_name":    *updateConfigElementOptions.ConfigName,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}/{config_name}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateConfigElementOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateConfigElement")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if updateConfigElementOptions.Type != nil {
+		body["type"] = updateConfigElementOptions.Type
+	}
+	if updateConfigElementOptions.Config != nil {
+		body["config"] = updateConfigElementOptions.Config
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSingleConfigElement)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteConfigElement : Remove a configuration
+// Removes a configuration element from the specified secret type.
+func (secretsManager *SecretsManagerV1) DeleteConfigElement(deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteConfigElementWithContext(context.Background(), deleteConfigElementOptions)
+}
+
+// DeleteConfigElementWithContext is an alternate form of the DeleteConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx context.Context, deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteConfigElementOptions, "deleteConfigElementOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(deleteConfigElementOptions, "deleteConfigElementOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *deleteConfigElementOptions.SecretType,
+		"config_element": *deleteConfigElementOptions.ConfigElement,
+		"config_name":    *deleteConfigElementOptions.ConfigName,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}/{config_name}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteConfigElementOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteConfigElement")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
+// GetConfigElement : Get a configuration
+// Retrieves the details of a specific configuration that is associated with a secret type.
+func (secretsManager *SecretsManagerV1) GetConfigElement(getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigElementWithContext(context.Background(), getConfigElementOptions)
+}
+
+// GetConfigElementWithContext is an alternate form of the GetConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.Context, getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getConfigElementOptions, "getConfigElementOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getConfigElementOptions, "getConfigElementOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *getConfigElementOptions.SecretType,
+		"config_element": *getConfigElementOptions.ConfigElement,
+		"config_name":    *getConfigElementOptions.ConfigName,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}/{config_name}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getConfigElementOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfigElement")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSingleConfigElement)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // CertificateSecretData : CertificateSecretData struct
 type CertificateSecretData struct {
 	// The contents of the certificate.
@@ -1446,6 +1779,7 @@ type CollectionMetadata struct {
 // Constants associated with the CollectionMetadata.CollectionType property.
 // The type of resources in the resource array.
 const (
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerConfigJSONConst        = "application/vnd.ibm.secrets-manager.config+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerErrorJSONConst         = "application/vnd.ibm.secrets-manager.error+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretGroupJSONConst   = "application/vnd.ibm.secrets-manager.secret.group+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst        = "application/vnd.ibm.secrets-manager.secret+json"
@@ -1476,6 +1810,246 @@ func UnmarshalCollectionMetadata(m map[string]json.RawMessage, result interface{
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// ConfigElementDef : The configuration to add or update.
+type ConfigElementDef struct {
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	// The configuration to define for the specified secret type.
+	Config ConfigElementDefConfigIntf `json:"config" validate:"required"`
+}
+
+// Constants associated with the ConfigElementDef.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	ConfigElementDefTypeCisConst                   = "cis"
+	ConfigElementDefTypeClassicInfrastructureConst = "classic_infrastructure"
+	ConfigElementDefTypeLetsencryptConst           = "letsencrypt"
+	ConfigElementDefTypeLetsencryptStageConst      = "letsencrypt-stage"
+)
+
+// NewConfigElementDef : Instantiate ConfigElementDef (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config ConfigElementDefConfigIntf) (_model *ConfigElementDef, err error) {
+	_model = &ConfigElementDef{
+		Name:   core.StringPtr(name),
+		Type:   core.StringPtr(typeVar),
+		Config: config,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalConfigElementDef unmarshals an instance of ConfigElementDef from the specified map of raw messages.
+func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDef)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalConfigElementDefConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementDefConfig : The configuration to define for the specified secret type.
+// Models which "extend" this model:
+// - ConfigElementDefConfigLetsEncryptConfig
+// - ConfigElementDefConfigCloudInternetServicesConfig
+// - ConfigElementDefConfigClassicInfrastructureConfig
+type ConfigElementDefConfig struct {
+	// The private key that is associated with your ACME account.
+	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
+	CisCRN *string `json:"cis_crn,omitempty"`
+
+	// An IBM Cloud API key that has the capability to list domains in your CIS instance.
+	//
+	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
+	// the Reader service role on Internet Services (`internet-svcs`).
+	//
+	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
+	// recommended that you assign the Reader access role, and then use the
+	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
+	// domains. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	CisApikey *string `json:"cis_apikey,omitempty"`
+
+	// The username that is associated with your classic infrastructure account.
+	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
+
+	// Your classic infrastructure API key.
+	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
+}
+
+func (*ConfigElementDefConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+type ConfigElementDefConfigIntf interface {
+	isaConfigElementDefConfig() bool
+}
+
+// UnmarshalConfigElementDefConfig unmarshals an instance of ConfigElementDefConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfig)
+	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cis_crn", &obj.CisCRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cis_apikey", &obj.CisApikey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementMetadata : Properties that describe a configuration element.
+type ConfigElementMetadata struct {
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+}
+
+// Constants associated with the ConfigElementMetadata.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	ConfigElementMetadataTypeCisConst                   = "cis"
+	ConfigElementMetadataTypeClassicInfrastructureConst = "classic_infrastructure"
+	ConfigElementMetadataTypeLetsencryptConst           = "letsencrypt"
+	ConfigElementMetadataTypeLetsencryptStageConst      = "letsencrypt-stage"
+)
+
+// UnmarshalConfigElementMetadata unmarshals an instance of ConfigElementMetadata from the specified map of raw messages.
+func UnmarshalConfigElementMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementMetadata)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateConfigElementOptions : The CreateConfigElement options.
+type CreateConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The configuration element to define or manage.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	// The configuration to define for the specified secret type.
+	Config ConfigElementDefConfigIntf `json:"config" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the CreateConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	CreateConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the CreateConfigElementOptions.ConfigElement property.
+// The configuration element to define or manage.
+const (
+	CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	CreateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// Constants associated with the CreateConfigElementOptions.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	CreateConfigElementOptionsTypeCisConst                   = "cis"
+	CreateConfigElementOptionsTypeClassicInfrastructureConst = "classic_infrastructure"
+	CreateConfigElementOptionsTypeLetsencryptConst           = "letsencrypt"
+	CreateConfigElementOptionsTypeLetsencryptStageConst      = "letsencrypt-stage"
+)
+
+// NewCreateConfigElementOptions : Instantiate CreateConfigElementOptions
+func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
+	return &CreateConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		Name:          core.StringPtr(name),
+		Type:          core.StringPtr(typeVar),
+		Config:        config,
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *CreateConfigElementOptions) SetSecretType(secretType string) *CreateConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *CreateConfigElementOptions) SetConfigElement(configElement string) *CreateConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetName : Allow user to set Name
+func (_options *CreateConfigElementOptions) SetName(name string) *CreateConfigElementOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
+}
+
+// SetType : Allow user to set Type
+func (_options *CreateConfigElementOptions) SetType(typeVar string) *CreateConfigElementOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
+}
+
+// SetConfig : Allow user to set Config
+func (_options *CreateConfigElementOptions) SetConfig(config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
+	_options.Config = config
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateConfigElementOptions) SetHeaders(param map[string]string) *CreateConfigElementOptions {
+	options.Headers = param
+	return options
 }
 
 // CreateSecret : Properties that describe a secret.
@@ -1515,10 +2089,10 @@ func UnmarshalCreateSecret(m map[string]json.RawMessage, result interface{}) (er
 // CreateSecretGroupOptions : The CreateSecretGroup options.
 type CreateSecretGroupOptions struct {
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretGroupResource `validate:"required"`
+	Resources []SecretGroupResource `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1553,13 +2127,13 @@ func (options *CreateSecretGroupOptions) SetHeaders(param map[string]string) *Cr
 // CreateSecretOptions : The CreateSecret options.
 type CreateSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretResourceIntf `validate:"required"`
+	Resources []SecretResourceIntf `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1571,6 +2145,7 @@ const (
 	CreateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	CreateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	CreateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	CreateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	CreateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -1607,10 +2182,71 @@ func (options *CreateSecretOptions) SetHeaders(param map[string]string) *CreateS
 	return options
 }
 
+// DeleteConfigElementOptions : The DeleteConfigElement options.
+type DeleteConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The configuration element to define or manage.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// The name of your configuration.
+	ConfigName *string `json:"-" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the DeleteConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	DeleteConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the DeleteConfigElementOptions.ConfigElement property.
+// The configuration element to define or manage.
+const (
+	DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	DeleteConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// NewDeleteConfigElementOptions : Instantiate DeleteConfigElementOptions
+func (*SecretsManagerV1) NewDeleteConfigElementOptions(secretType string, configElement string, configName string) *DeleteConfigElementOptions {
+	return &DeleteConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		ConfigName:    core.StringPtr(configName),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *DeleteConfigElementOptions) SetSecretType(secretType string) *DeleteConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *DeleteConfigElementOptions) SetConfigElement(configElement string) *DeleteConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetConfigName : Allow user to set ConfigName
+func (_options *DeleteConfigElementOptions) SetConfigName(configName string) *DeleteConfigElementOptions {
+	_options.ConfigName = core.StringPtr(configName)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *DeleteConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteSecretGroupOptions : The DeleteSecretGroup options.
 type DeleteSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1638,10 +2274,10 @@ func (options *DeleteSecretGroupOptions) SetHeaders(param map[string]string) *De
 // DeleteSecretOptions : The DeleteSecret options.
 type DeleteSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1653,6 +2289,7 @@ const (
 	DeleteSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	DeleteSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	DeleteSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	DeleteSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	DeleteSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -1682,51 +2319,13 @@ func (options *DeleteSecretOptions) SetHeaders(param map[string]string) *DeleteS
 	return options
 }
 
-// EngineConfig : EngineConfig struct
-// Models which "extend" this model:
-// - IamCredentialsSecretEngineRootConfig
-type EngineConfig struct {
-	// An IBM Cloud API key that has the capability to create and manage service IDs.
-	//
-	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
-	// the IAM Identity Service. For more information, see [Configuring the IAM secrets
-	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials#configure-iam-secrets-engine-api).
-	APIKey *string `json:"api_key,omitempty"`
-
-	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
-	APIKeyHash *string `json:"api_key_hash,omitempty"`
-}
-
-func (*EngineConfig) isaEngineConfig() bool {
-	return true
-}
-
-type EngineConfigIntf interface {
-	isaEngineConfig() bool
-}
-
-// UnmarshalEngineConfig unmarshals an instance of EngineConfig from the specified map of raw messages.
-func UnmarshalEngineConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(EngineConfig)
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// GetConfig : Configuration that is used to generate IAM credentials.
+// GetConfig : Configuration for the specified secret type.
 type GetConfig struct {
 	// The metadata that describes the resource array.
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []IamCredentialsSecretEngineRootConfig `json:"resources" validate:"required"`
+	Resources []GetConfigResourcesItemIntf `json:"resources" validate:"required"`
 }
 
 // UnmarshalGetConfig unmarshals an instance of GetConfig from the specified map of raw messages.
@@ -1736,7 +2335,176 @@ func UnmarshalGetConfig(m map[string]json.RawMessage, result interface{}) (err e
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalIamCredentialsSecretEngineRootConfig)
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalGetConfigResourcesItem)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetConfigElementOptions : The GetConfigElement options.
+type GetConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The configuration element to define or manage.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// The name of your configuration.
+	ConfigName *string `json:"-" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the GetConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	GetConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the GetConfigElementOptions.ConfigElement property.
+// The configuration element to define or manage.
+const (
+	GetConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	GetConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// NewGetConfigElementOptions : Instantiate GetConfigElementOptions
+func (*SecretsManagerV1) NewGetConfigElementOptions(secretType string, configElement string, configName string) *GetConfigElementOptions {
+	return &GetConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		ConfigName:    core.StringPtr(configName),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *GetConfigElementOptions) SetSecretType(secretType string) *GetConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *GetConfigElementOptions) SetConfigElement(configElement string) *GetConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetConfigName : Allow user to set ConfigName
+func (_options *GetConfigElementOptions) SetConfigName(configName string) *GetConfigElementOptions {
+	_options.ConfigName = core.StringPtr(configName)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetConfigElementOptions) SetHeaders(param map[string]string) *GetConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
+// GetConfigElements : Properties that describe a list of configurations.
+type GetConfigElements struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []GetConfigElementsResourcesItemIntf `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetConfigElements unmarshals an instance of GetConfigElements from the specified map of raw messages.
+func UnmarshalGetConfigElements(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetConfigElements)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalGetConfigElementsResourcesItem)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetConfigElementsOptions : The GetConfigElements options.
+type GetConfigElementsOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The configuration element to define or manage.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the GetConfigElementsOptions.SecretType property.
+// The secret type.
+const (
+	GetConfigElementsOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the GetConfigElementsOptions.ConfigElement property.
+// The configuration element to define or manage.
+const (
+	GetConfigElementsOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	GetConfigElementsOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// NewGetConfigElementsOptions : Instantiate GetConfigElementsOptions
+func (*SecretsManagerV1) NewGetConfigElementsOptions(secretType string, configElement string) *GetConfigElementsOptions {
+	return &GetConfigElementsOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *GetConfigElementsOptions) SetSecretType(secretType string) *GetConfigElementsOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *GetConfigElementsOptions) SetConfigElement(configElement string) *GetConfigElementsOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetConfigElementsOptions) SetHeaders(param map[string]string) *GetConfigElementsOptions {
+	options.Headers = param
+	return options
+}
+
+// GetConfigElementsResourcesItem : GetConfigElementsResourcesItem struct
+// Models which "extend" this model:
+// - GetConfigElementsResourcesItemCertificateAuthoritiesConfig
+// - GetConfigElementsResourcesItemDNSProvidersConfig
+type GetConfigElementsResourcesItem struct {
+	CertificateAuthorities []ConfigElementMetadata `json:"certificate_authorities,omitempty"`
+
+	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
+}
+
+func (*GetConfigElementsResourcesItem) isaGetConfigElementsResourcesItem() bool {
+	return true
+}
+
+type GetConfigElementsResourcesItemIntf interface {
+	isaGetConfigElementsResourcesItem() bool
+}
+
+// UnmarshalGetConfigElementsResourcesItem unmarshals an instance of GetConfigElementsResourcesItem from the specified map of raw messages.
+func UnmarshalGetConfigElementsResourcesItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetConfigElementsResourcesItem)
+	err = core.UnmarshalModel(m, "certificate_authorities", &obj.CertificateAuthorities, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "dns_providers", &obj.DNSProviders, UnmarshalConfigElementMetadata)
 	if err != nil {
 		return
 	}
@@ -1747,7 +2515,7 @@ func UnmarshalGetConfig(m map[string]json.RawMessage, result interface{}) (err e
 // GetConfigOptions : The GetConfig options.
 type GetConfigOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1757,6 +2525,7 @@ type GetConfigOptions struct {
 // The secret type.
 const (
 	GetConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
+	GetConfigOptionsSecretTypePublicCertConst     = "public_cert"
 )
 
 // NewGetConfigOptions : Instantiate GetConfigOptions
@@ -1778,16 +2547,69 @@ func (options *GetConfigOptions) SetHeaders(param map[string]string) *GetConfigO
 	return options
 }
 
+// GetConfigResourcesItem : GetConfigResourcesItem struct
+// Models which "extend" this model:
+// - PublicCertSecretEngineRootConfig
+// - IamCredentialsSecretEngineRootConfig
+type GetConfigResourcesItem struct {
+	// The certificate authority configurations that are associated with your instance.
+	CertificateAuthorities []ConfigElementMetadata `json:"certificate_authorities,omitempty"`
+
+	// The DNS provider configurations that are associated with your instance.
+	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
+
+	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	//
+	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
+	// the IAM Identity Service. For more information, see [Configuring the IAM secrets
+	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials#configure-iam-secrets-engine-api).
+	APIKey *string `json:"api_key,omitempty"`
+
+	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
+	APIKeyHash *string `json:"api_key_hash,omitempty"`
+}
+
+func (*GetConfigResourcesItem) isaGetConfigResourcesItem() bool {
+	return true
+}
+
+type GetConfigResourcesItemIntf interface {
+	isaGetConfigResourcesItem() bool
+}
+
+// UnmarshalGetConfigResourcesItem unmarshals an instance of GetConfigResourcesItem from the specified map of raw messages.
+func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetConfigResourcesItem)
+	err = core.UnmarshalModel(m, "certificate_authorities", &obj.CertificateAuthorities, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "dns_providers", &obj.DNSProviders, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // GetPolicyOptions : The GetPolicy options.
 type GetPolicyOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The type of policy that is associated with the specified secret.
-	Policy *string
+	Policy *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1796,6 +2618,7 @@ type GetPolicyOptions struct {
 // Constants associated with the GetPolicyOptions.SecretType property.
 // The secret type.
 const (
+	GetPolicyOptionsSecretTypePublicCertConst       = "public_cert"
 	GetPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -1864,7 +2687,7 @@ func UnmarshalGetSecret(m map[string]json.RawMessage, result interface{}) (err e
 // GetSecretGroupOptions : The GetSecretGroup options.
 type GetSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1892,10 +2715,10 @@ func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSe
 // GetSecretMetadataOptions : The GetSecretMetadata options.
 type GetSecretMetadataOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1907,6 +2730,7 @@ const (
 	GetSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -1939,10 +2763,10 @@ func (options *GetSecretMetadataOptions) SetHeaders(param map[string]string) *Ge
 // GetSecretOptions : The GetSecret options.
 type GetSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1954,6 +2778,7 @@ const (
 	GetSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2040,8 +2865,7 @@ type GetSecretPoliciesResourcesItem struct {
 	// The MIME type that represents the policy. Currently, only the default is supported.
 	Type *string `json:"type" validate:"required"`
 
-	// The secret rotation time interval.
-	Rotation *SecretPolicyRotationRotation `json:"rotation" validate:"required"`
+	Rotation SecretPolicyRotationRotationIntf `json:"rotation" validate:"required"`
 }
 
 // Constants associated with the GetSecretPoliciesResourcesItem.Type property.
@@ -2112,8 +2936,7 @@ type GetSecretPolicyRotationResourcesItem struct {
 	// The MIME type that represents the policy. Currently, only the default is supported.
 	Type *string `json:"type" validate:"required"`
 
-	// The secret rotation time interval.
-	Rotation *SecretPolicyRotationRotation `json:"rotation" validate:"required"`
+	Rotation SecretPolicyRotationRotationIntf `json:"rotation" validate:"required"`
 }
 
 // Constants associated with the GetSecretPolicyRotationResourcesItem.Type property.
@@ -2212,17 +3035,17 @@ func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result inte
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
 	// The secret type. Supported options include: imported_cert.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
 	// version.
 	//
 	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
 	// the response details.
-	VersionID *string `validate:"required,ne="`
+	VersionID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2232,6 +3055,7 @@ type GetSecretVersionMetadataOptions struct {
 // The secret type. Supported options include: imported_cert.
 const (
 	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst = "imported_cert"
+	GetSecretVersionMetadataOptionsSecretTypePublicCertConst   = "public_cert"
 )
 
 // NewGetSecretVersionMetadataOptions : Instantiate GetSecretVersionMetadataOptions
@@ -2270,17 +3094,17 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
 	// The secret type. Supported options include: imported_cert.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
 	// version.
 	//
 	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
 	// the response details.
-	VersionID *string `validate:"required,ne="`
+	VersionID *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2290,6 +3114,7 @@ type GetSecretVersionOptions struct {
 // The secret type. Supported options include: imported_cert.
 const (
 	GetSecretVersionOptionsSecretTypeImportedCertConst = "imported_cert"
+	GetSecretVersionOptionsSecretTypePublicCertConst   = "public_cert"
 )
 
 // NewGetSecretVersionOptions : Instantiate GetSecretVersionOptions
@@ -2325,6 +3150,107 @@ func (options *GetSecretVersionOptions) SetHeaders(param map[string]string) *Get
 	return options
 }
 
+// GetSingleConfigElement : Properties that describe a configuration.
+type GetSingleConfigElement struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []ConfigElementDef `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetSingleConfigElement unmarshals an instance of GetSingleConfigElement from the specified map of raw messages.
+func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetSingleConfigElement)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalConfigElementDef)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IssuanceInfo : Issuance information that is associated with your certificate.
+type IssuanceInfo struct {
+	// The date the certificate was ordered. The date format follows RFC 3339.
+	OrderedOn *strfmt.DateTime `json:"ordered_on,omitempty"`
+
+	// An code that identifies an issuance error.
+	//
+	// This field, along with `error_message`, is returned when Secrets Manager successfully processes your request, but a
+	// certificate is unable to be issued by the certificate authority.
+	ErrorCode *string `json:"error_code,omitempty"`
+
+	// A human-readable message that provides details about the issuance error.
+	ErrorMessage *string `json:"error_message,omitempty"`
+
+	// Indicates whether the issued certificate is bundled with intermediate certificates.
+	BundleCerts *bool `json:"bundle_certs,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// Indicates whether the issued certificate is configured with an automatic rotation policy.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+
+	// The name that was assigned to the certificate authority configuration.
+	Ca *string `json:"ca,omitempty"`
+
+	// The name that was assigned to the DNS provider configuration.
+	DNS *string `json:"dns,omitempty"`
+}
+
+// UnmarshalIssuanceInfo unmarshals an instance of IssuanceInfo from the specified map of raw messages.
+func UnmarshalIssuanceInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IssuanceInfo)
+	err = core.UnmarshalPrimitive(m, "ordered_on", &obj.OrderedOn)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "error_code", &obj.ErrorCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "error_message", &obj.ErrorMessage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "dns", &obj.DNS)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ListAllSecretsOptions : The ListAllSecrets options.
 type ListAllSecretsOptions struct {
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
@@ -2332,27 +3258,27 @@ type ListAllSecretsOptions struct {
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
 	// `../secrets/{secret-type}?limit=5`.
-	Limit *int64
+	Limit *int64 `json:"-"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
 	// `../secrets/{secret-type}?offset=25&limit=25`.
-	Offset *int64
+	Offset *int64 `json:"-"`
 
 	// Filter secrets that contain the specified string. The fields that are searched include: id, name, description,
 	// labels, secret_type.
 	//
 	// **Usage:** If you want to list only the secrets that contain the string "text", use
 	// `../secrets/{secret-type}?search=text`.
-	Search *string
+	Search *string `json:"-"`
 
 	// Sort a list of secrets by the specified field.
 	//
 	// **Usage:** To sort a list of secrets by their creation date, use
 	// `../secrets/{secret-type}?sort_by=creation_date`.
-	SortBy *string
+	SortBy *string `json:"-"`
 
 	// Filter secrets by groups.
 	//
@@ -2361,7 +3287,7 @@ type ListAllSecretsOptions struct {
 	//
 	// **Usage:** To retrieve a list of secrets that are associated with an existing secret group or the default group, use
 	// `../secrets?groups={secret_group_ID},default`.
-	Groups []string
+	Groups []string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2466,21 +3392,21 @@ func UnmarshalListSecrets(m map[string]json.RawMessage, result interface{}) (err
 // ListSecretsOptions : The ListSecrets options.
 type ListSecretsOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
 	// set of items, use `limit` with `offset` to page through your available resources.
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
 	// `../secrets/{secret-type}?limit=5`.
-	Limit *int64
+	Limit *int64 `json:"-"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
 	// `../secrets/{secret-type}?offset=25&limit=25`.
-	Offset *int64
+	Offset *int64 `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2492,6 +3418,7 @@ const (
 	ListSecretsOptionsSecretTypeArbitraryConst        = "arbitrary"
 	ListSecretsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	ListSecretsOptionsSecretTypeImportedCertConst     = "imported_cert"
+	ListSecretsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2529,10 +3456,7 @@ func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecr
 // PutConfigOptions : The PutConfig options.
 type PutConfigOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
-
-	// Properties to update for a secrets engine.
-	EngineConfig EngineConfigIntf `validate:"required"`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2542,25 +3466,19 @@ type PutConfigOptions struct {
 // The secret type.
 const (
 	PutConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
+	PutConfigOptionsSecretTypePublicCertConst     = "public_cert"
 )
 
 // NewPutConfigOptions : Instantiate PutConfigOptions
-func (*SecretsManagerV1) NewPutConfigOptions(secretType string, engineConfig EngineConfigIntf) *PutConfigOptions {
+func (*SecretsManagerV1) NewPutConfigOptions(secretType string) *PutConfigOptions {
 	return &PutConfigOptions{
-		SecretType:   core.StringPtr(secretType),
-		EngineConfig: engineConfig,
+		SecretType: core.StringPtr(secretType),
 	}
 }
 
 // SetSecretType : Allow user to set SecretType
 func (_options *PutConfigOptions) SetSecretType(secretType string) *PutConfigOptions {
 	_options.SecretType = core.StringPtr(secretType)
-	return _options
-}
-
-// SetEngineConfig : Allow user to set EngineConfig
-func (_options *PutConfigOptions) SetEngineConfig(engineConfig EngineConfigIntf) *PutConfigOptions {
-	_options.EngineConfig = engineConfig
 	return _options
 }
 
@@ -2573,19 +3491,19 @@ func (options *PutConfigOptions) SetHeaders(param map[string]string) *PutConfigO
 // PutPolicyOptions : The PutPolicy options.
 type PutPolicyOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretPolicyRotation `validate:"required"`
+	Resources []SecretPolicyRotation `json:"resources" validate:"required"`
 
 	// The type of policy that is associated with the specified secret.
-	Policy *string
+	Policy *string `json:"-"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2594,6 +3512,7 @@ type PutPolicyOptions struct {
 // Constants associated with the PutPolicyOptions.SecretType property.
 // The secret type.
 const (
+	PutPolicyOptionsSecretTypePublicCertConst       = "public_cert"
 	PutPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2649,15 +3568,48 @@ func (options *PutPolicyOptions) SetHeaders(param map[string]string) *PutPolicyO
 	return options
 }
 
+// Rotation : Rotation struct
+type Rotation struct {
+	// Determines whether Secrets Manager rotates your certificate automatically.
+	//
+	// If set to `true`, the service reorders your certificate 31 days before it expires. To access the previous  version
+	// of the certifcate, you can use the [Get a version of a secret](#get-secret-version) method.
+	AutoRotate *bool `json:"auto_rotate,omitempty"`
+
+	// Determines whether Secrets Manager rotates the private key for your certificate automatically.
+	//
+	// If set to `true`, the service generates and stores a new private key for your rotated certificate.
+	RotateKeys *bool `json:"rotate_keys,omitempty"`
+}
+
+// UnmarshalRotation unmarshals an instance of Rotation from the specified map of raw messages.
+func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(Rotation)
+	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // SecretAction : SecretAction struct
 // Models which "extend" this model:
 // - RotateArbitrarySecretBody
+// - RotatePublicCertBody
 // - RotateUsernamePasswordSecretBody
 // - RotateCertificateBody
 // - DeleteCredentialsForIamCredentialsSecret
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
 	Payload *string `json:"payload,omitempty"`
+
+	// Determine whether keys should be rotated.
+	RotateKeys *bool `json:"rotate_keys,omitempty"`
 
 	// The new password to assign to a `username_password` secret.
 	Password *string `json:"password,omitempty"`
@@ -2687,6 +3639,10 @@ type SecretActionIntf interface {
 func UnmarshalSecretAction(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SecretAction)
 	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
 	if err != nil {
 		return
 	}
@@ -2814,6 +3770,14 @@ func (o *SecretGroupResource) SetProperty(key string, value interface{}) {
 	o.additionalProperties[key] = value
 }
 
+// SetProperties allows the user to set a map of arbitrary properties on an instance of SecretGroupResource
+func (o *SecretGroupResource) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
 // GetProperty allows the user to retrieve an arbitrary property from an instance of SecretGroupResource
 func (o *SecretGroupResource) GetProperty(key string) interface{} {
 	return o.additionalProperties[key]
@@ -2906,6 +3870,7 @@ func UnmarshalSecretGroupResource(m map[string]json.RawMessage, result interface
 // - UsernamePasswordSecretMetadata
 // - IamCredentialsSecretMetadata
 // - CertificateSecretMetadata
+// - PublicCertificateMetadataSecretResource
 type SecretMetadata struct {
 	// The unique ID of the secret.
 	ID *string `json:"id,omitempty"`
@@ -3007,6 +3972,16 @@ type SecretMetadata struct {
 
 	// The alternative names that are defined for the certificate.
 	AltNames []string `json:"alt_names,omitempty"`
+
+	// Determines whether your issued certificate is bundled with intermediate certificates.
+	//
+	// Set to `false` for the certificate file to contain only the issued certificate.
+	BundleCerts *bool `json:"bundle_certs,omitempty"`
+
+	Rotation *Rotation `json:"rotation,omitempty"`
+
+	// Issuance information that is associated with your certificate.
+	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
 }
 
 // Constants associated with the SecretMetadata.SecretType property.
@@ -3015,6 +3990,7 @@ const (
 	SecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3129,6 +4105,18 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalIssuanceInfo)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -3172,8 +4160,7 @@ type SecretPolicyRotation struct {
 	// The MIME type that represents the policy. Currently, only the default is supported.
 	Type *string `json:"type" validate:"required"`
 
-	// The secret rotation time interval.
-	Rotation *SecretPolicyRotationRotation `json:"rotation" validate:"required"`
+	Rotation SecretPolicyRotationRotationIntf `json:"rotation" validate:"required"`
 }
 
 // Constants associated with the SecretPolicyRotation.Type property.
@@ -3183,7 +4170,7 @@ const (
 )
 
 // NewSecretPolicyRotation : Instantiate SecretPolicyRotation (Generic Model Constructor)
-func (*SecretsManagerV1) NewSecretPolicyRotation(typeVar string, rotation *SecretPolicyRotationRotation) (_model *SecretPolicyRotation, err error) {
+func (*SecretsManagerV1) NewSecretPolicyRotation(typeVar string, rotation SecretPolicyRotationRotationIntf) (_model *SecretPolicyRotation, err error) {
 	_model = &SecretPolicyRotation{
 		Type:     core.StringPtr(typeVar),
 		Rotation: rotation,
@@ -3207,13 +4194,23 @@ func UnmarshalSecretPolicyRotation(m map[string]json.RawMessage, result interfac
 	return
 }
 
-// SecretPolicyRotationRotation : The secret rotation time interval.
+// SecretPolicyRotationRotation : SecretPolicyRotationRotation struct
+// Models which "extend" this model:
+// - SecretPolicyRotationRotationPolicyRotation
+// - SecretPolicyRotationRotationPublicCertPolicyRotation
 type SecretPolicyRotationRotation struct {
 	// Specifies the length of the secret rotation time interval.
-	Interval *int64 `json:"interval" validate:"required"`
+	Interval *int64 `json:"interval,omitempty"`
 
 	// Specifies the units for the secret rotation time interval.
-	Unit *string `json:"unit" validate:"required"`
+	Unit *string `json:"unit,omitempty"`
+
+	AutoRotate *bool `json:"auto_rotate,omitempty"`
+
+	RotateKeys *bool `json:"rotate_keys,omitempty"`
+
+	// Warning response.
+	Warning *Warning `json:"warning,omitempty"`
 }
 
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
@@ -3223,14 +4220,12 @@ const (
 	SecretPolicyRotationRotationUnitMonthConst = "month"
 )
 
-// NewSecretPolicyRotationRotation : Instantiate SecretPolicyRotationRotation (Generic Model Constructor)
-func (*SecretsManagerV1) NewSecretPolicyRotationRotation(interval int64, unit string) (_model *SecretPolicyRotationRotation, err error) {
-	_model = &SecretPolicyRotationRotation{
-		Interval: core.Int64Ptr(interval),
-		Unit:     core.StringPtr(unit),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
+func (*SecretPolicyRotationRotation) isaSecretPolicyRotationRotation() bool {
+	return true
+}
+
+type SecretPolicyRotationRotationIntf interface {
+	isaSecretPolicyRotationRotation() bool
 }
 
 // UnmarshalSecretPolicyRotationRotation unmarshals an instance of SecretPolicyRotationRotation from the specified map of raw messages.
@@ -3244,6 +4239,18 @@ func UnmarshalSecretPolicyRotationRotation(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "warning", &obj.Warning, UnmarshalWarning)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -3254,6 +4261,7 @@ func UnmarshalSecretPolicyRotationRotation(m map[string]json.RawMessage, result 
 // - UsernamePasswordSecretResource
 // - IamCredentialsSecretResource
 // - CertificateSecretResource
+// - PublicCertificateSecretResource
 type SecretResource struct {
 	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
@@ -3406,6 +4414,26 @@ type SecretResource struct {
 
 	// The alternative names that are defined for the certificate.
 	AltNames []string `json:"alt_names,omitempty"`
+
+	// Determines whether your issued certificate is bundled with intermediate certificates.
+	//
+	// Set to `false` for the certificate file to contain only the issued certificate.
+	BundleCerts *bool `json:"bundle_certs,omitempty"`
+
+	// The name of the certificate authority configuration.
+	//
+	// To view a list of your configured authorities, use the [List configurations API](#get-secret-config-element).
+	Ca *string `json:"ca,omitempty"`
+
+	// The name of the DNS provider configuration.
+	//
+	// To view a list of your configured authorities, use the [List configurations API](#get-secret-config-element).
+	DNS *string `json:"dns,omitempty"`
+
+	Rotation *Rotation `json:"rotation,omitempty"`
+
+	// Issuance information that is associated with your certificate.
+	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
 }
 
 // Constants associated with the SecretResource.SecretType property.
@@ -3576,6 +4604,26 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "dns", &obj.DNS)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalIssuanceInfo)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -3601,6 +4649,7 @@ type SecretVersion struct {
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date that the certificate expires. The date format follows RFC 3339.
@@ -3679,6 +4728,7 @@ type SecretVersionMetadata struct {
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date that the certificate expires. The date format follows RFC 3339.
@@ -3730,16 +4780,105 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// UpdateConfigElementOptions : The UpdateConfigElement options.
+type UpdateConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"-" validate:"required,ne="`
+
+	// The configuration element to define or manage.
+	ConfigElement *string `json:"-" validate:"required,ne="`
+
+	// The name of your configuration.
+	ConfigName *string `json:"-" validate:"required,ne="`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	Config interface{} `json:"config" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the UpdateConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	UpdateConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+)
+
+// Constants associated with the UpdateConfigElementOptions.ConfigElement property.
+// The configuration element to define or manage.
+const (
+	UpdateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
+	UpdateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+)
+
+// Constants associated with the UpdateConfigElementOptions.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	UpdateConfigElementOptionsTypeCisConst                   = "cis"
+	UpdateConfigElementOptionsTypeClassicInfrastructureConst = "classic_infrastructure"
+	UpdateConfigElementOptionsTypeLetsencryptConst           = "letsencrypt"
+	UpdateConfigElementOptionsTypeLetsencryptStageConst      = "letsencrypt-stage"
+)
+
+// NewUpdateConfigElementOptions : Instantiate UpdateConfigElementOptions
+func (*SecretsManagerV1) NewUpdateConfigElementOptions(secretType string, configElement string, configName string, typeVar string, config interface{}) *UpdateConfigElementOptions {
+	return &UpdateConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		ConfigName:    core.StringPtr(configName),
+		Type:          core.StringPtr(typeVar),
+		Config:        config,
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *UpdateConfigElementOptions) SetSecretType(secretType string) *UpdateConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *UpdateConfigElementOptions) SetConfigElement(configElement string) *UpdateConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetConfigName : Allow user to set ConfigName
+func (_options *UpdateConfigElementOptions) SetConfigName(configName string) *UpdateConfigElementOptions {
+	_options.ConfigName = core.StringPtr(configName)
+	return _options
+}
+
+// SetType : Allow user to set Type
+func (_options *UpdateConfigElementOptions) SetType(typeVar string) *UpdateConfigElementOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
+}
+
+// SetConfig : Allow user to set Config
+func (_options *UpdateConfigElementOptions) SetConfig(config interface{}) *UpdateConfigElementOptions {
+	_options.Config = config
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateConfigElementOptions) SetHeaders(param map[string]string) *UpdateConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
 // UpdateSecretGroupMetadataOptions : The UpdateSecretGroupMetadata options.
 type UpdateSecretGroupMetadataOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretGroupMetadataUpdatable `validate:"required"`
+	Resources []SecretGroupMetadataUpdatable `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3781,16 +4920,16 @@ func (options *UpdateSecretGroupMetadataOptions) SetHeaders(param map[string]str
 // UpdateSecretMetadataOptions : The UpdateSecretMetadata options.
 type UpdateSecretMetadataOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `validate:"required"`
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretMetadataIntf `validate:"required"`
+	Resources []SecretMetadataIntf `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3802,6 +4941,7 @@ const (
 	UpdateSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	UpdateSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UpdateSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3848,16 +4988,16 @@ func (options *UpdateSecretMetadataOptions) SetHeaders(param map[string]string) 
 // UpdateSecretOptions : The UpdateSecret options.
 type UpdateSecretOptions struct {
 	// The secret type.
-	SecretType *string `validate:"required,ne="`
+	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `validate:"required,ne="`
+	ID *string `json:"-" validate:"required,ne="`
 
 	// The action to perform on the specified secret.
-	Action *string `validate:"required"`
+	Action *string `json:"-" validate:"required"`
 
 	// The properties to update for the secret.
-	SecretAction SecretActionIntf `validate:"required"`
+	SecretAction SecretActionIntf `json:"SecretAction" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3869,6 +5009,7 @@ const (
 	UpdateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	UpdateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	UpdateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UpdateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3936,6 +5077,40 @@ func UnmarshalCertificateValidity(m map[string]json.RawMessage, result interface
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_after", &obj.NotAfter)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// Warning : Warning response.
+type Warning struct {
+	// A warning code identifier.
+	Code *string `json:"code" validate:"required"`
+
+	// A human-readable message that provides details about the warning.
+	Message *string `json:"message" validate:"required"`
+}
+
+// NewWarning : Instantiate Warning (Generic Model Constructor)
+func (*SecretsManagerV1) NewWarning(code string, message string) (_model *Warning, err error) {
+	_model = &Warning{
+		Code:    core.StringPtr(code),
+		Message: core.StringPtr(message),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalWarning unmarshals an instance of Warning from the specified map of raw messages.
+func UnmarshalWarning(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(Warning)
+	err = core.UnmarshalPrimitive(m, "code", &obj.Code)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
 	if err != nil {
 		return
 	}
@@ -4014,6 +5189,7 @@ const (
 	ArbitrarySecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	ArbitrarySecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretMetadataSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -4392,6 +5568,7 @@ const (
 	CertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	CertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -4771,6 +5948,7 @@ type CertificateSecretVersion struct {
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date that the certificate expires. The date format follows RFC 3339.
@@ -4838,6 +6016,7 @@ type CertificateSecretVersionMetadata struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date that the certificate expires. The date format follows RFC 3339.
@@ -4881,6 +6060,123 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 	return
 }
 
+// ConfigElementDefConfigClassicInfrastructureConfig : Properties that describe an IBM Cloud classic infrastructure (SoftLayer) configuration.
+// This model "extends" ConfigElementDefConfig
+type ConfigElementDefConfigClassicInfrastructureConfig struct {
+	// The username that is associated with your classic infrastructure account.
+	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username" validate:"required"`
+
+	// Your classic infrastructure API key.
+	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password" validate:"required"`
+}
+
+// NewConfigElementDefConfigClassicInfrastructureConfig : Instantiate ConfigElementDefConfigClassicInfrastructureConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDefConfigClassicInfrastructureConfig(classicInfrastructureUsername string, classicInfrastructurePassword string) (_model *ConfigElementDefConfigClassicInfrastructureConfig, err error) {
+	_model = &ConfigElementDefConfigClassicInfrastructureConfig{
+		ClassicInfrastructureUsername: core.StringPtr(classicInfrastructureUsername),
+		ClassicInfrastructurePassword: core.StringPtr(classicInfrastructurePassword),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*ConfigElementDefConfigClassicInfrastructureConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalConfigElementDefConfigClassicInfrastructureConfig unmarshals an instance of ConfigElementDefConfigClassicInfrastructureConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfigClassicInfrastructureConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfigClassicInfrastructureConfig)
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementDefConfigCloudInternetServicesConfig : Properties that describe an IBM Cloud Internet Services (CIS) configuration.
+// This model "extends" ConfigElementDefConfig
+type ConfigElementDefConfigCloudInternetServicesConfig struct {
+	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
+	CisCRN *string `json:"cis_crn" validate:"required"`
+
+	// An IBM Cloud API key that has the capability to list domains in your CIS instance.
+	//
+	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
+	// the Reader service role on Internet Services (`internet-svcs`).
+	//
+	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
+	// recommended that you assign the Reader access role, and then use the
+	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
+	// domains. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	CisApikey *string `json:"cis_apikey,omitempty"`
+}
+
+// NewConfigElementDefConfigCloudInternetServicesConfig : Instantiate ConfigElementDefConfigCloudInternetServicesConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDefConfigCloudInternetServicesConfig(cisCRN string) (_model *ConfigElementDefConfigCloudInternetServicesConfig, err error) {
+	_model = &ConfigElementDefConfigCloudInternetServicesConfig{
+		CisCRN: core.StringPtr(cisCRN),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*ConfigElementDefConfigCloudInternetServicesConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalConfigElementDefConfigCloudInternetServicesConfig unmarshals an instance of ConfigElementDefConfigCloudInternetServicesConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfigCloudInternetServicesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfigCloudInternetServicesConfig)
+	err = core.UnmarshalPrimitive(m, "cis_crn", &obj.CisCRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cis_apikey", &obj.CisApikey)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementDefConfigLetsEncryptConfig : Properties that describe a Let's Encrypt configuration.
+// This model "extends" ConfigElementDefConfig
+type ConfigElementDefConfigLetsEncryptConfig struct {
+	// The private key that is associated with your ACME account.
+	PrivateKey *string `json:"private_key" validate:"required"`
+}
+
+// NewConfigElementDefConfigLetsEncryptConfig : Instantiate ConfigElementDefConfigLetsEncryptConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDefConfigLetsEncryptConfig(privateKey string) (_model *ConfigElementDefConfigLetsEncryptConfig, err error) {
+	_model = &ConfigElementDefConfigLetsEncryptConfig{
+		PrivateKey: core.StringPtr(privateKey),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*ConfigElementDefConfigLetsEncryptConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalConfigElementDefConfigLetsEncryptConfig unmarshals an instance of ConfigElementDefConfigLetsEncryptConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfigLetsEncryptConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfigLetsEncryptConfig)
+	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // DeleteCredentialsForIamCredentialsSecret : Delete the credentials that are associated with an `iam_credentials` secret.
 // This model "extends" SecretAction
 type DeleteCredentialsForIamCredentialsSecret struct {
@@ -4905,6 +6201,48 @@ func (*DeleteCredentialsForIamCredentialsSecret) isaSecretAction() bool {
 func UnmarshalDeleteCredentialsForIamCredentialsSecret(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DeleteCredentialsForIamCredentialsSecret)
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetConfigElementsResourcesItemCertificateAuthoritiesConfig : Certificate authorities configuration.
+// This model "extends" GetConfigElementsResourcesItem
+type GetConfigElementsResourcesItemCertificateAuthoritiesConfig struct {
+	CertificateAuthorities []ConfigElementMetadata `json:"certificate_authorities" validate:"required"`
+}
+
+func (*GetConfigElementsResourcesItemCertificateAuthoritiesConfig) isaGetConfigElementsResourcesItem() bool {
+	return true
+}
+
+// UnmarshalGetConfigElementsResourcesItemCertificateAuthoritiesConfig unmarshals an instance of GetConfigElementsResourcesItemCertificateAuthoritiesConfig from the specified map of raw messages.
+func UnmarshalGetConfigElementsResourcesItemCertificateAuthoritiesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetConfigElementsResourcesItemCertificateAuthoritiesConfig)
+	err = core.UnmarshalModel(m, "certificate_authorities", &obj.CertificateAuthorities, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetConfigElementsResourcesItemDNSProvidersConfig : DNS providers configuration.
+// This model "extends" GetConfigElementsResourcesItem
+type GetConfigElementsResourcesItemDNSProvidersConfig struct {
+	DNSProviders []ConfigElementMetadata `json:"dns_providers" validate:"required"`
+}
+
+func (*GetConfigElementsResourcesItemDNSProvidersConfig) isaGetConfigElementsResourcesItem() bool {
+	return true
+}
+
+// UnmarshalGetConfigElementsResourcesItemDNSProvidersConfig unmarshals an instance of GetConfigElementsResourcesItemDNSProvidersConfig from the specified map of raw messages.
+func UnmarshalGetConfigElementsResourcesItemDNSProvidersConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetConfigElementsResourcesItemDNSProvidersConfig)
+	err = core.UnmarshalModel(m, "dns_providers", &obj.DNSProviders, UnmarshalConfigElementMetadata)
 	if err != nil {
 		return
 	}
@@ -4941,8 +6279,8 @@ func UnmarshalGetSecretPolicyRotation(m map[string]json.RawMessage, result inter
 	return
 }
 
-// IamCredentialsSecretEngineRootConfig : Configuration that is used to generate IAM credentials.
-// This model "extends" EngineConfig
+// IamCredentialsSecretEngineRootConfig : Configuration for the IAM credentials engine.
+// This model "extends" GetConfigResourcesItem
 type IamCredentialsSecretEngineRootConfig struct {
 	// An IBM Cloud API key that has the capability to create and manage service IDs.
 	//
@@ -4964,7 +6302,7 @@ func (*SecretsManagerV1) NewIamCredentialsSecretEngineRootConfig(apiKey string) 
 	return
 }
 
-func (*IamCredentialsSecretEngineRootConfig) isaEngineConfig() bool {
+func (*IamCredentialsSecretEngineRootConfig) isaGetConfigResourcesItem() bool {
 	return true
 }
 
@@ -5056,6 +6394,7 @@ const (
 	IamCredentialsSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5370,6 +6709,492 @@ func UnmarshalIamCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	return
 }
 
+// PublicCertSecretEngineRootConfig : Configuration for the public certificates engine.
+// This model "extends" GetConfigResourcesItem
+type PublicCertSecretEngineRootConfig struct {
+	// The certificate authority configurations that are associated with your instance.
+	CertificateAuthorities []ConfigElementMetadata `json:"certificate_authorities,omitempty"`
+
+	// The DNS provider configurations that are associated with your instance.
+	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
+}
+
+func (*PublicCertSecretEngineRootConfig) isaGetConfigResourcesItem() bool {
+	return true
+}
+
+// UnmarshalPublicCertSecretEngineRootConfig unmarshals an instance of PublicCertSecretEngineRootConfig from the specified map of raw messages.
+func UnmarshalPublicCertSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PublicCertSecretEngineRootConfig)
+	err = core.UnmarshalModel(m, "certificate_authorities", &obj.CertificateAuthorities, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "dns_providers", &obj.DNSProviders, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PublicCertificateMetadataSecretResource : Metadata properties that describe a public certificate secret.
+// This model "extends" SecretMetadata
+type PublicCertificateMetadataSecretResource struct {
+	// The unique ID of the secret.
+	ID *string `json:"id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// A human-readable alias to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an alias for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret.
+	Description *string `json:"description,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// The Cloud Resource Name (CRN) that uniquely identifies the resource.
+	CRN *string `json:"crn,omitempty"`
+
+	// The date the secret was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// The number of versions the secret has.
+	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The distinguished name that identifies the entity that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// Determines whether your issued certificate is bundled with intermediate certificates.
+	//
+	// Set to `false` for the certificate file to contain only the issued certificate.
+	BundleCerts *bool `json:"bundle_certs,omitempty"`
+
+	// The identifier for the cryptographic algorthim to be used by the issuing certificate authority to sign the
+	// ceritificate.
+	Algorithm *string `json:"algorithm,omitempty"`
+
+	// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
+	// certificate.
+	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
+
+	// The alternative names that are defined for the certificate.
+	AltNames []string `json:"alt_names,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// Indicates whether the certificate was ordered with an associated intermediate certificate.
+	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
+
+	// Indicates whether the certificate was ordered with an associated private key.
+	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
+
+	Rotation *Rotation `json:"rotation,omitempty"`
+
+	// Issuance information that is associated with your certificate.
+	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
+}
+
+// Constants associated with the PublicCertificateMetadataSecretResource.SecretType property.
+// The secret type.
+const (
+	PublicCertificateMetadataSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	PublicCertificateMetadataSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	PublicCertificateMetadataSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateMetadataSecretResourceSecretTypePublicCertConst       = "public_cert"
+	PublicCertificateMetadataSecretResourceSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the PublicCertificateMetadataSecretResource.KeyAlgorithm property.
+// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
+// certificate.
+const (
+	PublicCertificateMetadataSecretResourceKeyAlgorithmEc256Const   = "EC256"
+	PublicCertificateMetadataSecretResourceKeyAlgorithmEc384Const   = "EC384"
+	PublicCertificateMetadataSecretResourceKeyAlgorithmRsa2048Const = "RSA2048"
+	PublicCertificateMetadataSecretResourceKeyAlgorithmRsa4096Const = "RSA4096"
+)
+
+// NewPublicCertificateMetadataSecretResource : Instantiate PublicCertificateMetadataSecretResource (Generic Model Constructor)
+func (*SecretsManagerV1) NewPublicCertificateMetadataSecretResource(name string) (_model *PublicCertificateMetadataSecretResource, err error) {
+	_model = &PublicCertificateMetadataSecretResource{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*PublicCertificateMetadataSecretResource) isaSecretMetadata() bool {
+	return true
+}
+
+// UnmarshalPublicCertificateMetadataSecretResource unmarshals an instance of PublicCertificateMetadataSecretResource from the specified map of raw messages.
+func UnmarshalPublicCertificateMetadataSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PublicCertificateMetadataSecretResource)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "algorithm", &obj.Algorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_included", &obj.IntermediateIncluded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_included", &obj.PrivateKeyIncluded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalIssuanceInfo)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PublicCertificateSecretResource : Properties that describe a secret.
+// This model "extends" SecretResource
+type PublicCertificateSecretResource struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// A human-readable alias to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an alias for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret.
+	Description *string `json:"description,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
+	CRN *string `json:"crn,omitempty"`
+
+	// The date the secret was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Updates when the actual secret is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// The number of versions that are associated with a secret.
+	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
+	// secret version metadata](#get-secret-version-metadata).
+	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The distinguished name that identifies the entity that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// Determines whether your issued certificate is bundled with intermediate certificates.
+	//
+	// Set to `false` for the certificate file to contain only the issued certificate.
+	BundleCerts *bool `json:"bundle_certs,omitempty"`
+
+	// The name of the certificate authority configuration.
+	//
+	// To view a list of your configured authorities, use the [List configurations API](#get-secret-config-element).
+	Ca *string `json:"ca,omitempty"`
+
+	// The name of the DNS provider configuration.
+	//
+	// To view a list of your configured authorities, use the [List configurations API](#get-secret-config-element).
+	DNS *string `json:"dns,omitempty"`
+
+	// The identifier for the cryptographic algorthim to be used by the issuing certificate authority to sign the
+	// ceritificate.
+	Algorithm *string `json:"algorithm,omitempty"`
+
+	// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
+	// certificate.
+	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
+
+	// The alternative names that are defined for the certificate.
+	AltNames []string `json:"alt_names,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	Rotation *Rotation `json:"rotation,omitempty"`
+
+	// Issuance information that is associated with your certificate.
+	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
+
+	SecretData interface{} `json:"secret_data,omitempty"`
+}
+
+// Constants associated with the PublicCertificateSecretResource.SecretType property.
+// The secret type.
+const (
+	PublicCertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	PublicCertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	PublicCertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the PublicCertificateSecretResource.KeyAlgorithm property.
+// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
+// certificate.
+const (
+	PublicCertificateSecretResourceKeyAlgorithmEc256Const   = "EC256"
+	PublicCertificateSecretResourceKeyAlgorithmEc384Const   = "EC384"
+	PublicCertificateSecretResourceKeyAlgorithmRsa2048Const = "RSA2048"
+	PublicCertificateSecretResourceKeyAlgorithmRsa4096Const = "RSA4096"
+)
+
+// NewPublicCertificateSecretResource : Instantiate PublicCertificateSecretResource (Generic Model Constructor)
+func (*SecretsManagerV1) NewPublicCertificateSecretResource(name string) (_model *PublicCertificateSecretResource, err error) {
+	_model = &PublicCertificateSecretResource{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*PublicCertificateSecretResource) isaSecretResource() bool {
+	return true
+}
+
+// UnmarshalPublicCertificateSecretResource unmarshals an instance of PublicCertificateSecretResource from the specified map of raw messages.
+func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PublicCertificateSecretResource)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "dns", &obj.DNS)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "algorithm", &obj.Algorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalIssuanceInfo)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // RotateArbitrarySecretBody : The request body of a `rotate` action.
 // This model "extends" SecretAction
 type RotateArbitrarySecretBody struct {
@@ -5446,6 +7271,37 @@ func UnmarshalRotateCertificateBody(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// RotatePublicCertBody : The request body of a `rotate` action.
+// This model "extends" SecretAction
+type RotatePublicCertBody struct {
+	// Determine whether keys should be rotated.
+	RotateKeys *bool `json:"rotate_keys" validate:"required"`
+}
+
+// NewRotatePublicCertBody : Instantiate RotatePublicCertBody (Generic Model Constructor)
+func (*SecretsManagerV1) NewRotatePublicCertBody(rotateKeys bool) (_model *RotatePublicCertBody, err error) {
+	_model = &RotatePublicCertBody{
+		RotateKeys: core.BoolPtr(rotateKeys),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*RotatePublicCertBody) isaSecretAction() bool {
+	return true
+}
+
+// UnmarshalRotatePublicCertBody unmarshals an instance of RotatePublicCertBody from the specified map of raw messages.
+func UnmarshalRotatePublicCertBody(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RotatePublicCertBody)
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // RotateUsernamePasswordSecretBody : The request body of a `rotate` action.
 // This model "extends" SecretAction
 type RotateUsernamePasswordSecretBody struct {
@@ -5470,6 +7326,96 @@ func (*RotateUsernamePasswordSecretBody) isaSecretAction() bool {
 func UnmarshalRotateUsernamePasswordSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RotateUsernamePasswordSecretBody)
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretPolicyRotationRotationPolicyRotation : The secret rotation time interval.
+// This model "extends" SecretPolicyRotationRotation
+type SecretPolicyRotationRotationPolicyRotation struct {
+	// Specifies the length of the secret rotation time interval.
+	Interval *int64 `json:"interval" validate:"required"`
+
+	// Specifies the units for the secret rotation time interval.
+	Unit *string `json:"unit" validate:"required"`
+}
+
+// Constants associated with the SecretPolicyRotationRotationPolicyRotation.Unit property.
+// Specifies the units for the secret rotation time interval.
+const (
+	SecretPolicyRotationRotationPolicyRotationUnitDayConst   = "day"
+	SecretPolicyRotationRotationPolicyRotationUnitMonthConst = "month"
+)
+
+// NewSecretPolicyRotationRotationPolicyRotation : Instantiate SecretPolicyRotationRotationPolicyRotation (Generic Model Constructor)
+func (*SecretsManagerV1) NewSecretPolicyRotationRotationPolicyRotation(interval int64, unit string) (_model *SecretPolicyRotationRotationPolicyRotation, err error) {
+	_model = &SecretPolicyRotationRotationPolicyRotation{
+		Interval: core.Int64Ptr(interval),
+		Unit:     core.StringPtr(unit),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*SecretPolicyRotationRotationPolicyRotation) isaSecretPolicyRotationRotation() bool {
+	return true
+}
+
+// UnmarshalSecretPolicyRotationRotationPolicyRotation unmarshals an instance of SecretPolicyRotationRotationPolicyRotation from the specified map of raw messages.
+func UnmarshalSecretPolicyRotationRotationPolicyRotation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretPolicyRotationRotationPolicyRotation)
+	err = core.UnmarshalPrimitive(m, "interval", &obj.Interval)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "unit", &obj.Unit)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretPolicyRotationRotationPublicCertPolicyRotation : The `public_cert` secret rotation policy.
+// This model "extends" SecretPolicyRotationRotation
+type SecretPolicyRotationRotationPublicCertPolicyRotation struct {
+	AutoRotate *bool `json:"auto_rotate" validate:"required"`
+
+	RotateKeys *bool `json:"rotate_keys" validate:"required"`
+
+	// Warning response.
+	Warning *Warning `json:"warning,omitempty"`
+}
+
+// NewSecretPolicyRotationRotationPublicCertPolicyRotation : Instantiate SecretPolicyRotationRotationPublicCertPolicyRotation (Generic Model Constructor)
+func (*SecretsManagerV1) NewSecretPolicyRotationRotationPublicCertPolicyRotation(autoRotate bool, rotateKeys bool) (_model *SecretPolicyRotationRotationPublicCertPolicyRotation, err error) {
+	_model = &SecretPolicyRotationRotationPublicCertPolicyRotation{
+		AutoRotate: core.BoolPtr(autoRotate),
+		RotateKeys: core.BoolPtr(rotateKeys),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*SecretPolicyRotationRotationPublicCertPolicyRotation) isaSecretPolicyRotationRotation() bool {
+	return true
+}
+
+// UnmarshalSecretPolicyRotationRotationPublicCertPolicyRotation unmarshals an instance of SecretPolicyRotationRotationPublicCertPolicyRotation from the specified map of raw messages.
+func UnmarshalSecretPolicyRotationRotationPublicCertPolicyRotation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretPolicyRotationRotationPublicCertPolicyRotation)
+	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "warning", &obj.Warning, UnmarshalWarning)
 	if err != nil {
 		return
 	}
@@ -5548,6 +7494,7 @@ const (
 	UsernamePasswordSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
