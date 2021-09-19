@@ -325,7 +325,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
 			cisConfig := secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig{
 				CisCRN:    core.StringPtr(os.Getenv("DNS_CONFIG_CRN")),
-				CisApikey: core.StringPtr(os.Getenv("SECRETS_MANAGER_API_APIKEY")),
+				CisApikey: core.StringPtr(os.Getenv("DNS_CONFIG_API_KEY")),
 			}
 			_, resp, err = secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
@@ -450,7 +450,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
 			cisConfig := secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig{
 				CisCRN:    core.StringPtr(os.Getenv("DNS_CONFIG_CRN")),
-				CisApikey: core.StringPtr(os.Getenv("SECRETS_MANAGER_API_APIKEY")),
+				CisApikey: core.StringPtr(os.Getenv("DNS_CONFIG_API_KEY")),
 			}
 			_, resp, err = secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
 				SecretType:    core.StringPtr(secretsmanagerv1.CreateConfigElementOptionsSecretTypePublicCertConst),
