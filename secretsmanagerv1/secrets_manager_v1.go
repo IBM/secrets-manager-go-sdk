@@ -1332,8 +1332,7 @@ func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context
 	}
 	builder.AddHeader("Content-Type", "application/json")
 
-	body := make(map[string]interface{})
-	_, err = builder.SetBodyContentJSON(body)
+	_, err = builder.SetBodyContentJSON(putConfigOptions.EngineConfig)
 	if err != nil {
 		return
 	}
@@ -1549,6 +1548,68 @@ func (secretsManager *SecretsManagerV1) GetConfigElementsWithContext(ctx context
 	return
 }
 
+// GetConfigElement : Get a configuration
+// Retrieves the details of a specific configuration that is associated with a secret type.
+func (secretsManager *SecretsManagerV1) GetConfigElement(getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	return secretsManager.GetConfigElementWithContext(context.Background(), getConfigElementOptions)
+}
+
+// GetConfigElementWithContext is an alternate form of the GetConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.Context, getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getConfigElementOptions, "getConfigElementOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getConfigElementOptions, "getConfigElementOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *getConfigElementOptions.SecretType,
+		"config_element": *getConfigElementOptions.ConfigElement,
+		"config_name":    *getConfigElementOptions.ConfigName,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}/{config_name}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getConfigElementOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfigElement")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSingleConfigElement)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // UpdateConfigElement : Update a configuration
 // Updates a configuration element that is associated with the specified secret type.
 func (secretsManager *SecretsManagerV1) UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
@@ -1624,8 +1685,8 @@ func (secretsManager *SecretsManagerV1) UpdateConfigElementWithContext(ctx conte
 	return
 }
 
-// DeleteConfigElement : Remove a configuration
-// Removes a configuration element from the specified secret type.
+// DeleteConfigElement : Delete a configuration
+// Deletes a configuration element from the specified secret type.
 func (secretsManager *SecretsManagerV1) DeleteConfigElement(deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.DeleteConfigElementWithContext(context.Background(), deleteConfigElementOptions)
 }
@@ -1670,68 +1731,6 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
-
-	return
-}
-
-// GetConfigElement : Get a configuration
-// Retrieves the details of a specific configuration that is associated with a secret type.
-func (secretsManager *SecretsManagerV1) GetConfigElement(getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	return secretsManager.GetConfigElementWithContext(context.Background(), getConfigElementOptions)
-}
-
-// GetConfigElementWithContext is an alternate form of the GetConfigElement method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.Context, getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(getConfigElementOptions, "getConfigElementOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(getConfigElementOptions, "getConfigElementOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"secret_type":    *getConfigElementOptions.SecretType,
-		"config_element": *getConfigElementOptions.ConfigElement,
-		"config_name":    *getConfigElementOptions.ConfigName,
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}/{config_name}`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getConfigElementOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetConfigElement")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = secretsManager.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSingleConfigElement)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
 
 	return
 }
@@ -1869,7 +1868,12 @@ func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{})
 // - ConfigElementDefConfigCloudInternetServicesConfig
 // - ConfigElementDefConfigClassicInfrastructureConfig
 type ConfigElementDefConfig struct {
-	// The private key that is associated with your ACME account.
+	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
+	//
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to  enable
+	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
@@ -1888,9 +1892,18 @@ type ConfigElementDefConfig struct {
 	CisApikey *string `json:"cis_apikey,omitempty"`
 
 	// The username that is associated with your classic infrastructure account.
+	//
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
+	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
 	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
 
 	// Your classic infrastructure API key.
+	//
+	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
+	// > Users > name > API keys.** For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 }
 
@@ -2319,6 +2332,44 @@ func (options *DeleteSecretOptions) SetHeaders(param map[string]string) *DeleteS
 	return options
 }
 
+// EngineConfig : EngineConfig struct
+// Models which "extend" this model:
+// - CreateIamCredentialsSecretEngineRootConfig
+type EngineConfig struct {
+	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	//
+	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
+	// the IAM Identity Service. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
+	APIKey *string `json:"api_key,omitempty"`
+
+	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
+	APIKeyHash *string `json:"api_key_hash,omitempty"`
+}
+
+func (*EngineConfig) isaEngineConfig() bool {
+	return true
+}
+
+type EngineConfigIntf interface {
+	isaEngineConfig() bool
+}
+
+// UnmarshalEngineConfig unmarshals an instance of EngineConfig from the specified map of raw messages.
+func UnmarshalEngineConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(EngineConfig)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // GetConfig : Configuration for the specified secret type.
 type GetConfig struct {
 	// The metadata that describes the resource array.
@@ -2561,8 +2612,8 @@ type GetConfigResourcesItem struct {
 	// An IBM Cloud API key that has the capability to create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
-	// the IAM Identity Service. For more information, see [Configuring the IAM secrets
-	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials#configure-iam-secrets-engine-api).
+	// the IAM Identity Service. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
 	APIKey *string `json:"api_key,omitempty"`
 
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
@@ -3034,7 +3085,7 @@ func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result inte
 
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
-	// The secret type. Supported options include: imported_cert.
+	// The secret type.
 	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3052,7 +3103,7 @@ type GetSecretVersionMetadataOptions struct {
 }
 
 // Constants associated with the GetSecretVersionMetadataOptions.SecretType property.
-// The secret type. Supported options include: imported_cert.
+// The secret type.
 const (
 	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst = "imported_cert"
 	GetSecretVersionMetadataOptionsSecretTypePublicCertConst   = "public_cert"
@@ -3093,7 +3144,7 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
-	// The secret type. Supported options include: imported_cert.
+	// The secret type.
 	SecretType *string `json:"-" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3111,7 +3162,7 @@ type GetSecretVersionOptions struct {
 }
 
 // Constants associated with the GetSecretVersionOptions.SecretType property.
-// The secret type. Supported options include: imported_cert.
+// The secret type.
 const (
 	GetSecretVersionOptionsSecretTypeImportedCertConst = "imported_cert"
 	GetSecretVersionOptionsSecretTypePublicCertConst   = "public_cert"
@@ -3458,6 +3509,9 @@ type PutConfigOptions struct {
 	// The secret type.
 	SecretType *string `json:"-" validate:"required,ne="`
 
+	// Properties to update for a secrets engine.
+	EngineConfig EngineConfigIntf `json:"EngineConfig" validate:"required"`
+
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
@@ -3470,15 +3524,22 @@ const (
 )
 
 // NewPutConfigOptions : Instantiate PutConfigOptions
-func (*SecretsManagerV1) NewPutConfigOptions(secretType string) *PutConfigOptions {
+func (*SecretsManagerV1) NewPutConfigOptions(secretType string, engineConfig EngineConfigIntf) *PutConfigOptions {
 	return &PutConfigOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:   core.StringPtr(secretType),
+		EngineConfig: engineConfig,
 	}
 }
 
 // SetSecretType : Allow user to set SecretType
 func (_options *PutConfigOptions) SetSecretType(secretType string) *PutConfigOptions {
 	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetEngineConfig : Allow user to set EngineConfig
+func (_options *PutConfigOptions) SetEngineConfig(engineConfig EngineConfigIntf) *PutConfigOptions {
+	_options.EngineConfig = engineConfig
 	return _options
 }
 
@@ -4208,9 +4269,6 @@ type SecretPolicyRotationRotation struct {
 	AutoRotate *bool `json:"auto_rotate,omitempty"`
 
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
-
-	// Warning response.
-	Warning *Warning `json:"warning,omitempty"`
 }
 
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
@@ -4244,10 +4302,6 @@ func UnmarshalSecretPolicyRotationRotation(m map[string]json.RawMessage, result 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "warning", &obj.Warning, UnmarshalWarning)
 	if err != nil {
 		return
 	}
@@ -4355,8 +4409,10 @@ type SecretResource struct {
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
 	// `iam_credentials` secret.
 	//
-	// **Tip:** To find the ID of an access group, go to **Manage > Access (IAM) > Access groups** in the IBM Cloud
-	// console. Select the access group to inspect, and click **Details** to view its ID.
+	// **Tip:** To list the access groups that are available in an account, you can use the [IAM Access Groups
+	// API](https://cloud.ibm.com/apidocs/iam-access-groups#list-access-groups). To find the ID of an access group in the
+	// console, go to **Manage > Access (IAM) > Access groups**. Select the access group to inspect, and click **Details**
+	// to view its ID.
 	AccessGroups []string `json:"access_groups,omitempty"`
 
 	// The API key that is generated for this secret.
@@ -5077,40 +5133,6 @@ func UnmarshalCertificateValidity(m map[string]json.RawMessage, result interface
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_after", &obj.NotAfter)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// Warning : Warning response.
-type Warning struct {
-	// A warning code identifier.
-	Code *string `json:"code" validate:"required"`
-
-	// A human-readable message that provides details about the warning.
-	Message *string `json:"message" validate:"required"`
-}
-
-// NewWarning : Instantiate Warning (Generic Model Constructor)
-func (*SecretsManagerV1) NewWarning(code string, message string) (_model *Warning, err error) {
-	_model = &Warning{
-		Code:    core.StringPtr(code),
-		Message: core.StringPtr(message),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalWarning unmarshals an instance of Warning from the specified map of raw messages.
-func UnmarshalWarning(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(Warning)
-	err = core.UnmarshalPrimitive(m, "code", &obj.Code)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
 	if err != nil {
 		return
 	}
@@ -6064,9 +6086,18 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 // This model "extends" ConfigElementDefConfig
 type ConfigElementDefConfigClassicInfrastructureConfig struct {
 	// The username that is associated with your classic infrastructure account.
+	//
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
+	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
 	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username" validate:"required"`
 
 	// Your classic infrastructure API key.
+	//
+	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
+	// > Users > name > API keys.** For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password" validate:"required"`
 }
 
@@ -6149,7 +6180,12 @@ func UnmarshalConfigElementDefConfigCloudInternetServicesConfig(m map[string]jso
 // ConfigElementDefConfigLetsEncryptConfig : Properties that describe a Let's Encrypt configuration.
 // This model "extends" ConfigElementDefConfig
 type ConfigElementDefConfigLetsEncryptConfig struct {
-	// The private key that is associated with your ACME account.
+	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
+	//
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to  enable
+	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
 	PrivateKey *string `json:"private_key" validate:"required"`
 }
 
@@ -6170,6 +6206,48 @@ func (*ConfigElementDefConfigLetsEncryptConfig) isaConfigElementDefConfig() bool
 func UnmarshalConfigElementDefConfigLetsEncryptConfig(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ConfigElementDefConfigLetsEncryptConfig)
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CreateIamCredentialsSecretEngineRootConfig : Configuration for the IAM credentials engine.
+// This model "extends" EngineConfig
+type CreateIamCredentialsSecretEngineRootConfig struct {
+	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	//
+	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
+	// the IAM Identity Service. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
+	APIKey *string `json:"api_key" validate:"required"`
+
+	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
+	APIKeyHash *string `json:"api_key_hash,omitempty"`
+}
+
+// NewCreateIamCredentialsSecretEngineRootConfig : Instantiate CreateIamCredentialsSecretEngineRootConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewCreateIamCredentialsSecretEngineRootConfig(apiKey string) (_model *CreateIamCredentialsSecretEngineRootConfig, err error) {
+	_model = &CreateIamCredentialsSecretEngineRootConfig{
+		APIKey: core.StringPtr(apiKey),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*CreateIamCredentialsSecretEngineRootConfig) isaEngineConfig() bool {
+	return true
+}
+
+// UnmarshalCreateIamCredentialsSecretEngineRootConfig unmarshals an instance of CreateIamCredentialsSecretEngineRootConfig from the specified map of raw messages.
+func UnmarshalCreateIamCredentialsSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CreateIamCredentialsSecretEngineRootConfig)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
 	if err != nil {
 		return
 	}
@@ -6285,21 +6363,12 @@ type IamCredentialsSecretEngineRootConfig struct {
 	// An IBM Cloud API key that has the capability to create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
-	// the IAM Identity Service. For more information, see [Configuring the IAM secrets
-	// engine](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-iam-credentials#configure-iam-secrets-engine-api).
+	// the IAM Identity Service. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
 	APIKey *string `json:"api_key" validate:"required"`
 
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
 	APIKeyHash *string `json:"api_key_hash,omitempty"`
-}
-
-// NewIamCredentialsSecretEngineRootConfig : Instantiate IamCredentialsSecretEngineRootConfig (Generic Model Constructor)
-func (*SecretsManagerV1) NewIamCredentialsSecretEngineRootConfig(apiKey string) (_model *IamCredentialsSecretEngineRootConfig, err error) {
-	_model = &IamCredentialsSecretEngineRootConfig{
-		APIKey: core.StringPtr(apiKey),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
 }
 
 func (*IamCredentialsSecretEngineRootConfig) isaGetConfigResourcesItem() bool {
@@ -6546,8 +6615,10 @@ type IamCredentialsSecretResource struct {
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
 	// `iam_credentials` secret.
 	//
-	// **Tip:** To find the ID of an access group, go to **Manage > Access (IAM) > Access groups** in the IBM Cloud
-	// console. Select the access group to inspect, and click **Details** to view its ID.
+	// **Tip:** To list the access groups that are available in an account, you can use the [IAM Access Groups
+	// API](https://cloud.ibm.com/apidocs/iam-access-groups#list-access-groups). To find the ID of an access group in the
+	// console, go to **Manage > Access (IAM) > Access groups**. Select the access group to inspect, and click **Details**
+	// to view its ID.
 	AccessGroups []string `json:"access_groups,omitempty"`
 
 	// The API key that is generated for this secret.
@@ -7040,6 +7111,10 @@ type PublicCertificateSecretResource struct {
 
 	// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
 	// certificate.
+	//
+	// The algorithm that you select determines the encryption algorthim (`RSA` or `ECDSA`) and key size to be used to
+	// generate keys and sign certificates. For longer living certificates it is recommended to use longer keys to provide
+	// more encryption protection.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The alternative names that are defined for the certificate.
@@ -7053,6 +7128,7 @@ type PublicCertificateSecretResource struct {
 	// Issuance information that is associated with your certificate.
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
 
+	// The data that is associated with the secret.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -7068,6 +7144,10 @@ const (
 // Constants associated with the PublicCertificateSecretResource.KeyAlgorithm property.
 // The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
 // certificate.
+//
+// The algorithm that you select determines the encryption algorthim (`RSA` or `ECDSA`) and key size to be used to
+// generate keys and sign certificates. For longer living certificates it is recommended to use longer keys to provide
+// more encryption protection.
 const (
 	PublicCertificateSecretResourceKeyAlgorithmEc256Const   = "EC256"
 	PublicCertificateSecretResourceKeyAlgorithmEc384Const   = "EC384"
@@ -7385,9 +7465,6 @@ type SecretPolicyRotationRotationPublicCertPolicyRotation struct {
 	AutoRotate *bool `json:"auto_rotate" validate:"required"`
 
 	RotateKeys *bool `json:"rotate_keys" validate:"required"`
-
-	// Warning response.
-	Warning *Warning `json:"warning,omitempty"`
 }
 
 // NewSecretPolicyRotationRotationPublicCertPolicyRotation : Instantiate SecretPolicyRotationRotationPublicCertPolicyRotation (Generic Model Constructor)
@@ -7412,10 +7489,6 @@ func UnmarshalSecretPolicyRotationRotationPublicCertPolicyRotation(m map[string]
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "warning", &obj.Warning, UnmarshalWarning)
 	if err != nil {
 		return
 	}
