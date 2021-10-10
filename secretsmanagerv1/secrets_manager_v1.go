@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.38.1-1037b405-20210908-184149
+ * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -1978,10 +1978,10 @@ func UnmarshalConfigElementMetadata(m map[string]json.RawMessage, result interfa
 // CreateConfigElementOptions : The CreateConfigElement options.
 type CreateConfigElementOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The configuration element to define or manage.
-	ConfigElement *string `json:"-" validate:"required,ne="`
+	ConfigElement *string `json:"config_element" validate:"required,ne="`
 
 	// The human-readable name to assign to your configuration.
 	Name *string `json:"name" validate:"required"`
@@ -2140,7 +2140,7 @@ func (options *CreateSecretGroupOptions) SetHeaders(param map[string]string) *Cr
 // CreateSecretOptions : The CreateSecret options.
 type CreateSecretOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
@@ -2198,13 +2198,13 @@ func (options *CreateSecretOptions) SetHeaders(param map[string]string) *CreateS
 // DeleteConfigElementOptions : The DeleteConfigElement options.
 type DeleteConfigElementOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The configuration element to define or manage.
-	ConfigElement *string `json:"-" validate:"required,ne="`
+	ConfigElement *string `json:"config_element" validate:"required,ne="`
 
 	// The name of your configuration.
-	ConfigName *string `json:"-" validate:"required,ne="`
+	ConfigName *string `json:"config_name" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2259,7 +2259,7 @@ func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *
 // DeleteSecretGroupOptions : The DeleteSecretGroup options.
 type DeleteSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2287,10 +2287,10 @@ func (options *DeleteSecretGroupOptions) SetHeaders(param map[string]string) *De
 // DeleteSecretOptions : The DeleteSecret options.
 type DeleteSecretOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2397,13 +2397,13 @@ func UnmarshalGetConfig(m map[string]json.RawMessage, result interface{}) (err e
 // GetConfigElementOptions : The GetConfigElement options.
 type GetConfigElementOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The configuration element to define or manage.
-	ConfigElement *string `json:"-" validate:"required,ne="`
+	ConfigElement *string `json:"config_element" validate:"required,ne="`
 
 	// The name of your configuration.
-	ConfigName *string `json:"-" validate:"required,ne="`
+	ConfigName *string `json:"config_name" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2482,10 +2482,10 @@ func UnmarshalGetConfigElements(m map[string]json.RawMessage, result interface{}
 // GetConfigElementsOptions : The GetConfigElements options.
 type GetConfigElementsOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The configuration element to define or manage.
-	ConfigElement *string `json:"-" validate:"required,ne="`
+	ConfigElement *string `json:"config_element" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2566,7 +2566,7 @@ func UnmarshalGetConfigElementsResourcesItem(m map[string]json.RawMessage, resul
 // GetConfigOptions : The GetConfig options.
 type GetConfigOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2654,13 +2654,13 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 // GetPolicyOptions : The GetPolicy options.
 type GetPolicyOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The type of policy that is associated with the specified secret.
-	Policy *string `json:"-"`
+	Policy *string `json:"policy,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2738,7 +2738,7 @@ func UnmarshalGetSecret(m map[string]json.RawMessage, result interface{}) (err e
 // GetSecretGroupOptions : The GetSecretGroup options.
 type GetSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2766,10 +2766,10 @@ func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSe
 // GetSecretMetadataOptions : The GetSecretMetadata options.
 type GetSecretMetadataOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2814,10 +2814,10 @@ func (options *GetSecretMetadataOptions) SetHeaders(param map[string]string) *Ge
 // GetSecretOptions : The GetSecret options.
 type GetSecretOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3086,17 +3086,17 @@ func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result inte
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
 	// version.
 	//
 	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
 	// the response details.
-	VersionID *string `json:"-" validate:"required,ne="`
+	VersionID *string `json:"version_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3145,17 +3145,17 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
 	// version.
 	//
 	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
 	// the response details.
-	VersionID *string `json:"-" validate:"required,ne="`
+	VersionID *string `json:"version_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3309,27 +3309,27 @@ type ListAllSecretsOptions struct {
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
 	// `../secrets/{secret-type}?limit=5`.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
 	// `../secrets/{secret-type}?offset=25&limit=25`.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Filter secrets that contain the specified string. The fields that are searched include: id, name, description,
 	// labels, secret_type.
 	//
 	// **Usage:** If you want to list only the secrets that contain the string "text", use
 	// `../secrets/{secret-type}?search=text`.
-	Search *string `json:"-"`
+	Search *string `json:"search,omitempty"`
 
 	// Sort a list of secrets by the specified field.
 	//
 	// **Usage:** To sort a list of secrets by their creation date, use
 	// `../secrets/{secret-type}?sort_by=creation_date`.
-	SortBy *string `json:"-"`
+	SortBy *string `json:"sort_by,omitempty"`
 
 	// Filter secrets by groups.
 	//
@@ -3338,7 +3338,7 @@ type ListAllSecretsOptions struct {
 	//
 	// **Usage:** To retrieve a list of secrets that are associated with an existing secret group or the default group, use
 	// `../secrets?groups={secret_group_ID},default`.
-	Groups []string `json:"-"`
+	Groups []string `json:"groups,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3443,21 +3443,21 @@ func UnmarshalListSecrets(m map[string]json.RawMessage, result interface{}) (err
 // ListSecretsOptions : The ListSecrets options.
 type ListSecretsOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
 	// set of items, use `limit` with `offset` to page through your available resources.
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
 	// `../secrets/{secret-type}?limit=5`.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
 	// `../secrets/{secret-type}?offset=25&limit=25`.
-	Offset *int64 `json:"-"`
+	Offset *int64 `json:"offset,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -3506,40 +3506,36 @@ func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecr
 
 // PutConfigOptions : The PutConfig options.
 type PutConfigOptions struct {
-	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
-
 	// Properties to update for a secrets engine.
 	EngineConfig EngineConfigIntf `json:"EngineConfig" validate:"required"`
+
+	SecretType *string `json:"secret_type,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // Constants associated with the PutConfigOptions.SecretType property.
-// The secret type.
 const (
 	PutConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	PutConfigOptionsSecretTypePublicCertConst     = "public_cert"
 )
 
 // NewPutConfigOptions : Instantiate PutConfigOptions
-func (*SecretsManagerV1) NewPutConfigOptions(secretType string, engineConfig EngineConfigIntf) *PutConfigOptions {
+func (*SecretsManagerV1) NewPutConfigOptions(engineConfig EngineConfigIntf) *PutConfigOptions {
 	return &PutConfigOptions{
-		SecretType:   core.StringPtr(secretType),
 		EngineConfig: engineConfig,
 	}
-}
-
-// SetSecretType : Allow user to set SecretType
-func (_options *PutConfigOptions) SetSecretType(secretType string) *PutConfigOptions {
-	_options.SecretType = core.StringPtr(secretType)
-	return _options
 }
 
 // SetEngineConfig : Allow user to set EngineConfig
 func (_options *PutConfigOptions) SetEngineConfig(engineConfig EngineConfigIntf) *PutConfigOptions {
 	_options.EngineConfig = engineConfig
+	return _options
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *PutConfigOptions) SetSecretType(secretType string) *PutConfigOptions {
+	_options.SecretType = core.StringPtr(secretType)
 	return _options
 }
 
@@ -3552,10 +3548,10 @@ func (options *PutConfigOptions) SetHeaders(param map[string]string) *PutConfigO
 // PutPolicyOptions : The PutPolicy options.
 type PutPolicyOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
@@ -3564,7 +3560,7 @@ type PutPolicyOptions struct {
 	Resources []SecretPolicyRotation `json:"resources" validate:"required"`
 
 	// The type of policy that is associated with the specified secret.
-	Policy *string `json:"-"`
+	Policy *string `json:"policy,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -4839,13 +4835,13 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 // UpdateConfigElementOptions : The UpdateConfigElement options.
 type UpdateConfigElementOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The configuration element to define or manage.
-	ConfigElement *string `json:"-" validate:"required,ne="`
+	ConfigElement *string `json:"config_element" validate:"required,ne="`
 
 	// The name of your configuration.
-	ConfigName *string `json:"-" validate:"required,ne="`
+	ConfigName *string `json:"config_name" validate:"required,ne="`
 
 	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 	Type *string `json:"type" validate:"required"`
@@ -4928,7 +4924,7 @@ func (options *UpdateConfigElementOptions) SetHeaders(param map[string]string) *
 // UpdateSecretGroupMetadataOptions : The UpdateSecretGroupMetadata options.
 type UpdateSecretGroupMetadataOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
@@ -4976,10 +4972,10 @@ func (options *UpdateSecretGroupMetadataOptions) SetHeaders(param map[string]str
 // UpdateSecretMetadataOptions : The UpdateSecretMetadata options.
 type UpdateSecretMetadataOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
@@ -5044,13 +5040,13 @@ func (options *UpdateSecretMetadataOptions) SetHeaders(param map[string]string) 
 // UpdateSecretOptions : The UpdateSecret options.
 type UpdateSecretOptions struct {
 	// The secret type.
-	SecretType *string `json:"-" validate:"required,ne="`
+	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
-	ID *string `json:"-" validate:"required,ne="`
+	ID *string `json:"id" validate:"required,ne="`
 
 	// The action to perform on the specified secret.
-	Action *string `json:"-" validate:"required"`
+	Action *string `json:"action" validate:"required"`
 
 	// The properties to update for the secret.
 	SecretAction SecretActionIntf `json:"SecretAction" validate:"required"`

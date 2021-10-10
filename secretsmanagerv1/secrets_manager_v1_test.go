@@ -5861,15 +5861,14 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(engineConfigModel.APIKey).To(Equal(core.StringPtr("API_KEY")))
 
 				// Construct an instance of the PutConfigOptions model
-				secretType := "iam_credentials"
 				var engineConfig secretsmanagerv1.EngineConfigIntf = nil
-				putConfigOptionsModel := secretsManagerService.NewPutConfigOptions(secretType, engineConfig)
-				putConfigOptionsModel.SetSecretType("iam_credentials")
+				putConfigOptionsModel := secretsManagerService.NewPutConfigOptions(engineConfig)
 				putConfigOptionsModel.SetEngineConfig(engineConfigModel)
+				putConfigOptionsModel.SetSecretType("iam_credentials")
 				putConfigOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putConfigOptionsModel).ToNot(BeNil())
-				Expect(putConfigOptionsModel.SecretType).To(Equal(core.StringPtr("iam_credentials")))
 				Expect(putConfigOptionsModel.EngineConfig).To(Equal(engineConfigModel))
+				Expect(putConfigOptionsModel.SecretType).To(Equal(core.StringPtr("iam_credentials")))
 				Expect(putConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutPolicyOptions successfully`, func() {
