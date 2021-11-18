@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.41.1-790c0dfc-20211021-231519
+ * IBM OpenAPI SDK Code Generator Version: 3.43.0-49eab5c7-20211117-152138
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -757,7 +757,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 // Invokes an action on a specified secret. This method supports the following actions:
 //
 // - `rotate`: Replace the value of a secret.
-// - `revert`: Revert an `iam_credentials` secret to a previous version.
+// - `restore`: Restore a previous version of an `iam_credentials` secret.
 // - `delete_credentials`: Delete the API key that is associated with an `iam_credentials` secret.
 func (secretsManager *SecretsManagerV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretWithContext(context.Background(), updateSecretOptions)
@@ -1801,6 +1801,177 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 	return
 }
 
+// CreateNotificationsRegistration : Register with Event Notifications
+// Creates a registration between a Secrets Manager instance and [Event
+// Notifications](https://cloud.ibm.com/apidocs/event-notifications).
+//
+// A successful request adds Secrets Manager as a source that you can reference from your Event Notifications instance.
+// For more information about enabling notifications for Secrets Manager, check out the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
+func (secretsManager *SecretsManagerV1) CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateNotificationsRegistrationWithContext(context.Background(), createNotificationsRegistrationOptions)
+}
+
+// CreateNotificationsRegistrationWithContext is an alternate form of the CreateNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) CreateNotificationsRegistrationWithContext(ctx context.Context, createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createNotificationsRegistrationOptions.EventNotificationsInstanceCRN != nil {
+		body["event_notifications_instance_crn"] = createNotificationsRegistrationOptions.EventNotificationsInstanceCRN
+	}
+	if createNotificationsRegistrationOptions.EventNotificationsSourceName != nil {
+		body["event_notifications_source_name"] = createNotificationsRegistrationOptions.EventNotificationsSourceName
+	}
+	if createNotificationsRegistrationOptions.EventNotificationsSourceDescription != nil {
+		body["event_notifications_source_description"] = createNotificationsRegistrationOptions.EventNotificationsSourceDescription
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetNotificationsRegistration : Get Event Notifications registration details
+// Retrieves the details of an existing registration between a Secrets Manager instance and Event Notifications.
+func (secretsManager *SecretsManagerV1) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
+}
+
+// GetNotificationsRegistrationWithContext is an alternate form of the GetNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetNotificationsRegistrationWithContext(ctx context.Context, getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getNotificationsRegistrationOptions, "getNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteNotificationsRegistration : Unregister from Event Notifications
+// Deletes a registration between a Secrets Manager instance and Event Notifications.
+//
+// A successful request removes your Secrets Manager instance as a source in Event Notifications.
+func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteNotificationsRegistrationWithContext(context.Background(), deleteNotificationsRegistrationOptions)
+}
+
+// DeleteNotificationsRegistrationWithContext is an alternate form of the DeleteNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithContext(ctx context.Context, deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(deleteNotificationsRegistrationOptions, "deleteNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
 // ArbitrarySecretVersionSecretData : ArbitrarySecretVersionSecretData struct
 type ArbitrarySecretVersionSecretData struct {
 	// The payload that is associated with the secret version.
@@ -1953,7 +2124,7 @@ func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{})
 type ConfigElementDefConfig struct {
 	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
 	//
-	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to  enable
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
 	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
 	// the
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
@@ -2148,6 +2319,53 @@ func (options *CreateConfigElementOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
+// CreateNotificationsRegistrationOptions : The CreateNotificationsRegistration options.
+type CreateNotificationsRegistrationOptions struct {
+	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
+	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
+
+	// The name that is displayed as a source in your Event Notifications instance.
+	EventNotificationsSourceName *string `json:"event_notifications_source_name" validate:"required"`
+
+	// An optional description for the source in your Event Notifications instance.
+	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreateNotificationsRegistrationOptions : Instantiate CreateNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewCreateNotificationsRegistrationOptions(eventNotificationsInstanceCRN string, eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
+	return &CreateNotificationsRegistrationOptions{
+		EventNotificationsInstanceCRN: core.StringPtr(eventNotificationsInstanceCRN),
+		EventNotificationsSourceName:  core.StringPtr(eventNotificationsSourceName),
+	}
+}
+
+// SetEventNotificationsInstanceCRN : Allow user to set EventNotificationsInstanceCRN
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsInstanceCRN(eventNotificationsInstanceCRN string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsInstanceCRN = core.StringPtr(eventNotificationsInstanceCRN)
+	return _options
+}
+
+// SetEventNotificationsSourceName : Allow user to set EventNotificationsSourceName
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceName(eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsSourceName = core.StringPtr(eventNotificationsSourceName)
+	return _options
+}
+
+// SetEventNotificationsSourceDescription : Allow user to set EventNotificationsSourceDescription
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceDescription(eventNotificationsSourceDescription string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsSourceDescription = core.StringPtr(eventNotificationsSourceDescription)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateNotificationsRegistrationOptions) SetHeaders(param map[string]string) *CreateNotificationsRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateSecret : Properties that describe a secret.
 type CreateSecret struct {
 	// The metadata that describes the resource array.
@@ -2335,6 +2553,24 @@ func (_options *DeleteConfigElementOptions) SetConfigName(configName string) *De
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *DeleteConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
+// DeleteNotificationsRegistrationOptions : The DeleteNotificationsRegistration options.
+type DeleteNotificationsRegistrationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeleteNotificationsRegistrationOptions : Instantiate DeleteNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewDeleteNotificationsRegistrationOptions() *DeleteNotificationsRegistrationOptions {
+	return &DeleteNotificationsRegistrationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteNotificationsRegistrationOptions) SetHeaders(param map[string]string) *DeleteNotificationsRegistrationOptions {
 	options.Headers = param
 	return options
 }
@@ -2727,6 +2963,48 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetNotificationsRegistrationOptions : The GetNotificationsRegistration options.
+type GetNotificationsRegistrationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetNotificationsRegistrationOptions : Instantiate GetNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewGetNotificationsRegistrationOptions() *GetNotificationsRegistrationOptions {
+	return &GetNotificationsRegistrationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetNotificationsRegistrationOptions) SetHeaders(param map[string]string) *GetNotificationsRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
+// GetNotificationsSettings : Properties that describe an existing registration with Event Notifications.
+type GetNotificationsSettings struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []NotificationsSettings `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetNotificationsSettings unmarshals an instance of GetNotificationsSettings from the specified map of raw messages.
+func UnmarshalGetNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetNotificationsSettings)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalNotificationsSettings)
 	if err != nil {
 		return
 	}
@@ -3696,6 +3974,23 @@ func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecr
 	return options
 }
 
+// NotificationsSettings : The Event Notifications details.
+type NotificationsSettings struct {
+	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
+	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
+}
+
+// UnmarshalNotificationsSettings unmarshals an instance of NotificationsSettings from the specified map of raw messages.
+func UnmarshalNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(NotificationsSettings)
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCRN)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PutConfigOptions : The PutConfig options.
 type PutConfigOptions struct {
 	// The secret type.
@@ -3855,7 +4150,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotatePublicCertBody
 // - RotateUsernamePasswordSecretBody
 // - RotateCertificateBody
-// - RevertIamCredentialsSecretBody
+// - RestoreIamCredentialsSecretBody
 // - DeleteCredentialsForIamCredentialsSecret
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
@@ -5465,7 +5760,7 @@ const (
 // The action to perform on the specified secret.
 const (
 	UpdateSecretOptionsActionDeleteCredentialsConst = "delete_credentials"
-	UpdateSecretOptionsActionRevertConst            = "revert"
+	UpdateSecretOptionsActionRestoreConst           = "restore"
 	UpdateSecretOptionsActionRotateConst            = "rotate"
 )
 
@@ -6808,7 +7103,7 @@ func UnmarshalConfigElementDefConfigCloudInternetServicesConfig(m map[string]jso
 type ConfigElementDefConfigLetsEncryptConfig struct {
 	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
 	//
-	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to  enable
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
 	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
 	// the
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
@@ -8080,29 +8375,29 @@ func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, resu
 	return
 }
 
-// RevertIamCredentialsSecretBody : The request body of a `revert` action.
+// RestoreIamCredentialsSecretBody : The request body of a `restore` action.
 // This model "extends" SecretAction
-type RevertIamCredentialsSecretBody struct {
+type RestoreIamCredentialsSecretBody struct {
 	// The ID of the target version or the alias `previous`.
 	VersionID *string `json:"version_id" validate:"required"`
 }
 
-// NewRevertIamCredentialsSecretBody : Instantiate RevertIamCredentialsSecretBody (Generic Model Constructor)
-func (*SecretsManagerV1) NewRevertIamCredentialsSecretBody(versionID string) (_model *RevertIamCredentialsSecretBody, err error) {
-	_model = &RevertIamCredentialsSecretBody{
+// NewRestoreIamCredentialsSecretBody : Instantiate RestoreIamCredentialsSecretBody (Generic Model Constructor)
+func (*SecretsManagerV1) NewRestoreIamCredentialsSecretBody(versionID string) (_model *RestoreIamCredentialsSecretBody, err error) {
+	_model = &RestoreIamCredentialsSecretBody{
 		VersionID: core.StringPtr(versionID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
-func (*RevertIamCredentialsSecretBody) isaSecretAction() bool {
+func (*RestoreIamCredentialsSecretBody) isaSecretAction() bool {
 	return true
 }
 
-// UnmarshalRevertIamCredentialsSecretBody unmarshals an instance of RevertIamCredentialsSecretBody from the specified map of raw messages.
-func UnmarshalRevertIamCredentialsSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(RevertIamCredentialsSecretBody)
+// UnmarshalRestoreIamCredentialsSecretBody unmarshals an instance of RestoreIamCredentialsSecretBody from the specified map of raw messages.
+func UnmarshalRestoreIamCredentialsSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RestoreIamCredentialsSecretBody)
 	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
 	if err != nil {
 		return
