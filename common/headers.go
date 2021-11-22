@@ -41,11 +41,11 @@ const (
 //
 // If you plan to gather metrics for your SDK, the User-Agent header value must
 // be a string similar to the following:
-// my-go-sdk/0.0.1 (lang=go; arch=x86_64; os=Linux; go.version=1.12.9)
+// secrets-manager-go-sdk/0.0.1 (lang=go; arch=x86_64; os=Linux; go.version=1.12.9)
 //
 // In the example above, the analytics tool will parse the user-agent header and
 // use the following properties:
-// "my-go-sdk" - the name of your sdk
+// "secrets-manager-go-sdk" - the name of your sdk
 // "0.0.1"- the version of your sdk
 // "lang=go" - the language of the current sdk
 // "arch=x86_64; os=Linux; go.version=1.12.9" - system information
