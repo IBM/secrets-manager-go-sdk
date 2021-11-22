@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
+ * IBM OpenAPI SDK Code Generator Version: 3.43.0-49eab5c7-20211117-152138
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -756,7 +756,8 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 // UpdateSecret : Invoke an action on a secret
 // Invokes an action on a specified secret. This method supports the following actions:
 //
-// - `rotate`: Replace the value of an `arbitrary`, `username_password`, `public_cert` or `imported_cert` secret.
+// - `rotate`: Replace the value of a secret.
+// - `restore`: Restore a previous version of an `iam_credentials` secret.
 // - `delete_credentials`: Delete the API key that is associated with an `iam_credentials` secret.
 func (secretsManager *SecretsManagerV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretWithContext(context.Background(), updateSecretOptions)
@@ -799,9 +800,11 @@ func (secretsManager *SecretsManagerV1) UpdateSecretWithContext(ctx context.Cont
 
 	builder.AddQuery("action", fmt.Sprint(*updateSecretOptions.Action))
 
-	_, err = builder.SetBodyContentJSON(updateSecretOptions.SecretAction)
-	if err != nil {
-		return
+	if updateSecretOptions.SecretAction != nil {
+		_, err = builder.SetBodyContentJSON(updateSecretOptions.SecretAction)
+		if err != nil {
+			return
+		}
 	}
 
 	request, err := builder.Build()
@@ -870,6 +873,69 @@ func (secretsManager *SecretsManagerV1) DeleteSecretWithContext(ctx context.Cont
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
+// ListSecretVersions : List versions of a secret
+// Retrieves a list of the versions of a secret.
+//
+// A successful request returns the list of the versions along with the metadata of each version.
+func (secretsManager *SecretsManagerV1) ListSecretVersions(listSecretVersionsOptions *ListSecretVersionsOptions) (result *ListSecretVersions, response *core.DetailedResponse, err error) {
+	return secretsManager.ListSecretVersionsWithContext(context.Background(), listSecretVersionsOptions)
+}
+
+// ListSecretVersionsWithContext is an alternate form of the ListSecretVersions method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) ListSecretVersionsWithContext(ctx context.Context, listSecretVersionsOptions *ListSecretVersionsOptions) (result *ListSecretVersions, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(listSecretVersionsOptions, "listSecretVersionsOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(listSecretVersionsOptions, "listSecretVersionsOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *listSecretVersionsOptions.SecretType,
+		"id":          *listSecretVersionsOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/versions`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range listSecretVersionsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "ListSecretVersions")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListSecretVersions)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
 
 	return
 }
@@ -1735,6 +1801,194 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 	return
 }
 
+// CreateNotificationsRegistration : Register with Event Notifications
+// Creates a registration between a Secrets Manager instance and [Event
+// Notifications](https://cloud.ibm.com/apidocs/event-notifications).
+//
+// A successful request adds Secrets Manager as a source that you can reference from your Event Notifications instance.
+// For more information about enabling notifications for Secrets Manager, check out the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
+func (secretsManager *SecretsManagerV1) CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateNotificationsRegistrationWithContext(context.Background(), createNotificationsRegistrationOptions)
+}
+
+// CreateNotificationsRegistrationWithContext is an alternate form of the CreateNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) CreateNotificationsRegistrationWithContext(ctx context.Context, createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createNotificationsRegistrationOptions.EventNotificationsInstanceCRN != nil {
+		body["event_notifications_instance_crn"] = createNotificationsRegistrationOptions.EventNotificationsInstanceCRN
+	}
+	if createNotificationsRegistrationOptions.EventNotificationsSourceName != nil {
+		body["event_notifications_source_name"] = createNotificationsRegistrationOptions.EventNotificationsSourceName
+	}
+	if createNotificationsRegistrationOptions.EventNotificationsSourceDescription != nil {
+		body["event_notifications_source_description"] = createNotificationsRegistrationOptions.EventNotificationsSourceDescription
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetNotificationsRegistration : Get Event Notifications registration details
+// Retrieves the details of an existing registration between a Secrets Manager instance and Event Notifications.
+func (secretsManager *SecretsManagerV1) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
+}
+
+// GetNotificationsRegistrationWithContext is an alternate form of the GetNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetNotificationsRegistrationWithContext(ctx context.Context, getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getNotificationsRegistrationOptions, "getNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteNotificationsRegistration : Unregister from Event Notifications
+// Deletes a registration between a Secrets Manager instance and Event Notifications.
+//
+// A successful request removes your Secrets Manager instance as a source in Event Notifications.
+func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteNotificationsRegistrationWithContext(context.Background(), deleteNotificationsRegistrationOptions)
+}
+
+// DeleteNotificationsRegistrationWithContext is an alternate form of the DeleteNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithContext(ctx context.Context, deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(deleteNotificationsRegistrationOptions, "deleteNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
+// ArbitrarySecretVersionSecretData : ArbitrarySecretVersionSecretData struct
+type ArbitrarySecretVersionSecretData struct {
+	// The payload that is associated with the secret version.
+	Payload *string `json:"payload,omitempty"`
+}
+
+// UnmarshalArbitrarySecretVersionSecretData unmarshals an instance of ArbitrarySecretVersionSecretData from the specified map of raw messages.
+func UnmarshalArbitrarySecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ArbitrarySecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // CertificateSecretData : CertificateSecretData struct
 type CertificateSecretData struct {
 	// The contents of the certificate.
@@ -1870,7 +2124,7 @@ func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{})
 type ConfigElementDefConfig struct {
 	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
 	//
-	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to  enable
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
 	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
 	// the
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
@@ -2065,6 +2319,53 @@ func (options *CreateConfigElementOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
+// CreateNotificationsRegistrationOptions : The CreateNotificationsRegistration options.
+type CreateNotificationsRegistrationOptions struct {
+	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
+	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
+
+	// The name that is displayed as a source in your Event Notifications instance.
+	EventNotificationsSourceName *string `json:"event_notifications_source_name" validate:"required"`
+
+	// An optional description for the source in your Event Notifications instance.
+	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreateNotificationsRegistrationOptions : Instantiate CreateNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewCreateNotificationsRegistrationOptions(eventNotificationsInstanceCRN string, eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
+	return &CreateNotificationsRegistrationOptions{
+		EventNotificationsInstanceCRN: core.StringPtr(eventNotificationsInstanceCRN),
+		EventNotificationsSourceName:  core.StringPtr(eventNotificationsSourceName),
+	}
+}
+
+// SetEventNotificationsInstanceCRN : Allow user to set EventNotificationsInstanceCRN
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsInstanceCRN(eventNotificationsInstanceCRN string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsInstanceCRN = core.StringPtr(eventNotificationsInstanceCRN)
+	return _options
+}
+
+// SetEventNotificationsSourceName : Allow user to set EventNotificationsSourceName
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceName(eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsSourceName = core.StringPtr(eventNotificationsSourceName)
+	return _options
+}
+
+// SetEventNotificationsSourceDescription : Allow user to set EventNotificationsSourceDescription
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceDescription(eventNotificationsSourceDescription string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsSourceDescription = core.StringPtr(eventNotificationsSourceDescription)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateNotificationsRegistrationOptions) SetHeaders(param map[string]string) *CreateNotificationsRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateSecret : Properties that describe a secret.
 type CreateSecret struct {
 	// The metadata that describes the resource array.
@@ -2252,6 +2553,24 @@ func (_options *DeleteConfigElementOptions) SetConfigName(configName string) *De
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *DeleteConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
+// DeleteNotificationsRegistrationOptions : The DeleteNotificationsRegistration options.
+type DeleteNotificationsRegistrationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeleteNotificationsRegistrationOptions : Instantiate DeleteNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewDeleteNotificationsRegistrationOptions() *DeleteNotificationsRegistrationOptions {
+	return &DeleteNotificationsRegistrationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteNotificationsRegistrationOptions) SetHeaders(param map[string]string) *DeleteNotificationsRegistrationOptions {
 	options.Headers = param
 	return options
 }
@@ -2644,6 +2963,48 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_hash", &obj.APIKeyHash)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetNotificationsRegistrationOptions : The GetNotificationsRegistration options.
+type GetNotificationsRegistrationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetNotificationsRegistrationOptions : Instantiate GetNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewGetNotificationsRegistrationOptions() *GetNotificationsRegistrationOptions {
+	return &GetNotificationsRegistrationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetNotificationsRegistrationOptions) SetHeaders(param map[string]string) *GetNotificationsRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
+// GetNotificationsSettings : Properties that describe an existing registration with Event Notifications.
+type GetNotificationsSettings struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []NotificationsSettings `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetNotificationsSettings unmarshals an instance of GetNotificationsSettings from the specified map of raw messages.
+func UnmarshalGetNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetNotificationsSettings)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalNotificationsSettings)
 	if err != nil {
 		return
 	}
@@ -3105,8 +3466,11 @@ type GetSecretVersionMetadataOptions struct {
 // Constants associated with the GetSecretVersionMetadataOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst = "imported_cert"
-	GetSecretVersionMetadataOptionsSecretTypePublicCertConst   = "public_cert"
+	GetSecretVersionMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretVersionMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionMetadataOptionsSecretTypePublicCertConst       = "public_cert"
+	GetSecretVersionMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewGetSecretVersionMetadataOptions : Instantiate GetSecretVersionMetadataOptions
@@ -3164,8 +3528,11 @@ type GetSecretVersionOptions struct {
 // Constants associated with the GetSecretVersionOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretVersionOptionsSecretTypeImportedCertConst = "imported_cert"
-	GetSecretVersionOptionsSecretTypePublicCertConst   = "public_cert"
+	GetSecretVersionOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretVersionOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionOptionsSecretTypePublicCertConst       = "public_cert"
+	GetSecretVersionOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
 // NewGetSecretVersionOptions : Instantiate GetSecretVersionOptions
@@ -3218,6 +3585,37 @@ func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalConfigElementDef)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IamCredentialsSecretVersionSecretData : IamCredentialsSecretVersionSecretData struct
+type IamCredentialsSecretVersionSecretData struct {
+	// The API key that is generated for this secret.
+	APIKey *string `json:"api_key,omitempty"`
+
+	// The ID of the API key that is generated for this secret.
+	APIKeyID *string `json:"api_key_id,omitempty"`
+
+	// The service ID under which the API key is created.
+	ServiceID *string `json:"service_id,omitempty"`
+}
+
+// UnmarshalIamCredentialsSecretVersionSecretData unmarshals an instance of IamCredentialsSecretVersionSecretData from the specified map of raw messages.
+func UnmarshalIamCredentialsSecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IamCredentialsSecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.APIKeyID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
 		return
 	}
@@ -3416,6 +3814,78 @@ func (options *ListSecretGroupsOptions) SetHeaders(param map[string]string) *Lis
 	return options
 }
 
+// ListSecretVersions : Properties that describe a list of versions of a secret.
+type ListSecretVersions struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []SecretVersionInfoIntf `json:"resources,omitempty"`
+}
+
+// UnmarshalListSecretVersions unmarshals an instance of ListSecretVersions from the specified map of raw messages.
+func UnmarshalListSecretVersions(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListSecretVersions)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalSecretVersionInfo)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ListSecretVersionsOptions : The ListSecretVersions options.
+type ListSecretVersionsOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the ListSecretVersionsOptions.SecretType property.
+// The secret type.
+const (
+	ListSecretVersionsOptionsSecretTypeArbitraryConst        = "arbitrary"
+	ListSecretVersionsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	ListSecretVersionsOptionsSecretTypeImportedCertConst     = "imported_cert"
+	ListSecretVersionsOptionsSecretTypePublicCertConst       = "public_cert"
+	ListSecretVersionsOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewListSecretVersionsOptions : Instantiate ListSecretVersionsOptions
+func (*SecretsManagerV1) NewListSecretVersionsOptions(secretType string, id string) *ListSecretVersionsOptions {
+	return &ListSecretVersionsOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *ListSecretVersionsOptions) SetSecretType(secretType string) *ListSecretVersionsOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *ListSecretVersionsOptions) SetID(id string) *ListSecretVersionsOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListSecretVersionsOptions) SetHeaders(param map[string]string) *ListSecretVersionsOptions {
+	options.Headers = param
+	return options
+}
+
 // ListSecrets : Properties that describe a list of secrets.
 type ListSecrets struct {
 	// The metadata that describes the resource array.
@@ -3504,38 +3974,58 @@ func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecr
 	return options
 }
 
+// NotificationsSettings : The Event Notifications details.
+type NotificationsSettings struct {
+	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
+	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
+}
+
+// UnmarshalNotificationsSettings unmarshals an instance of NotificationsSettings from the specified map of raw messages.
+func UnmarshalNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(NotificationsSettings)
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCRN)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PutConfigOptions : The PutConfig options.
 type PutConfigOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
 	// Properties to update for a secrets engine.
 	EngineConfig EngineConfigIntf `json:"EngineConfig" validate:"required"`
-
-	SecretType *string `json:"secret_type,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // Constants associated with the PutConfigOptions.SecretType property.
+// The secret type.
 const (
 	PutConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
 )
 
 // NewPutConfigOptions : Instantiate PutConfigOptions
-func (*SecretsManagerV1) NewPutConfigOptions(engineConfig EngineConfigIntf) *PutConfigOptions {
+func (*SecretsManagerV1) NewPutConfigOptions(secretType string, engineConfig EngineConfigIntf) *PutConfigOptions {
 	return &PutConfigOptions{
+		SecretType:   core.StringPtr(secretType),
 		EngineConfig: engineConfig,
 	}
-}
-
-// SetEngineConfig : Allow user to set EngineConfig
-func (_options *PutConfigOptions) SetEngineConfig(engineConfig EngineConfigIntf) *PutConfigOptions {
-	_options.EngineConfig = engineConfig
-	return _options
 }
 
 // SetSecretType : Allow user to set SecretType
 func (_options *PutConfigOptions) SetSecretType(secretType string) *PutConfigOptions {
 	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetEngineConfig : Allow user to set EngineConfig
+func (_options *PutConfigOptions) SetEngineConfig(engineConfig EngineConfigIntf) *PutConfigOptions {
+	_options.EngineConfig = engineConfig
 	return _options
 }
 
@@ -3660,6 +4150,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotatePublicCertBody
 // - RotateUsernamePasswordSecretBody
 // - RotateCertificateBody
+// - RestoreIamCredentialsSecretBody
 // - DeleteCredentialsForIamCredentialsSecret
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
@@ -3680,7 +4171,17 @@ type SecretAction struct {
 	// The new intermediate certificate to associate with the certificate.
 	Intermediate *string `json:"intermediate,omitempty"`
 
-	// The service ID that you want to delete. It is deleted together with its API key.
+	// The ID of the target version or the alias `previous`.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The ID of the API key that you want to delete. If the secret was created with a static service ID, only the API key
+	// is deleted. Otherwise the service ID is deleted together with its API key.
+	APIKeyID *string `json:"api_key_id,omitempty"`
+
+	// The service ID that you want to delete. This property can be used instead of the `api_key_id` field, but only for
+	// secrets that were created with a service ID that was generated by Secrets Manager.
+	//
+	// **Deprecated.** Use the `api_key_id` field instead.
 	ServiceID *string `json:"service_id,omitempty"`
 }
 
@@ -3716,6 +4217,14 @@ func UnmarshalSecretAction(m map[string]json.RawMessage, result interface{}) (er
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.APIKeyID)
 	if err != nil {
 		return
 	}
@@ -3927,7 +4436,7 @@ func UnmarshalSecretGroupResource(m map[string]json.RawMessage, result interface
 // - UsernamePasswordSecretMetadata
 // - IamCredentialsSecretMetadata
 // - CertificateSecretMetadata
-// - PublicCertificateMetadataSecretResource
+// - PublicCertificateSecretMetadata
 type SecretMetadata struct {
 	// The unique ID of the secret.
 	ID *string `json:"id,omitempty"`
@@ -3997,10 +4506,27 @@ type SecretMetadata struct {
 	// or `24h`.
 	TTL interface{} `json:"ttl,omitempty"`
 
-	// For `iam_credentials` secrets, this field controls whether to use the same service ID and API key for future read
-	// operations on this secret. If set to `true`, the service reuses the current credentials. If set to `false`, a new
-	// service ID and API key is generated each time that the secret is read or accessed.
+	// Determines whether to use the same service ID and API key for future read operations on an
+	// `iam_credentials` secret.
+	//
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
+
+	// Indicates whether an `iam_credentials` secret was created with a static service ID.
+	//
+	// If `true`, the service ID for the secret was provided by the user at secret creation. If `false`, the service ID was
+	// generated by Secrets Manager.
+	ServiceIDIsStatic *bool `json:"service_id_is_static,omitempty"`
+
+	// The service ID under which the API key is created. The service ID is included in the metadata only if the secret was
+	// created with a static service ID.
+	ServiceID *string `json:"service_id,omitempty"`
+
+	// The access groups that define the capabilities of the service ID and API key that are generated for an
+	// `iam_credentials` secret. The access groups are included in the metadata only if the secret was created with a
+	// service ID that was generated by Secrets Manager.
+	AccessGroups []string `json:"access_groups,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -4123,6 +4649,18 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseAPIKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIDIsStatic)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "access_groups", &obj.AccessGroups)
 	if err != nil {
 		return
 	}
@@ -4403,7 +4941,8 @@ type SecretResource struct {
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
-	// `iam_credentials` secret.
+	// `iam_credentials` secret. If you prefer to use an existing service ID that is already assigned the access policies
+	// that you require, you can omit this parameter and use the `service_id` field instead.
 	//
 	// **Tip:** To list the access groups that are available in an account, you can use the [IAM Access Groups
 	// API](https://cloud.ibm.com/apidocs/iam-access-groups#list-access-groups). To find the ID of an access group in the
@@ -4417,13 +4956,28 @@ type SecretResource struct {
 	// want to continue to use the same API key for future read operations, see the `reuse_api_key` field.
 	APIKey *string `json:"api_key,omitempty"`
 
-	// The service ID under which the API key (see the `api_key` field) is created. This service ID is added to the access
-	// groups that you assign for this secret.
+	// The ID of the API key that is generated for this secret.
+	APIKeyID *string `json:"api_key_id,omitempty"`
+
+	// The service ID under which the API key (see the `api_key` field) is created.
+	//
+	// If you omit this parameter, Secrets Manager generates a new service ID for your secret at its creation and adds it
+	// to the access groups that you assign.
+	//
+	// Optionally, you can use this field to provide your own service ID if you prefer to manage its access directly or
+	// retain the service ID after your secret expires, is rotated, or deleted. If you provide a service ID, do not include
+	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
 
-	// Set to `true` to reuse the service ID and API key for this secret.
+	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
-	// Use this field to control whether to use the same service ID and API key for future read operations on this secret.
+	// If `true`, the service ID for the secret was provided by the user at secret creation. If `false`, the service ID was
+	// generated by Secrets Manager.
+	ServiceIDIsStatic *bool `json:"service_id_is_static,omitempty"`
+
+	// Determines whether to use the same service ID and API key for future read operations on an
+	// `iam_credentials` secret.
+	//
 	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
 	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
@@ -4494,6 +5048,7 @@ const (
 	SecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	SecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	SecretResourceSecretTypePublicCertConst       = "public_cert"
 	SecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -4600,7 +5155,15 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.APIKeyID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIDIsStatic)
 	if err != nil {
 		return
 	}
@@ -4682,13 +5245,13 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 
 // SecretVersion : SecretVersion struct
 // Models which "extend" this model:
+// - ArbitrarySecretVersion
+// - UsernamePasswordSecretVersion
+// - IamCredentialsSecretVersion
 // - CertificateSecretVersion
 type SecretVersion struct {
 	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
-
-	// The Cloud Resource Name (CRN) that uniquely identifies the secret.
-	CRN *string `json:"crn,omitempty"`
 
 	// The ID of the secret version.
 	VersionID *string `json:"version_id,omitempty"`
@@ -4699,6 +5262,11 @@ type SecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	SecretData *SecretVersionSecretData `json:"secret_data,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -4706,8 +5274,6 @@ type SecretVersion struct {
 
 	// The date that the certificate expires. The date format follows RFC 3339.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
-
-	SecretData *CertificateSecretData `json:"secret_data,omitempty"`
 }
 
 func (*SecretVersion) isaSecretVersion() bool {
@@ -4725,10 +5291,6 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
 	if err != nil {
 		return
@@ -4738,6 +5300,14 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalSecretVersionSecretData)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
 		return
 	}
@@ -4753,7 +5323,89 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalCertificateSecretData)
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretVersionInfo : Properties that describe a secret version within a list of secret versions.
+// Models which "extend" this model:
+// - ArbitrarySecretVersionInfo
+// - UsernamePasswordSecretVersionInfo
+// - IamCredentialsSecretVersionInfo
+// - CertificateSecretVersionInfo
+type SecretVersionInfo struct {
+	// The ID of the secret version.
+	ID *string `json:"id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+}
+
+func (*SecretVersionInfo) isaSecretVersionInfo() bool {
+	return true
+}
+
+type SecretVersionInfoIntf interface {
+	isaSecretVersionInfo() bool
+}
+
+// UnmarshalSecretVersionInfo unmarshals an instance of SecretVersionInfo from the specified map of raw messages.
+func UnmarshalSecretVersionInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretVersionInfo)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
 		return
 	}
@@ -4768,14 +5420,24 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 // - IamCredentialsSecretVersionMetadata
 // - CertificateSecretVersionMetadata
 type SecretVersionMetadata struct {
-	// The ID of the secret version.
+	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
 
 	// The date that the version of the secret was created.
 	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
 
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -4804,11 +5466,23 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
 		return
 	}
@@ -4825,6 +5499,23 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretVersionSecretData : SecretVersionSecretData struct
+type SecretVersionSecretData struct {
+	// The payload that is associated with the secret version.
+	Payload *string `json:"payload,omitempty"`
+}
+
+// UnmarshalSecretVersionSecretData unmarshals an instance of SecretVersionSecretData from the specified map of raw messages.
+func UnmarshalSecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
 	if err != nil {
 		return
 	}
@@ -5049,7 +5740,7 @@ type UpdateSecretOptions struct {
 	Action *string `json:"action" validate:"required"`
 
 	// The properties to update for the secret.
-	SecretAction SecretActionIntf `json:"SecretAction" validate:"required"`
+	SecretAction SecretActionIntf `json:"SecretAction,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -5069,16 +5760,16 @@ const (
 // The action to perform on the specified secret.
 const (
 	UpdateSecretOptionsActionDeleteCredentialsConst = "delete_credentials"
+	UpdateSecretOptionsActionRestoreConst           = "restore"
 	UpdateSecretOptionsActionRotateConst            = "rotate"
 )
 
 // NewUpdateSecretOptions : Instantiate UpdateSecretOptions
-func (*SecretsManagerV1) NewUpdateSecretOptions(secretType string, id string, action string, secretAction SecretActionIntf) *UpdateSecretOptions {
+func (*SecretsManagerV1) NewUpdateSecretOptions(secretType string, id string, action string) *UpdateSecretOptions {
 	return &UpdateSecretOptions{
-		SecretType:   core.StringPtr(secretType),
-		ID:           core.StringPtr(id),
-		Action:       core.StringPtr(action),
-		SecretAction: secretAction,
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+		Action:     core.StringPtr(action),
 	}
 }
 
@@ -5110,6 +5801,30 @@ func (_options *UpdateSecretOptions) SetSecretAction(secretAction SecretActionIn
 func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateSecretOptions {
 	options.Headers = param
 	return options
+}
+
+// UsernamePasswordSecretVersionSecretData : UsernamePasswordSecretVersionSecretData struct
+type UsernamePasswordSecretVersionSecretData struct {
+	// The username that is associated with the secret version.
+	Username *string `json:"username,omitempty"`
+
+	// The password that is associated with the secret version.
+	Password *string `json:"password,omitempty"`
+}
+
+// UnmarshalUsernamePasswordSecretVersionSecretData unmarshals an instance of UsernamePasswordSecretVersionSecretData from the specified map of raw messages.
+func UnmarshalUsernamePasswordSecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsernamePasswordSecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // CertificateValidity : CertificateValidity struct
@@ -5367,6 +6082,7 @@ const (
 	ArbitrarySecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	ArbitrarySecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretResourceSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5458,9 +6174,58 @@ func UnmarshalArbitrarySecretResource(m map[string]json.RawMessage, result inter
 	return
 }
 
-// ArbitrarySecretVersionMetadata : Properties that describe a secret version.
-// This model "extends" SecretVersionMetadata
-type ArbitrarySecretVersionMetadata struct {
+// ArbitrarySecretVersion : ArbitrarySecretVersion struct
+// This model "extends" SecretVersion
+type ArbitrarySecretVersion struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	SecretData *ArbitrarySecretVersionSecretData `json:"secret_data,omitempty"`
+}
+
+func (*ArbitrarySecretVersion) isaSecretVersion() bool {
+	return true
+}
+
+// UnmarshalArbitrarySecretVersion unmarshals an instance of ArbitrarySecretVersion from the specified map of raw messages.
+func UnmarshalArbitrarySecretVersion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ArbitrarySecretVersion)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalArbitrarySecretVersionSecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ArbitrarySecretVersionInfo : ArbitrarySecretVersionInfo struct
+// This model "extends" SecretVersionInfo
+type ArbitrarySecretVersionInfo struct {
 	// The ID of the secret version.
 	ID *string `json:"id,omitempty"`
 
@@ -5469,6 +6234,67 @@ type ArbitrarySecretVersionMetadata struct {
 
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+}
+
+func (*ArbitrarySecretVersionInfo) isaSecretVersionInfo() bool {
+	return true
+}
+
+// UnmarshalArbitrarySecretVersionInfo unmarshals an instance of ArbitrarySecretVersionInfo from the specified map of raw messages.
+func UnmarshalArbitrarySecretVersionInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ArbitrarySecretVersionInfo)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ArbitrarySecretVersionMetadata : Properties that describe a secret version.
+// This model "extends" SecretVersionMetadata
+type ArbitrarySecretVersionMetadata struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
 }
 
 func (*ArbitrarySecretVersionMetadata) isaSecretVersionMetadata() bool {
@@ -5482,11 +6308,23 @@ func UnmarshalArbitrarySecretVersionMetadata(m map[string]json.RawMessage, resul
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
 		return
 	}
@@ -5771,7 +6609,7 @@ type CertificateSecretResource struct {
 	// with embedded newline characters.
 	Intermediate *string `json:"intermediate,omitempty"`
 
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData *CertificateSecretData `json:"secret_data,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -5811,6 +6649,7 @@ const (
 	CertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	CertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5898,7 +6737,7 @@ func UnmarshalCertificateSecretResource(m map[string]json.RawMessage, result int
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalCertificateSecretData)
 	if err != nil {
 		return
 	}
@@ -5952,9 +6791,6 @@ type CertificateSecretVersion struct {
 	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
 
-	// The Cloud Resource Name (CRN) that uniquely identifies the secret.
-	CRN *string `json:"crn,omitempty"`
-
 	// The ID of the secret version.
 	VersionID *string `json:"version_id,omitempty"`
 
@@ -5983,10 +6819,6 @@ func (*CertificateSecretVersion) isaSecretVersion() bool {
 func UnmarshalCertificateSecretVersion(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CertificateSecretVersion)
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
 	if err != nil {
 		return
 	}
@@ -6022,9 +6854,9 @@ func UnmarshalCertificateSecretVersion(m map[string]json.RawMessage, result inte
 	return
 }
 
-// CertificateSecretVersionMetadata : Properties that describe a secret version.
-// This model "extends" SecretVersionMetadata
-type CertificateSecretVersionMetadata struct {
+// CertificateSecretVersionInfo : CertificateSecretVersionInfo struct
+// This model "extends" SecretVersionInfo
+type CertificateSecretVersionInfo struct {
 	// The ID of the secret version.
 	ID *string `json:"id,omitempty"`
 
@@ -6033,6 +6865,87 @@ type CertificateSecretVersionMetadata struct {
 
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+}
+
+func (*CertificateSecretVersionInfo) isaSecretVersionInfo() bool {
+	return true
+}
+
+// UnmarshalCertificateSecretVersionInfo unmarshals an instance of CertificateSecretVersionInfo from the specified map of raw messages.
+func UnmarshalCertificateSecretVersionInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CertificateSecretVersionInfo)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CertificateSecretVersionMetadata : Properties that describe a secret version.
+// This model "extends" SecretVersionMetadata
+type CertificateSecretVersionMetadata struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -6054,11 +6967,23 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
 		return
 	}
@@ -6178,7 +7103,7 @@ func UnmarshalConfigElementDefConfigCloudInternetServicesConfig(m map[string]jso
 type ConfigElementDefConfigLetsEncryptConfig struct {
 	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
 	//
-	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to  enable
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
 	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
 	// the
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
@@ -6254,17 +7179,15 @@ func UnmarshalCreateIamCredentialsSecretEngineRootConfig(m map[string]json.RawMe
 // DeleteCredentialsForIamCredentialsSecret : Delete the credentials that are associated with an `iam_credentials` secret.
 // This model "extends" SecretAction
 type DeleteCredentialsForIamCredentialsSecret struct {
-	// The service ID that you want to delete. It is deleted together with its API key.
-	ServiceID *string `json:"service_id" validate:"required"`
-}
+	// The ID of the API key that you want to delete. If the secret was created with a static service ID, only the API key
+	// is deleted. Otherwise the service ID is deleted together with its API key.
+	APIKeyID *string `json:"api_key_id,omitempty"`
 
-// NewDeleteCredentialsForIamCredentialsSecret : Instantiate DeleteCredentialsForIamCredentialsSecret (Generic Model Constructor)
-func (*SecretsManagerV1) NewDeleteCredentialsForIamCredentialsSecret(serviceID string) (_model *DeleteCredentialsForIamCredentialsSecret, err error) {
-	_model = &DeleteCredentialsForIamCredentialsSecret{
-		ServiceID: core.StringPtr(serviceID),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
+	// The service ID that you want to delete. This property can be used instead of the `api_key_id` field, but only for
+	// secrets that were created with a service ID that was generated by Secrets Manager.
+	//
+	// **Deprecated.** Use the `api_key_id` field instead.
+	ServiceID *string `json:"service_id,omitempty"`
 }
 
 func (*DeleteCredentialsForIamCredentialsSecret) isaSecretAction() bool {
@@ -6274,6 +7197,10 @@ func (*DeleteCredentialsForIamCredentialsSecret) isaSecretAction() bool {
 // UnmarshalDeleteCredentialsForIamCredentialsSecret unmarshals an instance of DeleteCredentialsForIamCredentialsSecret from the specified map of raw messages.
 func UnmarshalDeleteCredentialsForIamCredentialsSecret(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DeleteCredentialsForIamCredentialsSecret)
+	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.APIKeyID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
 		return
@@ -6447,10 +7374,27 @@ type IamCredentialsSecretMetadata struct {
 	// or `24h`.
 	TTL interface{} `json:"ttl,omitempty"`
 
-	// For `iam_credentials` secrets, this field controls whether to use the same service ID and API key for future read
-	// operations on this secret. If set to `true`, the service reuses the current credentials. If set to `false`, a new
-	// service ID and API key is generated each time that the secret is read or accessed.
+	// Determines whether to use the same service ID and API key for future read operations on an
+	// `iam_credentials` secret.
+	//
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
+
+	// Indicates whether an `iam_credentials` secret was created with a static service ID.
+	//
+	// If `true`, the service ID for the secret was provided by the user at secret creation. If `false`, the service ID was
+	// generated by Secrets Manager.
+	ServiceIDIsStatic *bool `json:"service_id_is_static,omitempty"`
+
+	// The service ID under which the API key is created. The service ID is included in the metadata only if the secret was
+	// created with a static service ID.
+	ServiceID *string `json:"service_id,omitempty"`
+
+	// The access groups that define the capabilities of the service ID and API key that are generated for an
+	// `iam_credentials` secret. The access groups are included in the metadata only if the secret was created with a
+	// service ID that was generated by Secrets Manager.
+	AccessGroups []string `json:"access_groups,omitempty"`
 }
 
 // Constants associated with the IamCredentialsSecretMetadata.SecretType property.
@@ -6539,6 +7483,18 @@ func UnmarshalIamCredentialsSecretMetadata(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIDIsStatic)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "access_groups", &obj.AccessGroups)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -6609,7 +7565,8 @@ type IamCredentialsSecretResource struct {
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
-	// `iam_credentials` secret.
+	// `iam_credentials` secret. If you prefer to use an existing service ID that is already assigned the access policies
+	// that you require, you can omit this parameter and use the `service_id` field instead.
 	//
 	// **Tip:** To list the access groups that are available in an account, you can use the [IAM Access Groups
 	// API](https://cloud.ibm.com/apidocs/iam-access-groups#list-access-groups). To find the ID of an access group in the
@@ -6623,13 +7580,28 @@ type IamCredentialsSecretResource struct {
 	// want to continue to use the same API key for future read operations, see the `reuse_api_key` field.
 	APIKey *string `json:"api_key,omitempty"`
 
-	// The service ID under which the API key (see the `api_key` field) is created. This service ID is added to the access
-	// groups that you assign for this secret.
+	// The ID of the API key that is generated for this secret.
+	APIKeyID *string `json:"api_key_id,omitempty"`
+
+	// The service ID under which the API key (see the `api_key` field) is created.
+	//
+	// If you omit this parameter, Secrets Manager generates a new service ID for your secret at its creation and adds it
+	// to the access groups that you assign.
+	//
+	// Optionally, you can use this field to provide your own service ID if you prefer to manage its access directly or
+	// retain the service ID after your secret expires, is rotated, or deleted. If you provide a service ID, do not include
+	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
 
-	// Set to `true` to reuse the service ID and API key for this secret.
+	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
-	// Use this field to control whether to use the same service ID and API key for future read operations on this secret.
+	// If `true`, the service ID for the secret was provided by the user at secret creation. If `false`, the service ID was
+	// generated by Secrets Manager.
+	ServiceIDIsStatic *bool `json:"service_id_is_static,omitempty"`
+
+	// Determines whether to use the same service ID and API key for future read operations on an
+	// `iam_credentials` secret.
+	//
 	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
 	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
@@ -6641,6 +7613,7 @@ const (
 	IamCredentialsSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	IamCredentialsSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretResourceSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -6728,7 +7701,15 @@ func UnmarshalIamCredentialsSecretResource(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.APIKeyID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIDIsStatic)
 	if err != nil {
 		return
 	}
@@ -6740,9 +7721,58 @@ func UnmarshalIamCredentialsSecretResource(m map[string]json.RawMessage, result 
 	return
 }
 
-// IamCredentialsSecretVersionMetadata : Properties that describe a secret version.
-// This model "extends" SecretVersionMetadata
-type IamCredentialsSecretVersionMetadata struct {
+// IamCredentialsSecretVersion : IamCredentialsSecretVersion struct
+// This model "extends" SecretVersion
+type IamCredentialsSecretVersion struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	SecretData *IamCredentialsSecretVersionSecretData `json:"secret_data,omitempty"`
+}
+
+func (*IamCredentialsSecretVersion) isaSecretVersion() bool {
+	return true
+}
+
+// UnmarshalIamCredentialsSecretVersion unmarshals an instance of IamCredentialsSecretVersion from the specified map of raw messages.
+func UnmarshalIamCredentialsSecretVersion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IamCredentialsSecretVersion)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalIamCredentialsSecretVersionSecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IamCredentialsSecretVersionInfo : IamCredentialsSecretVersionInfo struct
+// This model "extends" SecretVersionInfo
+type IamCredentialsSecretVersionInfo struct {
 	// The ID of the secret version.
 	ID *string `json:"id,omitempty"`
 
@@ -6751,6 +7781,67 @@ type IamCredentialsSecretVersionMetadata struct {
 
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+}
+
+func (*IamCredentialsSecretVersionInfo) isaSecretVersionInfo() bool {
+	return true
+}
+
+// UnmarshalIamCredentialsSecretVersionInfo unmarshals an instance of IamCredentialsSecretVersionInfo from the specified map of raw messages.
+func UnmarshalIamCredentialsSecretVersionInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IamCredentialsSecretVersionInfo)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IamCredentialsSecretVersionMetadata : Properties that describe a secret version.
+// This model "extends" SecretVersionMetadata
+type IamCredentialsSecretVersionMetadata struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
 }
 
 func (*IamCredentialsSecretVersionMetadata) isaSecretVersionMetadata() bool {
@@ -6764,11 +7855,23 @@ func UnmarshalIamCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
 		return
 	}
@@ -6805,9 +7908,9 @@ func UnmarshalPublicCertSecretEngineRootConfig(m map[string]json.RawMessage, res
 	return
 }
 
-// PublicCertificateMetadataSecretResource : Metadata properties that describe a public certificate secret.
+// PublicCertificateSecretMetadata : Metadata properties that describe a public certificate secret.
 // This model "extends" SecretMetadata
-type PublicCertificateMetadataSecretResource struct {
+type PublicCertificateSecretMetadata struct {
 	// The unique ID of the secret.
 	ID *string `json:"id,omitempty"`
 
@@ -6893,42 +7996,42 @@ type PublicCertificateMetadataSecretResource struct {
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
 }
 
-// Constants associated with the PublicCertificateMetadataSecretResource.SecretType property.
+// Constants associated with the PublicCertificateSecretMetadata.SecretType property.
 // The secret type.
 const (
-	PublicCertificateMetadataSecretResourceSecretTypeArbitraryConst        = "arbitrary"
-	PublicCertificateMetadataSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
-	PublicCertificateMetadataSecretResourceSecretTypeImportedCertConst     = "imported_cert"
-	PublicCertificateMetadataSecretResourceSecretTypePublicCertConst       = "public_cert"
-	PublicCertificateMetadataSecretResourceSecretTypeUsernamePasswordConst = "username_password"
+	PublicCertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	PublicCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	PublicCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
+	PublicCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
-// Constants associated with the PublicCertificateMetadataSecretResource.KeyAlgorithm property.
+// Constants associated with the PublicCertificateSecretMetadata.KeyAlgorithm property.
 // The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
 // certificate.
 const (
-	PublicCertificateMetadataSecretResourceKeyAlgorithmEc256Const   = "EC256"
-	PublicCertificateMetadataSecretResourceKeyAlgorithmEc384Const   = "EC384"
-	PublicCertificateMetadataSecretResourceKeyAlgorithmRsa2048Const = "RSA2048"
-	PublicCertificateMetadataSecretResourceKeyAlgorithmRsa4096Const = "RSA4096"
+	PublicCertificateSecretMetadataKeyAlgorithmEc256Const   = "EC256"
+	PublicCertificateSecretMetadataKeyAlgorithmEc384Const   = "EC384"
+	PublicCertificateSecretMetadataKeyAlgorithmRsa2048Const = "RSA2048"
+	PublicCertificateSecretMetadataKeyAlgorithmRsa4096Const = "RSA4096"
 )
 
-// NewPublicCertificateMetadataSecretResource : Instantiate PublicCertificateMetadataSecretResource (Generic Model Constructor)
-func (*SecretsManagerV1) NewPublicCertificateMetadataSecretResource(name string) (_model *PublicCertificateMetadataSecretResource, err error) {
-	_model = &PublicCertificateMetadataSecretResource{
+// NewPublicCertificateSecretMetadata : Instantiate PublicCertificateSecretMetadata (Generic Model Constructor)
+func (*SecretsManagerV1) NewPublicCertificateSecretMetadata(name string) (_model *PublicCertificateSecretMetadata, err error) {
+	_model = &PublicCertificateSecretMetadata{
 		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
-func (*PublicCertificateMetadataSecretResource) isaSecretMetadata() bool {
+func (*PublicCertificateSecretMetadata) isaSecretMetadata() bool {
 	return true
 }
 
-// UnmarshalPublicCertificateMetadataSecretResource unmarshals an instance of PublicCertificateMetadataSecretResource from the specified map of raw messages.
-func UnmarshalPublicCertificateMetadataSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(PublicCertificateMetadataSecretResource)
+// UnmarshalPublicCertificateSecretMetadata unmarshals an instance of PublicCertificateSecretMetadata from the specified map of raw messages.
+func UnmarshalPublicCertificateSecretMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PublicCertificateSecretMetadata)
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
@@ -7134,6 +8237,7 @@ const (
 	PublicCertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	PublicCertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7264,6 +8368,37 @@ func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, resu
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RestoreIamCredentialsSecretBody : The request body of a `restore` action.
+// This model "extends" SecretAction
+type RestoreIamCredentialsSecretBody struct {
+	// The ID of the target version or the alias `previous`.
+	VersionID *string `json:"version_id" validate:"required"`
+}
+
+// NewRestoreIamCredentialsSecretBody : Instantiate RestoreIamCredentialsSecretBody (Generic Model Constructor)
+func (*SecretsManagerV1) NewRestoreIamCredentialsSecretBody(versionID string) (_model *RestoreIamCredentialsSecretBody, err error) {
+	_model = &RestoreIamCredentialsSecretBody{
+		VersionID: core.StringPtr(versionID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*RestoreIamCredentialsSecretBody) isaSecretAction() bool {
+	return true
+}
+
+// UnmarshalRestoreIamCredentialsSecretBody unmarshals an instance of RestoreIamCredentialsSecretBody from the specified map of raw messages.
+func UnmarshalRestoreIamCredentialsSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RestoreIamCredentialsSecretBody)
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
 	if err != nil {
 		return
 	}
@@ -7732,6 +8867,7 @@ const (
 	UsernamePasswordSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	UsernamePasswordSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretResourceSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7831,9 +8967,65 @@ func UnmarshalUsernamePasswordSecretResource(m map[string]json.RawMessage, resul
 	return
 }
 
-// UsernamePasswordSecretVersionMetadata : Properties that describe a secret version.
-// This model "extends" SecretVersionMetadata
-type UsernamePasswordSecretVersionMetadata struct {
+// UsernamePasswordSecretVersion : UsernamePasswordSecretVersion struct
+// This model "extends" SecretVersion
+type UsernamePasswordSecretVersion struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+
+	SecretData *UsernamePasswordSecretVersionSecretData `json:"secret_data,omitempty"`
+}
+
+func (*UsernamePasswordSecretVersion) isaSecretVersion() bool {
+	return true
+}
+
+// UnmarshalUsernamePasswordSecretVersion unmarshals an instance of UsernamePasswordSecretVersion from the specified map of raw messages.
+func UnmarshalUsernamePasswordSecretVersion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsernamePasswordSecretVersion)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalUsernamePasswordSecretVersionSecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UsernamePasswordSecretVersionInfo : UsernamePasswordSecretVersionInfo struct
+// This model "extends" SecretVersionInfo
+type UsernamePasswordSecretVersionInfo struct {
 	// The ID of the secret version.
 	ID *string `json:"id,omitempty"`
 
@@ -7842,6 +9034,74 @@ type UsernamePasswordSecretVersionMetadata struct {
 
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+}
+
+func (*UsernamePasswordSecretVersionInfo) isaSecretVersionInfo() bool {
+	return true
+}
+
+// UnmarshalUsernamePasswordSecretVersionInfo unmarshals an instance of UsernamePasswordSecretVersionInfo from the specified map of raw messages.
+func UnmarshalUsernamePasswordSecretVersionInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsernamePasswordSecretVersionInfo)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UsernamePasswordSecretVersionMetadata : Properties that describe a secret version.
+// This model "extends" SecretVersionMetadata
+type UsernamePasswordSecretVersionMetadata struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -7858,11 +9118,23 @@ func UnmarshalUsernamePasswordSecretVersionMetadata(m map[string]json.RawMessage
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
 		return
 	}
