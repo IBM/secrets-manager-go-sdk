@@ -1972,54 +1972,6 @@ func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithConte
 	return
 }
 
-// ArbitrarySecretVersionSecretData : ArbitrarySecretVersionSecretData struct
-type ArbitrarySecretVersionSecretData struct {
-	// The payload that is associated with the secret version.
-	Payload *string `json:"payload,omitempty"`
-}
-
-// UnmarshalArbitrarySecretVersionSecretData unmarshals an instance of ArbitrarySecretVersionSecretData from the specified map of raw messages.
-func UnmarshalArbitrarySecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ArbitrarySecretVersionSecretData)
-	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// CertificateSecretData : CertificateSecretData struct
-type CertificateSecretData struct {
-	// The contents of the certificate.
-	Certificate *string `json:"certificate,omitempty"`
-
-	// The private key that is associated with the certificate.
-	PrivateKey *string `json:"private_key,omitempty"`
-
-	// The intermediate certificate that is associated with the certificate.
-	Intermediate *string `json:"intermediate,omitempty"`
-}
-
-// UnmarshalCertificateSecretData unmarshals an instance of CertificateSecretData from the specified map of raw messages.
-func UnmarshalCertificateSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CertificateSecretData)
-	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // CollectionMetadata : The metadata that describes the resource array.
 type CollectionMetadata struct {
 	// The type of resources in the resource array.
@@ -3592,37 +3544,6 @@ func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interf
 	return
 }
 
-// IamCredentialsSecretVersionSecretData : IamCredentialsSecretVersionSecretData struct
-type IamCredentialsSecretVersionSecretData struct {
-	// The API key that is generated for this secret.
-	APIKey *string `json:"api_key,omitempty"`
-
-	// The ID of the API key that is generated for this secret.
-	APIKeyID *string `json:"api_key_id,omitempty"`
-
-	// The service ID under which the API key is created.
-	ServiceID *string `json:"service_id,omitempty"`
-}
-
-// UnmarshalIamCredentialsSecretVersionSecretData unmarshals an instance of IamCredentialsSecretVersionSecretData from the specified map of raw messages.
-func UnmarshalIamCredentialsSecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(IamCredentialsSecretVersionSecretData)
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.APIKey)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.APIKeyID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // IssuanceInfo : Issuance information that is associated with your certificate.
 type IssuanceInfo struct {
 	// The date the certificate was ordered. The date format follows RFC 3339.
@@ -4919,6 +4840,7 @@ type SecretResource struct {
 	// The new secret data to assign to the secret.
 	Payload *string `json:"payload,omitempty"`
 
+	// The data that is associated with the secret version. The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The username to assign to this secret.
@@ -5262,7 +5184,8 @@ type SecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	SecretData *SecretVersionSecretData `json:"secret_data,omitempty"`
+	// The data that is associated with the secret version. The data object contains the field `payload`.
+	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -5303,7 +5226,7 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalSecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
 	if err != nil {
 		return
 	}
@@ -5506,23 +5429,6 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// SecretVersionSecretData : SecretVersionSecretData struct
-type SecretVersionSecretData struct {
-	// The payload that is associated with the secret version.
-	Payload *string `json:"payload,omitempty"`
-}
-
-// UnmarshalSecretVersionSecretData unmarshals an instance of SecretVersionSecretData from the specified map of raw messages.
-func UnmarshalSecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretVersionSecretData)
-	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // UpdateConfigElementOptions : The UpdateConfigElement options.
 type UpdateConfigElementOptions struct {
 	// The secret type.
@@ -5537,6 +5443,7 @@ type UpdateConfigElementOptions struct {
 	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 	Type *string `json:"type" validate:"required"`
 
+	// Properties that describe a configuration, depends on type.
 	Config interface{} `json:"config" validate:"required"`
 
 	// Allows users to set headers on API requests
@@ -5803,30 +5710,6 @@ func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateS
 	return options
 }
 
-// UsernamePasswordSecretVersionSecretData : UsernamePasswordSecretVersionSecretData struct
-type UsernamePasswordSecretVersionSecretData struct {
-	// The username that is associated with the secret version.
-	Username *string `json:"username,omitempty"`
-
-	// The password that is associated with the secret version.
-	Password *string `json:"password,omitempty"`
-}
-
-// UnmarshalUsernamePasswordSecretVersionSecretData unmarshals an instance of UsernamePasswordSecretVersionSecretData from the specified map of raw messages.
-func UnmarshalUsernamePasswordSecretVersionSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UsernamePasswordSecretVersionSecretData)
-	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // CertificateValidity : CertificateValidity struct
 type CertificateValidity struct {
 	// The date the certificate validity period begins.
@@ -6073,6 +5956,7 @@ type ArbitrarySecretResource struct {
 	// The new secret data to assign to the secret.
 	Payload *string `json:"payload,omitempty"`
 
+	// The data that is associated with the secret version. The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -6189,7 +6073,8 @@ type ArbitrarySecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	SecretData *ArbitrarySecretVersionSecretData `json:"secret_data,omitempty"`
+	// The data that is associated with the secret version. The data object contains the field `payload`.
+	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
 func (*ArbitrarySecretVersion) isaSecretVersion() bool {
@@ -6215,7 +6100,7 @@ func UnmarshalArbitrarySecretVersion(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalArbitrarySecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
 	if err != nil {
 		return
 	}
@@ -6609,7 +6494,11 @@ type CertificateSecretResource struct {
 	// with embedded newline characters.
 	Intermediate *string `json:"intermediate,omitempty"`
 
-	SecretData *CertificateSecretData `json:"secret_data,omitempty"`
+	// The data that is associated with the secret. The data object contains the following fields:
+	// `certificate`: The contents of the certificate.
+	// `private_key`: The private key that is associated with the certificate.
+	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -6737,7 +6626,7 @@ func UnmarshalCertificateSecretResource(m map[string]json.RawMessage, result int
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalCertificateSecretData)
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
 	if err != nil {
 		return
 	}
@@ -6808,7 +6697,11 @@ type CertificateSecretVersion struct {
 	// The date that the certificate expires. The date format follows RFC 3339.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
-	SecretData *CertificateSecretData `json:"secret_data,omitempty"`
+	// The data that is associated with the secret version. The data object contains the following fields:
+	// `certificate`: The contents of the certificate.
+	// `private_key`: The private key that is associated with the certificate.
+	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
 func (*CertificateSecretVersion) isaSecretVersion() bool {
@@ -6846,7 +6739,7 @@ func UnmarshalCertificateSecretVersion(m map[string]json.RawMessage, result inte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalCertificateSecretData)
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
 	if err != nil {
 		return
 	}
@@ -7736,7 +7629,11 @@ type IamCredentialsSecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	SecretData *IamCredentialsSecretVersionSecretData `json:"secret_data,omitempty"`
+	// The data that is associated with the secret version. The data object contains the following fields:
+	// `api_key`: The API key that is generated for this secret.
+	// `api_key_id`: The ID of the API key that is generated for this secret.
+	// `service_id`: The service ID under which the API key is created.
+	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
 func (*IamCredentialsSecretVersion) isaSecretVersion() bool {
@@ -7762,7 +7659,7 @@ func UnmarshalIamCredentialsSecretVersion(m map[string]json.RawMessage, result i
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalIamCredentialsSecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
 	if err != nil {
 		return
 	}
@@ -8227,7 +8124,13 @@ type PublicCertificateSecretResource struct {
 	// Issuance information that is associated with your certificate.
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
 
-	// The data that is associated with the secret.
+	// The data that is associated with the secret. The data object contains the following fields:
+	//
+	// `certificate`: The contents of the certificate.
+	//
+	// `private_key`: The private key that is associated with the certificate.
+	//
+	// `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -8842,6 +8745,9 @@ type UsernamePasswordSecretResource struct {
 	// The password to assign to this secret.
 	Password *string `json:"password,omitempty"`
 
+	// The data that is associated with the secret version. The data object contains the following fields:
+	// `username`: The username that is associated with the secret version.
+	// `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
@@ -8985,7 +8891,10 @@ type UsernamePasswordSecretVersion struct {
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
-	SecretData *UsernamePasswordSecretVersionSecretData `json:"secret_data,omitempty"`
+	// The data that is associated with the secret version. The data object contains the following fields:
+	// `username`: The username that is associated with the secret version.
+	// `password`: The password that is associated with the secret version.
+	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
 func (*UsernamePasswordSecretVersion) isaSecretVersion() bool {
@@ -9015,7 +8924,7 @@ func UnmarshalUsernamePasswordSecretVersion(m map[string]json.RawMessage, result
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalUsernamePasswordSecretVersionSecretData)
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
 	if err != nil {
 		return
 	}
