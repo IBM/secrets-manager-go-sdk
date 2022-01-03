@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.43.0-49eab5c7-20211117-152138
+ * IBM OpenAPI SDK Code Generator Version: 3.43.2-e01bd7ca-20211209-144508
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -1801,177 +1801,6 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 	return
 }
 
-// CreateNotificationsRegistration : Register with Event Notifications
-// Creates a registration between a Secrets Manager instance and [Event
-// Notifications](https://cloud.ibm.com/apidocs/event-notifications).
-//
-// A successful request adds Secrets Manager as a source that you can reference from your Event Notifications instance.
-// For more information about enabling notifications for Secrets Manager, check out the
-// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
-func (secretsManager *SecretsManagerV1) CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateNotificationsRegistrationWithContext(context.Background(), createNotificationsRegistrationOptions)
-}
-
-// CreateNotificationsRegistrationWithContext is an alternate form of the CreateNotificationsRegistration method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) CreateNotificationsRegistrationWithContext(ctx context.Context, createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range createNotificationsRegistrationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateNotificationsRegistration")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-
-	body := make(map[string]interface{})
-	if createNotificationsRegistrationOptions.EventNotificationsInstanceCRN != nil {
-		body["event_notifications_instance_crn"] = createNotificationsRegistrationOptions.EventNotificationsInstanceCRN
-	}
-	if createNotificationsRegistrationOptions.EventNotificationsSourceName != nil {
-		body["event_notifications_source_name"] = createNotificationsRegistrationOptions.EventNotificationsSourceName
-	}
-	if createNotificationsRegistrationOptions.EventNotificationsSourceDescription != nil {
-		body["event_notifications_source_description"] = createNotificationsRegistrationOptions.EventNotificationsSourceDescription
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = secretsManager.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
-// GetNotificationsRegistration : Get Event Notifications registration details
-// Retrieves the details of an existing registration between a Secrets Manager instance and Event Notifications.
-func (secretsManager *SecretsManagerV1) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
-	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
-}
-
-// GetNotificationsRegistrationWithContext is an alternate form of the GetNotificationsRegistration method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetNotificationsRegistrationWithContext(ctx context.Context, getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getNotificationsRegistrationOptions, "getNotificationsRegistrationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getNotificationsRegistrationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetNotificationsRegistration")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = secretsManager.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
-// DeleteNotificationsRegistration : Unregister from Event Notifications
-// Deletes a registration between a Secrets Manager instance and Event Notifications.
-//
-// A successful request removes your Secrets Manager instance as a source in Event Notifications.
-func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteNotificationsRegistrationWithContext(context.Background(), deleteNotificationsRegistrationOptions)
-}
-
-// DeleteNotificationsRegistrationWithContext is an alternate form of the DeleteNotificationsRegistration method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithContext(ctx context.Context, deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(deleteNotificationsRegistrationOptions, "deleteNotificationsRegistrationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range deleteNotificationsRegistrationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteNotificationsRegistration")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	response, err = secretsManager.Service.Request(request, nil)
-
-	return
-}
-
 // CollectionMetadata : The metadata that describes the resource array.
 type CollectionMetadata struct {
 	// The type of resources in the resource array.
@@ -2271,53 +2100,6 @@ func (options *CreateConfigElementOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
-// CreateNotificationsRegistrationOptions : The CreateNotificationsRegistration options.
-type CreateNotificationsRegistrationOptions struct {
-	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
-	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
-
-	// The name that is displayed as a source in your Event Notifications instance.
-	EventNotificationsSourceName *string `json:"event_notifications_source_name" validate:"required"`
-
-	// An optional description for the source in your Event Notifications instance.
-	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewCreateNotificationsRegistrationOptions : Instantiate CreateNotificationsRegistrationOptions
-func (*SecretsManagerV1) NewCreateNotificationsRegistrationOptions(eventNotificationsInstanceCRN string, eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
-	return &CreateNotificationsRegistrationOptions{
-		EventNotificationsInstanceCRN: core.StringPtr(eventNotificationsInstanceCRN),
-		EventNotificationsSourceName:  core.StringPtr(eventNotificationsSourceName),
-	}
-}
-
-// SetEventNotificationsInstanceCRN : Allow user to set EventNotificationsInstanceCRN
-func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsInstanceCRN(eventNotificationsInstanceCRN string) *CreateNotificationsRegistrationOptions {
-	_options.EventNotificationsInstanceCRN = core.StringPtr(eventNotificationsInstanceCRN)
-	return _options
-}
-
-// SetEventNotificationsSourceName : Allow user to set EventNotificationsSourceName
-func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceName(eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
-	_options.EventNotificationsSourceName = core.StringPtr(eventNotificationsSourceName)
-	return _options
-}
-
-// SetEventNotificationsSourceDescription : Allow user to set EventNotificationsSourceDescription
-func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceDescription(eventNotificationsSourceDescription string) *CreateNotificationsRegistrationOptions {
-	_options.EventNotificationsSourceDescription = core.StringPtr(eventNotificationsSourceDescription)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *CreateNotificationsRegistrationOptions) SetHeaders(param map[string]string) *CreateNotificationsRegistrationOptions {
-	options.Headers = param
-	return options
-}
-
 // CreateSecret : Properties that describe a secret.
 type CreateSecret struct {
 	// The metadata that describes the resource array.
@@ -2392,7 +2174,7 @@ func (options *CreateSecretGroupOptions) SetHeaders(param map[string]string) *Cr
 
 // CreateSecretOptions : The CreateSecret options.
 type CreateSecretOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
@@ -2406,11 +2188,12 @@ type CreateSecretOptions struct {
 }
 
 // Constants associated with the CreateSecretOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	CreateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	CreateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	CreateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	CreateSecretOptionsSecretTypeKvConst               = "kv"
 	CreateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	CreateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -2509,24 +2292,6 @@ func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
-// DeleteNotificationsRegistrationOptions : The DeleteNotificationsRegistration options.
-type DeleteNotificationsRegistrationOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewDeleteNotificationsRegistrationOptions : Instantiate DeleteNotificationsRegistrationOptions
-func (*SecretsManagerV1) NewDeleteNotificationsRegistrationOptions() *DeleteNotificationsRegistrationOptions {
-	return &DeleteNotificationsRegistrationOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *DeleteNotificationsRegistrationOptions) SetHeaders(param map[string]string) *DeleteNotificationsRegistrationOptions {
-	options.Headers = param
-	return options
-}
-
 // DeleteSecretGroupOptions : The DeleteSecretGroup options.
 type DeleteSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies the secret group.
@@ -2557,7 +2322,7 @@ func (options *DeleteSecretGroupOptions) SetHeaders(param map[string]string) *De
 
 // DeleteSecretOptions : The DeleteSecret options.
 type DeleteSecretOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -2568,11 +2333,12 @@ type DeleteSecretOptions struct {
 }
 
 // Constants associated with the DeleteSecretOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	DeleteSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	DeleteSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	DeleteSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	DeleteSecretOptionsSecretTypeKvConst               = "kv"
 	DeleteSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	DeleteSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -2922,48 +2688,6 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 	return
 }
 
-// GetNotificationsRegistrationOptions : The GetNotificationsRegistration options.
-type GetNotificationsRegistrationOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewGetNotificationsRegistrationOptions : Instantiate GetNotificationsRegistrationOptions
-func (*SecretsManagerV1) NewGetNotificationsRegistrationOptions() *GetNotificationsRegistrationOptions {
-	return &GetNotificationsRegistrationOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetNotificationsRegistrationOptions) SetHeaders(param map[string]string) *GetNotificationsRegistrationOptions {
-	options.Headers = param
-	return options
-}
-
-// GetNotificationsSettings : Properties that describe an existing registration with Event Notifications.
-type GetNotificationsSettings struct {
-	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
-
-	// A collection of resources.
-	Resources []NotificationsSettings `json:"resources" validate:"required"`
-}
-
-// UnmarshalGetNotificationsSettings unmarshals an instance of GetNotificationsSettings from the specified map of raw messages.
-func UnmarshalGetNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(GetNotificationsSettings)
-	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalNotificationsSettings)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // GetPolicyOptions : The GetPolicy options.
 type GetPolicyOptions struct {
 	// The secret type.
@@ -3078,7 +2802,7 @@ func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSe
 
 // GetSecretMetadataOptions : The GetSecretMetadata options.
 type GetSecretMetadataOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3089,11 +2813,12 @@ type GetSecretMetadataOptions struct {
 }
 
 // Constants associated with the GetSecretMetadataOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	GetSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretMetadataOptionsSecretTypeKvConst               = "kv"
 	GetSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3126,7 +2851,7 @@ func (options *GetSecretMetadataOptions) SetHeaders(param map[string]string) *Ge
 
 // GetSecretOptions : The GetSecret options.
 type GetSecretOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3137,11 +2862,12 @@ type GetSecretOptions struct {
 }
 
 // Constants associated with the GetSecretOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	GetSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretOptionsSecretTypeKvConst               = "kv"
 	GetSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3209,7 +2935,7 @@ func UnmarshalGetSecretPolicies(m map[string]json.RawMessage, result interface{}
 // GetSecretPoliciesResourcesItem : Properties that describe a rotation policy.
 type GetSecretPoliciesResourcesItem struct {
 	// The v4 UUID that uniquely identifies the policy.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
 	CRN *string `json:"crn,omitempty"`
@@ -3280,7 +3006,7 @@ func UnmarshalGetSecretPoliciesResourcesItem(m map[string]json.RawMessage, resul
 // GetSecretPolicyRotationResourcesItem : Properties that describe a rotation policy.
 type GetSecretPolicyRotationResourcesItem struct {
 	// The v4 UUID that uniquely identifies the policy.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
 	CRN *string `json:"crn,omitempty"`
@@ -3398,7 +3124,7 @@ func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result inte
 
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3416,11 +3142,12 @@ type GetSecretVersionMetadataOptions struct {
 }
 
 // Constants associated with the GetSecretVersionMetadataOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	GetSecretVersionMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretVersionMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionMetadataOptionsSecretTypeKvConst               = "kv"
 	GetSecretVersionMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretVersionMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3460,7 +3187,7 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3478,11 +3205,12 @@ type GetSecretVersionOptions struct {
 }
 
 // Constants associated with the GetSecretVersionOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	GetSecretVersionOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretVersionOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionOptionsSecretTypeKvConst               = "kv"
 	GetSecretVersionOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretVersionOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3761,7 +3489,7 @@ func UnmarshalListSecretVersions(m map[string]json.RawMessage, result interface{
 
 // ListSecretVersionsOptions : The ListSecretVersions options.
 type ListSecretVersionsOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3772,11 +3500,12 @@ type ListSecretVersionsOptions struct {
 }
 
 // Constants associated with the ListSecretVersionsOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	ListSecretVersionsOptionsSecretTypeArbitraryConst        = "arbitrary"
 	ListSecretVersionsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	ListSecretVersionsOptionsSecretTypeImportedCertConst     = "imported_cert"
+	ListSecretVersionsOptionsSecretTypeKvConst               = "kv"
 	ListSecretVersionsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretVersionsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3833,7 +3562,7 @@ func UnmarshalListSecrets(m map[string]json.RawMessage, result interface{}) (err
 
 // ListSecretsOptions : The ListSecrets options.
 type ListSecretsOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
@@ -3855,11 +3584,12 @@ type ListSecretsOptions struct {
 }
 
 // Constants associated with the ListSecretsOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	ListSecretsOptionsSecretTypeArbitraryConst        = "arbitrary"
 	ListSecretsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	ListSecretsOptionsSecretTypeImportedCertConst     = "imported_cert"
+	ListSecretsOptionsSecretTypeKvConst               = "kv"
 	ListSecretsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3893,23 +3623,6 @@ func (_options *ListSecretsOptions) SetOffset(offset int64) *ListSecretsOptions 
 func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecretsOptions {
 	options.Headers = param
 	return options
-}
-
-// NotificationsSettings : The Event Notifications details.
-type NotificationsSettings struct {
-	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
-	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
-}
-
-// UnmarshalNotificationsSettings unmarshals an instance of NotificationsSettings from the specified map of raw messages.
-func UnmarshalNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(NotificationsSettings)
-	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCRN)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
 }
 
 // PutConfigOptions : The PutConfig options.
@@ -4073,6 +3786,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotateCertificateBody
 // - RestoreIamCredentialsSecretBody
 // - DeleteCredentialsForIamCredentialsSecret
+// - RotateKvSecretBody
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
 	Payload *string `json:"payload,omitempty"`
@@ -4358,6 +4072,7 @@ func UnmarshalSecretGroupResource(m map[string]json.RawMessage, result interface
 // - IamCredentialsSecretMetadata
 // - CertificateSecretMetadata
 // - PublicCertificateSecretMetadata
+// - KvSecretMetadata
 type SecretMetadata struct {
 	// The unique ID of the secret.
 	ID *string `json:"id,omitempty"`
@@ -4494,6 +4209,7 @@ const (
 	SecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	SecretMetadataSecretTypeKvConst               = "kv"
 	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -4771,6 +4487,7 @@ func UnmarshalSecretPolicyRotationRotation(m map[string]json.RawMessage, result 
 // - IamCredentialsSecretResource
 // - CertificateSecretResource
 // - PublicCertificateSecretResource
+// - KvSecretResource
 type SecretResource struct {
 	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
@@ -4970,6 +4687,7 @@ const (
 	SecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	SecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	SecretResourceSecretTypeKvConst               = "kv"
 	SecretResourceSecretTypePublicCertConst       = "public_cert"
 	SecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5569,7 +5287,7 @@ func (options *UpdateSecretGroupMetadataOptions) SetHeaders(param map[string]str
 
 // UpdateSecretMetadataOptions : The UpdateSecretMetadata options.
 type UpdateSecretMetadataOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -5586,11 +5304,12 @@ type UpdateSecretMetadataOptions struct {
 }
 
 // Constants associated with the UpdateSecretMetadataOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	UpdateSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	UpdateSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UpdateSecretMetadataOptionsSecretTypeKvConst               = "kv"
 	UpdateSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5637,7 +5356,7 @@ func (options *UpdateSecretMetadataOptions) SetHeaders(param map[string]string) 
 
 // UpdateSecretOptions : The UpdateSecret options.
 type UpdateSecretOptions struct {
-	// The secret type.
+	// The secret type. Kv is not supported at present.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -5654,11 +5373,12 @@ type UpdateSecretOptions struct {
 }
 
 // Constants associated with the UpdateSecretOptions.SecretType property.
-// The secret type.
+// The secret type. Kv is not supported at present.
 const (
 	UpdateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	UpdateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	UpdateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UpdateSecretOptionsSecretTypeKvConst               = "kv"
 	UpdateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5805,6 +5525,7 @@ const (
 	ArbitrarySecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	ArbitrarySecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretMetadataSecretTypeKvConst               = "kv"
 	ArbitrarySecretMetadataSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5966,6 +5687,7 @@ const (
 	ArbitrarySecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	ArbitrarySecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretResourceSecretTypeKvConst               = "kv"
 	ArbitrarySecretResourceSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -6309,6 +6031,7 @@ const (
 	CertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	CertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretMetadataSecretTypeKvConst               = "kv"
 	CertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -6538,6 +6261,7 @@ const (
 	CertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	CertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretResourceSecretTypeKvConst               = "kv"
 	CertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7296,6 +7020,7 @@ const (
 	IamCredentialsSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretMetadataSecretTypeKvConst               = "kv"
 	IamCredentialsSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7506,6 +7231,7 @@ const (
 	IamCredentialsSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	IamCredentialsSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretResourceSecretTypeKvConst               = "kv"
 	IamCredentialsSecretResourceSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7776,6 +7502,332 @@ func UnmarshalIamCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	return
 }
 
+// KvSecretMetadata : Metadata properties that describe a Kv secret.
+// This model "extends" SecretMetadata
+type KvSecretMetadata struct {
+	// The unique ID of the secret.
+	ID *string `json:"id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// A human-readable alias to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an alias for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret.
+	Description *string `json:"description,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// The Cloud Resource Name (CRN) that uniquely identifies the resource.
+	CRN *string `json:"crn,omitempty"`
+
+	// The date the secret was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// The number of versions the secret has.
+	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The date the secret material expires. The date format follows RFC 3339.
+	//
+	// You can set an expiration date on supported secret types at their creation. If you create a secret without
+	// specifying an expiration date, the secret does not expire. The `expiration_date` field is supported for the
+	// following secret types:
+	//
+	// - `arbitrary`
+	// - `username_password`.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+}
+
+// Constants associated with the KvSecretMetadata.SecretType property.
+// The secret type.
+const (
+	KvSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	KvSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	KvSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	KvSecretMetadataSecretTypeKvConst               = "kv"
+	KvSecretMetadataSecretTypePublicCertConst       = "public_cert"
+	KvSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewKvSecretMetadata : Instantiate KvSecretMetadata (Generic Model Constructor)
+func (*SecretsManagerV1) NewKvSecretMetadata(name string) (_model *KvSecretMetadata, err error) {
+	_model = &KvSecretMetadata{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*KvSecretMetadata) isaSecretMetadata() bool {
+	return true
+}
+
+// UnmarshalKvSecretMetadata unmarshals an instance of KvSecretMetadata from the specified map of raw messages.
+func UnmarshalKvSecretMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(KvSecretMetadata)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// KvSecretResource : Properties that describe a secret.
+// This model "extends" SecretResource
+type KvSecretResource struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// A human-readable alias to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an alias for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret.
+	Description *string `json:"description,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
+	CRN *string `json:"crn,omitempty"`
+
+	// The date the secret was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Updates when the actual secret is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// The number of versions that are associated with a secret.
+	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
+	// secret version metadata](#get-secret-version-metadata).
+	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The date the secret material expires. The date format follows RFC 3339.
+	//
+	// You can set an expiration date on supported secret types at their creation. If you create a secret without
+	// specifying an expiration date, the secret does not expire. The `expiration_date` field is supported for the
+	// following secret types:
+	//
+	// - `arbitrary`
+	// - `username_password`.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The new secret data to assign to the secret.
+	Payload *string `json:"payload,omitempty"`
+
+	// The data that is associated with the secret version. The data object contains the field `payload`.
+	SecretData interface{} `json:"secret_data,omitempty"`
+}
+
+// Constants associated with the KvSecretResource.SecretType property.
+// The secret type.
+const (
+	KvSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	KvSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	KvSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	KvSecretResourceSecretTypeKvConst               = "kv"
+	KvSecretResourceSecretTypePublicCertConst       = "public_cert"
+	KvSecretResourceSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewKvSecretResource : Instantiate KvSecretResource (Generic Model Constructor)
+func (*SecretsManagerV1) NewKvSecretResource(name string) (_model *KvSecretResource, err error) {
+	_model = &KvSecretResource{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*KvSecretResource) isaSecretResource() bool {
+	return true
+}
+
+// UnmarshalKvSecretResource unmarshals an instance of KvSecretResource from the specified map of raw messages.
+func UnmarshalKvSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(KvSecretResource)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PublicCertSecretEngineRootConfig : Configuration for the public certificates engine.
 // This model "extends" GetConfigResourcesItem
 type PublicCertSecretEngineRootConfig struct {
@@ -7899,6 +7951,7 @@ const (
 	PublicCertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	PublicCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretMetadataSecretTypeKvConst               = "kv"
 	PublicCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8119,10 +8172,18 @@ type PublicCertificateSecretResource struct {
 	// The fully qualified domain name or host domain name for the certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
+	// Indicates whether the issued certificate includes a private key.
+	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
+
+	// Indicates whether the issued certificate includes an intermediate certificate.
+	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
+
 	Rotation *Rotation `json:"rotation,omitempty"`
 
 	// Issuance information that is associated with your certificate.
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
 
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
@@ -8140,6 +8201,7 @@ const (
 	PublicCertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	PublicCertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretResourceSecretTypeKvConst               = "kv"
 	PublicCertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8262,11 +8324,23 @@ func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, resu
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "private_key_included", &obj.PrivateKeyIncluded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_included", &obj.IntermediateIncluded)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalIssuanceInfo)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
 		return
 	}
@@ -8381,6 +8455,22 @@ func UnmarshalRotateCertificateBody(m map[string]json.RawMessage, result interfa
 	if err != nil {
 		return
 	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RotateKvSecretBody : The request body of a `rotate` action.
+// This model "extends" SecretAction
+type RotateKvSecretBody struct {
+}
+
+func (*RotateKvSecretBody) isaSecretAction() bool {
+	return true
+}
+
+// UnmarshalRotateKvSecretBody unmarshals an instance of RotateKvSecretBody from the specified map of raw messages.
+func UnmarshalRotateKvSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RotateKvSecretBody)
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -8601,6 +8691,7 @@ const (
 	UsernamePasswordSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
 	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretMetadataSecretTypeKvConst               = "kv"
 	UsernamePasswordSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8773,6 +8864,7 @@ const (
 	UsernamePasswordSecretResourceSecretTypeArbitraryConst        = "arbitrary"
 	UsernamePasswordSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretResourceSecretTypeKvConst               = "kv"
 	UsernamePasswordSecretResourceSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )

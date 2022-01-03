@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1260,7 +1260,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(createSecretPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -1342,7 +1342,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
@@ -1428,7 +1428,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
@@ -1528,7 +1528,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					defer GinkgoRecover()
 
 					// Set success status code with no respoonse body
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -5736,520 +5736,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) - Operation response error`, func() {
-		createNotificationsRegistrationPath := "/api/v1/notifications/registration"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke CreateNotificationsRegistration with error: Operation response processing error`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the CreateNotificationsRegistrationOptions model
-				createNotificationsRegistrationOptionsModel := new(secretsmanagerv1.CreateNotificationsRegistrationOptions)
-				createNotificationsRegistrationOptionsModel.EventNotificationsInstanceCRN = core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceName = core.StringPtr("My Secrets Manager")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceDescription = core.StringPtr("Optional description of this source in an Event Notifications instance.")
-				createNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				secretsManagerService.EnableRetries(0, 0)
-				result, response, operationErr = secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions)`, func() {
-		createNotificationsRegistrationPath := "/api/v1/notifications/registration"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"event_notifications_instance_crn": "crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::"}]}`)
-				}))
-			})
-			It(`Invoke CreateNotificationsRegistration successfully with retries`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-				secretsManagerService.EnableRetries(0, 0)
-
-				// Construct an instance of the CreateNotificationsRegistrationOptions model
-				createNotificationsRegistrationOptionsModel := new(secretsmanagerv1.CreateNotificationsRegistrationOptions)
-				createNotificationsRegistrationOptionsModel.EventNotificationsInstanceCRN = core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceName = core.StringPtr("My Secrets Manager")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceDescription = core.StringPtr("Optional description of this source in an Event Notifications instance.")
-				createNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := secretsManagerService.CreateNotificationsRegistrationWithContext(ctx, createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				secretsManagerService.DisableRetries()
-				result, response, operationErr := secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = secretsManagerService.CreateNotificationsRegistrationWithContext(ctx, createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(createNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"event_notifications_instance_crn": "crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::"}]}`)
-				}))
-			})
-			It(`Invoke CreateNotificationsRegistration successfully`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := secretsManagerService.CreateNotificationsRegistration(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the CreateNotificationsRegistrationOptions model
-				createNotificationsRegistrationOptionsModel := new(secretsmanagerv1.CreateNotificationsRegistrationOptions)
-				createNotificationsRegistrationOptionsModel.EventNotificationsInstanceCRN = core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceName = core.StringPtr("My Secrets Manager")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceDescription = core.StringPtr("Optional description of this source in an Event Notifications instance.")
-				createNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke CreateNotificationsRegistration with error: Operation validation and request error`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the CreateNotificationsRegistrationOptions model
-				createNotificationsRegistrationOptionsModel := new(secretsmanagerv1.CreateNotificationsRegistrationOptions)
-				createNotificationsRegistrationOptionsModel.EventNotificationsInstanceCRN = core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceName = core.StringPtr("My Secrets Manager")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceDescription = core.StringPtr("Optional description of this source in an Event Notifications instance.")
-				createNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := secretsManagerService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the CreateNotificationsRegistrationOptions model with no property values
-				createNotificationsRegistrationOptionsModelNew := new(secretsmanagerv1.CreateNotificationsRegistrationOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(201)
-				}))
-			})
-			It(`Invoke CreateNotificationsRegistration successfully`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the CreateNotificationsRegistrationOptions model
-				createNotificationsRegistrationOptionsModel := new(secretsmanagerv1.CreateNotificationsRegistrationOptions)
-				createNotificationsRegistrationOptionsModel.EventNotificationsInstanceCRN = core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceName = core.StringPtr("My Secrets Manager")
-				createNotificationsRegistrationOptionsModel.EventNotificationsSourceDescription = core.StringPtr("Optional description of this source in an Event Notifications instance.")
-				createNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := secretsManagerService.CreateNotificationsRegistration(createNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) - Operation response error`, func() {
-		getNotificationsRegistrationPath := "/api/v1/notifications/registration"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke GetNotificationsRegistration with error: Operation response processing error`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the GetNotificationsRegistrationOptions model
-				getNotificationsRegistrationOptionsModel := new(secretsmanagerv1.GetNotificationsRegistrationOptions)
-				getNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				secretsManagerService.EnableRetries(0, 0)
-				result, response, operationErr = secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions)`, func() {
-		getNotificationsRegistrationPath := "/api/v1/notifications/registration"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"event_notifications_instance_crn": "crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::"}]}`)
-				}))
-			})
-			It(`Invoke GetNotificationsRegistration successfully with retries`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-				secretsManagerService.EnableRetries(0, 0)
-
-				// Construct an instance of the GetNotificationsRegistrationOptions model
-				getNotificationsRegistrationOptionsModel := new(secretsmanagerv1.GetNotificationsRegistrationOptions)
-				getNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := secretsManagerService.GetNotificationsRegistrationWithContext(ctx, getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				secretsManagerService.DisableRetries()
-				result, response, operationErr := secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = secretsManagerService.GetNotificationsRegistrationWithContext(ctx, getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"event_notifications_instance_crn": "crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::"}]}`)
-				}))
-			})
-			It(`Invoke GetNotificationsRegistration successfully`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := secretsManagerService.GetNotificationsRegistration(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the GetNotificationsRegistrationOptions model
-				getNotificationsRegistrationOptionsModel := new(secretsmanagerv1.GetNotificationsRegistrationOptions)
-				getNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke GetNotificationsRegistration with error: Operation request error`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the GetNotificationsRegistrationOptions model
-				getNotificationsRegistrationOptionsModel := new(secretsmanagerv1.GetNotificationsRegistrationOptions)
-				getNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := secretsManagerService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke GetNotificationsRegistration successfully`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the GetNotificationsRegistrationOptions model
-				getNotificationsRegistrationOptionsModel := new(secretsmanagerv1.GetNotificationsRegistrationOptions)
-				getNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions)`, func() {
-		deleteNotificationsRegistrationPath := "/api/v1/notifications/registration"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteNotificationsRegistrationPath))
-					Expect(req.Method).To(Equal("DELETE"))
-
-					res.WriteHeader(204)
-				}))
-			})
-			It(`Invoke DeleteNotificationsRegistration successfully`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				response, operationErr := secretsManagerService.DeleteNotificationsRegistration(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-
-				// Construct an instance of the DeleteNotificationsRegistrationOptions model
-				deleteNotificationsRegistrationOptionsModel := new(secretsmanagerv1.DeleteNotificationsRegistrationOptions)
-				deleteNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				response, operationErr = secretsManagerService.DeleteNotificationsRegistration(deleteNotificationsRegistrationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-			})
-			It(`Invoke DeleteNotificationsRegistration with error: Operation request error`, func() {
-				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(secretsManagerService).ToNot(BeNil())
-
-				// Construct an instance of the DeleteNotificationsRegistrationOptions model
-				deleteNotificationsRegistrationOptionsModel := new(secretsmanagerv1.DeleteNotificationsRegistrationOptions)
-				deleteNotificationsRegistrationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := secretsManagerService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				response, operationErr := secretsManagerService.DeleteNotificationsRegistration(deleteNotificationsRegistrationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			secretsManagerService, _ := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
@@ -6297,21 +5783,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("letsencrypt")))
 				Expect(createConfigElementOptionsModel.Config).To(Equal(configElementDefConfigModel))
 				Expect(createConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewCreateNotificationsRegistrationOptions successfully`, func() {
-				// Construct an instance of the CreateNotificationsRegistrationOptions model
-				createNotificationsRegistrationOptionsEventNotificationsInstanceCRN := "crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::"
-				createNotificationsRegistrationOptionsEventNotificationsSourceName := "My Secrets Manager"
-				createNotificationsRegistrationOptionsModel := secretsManagerService.NewCreateNotificationsRegistrationOptions(createNotificationsRegistrationOptionsEventNotificationsInstanceCRN, createNotificationsRegistrationOptionsEventNotificationsSourceName)
-				createNotificationsRegistrationOptionsModel.SetEventNotificationsInstanceCRN("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")
-				createNotificationsRegistrationOptionsModel.SetEventNotificationsSourceName("My Secrets Manager")
-				createNotificationsRegistrationOptionsModel.SetEventNotificationsSourceDescription("Optional description of this source in an Event Notifications instance.")
-				createNotificationsRegistrationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(createNotificationsRegistrationOptionsModel).ToNot(BeNil())
-				Expect(createNotificationsRegistrationOptionsModel.EventNotificationsInstanceCRN).To(Equal(core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/<account-id>:<service-instance>::")))
-				Expect(createNotificationsRegistrationOptionsModel.EventNotificationsSourceName).To(Equal(core.StringPtr("My Secrets Manager")))
-				Expect(createNotificationsRegistrationOptionsModel.EventNotificationsSourceDescription).To(Equal(core.StringPtr("Optional description of this source in an Event Notifications instance.")))
-				Expect(createNotificationsRegistrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecret successfully`, func() {
 				var metadata *secretsmanagerv1.CollectionMetadata = nil
@@ -6416,13 +5887,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(deleteConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
 				Expect(deleteConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewDeleteNotificationsRegistrationOptions successfully`, func() {
-				// Construct an instance of the DeleteNotificationsRegistrationOptions model
-				deleteNotificationsRegistrationOptionsModel := secretsManagerService.NewDeleteNotificationsRegistrationOptions()
-				deleteNotificationsRegistrationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(deleteNotificationsRegistrationOptionsModel).ToNot(BeNil())
-				Expect(deleteNotificationsRegistrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewDeleteSecretGroupOptions successfully`, func() {
 				// Construct an instance of the DeleteSecretGroupOptions model
 				id := "testString"
@@ -6484,13 +5948,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getConfigOptionsModel).ToNot(BeNil())
 				Expect(getConfigOptionsModel.SecretType).To(Equal(core.StringPtr("iam_credentials")))
 				Expect(getConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewGetNotificationsRegistrationOptions successfully`, func() {
-				// Construct an instance of the GetNotificationsRegistrationOptions model
-				getNotificationsRegistrationOptionsModel := secretsManagerService.NewGetNotificationsRegistrationOptions()
-				getNotificationsRegistrationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getNotificationsRegistrationOptionsModel).ToNot(BeNil())
-				Expect(getNotificationsRegistrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetPolicyOptions successfully`, func() {
 				// Construct an instance of the GetPolicyOptions model
@@ -6883,6 +6340,18 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			It(`Invoke NewIamCredentialsSecretResource successfully`, func() {
 				name := "testString"
 				_model, err := secretsManagerService.NewIamCredentialsSecretResource(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewKvSecretMetadata successfully`, func() {
+				name := "example-secret"
+				_model, err := secretsManagerService.NewKvSecretMetadata(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewKvSecretResource successfully`, func() {
+				name := "testString"
+				_model, err := secretsManagerService.NewKvSecretResource(name)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
