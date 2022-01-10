@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.43.2-e01bd7ca-20211209-144508
+ * IBM OpenAPI SDK Code Generator Version: 3.43.3-d49d4b21-20220104-223519
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -7723,7 +7723,7 @@ type KvSecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
@@ -8462,6 +8462,17 @@ func UnmarshalRotateCertificateBody(m map[string]json.RawMessage, result interfa
 // RotateKvSecretBody : The request body of a `rotate` action.
 // This model "extends" SecretAction
 type RotateKvSecretBody struct {
+	// The new secret data to assign to a `kv` secret.
+	Payload interface{} `json:"payload" validate:"required"`
+}
+
+// NewRotateKvSecretBody : Instantiate RotateKvSecretBody (Generic Model Constructor)
+func (*SecretsManagerV1) NewRotateKvSecretBody(payload interface{}) (_model *RotateKvSecretBody, err error) {
+	_model = &RotateKvSecretBody{
+		Payload: payload,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
 }
 
 func (*RotateKvSecretBody) isaSecretAction() bool {
@@ -8471,6 +8482,10 @@ func (*RotateKvSecretBody) isaSecretAction() bool {
 // UnmarshalRotateKvSecretBody unmarshals an instance of RotateKvSecretBody from the specified map of raw messages.
 func UnmarshalRotateKvSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RotateKvSecretBody)
+	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }

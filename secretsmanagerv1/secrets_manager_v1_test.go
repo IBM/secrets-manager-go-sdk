@@ -6385,6 +6385,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewRotateKvSecretBody successfully`, func() {
+				payload := map[string]interface{}{"anyKey": "anyValue"}
+				_model, err := secretsManagerService.NewRotateKvSecretBody(payload)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewRotatePublicCertBody successfully`, func() {
 				rotateKeys := true
 				_model, err := secretsManagerService.NewRotatePublicCertBody(rotateKeys)
