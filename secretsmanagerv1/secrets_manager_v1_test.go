@@ -4700,13 +4700,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
+				// Construct an instance of the SecretConfigLetsEncryptConfig model
+				secretConfigModel := new(secretsmanagerv1.SecretConfigLetsEncryptConfig)
+				secretConfigModel.PrivateKey = core.StringPtr("testString")
+
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				createConfigElementOptionsModel.Name = core.StringPtr("testString")
 				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
-				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Config = secretConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.CreateConfigElement(createConfigElementOptionsModel)
@@ -4759,7 +4763,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"private_key": "PrivateKey"}}]}`)
 				}))
 			})
 			It(`Invoke CreateConfigElement successfully with retries`, func() {
@@ -4771,13 +4775,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
+				// Construct an instance of the SecretConfigLetsEncryptConfig model
+				secretConfigModel := new(secretsmanagerv1.SecretConfigLetsEncryptConfig)
+				secretConfigModel.PrivateKey = core.StringPtr("testString")
+
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				createConfigElementOptionsModel.Name = core.StringPtr("testString")
 				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
-				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Config = secretConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4833,7 +4841,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"private_key": "PrivateKey"}}]}`)
 				}))
 			})
 			It(`Invoke CreateConfigElement successfully`, func() {
@@ -4850,13 +4858,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
+				// Construct an instance of the SecretConfigLetsEncryptConfig model
+				secretConfigModel := new(secretsmanagerv1.SecretConfigLetsEncryptConfig)
+				secretConfigModel.PrivateKey = core.StringPtr("testString")
+
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				createConfigElementOptionsModel.Name = core.StringPtr("testString")
 				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
-				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Config = secretConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4874,13 +4886,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
+				// Construct an instance of the SecretConfigLetsEncryptConfig model
+				secretConfigModel := new(secretsmanagerv1.SecretConfigLetsEncryptConfig)
+				secretConfigModel.PrivateKey = core.StringPtr("testString")
+
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				createConfigElementOptionsModel.Name = core.StringPtr("testString")
 				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
-				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Config = secretConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -4919,13 +4935,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
+				// Construct an instance of the SecretConfigLetsEncryptConfig model
+				secretConfigModel := new(secretsmanagerv1.SecretConfigLetsEncryptConfig)
+				secretConfigModel.PrivateKey = core.StringPtr("testString")
+
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				createConfigElementOptionsModel.Name = core.StringPtr("testString")
 				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
-				createConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
+				createConfigElementOptionsModel.Config = secretConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5222,7 +5242,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"private_key": "PrivateKey"}}]}`)
 				}))
 			})
 			It(`Invoke GetConfigElement successfully with retries`, func() {
@@ -5278,7 +5298,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"private_key": "PrivateKey"}}]}`)
 				}))
 			})
 			It(`Invoke GetConfigElement successfully`, func() {
@@ -5462,7 +5482,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"private_key": "PrivateKey"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateConfigElement successfully with retries`, func() {
@@ -5536,7 +5556,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"private_key": "PrivateKey"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateConfigElement successfully`, func() {
@@ -5732,31 +5752,36 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			It(`Invoke NewConfigElementDef successfully`, func() {
 				name := "testString"
 				typeVar := "letsencrypt"
-				config := map[string]interface{}{"anyKey": "anyValue"}
-				_model, err := secretsManagerService.NewConfigElementDef(name, typeVar, config)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
+				var config secretsmanagerv1.SecretConfigIntf = nil
+				_, err := secretsManagerService.NewConfigElementDef(name, typeVar, config)
+				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewCreateConfigElementOptions successfully`, func() {
+				// Construct an instance of the SecretConfigLetsEncryptConfig model
+				secretConfigModel := new(secretsmanagerv1.SecretConfigLetsEncryptConfig)
+				Expect(secretConfigModel).ToNot(BeNil())
+				secretConfigModel.PrivateKey = core.StringPtr("testString")
+				Expect(secretConfigModel.PrivateKey).To(Equal(core.StringPtr("testString")))
+
 				// Construct an instance of the CreateConfigElementOptions model
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
 				createConfigElementOptionsName := "testString"
 				createConfigElementOptionsType := "letsencrypt"
-				createConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
+				var createConfigElementOptionsConfig secretsmanagerv1.SecretConfigIntf = nil
 				createConfigElementOptionsModel := secretsManagerService.NewCreateConfigElementOptions(secretType, configElement, createConfigElementOptionsName, createConfigElementOptionsType, createConfigElementOptionsConfig)
 				createConfigElementOptionsModel.SetSecretType("public_cert")
 				createConfigElementOptionsModel.SetConfigElement("certificate_authorities")
 				createConfigElementOptionsModel.SetName("testString")
 				createConfigElementOptionsModel.SetType("letsencrypt")
-				createConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
+				createConfigElementOptionsModel.SetConfig(secretConfigModel)
 				createConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createConfigElementOptionsModel).ToNot(BeNil())
 				Expect(createConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
 				Expect(createConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
 				Expect(createConfigElementOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("letsencrypt")))
-				Expect(createConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(createConfigElementOptionsModel.Config).To(Equal(secretConfigModel))
 				Expect(createConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecret successfully`, func() {
@@ -6356,6 +6381,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			It(`Invoke NewRotateUsernamePasswordSecretBody successfully`, func() {
 				password := "testString"
 				_model, err := secretsManagerService.NewRotateUsernamePasswordSecretBody(password)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretConfigClassicInfrastructureConfig successfully`, func() {
+				classicInfrastructureUsername := "testString"
+				classicInfrastructurePassword := "testString"
+				_model, err := secretsManagerService.NewSecretConfigClassicInfrastructureConfig(classicInfrastructureUsername, classicInfrastructurePassword)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretConfigCloudInternetServicesConfig successfully`, func() {
+				cisCRN := "crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::"
+				_model, err := secretsManagerService.NewSecretConfigCloudInternetServicesConfig(cisCRN)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretConfigLetsEncryptConfig successfully`, func() {
+				privateKey := "testString"
+				_model, err := secretsManagerService.NewSecretConfigLetsEncryptConfig(privateKey)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
