@@ -1855,7 +1855,7 @@ type ConfigElementDef struct {
 	Type *string `json:"type" validate:"required"`
 
 	// The configuration to define for the specified secret type.
-	Config SecretConfigIntf `json:"config" validate:"required"`
+	Config ConfigElementDefConfigIntf `json:"config" validate:"required"`
 }
 
 // Constants associated with the ConfigElementDef.Type property.
@@ -1868,7 +1868,7 @@ const (
 )
 
 // NewConfigElementDef : Instantiate ConfigElementDef (Generic Model Constructor)
-func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config SecretConfigIntf) (_model *ConfigElementDef, err error) {
+func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config ConfigElementDefConfigIntf) (_model *ConfigElementDef, err error) {
 	_model = &ConfigElementDef{
 		Name:   core.StringPtr(name),
 		Type:   core.StringPtr(typeVar),
@@ -1889,7 +1889,87 @@ func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalSecretConfig)
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalConfigElementDefConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementDefConfig : The configuration to define for the specified secret type.
+// Models which "extend" this model:
+// - ConfigElementDefConfigLetsEncryptConfig
+// - ConfigElementDefConfigCloudInternetServicesConfig
+// - ConfigElementDefConfigClassicInfrastructureConfig
+type ConfigElementDefConfig struct {
+	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
+	//
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
+	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
+	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
+	CisCRN *string `json:"cis_crn,omitempty"`
+
+	// An IBM Cloud API key that can to list domains in your CIS instance.
+	//
+	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
+	// the Reader service role on Internet Services (`internet-svcs`).
+	//
+	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
+	// recommended that you assign the Reader access role, and then use the
+	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
+	// domains. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	CisApikey *string `json:"cis_apikey,omitempty"`
+
+	// The username that is associated with your classic infrastructure account.
+	//
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
+	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
+
+	// Your classic infrastructure API key.
+	//
+	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
+	// > Users > name > API keys.** For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
+}
+
+func (*ConfigElementDefConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+type ConfigElementDefConfigIntf interface {
+	isaConfigElementDefConfig() bool
+}
+
+// UnmarshalConfigElementDefConfig unmarshals an instance of ConfigElementDefConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfig)
+	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cis_crn", &obj.CisCRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cis_apikey", &obj.CisApikey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
 	if err != nil {
 		return
 	}
@@ -1945,7 +2025,7 @@ type CreateConfigElementOptions struct {
 	Type *string `json:"type" validate:"required"`
 
 	// The configuration to define for the specified secret type.
-	Config SecretConfigIntf `json:"config" validate:"required"`
+	Config ConfigElementDefConfigIntf `json:"config" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -1974,7 +2054,7 @@ const (
 )
 
 // NewCreateConfigElementOptions : Instantiate CreateConfigElementOptions
-func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config SecretConfigIntf) *CreateConfigElementOptions {
+func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
 	return &CreateConfigElementOptions{
 		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
@@ -2009,7 +2089,7 @@ func (_options *CreateConfigElementOptions) SetType(typeVar string) *CreateConfi
 }
 
 // SetConfig : Allow user to set Config
-func (_options *CreateConfigElementOptions) SetConfig(config SecretConfigIntf) *CreateConfigElementOptions {
+func (_options *CreateConfigElementOptions) SetConfig(config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
 	_options.Config = config
 	return _options
 }
@@ -3642,86 +3722,6 @@ func UnmarshalSecretAction(m map[string]json.RawMessage, result interface{}) (er
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// SecretConfig : The configuration to define for the specified secret type.
-// Models which "extend" this model:
-// - SecretConfigLetsEncryptConfig
-// - SecretConfigCloudInternetServicesConfig
-// - SecretConfigClassicInfrastructureConfig
-type SecretConfig struct {
-	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
-	//
-	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
-	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
-	// the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
-	PrivateKey *string `json:"private_key,omitempty"`
-
-	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
-	CisCRN *string `json:"cis_crn,omitempty"`
-
-	// An IBM Cloud API key that can to list domains in your CIS instance.
-	//
-	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
-	// the Reader service role on Internet Services (`internet-svcs`).
-	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
-	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
-	CisApikey *string `json:"cis_apikey,omitempty"`
-
-	// The username that is associated with your classic infrastructure account.
-	//
-	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
-	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
-	// the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
-	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
-
-	// Your classic infrastructure API key.
-	//
-	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
-	// > Users > name > API keys.** For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
-	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
-}
-
-func (*SecretConfig) isaSecretConfig() bool {
-	return true
-}
-
-type SecretConfigIntf interface {
-	isaSecretConfig() bool
-}
-
-// UnmarshalSecretConfig unmarshals an instance of SecretConfig from the specified map of raw messages.
-func UnmarshalSecretConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretConfig)
-	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "cis_crn", &obj.CisCRN)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "cis_apikey", &obj.CisApikey)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
 	if err != nil {
 		return
 	}
@@ -6482,6 +6482,137 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 	return
 }
 
+// ConfigElementDefConfigClassicInfrastructureConfig : Properties that describe an IBM Cloud classic infrastructure (SoftLayer) configuration.
+// This model "extends" ConfigElementDefConfig
+type ConfigElementDefConfigClassicInfrastructureConfig struct {
+	// The username that is associated with your classic infrastructure account.
+	//
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
+	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username" validate:"required"`
+
+	// Your classic infrastructure API key.
+	//
+	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
+	// > Users > name > API keys.** For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password" validate:"required"`
+}
+
+// NewConfigElementDefConfigClassicInfrastructureConfig : Instantiate ConfigElementDefConfigClassicInfrastructureConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDefConfigClassicInfrastructureConfig(classicInfrastructureUsername string, classicInfrastructurePassword string) (_model *ConfigElementDefConfigClassicInfrastructureConfig, err error) {
+	_model = &ConfigElementDefConfigClassicInfrastructureConfig{
+		ClassicInfrastructureUsername: core.StringPtr(classicInfrastructureUsername),
+		ClassicInfrastructurePassword: core.StringPtr(classicInfrastructurePassword),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*ConfigElementDefConfigClassicInfrastructureConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalConfigElementDefConfigClassicInfrastructureConfig unmarshals an instance of ConfigElementDefConfigClassicInfrastructureConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfigClassicInfrastructureConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfigClassicInfrastructureConfig)
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementDefConfigCloudInternetServicesConfig : Properties that describe an IBM Cloud Internet Services (CIS) configuration.
+// This model "extends" ConfigElementDefConfig
+type ConfigElementDefConfigCloudInternetServicesConfig struct {
+	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
+	CisCRN *string `json:"cis_crn" validate:"required"`
+
+	// An IBM Cloud API key that can to list domains in your CIS instance.
+	//
+	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
+	// the Reader service role on Internet Services (`internet-svcs`).
+	//
+	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
+	// recommended that you assign the Reader access role, and then use the
+	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
+	// domains. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	CisApikey *string `json:"cis_apikey,omitempty"`
+}
+
+// NewConfigElementDefConfigCloudInternetServicesConfig : Instantiate ConfigElementDefConfigCloudInternetServicesConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDefConfigCloudInternetServicesConfig(cisCRN string) (_model *ConfigElementDefConfigCloudInternetServicesConfig, err error) {
+	_model = &ConfigElementDefConfigCloudInternetServicesConfig{
+		CisCRN: core.StringPtr(cisCRN),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*ConfigElementDefConfigCloudInternetServicesConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalConfigElementDefConfigCloudInternetServicesConfig unmarshals an instance of ConfigElementDefConfigCloudInternetServicesConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfigCloudInternetServicesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfigCloudInternetServicesConfig)
+	err = core.UnmarshalPrimitive(m, "cis_crn", &obj.CisCRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cis_apikey", &obj.CisApikey)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementDefConfigLetsEncryptConfig : Properties that describe a Let's Encrypt configuration.
+// This model "extends" ConfigElementDefConfig
+type ConfigElementDefConfigLetsEncryptConfig struct {
+	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
+	//
+	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
+	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
+	// the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
+	PrivateKey *string `json:"private_key" validate:"required"`
+}
+
+// NewConfigElementDefConfigLetsEncryptConfig : Instantiate ConfigElementDefConfigLetsEncryptConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewConfigElementDefConfigLetsEncryptConfig(privateKey string) (_model *ConfigElementDefConfigLetsEncryptConfig, err error) {
+	_model = &ConfigElementDefConfigLetsEncryptConfig{
+		PrivateKey: core.StringPtr(privateKey),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*ConfigElementDefConfigLetsEncryptConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalConfigElementDefConfigLetsEncryptConfig unmarshals an instance of ConfigElementDefConfigLetsEncryptConfig from the specified map of raw messages.
+func UnmarshalConfigElementDefConfigLetsEncryptConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementDefConfigLetsEncryptConfig)
+	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // CreateIamCredentialsSecretEngineRootConfig : Configuration for the IAM credentials engine.
 // This model "extends" EngineConfig
 type CreateIamCredentialsSecretEngineRootConfig struct {
@@ -8266,137 +8397,6 @@ func (*RotateUsernamePasswordSecretBody) isaSecretAction() bool {
 func UnmarshalRotateUsernamePasswordSecretBody(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RotateUsernamePasswordSecretBody)
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// SecretConfigClassicInfrastructureConfig : Properties that describe an IBM Cloud classic infrastructure (SoftLayer) configuration.
-// This model "extends" SecretConfig
-type SecretConfigClassicInfrastructureConfig struct {
-	// The username that is associated with your classic infrastructure account.
-	//
-	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
-	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
-	// the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
-	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username" validate:"required"`
-
-	// Your classic infrastructure API key.
-	//
-	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
-	// > Users > name > API keys.** For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
-	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password" validate:"required"`
-}
-
-// NewSecretConfigClassicInfrastructureConfig : Instantiate SecretConfigClassicInfrastructureConfig (Generic Model Constructor)
-func (*SecretsManagerV1) NewSecretConfigClassicInfrastructureConfig(classicInfrastructureUsername string, classicInfrastructurePassword string) (_model *SecretConfigClassicInfrastructureConfig, err error) {
-	_model = &SecretConfigClassicInfrastructureConfig{
-		ClassicInfrastructureUsername: core.StringPtr(classicInfrastructureUsername),
-		ClassicInfrastructurePassword: core.StringPtr(classicInfrastructurePassword),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-func (*SecretConfigClassicInfrastructureConfig) isaSecretConfig() bool {
-	return true
-}
-
-// UnmarshalSecretConfigClassicInfrastructureConfig unmarshals an instance of SecretConfigClassicInfrastructureConfig from the specified map of raw messages.
-func UnmarshalSecretConfigClassicInfrastructureConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretConfigClassicInfrastructureConfig)
-	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// SecretConfigCloudInternetServicesConfig : Properties that describe an IBM Cloud Internet Services (CIS) configuration.
-// This model "extends" SecretConfig
-type SecretConfigCloudInternetServicesConfig struct {
-	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
-	CisCRN *string `json:"cis_crn" validate:"required"`
-
-	// An IBM Cloud API key that can to list domains in your CIS instance.
-	//
-	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
-	// the Reader service role on Internet Services (`internet-svcs`).
-	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
-	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
-	CisApikey *string `json:"cis_apikey,omitempty"`
-}
-
-// NewSecretConfigCloudInternetServicesConfig : Instantiate SecretConfigCloudInternetServicesConfig (Generic Model Constructor)
-func (*SecretsManagerV1) NewSecretConfigCloudInternetServicesConfig(cisCRN string) (_model *SecretConfigCloudInternetServicesConfig, err error) {
-	_model = &SecretConfigCloudInternetServicesConfig{
-		CisCRN: core.StringPtr(cisCRN),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-func (*SecretConfigCloudInternetServicesConfig) isaSecretConfig() bool {
-	return true
-}
-
-// UnmarshalSecretConfigCloudInternetServicesConfig unmarshals an instance of SecretConfigCloudInternetServicesConfig from the specified map of raw messages.
-func UnmarshalSecretConfigCloudInternetServicesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretConfigCloudInternetServicesConfig)
-	err = core.UnmarshalPrimitive(m, "cis_crn", &obj.CisCRN)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "cis_apikey", &obj.CisApikey)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// SecretConfigLetsEncryptConfig : Properties that describe a Let's Encrypt configuration.
-// This model "extends" SecretConfig
-type SecretConfigLetsEncryptConfig struct {
-	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
-	//
-	// If you have a working ACME client or account for Let's Encrypt, you can use the existing private key to enable
-	// communications with Secrets Manager. If you don't have an account yet, you can create one. For more information, see
-	// the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#create-acme-account).
-	PrivateKey *string `json:"private_key" validate:"required"`
-}
-
-// NewSecretConfigLetsEncryptConfig : Instantiate SecretConfigLetsEncryptConfig (Generic Model Constructor)
-func (*SecretsManagerV1) NewSecretConfigLetsEncryptConfig(privateKey string) (_model *SecretConfigLetsEncryptConfig, err error) {
-	_model = &SecretConfigLetsEncryptConfig{
-		PrivateKey: core.StringPtr(privateKey),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-func (*SecretConfigLetsEncryptConfig) isaSecretConfig() bool {
-	return true
-}
-
-// UnmarshalSecretConfigLetsEncryptConfig unmarshals an instance of SecretConfigLetsEncryptConfig from the specified map of raw messages.
-func UnmarshalSecretConfigLetsEncryptConfig(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretConfigLetsEncryptConfig)
-	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
 		return
 	}
