@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.43.5-e0ec19e2-20220124-172004
+ * IBM OpenAPI SDK Code Generator Version: 3.44.0-98838c07-20220128-151531
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
