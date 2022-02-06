@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.43.3-d49d4b21-20220104-223519
+ * IBM OpenAPI SDK Code Generator Version: 3.44.0-98838c07-20220128-151531
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -37,7 +37,7 @@ import (
 
 // SecretsManagerV1 : With IBM Cloud® Secrets Manager, you can create, lease, and centrally manage secrets that are used
 // in IBM Cloud services or your custom-built applications. Secrets are stored in a dedicated instance of Secrets
-// Manager, built on open source HashiCorp Vault.
+// Manager, which is built on open source HashiCorp Vault.
 //
 // API Version: 1.0.0
 // See: https://cloud.ibm.com/docs/secrets-manager
@@ -473,7 +473,7 @@ func (secretsManager *SecretsManagerV1) DeleteSecretGroupWithContext(ctx context
 }
 
 // CreateSecret : Create a secret
-// Creates a secret or imports an existing value that you can use to access or authenticate to a protected resource.
+// Create a secret or import an existing value that you can use to access or authenticate to a protected resource.
 //
 // Use this method to either generate or import an existing secret, such as an arbitrary value or a TLS certificate,
 // that you can manage in your Secrets Manager service instance. A successful request stores the secret in your
@@ -689,7 +689,7 @@ func (secretsManager *SecretsManagerV1) ListAllSecretsWithContext(ctx context.Co
 }
 
 // GetSecret : Get a secret
-// Retrieves a secret and its details by specifying the ID of the secret.
+// Get a secret and its details by specifying the ID of the secret.
 //
 // A successful request returns the secret data that is associated with your secret, along with other metadata. To view
 // only the details of a specified secret without retrieving its value, use the [Get secret
@@ -1476,7 +1476,7 @@ func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context
 // CreateConfigElement : Add a configuration
 // Adds a configuration element to the specified secret type.
 //
-// Use this method to define the configurations that are required to enable the  public certificates (`public_cert`)
+// Use this method to define the configurations that are required to enable the public certificates (`public_cert`)
 // engine. You can add up to 10 certificate authority and DNS provider configurations for your instance.
 func (secretsManager *SecretsManagerV1) CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.CreateConfigElementWithContext(context.Background(), createConfigElementOptions)
@@ -1914,7 +1914,7 @@ type ConfigElementDefConfig struct {
 	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
 	CisCRN *string `json:"cis_crn,omitempty"`
 
-	// An IBM Cloud API key that has the capability to list domains in your CIS instance.
+	// An IBM Cloud API key that can to list domains in your CIS instance.
 	//
 	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
 	// the Reader service role on Internet Services (`internet-svcs`).
@@ -2174,7 +2174,7 @@ func (options *CreateSecretGroupOptions) SetHeaders(param map[string]string) *Cr
 
 // CreateSecretOptions : The CreateSecret options.
 type CreateSecretOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The metadata that describes the resource array.
@@ -2188,7 +2188,7 @@ type CreateSecretOptions struct {
 }
 
 // Constants associated with the CreateSecretOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	CreateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	CreateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -2322,7 +2322,7 @@ func (options *DeleteSecretGroupOptions) SetHeaders(param map[string]string) *De
 
 // DeleteSecretOptions : The DeleteSecret options.
 type DeleteSecretOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -2333,7 +2333,7 @@ type DeleteSecretOptions struct {
 }
 
 // Constants associated with the DeleteSecretOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	DeleteSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	DeleteSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -2373,7 +2373,7 @@ func (options *DeleteSecretOptions) SetHeaders(param map[string]string) *DeleteS
 // Models which "extend" this model:
 // - CreateIamCredentialsSecretEngineRootConfig
 type EngineConfig struct {
-	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	// An IBM Cloud API key that can create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
 	// the IAM Identity Service. For more information, see the
@@ -2646,7 +2646,7 @@ type GetConfigResourcesItem struct {
 	// The DNS provider configurations that are associated with your instance.
 	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
 
-	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	// An IBM Cloud API key that can create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
 	// the IAM Identity Service. For more information, see the
@@ -2802,7 +2802,7 @@ func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSe
 
 // GetSecretMetadataOptions : The GetSecretMetadata options.
 type GetSecretMetadataOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -2813,7 +2813,7 @@ type GetSecretMetadataOptions struct {
 }
 
 // Constants associated with the GetSecretMetadataOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	GetSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -2851,7 +2851,7 @@ func (options *GetSecretMetadataOptions) SetHeaders(param map[string]string) *Ge
 
 // GetSecretOptions : The GetSecret options.
 type GetSecretOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -2862,7 +2862,7 @@ type GetSecretOptions struct {
 }
 
 // Constants associated with the GetSecretOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	GetSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -2906,7 +2906,7 @@ type GetSecretPolicies struct {
 	Metadata *CollectionMetadata `json:"metadata,omitempty"`
 
 	// A collection of resources.
-	Resources []GetSecretPoliciesResourcesItem `json:"resources,omitempty"`
+	Resources []interface{} `json:"resources,omitempty"`
 }
 
 func (*GetSecretPolicies) isaGetSecretPolicies() bool {
@@ -2924,149 +2924,7 @@ func UnmarshalGetSecretPolicies(m map[string]json.RawMessage, result interface{}
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalGetSecretPoliciesResourcesItem)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// GetSecretPoliciesResourcesItem : Properties that describe a rotation policy.
-type GetSecretPoliciesResourcesItem struct {
-	// The v4 UUID that uniquely identifies the policy.
-	ID *string `json:"id,omitempty"`
-
-	// The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
-	CRN *string `json:"crn,omitempty"`
-
-	// The date the policy was created. The date format follows RFC 3339.
-	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
-
-	// The unique identifier for the entity that created the policy.
-	CreatedBy *string `json:"created_by,omitempty"`
-
-	// Updates when the policy is replaced or modified. The date format follows RFC 3339.
-	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
-
-	// The unique identifier for the entity that updated the policy.
-	UpdatedBy *string `json:"updated_by,omitempty"`
-
-	// The MIME type that represents the policy. Currently, only the default is supported.
-	Type *string `json:"type" validate:"required"`
-
-	Rotation SecretPolicyRotationRotationIntf `json:"rotation" validate:"required"`
-}
-
-// Constants associated with the GetSecretPoliciesResourcesItem.Type property.
-// The MIME type that represents the policy. Currently, only the default is supported.
-const (
-	GetSecretPoliciesResourcesItemTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst = "application/vnd.ibm.secrets-manager.secret.policy+json"
-)
-
-// UnmarshalGetSecretPoliciesResourcesItem unmarshals an instance of GetSecretPoliciesResourcesItem from the specified map of raw messages.
-func UnmarshalGetSecretPoliciesResourcesItem(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(GetSecretPoliciesResourcesItem)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "updated_by", &obj.UpdatedBy)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalSecretPolicyRotationRotation)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// GetSecretPolicyRotationResourcesItem : Properties that describe a rotation policy.
-type GetSecretPolicyRotationResourcesItem struct {
-	// The v4 UUID that uniquely identifies the policy.
-	ID *string `json:"id,omitempty"`
-
-	// The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
-	CRN *string `json:"crn,omitempty"`
-
-	// The date the policy was created. The date format follows RFC 3339.
-	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
-
-	// The unique identifier for the entity that created the policy.
-	CreatedBy *string `json:"created_by,omitempty"`
-
-	// Updates when the policy is replaced or modified. The date format follows RFC 3339.
-	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
-
-	// The unique identifier for the entity that updated the policy.
-	UpdatedBy *string `json:"updated_by,omitempty"`
-
-	// The MIME type that represents the policy. Currently, only the default is supported.
-	Type *string `json:"type" validate:"required"`
-
-	Rotation SecretPolicyRotationRotationIntf `json:"rotation" validate:"required"`
-}
-
-// Constants associated with the GetSecretPolicyRotationResourcesItem.Type property.
-// The MIME type that represents the policy. Currently, only the default is supported.
-const (
-	GetSecretPolicyRotationResourcesItemTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst = "application/vnd.ibm.secrets-manager.secret.policy+json"
-)
-
-// UnmarshalGetSecretPolicyRotationResourcesItem unmarshals an instance of GetSecretPolicyRotationResourcesItem from the specified map of raw messages.
-func UnmarshalGetSecretPolicyRotationResourcesItem(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(GetSecretPolicyRotationResourcesItem)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "updated_by", &obj.UpdatedBy)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalSecretPolicyRotationRotation)
+	err = core.UnmarshalPrimitive(m, "resources", &obj.Resources)
 	if err != nil {
 		return
 	}
@@ -3124,7 +2982,7 @@ func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result inte
 
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3142,7 +3000,7 @@ type GetSecretVersionMetadataOptions struct {
 }
 
 // Constants associated with the GetSecretVersionMetadataOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	GetSecretVersionMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretVersionMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -3187,7 +3045,7 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3205,7 +3063,7 @@ type GetSecretVersionOptions struct {
 }
 
 // Constants associated with the GetSecretVersionOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	GetSecretVersionOptionsSecretTypeArbitraryConst        = "arbitrary"
 	GetSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -3277,7 +3135,7 @@ type IssuanceInfo struct {
 	// The date the certificate was ordered. The date format follows RFC 3339.
 	OrderedOn *strfmt.DateTime `json:"ordered_on,omitempty"`
 
-	// An code that identifies an issuance error.
+	// A code that identifies an issuance error.
 	//
 	// This field, along with `error_message`, is returned when Secrets Manager successfully processes your request, but a
 	// certificate is unable to be issued by the certificate authority.
@@ -3489,7 +3347,7 @@ func UnmarshalListSecretVersions(m map[string]json.RawMessage, result interface{
 
 // ListSecretVersionsOptions : The ListSecretVersions options.
 type ListSecretVersionsOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -3500,7 +3358,7 @@ type ListSecretVersionsOptions struct {
 }
 
 // Constants associated with the ListSecretVersionsOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	ListSecretVersionsOptionsSecretTypeArbitraryConst        = "arbitrary"
 	ListSecretVersionsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -3562,7 +3420,7 @@ func UnmarshalListSecrets(m map[string]json.RawMessage, result interface{}) (err
 
 // ListSecretsOptions : The ListSecrets options.
 type ListSecretsOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The number of secrets to retrieve. By default, list operations return the first 200 items. To retrieve a different
@@ -3584,7 +3442,7 @@ type ListSecretsOptions struct {
 }
 
 // Constants associated with the ListSecretsOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	ListSecretsOptionsSecretTypeArbitraryConst        = "arbitrary"
 	ListSecretsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -3754,7 +3612,7 @@ type Rotation struct {
 	// Determines whether Secrets Manager rotates your certificate automatically.
 	//
 	// If set to `true`, the service reorders your certificate 31 days before it expires. To access the previous  version
-	// of the certifcate, you can use the [Get a version of a secret](#get-secret-version) method.
+	// of the certificate, you can use the [Get a version of a secret](#get-secret-version) method.
 	AutoRotate *bool `json:"auto_rotate,omitempty"`
 
 	// Determines whether Secrets Manager rotates the private key for your certificate automatically.
@@ -3791,7 +3649,7 @@ type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
 	Payload *string `json:"payload,omitempty"`
 
-	// Determine whether keys should be rotated.
+	// Determine whether keys must be rotated.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
 
 	// The new password to assign to a `username_password` secret.
@@ -3810,7 +3668,7 @@ type SecretAction struct {
 	VersionID *string `json:"version_id,omitempty"`
 
 	// The ID of the API key that you want to delete. If the secret was created with a static service ID, only the API key
-	// is deleted. Otherwise the service ID is deleted together with its API key.
+	// is deleted. Otherwise, the service ID is deleted together with its API key.
 	APIKeyID *string `json:"api_key_id,omitempty"`
 
 	// The service ID that you want to delete. This property can be used instead of the `api_key_id` field, but only for
@@ -4079,8 +3937,8 @@ type SecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -4140,19 +3998,21 @@ type SecretMetadata struct {
 	// For `iam_credentials` secrets, the TTL defines for how long each generated API key remains valid. The value can be
 	// either an integer that specifies the number of seconds, or the string representation of a duration, such as `120m`
 	// or `24h`.
+	//
+	// Minimum duration is 1 minute. Maximum is 90 days.
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
 	// `iam_credentials` secret.
 	//
-	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key are
 	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
 
 	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
-	// If `true`, the service ID for the secret was provided by the user at secret creation. If `false`, the service ID was
-	// generated by Secrets Manager.
+	// If the value is `true`, the service ID for the secret was provided by the user at secret creation. If the value is
+	// `false`, the service ID was generated by Secrets Manager.
 	ServiceIDIsStatic *bool `json:"service_id_is_static,omitempty"`
 
 	// The service ID under which the API key is created. The service ID is included in the metadata only if the secret was
@@ -4167,8 +4027,8 @@ type SecretMetadata struct {
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The identifier for the cryptographic algorthim that was used by the issuing certificate authority to sign the
-	// ceritificate.
+	// The identifier for the cryptographic algorithm that was used by the issuing certificate authority to sign the
+	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
 	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
@@ -4509,7 +4369,7 @@ type SecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -4577,6 +4437,8 @@ type SecretResource struct {
 	// For `iam_credentials` secrets, the TTL defines for how long each generated API key remains valid. The value can be
 	// either an integer that specifies the number of seconds, or the string representation of a duration, such as `120m`
 	// or `24h`.
+	//
+	// Minimum duration is 1 minute. Maximum is 90 days.
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
@@ -4617,7 +4479,7 @@ type SecretResource struct {
 	// Determines whether to use the same service ID and API key for future read operations on an
 	// `iam_credentials` secret.
 	//
-	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key are
 	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
 
@@ -4635,8 +4497,8 @@ type SecretResource struct {
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The identifier for the cryptographic algorthim that was used by the issuing certificate authority to sign the
-	// ceritificate.
+	// The identifier for the cryptographic algorithm that was used by the issuing certificate authority to sign the
+	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
 	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
@@ -4987,8 +4849,8 @@ type SecretVersionInfo struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
@@ -5076,8 +4938,8 @@ type SecretVersionMetadata struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
@@ -5161,7 +5023,7 @@ type UpdateConfigElementOptions struct {
 	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 	Type *string `json:"type" validate:"required"`
 
-	// Properties that describe a configuration, depends on type.
+	// Properties that describe a configuration, which depends on type.
 	Config interface{} `json:"config" validate:"required"`
 
 	// Allows users to set headers on API requests
@@ -5287,7 +5149,7 @@ func (options *UpdateSecretGroupMetadataOptions) SetHeaders(param map[string]str
 
 // UpdateSecretMetadataOptions : The UpdateSecretMetadata options.
 type UpdateSecretMetadataOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -5304,7 +5166,7 @@ type UpdateSecretMetadataOptions struct {
 }
 
 // Constants associated with the UpdateSecretMetadataOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	UpdateSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
 	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -5356,7 +5218,7 @@ func (options *UpdateSecretMetadataOptions) SetHeaders(param map[string]string) 
 
 // UpdateSecretOptions : The UpdateSecret options.
 type UpdateSecretOptions struct {
-	// The secret type. Kv is not supported at present.
+	// The secret type.
 	SecretType *string `json:"secret_type" validate:"required,ne="`
 
 	// The v4 UUID that uniquely identifies the secret.
@@ -5373,7 +5235,7 @@ type UpdateSecretOptions struct {
 }
 
 // Constants associated with the UpdateSecretOptions.SecretType property.
-// The secret type. Kv is not supported at present.
+// The secret type.
 const (
 	UpdateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
 	UpdateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
@@ -5462,8 +5324,8 @@ type ArbitrarySecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -5629,7 +5491,7 @@ type ArbitrarySecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -5845,8 +5707,8 @@ type ArbitrarySecretVersionInfo struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 }
 
@@ -5899,8 +5761,8 @@ type ArbitrarySecretVersionMetadata struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 }
 
@@ -5947,8 +5809,8 @@ type CertificateSecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -5996,8 +5858,8 @@ type CertificateSecretMetadata struct {
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The identifier for the cryptographic algorthim that was used by the issuing certificate authority to sign the
-	// ceritificate.
+	// The identifier for the cryptographic algorithm that was used by the issuing certificate authority to sign the
+	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
 	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
@@ -6171,7 +6033,7 @@ type CertificateSecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -6226,8 +6088,8 @@ type CertificateSecretResource struct {
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The identifier for the cryptographic algorthim that was used by the issuing certificate authority to sign the
-	// ceritificate.
+	// The identifier for the cryptographic algorithm that was used by the issuing certificate authority to sign the
+	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
 	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
@@ -6486,8 +6348,8 @@ type CertificateSecretVersionInfo struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -6560,8 +6422,8 @@ type CertificateSecretVersionMetadata struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -6674,7 +6536,7 @@ type ConfigElementDefConfigCloudInternetServicesConfig struct {
 	// The Cloud Resource Name (CRN) that is associated with the CIS instance.
 	CisCRN *string `json:"cis_crn" validate:"required"`
 
-	// An IBM Cloud API key that has the capability to list domains in your CIS instance.
+	// An IBM Cloud API key that can to list domains in your CIS instance.
 	//
 	// To grant Secrets Manager the ability to view the CIS instance and all of its domains, the API key must be assigned
 	// the Reader service role on Internet Services (`internet-svcs`).
@@ -6754,7 +6616,7 @@ func UnmarshalConfigElementDefConfigLetsEncryptConfig(m map[string]json.RawMessa
 // CreateIamCredentialsSecretEngineRootConfig : Configuration for the IAM credentials engine.
 // This model "extends" EngineConfig
 type CreateIamCredentialsSecretEngineRootConfig struct {
-	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	// An IBM Cloud API key that can create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
 	// the IAM Identity Service. For more information, see the
@@ -6797,7 +6659,7 @@ func UnmarshalCreateIamCredentialsSecretEngineRootConfig(m map[string]json.RawMe
 // This model "extends" SecretAction
 type DeleteCredentialsForIamCredentialsSecret struct {
 	// The ID of the API key that you want to delete. If the secret was created with a static service ID, only the API key
-	// is deleted. Otherwise the service ID is deleted together with its API key.
+	// is deleted. Otherwise, the service ID is deleted together with its API key.
 	APIKeyID *string `json:"api_key_id,omitempty"`
 
 	// The service ID that you want to delete. This property can be used instead of the `api_key_id` field, but only for
@@ -6875,7 +6737,7 @@ type GetSecretPolicyRotation struct {
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []GetSecretPolicyRotationResourcesItem `json:"resources" validate:"required"`
+	Resources []interface{} `json:"resources" validate:"required"`
 }
 
 func (*GetSecretPolicyRotation) isaGetSecretPolicies() bool {
@@ -6889,7 +6751,7 @@ func UnmarshalGetSecretPolicyRotation(m map[string]json.RawMessage, result inter
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalGetSecretPolicyRotationResourcesItem)
+	err = core.UnmarshalPrimitive(m, "resources", &obj.Resources)
 	if err != nil {
 		return
 	}
@@ -6900,7 +6762,7 @@ func UnmarshalGetSecretPolicyRotation(m map[string]json.RawMessage, result inter
 // IamCredentialsSecretEngineRootConfig : Configuration for the IAM credentials engine.
 // This model "extends" GetConfigResourcesItem
 type IamCredentialsSecretEngineRootConfig struct {
-	// An IBM Cloud API key that has the capability to create and manage service IDs.
+	// An IBM Cloud API key that can create and manage service IDs.
 	//
 	// The API key must be assigned the Editor platform role on the Access Groups Service and the Operator platform role on
 	// the IAM Identity Service. For more information, see the
@@ -6938,8 +6800,8 @@ type IamCredentialsSecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -6989,19 +6851,21 @@ type IamCredentialsSecretMetadata struct {
 	// For `iam_credentials` secrets, the TTL defines for how long each generated API key remains valid. The value can be
 	// either an integer that specifies the number of seconds, or the string representation of a duration, such as `120m`
 	// or `24h`.
+	//
+	// Minimum duration is 1 minute. Maximum is 90 days.
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
 	// `iam_credentials` secret.
 	//
-	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key are
 	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
 
 	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
-	// If `true`, the service ID for the secret was provided by the user at secret creation. If `false`, the service ID was
-	// generated by Secrets Manager.
+	// If the value is `true`, the service ID for the secret was provided by the user at secret creation. If the value is
+	// `false`, the service ID was generated by Secrets Manager.
 	ServiceIDIsStatic *bool `json:"service_id_is_static,omitempty"`
 
 	// The service ID under which the API key is created. The service ID is included in the metadata only if the secret was
@@ -7140,7 +7004,7 @@ type IamCredentialsSecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -7180,6 +7044,8 @@ type IamCredentialsSecretResource struct {
 	// For `iam_credentials` secrets, the TTL defines for how long each generated API key remains valid. The value can be
 	// either an integer that specifies the number of seconds, or the string representation of a duration, such as `120m`
 	// or `24h`.
+	//
+	// Minimum duration is 1 minute. Maximum is 90 days.
 	TTL interface{} `json:"ttl,omitempty"`
 
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
@@ -7220,7 +7086,7 @@ type IamCredentialsSecretResource struct {
 	// Determines whether to use the same service ID and API key for future read operations on an
 	// `iam_credentials` secret.
 	//
-	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key is
+	// If set to `true`, the service reuses the current credentials. If set to `false`, a new service ID and API key are
 	// generated each time that the secret is read or accessed.
 	ReuseAPIKey *bool `json:"reuse_api_key,omitempty"`
 }
@@ -7408,8 +7274,8 @@ type IamCredentialsSecretVersionInfo struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 }
 
@@ -7462,8 +7328,8 @@ type IamCredentialsSecretVersionMetadata struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 }
 
@@ -7502,7 +7368,7 @@ func UnmarshalIamCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	return
 }
 
-// KvSecretMetadata : Metadata properties that describe a Kv secret.
+// KvSecretMetadata : Metadata properties that describe a key-value secret.
 // This model "extends" SecretMetadata
 type KvSecretMetadata struct {
 	// The unique ID of the secret.
@@ -7510,8 +7376,8 @@ type KvSecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -7555,16 +7421,6 @@ type KvSecretMetadata struct {
 
 	// The number of versions the secret has.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
-
-	// The date the secret material expires. The date format follows RFC 3339.
-	//
-	// You can set an expiration date on supported secret types at their creation. If you create a secret without
-	// specifying an expiration date, the secret does not expire. The `expiration_date` field is supported for the
-	// following secret types:
-	//
-	// - `arbitrary`
-	// - `username_password`.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
 // Constants associated with the KvSecretMetadata.SecretType property.
@@ -7646,10 +7502,6 @@ func UnmarshalKvSecretMetadata(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
-	if err != nil {
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -7677,7 +7529,7 @@ type KvSecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -7865,8 +7717,8 @@ type PublicCertificateSecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -7919,8 +7771,8 @@ type PublicCertificateSecretMetadata struct {
 	// Set to `false` for the certificate file to contain only the issued certificate.
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
-	// The identifier for the cryptographic algorthim to be used by the issuing certificate authority to sign the
-	// ceritificate.
+	// The identifier for the cryptographic algorithm to be used by the issuing certificate authority to sign the
+	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
 	// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
@@ -8101,7 +7953,7 @@ type PublicCertificateSecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -8154,15 +8006,15 @@ type PublicCertificateSecretResource struct {
 	// To view a list of your configured authorities, use the [List configurations API](#get-secret-config-element).
 	DNS *string `json:"dns,omitempty"`
 
-	// The identifier for the cryptographic algorthim to be used by the issuing certificate authority to sign the
-	// ceritificate.
+	// The identifier for the cryptographic algorithm to be used by the issuing certificate authority to sign the
+	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
 	// The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
 	// certificate.
 	//
-	// The algorithm that you select determines the encryption algorthim (`RSA` or `ECDSA`) and key size to be used to
-	// generate keys and sign certificates. For longer living certificates it is recommended to use longer keys to provide
+	// The algorithm that you select determines the encryption algorithm (`RSA` or `ECDSA`) and key size to be used to
+	// generate keys and sign certificates. For longer living certificates, it is recommended to use longer keys to provide
 	// more encryption protection.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
@@ -8210,8 +8062,8 @@ const (
 // The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
 // certificate.
 //
-// The algorithm that you select determines the encryption algorthim (`RSA` or `ECDSA`) and key size to be used to
-// generate keys and sign certificates. For longer living certificates it is recommended to use longer keys to provide
+// The algorithm that you select determines the encryption algorithm (`RSA` or `ECDSA`) and key size to be used to
+// generate keys and sign certificates. For longer living certificates, it is recommended to use longer keys to provide
 // more encryption protection.
 const (
 	PublicCertificateSecretResourceKeyAlgorithmEc256Const   = "EC256"
@@ -8462,7 +8314,7 @@ func UnmarshalRotateCertificateBody(m map[string]json.RawMessage, result interfa
 // RotateKvSecretBody : The request body of a `rotate` action.
 // This model "extends" SecretAction
 type RotateKvSecretBody struct {
-	// The new secret data to assign to a `kv` secret.
+	// The new secret data to assign to a key-value secret.
 	Payload interface{} `json:"payload" validate:"required"`
 }
 
@@ -8493,7 +8345,7 @@ func UnmarshalRotateKvSecretBody(m map[string]json.RawMessage, result interface{
 // RotatePublicCertBody : The request body of a `rotate` action.
 // This model "extends" SecretAction
 type RotatePublicCertBody struct {
-	// Determine whether keys should be rotated.
+	// Determine whether keys must be rotated.
 	RotateKeys *bool `json:"rotate_keys" validate:"required"`
 }
 
@@ -8643,8 +8495,8 @@ type UsernamePasswordSecretMetadata struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
-	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -8810,7 +8662,7 @@ type UsernamePasswordSecretResource struct {
 
 	// Labels that you can use to filter for secrets in your instance.
 	//
-	// Up to 30 labels can be created. Labels can be between 2-30 characters, including spaces. Special characters not
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
 	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
@@ -9054,8 +8906,8 @@ type UsernamePasswordSecretVersionInfo struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
@@ -9115,8 +8967,8 @@ type UsernamePasswordSecretVersionMetadata struct {
 	// Indicates whether the payload for the secret version is stored and available.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
-	// Indicates whether the secret data that is associated with a secret version has been retrieved in a call to the
-	// service API.
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
