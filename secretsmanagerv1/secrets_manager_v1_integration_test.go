@@ -305,7 +305,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			caConfigName := generateName() + "le-stage-config"
 			privateKey := strings.ReplaceAll(os.Getenv("CA_CONFIG_PRIVATE_KEY"), `\n`, "\n")
 
-			leConfig := secretsmanagerv1.SecretConfig{
+			leConfig := secretsmanagerv1.SecretConfigLetsEncryptConfig{
 				PrivateKey: &privateKey,
 			}
 			_, resp, err := secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
@@ -323,7 +323,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			cis := "cis"
 			dnsConfigName := generateName() + "dns-config"
 
-			cisConfig := secretsmanagerv1.SecretConfig{
+			cisConfig := secretsmanagerv1.SecretConfigCloudInternetServicesConfig{
 				CisCRN:    core.StringPtr(os.Getenv("DNS_CONFIG_CRN")),
 				CisApikey: core.StringPtr(os.Getenv("DNS_CONFIG_API_KEY")),
 			}
@@ -419,7 +419,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			caConfigName := generateName() + "le-stage-config"
 			privateKey := strings.ReplaceAll(os.Getenv("CA_CONFIG_PRIVATE_KEY"), `\n`, "\n")
 
-			leConfig := secretsmanagerv1.SecretConfig{
+			leConfig := secretsmanagerv1.SecretConfigLetsEncryptConfig{
 				PrivateKey: &privateKey,
 			}
 			_, resp, err := secretsManager.CreateConfigElement(&secretsmanagerv1.CreateConfigElementOptions{
@@ -448,7 +448,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			cis := "cis"
 			dnsConfigName := generateName() + "dns-config"
 
-			cisConfig := secretsmanagerv1.SecretConfig{
+			cisConfig := secretsmanagerv1.SecretConfigCloudInternetServicesConfig{
 				CisCRN:    core.StringPtr(os.Getenv("DNS_CONFIG_CRN")),
 				CisApikey: core.StringPtr(os.Getenv("DNS_CONFIG_API_KEY")),
 			}
