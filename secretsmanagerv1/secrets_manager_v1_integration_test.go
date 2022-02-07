@@ -120,6 +120,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
 		It(`Should create a kv secret`, func() {
 			// create kv secret
+			payload := make(map[string]interface{})
+			payload["foo"] = "bar"
 			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeKvConst),
 				Metadata: &secretsmanagerv1.CollectionMetadata{
@@ -131,7 +133,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 						Name:           core.StringPtr(generateName()),
 						Description:    core.StringPtr("Integration test generated"),
 						Labels:         []string{"label1", "label2"},
-						Payload: map[string]string{"foo": "bar"},
+						Payload: 		payload,
 					},
 				},
 			})
