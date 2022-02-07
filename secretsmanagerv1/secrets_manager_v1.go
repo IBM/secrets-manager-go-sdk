@@ -7795,6 +7795,11 @@ type PublicCertificateSecretMetadata struct {
 
 	// Issuance information that is associated with your certificate.
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
 }
 
 // Constants associated with the PublicCertificateSecretMetadata.SecretType property.
@@ -7926,6 +7931,14 @@ func UnmarshalPublicCertificateSecretMetadata(m map[string]json.RawMessage, resu
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -8036,6 +8049,9 @@ type PublicCertificateSecretResource struct {
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
@@ -8193,6 +8209,10 @@ func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, resu
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
 		return
 	}
