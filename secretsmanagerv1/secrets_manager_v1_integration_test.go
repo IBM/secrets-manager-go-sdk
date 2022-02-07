@@ -150,7 +150,8 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(err).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
 			secretData := secret.SecretData.(map[string]interface{})
-			Expect(secretData["payload"].(string)).To(Equal("secret-data"))
+			println(secretData)
+			Expect(secretData["payload"]).To(Equal(payload))
 			// delete kv secret
 			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeKvConst),
