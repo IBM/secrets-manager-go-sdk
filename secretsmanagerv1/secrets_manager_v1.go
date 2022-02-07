@@ -1855,7 +1855,7 @@ type ConfigElementDef struct {
 	Type *string `json:"type" validate:"required"`
 
 	// The configuration to define for the specified secret type.
-	Config interface{} `json:"config" validate:"required"`
+	Config ConfigElementDefConfigIntf `json:"config" validate:"required"`
 }
 
 // Constants associated with the ConfigElementDef.Type property.
@@ -1868,7 +1868,7 @@ const (
 )
 
 // NewConfigElementDef : Instantiate ConfigElementDef (Generic Model Constructor)
-func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config interface{}) (_model *ConfigElementDef, err error) {
+func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config ConfigElementDefConfigIntf) (_model *ConfigElementDef, err error) {
 	_model = &ConfigElementDef{
 		Name: core.StringPtr(name),
 		Type: core.StringPtr(typeVar),
@@ -1941,7 +1941,6 @@ type ConfigElementDefConfig struct {
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 }
-
 func (*ConfigElementDefConfig) isaConfigElementDefConfig() bool {
 	return true
 }
@@ -2025,7 +2024,7 @@ type CreateConfigElementOptions struct {
 	Type *string `json:"type" validate:"required"`
 
 	// The configuration to define for the specified secret type.
-	Config interface{} `json:"config" validate:"required"`
+	Config ConfigElementDefConfigIntf `json:"config" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -2054,7 +2053,7 @@ const (
 )
 
 // NewCreateConfigElementOptions : Instantiate CreateConfigElementOptions
-func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config interface{}) *CreateConfigElementOptions {
+func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
 	return &CreateConfigElementOptions{
 		SecretType: core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
@@ -2089,7 +2088,7 @@ func (_options *CreateConfigElementOptions) SetType(typeVar string) *CreateConfi
 }
 
 // SetConfig : Allow user to set Config
-func (_options *CreateConfigElementOptions) SetConfig(config interface{}) *CreateConfigElementOptions {
+func (_options *CreateConfigElementOptions) SetConfig(config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
 	_options.Config = config
 	return _options
 }
