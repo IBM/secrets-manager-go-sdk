@@ -711,7 +711,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getSecretOptions.SecretType,
-		"id": *getSecretOptions.ID,
+		"id":          *getSecretOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -776,7 +776,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretWithContext(ctx context.Cont
 
 	pathParamsMap := map[string]string{
 		"secret_type": *updateSecretOptions.SecretType,
-		"id": *updateSecretOptions.ID,
+		"id":          *updateSecretOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -847,7 +847,7 @@ func (secretsManager *SecretsManagerV1) DeleteSecretWithContext(ctx context.Cont
 
 	pathParamsMap := map[string]string{
 		"secret_type": *deleteSecretOptions.SecretType,
-		"id": *deleteSecretOptions.ID,
+		"id":          *deleteSecretOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -898,7 +898,7 @@ func (secretsManager *SecretsManagerV1) ListSecretVersionsWithContext(ctx contex
 
 	pathParamsMap := map[string]string{
 		"secret_type": *listSecretVersionsOptions.SecretType,
-		"id": *listSecretVersionsOptions.ID,
+		"id":          *listSecretVersionsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -962,8 +962,8 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionWithContext(ctx context.
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getSecretVersionOptions.SecretType,
-		"id": *getSecretVersionOptions.ID,
-		"version_id": *getSecretVersionOptions.VersionID,
+		"id":          *getSecretVersionOptions.ID,
+		"version_id":  *getSecretVersionOptions.VersionID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1026,8 +1026,8 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx 
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getSecretVersionMetadataOptions.SecretType,
-		"id": *getSecretVersionMetadataOptions.ID,
-		"version_id": *getSecretVersionMetadataOptions.VersionID,
+		"id":          *getSecretVersionMetadataOptions.ID,
+		"version_id":  *getSecretVersionMetadataOptions.VersionID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1091,7 +1091,7 @@ func (secretsManager *SecretsManagerV1) GetSecretMetadataWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getSecretMetadataOptions.SecretType,
-		"id": *getSecretMetadataOptions.ID,
+		"id":          *getSecretMetadataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1155,7 +1155,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretMetadataWithContext(ctx cont
 
 	pathParamsMap := map[string]string{
 		"secret_type": *updateSecretMetadataOptions.SecretType,
-		"id": *updateSecretMetadataOptions.ID,
+		"id":          *updateSecretMetadataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1231,7 +1231,7 @@ func (secretsManager *SecretsManagerV1) PutPolicyWithContext(ctx context.Context
 
 	pathParamsMap := map[string]string{
 		"secret_type": *putPolicyOptions.SecretType,
-		"id": *putPolicyOptions.ID,
+		"id":          *putPolicyOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1309,7 +1309,7 @@ func (secretsManager *SecretsManagerV1) GetPolicyWithContext(ctx context.Context
 
 	pathParamsMap := map[string]string{
 		"secret_type": *getPolicyOptions.SecretType,
-		"id": *getPolicyOptions.ID,
+		"id":          *getPolicyOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1494,7 +1494,7 @@ func (secretsManager *SecretsManagerV1) CreateConfigElementWithContext(ctx conte
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type": *createConfigElementOptions.SecretType,
+		"secret_type":    *createConfigElementOptions.SecretType,
 		"config_element": *createConfigElementOptions.ConfigElement,
 	}
 
@@ -1571,7 +1571,7 @@ func (secretsManager *SecretsManagerV1) GetConfigElementsWithContext(ctx context
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type": *getConfigElementsOptions.SecretType,
+		"secret_type":    *getConfigElementsOptions.SecretType,
 		"config_element": *getConfigElementsOptions.ConfigElement,
 	}
 
@@ -1632,9 +1632,9 @@ func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type": *getConfigElementOptions.SecretType,
+		"secret_type":    *getConfigElementOptions.SecretType,
 		"config_element": *getConfigElementOptions.ConfigElement,
-		"config_name": *getConfigElementOptions.ConfigName,
+		"config_name":    *getConfigElementOptions.ConfigName,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1694,9 +1694,9 @@ func (secretsManager *SecretsManagerV1) UpdateConfigElementWithContext(ctx conte
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type": *updateConfigElementOptions.SecretType,
+		"secret_type":    *updateConfigElementOptions.SecretType,
 		"config_element": *updateConfigElementOptions.ConfigElement,
-		"config_name": *updateConfigElementOptions.ConfigName,
+		"config_name":    *updateConfigElementOptions.ConfigName,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1769,9 +1769,9 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type": *deleteConfigElementOptions.SecretType,
+		"secret_type":    *deleteConfigElementOptions.SecretType,
 		"config_element": *deleteConfigElementOptions.ConfigElement,
-		"config_name": *deleteConfigElementOptions.ConfigName,
+		"config_name":    *deleteConfigElementOptions.ConfigName,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1813,18 +1813,18 @@ type CollectionMetadata struct {
 // Constants associated with the CollectionMetadata.CollectionType property.
 // The type of resources in the resource array.
 const (
-	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerConfigJSONConst = "application/vnd.ibm.secrets-manager.config+json"
-	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerErrorJSONConst = "application/vnd.ibm.secrets-manager.error+json"
-	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretGroupJSONConst = "application/vnd.ibm.secrets-manager.secret.group+json"
-	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst = "application/vnd.ibm.secrets-manager.secret+json"
-	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst = "application/vnd.ibm.secrets-manager.secret.policy+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerConfigJSONConst        = "application/vnd.ibm.secrets-manager.config+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerErrorJSONConst         = "application/vnd.ibm.secrets-manager.error+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretGroupJSONConst   = "application/vnd.ibm.secrets-manager.secret.group+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst        = "application/vnd.ibm.secrets-manager.secret+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst  = "application/vnd.ibm.secrets-manager.secret.policy+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretVersionJSONConst = "application/vnd.ibm.secrets-manager.secret.version+json"
 )
 
 // NewCollectionMetadata : Instantiate CollectionMetadata (Generic Model Constructor)
 func (*SecretsManagerV1) NewCollectionMetadata(collectionType string, collectionTotal int64) (_model *CollectionMetadata, err error) {
 	_model = &CollectionMetadata{
-		CollectionType: core.StringPtr(collectionType),
+		CollectionType:  core.StringPtr(collectionType),
 		CollectionTotal: core.Int64Ptr(collectionTotal),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -1861,17 +1861,17 @@ type ConfigElementDef struct {
 // Constants associated with the ConfigElementDef.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	ConfigElementDefTypeCisConst = "cis"
+	ConfigElementDefTypeCisConst                   = "cis"
 	ConfigElementDefTypeClassicInfrastructureConst = "classic_infrastructure"
-	ConfigElementDefTypeLetsencryptConst = "letsencrypt"
-	ConfigElementDefTypeLetsencryptStageConst = "letsencrypt-stage"
+	ConfigElementDefTypeLetsencryptConst           = "letsencrypt"
+	ConfigElementDefTypeLetsencryptStageConst      = "letsencrypt-stage"
 )
 
 // NewConfigElementDef : Instantiate ConfigElementDef (Generic Model Constructor)
 func (*SecretsManagerV1) NewConfigElementDef(name string, typeVar string, config ConfigElementDefConfigIntf) (_model *ConfigElementDef, err error) {
 	_model = &ConfigElementDef{
-		Name: core.StringPtr(name),
-		Type: core.StringPtr(typeVar),
+		Name:   core.StringPtr(name),
+		Type:   core.StringPtr(typeVar),
 		Config: config,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -1941,6 +1941,7 @@ type ConfigElementDefConfig struct {
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 }
+
 func (*ConfigElementDefConfig) isaConfigElementDefConfig() bool {
 	return true
 }
@@ -1988,10 +1989,10 @@ type ConfigElementMetadata struct {
 // Constants associated with the ConfigElementMetadata.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	ConfigElementMetadataTypeCisConst = "cis"
+	ConfigElementMetadataTypeCisConst                   = "cis"
 	ConfigElementMetadataTypeClassicInfrastructureConst = "classic_infrastructure"
-	ConfigElementMetadataTypeLetsencryptConst = "letsencrypt"
-	ConfigElementMetadataTypeLetsencryptStageConst = "letsencrypt-stage"
+	ConfigElementMetadataTypeLetsencryptConst           = "letsencrypt"
+	ConfigElementMetadataTypeLetsencryptStageConst      = "letsencrypt-stage"
 )
 
 // UnmarshalConfigElementMetadata unmarshals an instance of ConfigElementMetadata from the specified map of raw messages.
@@ -2040,26 +2041,26 @@ const (
 // The configuration element to define or manage.
 const (
 	CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	CreateConfigElementOptionsConfigElementDNSProvidersConst = "dns_providers"
+	CreateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
 // Constants associated with the CreateConfigElementOptions.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	CreateConfigElementOptionsTypeCisConst = "cis"
+	CreateConfigElementOptionsTypeCisConst                   = "cis"
 	CreateConfigElementOptionsTypeClassicInfrastructureConst = "classic_infrastructure"
-	CreateConfigElementOptionsTypeLetsencryptConst = "letsencrypt"
-	CreateConfigElementOptionsTypeLetsencryptStageConst = "letsencrypt-stage"
+	CreateConfigElementOptionsTypeLetsencryptConst           = "letsencrypt"
+	CreateConfigElementOptionsTypeLetsencryptStageConst      = "letsencrypt-stage"
 )
 
 // NewCreateConfigElementOptions : Instantiate CreateConfigElementOptions
 func (*SecretsManagerV1) NewCreateConfigElementOptions(secretType string, configElement string, name string, typeVar string, config ConfigElementDefConfigIntf) *CreateConfigElementOptions {
 	return &CreateConfigElementOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
-		Name: core.StringPtr(name),
-		Type: core.StringPtr(typeVar),
-		Config: config,
+		Name:          core.StringPtr(name),
+		Type:          core.StringPtr(typeVar),
+		Config:        config,
 	}
 }
 
@@ -2111,7 +2112,7 @@ type CreateSecret struct {
 // NewCreateSecret : Instantiate CreateSecret (Generic Model Constructor)
 func (*SecretsManagerV1) NewCreateSecret(metadata *CollectionMetadata, resources []SecretResourceIntf) (_model *CreateSecret, err error) {
 	_model = &CreateSecret{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -2148,7 +2149,7 @@ type CreateSecretGroupOptions struct {
 // NewCreateSecretGroupOptions : Instantiate CreateSecretGroupOptions
 func (*SecretsManagerV1) NewCreateSecretGroupOptions(metadata *CollectionMetadata, resources []SecretGroupResource) *CreateSecretGroupOptions {
 	return &CreateSecretGroupOptions{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 }
@@ -2189,11 +2190,11 @@ type CreateSecretOptions struct {
 // Constants associated with the CreateSecretOptions.SecretType property.
 // The secret type.
 const (
-	CreateSecretOptionsSecretTypeArbitraryConst = "arbitrary"
-	CreateSecretOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	CreateSecretOptionsSecretTypeImportedCertConst = "imported_cert"
-	CreateSecretOptionsSecretTypeKvConst = "kv"
-	CreateSecretOptionsSecretTypePublicCertConst = "public_cert"
+	CreateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	CreateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	CreateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	CreateSecretOptionsSecretTypeKvConst               = "kv"
+	CreateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	CreateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2201,8 +2202,8 @@ const (
 func (*SecretsManagerV1) NewCreateSecretOptions(secretType string, metadata *CollectionMetadata, resources []SecretResourceIntf) *CreateSecretOptions {
 	return &CreateSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		Metadata: metadata,
-		Resources: resources,
+		Metadata:   metadata,
+		Resources:  resources,
 	}
 }
 
@@ -2255,15 +2256,15 @@ const (
 // The configuration element to define or manage.
 const (
 	DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	DeleteConfigElementOptionsConfigElementDNSProvidersConst = "dns_providers"
+	DeleteConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
 // NewDeleteConfigElementOptions : Instantiate DeleteConfigElementOptions
 func (*SecretsManagerV1) NewDeleteConfigElementOptions(secretType string, configElement string, configName string) *DeleteConfigElementOptions {
 	return &DeleteConfigElementOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
-		ConfigName: core.StringPtr(configName),
+		ConfigName:    core.StringPtr(configName),
 	}
 }
 
@@ -2334,11 +2335,11 @@ type DeleteSecretOptions struct {
 // Constants associated with the DeleteSecretOptions.SecretType property.
 // The secret type.
 const (
-	DeleteSecretOptionsSecretTypeArbitraryConst = "arbitrary"
-	DeleteSecretOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	DeleteSecretOptionsSecretTypeImportedCertConst = "imported_cert"
-	DeleteSecretOptionsSecretTypeKvConst = "kv"
-	DeleteSecretOptionsSecretTypePublicCertConst = "public_cert"
+	DeleteSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	DeleteSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	DeleteSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	DeleteSecretOptionsSecretTypeKvConst               = "kv"
+	DeleteSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	DeleteSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2346,7 +2347,7 @@ const (
 func (*SecretsManagerV1) NewDeleteSecretOptions(secretType string, id string) *DeleteSecretOptions {
 	return &DeleteSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -2382,6 +2383,7 @@ type EngineConfig struct {
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
 	APIKeyHash *string `json:"api_key_hash,omitempty"`
 }
+
 func (*EngineConfig) isaEngineConfig() bool {
 	return true
 }
@@ -2454,15 +2456,15 @@ const (
 // The configuration element to define or manage.
 const (
 	GetConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	GetConfigElementOptionsConfigElementDNSProvidersConst = "dns_providers"
+	GetConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
 // NewGetConfigElementOptions : Instantiate GetConfigElementOptions
 func (*SecretsManagerV1) NewGetConfigElementOptions(secretType string, configElement string, configName string) *GetConfigElementOptions {
 	return &GetConfigElementOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
-		ConfigName: core.StringPtr(configName),
+		ConfigName:    core.StringPtr(configName),
 	}
 }
 
@@ -2536,13 +2538,13 @@ const (
 // The configuration element to define or manage.
 const (
 	GetConfigElementsOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	GetConfigElementsOptionsConfigElementDNSProvidersConst = "dns_providers"
+	GetConfigElementsOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
 // NewGetConfigElementsOptions : Instantiate GetConfigElementsOptions
 func (*SecretsManagerV1) NewGetConfigElementsOptions(secretType string, configElement string) *GetConfigElementsOptions {
 	return &GetConfigElementsOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
 	}
 }
@@ -2574,6 +2576,7 @@ type GetConfigElementsResourcesItem struct {
 
 	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
 }
+
 func (*GetConfigElementsResourcesItem) isaGetConfigElementsResourcesItem() bool {
 	return true
 }
@@ -2610,7 +2613,7 @@ type GetConfigOptions struct {
 // The secret type.
 const (
 	GetConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	GetConfigOptionsSecretTypePublicCertConst = "public_cert"
+	GetConfigOptionsSecretTypePublicCertConst     = "public_cert"
 )
 
 // NewGetConfigOptions : Instantiate GetConfigOptions
@@ -2653,6 +2656,7 @@ type GetConfigResourcesItem struct {
 	// The hash value of the IBM Cloud API key that is used to create and manage service IDs.
 	APIKeyHash *string `json:"api_key_hash,omitempty"`
 }
+
 func (*GetConfigResourcesItem) isaGetConfigResourcesItem() bool {
 	return true
 }
@@ -2702,7 +2706,7 @@ type GetPolicyOptions struct {
 // Constants associated with the GetPolicyOptions.SecretType property.
 // The secret type.
 const (
-	GetPolicyOptionsSecretTypePublicCertConst = "public_cert"
+	GetPolicyOptionsSecretTypePublicCertConst       = "public_cert"
 	GetPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2716,7 +2720,7 @@ const (
 func (*SecretsManagerV1) NewGetPolicyOptions(secretType string, id string) *GetPolicyOptions {
 	return &GetPolicyOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -2811,11 +2815,11 @@ type GetSecretMetadataOptions struct {
 // Constants associated with the GetSecretMetadataOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretMetadataOptionsSecretTypeArbitraryConst = "arbitrary"
-	GetSecretMetadataOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	GetSecretMetadataOptionsSecretTypeImportedCertConst = "imported_cert"
-	GetSecretMetadataOptionsSecretTypeKvConst = "kv"
-	GetSecretMetadataOptionsSecretTypePublicCertConst = "public_cert"
+	GetSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretMetadataOptionsSecretTypeKvConst               = "kv"
+	GetSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2823,7 +2827,7 @@ const (
 func (*SecretsManagerV1) NewGetSecretMetadataOptions(secretType string, id string) *GetSecretMetadataOptions {
 	return &GetSecretMetadataOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -2860,11 +2864,11 @@ type GetSecretOptions struct {
 // Constants associated with the GetSecretOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretOptionsSecretTypeArbitraryConst = "arbitrary"
-	GetSecretOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	GetSecretOptionsSecretTypeImportedCertConst = "imported_cert"
-	GetSecretOptionsSecretTypeKvConst = "kv"
-	GetSecretOptionsSecretTypePublicCertConst = "public_cert"
+	GetSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretOptionsSecretTypeKvConst               = "kv"
+	GetSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -2872,7 +2876,7 @@ const (
 func (*SecretsManagerV1) NewGetSecretOptions(secretType string, id string) *GetSecretOptions {
 	return &GetSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -2904,6 +2908,7 @@ type GetSecretPolicies struct {
 	// A collection of resources.
 	Resources []interface{} `json:"resources,omitempty"`
 }
+
 func (*GetSecretPolicies) isaGetSecretPolicies() bool {
 	return true
 }
@@ -2997,11 +3002,11 @@ type GetSecretVersionMetadataOptions struct {
 // Constants associated with the GetSecretVersionMetadataOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretVersionMetadataOptionsSecretTypeArbitraryConst = "arbitrary"
-	GetSecretVersionMetadataOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst = "imported_cert"
-	GetSecretVersionMetadataOptionsSecretTypeKvConst = "kv"
-	GetSecretVersionMetadataOptionsSecretTypePublicCertConst = "public_cert"
+	GetSecretVersionMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretVersionMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionMetadataOptionsSecretTypeKvConst               = "kv"
+	GetSecretVersionMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretVersionMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3009,8 +3014,8 @@ const (
 func (*SecretsManagerV1) NewGetSecretVersionMetadataOptions(secretType string, id string, versionID string) *GetSecretVersionMetadataOptions {
 	return &GetSecretVersionMetadataOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		VersionID: core.StringPtr(versionID),
+		ID:         core.StringPtr(id),
+		VersionID:  core.StringPtr(versionID),
 	}
 }
 
@@ -3060,11 +3065,11 @@ type GetSecretVersionOptions struct {
 // Constants associated with the GetSecretVersionOptions.SecretType property.
 // The secret type.
 const (
-	GetSecretVersionOptionsSecretTypeArbitraryConst = "arbitrary"
-	GetSecretVersionOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	GetSecretVersionOptionsSecretTypeImportedCertConst = "imported_cert"
-	GetSecretVersionOptionsSecretTypeKvConst = "kv"
-	GetSecretVersionOptionsSecretTypePublicCertConst = "public_cert"
+	GetSecretVersionOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretVersionOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionOptionsSecretTypeKvConst               = "kv"
+	GetSecretVersionOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretVersionOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3072,8 +3077,8 @@ const (
 func (*SecretsManagerV1) NewGetSecretVersionOptions(secretType string, id string, versionID string) *GetSecretVersionOptions {
 	return &GetSecretVersionOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		VersionID: core.StringPtr(versionID),
+		ID:         core.StringPtr(id),
+		VersionID:  core.StringPtr(versionID),
 	}
 }
 
@@ -3250,11 +3255,11 @@ type ListAllSecretsOptions struct {
 // **Usage:** To sort a list of secrets by their creation date, use
 // `../secrets/{secret-type}?sort_by=creation_date`.
 const (
-	ListAllSecretsOptionsSortByCreationDateConst = "creation_date"
+	ListAllSecretsOptionsSortByCreationDateConst   = "creation_date"
 	ListAllSecretsOptionsSortByExpirationDateConst = "expiration_date"
-	ListAllSecretsOptionsSortByIDConst = "id"
-	ListAllSecretsOptionsSortByNameConst = "name"
-	ListAllSecretsOptionsSortBySecretTypeConst = "secret_type"
+	ListAllSecretsOptionsSortByIDConst             = "id"
+	ListAllSecretsOptionsSortByNameConst           = "name"
+	ListAllSecretsOptionsSortBySecretTypeConst     = "secret_type"
 )
 
 // NewListAllSecretsOptions : Instantiate ListAllSecretsOptions
@@ -3355,11 +3360,11 @@ type ListSecretVersionsOptions struct {
 // Constants associated with the ListSecretVersionsOptions.SecretType property.
 // The secret type.
 const (
-	ListSecretVersionsOptionsSecretTypeArbitraryConst = "arbitrary"
-	ListSecretVersionsOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	ListSecretVersionsOptionsSecretTypeImportedCertConst = "imported_cert"
-	ListSecretVersionsOptionsSecretTypeKvConst = "kv"
-	ListSecretVersionsOptionsSecretTypePublicCertConst = "public_cert"
+	ListSecretVersionsOptionsSecretTypeArbitraryConst        = "arbitrary"
+	ListSecretVersionsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	ListSecretVersionsOptionsSecretTypeImportedCertConst     = "imported_cert"
+	ListSecretVersionsOptionsSecretTypeKvConst               = "kv"
+	ListSecretVersionsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretVersionsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3367,7 +3372,7 @@ const (
 func (*SecretsManagerV1) NewListSecretVersionsOptions(secretType string, id string) *ListSecretVersionsOptions {
 	return &ListSecretVersionsOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
+		ID:         core.StringPtr(id),
 	}
 }
 
@@ -3439,11 +3444,11 @@ type ListSecretsOptions struct {
 // Constants associated with the ListSecretsOptions.SecretType property.
 // The secret type.
 const (
-	ListSecretsOptionsSecretTypeArbitraryConst = "arbitrary"
-	ListSecretsOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	ListSecretsOptionsSecretTypeImportedCertConst = "imported_cert"
-	ListSecretsOptionsSecretTypeKvConst = "kv"
-	ListSecretsOptionsSecretTypePublicCertConst = "public_cert"
+	ListSecretsOptionsSecretTypeArbitraryConst        = "arbitrary"
+	ListSecretsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	ListSecretsOptionsSecretTypeImportedCertConst     = "imported_cert"
+	ListSecretsOptionsSecretTypeKvConst               = "kv"
+	ListSecretsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3499,7 +3504,7 @@ const (
 // NewPutConfigOptions : Instantiate PutConfigOptions
 func (*SecretsManagerV1) NewPutConfigOptions(secretType string, engineConfig EngineConfigIntf) *PutConfigOptions {
 	return &PutConfigOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:   core.StringPtr(secretType),
 		EngineConfig: engineConfig,
 	}
 }
@@ -3546,7 +3551,7 @@ type PutPolicyOptions struct {
 // Constants associated with the PutPolicyOptions.SecretType property.
 // The secret type.
 const (
-	PutPolicyOptionsSecretTypePublicCertConst = "public_cert"
+	PutPolicyOptionsSecretTypePublicCertConst       = "public_cert"
 	PutPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -3560,9 +3565,9 @@ const (
 func (*SecretsManagerV1) NewPutPolicyOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretPolicyRotation) *PutPolicyOptions {
 	return &PutPolicyOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		Metadata: metadata,
-		Resources: resources,
+		ID:         core.StringPtr(id),
+		Metadata:   metadata,
+		Resources:  resources,
 	}
 }
 
@@ -3672,6 +3677,7 @@ type SecretAction struct {
 	// **Deprecated.** Use the `api_key_id` field instead.
 	ServiceID *string `json:"service_id,omitempty"`
 }
+
 func (*SecretAction) isaSecretAction() bool {
 	return true
 }
@@ -3735,7 +3741,7 @@ type SecretGroupDef struct {
 // NewSecretGroupDef : Instantiate SecretGroupDef (Generic Model Constructor)
 func (*SecretsManagerV1) NewSecretGroupDef(metadata *CollectionMetadata, resources []SecretGroupResource) (_model *SecretGroupDef, err error) {
 	_model = &SecretGroupDef{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -4060,13 +4066,14 @@ type SecretMetadata struct {
 // Constants associated with the SecretMetadata.SecretType property.
 // The secret type.
 const (
-	SecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	SecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	SecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	SecretMetadataSecretTypeKvConst = "kv"
-	SecretMetadataSecretTypePublicCertConst = "public_cert"
+	SecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	SecretMetadataSecretTypeKvConst               = "kv"
+	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
+
 func (*SecretMetadata) isaSecretMetadata() bool {
 	return true
 }
@@ -4218,7 +4225,7 @@ type SecretMetadataRequest struct {
 // NewSecretMetadataRequest : Instantiate SecretMetadataRequest (Generic Model Constructor)
 func (*SecretsManagerV1) NewSecretMetadataRequest(metadata *CollectionMetadata, resources []SecretMetadataIntf) (_model *SecretMetadataRequest, err error) {
 	_model = &SecretMetadataRequest{
-		Metadata: metadata,
+		Metadata:  metadata,
 		Resources: resources,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -4257,7 +4264,7 @@ const (
 // NewSecretPolicyRotation : Instantiate SecretPolicyRotation (Generic Model Constructor)
 func (*SecretsManagerV1) NewSecretPolicyRotation(typeVar string, rotation SecretPolicyRotationRotationIntf) (_model *SecretPolicyRotation, err error) {
 	_model = &SecretPolicyRotation{
-		Type: core.StringPtr(typeVar),
+		Type:     core.StringPtr(typeVar),
 		Rotation: rotation,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -4298,9 +4305,10 @@ type SecretPolicyRotationRotation struct {
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
 // Specifies the units for the secret rotation time interval.
 const (
-	SecretPolicyRotationRotationUnitDayConst = "day"
+	SecretPolicyRotationRotationUnitDayConst   = "day"
 	SecretPolicyRotationRotationUnitMonthConst = "month"
 )
+
 func (*SecretPolicyRotationRotation) isaSecretPolicyRotationRotation() bool {
 	return true
 }
@@ -4538,13 +4546,14 @@ type SecretResource struct {
 // Constants associated with the SecretResource.SecretType property.
 // The secret type.
 const (
-	SecretResourceSecretTypeArbitraryConst = "arbitrary"
-	SecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	SecretResourceSecretTypeImportedCertConst = "imported_cert"
-	SecretResourceSecretTypeKvConst = "kv"
-	SecretResourceSecretTypePublicCertConst = "public_cert"
+	SecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	SecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	SecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	SecretResourceSecretTypeKvConst               = "kv"
+	SecretResourceSecretTypePublicCertConst       = "public_cert"
 	SecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
+
 func (*SecretResource) isaSecretResource() bool {
 	return true
 }
@@ -4769,6 +4778,7 @@ type SecretVersion struct {
 	// The date that the certificate expires. The date format follows RFC 3339.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
+
 func (*SecretVersion) isaSecretVersion() bool {
 	return true
 }
@@ -4854,6 +4864,7 @@ type SecretVersionInfo struct {
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
 }
+
 func (*SecretVersionInfo) isaSecretVersionInfo() bool {
 	return true
 }
@@ -4942,6 +4953,7 @@ type SecretVersionMetadata struct {
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
 }
+
 func (*SecretVersionMetadata) isaSecretVersionMetadata() bool {
 	return true
 }
@@ -5028,26 +5040,26 @@ const (
 // The configuration element to define or manage.
 const (
 	UpdateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	UpdateConfigElementOptionsConfigElementDNSProvidersConst = "dns_providers"
+	UpdateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
 )
 
 // Constants associated with the UpdateConfigElementOptions.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	UpdateConfigElementOptionsTypeCisConst = "cis"
+	UpdateConfigElementOptionsTypeCisConst                   = "cis"
 	UpdateConfigElementOptionsTypeClassicInfrastructureConst = "classic_infrastructure"
-	UpdateConfigElementOptionsTypeLetsencryptConst = "letsencrypt"
-	UpdateConfigElementOptionsTypeLetsencryptStageConst = "letsencrypt-stage"
+	UpdateConfigElementOptionsTypeLetsencryptConst           = "letsencrypt"
+	UpdateConfigElementOptionsTypeLetsencryptStageConst      = "letsencrypt-stage"
 )
 
 // NewUpdateConfigElementOptions : Instantiate UpdateConfigElementOptions
 func (*SecretsManagerV1) NewUpdateConfigElementOptions(secretType string, configElement string, configName string, typeVar string, config interface{}) *UpdateConfigElementOptions {
 	return &UpdateConfigElementOptions{
-		SecretType: core.StringPtr(secretType),
+		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
-		ConfigName: core.StringPtr(configName),
-		Type: core.StringPtr(typeVar),
-		Config: config,
+		ConfigName:    core.StringPtr(configName),
+		Type:          core.StringPtr(typeVar),
+		Config:        config,
 	}
 }
 
@@ -5105,8 +5117,8 @@ type UpdateSecretGroupMetadataOptions struct {
 // NewUpdateSecretGroupMetadataOptions : Instantiate UpdateSecretGroupMetadataOptions
 func (*SecretsManagerV1) NewUpdateSecretGroupMetadataOptions(id string, metadata *CollectionMetadata, resources []SecretGroupMetadataUpdatable) *UpdateSecretGroupMetadataOptions {
 	return &UpdateSecretGroupMetadataOptions{
-		ID: core.StringPtr(id),
-		Metadata: metadata,
+		ID:        core.StringPtr(id),
+		Metadata:  metadata,
 		Resources: resources,
 	}
 }
@@ -5156,11 +5168,11 @@ type UpdateSecretMetadataOptions struct {
 // Constants associated with the UpdateSecretMetadataOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretMetadataOptionsSecretTypeArbitraryConst = "arbitrary"
-	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	UpdateSecretMetadataOptionsSecretTypeImportedCertConst = "imported_cert"
-	UpdateSecretMetadataOptionsSecretTypeKvConst = "kv"
-	UpdateSecretMetadataOptionsSecretTypePublicCertConst = "public_cert"
+	UpdateSecretMetadataOptionsSecretTypeArbitraryConst        = "arbitrary"
+	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	UpdateSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UpdateSecretMetadataOptionsSecretTypeKvConst               = "kv"
+	UpdateSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5168,9 +5180,9 @@ const (
 func (*SecretsManagerV1) NewUpdateSecretMetadataOptions(secretType string, id string, metadata *CollectionMetadata, resources []SecretMetadataIntf) *UpdateSecretMetadataOptions {
 	return &UpdateSecretMetadataOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		Metadata: metadata,
-		Resources: resources,
+		ID:         core.StringPtr(id),
+		Metadata:   metadata,
+		Resources:  resources,
 	}
 }
 
@@ -5225,11 +5237,11 @@ type UpdateSecretOptions struct {
 // Constants associated with the UpdateSecretOptions.SecretType property.
 // The secret type.
 const (
-	UpdateSecretOptionsSecretTypeArbitraryConst = "arbitrary"
-	UpdateSecretOptionsSecretTypeIamCredentialsConst = "iam_credentials"
-	UpdateSecretOptionsSecretTypeImportedCertConst = "imported_cert"
-	UpdateSecretOptionsSecretTypeKvConst = "kv"
-	UpdateSecretOptionsSecretTypePublicCertConst = "public_cert"
+	UpdateSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	UpdateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	UpdateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UpdateSecretOptionsSecretTypeKvConst               = "kv"
+	UpdateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5237,16 +5249,16 @@ const (
 // The action to perform on the specified secret.
 const (
 	UpdateSecretOptionsActionDeleteCredentialsConst = "delete_credentials"
-	UpdateSecretOptionsActionRestoreConst = "restore"
-	UpdateSecretOptionsActionRotateConst = "rotate"
+	UpdateSecretOptionsActionRestoreConst           = "restore"
+	UpdateSecretOptionsActionRotateConst            = "rotate"
 )
 
 // NewUpdateSecretOptions : Instantiate UpdateSecretOptions
 func (*SecretsManagerV1) NewUpdateSecretOptions(secretType string, id string, action string) *UpdateSecretOptions {
 	return &UpdateSecretOptions{
 		SecretType: core.StringPtr(secretType),
-		ID: core.StringPtr(id),
-		Action: core.StringPtr(action),
+		ID:         core.StringPtr(id),
+		Action:     core.StringPtr(action),
 	}
 }
 
@@ -5372,11 +5384,11 @@ type ArbitrarySecretMetadata struct {
 // Constants associated with the ArbitrarySecretMetadata.SecretType property.
 // The secret type.
 const (
-	ArbitrarySecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	ArbitrarySecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	ArbitrarySecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	ArbitrarySecretMetadataSecretTypeKvConst = "kv"
-	ArbitrarySecretMetadataSecretTypePublicCertConst = "public_cert"
+	ArbitrarySecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	ArbitrarySecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	ArbitrarySecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretMetadataSecretTypeKvConst               = "kv"
+	ArbitrarySecretMetadataSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5534,11 +5546,11 @@ type ArbitrarySecretResource struct {
 // Constants associated with the ArbitrarySecretResource.SecretType property.
 // The secret type.
 const (
-	ArbitrarySecretResourceSecretTypeArbitraryConst = "arbitrary"
-	ArbitrarySecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	ArbitrarySecretResourceSecretTypeImportedCertConst = "imported_cert"
-	ArbitrarySecretResourceSecretTypeKvConst = "kv"
-	ArbitrarySecretResourceSecretTypePublicCertConst = "public_cert"
+	ArbitrarySecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	ArbitrarySecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	ArbitrarySecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	ArbitrarySecretResourceSecretTypeKvConst               = "kv"
+	ArbitrarySecretResourceSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -5878,11 +5890,11 @@ type CertificateSecretMetadata struct {
 // Constants associated with the CertificateSecretMetadata.SecretType property.
 // The secret type.
 const (
-	CertificateSecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	CertificateSecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	CertificateSecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	CertificateSecretMetadataSecretTypeKvConst = "kv"
-	CertificateSecretMetadataSecretTypePublicCertConst = "public_cert"
+	CertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	CertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	CertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretMetadataSecretTypeKvConst               = "kv"
+	CertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -6108,11 +6120,11 @@ type CertificateSecretResource struct {
 // Constants associated with the CertificateSecretResource.SecretType property.
 // The secret type.
 const (
-	CertificateSecretResourceSecretTypeArbitraryConst = "arbitrary"
-	CertificateSecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	CertificateSecretResourceSecretTypeImportedCertConst = "imported_cert"
-	CertificateSecretResourceSecretTypeKvConst = "kv"
-	CertificateSecretResourceSecretTypePublicCertConst = "public_cert"
+	CertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	CertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	CertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	CertificateSecretResourceSecretTypeKvConst               = "kv"
+	CertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -6869,11 +6881,11 @@ type IamCredentialsSecretMetadata struct {
 // Constants associated with the IamCredentialsSecretMetadata.SecretType property.
 // The secret type.
 const (
-	IamCredentialsSecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	IamCredentialsSecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	IamCredentialsSecretMetadataSecretTypeKvConst = "kv"
-	IamCredentialsSecretMetadataSecretTypePublicCertConst = "public_cert"
+	IamCredentialsSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	IamCredentialsSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretMetadataSecretTypeKvConst               = "kv"
+	IamCredentialsSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7082,11 +7094,11 @@ type IamCredentialsSecretResource struct {
 // Constants associated with the IamCredentialsSecretResource.SecretType property.
 // The secret type.
 const (
-	IamCredentialsSecretResourceSecretTypeArbitraryConst = "arbitrary"
-	IamCredentialsSecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	IamCredentialsSecretResourceSecretTypeImportedCertConst = "imported_cert"
-	IamCredentialsSecretResourceSecretTypeKvConst = "kv"
-	IamCredentialsSecretResourceSecretTypePublicCertConst = "public_cert"
+	IamCredentialsSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	IamCredentialsSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	IamCredentialsSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	IamCredentialsSecretResourceSecretTypeKvConst               = "kv"
+	IamCredentialsSecretResourceSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7414,11 +7426,11 @@ type KvSecretMetadata struct {
 // Constants associated with the KvSecretMetadata.SecretType property.
 // The secret type.
 const (
-	KvSecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	KvSecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	KvSecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	KvSecretMetadataSecretTypeKvConst = "kv"
-	KvSecretMetadataSecretTypePublicCertConst = "public_cert"
+	KvSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	KvSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	KvSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	KvSecretMetadataSecretTypeKvConst               = "kv"
+	KvSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	KvSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7572,11 +7584,11 @@ type KvSecretResource struct {
 // Constants associated with the KvSecretResource.SecretType property.
 // The secret type.
 const (
-	KvSecretResourceSecretTypeArbitraryConst = "arbitrary"
-	KvSecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	KvSecretResourceSecretTypeImportedCertConst = "imported_cert"
-	KvSecretResourceSecretTypeKvConst = "kv"
-	KvSecretResourceSecretTypePublicCertConst = "public_cert"
+	KvSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	KvSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	KvSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	KvSecretResourceSecretTypeKvConst               = "kv"
+	KvSecretResourceSecretTypePublicCertConst       = "public_cert"
 	KvSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7793,11 +7805,11 @@ type PublicCertificateSecretMetadata struct {
 // Constants associated with the PublicCertificateSecretMetadata.SecretType property.
 // The secret type.
 const (
-	PublicCertificateSecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	PublicCertificateSecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	PublicCertificateSecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	PublicCertificateSecretMetadataSecretTypeKvConst = "kv"
-	PublicCertificateSecretMetadataSecretTypePublicCertConst = "public_cert"
+	PublicCertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	PublicCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	PublicCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretMetadataSecretTypeKvConst               = "kv"
+	PublicCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -7805,8 +7817,8 @@ const (
 // The identifier for the cryptographic algorithm to be used to generate the public key that is associated with the
 // certificate.
 const (
-	PublicCertificateSecretMetadataKeyAlgorithmEc256Const = "EC256"
-	PublicCertificateSecretMetadataKeyAlgorithmEc384Const = "EC384"
+	PublicCertificateSecretMetadataKeyAlgorithmEc256Const   = "EC256"
+	PublicCertificateSecretMetadataKeyAlgorithmEc384Const   = "EC384"
 	PublicCertificateSecretMetadataKeyAlgorithmRsa2048Const = "RSA2048"
 	PublicCertificateSecretMetadataKeyAlgorithmRsa4096Const = "RSA4096"
 )
@@ -8054,11 +8066,11 @@ type PublicCertificateSecretResource struct {
 // Constants associated with the PublicCertificateSecretResource.SecretType property.
 // The secret type.
 const (
-	PublicCertificateSecretResourceSecretTypeArbitraryConst = "arbitrary"
-	PublicCertificateSecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	PublicCertificateSecretResourceSecretTypeImportedCertConst = "imported_cert"
-	PublicCertificateSecretResourceSecretTypeKvConst = "kv"
-	PublicCertificateSecretResourceSecretTypePublicCertConst = "public_cert"
+	PublicCertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	PublicCertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	PublicCertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PublicCertificateSecretResourceSecretTypeKvConst               = "kv"
+	PublicCertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -8070,8 +8082,8 @@ const (
 // generate keys and sign certificates. For longer living certificates, it is recommended to use longer keys to provide
 // more encryption protection.
 const (
-	PublicCertificateSecretResourceKeyAlgorithmEc256Const = "EC256"
-	PublicCertificateSecretResourceKeyAlgorithmEc384Const = "EC384"
+	PublicCertificateSecretResourceKeyAlgorithmEc256Const   = "EC256"
+	PublicCertificateSecretResourceKeyAlgorithmEc384Const   = "EC384"
 	PublicCertificateSecretResourceKeyAlgorithmRsa2048Const = "RSA2048"
 	PublicCertificateSecretResourceKeyAlgorithmRsa4096Const = "RSA4096"
 )
@@ -8425,7 +8437,7 @@ type SecretPolicyRotationRotationPolicyRotation struct {
 // Constants associated with the SecretPolicyRotationRotationPolicyRotation.Unit property.
 // Specifies the units for the secret rotation time interval.
 const (
-	SecretPolicyRotationRotationPolicyRotationUnitDayConst = "day"
+	SecretPolicyRotationRotationPolicyRotationUnitDayConst   = "day"
 	SecretPolicyRotationRotationPolicyRotationUnitMonthConst = "month"
 )
 
@@ -8433,7 +8445,7 @@ const (
 func (*SecretsManagerV1) NewSecretPolicyRotationRotationPolicyRotation(interval int64, unit string) (_model *SecretPolicyRotationRotationPolicyRotation, err error) {
 	_model = &SecretPolicyRotationRotationPolicyRotation{
 		Interval: core.Int64Ptr(interval),
-		Unit: core.StringPtr(unit),
+		Unit:     core.StringPtr(unit),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -8563,11 +8575,11 @@ type UsernamePasswordSecretMetadata struct {
 // Constants associated with the UsernamePasswordSecretMetadata.SecretType property.
 // The secret type.
 const (
-	UsernamePasswordSecretMetadataSecretTypeArbitraryConst = "arbitrary"
-	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst = "iam_credentials"
-	UsernamePasswordSecretMetadataSecretTypeImportedCertConst = "imported_cert"
-	UsernamePasswordSecretMetadataSecretTypeKvConst = "kv"
-	UsernamePasswordSecretMetadataSecretTypePublicCertConst = "public_cert"
+	UsernamePasswordSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	UsernamePasswordSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretMetadataSecretTypeKvConst               = "kv"
+	UsernamePasswordSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
@@ -8736,11 +8748,11 @@ type UsernamePasswordSecretResource struct {
 // Constants associated with the UsernamePasswordSecretResource.SecretType property.
 // The secret type.
 const (
-	UsernamePasswordSecretResourceSecretTypeArbitraryConst = "arbitrary"
-	UsernamePasswordSecretResourceSecretTypeIamCredentialsConst = "iam_credentials"
-	UsernamePasswordSecretResourceSecretTypeImportedCertConst = "imported_cert"
-	UsernamePasswordSecretResourceSecretTypeKvConst = "kv"
-	UsernamePasswordSecretResourceSecretTypePublicCertConst = "public_cert"
+	UsernamePasswordSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	UsernamePasswordSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	UsernamePasswordSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	UsernamePasswordSecretResourceSecretTypeKvConst               = "kv"
+	UsernamePasswordSecretResourceSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
 

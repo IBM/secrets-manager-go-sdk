@@ -130,10 +130,10 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 				},
 				Resources: []secretsmanagerv1.SecretResourceIntf{
 					&secretsmanagerv1.KvSecretResource{
-						Name:           core.StringPtr(generateName()),
-						Description:    core.StringPtr("Integration test generated"),
-						Labels:         []string{"label1", "label2"},
-						Payload: 		payload,
+						Name:        core.StringPtr(generateName()),
+						Description: core.StringPtr("Integration test generated"),
+						Labels:      []string{"label1", "label2"},
+						Payload:     payload,
 					},
 				},
 			})
