@@ -118,6 +118,46 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
 		})
 
+		It(`Should create a kv secret`, func() {
+			// create kv secret
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeKvConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.KvSecretResource{
+						Name:           core.StringPtr(generateName()),
+						Description:    core.StringPtr("Integration test generated"),
+						Labels:         []string{"label1", "label2"},
+						Payload: map[string]string{"foo": "bar"},
+					},
+				},
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			kvSecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
+			Expect(ok).To(BeTrue())
+			secretId := kvSecretResource.ID
+			// get kv secret
+			getSecretRes, resp, err := secretsManager.GetSecret(&secretsmanagerv1.GetSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.GetSecretOptionsSecretTypeKvConst),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
+			secretData := secret.SecretData.(map[string]interface{})
+			Expect(secretData["payload"].(string)).To(Equal("secret-data"))
+			// delete kv secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeKvConst),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+		})
+
 	})
 
 	Context(`Secret group`, func() {
