@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.44.0-98838c07-20220128-151531
+ * IBM OpenAPI SDK Code Generator Version: 3.45.1-632ec580-20220210-190638
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -1861,10 +1861,12 @@ type ConfigElementDef struct {
 // Constants associated with the ConfigElementDef.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	ConfigElementDefTypeCisConst                   = "cis"
-	ConfigElementDefTypeClassicInfrastructureConst = "classic_infrastructure"
-	ConfigElementDefTypeLetsencryptConst           = "letsencrypt"
-	ConfigElementDefTypeLetsencryptStageConst      = "letsencrypt-stage"
+	ConfigElementDefTypeCisConst                              = "cis"
+	ConfigElementDefTypeClassicInfrastructureConst            = "classic_infrastructure"
+	ConfigElementDefTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	ConfigElementDefTypeLetsencryptConst                      = "letsencrypt"
+	ConfigElementDefTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	ConfigElementDefTypeRootCertificateAuthorityConst         = "root_certificate_authority"
 )
 
 // NewConfigElementDef : Instantiate ConfigElementDef (Generic Model Constructor)
@@ -1928,17 +1930,14 @@ type ConfigElementDefConfig struct {
 
 	// The username that is associated with your classic infrastructure account.
 	//
-	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
-	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
-	// the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. For more information,
+	// see the [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
 
 	// Your classic infrastructure API key.
 	//
-	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
-	// > Users > name > API keys.** For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	// For information about viewing and accessing your classic infrastructure API key, see the
+	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 }
 
@@ -1989,10 +1988,12 @@ type ConfigElementMetadata struct {
 // Constants associated with the ConfigElementMetadata.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	ConfigElementMetadataTypeCisConst                   = "cis"
-	ConfigElementMetadataTypeClassicInfrastructureConst = "classic_infrastructure"
-	ConfigElementMetadataTypeLetsencryptConst           = "letsencrypt"
-	ConfigElementMetadataTypeLetsencryptStageConst      = "letsencrypt-stage"
+	ConfigElementMetadataTypeCisConst                              = "cis"
+	ConfigElementMetadataTypeClassicInfrastructureConst            = "classic_infrastructure"
+	ConfigElementMetadataTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	ConfigElementMetadataTypeLetsencryptConst                      = "letsencrypt"
+	ConfigElementMetadataTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	ConfigElementMetadataTypeRootCertificateAuthorityConst         = "root_certificate_authority"
 )
 
 // UnmarshalConfigElementMetadata unmarshals an instance of ConfigElementMetadata from the specified map of raw messages.
@@ -2034,23 +2035,28 @@ type CreateConfigElementOptions struct {
 // Constants associated with the CreateConfigElementOptions.SecretType property.
 // The secret type.
 const (
-	CreateConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+	CreateConfigElementOptionsSecretTypePrivateCertConst = "private_cert"
+	CreateConfigElementOptionsSecretTypePublicCertConst  = "public_cert"
 )
 
 // Constants associated with the CreateConfigElementOptions.ConfigElement property.
 // The configuration element to define or manage.
 const (
-	CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	CreateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	CreateConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
+	CreateConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
+	CreateConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
 )
 
 // Constants associated with the CreateConfigElementOptions.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	CreateConfigElementOptionsTypeCisConst                   = "cis"
-	CreateConfigElementOptionsTypeClassicInfrastructureConst = "classic_infrastructure"
-	CreateConfigElementOptionsTypeLetsencryptConst           = "letsencrypt"
-	CreateConfigElementOptionsTypeLetsencryptStageConst      = "letsencrypt-stage"
+	CreateConfigElementOptionsTypeCisConst                              = "cis"
+	CreateConfigElementOptionsTypeClassicInfrastructureConst            = "classic_infrastructure"
+	CreateConfigElementOptionsTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	CreateConfigElementOptionsTypeLetsencryptConst                      = "letsencrypt"
+	CreateConfigElementOptionsTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	CreateConfigElementOptionsTypeRootCertificateAuthorityConst         = "root_certificate_authority"
 )
 
 // NewCreateConfigElementOptions : Instantiate CreateConfigElementOptions
@@ -2249,14 +2255,17 @@ type DeleteConfigElementOptions struct {
 // Constants associated with the DeleteConfigElementOptions.SecretType property.
 // The secret type.
 const (
-	DeleteConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+	DeleteConfigElementOptionsSecretTypePrivateCertConst = "private_cert"
+	DeleteConfigElementOptionsSecretTypePublicCertConst  = "public_cert"
 )
 
 // Constants associated with the DeleteConfigElementOptions.ConfigElement property.
 // The configuration element to define or manage.
 const (
-	DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	DeleteConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	DeleteConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
+	DeleteConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
+	DeleteConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
 )
 
 // NewDeleteConfigElementOptions : Instantiate DeleteConfigElementOptions
@@ -2449,14 +2458,17 @@ type GetConfigElementOptions struct {
 // Constants associated with the GetConfigElementOptions.SecretType property.
 // The secret type.
 const (
-	GetConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+	GetConfigElementOptionsSecretTypePrivateCertConst = "private_cert"
+	GetConfigElementOptionsSecretTypePublicCertConst  = "public_cert"
 )
 
 // Constants associated with the GetConfigElementOptions.ConfigElement property.
 // The configuration element to define or manage.
 const (
-	GetConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	GetConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	GetConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	GetConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
+	GetConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
+	GetConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
 )
 
 // NewGetConfigElementOptions : Instantiate GetConfigElementOptions
@@ -2531,14 +2543,17 @@ type GetConfigElementsOptions struct {
 // Constants associated with the GetConfigElementsOptions.SecretType property.
 // The secret type.
 const (
-	GetConfigElementsOptionsSecretTypePublicCertConst = "public_cert"
+	GetConfigElementsOptionsSecretTypePrivateCertConst = "private_cert"
+	GetConfigElementsOptionsSecretTypePublicCertConst  = "public_cert"
 )
 
 // Constants associated with the GetConfigElementsOptions.ConfigElement property.
 // The configuration element to define or manage.
 const (
-	GetConfigElementsOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	GetConfigElementsOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	GetConfigElementsOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	GetConfigElementsOptionsConfigElementDNSProvidersConst                       = "dns_providers"
+	GetConfigElementsOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
+	GetConfigElementsOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
 )
 
 // NewGetConfigElementsOptions : Instantiate GetConfigElementsOptions
@@ -5033,23 +5048,28 @@ type UpdateConfigElementOptions struct {
 // Constants associated with the UpdateConfigElementOptions.SecretType property.
 // The secret type.
 const (
-	UpdateConfigElementOptionsSecretTypePublicCertConst = "public_cert"
+	UpdateConfigElementOptionsSecretTypePrivateCertConst = "private_cert"
+	UpdateConfigElementOptionsSecretTypePublicCertConst  = "public_cert"
 )
 
 // Constants associated with the UpdateConfigElementOptions.ConfigElement property.
 // The configuration element to define or manage.
 const (
-	UpdateConfigElementOptionsConfigElementCertificateAuthoritiesConst = "certificate_authorities"
-	UpdateConfigElementOptionsConfigElementDNSProvidersConst           = "dns_providers"
+	UpdateConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	UpdateConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
+	UpdateConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
+	UpdateConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
 )
 
 // Constants associated with the UpdateConfigElementOptions.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
-	UpdateConfigElementOptionsTypeCisConst                   = "cis"
-	UpdateConfigElementOptionsTypeClassicInfrastructureConst = "classic_infrastructure"
-	UpdateConfigElementOptionsTypeLetsencryptConst           = "letsencrypt"
-	UpdateConfigElementOptionsTypeLetsencryptStageConst      = "letsencrypt-stage"
+	UpdateConfigElementOptionsTypeCisConst                              = "cis"
+	UpdateConfigElementOptionsTypeClassicInfrastructureConst            = "classic_infrastructure"
+	UpdateConfigElementOptionsTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	UpdateConfigElementOptionsTypeLetsencryptConst                      = "letsencrypt"
+	UpdateConfigElementOptionsTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	UpdateConfigElementOptionsTypeRootCertificateAuthorityConst         = "root_certificate_authority"
 )
 
 // NewUpdateConfigElementOptions : Instantiate UpdateConfigElementOptions
@@ -6487,17 +6507,14 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 type ConfigElementDefConfigClassicInfrastructureConfig struct {
 	// The username that is associated with your classic infrastructure account.
 	//
-	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. In the console, you can
-	// find your username by going to **Manage > Access (IAM) > Users > name > VPN password.** For more information, see
-	// the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. For more information,
+	// see the [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username" validate:"required"`
 
 	// Your classic infrastructure API key.
 	//
-	// In the console, you can view or create a classic infrastructure API key by going to **Manage > Access (IAM)
-	// > Users > name > API keys.** For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-classic-infrastructure).
+	// For information about viewing and accessing your classic infrastructure API key, see the
+	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password" validate:"required"`
 }
 
