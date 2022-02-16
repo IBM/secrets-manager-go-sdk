@@ -3662,7 +3662,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotateKvSecretBody
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// Determine whether keys must be rotated.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
@@ -4430,7 +4430,7 @@ type SecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
@@ -5557,7 +5557,7 @@ type ArbitrarySecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
