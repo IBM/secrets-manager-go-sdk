@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.45.1-632ec580-20220210-190638
+ * IBM OpenAPI SDK Code Generator Version: 3.46.0-a4e29da0-20220224-210428
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -758,6 +758,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 //
 // - `rotate`: Replace the value of a secret.
 // - `restore`: Restore a previous version of an `iam_credentials` secret.
+// - `revoke`: Revoke a private certificate.
 // - `delete_credentials`: Delete the API key that is associated with an `iam_credentials` secret.
 func (secretsManager *SecretsManagerV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretWithContext(context.Background(), updateSecretOptions)
@@ -1477,7 +1478,15 @@ func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context
 // Adds a configuration element to the specified secret type.
 //
 // Use this method to define the configurations that are required to enable the public certificates (`public_cert`)
-// engine. You can add up to 10 certificate authority and DNS provider configurations for your instance.
+// engine and the private certificates (`private_cert`) engine.
+//
+// You can add multiple configurations for your instance as follows:
+//
+// - Up to 10 public certificate authority configurations
+// - Up to 10 DNS provider configurations
+// - Up to 10 private root certifiate authority configurations
+// - Up to 10 private intermediate certifiate authority configurations
+// - Up to 10 certificate templates.
 func (secretsManager *SecretsManagerV1) CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.CreateConfigElementWithContext(context.Background(), createConfigElementOptions)
 }
@@ -1801,6 +1810,222 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 	return
 }
 
+// CreateNotificationsRegistration : Register with Event Notifications
+// Creates a registration between a Secrets Manager instance and [Event
+// Notifications](https://cloud.ibm.com/apidocs/event-notifications).
+//
+// A successful request adds Secrets Manager as a source that you can reference from your Event Notifications instance.
+// For more information about enabling notifications for Secrets Manager, check out the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
+func (secretsManager *SecretsManagerV1) CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	return secretsManager.CreateNotificationsRegistrationWithContext(context.Background(), createNotificationsRegistrationOptions)
+}
+
+// CreateNotificationsRegistrationWithContext is an alternate form of the CreateNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) CreateNotificationsRegistrationWithContext(ctx context.Context, createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "CreateNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createNotificationsRegistrationOptions.EventNotificationsInstanceCRN != nil {
+		body["event_notifications_instance_crn"] = createNotificationsRegistrationOptions.EventNotificationsInstanceCRN
+	}
+	if createNotificationsRegistrationOptions.EventNotificationsSourceName != nil {
+		body["event_notifications_source_name"] = createNotificationsRegistrationOptions.EventNotificationsSourceName
+	}
+	if createNotificationsRegistrationOptions.EventNotificationsSourceDescription != nil {
+		body["event_notifications_source_description"] = createNotificationsRegistrationOptions.EventNotificationsSourceDescription
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetNotificationsRegistration : Get Event Notifications registration details
+// Retrieves the details of an existing registration between a Secrets Manager instance and Event Notifications.
+func (secretsManager *SecretsManagerV1) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
+}
+
+// GetNotificationsRegistrationWithContext is an alternate form of the GetNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetNotificationsRegistrationWithContext(ctx context.Context, getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getNotificationsRegistrationOptions, "getNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetNotificationsSettings)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteNotificationsRegistration : Unregister from Event Notifications
+// Deletes a registration between a Secrets Manager instance and Event Notifications.
+//
+// A successful request removes your Secrets Manager instance as a source in Event Notifications.
+func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.DeleteNotificationsRegistrationWithContext(context.Background(), deleteNotificationsRegistrationOptions)
+}
+
+// DeleteNotificationsRegistrationWithContext is an alternate form of the DeleteNotificationsRegistration method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithContext(ctx context.Context, deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(deleteNotificationsRegistrationOptions, "deleteNotificationsRegistrationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/registration`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteNotificationsRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "DeleteNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
+// SendTestNotification : Send test event
+// Send a test event from a Secrets Manager instance to a configured [Event
+// Notifications](https://cloud.ibm.com/apidocs/event-notifications) instance.
+//
+// A successful request sends a test event to the Event Notifications instance. For more information about enabling
+// notifications for Secrets Manager, check out the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
+func (secretsManager *SecretsManagerV1) SendTestNotification(sendTestNotificationOptions *SendTestNotificationOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.SendTestNotificationWithContext(context.Background(), sendTestNotificationOptions)
+}
+
+// SendTestNotificationWithContext is an alternate form of the SendTestNotification method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) SendTestNotificationWithContext(ctx context.Context, sendTestNotificationOptions *SendTestNotificationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(sendTestNotificationOptions, "sendTestNotificationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/notifications/test`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range sendTestNotificationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "SendTestNotification")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+
+	return
+}
+
 // CollectionMetadata : The metadata that describes the resource array.
 type CollectionMetadata struct {
 	// The type of resources in the resource array.
@@ -1861,6 +2086,7 @@ type ConfigElementDef struct {
 // Constants associated with the ConfigElementDef.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
+	ConfigElementDefTypeCertificateTemplateConst              = "certificate_template"
 	ConfigElementDefTypeCisConst                              = "cis"
 	ConfigElementDefTypeClassicInfrastructureConst            = "classic_infrastructure"
 	ConfigElementDefTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
@@ -1988,6 +2214,7 @@ type ConfigElementMetadata struct {
 // Constants associated with the ConfigElementMetadata.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
+	ConfigElementMetadataTypeCertificateTemplateConst              = "certificate_template"
 	ConfigElementMetadataTypeCisConst                              = "cis"
 	ConfigElementMetadataTypeClassicInfrastructureConst            = "classic_infrastructure"
 	ConfigElementMetadataTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
@@ -2043,6 +2270,7 @@ const (
 // The configuration element to define or manage.
 const (
 	CreateConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	CreateConfigElementOptionsConfigElementCertificateTemplatesConst               = "certificate_templates"
 	CreateConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
 	CreateConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
 	CreateConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
@@ -2051,6 +2279,7 @@ const (
 // Constants associated with the CreateConfigElementOptions.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
+	CreateConfigElementOptionsTypeCertificateTemplateConst              = "certificate_template"
 	CreateConfigElementOptionsTypeCisConst                              = "cis"
 	CreateConfigElementOptionsTypeClassicInfrastructureConst            = "classic_infrastructure"
 	CreateConfigElementOptionsTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
@@ -2102,6 +2331,53 @@ func (_options *CreateConfigElementOptions) SetConfig(config ConfigElementDefCon
 
 // SetHeaders : Allow user to set Headers
 func (options *CreateConfigElementOptions) SetHeaders(param map[string]string) *CreateConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
+// CreateNotificationsRegistrationOptions : The CreateNotificationsRegistration options.
+type CreateNotificationsRegistrationOptions struct {
+	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
+	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
+
+	// The name that is displayed as a source in your Event Notifications instance.
+	EventNotificationsSourceName *string `json:"event_notifications_source_name" validate:"required"`
+
+	// An optional description for the source in your Event Notifications instance.
+	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreateNotificationsRegistrationOptions : Instantiate CreateNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewCreateNotificationsRegistrationOptions(eventNotificationsInstanceCRN string, eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
+	return &CreateNotificationsRegistrationOptions{
+		EventNotificationsInstanceCRN: core.StringPtr(eventNotificationsInstanceCRN),
+		EventNotificationsSourceName:  core.StringPtr(eventNotificationsSourceName),
+	}
+}
+
+// SetEventNotificationsInstanceCRN : Allow user to set EventNotificationsInstanceCRN
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsInstanceCRN(eventNotificationsInstanceCRN string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsInstanceCRN = core.StringPtr(eventNotificationsInstanceCRN)
+	return _options
+}
+
+// SetEventNotificationsSourceName : Allow user to set EventNotificationsSourceName
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceName(eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsSourceName = core.StringPtr(eventNotificationsSourceName)
+	return _options
+}
+
+// SetEventNotificationsSourceDescription : Allow user to set EventNotificationsSourceDescription
+func (_options *CreateNotificationsRegistrationOptions) SetEventNotificationsSourceDescription(eventNotificationsSourceDescription string) *CreateNotificationsRegistrationOptions {
+	_options.EventNotificationsSourceDescription = core.StringPtr(eventNotificationsSourceDescription)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateNotificationsRegistrationOptions) SetHeaders(param map[string]string) *CreateNotificationsRegistrationOptions {
 	options.Headers = param
 	return options
 }
@@ -2200,6 +2476,7 @@ const (
 	CreateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	CreateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
 	CreateSecretOptionsSecretTypeKvConst               = "kv"
+	CreateSecretOptionsSecretTypePrivateCertConst      = "private_cert"
 	CreateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	CreateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -2263,6 +2540,7 @@ const (
 // The configuration element to define or manage.
 const (
 	DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	DeleteConfigElementOptionsConfigElementCertificateTemplatesConst               = "certificate_templates"
 	DeleteConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
 	DeleteConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
 	DeleteConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
@@ -2297,6 +2575,24 @@ func (_options *DeleteConfigElementOptions) SetConfigName(configName string) *De
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteConfigElementOptions) SetHeaders(param map[string]string) *DeleteConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
+// DeleteNotificationsRegistrationOptions : The DeleteNotificationsRegistration options.
+type DeleteNotificationsRegistrationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeleteNotificationsRegistrationOptions : Instantiate DeleteNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewDeleteNotificationsRegistrationOptions() *DeleteNotificationsRegistrationOptions {
+	return &DeleteNotificationsRegistrationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteNotificationsRegistrationOptions) SetHeaders(param map[string]string) *DeleteNotificationsRegistrationOptions {
 	options.Headers = param
 	return options
 }
@@ -2348,6 +2644,7 @@ const (
 	DeleteSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	DeleteSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
 	DeleteSecretOptionsSecretTypeKvConst               = "kv"
+	DeleteSecretOptionsSecretTypePrivateCertConst      = "private_cert"
 	DeleteSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	DeleteSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -2466,6 +2763,7 @@ const (
 // The configuration element to define or manage.
 const (
 	GetConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	GetConfigElementOptionsConfigElementCertificateTemplatesConst               = "certificate_templates"
 	GetConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
 	GetConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
 	GetConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
@@ -2551,6 +2849,7 @@ const (
 // The configuration element to define or manage.
 const (
 	GetConfigElementsOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	GetConfigElementsOptionsConfigElementCertificateTemplatesConst               = "certificate_templates"
 	GetConfigElementsOptionsConfigElementDNSProvidersConst                       = "dns_providers"
 	GetConfigElementsOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
 	GetConfigElementsOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
@@ -2628,6 +2927,7 @@ type GetConfigOptions struct {
 // The secret type.
 const (
 	GetConfigOptionsSecretTypeIamCredentialsConst = "iam_credentials"
+	GetConfigOptionsSecretTypePrivateCertConst    = "private_cert"
 	GetConfigOptionsSecretTypePublicCertConst     = "public_cert"
 )
 
@@ -2703,6 +3003,48 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 	return
 }
 
+// GetNotificationsRegistrationOptions : The GetNotificationsRegistration options.
+type GetNotificationsRegistrationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetNotificationsRegistrationOptions : Instantiate GetNotificationsRegistrationOptions
+func (*SecretsManagerV1) NewGetNotificationsRegistrationOptions() *GetNotificationsRegistrationOptions {
+	return &GetNotificationsRegistrationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetNotificationsRegistrationOptions) SetHeaders(param map[string]string) *GetNotificationsRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
+// GetNotificationsSettings : Properties that describe an existing registration with Event Notifications.
+type GetNotificationsSettings struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []NotificationsSettings `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetNotificationsSettings unmarshals an instance of GetNotificationsSettings from the specified map of raw messages.
+func UnmarshalGetNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetNotificationsSettings)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalNotificationsSettings)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // GetPolicyOptions : The GetPolicy options.
 type GetPolicyOptions struct {
 	// The secret type.
@@ -2721,6 +3063,7 @@ type GetPolicyOptions struct {
 // Constants associated with the GetPolicyOptions.SecretType property.
 // The secret type.
 const (
+	GetPolicyOptionsSecretTypePrivateCertConst      = "private_cert"
 	GetPolicyOptionsSecretTypePublicCertConst       = "public_cert"
 	GetPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -2834,6 +3177,7 @@ const (
 	GetSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
 	GetSecretMetadataOptionsSecretTypeKvConst               = "kv"
+	GetSecretMetadataOptionsSecretTypePrivateCertConst      = "private_cert"
 	GetSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -2883,6 +3227,7 @@ const (
 	GetSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
 	GetSecretOptionsSecretTypeKvConst               = "kv"
+	GetSecretOptionsSecretTypePrivateCertConst      = "private_cert"
 	GetSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3021,6 +3366,7 @@ const (
 	GetSecretVersionMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretVersionMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
 	GetSecretVersionMetadataOptionsSecretTypeKvConst               = "kv"
+	GetSecretVersionMetadataOptionsSecretTypePrivateCertConst      = "private_cert"
 	GetSecretVersionMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretVersionMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3084,6 +3430,7 @@ const (
 	GetSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	GetSecretVersionOptionsSecretTypeImportedCertConst     = "imported_cert"
 	GetSecretVersionOptionsSecretTypeKvConst               = "kv"
+	GetSecretVersionOptionsSecretTypePrivateCertConst      = "private_cert"
 	GetSecretVersionOptionsSecretTypePublicCertConst       = "public_cert"
 	GetSecretVersionOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3379,6 +3726,7 @@ const (
 	ListSecretVersionsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	ListSecretVersionsOptionsSecretTypeImportedCertConst     = "imported_cert"
 	ListSecretVersionsOptionsSecretTypeKvConst               = "kv"
+	ListSecretVersionsOptionsSecretTypePrivateCertConst      = "private_cert"
 	ListSecretVersionsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretVersionsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3463,6 +3811,7 @@ const (
 	ListSecretsOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	ListSecretsOptionsSecretTypeImportedCertConst     = "imported_cert"
 	ListSecretsOptionsSecretTypeKvConst               = "kv"
+	ListSecretsOptionsSecretTypePrivateCertConst      = "private_cert"
 	ListSecretsOptionsSecretTypePublicCertConst       = "public_cert"
 	ListSecretsOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3496,6 +3845,23 @@ func (_options *ListSecretsOptions) SetOffset(offset int64) *ListSecretsOptions 
 func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecretsOptions {
 	options.Headers = param
 	return options
+}
+
+// NotificationsSettings : The Event Notifications details.
+type NotificationsSettings struct {
+	// The Cloud Resource Name (CRN) of the connected Event Notifications instance.
+	EventNotificationsInstanceCRN *string `json:"event_notifications_instance_crn" validate:"required"`
+}
+
+// UnmarshalNotificationsSettings unmarshals an instance of NotificationsSettings from the specified map of raw messages.
+func UnmarshalNotificationsSettings(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(NotificationsSettings)
+	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCRN)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // PutConfigOptions : The PutConfig options.
@@ -3566,6 +3932,7 @@ type PutPolicyOptions struct {
 // Constants associated with the PutPolicyOptions.SecretType property.
 // The secret type.
 const (
+	PutPolicyOptionsSecretTypePrivateCertConst      = "private_cert"
 	PutPolicyOptionsSecretTypePublicCertConst       = "public_cert"
 	PutPolicyOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -3626,15 +3993,41 @@ func (options *PutPolicyOptions) SetHeaders(param map[string]string) *PutPolicyO
 type Rotation struct {
 	// Determines whether Secrets Manager rotates your certificate automatically.
 	//
-	// If set to `true`, the service reorders your certificate 31 days before it expires. To access the previous  version
-	// of the certificate, you can use the [Get a version of a secret](#get-secret-version) method.
+	// For public certificates, if `auto_rotate` is set to `true` the service reorders your certificate 31 days before it
+	// expires. For private certificates, the certificate is rotated according to the time interval specified in the
+	// `interval` and `unit` fields.
+	//
+	// To access the previous version of the certificate, you can use the
+	// [Get a version of a secret](#get-secret-version) method.
 	AutoRotate *bool `json:"auto_rotate,omitempty"`
 
 	// Determines whether Secrets Manager rotates the private key for your certificate automatically.
 	//
 	// If set to `true`, the service generates and stores a new private key for your rotated certificate.
+	//
+	// **Note:** Use this field only for public certificates. Ignored for private certificates.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
+
+	// Used together with the `unit` field to specify the rotation interval. The minimum interval is one day, and the
+	// maximum interval is 3 years (1095 days). Required in case `auto_rotate` is set to `true`.
+	//
+	// **Note:** Use this field only for private certificates Ignored for public certificates.
+	Interval *int64 `json:"interval,omitempty"`
+
+	// The time unit of the rotation interval.
+	//
+	// **Note:** Use this field only for private certificates. Ignored for public certificates.
+	Unit *string `json:"unit,omitempty"`
 }
+
+// Constants associated with the Rotation.Unit property.
+// The time unit of the rotation interval.
+//
+// **Note:** Use this field only for private certificates. Ignored for public certificates.
+const (
+	RotationUnitDayConst   = "day"
+	RotationUnitMonthConst = "month"
+)
 
 // UnmarshalRotation unmarshals an instance of Rotation from the specified map of raw messages.
 func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -3644,6 +4037,14 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "interval", &obj.Interval)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "unit", &obj.Unit)
 	if err != nil {
 		return
 	}
@@ -3945,6 +4346,7 @@ func UnmarshalSecretGroupResource(m map[string]json.RawMessage, result interface
 // - IamCredentialsSecretMetadata
 // - CertificateSecretMetadata
 // - PublicCertificateSecretMetadata
+// - PrivateCertificateSecretMetadata
 // - KvSecretMetadata
 type SecretMetadata struct {
 	// The unique ID of the secret.
@@ -4008,14 +4410,8 @@ type SecretMetadata struct {
 	// - `username_password`.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to generated credentials.
-	//
-	// For `iam_credentials` secrets, the TTL defines for how long each generated API key remains valid. The value can be
-	// either an integer that specifies the number of seconds, or the string representation of a duration, such as `120m`
-	// or `24h`.
-	//
-	// Minimum duration is 1 minute. Maximum is 90 days.
-	TTL interface{} `json:"ttl,omitempty"`
+	// Specifies the Time To Live value provided as a string duration with time suffix.
+	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
 	// `iam_credentials` secret.
@@ -4432,7 +4828,9 @@ type SecretResource struct {
 	// The new secret data to assign to the secret.
 	Payload interface{} `json:"payload,omitempty"`
 
-	// The data that is associated with the secret version. The data object contains the field `payload`.
+	// The data that is associated with the secret version.
+	//
+	// The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The username to assign to this secret.
@@ -4565,6 +4963,7 @@ const (
 	SecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	SecretResourceSecretTypeKvConst               = "kv"
+	SecretResourceSecretTypePrivateCertConst      = "private_cert"
 	SecretResourceSecretTypePublicCertConst       = "public_cert"
 	SecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -4779,7 +5178,9 @@ type SecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The data that is associated with the secret version. The data object contains the field `payload`.
+	// The data that is associated with the secret version.
+	//
+	// The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
@@ -5024,6 +5425,24 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// SendTestNotificationOptions : The SendTestNotification options.
+type SendTestNotificationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewSendTestNotificationOptions : Instantiate SendTestNotificationOptions
+func (*SecretsManagerV1) NewSendTestNotificationOptions() *SendTestNotificationOptions {
+	return &SendTestNotificationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *SendTestNotificationOptions) SetHeaders(param map[string]string) *SendTestNotificationOptions {
+	options.Headers = param
+	return options
+}
+
 // UpdateConfigElementOptions : The UpdateConfigElement options.
 type UpdateConfigElementOptions struct {
 	// The secret type.
@@ -5056,6 +5475,7 @@ const (
 // The configuration element to define or manage.
 const (
 	UpdateConfigElementOptionsConfigElementCertificateAuthoritiesConst             = "certificate_authorities"
+	UpdateConfigElementOptionsConfigElementCertificateTemplatesConst               = "certificate_templates"
 	UpdateConfigElementOptionsConfigElementDNSProvidersConst                       = "dns_providers"
 	UpdateConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
 	UpdateConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
@@ -5064,6 +5484,7 @@ const (
 // Constants associated with the UpdateConfigElementOptions.Type property.
 // The type of configuration. Value options differ depending on the `config_element` property that you want to define.
 const (
+	UpdateConfigElementOptionsTypeCertificateTemplateConst              = "certificate_template"
 	UpdateConfigElementOptionsTypeCisConst                              = "cis"
 	UpdateConfigElementOptionsTypeClassicInfrastructureConst            = "classic_infrastructure"
 	UpdateConfigElementOptionsTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
@@ -5192,6 +5613,7 @@ const (
 	UpdateSecretMetadataOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	UpdateSecretMetadataOptionsSecretTypeImportedCertConst     = "imported_cert"
 	UpdateSecretMetadataOptionsSecretTypeKvConst               = "kv"
+	UpdateSecretMetadataOptionsSecretTypePrivateCertConst      = "private_cert"
 	UpdateSecretMetadataOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretMetadataOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5261,6 +5683,7 @@ const (
 	UpdateSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
 	UpdateSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
 	UpdateSecretOptionsSecretTypeKvConst               = "kv"
+	UpdateSecretOptionsSecretTypePrivateCertConst      = "private_cert"
 	UpdateSecretOptionsSecretTypePublicCertConst       = "public_cert"
 	UpdateSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5270,6 +5693,7 @@ const (
 const (
 	UpdateSecretOptionsActionDeleteCredentialsConst = "delete_credentials"
 	UpdateSecretOptionsActionRestoreConst           = "restore"
+	UpdateSecretOptionsActionRevokeConst            = "revoke"
 	UpdateSecretOptionsActionRotateConst            = "rotate"
 )
 
@@ -5559,7 +5983,9 @@ type ArbitrarySecretResource struct {
 	// The new secret data to assign to the secret.
 	Payload interface{} `json:"payload,omitempty"`
 
-	// The data that is associated with the secret version. The data object contains the field `payload`.
+	// The data that is associated with the secret version.
+	//
+	// The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -5570,6 +5996,7 @@ const (
 	ArbitrarySecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	ArbitrarySecretResourceSecretTypeKvConst               = "kv"
+	ArbitrarySecretResourceSecretTypePrivateCertConst      = "private_cert"
 	ArbitrarySecretResourceSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5677,7 +6104,9 @@ type ArbitrarySecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The data that is associated with the secret version. The data object contains the field `payload`.
+	// The data that is associated with the secret version.
+	//
+	// The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -6100,8 +6529,11 @@ type CertificateSecretResource struct {
 	Intermediate *string `json:"intermediate,omitempty"`
 
 	// The data that is associated with the secret. The data object contains the following fields:
+	//
 	// `certificate`: The contents of the certificate.
+	//
 	// `private_key`: The private key that is associated with the certificate.
+	//
 	// `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
@@ -6144,6 +6576,7 @@ const (
 	CertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	CertificateSecretResourceSecretTypeKvConst               = "kv"
+	CertificateSecretResourceSecretTypePrivateCertConst      = "private_cert"
 	CertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -6304,8 +6737,11 @@ type CertificateSecretVersion struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the following fields:
+	//
 	// `certificate`: The contents of the certificate.
+	//
 	// `private_key`: The private key that is associated with the certificate.
+	//
 	// `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
@@ -6863,14 +7299,8 @@ type IamCredentialsSecretMetadata struct {
 	// The number of versions the secret has.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to generated credentials.
-	//
-	// For `iam_credentials` secrets, the TTL defines for how long each generated API key remains valid. The value can be
-	// either an integer that specifies the number of seconds, or the string representation of a duration, such as `120m`
-	// or `24h`.
-	//
-	// Minimum duration is 1 minute. Maximum is 90 days.
-	TTL interface{} `json:"ttl,omitempty"`
+	// Specifies the Time To Live value provided as a string duration with time suffix.
+	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
 	// `iam_credentials` secret.
@@ -7115,6 +7545,7 @@ const (
 	IamCredentialsSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	IamCredentialsSecretResourceSecretTypeKvConst               = "kv"
+	IamCredentialsSecretResourceSecretTypePrivateCertConst      = "private_cert"
 	IamCredentialsSecretResourceSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7239,8 +7670,11 @@ type IamCredentialsSecretVersion struct {
 	CreatedBy *string `json:"created_by,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the following fields:
+	//
 	// `api_key`: The API key that is generated for this secret.
+	//
 	// `api_key_id`: The ID of the API key that is generated for this secret.
+	//
 	// `service_id`: The service ID under which the API key is created.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
@@ -7594,7 +8028,9 @@ type KvSecretResource struct {
 	// The new secret data to assign to the secret.
 	Payload interface{} `json:"payload,omitempty"`
 
-	// The data that is associated with the secret version. The data object contains the field `payload`.
+	// The data that is associated with the secret version.
+	//
+	// The data object contains the field `payload`.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -7605,6 +8041,7 @@ const (
 	KvSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	KvSecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	KvSecretResourceSecretTypeKvConst               = "kv"
+	KvSecretResourceSecretTypePrivateCertConst      = "private_cert"
 	KvSecretResourceSecretTypePublicCertConst       = "public_cert"
 	KvSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7690,6 +8127,144 @@ func UnmarshalKvSecretResource(m map[string]json.RawMessage, result interface{})
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateSecretMetadata : Metadata properties that describe a private certificate secret.
+// This model "extends" SecretMetadata
+type PrivateCertificateSecretMetadata struct {
+	// The unique ID of the secret.
+	ID *string `json:"id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be in the range 2 - 30 characters, including spaces. Special characters
+	// that are not permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// A human-readable alias to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an alias for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret.
+	Description *string `json:"description,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// The Cloud Resource Name (CRN) that uniquely identifies the resource.
+	CRN *string `json:"crn,omitempty"`
+
+	// The date the secret was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// The number of versions the secret has.
+	VersionsTotal *int64 `json:"versions_total,omitempty"`
+}
+
+// Constants associated with the PrivateCertificateSecretMetadata.SecretType property.
+// The secret type.
+const (
+	PrivateCertificateSecretMetadataSecretTypeArbitraryConst        = "arbitrary"
+	PrivateCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
+	PrivateCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
+	PrivateCertificateSecretMetadataSecretTypeKvConst               = "kv"
+	PrivateCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
+	PrivateCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewPrivateCertificateSecretMetadata : Instantiate PrivateCertificateSecretMetadata (Generic Model Constructor)
+func (*SecretsManagerV1) NewPrivateCertificateSecretMetadata(name string) (_model *PrivateCertificateSecretMetadata, err error) {
+	_model = &PrivateCertificateSecretMetadata{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*PrivateCertificateSecretMetadata) isaSecretMetadata() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateSecretMetadata unmarshals an instance of PrivateCertificateSecretMetadata from the specified map of raw messages.
+func UnmarshalPrivateCertificateSecretMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateSecretMetadata)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
 		return
 	}
@@ -8087,6 +8662,7 @@ const (
 	PublicCertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	PublicCertificateSecretResourceSecretTypeKvConst               = "kv"
+	PublicCertificateSecretResourceSecretTypePrivateCertConst      = "private_cert"
 	PublicCertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8741,7 +9317,9 @@ type UsernamePasswordSecretResource struct {
 	Password *string `json:"password,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the following fields:
+	//
 	// `username`: The username that is associated with the secret version.
+	//
 	// `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
@@ -8769,6 +9347,7 @@ const (
 	UsernamePasswordSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretResourceSecretTypeImportedCertConst     = "imported_cert"
 	UsernamePasswordSecretResourceSecretTypeKvConst               = "kv"
+	UsernamePasswordSecretResourceSecretTypePrivateCertConst      = "private_cert"
 	UsernamePasswordSecretResourceSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretResourceSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8888,7 +9467,9 @@ type UsernamePasswordSecretVersion struct {
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
 	// The data that is associated with the secret version. The data object contains the following fields:
+	//
 	// `username`: The username that is associated with the secret version.
+	//
 	// `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
