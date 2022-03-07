@@ -6250,21 +6250,21 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
-	Describe(`NotificationsTest(notificationsTestOptions *NotificationsTestOptions)`, func() {
-		notificationsTestPath := "/api/v1/notifications/test"
+	Describe(`SendTestNotification(sendTestNotificationOptions *SendTestNotificationOptions)`, func() {
+		sendTestNotificationPath := "/api/v1/notifications/test"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(notificationsTestPath))
+					Expect(req.URL.EscapedPath()).To(Equal(sendTestNotificationPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					res.WriteHeader(200)
 				}))
 			})
-			It(`Invoke NotificationsTest successfully`, func() {
+			It(`Invoke SendTestNotification successfully`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -6273,20 +6273,20 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				response, operationErr := secretsManagerService.NotificationsTest(nil)
+				response, operationErr := secretsManagerService.SendTestNotification(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 
-				// Construct an instance of the NotificationsTestOptions model
-				notificationsTestOptionsModel := new(secretsmanagerv1.NotificationsTestOptions)
-				notificationsTestOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SendTestNotificationOptions model
+				sendTestNotificationOptionsModel := new(secretsmanagerv1.SendTestNotificationOptions)
+				sendTestNotificationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				response, operationErr = secretsManagerService.NotificationsTest(notificationsTestOptionsModel)
+				response, operationErr = secretsManagerService.SendTestNotification(sendTestNotificationOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 			})
-			It(`Invoke NotificationsTest with error: Operation request error`, func() {
+			It(`Invoke SendTestNotification with error: Operation request error`, func() {
 				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -6294,13 +6294,13 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the NotificationsTestOptions model
-				notificationsTestOptionsModel := new(secretsmanagerv1.NotificationsTestOptions)
-				notificationsTestOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SendTestNotificationOptions model
+				sendTestNotificationOptionsModel := new(secretsmanagerv1.SendTestNotificationOptions)
+				sendTestNotificationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				response, operationErr := secretsManagerService.NotificationsTest(notificationsTestOptionsModel)
+				response, operationErr := secretsManagerService.SendTestNotification(sendTestNotificationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
@@ -6686,13 +6686,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(listSecretsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewNotificationsTestOptions successfully`, func() {
-				// Construct an instance of the NotificationsTestOptions model
-				notificationsTestOptionsModel := secretsManagerService.NewNotificationsTestOptions()
-				notificationsTestOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(notificationsTestOptionsModel).ToNot(BeNil())
-				Expect(notificationsTestOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewPutConfigOptions successfully`, func() {
 				// Construct an instance of the CreateIamCredentialsSecretEngineRootConfig model
 				engineConfigModel := new(secretsmanagerv1.CreateIamCredentialsSecretEngineRootConfig)
@@ -6774,6 +6767,13 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				var rotation secretsmanagerv1.SecretPolicyRotationRotationIntf = nil
 				_, err := secretsManagerService.NewSecretPolicyRotation(typeVar, rotation)
 				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewSendTestNotificationOptions successfully`, func() {
+				// Construct an instance of the SendTestNotificationOptions model
+				sendTestNotificationOptionsModel := secretsManagerService.NewSendTestNotificationOptions()
+				sendTestNotificationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(sendTestNotificationOptionsModel).ToNot(BeNil())
+				Expect(sendTestNotificationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateConfigElementOptions successfully`, func() {
 				// Construct an instance of the UpdateConfigElementOptions model

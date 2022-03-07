@@ -1981,20 +1981,20 @@ func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithConte
 	return
 }
 
-// NotificationsTest : Send test event
+// SendTestNotification : Send test event
 // Send a test event from a Secrets Manager instance to a configured [Event
 // Notifications](https://cloud.ibm.com/apidocs/event-notifications) instance.
 //
 // A successful request sends a test event to the Event Notifications instance. For more information about enabling
 // notifications for Secrets Manager, check out the
 // [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
-func (secretsManager *SecretsManagerV1) NotificationsTest(notificationsTestOptions *NotificationsTestOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.NotificationsTestWithContext(context.Background(), notificationsTestOptions)
+func (secretsManager *SecretsManagerV1) SendTestNotification(sendTestNotificationOptions *SendTestNotificationOptions) (response *core.DetailedResponse, err error) {
+	return secretsManager.SendTestNotificationWithContext(context.Background(), sendTestNotificationOptions)
 }
 
-// NotificationsTestWithContext is an alternate form of the NotificationsTest method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) NotificationsTestWithContext(ctx context.Context, notificationsTestOptions *NotificationsTestOptions) (response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(notificationsTestOptions, "notificationsTestOptions")
+// SendTestNotificationWithContext is an alternate form of the SendTestNotification method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) SendTestNotificationWithContext(ctx context.Context, sendTestNotificationOptions *SendTestNotificationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(sendTestNotificationOptions, "sendTestNotificationOptions")
 	if err != nil {
 		return
 	}
@@ -2007,11 +2007,11 @@ func (secretsManager *SecretsManagerV1) NotificationsTestWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range notificationsTestOptions.Headers {
+	for headerName, headerValue := range sendTestNotificationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "NotificationsTest")
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "SendTestNotification")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -3864,24 +3864,6 @@ func UnmarshalNotificationsSettings(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// NotificationsTestOptions : The NotificationsTest options.
-type NotificationsTestOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewNotificationsTestOptions : Instantiate NotificationsTestOptions
-func (*SecretsManagerV1) NewNotificationsTestOptions() *NotificationsTestOptions {
-	return &NotificationsTestOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *NotificationsTestOptions) SetHeaders(param map[string]string) *NotificationsTestOptions {
-	options.Headers = param
-	return options
-}
-
 // PutConfigOptions : The PutConfig options.
 type PutConfigOptions struct {
 	// The secret type.
@@ -5441,6 +5423,24 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// SendTestNotificationOptions : The SendTestNotification options.
+type SendTestNotificationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewSendTestNotificationOptions : Instantiate SendTestNotificationOptions
+func (*SecretsManagerV1) NewSendTestNotificationOptions() *SendTestNotificationOptions {
+	return &SendTestNotificationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *SendTestNotificationOptions) SetHeaders(param map[string]string) *SendTestNotificationOptions {
+	options.Headers = param
+	return options
 }
 
 // UpdateConfigElementOptions : The UpdateConfigElement options.
