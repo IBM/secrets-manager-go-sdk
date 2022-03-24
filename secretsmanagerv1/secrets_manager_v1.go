@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.46.0-a4e29da0-20220224-210428
+ * IBM OpenAPI SDK Code Generator Version: 3.46.1-a5569134-20220316-164819
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -165,7 +165,7 @@ func (secretsManager *SecretsManagerV1) DisableRetries() {
 }
 
 // CreateSecretGroup : Create a secret group
-// Creates a secret group that you can use to organize secrets and control who on your team has access to them.
+// Create a secret group that you can use to organize secrets and control who on your team has access to them.
 //
 // A successful request returns the ID value of the secret group, along with other metadata. To learn more about secret
 // groups, check out the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-groups).
@@ -237,7 +237,7 @@ func (secretsManager *SecretsManagerV1) CreateSecretGroupWithContext(ctx context
 }
 
 // ListSecretGroups : List secret groups
-// Retrieves the list of secret groups that are available in your Secrets Manager instance.
+// List the secret groups that are available in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV1) ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	return secretsManager.ListSecretGroupsWithContext(context.Background(), listSecretGroupsOptions)
 }
@@ -289,7 +289,7 @@ func (secretsManager *SecretsManagerV1) ListSecretGroupsWithContext(ctx context.
 }
 
 // GetSecretGroup : Get a secret group
-// Retrieves the metadata of an existing secret group by specifying the ID of the group.
+// Get the metadata of an existing secret group by specifying the ID of the group.
 func (secretsManager *SecretsManagerV1) GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	return secretsManager.GetSecretGroupWithContext(context.Background(), getSecretGroupOptions)
 }
@@ -349,7 +349,7 @@ func (secretsManager *SecretsManagerV1) GetSecretGroupWithContext(ctx context.Co
 }
 
 // UpdateSecretGroupMetadata : Update a secret group
-// Updates the metadata of an existing secret group, such as its name or description.
+// Update the metadata of an existing secret group, such as its name or description.
 func (secretsManager *SecretsManagerV1) UpdateSecretGroupMetadata(updateSecretGroupMetadataOptions *UpdateSecretGroupMetadataOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretGroupMetadataWithContext(context.Background(), updateSecretGroupMetadataOptions)
 }
@@ -422,7 +422,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretGroupMetadataWithContext(ctx
 }
 
 // DeleteSecretGroup : Delete a secret group
-// Deletes a secret group by specifying the ID of the secret group.
+// Delete a secret group by specifying the ID of the secret group.
 //
 // **Note:** To delete a secret group, it must be empty. If you need to remove a secret group that contains secrets, you
 // must first [delete the secrets](#delete-secret) that are associated with the group.
@@ -554,7 +554,7 @@ func (secretsManager *SecretsManagerV1) CreateSecretWithContext(ctx context.Cont
 }
 
 // ListSecrets : List secrets by type
-// Retrieves a list of secrets based on the type that you specify.
+// List the secrets in your Secrets Manager instance based on the type that you specify.
 func (secretsManager *SecretsManagerV1) ListSecrets(listSecretsOptions *ListSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
 	return secretsManager.ListSecretsWithContext(context.Background(), listSecretsOptions)
 }
@@ -621,7 +621,7 @@ func (secretsManager *SecretsManagerV1) ListSecretsWithContext(ctx context.Conte
 }
 
 // ListAllSecrets : List all secrets
-// Retrieves a list of all secrets in your Secrets Manager instance.
+// List all of the secrets in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV1) ListAllSecrets(listAllSecretsOptions *ListAllSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
 	return secretsManager.ListAllSecretsWithContext(context.Background(), listAllSecretsOptions)
 }
@@ -754,7 +754,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 }
 
 // UpdateSecret : Invoke an action on a secret
-// Invokes an action on a specified secret. This method supports the following actions:
+// Invoke an action on a specified secret. This method supports the following actions:
 //
 // - `rotate`: Replace the value of a secret.
 // - `restore`: Restore a previous version of an `iam_credentials` secret.
@@ -830,7 +830,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretWithContext(ctx context.Cont
 }
 
 // DeleteSecret : Delete a secret
-// Deletes a secret by specifying the ID of the secret.
+// Delete a secret by specifying the ID of the secret.
 func (secretsManager *SecretsManagerV1) DeleteSecret(deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.DeleteSecretWithContext(context.Background(), deleteSecretOptions)
 }
@@ -879,7 +879,7 @@ func (secretsManager *SecretsManagerV1) DeleteSecretWithContext(ctx context.Cont
 }
 
 // ListSecretVersions : List versions of a secret
-// Retrieves a list of the versions of a secret.
+// List the versions of a secret.
 //
 // A successful request returns the list of the versions along with the metadata of each version.
 func (secretsManager *SecretsManagerV1) ListSecretVersions(listSecretVersionsOptions *ListSecretVersionsOptions) (result *ListSecretVersions, response *core.DetailedResponse, err error) {
@@ -942,7 +942,7 @@ func (secretsManager *SecretsManagerV1) ListSecretVersionsWithContext(ctx contex
 }
 
 // GetSecretVersion : Get a version of a secret
-// Retrieves a version of a secret by specifying the ID of the version or the alias `previous`.
+// Get a version of a secret by specifying the ID of the version or the alias `previous`.
 //
 // A successful request returns the secret data that is associated with the specified version of your secret, along with
 // other metadata.
@@ -1007,7 +1007,7 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionWithContext(ctx context.
 }
 
 // GetSecretVersionMetadata : Get secret version metadata
-// Retrieves secret version metadata by specifying the ID of the version or the alias `previous`.
+// Get the metadata of a secret version by specifying the ID of the version or the alias `previous`.
 //
 // A successful request returns the metadata that is associated with the specified version of your secret.
 func (secretsManager *SecretsManagerV1) GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result *GetSecretVersionMetadata, response *core.DetailedResponse, err error) {
@@ -1071,7 +1071,7 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx 
 }
 
 // GetSecretMetadata : Get secret metadata
-// Retrieves the details of a secret by specifying the ID.
+// Get the details of a secret by specifying its ID.
 //
 // A successful request returns only metadata about the secret, such as its name and creation date. To retrieve the
 // value of a secret, use the [Get a secret](#get-secret) or [Get a version of a secret](#get-secret-version) methods.
@@ -1135,7 +1135,7 @@ func (secretsManager *SecretsManagerV1) GetSecretMetadataWithContext(ctx context
 }
 
 // UpdateSecretMetadata : Update secret metadata
-// Updates the metadata of a secret, such as its name or description.
+// Update the metadata of a secret, such as its name or description.
 //
 // To update the actual contents of a secret, rotate the secret by using the [Invoke an action on a
 // secret](#update-secret) method.
@@ -1212,9 +1212,9 @@ func (secretsManager *SecretsManagerV1) UpdateSecretMetadataWithContext(ctx cont
 }
 
 // PutPolicy : Set secret policies
-// Creates or updates one or more policies, such as an [automatic rotation
-// policy](http://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-rotate-secrets#auto-rotate-secret), for the
-// specified secret.
+// Create or update one or more policies, such as an [automatic rotation
+// policy](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-automatic-rotation), for the specified
+// secret.
 func (secretsManager *SecretsManagerV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
 	return secretsManager.PutPolicyWithContext(context.Background(), putPolicyOptions)
 }
@@ -1292,7 +1292,7 @@ func (secretsManager *SecretsManagerV1) PutPolicyWithContext(ctx context.Context
 }
 
 // GetPolicy : List secret policies
-// Retrieves a list of policies that are associated with a specified secret.
+// List the rotation policies that are associated with a specified secret.
 func (secretsManager *SecretsManagerV1) GetPolicy(getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
 	return secretsManager.GetPolicyWithContext(context.Background(), getPolicyOptions)
 }
@@ -1357,11 +1357,11 @@ func (secretsManager *SecretsManagerV1) GetPolicyWithContext(ctx context.Context
 }
 
 // PutConfig : Set the configuration of a secret type
-// Sets the configuration for the specified secret type.
+// Set the configuration for the specified secret type.
 //
-// Use this method to configure the IAM credentials (`iam_credentials`) engine for your service instance. Looking to set
-// up certificate ordering? To configure the public certificates (`public_cert`) engine, use the [Add a
-// configuration](#create_config_element) method.
+// Use this method to configure the IAM credentials (`iam_credentials`) engine for your service instance. Looking to
+// order or generate certificates? To configure the public certificates (`public_cert`) or  private certificates
+// (`private_cert`) engines, use the [Add a configuration](#create_config_element) method.
 func (secretsManager *SecretsManagerV1) PutConfig(putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.PutConfigWithContext(context.Background(), putConfigOptions)
 }
@@ -1415,7 +1415,7 @@ func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context
 }
 
 // GetConfig : Get the configuration of a secret type
-// Retrieves the configuration that is associated with the specified secret type.
+// Get the configuration that is associated with the specified secret type.
 func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigWithContext(context.Background(), getConfigOptions)
 }
@@ -1475,17 +1475,17 @@ func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context
 }
 
 // CreateConfigElement : Add a configuration
-// Adds a configuration element to the specified secret type.
+// Add a configuration element to the specified secret type.
 //
-// Use this method to define the configurations that are required to enable the public certificates (`public_cert`)
-// engine and the private certificates (`private_cert`) engine.
+// Use this method to define the configurations that are required to enable the public certificates (`public_cert`) and
+// private certificates (`private_cert`) engines.
 //
 // You can add multiple configurations for your instance as follows:
 //
 // - Up to 10 public certificate authority configurations
 // - Up to 10 DNS provider configurations
-// - Up to 10 private root certifiate authority configurations
-// - Up to 10 private intermediate certifiate authority configurations
+// - Up to 10 private root certificate authority configurations
+// - Up to 10 private intermediate certificate authority configurations
 // - Up to 10 certificate templates.
 func (secretsManager *SecretsManagerV1) CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.CreateConfigElementWithContext(context.Background(), createConfigElementOptions)
@@ -1563,7 +1563,7 @@ func (secretsManager *SecretsManagerV1) CreateConfigElementWithContext(ctx conte
 }
 
 // GetConfigElements : List configurations
-// Lists the configuration elements that are associated with a specified secret type.
+// List the configuration elements that are associated with a specified secret type.
 func (secretsManager *SecretsManagerV1) GetConfigElements(getConfigElementsOptions *GetConfigElementsOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigElementsWithContext(context.Background(), getConfigElementsOptions)
 }
@@ -1624,7 +1624,7 @@ func (secretsManager *SecretsManagerV1) GetConfigElementsWithContext(ctx context
 }
 
 // GetConfigElement : Get a configuration
-// Retrieves the details of a specific configuration that is associated with a secret type.
+// Get the details of a specific configuration that is associated with a secret type.
 func (secretsManager *SecretsManagerV1) GetConfigElement(getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigElementWithContext(context.Background(), getConfigElementOptions)
 }
@@ -1686,7 +1686,7 @@ func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.
 }
 
 // UpdateConfigElement : Update a configuration
-// Updates a configuration element that is associated with the specified secret type.
+// Update a configuration element that is associated with the specified secret type.
 func (secretsManager *SecretsManagerV1) UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateConfigElementWithContext(context.Background(), updateConfigElementOptions)
 }
@@ -1761,7 +1761,7 @@ func (secretsManager *SecretsManagerV1) UpdateConfigElementWithContext(ctx conte
 }
 
 // DeleteConfigElement : Delete a configuration
-// Deletes a configuration element from the specified secret type.
+// Delete a configuration element from the specified secret type.
 func (secretsManager *SecretsManagerV1) DeleteConfigElement(deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.DeleteConfigElementWithContext(context.Background(), deleteConfigElementOptions)
 }
@@ -1811,7 +1811,7 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 }
 
 // CreateNotificationsRegistration : Register with Event Notifications
-// Creates a registration between a Secrets Manager instance and [Event
+// Create a registration between a Secrets Manager instance and [Event
 // Notifications](https://cloud.ibm.com/apidocs/event-notifications).
 //
 // A successful request adds Secrets Manager as a source that you can reference from your Event Notifications instance.
@@ -1888,7 +1888,7 @@ func (secretsManager *SecretsManagerV1) CreateNotificationsRegistrationWithConte
 }
 
 // GetNotificationsRegistration : Get Event Notifications registration details
-// Retrieves the details of an existing registration between a Secrets Manager instance and Event Notifications.
+// Get the details of an existing registration between a Secrets Manager instance and Event Notifications.
 func (secretsManager *SecretsManagerV1) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
 	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
 }
@@ -1940,7 +1940,7 @@ func (secretsManager *SecretsManagerV1) GetNotificationsRegistrationWithContext(
 }
 
 // DeleteNotificationsRegistration : Unregister from Event Notifications
-// Deletes a registration between a Secrets Manager instance and Event Notifications.
+// Delete a registration between a Secrets Manager instance and Event Notifications.
 //
 // A successful request removes your Secrets Manager instance as a source in Event Notifications.
 func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
@@ -1981,7 +1981,7 @@ func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithConte
 	return
 }
 
-// SendTestNotification : Send test event
+// SendTestNotification : Send a test event
 // Send a test event from a Secrets Manager instance to a configured [Event
 // Notifications](https://cloud.ibm.com/apidocs/event-notifications) instance.
 //
@@ -4005,25 +4005,25 @@ type Rotation struct {
 	//
 	// If set to `true`, the service generates and stores a new private key for your rotated certificate.
 	//
-	// **Note:** Use this field only for public certificates. Ignored for private certificates.
+	// **Note:** Use this field only for public certificates. It is ignored for private certificates.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
 
 	// Used together with the `unit` field to specify the rotation interval. The minimum interval is one day, and the
 	// maximum interval is 3 years (1095 days). Required in case `auto_rotate` is set to `true`.
 	//
-	// **Note:** Use this field only for private certificates Ignored for public certificates.
+	// **Note:** Use this field only for private certificates. It is ignored for public certificates.
 	Interval *int64 `json:"interval,omitempty"`
 
 	// The time unit of the rotation interval.
 	//
-	// **Note:** Use this field only for private certificates. Ignored for public certificates.
+	// **Note:** Use this field only for private certificates. It is ignored for public certificates.
 	Unit *string `json:"unit,omitempty"`
 }
 
 // Constants associated with the Rotation.Unit property.
 // The time unit of the rotation interval.
 //
-// **Note:** Use this field only for private certificates. Ignored for public certificates.
+// **Note:** Use this field only for private certificates. It is ignored for public certificates.
 const (
 	RotationUnitDayConst   = "day"
 	RotationUnitMonthConst = "month"
@@ -4410,7 +4410,8 @@ type SecretMetadata struct {
 	// - `username_password`.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
-	// Specifies the Time To Live value provided as a string duration with time suffix.
+	// The time-to-live (TTL) or lease duration that is assigned to the secret. For `iam_credentials` secrets, the TTL
+	// defines for how long each generated API key remains valid.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
@@ -4442,8 +4443,8 @@ type SecretMetadata struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -4481,6 +4482,7 @@ const (
 	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	SecretMetadataSecretTypeKvConst               = "kv"
+	SecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -4702,10 +4704,10 @@ func UnmarshalSecretPolicyRotation(m map[string]json.RawMessage, result interfac
 // - SecretPolicyRotationRotationPolicyRotation
 // - SecretPolicyRotationRotationPublicCertPolicyRotation
 type SecretPolicyRotationRotation struct {
-	// Specifies the length of the secret rotation time interval.
+	// The length of the secret rotation time interval.
 	Interval *int64 `json:"interval,omitempty"`
 
-	// Specifies the units for the secret rotation time interval.
+	// The units for the secret rotation time interval.
 	Unit *string `json:"unit,omitempty"`
 
 	AutoRotate *bool `json:"auto_rotate,omitempty"`
@@ -4714,7 +4716,7 @@ type SecretPolicyRotationRotation struct {
 }
 
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
-// Specifies the units for the secret rotation time interval.
+// The units for the secret rotation time interval.
 const (
 	SecretPolicyRotationRotationUnitDayConst   = "day"
 	SecretPolicyRotationRotationUnitMonthConst = "month"
@@ -4914,8 +4916,8 @@ type SecretResource struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -5738,10 +5740,10 @@ func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateS
 
 // CertificateValidity : CertificateValidity struct
 type CertificateValidity struct {
-	// The date the certificate validity period begins.
+	// The date and time that the certificate validity period begins.
 	NotBefore *strfmt.DateTime `json:"not_before,omitempty"`
 
-	// The date the certificate validity period ends.
+	// The date and time that the certificate validity period ends.
 	NotAfter *strfmt.DateTime `json:"not_after,omitempty"`
 }
 
@@ -5832,6 +5834,7 @@ const (
 	ArbitrarySecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	ArbitrarySecretMetadataSecretTypeKvConst               = "kv"
+	ArbitrarySecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	ArbitrarySecretMetadataSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -6311,8 +6314,8 @@ type CertificateSecretMetadata struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -6343,6 +6346,7 @@ const (
 	CertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	CertificateSecretMetadataSecretTypeKvConst               = "kv"
+	CertificateSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	CertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -6530,11 +6534,9 @@ type CertificateSecretResource struct {
 
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
-	// `certificate`: The contents of the certificate.
-	//
-	// `private_key`: The private key that is associated with the certificate.
-	//
-	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -6544,8 +6546,8 @@ type CertificateSecretResource struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -6738,11 +6740,9 @@ type CertificateSecretVersion struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `certificate`: The contents of the certificate.
-	//
-	// `private_key`: The private key that is associated with the certificate.
-	//
-	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -7245,7 +7245,7 @@ func UnmarshalIamCredentialsSecretEngineRootConfig(m map[string]json.RawMessage,
 	return
 }
 
-// IamCredentialsSecretMetadata : Metadata properties that describe a iam_credentials secret.
+// IamCredentialsSecretMetadata : Metadata properties that describe an `iam_credentials` secret.
 // This model "extends" SecretMetadata
 type IamCredentialsSecretMetadata struct {
 	// The unique ID of the secret.
@@ -7299,7 +7299,8 @@ type IamCredentialsSecretMetadata struct {
 	// The number of versions the secret has.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// Specifies the Time To Live value provided as a string duration with time suffix.
+	// The time-to-live (TTL) or lease duration that is assigned to the secret. For `iam_credentials` secrets, the TTL
+	// defines for how long each generated API key remains valid.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
@@ -7332,6 +7333,7 @@ const (
 	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	IamCredentialsSecretMetadataSecretTypeKvConst               = "kv"
+	IamCredentialsSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	IamCredentialsSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7671,11 +7673,9 @@ type IamCredentialsSecretVersion struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `api_key`: The API key that is generated for this secret.
-	//
-	// `api_key_id`: The ID of the API key that is generated for this secret.
-	//
-	// `service_id`: The service ID under which the API key is created.
+	// - `api_key`: The API key that is generated for this secret.
+	// - `api_key_id`: The ID of the API key that is generated for this secret.
+	// - `service_id`: The service ID under which the API key is created.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -7881,6 +7881,7 @@ const (
 	KvSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	KvSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	KvSecretMetadataSecretTypeKvConst               = "kv"
+	KvSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	KvSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	KvSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8196,6 +8197,7 @@ const (
 	PrivateCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	PrivateCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	PrivateCertificateSecretMetadataSecretTypeKvConst               = "kv"
+	PrivateCertificateSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	PrivateCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	PrivateCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8401,6 +8403,7 @@ const (
 	PublicCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	PublicCertificateSecretMetadataSecretTypeKvConst               = "kv"
+	PublicCertificateSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	PublicCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8647,11 +8650,9 @@ type PublicCertificateSecretResource struct {
 
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
-	// `certificate`: The contents of the certificate.
-	//
-	// `private_key`: The private key that is associated with the certificate.
-	//
-	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -9020,15 +9021,15 @@ func UnmarshalRotateUsernamePasswordSecretBody(m map[string]json.RawMessage, res
 // SecretPolicyRotationRotationPolicyRotation : The secret rotation time interval.
 // This model "extends" SecretPolicyRotationRotation
 type SecretPolicyRotationRotationPolicyRotation struct {
-	// Specifies the length of the secret rotation time interval.
+	// The length of the secret rotation time interval.
 	Interval *int64 `json:"interval" validate:"required"`
 
-	// Specifies the units for the secret rotation time interval.
+	// The units for the secret rotation time interval.
 	Unit *string `json:"unit" validate:"required"`
 }
 
 // Constants associated with the SecretPolicyRotationRotationPolicyRotation.Unit property.
-// Specifies the units for the secret rotation time interval.
+// The units for the secret rotation time interval.
 const (
 	SecretPolicyRotationRotationPolicyRotationUnitDayConst   = "day"
 	SecretPolicyRotationRotationPolicyRotationUnitMonthConst = "month"
@@ -9172,6 +9173,7 @@ const (
 	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	UsernamePasswordSecretMetadataSecretTypeKvConst               = "kv"
+	UsernamePasswordSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	UsernamePasswordSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -9318,9 +9320,8 @@ type UsernamePasswordSecretResource struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `username`: The username that is associated with the secret version.
-	//
-	// `password`: The password that is associated with the secret version.
+	// - `username`: The username that is associated with the secret version.
+	// - `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
@@ -9468,9 +9469,8 @@ type UsernamePasswordSecretVersion struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `username`: The username that is associated with the secret version.
-	//
-	// `password`: The password that is associated with the secret version.
+	// - `username`: The username that is associated with the secret version.
+	// - `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 

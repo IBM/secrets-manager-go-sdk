@@ -1274,17 +1274,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1357,17 +1357,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1448,17 +1448,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1484,17 +1484,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1541,17 +1541,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -3510,15 +3510,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3592,15 +3592,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3682,15 +3682,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3717,15 +3717,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3773,15 +3773,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -4700,16 +4700,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -4775,16 +4776,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4858,16 +4860,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4886,16 +4889,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4935,16 +4939,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5428,7 +5433,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -5499,7 +5504,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5578,7 +5583,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5602,7 +5607,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -5647,7 +5652,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -6331,30 +6336,32 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewCreateConfigElementOptions successfully`, func() {
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
 				Expect(configElementDefConfigModel).ToNot(BeNil())
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
-				Expect(configElementDefConfigModel.PrivateKey).To(Equal(core.StringPtr("testString")))
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
+				Expect(configElementDefConfigModel.CisCRN).To(Equal(core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")))
+				Expect(configElementDefConfigModel.CisApikey).To(Equal(core.StringPtr("cis_apikey_value")))
 
 				// Construct an instance of the CreateConfigElementOptions model
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
-				createConfigElementOptionsName := "testString"
-				createConfigElementOptionsType := "letsencrypt"
+				createConfigElementOptionsName := "cis-example-config"
+				createConfigElementOptionsType := "cis"
 				var createConfigElementOptionsConfig secretsmanagerv1.ConfigElementDefConfigIntf = nil
 				createConfigElementOptionsModel := secretsManagerService.NewCreateConfigElementOptions(secretType, configElement, createConfigElementOptionsName, createConfigElementOptionsType, createConfigElementOptionsConfig)
 				createConfigElementOptionsModel.SetSecretType("public_cert")
 				createConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				createConfigElementOptionsModel.SetName("testString")
-				createConfigElementOptionsModel.SetType("letsencrypt")
+				createConfigElementOptionsModel.SetName("cis-example-config")
+				createConfigElementOptionsModel.SetType("cis")
 				createConfigElementOptionsModel.SetConfig(configElementDefConfigModel)
 				createConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createConfigElementOptionsModel).ToNot(BeNil())
 				Expect(createConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
 				Expect(createConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(createConfigElementOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("letsencrypt")))
+				Expect(createConfigElementOptionsModel.Name).To(Equal(core.StringPtr("cis-example-config")))
+				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("cis")))
 				Expect(createConfigElementOptionsModel.Config).To(Equal(configElementDefConfigModel))
 				Expect(createConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -6424,26 +6431,26 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
 				Expect(secretResourceModel).ToNot(BeNil())
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
-				Expect(secretResourceModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.Description).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.SecretGroupID).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.Labels).To(Equal([]string{"testString"}))
-				Expect(secretResourceModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00.000Z")))
-				Expect(secretResourceModel.Payload).To(Equal(core.StringPtr("testString")))
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
+				Expect(secretResourceModel.Name).To(Equal(core.StringPtr("example-arbitrary-secret")))
+				Expect(secretResourceModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
+				Expect(secretResourceModel.SecretGroupID).To(Equal(core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")))
+				Expect(secretResourceModel.Labels).To(Equal([]string{"dev", "us-south"}))
+				Expect(secretResourceModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-01-01T00:00:00Z")))
+				Expect(secretResourceModel.Payload).To(Equal(core.StringPtr("secret-data")))
 
 				// Construct an instance of the CreateSecretOptions model
 				secretType := "arbitrary"
@@ -6780,20 +6787,20 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
 				configName := "testString"
-				updateConfigElementOptionsType := "letsencrypt"
+				updateConfigElementOptionsType := "cis"
 				updateConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel := secretsManagerService.NewUpdateConfigElementOptions(secretType, configElement, configName, updateConfigElementOptionsType, updateConfigElementOptionsConfig)
 				updateConfigElementOptionsModel.SetSecretType("public_cert")
 				updateConfigElementOptionsModel.SetConfigElement("certificate_authorities")
 				updateConfigElementOptionsModel.SetConfigName("testString")
-				updateConfigElementOptionsModel.SetType("letsencrypt")
+				updateConfigElementOptionsModel.SetType("cis")
 				updateConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
 				updateConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateConfigElementOptionsModel).ToNot(BeNil())
 				Expect(updateConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
 				Expect(updateConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
 				Expect(updateConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
-				Expect(updateConfigElementOptionsModel.Type).To(Equal(core.StringPtr("letsencrypt")))
+				Expect(updateConfigElementOptionsModel.Type).To(Equal(core.StringPtr("cis")))
 				Expect(updateConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(updateConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -6833,22 +6840,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				Expect(secretMetadataModel).ToNot(BeNil())
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 				Expect(secretMetadataModel.Labels).To(Equal([]string{"dev", "us-south"}))
-				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("example-secret")))
-				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
-				Expect(secretMetadataModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00.000Z")))
+				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("updated-secret-name")))
+				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Updated description for this secret.")))
+				Expect(secretMetadataModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00Z")))
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				secretType := "arbitrary"
