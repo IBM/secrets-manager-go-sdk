@@ -28,6 +28,12 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 	Expect(secretsManager).ToNot(BeNil())
 	Expect(serviceErr).To(BeNil())
 
+	AfterSuite(func() {
+		deleteAllSecrets(secretsManager, TESTCASEPREFIX)
+		deleteAllSecretGroups(secretsManager, TESTCASEPREFIX)
+		deleteAllConfigElements(secretsManager, secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst, TESTCASEPREFIX)
+	})
+
 	Context(`Create and delete secret`, func() {
 
 		It(`Should create an arbitrary secret`, func() {
@@ -550,19 +556,6 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		})
 	})
 
-	Context(`Cleanup - Delete all test case data`, func() {
-		It(`Delete All Secrets with prefix`, func() {
-			deleteAllSecrets(secretsManager, TESTCASEPREFIX)
-		})
-
-		It(`Delete All SecretGroups with prefix`, func() {
-			deleteAllSecretGroups(secretsManager, TESTCASEPREFIX)
-		})
-
-		It(`Delete All Configs with prefix`, func() {
-			deleteAllConfigElements(secretsManager, secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst, TESTCASEPREFIX)
-		})
-	})
 })
 
 func generateName() string {
