@@ -506,7 +506,6 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 
 			Expect(err).To(BeNil())
-			Expect(err).ToNot(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusCreated))
 
 			//Get the DNS config
@@ -551,7 +550,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		})
 	})
 
-	Context(`Cleanup - Delete all leftover secrets`, func() {
+	Context(`Cleanup - Delete all test case data`, func() {
 		It(`Delete All Secrets with prefix`, func() {
 			deleteAllSecrets(secretsManager, TESTCASEPREFIX)
 		})
