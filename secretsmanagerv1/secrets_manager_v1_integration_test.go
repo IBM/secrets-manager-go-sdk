@@ -1,6 +1,7 @@
 package secretsmanagerv1_test
 
 import (
+	"encoding/json"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
 	"github.com/go-openapi/strfmt"
@@ -13,6 +14,8 @@ import (
 	"time"
 )
 
+const TESTCASEPREFIX = "Go-SDK_"
+
 var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 
 	secretsManager, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
@@ -24,6 +27,12 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 	})
 	Expect(secretsManager).ToNot(BeNil())
 	Expect(serviceErr).To(BeNil())
+
+	AfterSuite(func() {
+		deleteAllSecrets(secretsManager, TESTCASEPREFIX)
+		deleteAllSecretGroups(secretsManager, TESTCASEPREFIX)
+		deleteAllConfigElements(secretsManager, secretsmanagerv1.DeleteSecretOptionsSecretTypePublicCertConst, TESTCASEPREFIX)
+	})
 
 	Context(`Create and delete secret`, func() {
 
@@ -69,7 +78,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		})
 
 		It(`Creating a secret with the same name should result in a conflict`, func() {
-			secretName := "conflict_integration_test_secret"
+			secretName := TESTCASEPREFIX + "conflict_integration_test_secret-" + strconv.FormatInt(core.GetCurrentTime(), 10)
 			// create arbitrary secret
 			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
@@ -550,10 +559,122 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 })
 
 func generateName() string {
-	return "test-integration-" + strconv.FormatInt(core.GetCurrentTime(), 10)
+	return TESTCASEPREFIX + "test-integration-" + strconv.FormatInt(core.GetCurrentTime(), 10)
 }
 
 func generateExpirationDate() *strfmt.DateTime {
 	d := strfmt.DateTime(time.Now().AddDate(10, 0, 0))
 	return &d
+}
+
+func deleteAllSecrets(secretsManager *secretsmanagerv1.SecretsManagerV1, prefix string) {
+	secrets := getAllSecrets(secretsManager).Resources
+	b, _ := json.MarshalIndent(secrets, "", "")
+	var secretsData []secretsmanagerv1.SecretResource
+	json.Unmarshal(b, &secretsData)
+	for _, secret := range secretsData {
+		//do not delete auto rotation secrets.
+		if strings.Contains(*secret.Name, "auto-rotate") || strings.Contains(*secret.Name, "auto-renew") {
+			continue
+		}
+
+		if !strings.Contains(*secret.Name, prefix) {
+			continue
+		}
+
+		secretType := strings.ToLower(*secret.SecretType)
+		deleteSecret(secretsManager, secretType, *secret.ID)
+	}
+}
+
+func deleteAllSecretGroups(secretsManager *secretsmanagerv1.SecretsManagerV1, prefix string) {
+	secretGroups := getAllSecretGroups(secretsManager).Resources
+	b, _ := json.MarshalIndent(secretGroups, "", "")
+	var secretGroupsData []secretsmanagerv1.SecretGroupResource
+	json.Unmarshal(b, &secretGroupsData)
+	for _, secretGroup := range secretGroupsData {
+
+		if !strings.Contains(*secretGroup.Name, prefix) {
+			continue
+		}
+
+		deleteSecretGroup(secretsManager, *secretGroup.ID)
+	}
+}
+
+func deleteAllConfigElements(secretsManager *secretsmanagerv1.SecretsManagerV1, SecretType string, prefix string) {
+	configElements := getAllConfigElements(secretsManager, SecretType).Resources
+	b, _ := json.MarshalIndent(configElements, "", "")
+	var configsData []secretsmanagerv1.GetConfigResourcesItem
+	json.Unmarshal(b, &configsData)
+
+	for _, configData := range configsData {
+
+		CertificateAuthorities := configData.CertificateAuthorities
+		b, _ = json.MarshalIndent(CertificateAuthorities, "", "")
+		var CertificateAuthoritiesData []secretsmanagerv1.ConfigElementMetadata
+		json.Unmarshal(b, &CertificateAuthoritiesData)
+
+		for _, CertificateData := range CertificateAuthoritiesData {
+			if !strings.Contains(*CertificateData.Name, prefix) {
+				continue
+			}
+
+			deleteConfigElement(secretsManager, SecretType, secretsmanagerv1.DeleteConfigElementOptionsConfigElementCertificateAuthoritiesConst, *CertificateData.Name)
+		}
+
+		DNSProviders := configData.DNSProviders
+		b, _ = json.MarshalIndent(DNSProviders, "", "")
+		var DNSProvidersData []secretsmanagerv1.ConfigElementMetadata
+		json.Unmarshal(b, &DNSProvidersData)
+
+		for _, DNSProviderData := range DNSProvidersData {
+			if !strings.Contains(*DNSProviderData.Name, prefix) {
+				continue
+			}
+
+			deleteConfigElement(secretsManager, SecretType, secretsmanagerv1.DeleteConfigElementOptionsConfigElementDNSProvidersConst, *DNSProviderData.Name)
+		}
+	}
+}
+
+func deleteSecret(secretsManager *secretsmanagerv1.SecretsManagerV1, secretType string, secretId string) {
+	deleteSecretOptions := secretsManager.NewDeleteSecretOptions(
+		secretType,
+		secretId,
+	)
+
+	secretsManager.DeleteSecret(deleteSecretOptions)
+}
+
+func deleteSecretGroup(secretsManager *secretsmanagerv1.SecretsManagerV1, secretGroupId string) {
+	deleteSecretGroupOptions := secretsManager.NewDeleteSecretGroupOptions(secretGroupId)
+
+	secretsManager.DeleteSecretGroup(deleteSecretGroupOptions)
+}
+
+func deleteConfigElement(secretsManager *secretsmanagerv1.SecretsManagerV1, SecretType string, ConfigElement string, caConfigName string) {
+	deleteConfigElementOptions := secretsManager.NewDeleteConfigElementOptions(
+		SecretType,
+		ConfigElement,
+		caConfigName,
+	)
+	secretsManager.DeleteConfigElement(deleteConfigElementOptions)
+}
+
+func getAllSecrets(secretsManager *secretsmanagerv1.SecretsManagerV1) *secretsmanagerv1.ListSecrets {
+	secrets, _, _ := secretsManager.ListAllSecrets(secretsManager.NewListAllSecretsOptions().SetLimit(2000))
+	return secrets
+}
+
+func getAllSecretGroups(secretsManager *secretsmanagerv1.SecretsManagerV1) *secretsmanagerv1.SecretGroupDef {
+	secretGroups, _, _ := secretsManager.ListSecretGroups(secretsManager.NewListSecretGroupsOptions())
+	return secretGroups
+}
+
+func getAllConfigElements(secretsManager *secretsmanagerv1.SecretsManagerV1, SecretType string) *secretsmanagerv1.GetConfig {
+	configRes, _, _ := secretsManager.GetConfig(&secretsmanagerv1.GetConfigOptions{
+		SecretType: core.StringPtr(SecretType),
+	})
+	return configRes
 }
