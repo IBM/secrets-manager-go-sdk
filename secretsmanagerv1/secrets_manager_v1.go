@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.46.0-a4e29da0-20220224-210428
+ * IBM OpenAPI SDK Code Generator Version: 3.47.1-be944570-20220406-170244
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -44,9 +44,6 @@ import (
 type SecretsManagerV1 struct {
 	Service *core.BaseService
 }
-
-// DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://secrets-manager.cloud.ibm.com"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "secrets_manager"
@@ -90,7 +87,6 @@ func NewSecretsManagerV1UsingExternalConfig(options *SecretsManagerV1Options) (s
 // NewSecretsManagerV1 : constructs an instance of SecretsManagerV1 with passed in options.
 func NewSecretsManagerV1(options *SecretsManagerV1Options) (service *SecretsManagerV1, err error) {
 	serviceOptions := &core.ServiceOptions{
-		URL:           DefaultServiceURL,
 		Authenticator: options.Authenticator,
 	}
 
@@ -165,7 +161,7 @@ func (secretsManager *SecretsManagerV1) DisableRetries() {
 }
 
 // CreateSecretGroup : Create a secret group
-// Creates a secret group that you can use to organize secrets and control who on your team has access to them.
+// Create a secret group that you can use to organize secrets and control who on your team has access to them.
 //
 // A successful request returns the ID value of the secret group, along with other metadata. To learn more about secret
 // groups, check out the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-groups).
@@ -237,7 +233,7 @@ func (secretsManager *SecretsManagerV1) CreateSecretGroupWithContext(ctx context
 }
 
 // ListSecretGroups : List secret groups
-// Retrieves the list of secret groups that are available in your Secrets Manager instance.
+// List the secret groups that are available in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV1) ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	return secretsManager.ListSecretGroupsWithContext(context.Background(), listSecretGroupsOptions)
 }
@@ -289,7 +285,7 @@ func (secretsManager *SecretsManagerV1) ListSecretGroupsWithContext(ctx context.
 }
 
 // GetSecretGroup : Get a secret group
-// Retrieves the metadata of an existing secret group by specifying the ID of the group.
+// Get the metadata of an existing secret group by specifying the ID of the group.
 func (secretsManager *SecretsManagerV1) GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	return secretsManager.GetSecretGroupWithContext(context.Background(), getSecretGroupOptions)
 }
@@ -349,7 +345,7 @@ func (secretsManager *SecretsManagerV1) GetSecretGroupWithContext(ctx context.Co
 }
 
 // UpdateSecretGroupMetadata : Update a secret group
-// Updates the metadata of an existing secret group, such as its name or description.
+// Update the metadata of an existing secret group, such as its name or description.
 func (secretsManager *SecretsManagerV1) UpdateSecretGroupMetadata(updateSecretGroupMetadataOptions *UpdateSecretGroupMetadataOptions) (result *SecretGroupDef, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretGroupMetadataWithContext(context.Background(), updateSecretGroupMetadataOptions)
 }
@@ -422,7 +418,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretGroupMetadataWithContext(ctx
 }
 
 // DeleteSecretGroup : Delete a secret group
-// Deletes a secret group by specifying the ID of the secret group.
+// Delete a secret group by specifying the ID of the secret group.
 //
 // **Note:** To delete a secret group, it must be empty. If you need to remove a secret group that contains secrets, you
 // must first [delete the secrets](#delete-secret) that are associated with the group.
@@ -554,7 +550,7 @@ func (secretsManager *SecretsManagerV1) CreateSecretWithContext(ctx context.Cont
 }
 
 // ListSecrets : List secrets by type
-// Retrieves a list of secrets based on the type that you specify.
+// List the secrets in your Secrets Manager instance based on the type that you specify.
 func (secretsManager *SecretsManagerV1) ListSecrets(listSecretsOptions *ListSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
 	return secretsManager.ListSecretsWithContext(context.Background(), listSecretsOptions)
 }
@@ -621,7 +617,7 @@ func (secretsManager *SecretsManagerV1) ListSecretsWithContext(ctx context.Conte
 }
 
 // ListAllSecrets : List all secrets
-// Retrieves a list of all secrets in your Secrets Manager instance.
+// List all of the secrets in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV1) ListAllSecrets(listAllSecretsOptions *ListAllSecretsOptions) (result *ListSecrets, response *core.DetailedResponse, err error) {
 	return secretsManager.ListAllSecretsWithContext(context.Background(), listAllSecretsOptions)
 }
@@ -754,7 +750,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 }
 
 // UpdateSecret : Invoke an action on a secret
-// Invokes an action on a specified secret. This method supports the following actions:
+// Invoke an action on a specified secret. This method supports the following actions:
 //
 // - `rotate`: Replace the value of a secret.
 // - `restore`: Restore a previous version of an `iam_credentials` secret.
@@ -830,7 +826,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretWithContext(ctx context.Cont
 }
 
 // DeleteSecret : Delete a secret
-// Deletes a secret by specifying the ID of the secret.
+// Delete a secret by specifying the ID of the secret.
 func (secretsManager *SecretsManagerV1) DeleteSecret(deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.DeleteSecretWithContext(context.Background(), deleteSecretOptions)
 }
@@ -879,7 +875,7 @@ func (secretsManager *SecretsManagerV1) DeleteSecretWithContext(ctx context.Cont
 }
 
 // ListSecretVersions : List versions of a secret
-// Retrieves a list of the versions of a secret.
+// List the versions of a secret.
 //
 // A successful request returns the list of the versions along with the metadata of each version.
 func (secretsManager *SecretsManagerV1) ListSecretVersions(listSecretVersionsOptions *ListSecretVersionsOptions) (result *ListSecretVersions, response *core.DetailedResponse, err error) {
@@ -942,7 +938,7 @@ func (secretsManager *SecretsManagerV1) ListSecretVersionsWithContext(ctx contex
 }
 
 // GetSecretVersion : Get a version of a secret
-// Retrieves a version of a secret by specifying the ID of the version or the alias `previous`.
+// Get a version of a secret by specifying the ID of the version or the alias `previous`.
 //
 // A successful request returns the secret data that is associated with the specified version of your secret, along with
 // other metadata.
@@ -1006,8 +1002,74 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionWithContext(ctx context.
 	return
 }
 
+// UpdateSecretVersion : Invoke an action on a version of a secret
+// Invoke an action on a specified version of a secret. This method supports the following actions:
+//
+// - `revoke`: Revoke a version of a private certificate.
+func (secretsManager *SecretsManagerV1) UpdateSecretVersion(updateSecretVersionOptions *UpdateSecretVersionOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
+	return secretsManager.UpdateSecretVersionWithContext(context.Background(), updateSecretVersionOptions)
+}
+
+// UpdateSecretVersionWithContext is an alternate form of the UpdateSecretVersion method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) UpdateSecretVersionWithContext(ctx context.Context, updateSecretVersionOptions *UpdateSecretVersionOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateSecretVersionOptions, "updateSecretVersionOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updateSecretVersionOptions, "updateSecretVersionOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *updateSecretVersionOptions.SecretType,
+		"id":          *updateSecretVersionOptions.ID,
+		"version_id":  *updateSecretVersionOptions.VersionID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/secrets/{secret_type}/{id}/versions/{version_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateSecretVersionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UpdateSecretVersion")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	builder.AddQuery("action", fmt.Sprint(*updateSecretVersionOptions.Action))
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecret)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // GetSecretVersionMetadata : Get secret version metadata
-// Retrieves secret version metadata by specifying the ID of the version or the alias `previous`.
+// Get the metadata of a secret version by specifying the ID of the version or the alias `previous`.
 //
 // A successful request returns the metadata that is associated with the specified version of your secret.
 func (secretsManager *SecretsManagerV1) GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result *GetSecretVersionMetadata, response *core.DetailedResponse, err error) {
@@ -1071,7 +1133,7 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx 
 }
 
 // GetSecretMetadata : Get secret metadata
-// Retrieves the details of a secret by specifying the ID.
+// Get the details of a secret by specifying its ID.
 //
 // A successful request returns only metadata about the secret, such as its name and creation date. To retrieve the
 // value of a secret, use the [Get a secret](#get-secret) or [Get a version of a secret](#get-secret-version) methods.
@@ -1135,7 +1197,7 @@ func (secretsManager *SecretsManagerV1) GetSecretMetadataWithContext(ctx context
 }
 
 // UpdateSecretMetadata : Update secret metadata
-// Updates the metadata of a secret, such as its name or description.
+// Update the metadata of a secret, such as its name or description.
 //
 // To update the actual contents of a secret, rotate the secret by using the [Invoke an action on a
 // secret](#update-secret) method.
@@ -1212,9 +1274,9 @@ func (secretsManager *SecretsManagerV1) UpdateSecretMetadataWithContext(ctx cont
 }
 
 // PutPolicy : Set secret policies
-// Creates or updates one or more policies, such as an [automatic rotation
-// policy](http://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-rotate-secrets#auto-rotate-secret), for the
-// specified secret.
+// Create or update one or more policies, such as an [automatic rotation
+// policy](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-automatic-rotation), for the specified
+// secret.
 func (secretsManager *SecretsManagerV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
 	return secretsManager.PutPolicyWithContext(context.Background(), putPolicyOptions)
 }
@@ -1292,7 +1354,7 @@ func (secretsManager *SecretsManagerV1) PutPolicyWithContext(ctx context.Context
 }
 
 // GetPolicy : List secret policies
-// Retrieves a list of policies that are associated with a specified secret.
+// List the rotation policies that are associated with a specified secret.
 func (secretsManager *SecretsManagerV1) GetPolicy(getPolicyOptions *GetPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
 	return secretsManager.GetPolicyWithContext(context.Background(), getPolicyOptions)
 }
@@ -1357,11 +1419,11 @@ func (secretsManager *SecretsManagerV1) GetPolicyWithContext(ctx context.Context
 }
 
 // PutConfig : Set the configuration of a secret type
-// Sets the configuration for the specified secret type.
+// Set the configuration for the specified secret type.
 //
-// Use this method to configure the IAM credentials (`iam_credentials`) engine for your service instance. Looking to set
-// up certificate ordering? To configure the public certificates (`public_cert`) engine, use the [Add a
-// configuration](#create_config_element) method.
+// Use this method to configure the IAM credentials (`iam_credentials`) engine for your service instance. Looking to
+// order or generate certificates? To configure the public certificates (`public_cert`) or  private certificates
+// (`private_cert`) engines, use the [Add a configuration](#create_config_element) method.
 func (secretsManager *SecretsManagerV1) PutConfig(putConfigOptions *PutConfigOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.PutConfigWithContext(context.Background(), putConfigOptions)
 }
@@ -1415,7 +1477,7 @@ func (secretsManager *SecretsManagerV1) PutConfigWithContext(ctx context.Context
 }
 
 // GetConfig : Get the configuration of a secret type
-// Retrieves the configuration that is associated with the specified secret type.
+// Get the configuration that is associated with the specified secret type.
 func (secretsManager *SecretsManagerV1) GetConfig(getConfigOptions *GetConfigOptions) (result *GetConfig, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigWithContext(context.Background(), getConfigOptions)
 }
@@ -1475,17 +1537,17 @@ func (secretsManager *SecretsManagerV1) GetConfigWithContext(ctx context.Context
 }
 
 // CreateConfigElement : Add a configuration
-// Adds a configuration element to the specified secret type.
+// Add a configuration element to the specified secret type.
 //
-// Use this method to define the configurations that are required to enable the public certificates (`public_cert`)
-// engine and the private certificates (`private_cert`) engine.
+// Use this method to define the configurations that are required to enable the public certificates (`public_cert`) and
+// private certificates (`private_cert`) engines.
 //
 // You can add multiple configurations for your instance as follows:
 //
 // - Up to 10 public certificate authority configurations
 // - Up to 10 DNS provider configurations
-// - Up to 10 private root certifiate authority configurations
-// - Up to 10 private intermediate certifiate authority configurations
+// - Up to 10 private root certificate authority configurations
+// - Up to 10 private intermediate certificate authority configurations
 // - Up to 10 certificate templates.
 func (secretsManager *SecretsManagerV1) CreateConfigElement(createConfigElementOptions *CreateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.CreateConfigElementWithContext(context.Background(), createConfigElementOptions)
@@ -1563,7 +1625,7 @@ func (secretsManager *SecretsManagerV1) CreateConfigElementWithContext(ctx conte
 }
 
 // GetConfigElements : List configurations
-// Lists the configuration elements that are associated with a specified secret type.
+// List the configuration elements that are associated with a specified secret type.
 func (secretsManager *SecretsManagerV1) GetConfigElements(getConfigElementsOptions *GetConfigElementsOptions) (result *GetConfigElements, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigElementsWithContext(context.Background(), getConfigElementsOptions)
 }
@@ -1624,7 +1686,7 @@ func (secretsManager *SecretsManagerV1) GetConfigElementsWithContext(ctx context
 }
 
 // GetConfigElement : Get a configuration
-// Retrieves the details of a specific configuration that is associated with a secret type.
+// Get the details of a specific configuration that is associated with a secret type.
 func (secretsManager *SecretsManagerV1) GetConfigElement(getConfigElementOptions *GetConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.GetConfigElementWithContext(context.Background(), getConfigElementOptions)
 }
@@ -1686,7 +1748,7 @@ func (secretsManager *SecretsManagerV1) GetConfigElementWithContext(ctx context.
 }
 
 // UpdateConfigElement : Update a configuration
-// Updates a configuration element that is associated with the specified secret type.
+// Update a configuration element that is associated with the specified secret type.
 func (secretsManager *SecretsManagerV1) UpdateConfigElement(updateConfigElementOptions *UpdateConfigElementOptions) (result *GetSingleConfigElement, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateConfigElementWithContext(context.Background(), updateConfigElementOptions)
 }
@@ -1760,8 +1822,88 @@ func (secretsManager *SecretsManagerV1) UpdateConfigElementWithContext(ctx conte
 	return
 }
 
+// ActionOnConfigElement : Invoke an action on a configuration
+// Invoke an action on a specified configuration element. This method supports the following actions:
+//
+// - `sign_intermediate`: Sign an intermediate certificate authority.
+// - `sign_csr`: Sign a certificate signing request.
+// - `set_signed`: Set a signed intermediate certificate authority.
+// - `revoke`: Revoke an internally signed intermediate certificate authority certificate.
+// - `rotate_crl`: Rotate the certificate revocation list (CRL) of an intermediate certificate authority.
+func (secretsManager *SecretsManagerV1) ActionOnConfigElement(actionOnConfigElementOptions *ActionOnConfigElementOptions) (result *ConfigElementActionResult, response *core.DetailedResponse, err error) {
+	return secretsManager.ActionOnConfigElementWithContext(context.Background(), actionOnConfigElementOptions)
+}
+
+// ActionOnConfigElementWithContext is an alternate form of the ActionOnConfigElement method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) ActionOnConfigElementWithContext(ctx context.Context, actionOnConfigElementOptions *ActionOnConfigElementOptions) (result *ConfigElementActionResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(actionOnConfigElementOptions, "actionOnConfigElementOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(actionOnConfigElementOptions, "actionOnConfigElementOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type":    *actionOnConfigElementOptions.SecretType,
+		"config_element": *actionOnConfigElementOptions.ConfigElement,
+		"config_name":    *actionOnConfigElementOptions.ConfigName,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/config/{secret_type}/{config_element}/{config_name}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range actionOnConfigElementOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "ActionOnConfigElement")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	builder.AddQuery("action", fmt.Sprint(*actionOnConfigElementOptions.Action))
+
+	body := make(map[string]interface{})
+	if actionOnConfigElementOptions.Config != nil {
+		body["config"] = actionOnConfigElementOptions.Config
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfigElementActionResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // DeleteConfigElement : Delete a configuration
-// Deletes a configuration element from the specified secret type.
+// Delete a configuration element from the specified secret type.
 func (secretsManager *SecretsManagerV1) DeleteConfigElement(deleteConfigElementOptions *DeleteConfigElementOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.DeleteConfigElementWithContext(context.Background(), deleteConfigElementOptions)
 }
@@ -1811,7 +1953,7 @@ func (secretsManager *SecretsManagerV1) DeleteConfigElementWithContext(ctx conte
 }
 
 // CreateNotificationsRegistration : Register with Event Notifications
-// Creates a registration between a Secrets Manager instance and [Event
+// Create a registration between a Secrets Manager instance and [Event
 // Notifications](https://cloud.ibm.com/apidocs/event-notifications).
 //
 // A successful request adds Secrets Manager as a source that you can reference from your Event Notifications instance.
@@ -1888,7 +2030,7 @@ func (secretsManager *SecretsManagerV1) CreateNotificationsRegistrationWithConte
 }
 
 // GetNotificationsRegistration : Get Event Notifications registration details
-// Retrieves the details of an existing registration between a Secrets Manager instance and Event Notifications.
+// Get the details of an existing registration between a Secrets Manager instance and Event Notifications.
 func (secretsManager *SecretsManagerV1) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *GetNotificationsSettings, response *core.DetailedResponse, err error) {
 	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
 }
@@ -1940,7 +2082,7 @@ func (secretsManager *SecretsManagerV1) GetNotificationsRegistrationWithContext(
 }
 
 // DeleteNotificationsRegistration : Unregister from Event Notifications
-// Deletes a registration between a Secrets Manager instance and Event Notifications.
+// Delete a registration between a Secrets Manager instance and Event Notifications.
 //
 // A successful request removes your Secrets Manager instance as a source in Event Notifications.
 func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
@@ -1981,7 +2123,7 @@ func (secretsManager *SecretsManagerV1) DeleteNotificationsRegistrationWithConte
 	return
 }
 
-// SendTestNotification : Send test event
+// SendTestNotification : Send a test event
 // Send a test event from a Secrets Manager instance to a configured [Event
 // Notifications](https://cloud.ibm.com/apidocs/event-notifications) instance.
 //
@@ -2026,6 +2168,111 @@ func (secretsManager *SecretsManagerV1) SendTestNotificationWithContext(ctx cont
 	return
 }
 
+// ActionOnConfigElementOptions : The ActionOnConfigElement options.
+type ActionOnConfigElementOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The configuration element on which the action is applied.
+	ConfigElement *string `json:"config_element" validate:"required,ne="`
+
+	// The name of the certificate authority.
+	ConfigName *string `json:"config_name" validate:"required,ne="`
+
+	// The action to perform on the specified configuration element.
+	Action *string `json:"action" validate:"required"`
+
+	// Properties that describe an action on a configuration element.
+	Config ConfigActionIntf `json:"config,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the ActionOnConfigElementOptions.SecretType property.
+// The secret type.
+const (
+	ActionOnConfigElementOptionsSecretTypePrivateCertConst = "private_cert"
+)
+
+// Constants associated with the ActionOnConfigElementOptions.ConfigElement property.
+// The configuration element on which the action is applied.
+const (
+	ActionOnConfigElementOptionsConfigElementIntermediateCertificateAuthoritiesConst = "intermediate_certificate_authorities"
+	ActionOnConfigElementOptionsConfigElementRootCertificateAuthoritiesConst         = "root_certificate_authorities"
+)
+
+// Constants associated with the ActionOnConfigElementOptions.Action property.
+// The action to perform on the specified configuration element.
+const (
+	ActionOnConfigElementOptionsActionRevokeConst           = "revoke"
+	ActionOnConfigElementOptionsActionRotateCrlConst        = "rotate_crl"
+	ActionOnConfigElementOptionsActionSetSignedConst        = "set_signed"
+	ActionOnConfigElementOptionsActionSignCsrConst          = "sign_csr"
+	ActionOnConfigElementOptionsActionSignIntermediateConst = "sign_intermediate"
+)
+
+// NewActionOnConfigElementOptions : Instantiate ActionOnConfigElementOptions
+func (*SecretsManagerV1) NewActionOnConfigElementOptions(secretType string, configElement string, configName string, action string) *ActionOnConfigElementOptions {
+	return &ActionOnConfigElementOptions{
+		SecretType:    core.StringPtr(secretType),
+		ConfigElement: core.StringPtr(configElement),
+		ConfigName:    core.StringPtr(configName),
+		Action:        core.StringPtr(action),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *ActionOnConfigElementOptions) SetSecretType(secretType string) *ActionOnConfigElementOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetConfigElement : Allow user to set ConfigElement
+func (_options *ActionOnConfigElementOptions) SetConfigElement(configElement string) *ActionOnConfigElementOptions {
+	_options.ConfigElement = core.StringPtr(configElement)
+	return _options
+}
+
+// SetConfigName : Allow user to set ConfigName
+func (_options *ActionOnConfigElementOptions) SetConfigName(configName string) *ActionOnConfigElementOptions {
+	_options.ConfigName = core.StringPtr(configName)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *ActionOnConfigElementOptions) SetAction(action string) *ActionOnConfigElementOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetConfig : Allow user to set Config
+func (_options *ActionOnConfigElementOptions) SetConfig(config ConfigActionIntf) *ActionOnConfigElementOptions {
+	_options.Config = config
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ActionOnConfigElementOptions) SetHeaders(param map[string]string) *ActionOnConfigElementOptions {
+	options.Headers = param
+	return options
+}
+
+// CertificateSecretData : The data that is associated with the secret version. The data object contains the following fields:
+//
+// - `certificate`: The contents of the certificate.
+// - `private_key`: The private key that is associated with the certificate.
+// - `intermediate`: The intermediate certificate that is associated with the certificate.
+type CertificateSecretData struct {
+}
+
+// UnmarshalCertificateSecretData unmarshals an instance of CertificateSecretData from the specified map of raw messages.
+func UnmarshalCertificateSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CertificateSecretData)
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // CollectionMetadata : The metadata that describes the resource array.
 type CollectionMetadata struct {
 	// The type of resources in the resource array.
@@ -2064,6 +2311,501 @@ func UnmarshalCollectionMetadata(m map[string]json.RawMessage, result interface{
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "collection_total", &obj.CollectionTotal)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigAction : Properties that describe an action on a configuration element.
+// Models which "extend" this model:
+// - SignCsrAction
+// - SignIntermediateAction
+// - SetSignedAction
+// - RevokeAction
+type ConfigAction struct {
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
+	// the `max_ttl` that is defined in the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// Determines whether to use values from a certificate signing request (CSR) to complete a `sign_csr` action. If set to
+	// `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than using the values
+	// provided in the other parameters to this operation.
+	//
+	// 2) Any key usages (for example, non-repudiation) that are requested in the CSR are added to the basic set of key
+	// usages used for CA certs signed by this intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The PEM-encoded certificate signing request (CSR). This field is required for the `sign_csr` action.
+	Csr *string `json:"csr,omitempty"`
+
+	// The intermediate certificate authority to be signed. The name must match one of the pre-configured intermediate
+	// certificate authorities.
+	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority,omitempty"`
+
+	// The PEM-encoded certificate.
+	Certificate *string `json:"certificate,omitempty"`
+}
+
+// Constants associated with the ConfigAction.Format property.
+// The format of the returned data.
+const (
+	ConfigActionFormatDerConst       = "der"
+	ConfigActionFormatPemConst       = "pem"
+	ConfigActionFormatPemBundleConst = "pem_bundle"
+)
+
+func (*ConfigAction) isaConfigAction() bool {
+	return true
+}
+
+type ConfigActionIntf interface {
+	isaConfigAction() bool
+}
+
+// UnmarshalConfigAction unmarshals an instance of ConfigAction from the specified map of raw messages.
+func UnmarshalConfigAction(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigAction)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_certificate_authority", &obj.IntermediateCertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementActionData : The configuration to add or update.
+type ConfigElementActionData struct {
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	Config ConfigElementActionResultConfigIntf `json:"config" validate:"required"`
+}
+
+// Constants associated with the ConfigElementActionData.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	ConfigElementActionDataTypeCertificateTemplateConst              = "certificate_template"
+	ConfigElementActionDataTypeCisConst                              = "cis"
+	ConfigElementActionDataTypeClassicInfrastructureConst            = "classic_infrastructure"
+	ConfigElementActionDataTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	ConfigElementActionDataTypeLetsencryptConst                      = "letsencrypt"
+	ConfigElementActionDataTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	ConfigElementActionDataTypeRootCertificateAuthorityConst         = "root_certificate_authority"
+)
+
+// UnmarshalConfigElementActionData unmarshals an instance of ConfigElementActionData from the specified map of raw messages.
+func UnmarshalConfigElementActionData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementActionData)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalConfigElementActionResultConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementActionResult : Properties that describe an action on a configuration element.
+type ConfigElementActionResult struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []ConfigElementActionData `json:"resources" validate:"required"`
+}
+
+// UnmarshalConfigElementActionResult unmarshals an instance of ConfigElementActionResult from the specified map of raw messages.
+func UnmarshalConfigElementActionResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementActionResult)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalConfigElementActionData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ConfigElementActionResultConfig : ConfigElementActionResultConfig struct
+// Models which "extend" this model:
+// - SignCsrActionResult
+// - SignIntermediateActionResult
+// - RotateCrlActionResult
+// - SetSignedActionResult
+// - RevokeActionResult
+type ConfigElementActionResultConfig struct {
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
+	// the `max_ttl` that is defined in the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// Determines whether to use values from a certificate signing request (CSR) to complete a `sign_csr` action. If set to
+	// `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than using the values
+	// provided in the other parameters to this operation.
+	//
+	// 2) Any key usages (for example, non-repudiation) that are requested in the CSR are added to the basic set of key
+	// usages used for CA certs signed by this intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Properties that are returned with a successful `sign` action.
+	Data *SignActionResultData `json:"data,omitempty"`
+
+	// The PEM-encoded certificate signing request (CSR).
+	Csr *string `json:"csr,omitempty"`
+
+	// The signed intermediate certificate authority.
+	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority,omitempty"`
+
+	// The time until the certificate authority is revoked.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+}
+
+// Constants associated with the ConfigElementActionResultConfig.Format property.
+// The format of the returned data.
+const (
+	ConfigElementActionResultConfigFormatDerConst       = "der"
+	ConfigElementActionResultConfigFormatPemConst       = "pem"
+	ConfigElementActionResultConfigFormatPemBundleConst = "pem_bundle"
+)
+
+func (*ConfigElementActionResultConfig) isaConfigElementActionResultConfig() bool {
+	return true
+}
+
+type ConfigElementActionResultConfigIntf interface {
+	isaConfigElementActionResultConfig() bool
+}
+
+// UnmarshalConfigElementActionResultConfig unmarshals an instance of ConfigElementActionResultConfig from the specified map of raw messages.
+func UnmarshalConfigElementActionResultConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ConfigElementActionResultConfig)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalSignActionResultData)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_certificate_authority", &obj.IntermediateCertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
 	if err != nil {
 		return
 	}
@@ -2130,6 +2872,9 @@ func UnmarshalConfigElementDef(m map[string]json.RawMessage, result interface{})
 // - ConfigElementDefConfigLetsEncryptConfig
 // - ConfigElementDefConfigCloudInternetServicesConfig
 // - ConfigElementDefConfigClassicInfrastructureConfig
+// - RootCertificateAuthorityConfig
+// - IntermediateCertificateAuthorityConfig
+// - CertificateTemplateConfig
 type ConfigElementDefConfig struct {
 	// The private key that is associated with your Automatic Certificate Management Environment (ACME) account.
 	//
@@ -2165,7 +2910,312 @@ type ConfigElementDefConfig struct {
 	// For information about viewing and accessing your classic infrastructure API key, see the
 	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
+
+	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
+	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
+	// seconds (integer).
+	//
+	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
+	MaxTTL interface{} `json:"max_ttl,omitempty"`
+
+	// The time until the certificate revocation list (CRL) expires. The value can be supplied as a string representation
+	// of a duration in hours, such as `48h`. The default is 72 hours. Note that in the API response the value is returned
+	// in seconds (integer).
+	CrlExpiry interface{} `json:"crl_expiry,omitempty"`
+
+	// Determines whether to disable certificate revocation list (CRL) building.
+	//
+	// By default, each request rebuilds a CRL. To disable CRL building, set this field to `true`.
+	CrlDisable *bool `json:"crl_disable,omitempty"`
+
+	// Determines whether to encode the certificate revocation list (CRL) distribution points in the private certificates
+	// that are issued by a certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// Determines whether to encode the URL of the issuing certificate in the private certificates that are issued by a
+	// certificate authority.
+	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration, such as `12h`. The value can't exceed the
+	// `max_ttl` that is defined in the associated certificate template. Note that in the API response the value is
+	// returned in seconds (integer).
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use when generating the private key.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The data that is associated with the root certificate authority. The data object contains the following fields:
+	//
+	// - `certificate`: The root certificate content.
+	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
+	// - `serial_number`: The unique serial number of the root certificate.
+	Data interface{} `json:"data,omitempty"`
+
+	// The signing method to use with this certificate authority to generate private certificates.
+	//
+	// You can choose between internal or externally signed options. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+	SigningMethod *string `json:"signing_method,omitempty"`
+
+	// The certificate authority that signed and issued the certificate.
+	//
+	// If the certificate is signed internally, the `issuer` field is required and must match the name of a certificate
+	// authority that is configured in the Secrets Manager service instance.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// The name of the intermediate certificate authority.
+	CertificateAuthority *string `json:"certificate_authority,omitempty"`
+
+	// Scopes the creation of private certificates to only the secret groups that you specify.
+	//
+	// This field can be supplied as a comma-delimited list of secret group IDs.
+	AllowedSecretGroups *string `json:"allowed_secret_groups,omitempty"`
+
+	// Determines whether to allow `localhost` to be included as one of the requested common names.
+	AllowLocalhost *bool `json:"allow_localhost,omitempty"`
+
+	// The domains to define for the certificate template. This property is used along with the `allow_bare_domains` and
+	// `allow_subdomains` options.
+	AllowedDomains []string `json:"allowed_domains,omitempty"`
+
+	// Determines whether to allow the domains that are supplied in the `allowed_domains` field to contain access control
+	// list (ACL) templates.
+	AllowedDomainsTemplate *bool `json:"allowed_domains_template,omitempty"`
+
+	// Determines whether to allow clients to request private certificates that match the value of the actual domains on
+	// the final certificate.
+	//
+	// For example, if you specify `example.com` in the `allowed_domains` field, you grant clients the ability to request a
+	// certificate that contains the name `example.com` as one of the DNS values on the final certificate.
+	//
+	// **Important:** In some scenarios, allowing bare domains can be considered a security risk.
+	AllowBareDomains *bool `json:"allow_bare_domains,omitempty"`
+
+	// Determines whether to allow clients to request private certificates with common names (CN) that are subdomains of
+	// the CNs that are allowed by the other certificate template options. This includes wildcard subdomains.
+	//
+	// For example, if `allowed_domains` has a value of `example.com` and `allow_subdomains`is set to `true`, then the
+	// following subdomains are allowed: `foo.example.com`, `bar.example.com`, `*.example.com`.
+	//
+	// **Note:** This field is redundant if you use the `allow_any_name` option.
+	AllowSubdomains *bool `json:"allow_subdomains,omitempty"`
+
+	// Determines whether to allow glob patterns, for example, `ftp*.example.com`, in the names that are specified in the
+	// `allowed_domains` field.
+	//
+	// If set to `true`, clients are allowed to request private certificates with names that match the glob patterns.
+	AllowGlobDomains *bool `json:"allow_glob_domains,omitempty"`
+
+	// Determines whether to allow clients to request a private certificate that matches any common name.
+	AllowAnyName *bool `json:"allow_any_name,omitempty"`
+
+	// Determines whether to enforce only valid host names for common names, DNS Subject Alternative Names, and the host
+	// section of email addresses.
+	EnforceHostnames *bool `json:"enforce_hostnames,omitempty"`
+
+	// Determines whether to allow clients to request a private certificate with IP Subject Alternative Names.
+	AllowIPSans *bool `json:"allow_ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to allow for private certificates.
+	//
+	// Values can contain glob patterns, for example `spiffe://hostname/_*`.
+	AllowedURISans []string `json:"allowed_uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names (SANs) to allow for private
+	// certificates.
+	//
+	// The format for each element in the list is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type
+	// is `UTF8`. To allow any value for an OID, use `*` as its value. Alternatively, specify a single `*` to allow any
+	// `other_sans` input.
+	AllowedOtherSans []string `json:"allowed_other_sans,omitempty"`
+
+	// Determines whether private certificates are flagged for server use.
+	ServerFlag *bool `json:"server_flag,omitempty"`
+
+	// Determines whether private certificates are flagged for client use.
+	ClientFlag *bool `json:"client_flag,omitempty"`
+
+	// Determines whether private certificates are flagged for code signing use.
+	CodeSigningFlag *bool `json:"code_signing_flag,omitempty"`
+
+	// Determines whether private certificates are flagged for email protection use.
+	EmailProtectionFlag *bool `json:"email_protection_flag,omitempty"`
+
+	// The allowed key usage constraint to define for private certificates.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://pkg.go.dev/crypto/x509#KeyUsage).  Omit the
+	// `KeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set this field to
+	// an empty list.
+	KeyUsage []string `json:"key_usage,omitempty"`
+
+	// The allowed extended key usage constraint on private certificates.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://golang.org/pkg/crypto/x509/#ExtKeyUsage).
+	// Omit the `ExtKeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set
+	// this field to an empty list.
+	ExtKeyUsage []string `json:"ext_key_usage,omitempty"`
+
+	// A list of extended key usage Object Identifiers (OIDs).
+	ExtKeyUsageOids []string `json:"ext_key_usage_oids,omitempty"`
+
+	// When used with the `sign_csr` action, this field determines whether to use the common name (CN) from a certificate
+	// signing request (CSR) instead of the CN that's included in the JSON data of the certificate.
+	//
+	// Does not include any requested Subject Alternative Names (SANs) in the CSR. To use the alternative names, include
+	// the `use_csr_sans` property.
+	UseCsrCommonName *bool `json:"use_csr_common_name,omitempty"`
+
+	// When used with the `sign_csr` action, this field determines whether to use the Subject Alternative Names
+	// (SANs) from a certificate signing request (CSR) instead of the SANs that are included in the JSON data of the
+	// certificate.
+	//
+	// Does not include the common name in the CSR. To use the common name, include the `use_csr_common_name` property.
+	UseCsrSans *bool `json:"use_csr_sans,omitempty"`
+
+	// Determines whether to require a common name to create a private certificate.
+	//
+	// By default, a common name is required to generate a certificate. To make the `common_name` field optional, set the
+	// `require_cn` option to `false`.
+	RequireCn *bool `json:"require_cn,omitempty"`
+
+	// A list of policy Object Identifiers (OIDs).
+	PolicyIdentifiers []string `json:"policy_identifiers,omitempty"`
+
+	// Determines whether to mark the Basic Constraints extension of an issued private certificate as valid for non-CA
+	// certificates.
+	BasicConstraintsValidForNonCa *bool `json:"basic_constraints_valid_for_non_ca,omitempty"`
+
+	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate. The value
+	// can be supplied as a string representation of a duration, such as `30s`. Note that in the API response the value is
+	// returned in seconds (integer).
+	NotBeforeDuration interface{} `json:"not_before_duration,omitempty"`
 }
+
+// Constants associated with the ConfigElementDefConfig.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	ConfigElementDefConfigStatusCertificateTemplateRequiredConst = "certificate_template_required"
+	ConfigElementDefConfigStatusConfiguredConst                  = "configured"
+	ConfigElementDefConfigStatusExpiredConst                     = "expired"
+	ConfigElementDefConfigStatusRevokedConst                     = "revoked"
+	ConfigElementDefConfigStatusSignedCertificateRequiredConst   = "signed_certificate_required"
+	ConfigElementDefConfigStatusSigningRequiredConst             = "signing_required"
+)
+
+// Constants associated with the ConfigElementDefConfig.Format property.
+// The format of the returned data.
+const (
+	ConfigElementDefConfigFormatDerConst       = "der"
+	ConfigElementDefConfigFormatPemConst       = "pem"
+	ConfigElementDefConfigFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the ConfigElementDefConfig.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	ConfigElementDefConfigPrivateKeyFormatDerConst   = "der"
+	ConfigElementDefConfigPrivateKeyFormatPkcs8Const = "pkcs8"
+)
+
+// Constants associated with the ConfigElementDefConfig.KeyType property.
+// The type of private key to generate.
+const (
+	ConfigElementDefConfigKeyTypeEcConst      = "ec"
+	ConfigElementDefConfigKeyTypeEd25519Const = "ed25519"
+	ConfigElementDefConfigKeyTypeRsaConst     = "rsa"
+)
+
+// Constants associated with the ConfigElementDefConfig.SigningMethod property.
+// The signing method to use with this certificate authority to generate private certificates.
+//
+// You can choose between internal or externally signed options. For more information, see the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+const (
+	ConfigElementDefConfigSigningMethodExternalConst = "external"
+	ConfigElementDefConfigSigningMethodInternalConst = "internal"
+)
 
 func (*ConfigElementDefConfig) isaConfigElementDefConfig() bool {
 	return true
@@ -2195,6 +3245,234 @@ func UnmarshalConfigElementDefConfig(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "signing_method", &obj.SigningMethod)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_secret_groups", &obj.AllowedSecretGroups)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_localhost", &obj.AllowLocalhost)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_domains", &obj.AllowedDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_domains_template", &obj.AllowedDomainsTemplate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_bare_domains", &obj.AllowBareDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_subdomains", &obj.AllowSubdomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_glob_domains", &obj.AllowGlobDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_any_name", &obj.AllowAnyName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enforce_hostnames", &obj.EnforceHostnames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_ip_sans", &obj.AllowIPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_uri_sans", &obj.AllowedURISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_other_sans", &obj.AllowedOtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_common_name", &obj.UseCsrCommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_sans", &obj.UseCsrSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "basic_constraints_valid_for_non_ca", &obj.BasicConstraintsValidForNonCa)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "not_before_duration", &obj.NotBeforeDuration)
 	if err != nil {
 		return
 	}
@@ -2885,10 +4163,16 @@ func (options *GetConfigElementsOptions) SetHeaders(param map[string]string) *Ge
 // Models which "extend" this model:
 // - GetConfigElementsResourcesItemCertificateAuthoritiesConfig
 // - GetConfigElementsResourcesItemDNSProvidersConfig
+// - RootCertificateAuthoritiesConfig
+// - IntermediateCertificateAuthoritiesConfig
 type GetConfigElementsResourcesItem struct {
 	CertificateAuthorities []ConfigElementMetadata `json:"certificate_authorities,omitempty"`
 
 	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
+
+	RootCertificateAuthorities []RootCertificateAuthoritiesConfigItem `json:"root_certificate_authorities,omitempty"`
+
+	IntermediateCertificateAuthorities []IntermediateCertificateAuthoritiesConfigItem `json:"intermediate_certificate_authorities,omitempty"`
 }
 
 func (*GetConfigElementsResourcesItem) isaGetConfigElementsResourcesItem() bool {
@@ -2907,6 +4191,14 @@ func UnmarshalGetConfigElementsResourcesItem(m map[string]json.RawMessage, resul
 		return
 	}
 	err = core.UnmarshalModel(m, "dns_providers", &obj.DNSProviders, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthoritiesConfigItem)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "intermediate_certificate_authorities", &obj.IntermediateCertificateAuthorities, UnmarshalIntermediateCertificateAuthoritiesConfigItem)
 	if err != nil {
 		return
 	}
@@ -2953,6 +4245,7 @@ func (options *GetConfigOptions) SetHeaders(param map[string]string) *GetConfigO
 // GetConfigResourcesItem : GetConfigResourcesItem struct
 // Models which "extend" this model:
 // - PublicCertSecretEngineRootConfig
+// - PrivateCertSecretEngineRootConfig
 // - IamCredentialsSecretEngineRootConfig
 type GetConfigResourcesItem struct {
 	// The certificate authority configurations that are associated with your instance.
@@ -2960,6 +4253,15 @@ type GetConfigResourcesItem struct {
 
 	// The DNS provider configurations that are associated with your instance.
 	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
+
+	// The root certificate authority configurations that are associated with your instance.
+	RootCertificateAuthorities []RootCertificateAuthorityConfig `json:"root_certificate_authorities,omitempty"`
+
+	// The intermediate certificate authority configurations that are associated with your instance.
+	IntermdiateCertificateAuthorities []IntermediateCertificateAuthorityConfig `json:"intermdiate_certificate_authorities,omitempty"`
+
+	// The certificate templates that are associated with your instance.
+	CertificateTemplates []CertificateTemplateConfig `json:"certificate_templates,omitempty"`
 
 	// An IBM Cloud API key that can create and manage service IDs.
 	//
@@ -2988,6 +4290,18 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalModel(m, "dns_providers", &obj.DNSProviders, UnmarshalConfigElementMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthorityConfig)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "intermdiate_certificate_authorities", &obj.IntermdiateCertificateAuthorities, UnmarshalIntermediateCertificateAuthorityConfig)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplateConfig)
 	if err != nil {
 		return
 	}
@@ -3492,6 +4806,49 @@ func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interf
 	return
 }
 
+// IntermediateCertificateAuthoritiesConfigItem : Intermediate certificate authorities configuration.
+type IntermediateCertificateAuthoritiesConfigItem struct {
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	// Intermediate certificate authority configuration.
+	Config *IntermediateCertificateAuthorityConfig `json:"config,omitempty"`
+}
+
+// Constants associated with the IntermediateCertificateAuthoritiesConfigItem.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	IntermediateCertificateAuthoritiesConfigItemTypeCertificateTemplateConst              = "certificate_template"
+	IntermediateCertificateAuthoritiesConfigItemTypeCisConst                              = "cis"
+	IntermediateCertificateAuthoritiesConfigItemTypeClassicInfrastructureConst            = "classic_infrastructure"
+	IntermediateCertificateAuthoritiesConfigItemTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	IntermediateCertificateAuthoritiesConfigItemTypeLetsencryptConst                      = "letsencrypt"
+	IntermediateCertificateAuthoritiesConfigItemTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	IntermediateCertificateAuthoritiesConfigItemTypeRootCertificateAuthorityConst         = "root_certificate_authority"
+)
+
+// UnmarshalIntermediateCertificateAuthoritiesConfigItem unmarshals an instance of IntermediateCertificateAuthoritiesConfigItem from the specified map of raw messages.
+func UnmarshalIntermediateCertificateAuthoritiesConfigItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntermediateCertificateAuthoritiesConfigItem)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalIntermediateCertificateAuthorityConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // IssuanceInfo : Issuance information that is associated with your certificate.
 type IssuanceInfo struct {
 	// The date the certificate was ordered. The date format follows RFC 3339.
@@ -3989,6 +5346,49 @@ func (options *PutPolicyOptions) SetHeaders(param map[string]string) *PutPolicyO
 	return options
 }
 
+// RootCertificateAuthoritiesConfigItem : Root certificate authorities configuration.
+type RootCertificateAuthoritiesConfigItem struct {
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	// Root certificate authority configuration.
+	Config *RootCertificateAuthorityConfig `json:"config,omitempty"`
+}
+
+// Constants associated with the RootCertificateAuthoritiesConfigItem.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	RootCertificateAuthoritiesConfigItemTypeCertificateTemplateConst              = "certificate_template"
+	RootCertificateAuthoritiesConfigItemTypeCisConst                              = "cis"
+	RootCertificateAuthoritiesConfigItemTypeClassicInfrastructureConst            = "classic_infrastructure"
+	RootCertificateAuthoritiesConfigItemTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	RootCertificateAuthoritiesConfigItemTypeLetsencryptConst                      = "letsencrypt"
+	RootCertificateAuthoritiesConfigItemTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	RootCertificateAuthoritiesConfigItemTypeRootCertificateAuthorityConst         = "root_certificate_authority"
+)
+
+// UnmarshalRootCertificateAuthoritiesConfigItem unmarshals an instance of RootCertificateAuthoritiesConfigItem from the specified map of raw messages.
+func UnmarshalRootCertificateAuthoritiesConfigItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RootCertificateAuthoritiesConfigItem)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalRootCertificateAuthorityConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // Rotation : Rotation struct
 type Rotation struct {
 	// Determines whether Secrets Manager rotates your certificate automatically.
@@ -4005,25 +5405,25 @@ type Rotation struct {
 	//
 	// If set to `true`, the service generates and stores a new private key for your rotated certificate.
 	//
-	// **Note:** Use this field only for public certificates. Ignored for private certificates.
+	// **Note:** Use this field only for public certificates. It is ignored for private certificates.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
 
 	// Used together with the `unit` field to specify the rotation interval. The minimum interval is one day, and the
 	// maximum interval is 3 years (1095 days). Required in case `auto_rotate` is set to `true`.
 	//
-	// **Note:** Use this field only for private certificates Ignored for public certificates.
+	// **Note:** Use this field only for private certificates. It is ignored for public certificates.
 	Interval *int64 `json:"interval,omitempty"`
 
 	// The time unit of the rotation interval.
 	//
-	// **Note:** Use this field only for private certificates. Ignored for public certificates.
+	// **Note:** Use this field only for private certificates. It is ignored for public certificates.
 	Unit *string `json:"unit,omitempty"`
 }
 
 // Constants associated with the Rotation.Unit property.
 // The time unit of the rotation interval.
 //
-// **Note:** Use this field only for private certificates. Ignored for public certificates.
+// **Note:** Use this field only for private certificates. It is ignored for public certificates.
 const (
 	RotationUnitDayConst   = "day"
 	RotationUnitMonthConst = "month"
@@ -4063,7 +5463,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotateKvSecretBody
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
-	Payload interface{} `json:"payload,omitempty"`
+	Payload *string `json:"payload,omitempty"`
 
 	// Determine whether keys must be rotated.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
@@ -4410,7 +5810,8 @@ type SecretMetadata struct {
 	// - `username_password`.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
-	// Specifies the Time To Live value provided as a string duration with time suffix.
+	// The time-to-live (TTL) or lease duration that is assigned to the secret. For `iam_credentials` secrets, the TTL
+	// defines for how long each generated API key remains valid.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
@@ -4442,8 +5843,8 @@ type SecretMetadata struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -4472,6 +5873,43 @@ type SecretMetadata struct {
 
 	// Issuance information that is associated with your certificate.
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
+
+	// The name of the certificate template.
+	CertificateTemplate *string `json:"certificate_template,omitempty"`
+
+	// The intermediate certificate authority that signed this certificate.
+	CertificateAuthority *string `json:"certificate_authority,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
 }
 
 // Constants associated with the SecretMetadata.SecretType property.
@@ -4481,8 +5919,24 @@ const (
 	SecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	SecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	SecretMetadataSecretTypeKvConst               = "kv"
+	SecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the SecretMetadata.Format property.
+// The format of the returned data.
+const (
+	SecretMetadataFormatDerConst       = "der"
+	SecretMetadataFormatPemConst       = "pem"
+	SecretMetadataFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the SecretMetadata.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	SecretMetadataPrivateKeyFormatDerConst   = "der"
+	SecretMetadataPrivateKeyFormatPkcs8Const = "pkcs8"
 )
 
 func (*SecretMetadata) isaSecretMetadata() bool {
@@ -4620,6 +6074,46 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -4701,11 +6195,12 @@ func UnmarshalSecretPolicyRotation(m map[string]json.RawMessage, result interfac
 // Models which "extend" this model:
 // - SecretPolicyRotationRotationPolicyRotation
 // - SecretPolicyRotationRotationPublicCertPolicyRotation
+// - PrivateCertPolicyRotation
 type SecretPolicyRotationRotation struct {
-	// Specifies the length of the secret rotation time interval.
+	// The length of the secret rotation time interval.
 	Interval *int64 `json:"interval,omitempty"`
 
-	// Specifies the units for the secret rotation time interval.
+	// The units for the secret rotation time interval.
 	Unit *string `json:"unit,omitempty"`
 
 	AutoRotate *bool `json:"auto_rotate,omitempty"`
@@ -4714,7 +6209,7 @@ type SecretPolicyRotationRotation struct {
 }
 
 // Constants associated with the SecretPolicyRotationRotation.Unit property.
-// Specifies the units for the secret rotation time interval.
+// The units for the secret rotation time interval.
 const (
 	SecretPolicyRotationRotationUnitDayConst   = "day"
 	SecretPolicyRotationRotationUnitMonthConst = "month"
@@ -4758,6 +6253,7 @@ func UnmarshalSecretPolicyRotationRotation(m map[string]json.RawMessage, result 
 // - IamCredentialsSecretResource
 // - CertificateSecretResource
 // - PublicCertificateSecretResource
+// - PrivateCertificateSecretResource
 // - KvSecretResource
 type SecretResource struct {
 	// The v4 UUID that uniquely identifies the secret.
@@ -4826,7 +6322,7 @@ type SecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload interface{} `json:"payload,omitempty"`
+	Payload *string `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
@@ -4914,8 +6410,8 @@ type SecretResource struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -4954,6 +6450,43 @@ type SecretResource struct {
 
 	// Issuance information that is associated with your certificate.
 	IssuanceInfo *IssuanceInfo `json:"issuance_info,omitempty"`
+
+	// The name of the certificate template.
+	CertificateTemplate *string `json:"certificate_template,omitempty"`
+
+	// The intermediate certificate authority that signed this certificate.
+	CertificateAuthority *string `json:"certificate_authority,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
 }
 
 // Constants associated with the SecretResource.SecretType property.
@@ -4966,6 +6499,21 @@ const (
 	SecretResourceSecretTypePrivateCertConst      = "private_cert"
 	SecretResourceSecretTypePublicCertConst       = "public_cert"
 	SecretResourceSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the SecretResource.Format property.
+// The format of the returned data.
+const (
+	SecretResourceFormatDerConst       = "der"
+	SecretResourceFormatPemConst       = "pem"
+	SecretResourceFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the SecretResource.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	SecretResourcePrivateKeyFormatDerConst   = "der"
+	SecretResourcePrivateKeyFormatPkcs8Const = "pkcs8"
 )
 
 func (*SecretResource) isaSecretResource() bool {
@@ -5155,6 +6703,46 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -5165,6 +6753,7 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 // - UsernamePasswordSecretVersion
 // - IamCredentialsSecretVersion
 // - CertificateSecretVersion
+// - PrivateCertificateSecretVersion
 type SecretVersion struct {
 	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
@@ -5193,6 +6782,19 @@ type SecretVersion struct {
 
 	// The date that the certificate expires. The date format follows RFC 3339.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
 }
 
 func (*SecretVersion) isaSecretVersion() bool {
@@ -5242,6 +6844,22 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -5252,6 +6870,7 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 // - UsernamePasswordSecretVersionInfo
 // - IamCredentialsSecretVersionInfo
 // - CertificateSecretVersionInfo
+// - PrivateCertificateSecretVersionInfo
 type SecretVersionInfo struct {
 	// The ID of the secret version.
 	ID *string `json:"id,omitempty"`
@@ -5279,6 +6898,19 @@ type SecretVersionInfo struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
 }
 
 func (*SecretVersionInfo) isaSecretVersionInfo() bool {
@@ -5328,6 +6960,22 @@ func UnmarshalSecretVersionInfo(m map[string]json.RawMessage, result interface{}
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -5338,6 +6986,7 @@ func UnmarshalSecretVersionInfo(m map[string]json.RawMessage, result interface{}
 // - UsernamePasswordSecretVersionMetadata
 // - IamCredentialsSecretVersionMetadata
 // - CertificateSecretVersionMetadata
+// - PrivateCertificateSecretVersionMetadata
 type SecretVersionMetadata struct {
 	// The v4 UUID that uniquely identifies the secret.
 	ID *string `json:"id,omitempty"`
@@ -5368,6 +7017,19 @@ type SecretVersionMetadata struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
 }
 
 func (*SecretVersionMetadata) isaSecretVersionMetadata() bool {
@@ -5421,6 +7083,22 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -5441,6 +7119,96 @@ func (*SecretsManagerV1) NewSendTestNotificationOptions() *SendTestNotificationO
 func (options *SendTestNotificationOptions) SetHeaders(param map[string]string) *SendTestNotificationOptions {
 	options.Headers = param
 	return options
+}
+
+// SignActionResultData : Properties that are returned with a successful `sign` action.
+type SignActionResultData struct {
+	// The PEM-encoded certificate.
+	Certificate *string `json:"certificate,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The PEM-encoded certificate of the certificate authority that signed and issued this certificate.
+	IssuingCa *string `json:"issuing_ca,omitempty"`
+
+	// The chain of certificate authorities that are associated with the certificate.
+	CaChain []string `json:"ca_chain,omitempty"`
+
+	// The time until the certificate expires.
+	Expiration *int64 `json:"expiration,omitempty"`
+}
+
+// UnmarshalSignActionResultData unmarshals an instance of SignActionResultData from the specified map of raw messages.
+func UnmarshalSignActionResultData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SignActionResultData)
+	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuing_ca", &obj.IssuingCa)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SignIntermediateActionResultData : Properties that are returned with a successful `sign` action.
+type SignIntermediateActionResultData struct {
+	// The PEM-encoded certificate.
+	Certificate *string `json:"certificate,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The PEM-encoded certificate of the certificate authority that signed and issued this certificate.
+	IssuingCa *string `json:"issuing_ca,omitempty"`
+
+	// The chain of certificate authorities that are associated with the certificate.
+	CaChain []string `json:"ca_chain,omitempty"`
+
+	// The time until the certificate expires.
+	Expiration *int64 `json:"expiration,omitempty"`
+}
+
+// UnmarshalSignIntermediateActionResultData unmarshals an instance of SignIntermediateActionResultData from the specified map of raw messages.
+func UnmarshalSignIntermediateActionResultData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SignIntermediateActionResultData)
+	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuing_ca", &obj.IssuingCa)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // UpdateConfigElementOptions : The UpdateConfigElement options.
@@ -5736,12 +7504,86 @@ func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateS
 	return options
 }
 
+// UpdateSecretVersionOptions : The UpdateSecretVersion options.
+type UpdateSecretVersionOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
+	// version.
+	//
+	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
+	// the response details.
+	VersionID *string `json:"version_id" validate:"required,ne="`
+
+	// The action to perform on the specified secret version.
+	Action *string `json:"action" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the UpdateSecretVersionOptions.SecretType property.
+// The secret type.
+const (
+	UpdateSecretVersionOptionsSecretTypePrivateCertConst = "private_cert"
+)
+
+// Constants associated with the UpdateSecretVersionOptions.Action property.
+// The action to perform on the specified secret version.
+const (
+	UpdateSecretVersionOptionsActionRevokeConst = "revoke"
+)
+
+// NewUpdateSecretVersionOptions : Instantiate UpdateSecretVersionOptions
+func (*SecretsManagerV1) NewUpdateSecretVersionOptions(secretType string, id string, versionID string, action string) *UpdateSecretVersionOptions {
+	return &UpdateSecretVersionOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+		VersionID:  core.StringPtr(versionID),
+		Action:     core.StringPtr(action),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *UpdateSecretVersionOptions) SetSecretType(secretType string) *UpdateSecretVersionOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *UpdateSecretVersionOptions) SetID(id string) *UpdateSecretVersionOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetVersionID : Allow user to set VersionID
+func (_options *UpdateSecretVersionOptions) SetVersionID(versionID string) *UpdateSecretVersionOptions {
+	_options.VersionID = core.StringPtr(versionID)
+	return _options
+}
+
+// SetAction : Allow user to set Action
+func (_options *UpdateSecretVersionOptions) SetAction(action string) *UpdateSecretVersionOptions {
+	_options.Action = core.StringPtr(action)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateSecretVersionOptions) SetHeaders(param map[string]string) *UpdateSecretVersionOptions {
+	options.Headers = param
+	return options
+}
+
 // CertificateValidity : CertificateValidity struct
 type CertificateValidity struct {
-	// The date the certificate validity period begins.
+	// The date and time that the certificate validity period begins.
 	NotBefore *strfmt.DateTime `json:"not_before,omitempty"`
 
-	// The date the certificate validity period ends.
+	// The date and time that the certificate validity period ends.
 	NotAfter *strfmt.DateTime `json:"not_after,omitempty"`
 }
 
@@ -5832,6 +7674,7 @@ const (
 	ArbitrarySecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	ArbitrarySecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	ArbitrarySecretMetadataSecretTypeKvConst               = "kv"
+	ArbitrarySecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	ArbitrarySecretMetadataSecretTypePublicCertConst       = "public_cert"
 	ArbitrarySecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -5981,7 +7824,7 @@ type ArbitrarySecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload interface{} `json:"payload,omitempty"`
+	Payload *string `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
@@ -6311,8 +8154,8 @@ type CertificateSecretMetadata struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -6343,6 +8186,7 @@ const (
 	CertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	CertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	CertificateSecretMetadataSecretTypeKvConst               = "kv"
+	CertificateSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	CertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	CertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -6530,11 +8374,9 @@ type CertificateSecretResource struct {
 
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
-	// `certificate`: The contents of the certificate.
-	//
-	// `private_key`: The private key that is associated with the certificate.
-	//
-	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -6544,8 +8386,8 @@ type CertificateSecretResource struct {
 	// certificate.
 	Algorithm *string `json:"algorithm,omitempty"`
 
-	// The identifier for the cryptographic algorithm that was used to generate the public key that is associated with the
-	// certificate.
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -6738,12 +8580,10 @@ type CertificateSecretVersion struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `certificate`: The contents of the certificate.
-	//
-	// `private_key`: The private key that is associated with the certificate.
-	//
-	// `intermediate`: The intermediate certificate that is associated with the certificate.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
+	SecretData *CertificateSecretData `json:"secret_data,omitempty"`
 }
 
 func (*CertificateSecretVersion) isaSecretVersion() bool {
@@ -6781,7 +8621,7 @@ func UnmarshalCertificateSecretVersion(m map[string]json.RawMessage, result inte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalCertificateSecretData)
 	if err != nil {
 		return
 	}
@@ -6931,6 +8771,372 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CertificateTemplateConfig : Properties that describe a certificate template. You can use a certificate template to control the parameters that
+// are applied to your issued private certificates. For more information, see the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-certificate-templates).
+// This model "extends" ConfigElementDefConfig
+type CertificateTemplateConfig struct {
+	// The name of the intermediate certificate authority.
+	CertificateAuthority *string `json:"certificate_authority" validate:"required"`
+
+	// Scopes the creation of private certificates to only the secret groups that you specify.
+	//
+	// This field can be supplied as a comma-delimited list of secret group IDs.
+	AllowedSecretGroups *string `json:"allowed_secret_groups,omitempty"`
+
+	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
+	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
+	// seconds (integer).
+	//
+	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
+	MaxTTL interface{} `json:"max_ttl,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration, such as `12h`. Hour (`h`) is the largest time
+	// suffix. The value can't exceed the `max_ttl` that is defined in the associated certificate template. Note that in
+	// the API response the value is returned in seconds (integer).
+	TTL interface{} `json:"ttl,omitempty"`
+
+	// Determines whether to allow `localhost` to be included as one of the requested common names.
+	AllowLocalhost *bool `json:"allow_localhost,omitempty"`
+
+	// The domains to define for the certificate template. This property is used along with the `allow_bare_domains` and
+	// `allow_subdomains` options.
+	AllowedDomains []string `json:"allowed_domains,omitempty"`
+
+	// Determines whether to allow the domains that are supplied in the `allowed_domains` field to contain access control
+	// list (ACL) templates.
+	AllowedDomainsTemplate *bool `json:"allowed_domains_template,omitempty"`
+
+	// Determines whether to allow clients to request private certificates that match the value of the actual domains on
+	// the final certificate.
+	//
+	// For example, if you specify `example.com` in the `allowed_domains` field, you grant clients the ability to request a
+	// certificate that contains the name `example.com` as one of the DNS values on the final certificate.
+	//
+	// **Important:** In some scenarios, allowing bare domains can be considered a security risk.
+	AllowBareDomains *bool `json:"allow_bare_domains,omitempty"`
+
+	// Determines whether to allow clients to request private certificates with common names (CN) that are subdomains of
+	// the CNs that are allowed by the other certificate template options. This includes wildcard subdomains.
+	//
+	// For example, if `allowed_domains` has a value of `example.com` and `allow_subdomains`is set to `true`, then the
+	// following subdomains are allowed: `foo.example.com`, `bar.example.com`, `*.example.com`.
+	//
+	// **Note:** This field is redundant if you use the `allow_any_name` option.
+	AllowSubdomains *bool `json:"allow_subdomains,omitempty"`
+
+	// Determines whether to allow glob patterns, for example, `ftp*.example.com`, in the names that are specified in the
+	// `allowed_domains` field.
+	//
+	// If set to `true`, clients are allowed to request private certificates with names that match the glob patterns.
+	AllowGlobDomains *bool `json:"allow_glob_domains,omitempty"`
+
+	// Determines whether to allow clients to request a private certificate that matches any common name.
+	AllowAnyName *bool `json:"allow_any_name,omitempty"`
+
+	// Determines whether to enforce only valid host names for common names, DNS Subject Alternative Names, and the host
+	// section of email addresses.
+	EnforceHostnames *bool `json:"enforce_hostnames,omitempty"`
+
+	// Determines whether to allow clients to request a private certificate with IP Subject Alternative Names.
+	AllowIPSans *bool `json:"allow_ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to allow for private certificates.
+	//
+	// Values can contain glob patterns, for example `spiffe://hostname/_*`.
+	AllowedURISans []string `json:"allowed_uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names (SANs) to allow for private
+	// certificates.
+	//
+	// The format for each element in the list is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type
+	// is `UTF8`. To allow any value for an OID, use `*` as its value. Alternatively, specify a single `*` to allow any
+	// `other_sans` input.
+	AllowedOtherSans []string `json:"allowed_other_sans,omitempty"`
+
+	// Determines whether private certificates are flagged for server use.
+	ServerFlag *bool `json:"server_flag,omitempty"`
+
+	// Determines whether private certificates are flagged for client use.
+	ClientFlag *bool `json:"client_flag,omitempty"`
+
+	// Determines whether private certificates are flagged for code signing use.
+	CodeSigningFlag *bool `json:"code_signing_flag,omitempty"`
+
+	// Determines whether private certificates are flagged for email protection use.
+	EmailProtectionFlag *bool `json:"email_protection_flag,omitempty"`
+
+	// The type of private key to generate for private certificates and the type of key that is expected for submitted
+	// certificate signing requests (CSRs).
+	//
+	// Allowable values are: `rsa`, `ec` and `any`. A value of `any` allow keys of either type and with any bit size. The
+	// bit size must be greater than 1024 bits for RSA keys.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use when generating the private key.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The allowed key usage constraint to define for private certificates.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://pkg.go.dev/crypto/x509#KeyUsage).  Omit the
+	// `KeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set this field to
+	// an empty list.
+	KeyUsage []string `json:"key_usage,omitempty"`
+
+	// The allowed extended key usage constraint on private certificates.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://golang.org/pkg/crypto/x509/#ExtKeyUsage).
+	// Omit the `ExtKeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set
+	// this field to an empty list.
+	ExtKeyUsage []string `json:"ext_key_usage,omitempty"`
+
+	// A list of extended key usage Object Identifiers (OIDs).
+	ExtKeyUsageOids []string `json:"ext_key_usage_oids,omitempty"`
+
+	// When used with the `sign_csr` action, this field determines whether to use the common name (CN) from a certificate
+	// signing request (CSR) instead of the CN that's included in the JSON data of the certificate.
+	//
+	// Does not include any requested Subject Alternative Names (SANs) in the CSR. To use the alternative names, include
+	// the `use_csr_sans` property.
+	UseCsrCommonName *bool `json:"use_csr_common_name,omitempty"`
+
+	// When used with the `sign_csr` action, this field determines whether to use the Subject Alternative Names
+	// (SANs) from a certificate signing request (CSR) instead of the SANs that are included in the JSON data of the
+	// certificate.
+	//
+	// Does not include the common name in the CSR. To use the common name, include the `use_csr_common_name` property.
+	UseCsrSans *bool `json:"use_csr_sans,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Determines whether to require a common name to create a private certificate.
+	//
+	// By default, a common name is required to generate a certificate. To make the `common_name` field optional, set the
+	// `require_cn` option to `false`.
+	RequireCn *bool `json:"require_cn,omitempty"`
+
+	// A list of policy Object Identifiers (OIDs).
+	PolicyIdentifiers []string `json:"policy_identifiers,omitempty"`
+
+	// Determines whether to mark the Basic Constraints extension of an issued private certificate as valid for non-CA
+	// certificates.
+	BasicConstraintsValidForNonCa *bool `json:"basic_constraints_valid_for_non_ca,omitempty"`
+
+	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate. The value
+	// can be supplied as a string representation of a duration, such as `30s`. Note that in the API response the value is
+	// returned in seconds (integer).
+	NotBeforeDuration interface{} `json:"not_before_duration,omitempty"`
+}
+
+// Constants associated with the CertificateTemplateConfig.KeyType property.
+// The type of private key to generate for private certificates and the type of key that is expected for submitted
+// certificate signing requests (CSRs).
+//
+// Allowable values are: `rsa`, `ec` and `any`. A value of `any` allow keys of either type and with any bit size. The
+// bit size must be greater than 1024 bits for RSA keys.
+const (
+	CertificateTemplateConfigKeyTypeAnyConst = "any"
+	CertificateTemplateConfigKeyTypeEcConst  = "ec"
+	CertificateTemplateConfigKeyTypeRsaConst = "rsa"
+)
+
+// NewCertificateTemplateConfig : Instantiate CertificateTemplateConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewCertificateTemplateConfig(certificateAuthority string) (_model *CertificateTemplateConfig, err error) {
+	_model = &CertificateTemplateConfig{
+		CertificateAuthority: core.StringPtr(certificateAuthority),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*CertificateTemplateConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalCertificateTemplateConfig unmarshals an instance of CertificateTemplateConfig from the specified map of raw messages.
+func UnmarshalCertificateTemplateConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CertificateTemplateConfig)
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_secret_groups", &obj.AllowedSecretGroups)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_localhost", &obj.AllowLocalhost)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_domains", &obj.AllowedDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_domains_template", &obj.AllowedDomainsTemplate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_bare_domains", &obj.AllowBareDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_subdomains", &obj.AllowSubdomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_glob_domains", &obj.AllowGlobDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_any_name", &obj.AllowAnyName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "enforce_hostnames", &obj.EnforceHostnames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_ip_sans", &obj.AllowIPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_uri_sans", &obj.AllowedURISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allowed_other_sans", &obj.AllowedOtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_common_name", &obj.UseCsrCommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_sans", &obj.UseCsrSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "basic_constraints_valid_for_non_ca", &obj.BasicConstraintsValidForNonCa)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "not_before_duration", &obj.NotBeforeDuration)
 	if err != nil {
 		return
 	}
@@ -7245,7 +9451,7 @@ func UnmarshalIamCredentialsSecretEngineRootConfig(m map[string]json.RawMessage,
 	return
 }
 
-// IamCredentialsSecretMetadata : Metadata properties that describe a iam_credentials secret.
+// IamCredentialsSecretMetadata : Metadata properties that describe an `iam_credentials` secret.
 // This model "extends" SecretMetadata
 type IamCredentialsSecretMetadata struct {
 	// The unique ID of the secret.
@@ -7299,7 +9505,8 @@ type IamCredentialsSecretMetadata struct {
 	// The number of versions the secret has.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
-	// Specifies the Time To Live value provided as a string duration with time suffix.
+	// The time-to-live (TTL) or lease duration that is assigned to the secret. For `iam_credentials` secrets, the TTL
+	// defines for how long each generated API key remains valid.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to use the same service ID and API key for future read operations on an
@@ -7332,6 +9539,7 @@ const (
 	IamCredentialsSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	IamCredentialsSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	IamCredentialsSecretMetadataSecretTypeKvConst               = "kv"
+	IamCredentialsSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	IamCredentialsSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	IamCredentialsSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -7671,11 +9879,9 @@ type IamCredentialsSecretVersion struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `api_key`: The API key that is generated for this secret.
-	//
-	// `api_key_id`: The ID of the API key that is generated for this secret.
-	//
-	// `service_id`: The service ID under which the API key is created.
+	// - `api_key`: The API key that is generated for this secret.
+	// - `api_key_id`: The ID of the API key that is generated for this secret.
+	// - `service_id`: The service ID under which the API key is created.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -7819,6 +10025,328 @@ func UnmarshalIamCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	return
 }
 
+// IntermediateCertificateAuthoritiesConfig : Intermediate certificate authorities configuration.
+// This model "extends" GetConfigElementsResourcesItem
+type IntermediateCertificateAuthoritiesConfig struct {
+	IntermediateCertificateAuthorities []IntermediateCertificateAuthoritiesConfigItem `json:"intermediate_certificate_authorities" validate:"required"`
+}
+
+func (*IntermediateCertificateAuthoritiesConfig) isaGetConfigElementsResourcesItem() bool {
+	return true
+}
+
+// UnmarshalIntermediateCertificateAuthoritiesConfig unmarshals an instance of IntermediateCertificateAuthoritiesConfig from the specified map of raw messages.
+func UnmarshalIntermediateCertificateAuthoritiesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntermediateCertificateAuthoritiesConfig)
+	err = core.UnmarshalModel(m, "intermediate_certificate_authorities", &obj.IntermediateCertificateAuthorities, UnmarshalIntermediateCertificateAuthoritiesConfigItem)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IntermediateCertificateAuthorityConfig : Intermediate certificate authority configuration.
+// This model "extends" ConfigElementDefConfig
+type IntermediateCertificateAuthorityConfig struct {
+	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
+	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
+	// seconds (integer).
+	//
+	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
+	MaxTTL interface{} `json:"max_ttl" validate:"required"`
+
+	// The signing method to use with this certificate authority to generate private certificates.
+	//
+	// You can choose between internal or externally signed options. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+	SigningMethod *string `json:"signing_method" validate:"required"`
+
+	// The certificate authority that signed and issued the certificate.
+	//
+	// If the certificate is signed internally, the `issuer` field is required and must match the name of a certificate
+	// authority that is configured in the Secrets Manager service instance.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// The time until the certificate revocation list (CRL) expires. The value can be supplied as a string representation
+	// of a duration in hours, such as `48h`. The default is 72 hours. Note that in the API response the value is returned
+	// in seconds (integer).
+	CrlExpiry interface{} `json:"crl_expiry,omitempty"`
+
+	// Determines whether to disable certificate revocation list (CRL) building.
+	//
+	// By default, each request rebuilds a CRL. To disable CRL building, set this field to `true`.
+	CrlDisable *bool `json:"crl_disable,omitempty"`
+
+	// Determines whether to encode the certificate revocation list (CRL) distribution points in the private certificates
+	// that are issued by a certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// Determines whether to encode the URL of the issuing certificate in the private certificates that are issued by a
+	// certificate authority.
+	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use when generating the private key.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The data that is associated with the intermediate certificate authority. The data object contains the
+	//  following fields:
+	//
+	// - `csr`: The PEM-encoded certificate signing request.
+	// - `private_key`: The private key.
+	// - `private_key_type`: The type of private key, for example `rsa`.
+	Data interface{} `json:"data,omitempty"`
+}
+
+// Constants associated with the IntermediateCertificateAuthorityConfig.SigningMethod property.
+// The signing method to use with this certificate authority to generate private certificates.
+//
+// You can choose between internal or externally signed options. For more information, see the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+const (
+	IntermediateCertificateAuthorityConfigSigningMethodExternalConst = "external"
+	IntermediateCertificateAuthorityConfigSigningMethodInternalConst = "internal"
+)
+
+// Constants associated with the IntermediateCertificateAuthorityConfig.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	IntermediateCertificateAuthorityConfigStatusCertificateTemplateRequiredConst = "certificate_template_required"
+	IntermediateCertificateAuthorityConfigStatusConfiguredConst                  = "configured"
+	IntermediateCertificateAuthorityConfigStatusExpiredConst                     = "expired"
+	IntermediateCertificateAuthorityConfigStatusRevokedConst                     = "revoked"
+	IntermediateCertificateAuthorityConfigStatusSignedCertificateRequiredConst   = "signed_certificate_required"
+	IntermediateCertificateAuthorityConfigStatusSigningRequiredConst             = "signing_required"
+)
+
+// Constants associated with the IntermediateCertificateAuthorityConfig.Format property.
+// The format of the returned data.
+const (
+	IntermediateCertificateAuthorityConfigFormatDerConst       = "der"
+	IntermediateCertificateAuthorityConfigFormatPemConst       = "pem"
+	IntermediateCertificateAuthorityConfigFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the IntermediateCertificateAuthorityConfig.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	IntermediateCertificateAuthorityConfigPrivateKeyFormatDerConst   = "der"
+	IntermediateCertificateAuthorityConfigPrivateKeyFormatPkcs8Const = "pkcs8"
+)
+
+// Constants associated with the IntermediateCertificateAuthorityConfig.KeyType property.
+// The type of private key to generate.
+const (
+	IntermediateCertificateAuthorityConfigKeyTypeEcConst      = "ec"
+	IntermediateCertificateAuthorityConfigKeyTypeEd25519Const = "ed25519"
+	IntermediateCertificateAuthorityConfigKeyTypeRsaConst     = "rsa"
+)
+
+// NewIntermediateCertificateAuthorityConfig : Instantiate IntermediateCertificateAuthorityConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewIntermediateCertificateAuthorityConfig(maxTTL interface{}, signingMethod string, commonName string) (_model *IntermediateCertificateAuthorityConfig, err error) {
+	_model = &IntermediateCertificateAuthorityConfig{
+		MaxTTL:        maxTTL,
+		SigningMethod: core.StringPtr(signingMethod),
+		CommonName:    core.StringPtr(commonName),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*IntermediateCertificateAuthorityConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalIntermediateCertificateAuthorityConfig unmarshals an instance of IntermediateCertificateAuthorityConfig from the specified map of raw messages.
+func UnmarshalIntermediateCertificateAuthorityConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IntermediateCertificateAuthorityConfig)
+	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "signing_method", &obj.SigningMethod)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // KvSecretMetadata : Metadata properties that describe a key-value secret.
 // This model "extends" SecretMetadata
 type KvSecretMetadata struct {
@@ -7881,6 +10409,7 @@ const (
 	KvSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	KvSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	KvSecretMetadataSecretTypeKvConst               = "kv"
+	KvSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	KvSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	KvSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8134,6 +10663,93 @@ func UnmarshalKvSecretResource(m map[string]json.RawMessage, result interface{})
 	return
 }
 
+// PrivateCertPolicyRotation : The `private_cert` secret rotation policy.
+// This model "extends" SecretPolicyRotationRotation
+type PrivateCertPolicyRotation struct {
+	AutoRotate *bool `json:"auto_rotate" validate:"required"`
+
+	// The length of the secret rotation time interval.
+	Interval *int64 `json:"interval,omitempty"`
+
+	// The units for the secret rotation time interval.
+	Unit *string `json:"unit,omitempty"`
+}
+
+// Constants associated with the PrivateCertPolicyRotation.Unit property.
+// The units for the secret rotation time interval.
+const (
+	PrivateCertPolicyRotationUnitDayConst   = "day"
+	PrivateCertPolicyRotationUnitMonthConst = "month"
+)
+
+// NewPrivateCertPolicyRotation : Instantiate PrivateCertPolicyRotation (Generic Model Constructor)
+func (*SecretsManagerV1) NewPrivateCertPolicyRotation(autoRotate bool) (_model *PrivateCertPolicyRotation, err error) {
+	_model = &PrivateCertPolicyRotation{
+		AutoRotate: core.BoolPtr(autoRotate),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*PrivateCertPolicyRotation) isaSecretPolicyRotationRotation() bool {
+	return true
+}
+
+// UnmarshalPrivateCertPolicyRotation unmarshals an instance of PrivateCertPolicyRotation from the specified map of raw messages.
+func UnmarshalPrivateCertPolicyRotation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertPolicyRotation)
+	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "interval", &obj.Interval)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "unit", &obj.Unit)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertSecretEngineRootConfig : Configuration for the private certificates engine.
+// This model "extends" GetConfigResourcesItem
+type PrivateCertSecretEngineRootConfig struct {
+	// The root certificate authority configurations that are associated with your instance.
+	RootCertificateAuthorities []RootCertificateAuthorityConfig `json:"root_certificate_authorities,omitempty"`
+
+	// The intermediate certificate authority configurations that are associated with your instance.
+	IntermdiateCertificateAuthorities []IntermediateCertificateAuthorityConfig `json:"intermdiate_certificate_authorities,omitempty"`
+
+	// The certificate templates that are associated with your instance.
+	CertificateTemplates []CertificateTemplateConfig `json:"certificate_templates,omitempty"`
+}
+
+func (*PrivateCertSecretEngineRootConfig) isaGetConfigResourcesItem() bool {
+	return true
+}
+
+// UnmarshalPrivateCertSecretEngineRootConfig unmarshals an instance of PrivateCertSecretEngineRootConfig from the specified map of raw messages.
+func UnmarshalPrivateCertSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertSecretEngineRootConfig)
+	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthorityConfig)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "intermdiate_certificate_authorities", &obj.IntermdiateCertificateAuthorities, UnmarshalIntermediateCertificateAuthorityConfig)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplateConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PrivateCertificateSecretMetadata : Metadata properties that describe a private certificate secret.
 // This model "extends" SecretMetadata
 type PrivateCertificateSecretMetadata struct {
@@ -8187,6 +10803,74 @@ type PrivateCertificateSecretMetadata struct {
 
 	// The number of versions the secret has.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The name of the certificate template.
+	CertificateTemplate *string `json:"certificate_template" validate:"required"`
+
+	// The intermediate certificate authority that signed this certificate.
+	CertificateAuthority *string `json:"certificate_authority,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate. The value can be supplied as a string
+	// representation of a duration in hours, for example '12h'. The value can't exceed the `max_ttl` that is defined in
+	// the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	Rotation *Rotation `json:"rotation,omitempty"`
+
+	// The identifier for the cryptographic algorithm that was used by the issuing certificate authority to sign the
+	// certificate.
+	Algorithm *string `json:"algorithm,omitempty"`
+
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
+	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
+
+	// The certificate authority that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
 }
 
 // Constants associated with the PrivateCertificateSecretMetadata.SecretType property.
@@ -8196,14 +10880,32 @@ const (
 	PrivateCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	PrivateCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	PrivateCertificateSecretMetadataSecretTypeKvConst               = "kv"
+	PrivateCertificateSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	PrivateCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	PrivateCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
+// Constants associated with the PrivateCertificateSecretMetadata.Format property.
+// The format of the returned data.
+const (
+	PrivateCertificateSecretMetadataFormatDerConst       = "der"
+	PrivateCertificateSecretMetadataFormatPemConst       = "pem"
+	PrivateCertificateSecretMetadataFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the PrivateCertificateSecretMetadata.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	PrivateCertificateSecretMetadataPrivateKeyFormatDerConst   = "der"
+	PrivateCertificateSecretMetadataPrivateKeyFormatPkcs8Const = "pkcs8"
+)
+
 // NewPrivateCertificateSecretMetadata : Instantiate PrivateCertificateSecretMetadata (Generic Model Constructor)
-func (*SecretsManagerV1) NewPrivateCertificateSecretMetadata(name string) (_model *PrivateCertificateSecretMetadata, err error) {
+func (*SecretsManagerV1) NewPrivateCertificateSecretMetadata(name string, certificateTemplate string, commonName string) (_model *PrivateCertificateSecretMetadata, err error) {
 	_model = &PrivateCertificateSecretMetadata{
-		Name: core.StringPtr(name),
+		Name:                core.StringPtr(name),
+		CertificateTemplate: core.StringPtr(certificateTemplate),
+		CommonName:          core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -8265,6 +10967,733 @@ func UnmarshalPrivateCertificateSecretMetadata(m map[string]json.RawMessage, res
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "algorithm", &obj.Algorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateSecretResource : Properties that describe a secret.
+// This model "extends" SecretResource
+type PrivateCertificateSecretResource struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// A human-readable alias to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an alias for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret.
+	Description *string `json:"description,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// Labels that you can use to filter for secrets in your instance.
+	//
+	// Up to 30 labels can be created. Labels can be 2 - 30 characters, including spaces. Special characters that are not
+	// permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character (|).
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// The Cloud Resource Name (CRN) that uniquely identifies your Secrets Manager resource.
+	CRN *string `json:"crn,omitempty"`
+
+	// The date the secret was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Updates when the actual secret is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// The number of versions that are associated with a secret.
+	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
+	// secret version metadata](#get-secret-version-metadata).
+	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The name of the certificate template.
+	CertificateTemplate *string `json:"certificate_template" validate:"required"`
+
+	// The intermediate certificate authority that signed this certificate.
+	CertificateAuthority *string `json:"certificate_authority,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate. The value can be supplied as a string
+	// representation of a duration in hours, for example '12h'. The value can't exceed the `max_ttl` that is defined in
+	// the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	Rotation *Rotation `json:"rotation,omitempty"`
+
+	// The identifier for the cryptographic algorithm that was used by the issuing certificate authority to sign the
+	// certificate.
+	Algorithm *string `json:"algorithm,omitempty"`
+
+	// The identifier for the cryptographic algorithm that was used to generate the public and private keys that are
+	// associated with the certificate.
+	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
+
+	// The certificate authority that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
+
+	// The data that is associated with the secret. The data object contains the following fields:
+	//
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
+	// - `ca_chain`: The chain of certificate authorities that are associated with the certificate.
+	SecretData interface{} `json:"secret_data,omitempty"`
+}
+
+// Constants associated with the PrivateCertificateSecretResource.SecretType property.
+// The secret type.
+const (
+	PrivateCertificateSecretResourceSecretTypeArbitraryConst        = "arbitrary"
+	PrivateCertificateSecretResourceSecretTypeIamCredentialsConst   = "iam_credentials"
+	PrivateCertificateSecretResourceSecretTypeImportedCertConst     = "imported_cert"
+	PrivateCertificateSecretResourceSecretTypeKvConst               = "kv"
+	PrivateCertificateSecretResourceSecretTypePrivateCertConst      = "private_cert"
+	PrivateCertificateSecretResourceSecretTypePublicCertConst       = "public_cert"
+	PrivateCertificateSecretResourceSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the PrivateCertificateSecretResource.Format property.
+// The format of the returned data.
+const (
+	PrivateCertificateSecretResourceFormatDerConst       = "der"
+	PrivateCertificateSecretResourceFormatPemConst       = "pem"
+	PrivateCertificateSecretResourceFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the PrivateCertificateSecretResource.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	PrivateCertificateSecretResourcePrivateKeyFormatDerConst   = "der"
+	PrivateCertificateSecretResourcePrivateKeyFormatPkcs8Const = "pkcs8"
+)
+
+// NewPrivateCertificateSecretResource : Instantiate PrivateCertificateSecretResource (Generic Model Constructor)
+func (*SecretsManagerV1) NewPrivateCertificateSecretResource(name string, certificateTemplate string, commonName string) (_model *PrivateCertificateSecretResource, err error) {
+	_model = &PrivateCertificateSecretResource{
+		Name:                core.StringPtr(name),
+		CertificateTemplate: core.StringPtr(certificateTemplate),
+		CommonName:          core.StringPtr(commonName),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*PrivateCertificateSecretResource) isaSecretResource() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateSecretResource unmarshals an instance of PrivateCertificateSecretResource from the specified map of raw messages.
+func UnmarshalPrivateCertificateSecretResource(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateSecretResource)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.CRN)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "algorithm", &obj.Algorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_data", &obj.SecretData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateSecretVersion : PrivateCertificateSecretVersion struct
+// This model "extends" SecretVersion
+type PrivateCertificateSecretVersion struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The data that is associated with the secret version. The data object contains the following fields:
+	//
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
+	SecretData *CertificateSecretData `json:"secret_data,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+}
+
+func (*PrivateCertificateSecretVersion) isaSecretVersion() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateSecretVersion unmarshals an instance of PrivateCertificateSecretVersion from the specified map of raw messages.
+func UnmarshalPrivateCertificateSecretVersion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateSecretVersion)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "secret_data", &obj.SecretData, UnmarshalCertificateSecretData)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateSecretVersionInfo : PrivateCertificateSecretVersionInfo struct
+// This model "extends" SecretVersionInfo
+type PrivateCertificateSecretVersionInfo struct {
+	// The ID of the secret version.
+	ID *string `json:"id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+}
+
+func (*PrivateCertificateSecretVersionInfo) isaSecretVersionInfo() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateSecretVersionInfo unmarshals an instance of PrivateCertificateSecretVersionInfo from the specified map of raw messages.
+func UnmarshalPrivateCertificateSecretVersionInfo(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateSecretVersionInfo)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateSecretVersionMetadata : Properties that describe a secret version.
+// This model "extends" SecretVersionMetadata
+type PrivateCertificateSecretVersionMetadata struct {
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id,omitempty"`
+
+	// The ID of the secret version.
+	VersionID *string `json:"version_id,omitempty"`
+
+	// The date that the version of the secret was created.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret version.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The secret state based on NIST SP 800-57. States are integers and correspond to the Pre-activation = 0, Active = 1,
+	// Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The timestamp of the certificate revocation.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+
+	// The date and time that the certificate was revoked. The date format follows RFC 3339.
+	RevocationTimeRfc3339 *strfmt.DateTime `json:"revocation_time_rfc3339,omitempty"`
+
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+}
+
+func (*PrivateCertificateSecretVersionMetadata) isaSecretVersionMetadata() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateSecretVersionMetadata unmarshals an instance of PrivateCertificateSecretVersionMetadata from the specified map of raw messages.
+func UnmarshalPrivateCertificateSecretVersionMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateSecretVersionMetadata)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
 		return
 	}
@@ -8401,6 +11830,7 @@ const (
 	PublicCertificateSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	PublicCertificateSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	PublicCertificateSecretMetadataSecretTypeKvConst               = "kv"
+	PublicCertificateSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	PublicCertificateSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	PublicCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -8647,11 +12077,9 @@ type PublicCertificateSecretResource struct {
 
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
-	// `certificate`: The contents of the certificate.
-	//
-	// `private_key`: The private key that is associated with the certificate.
-	//
-	// `intermediate`: The intermediate certificate that is associated with the certificate.
+	// - `certificate`: The contents of the certificate.
+	// - `private_key`: The private key that is associated with the certificate.
+	// - `intermediate`: The intermediate certificate that is associated with the certificate.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
@@ -8848,11 +12276,382 @@ func UnmarshalRestoreIamCredentialsSecretBody(m map[string]json.RawMessage, resu
 	return
 }
 
+// RevokeAction : A request to revoke the certificate of an internally signed intermediate certificate authority.
+// This model "extends" ConfigAction
+type RevokeAction struct {
+	// The serial number of the certificate.
+	SerialNumber *string `json:"serial_number" validate:"required"`
+}
+
+// NewRevokeAction : Instantiate RevokeAction (Generic Model Constructor)
+func (*SecretsManagerV1) NewRevokeAction(serialNumber string) (_model *RevokeAction, err error) {
+	_model = &RevokeAction{
+		SerialNumber: core.StringPtr(serialNumber),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*RevokeAction) isaConfigAction() bool {
+	return true
+}
+
+// UnmarshalRevokeAction unmarshals an instance of RevokeAction from the specified map of raw messages.
+func UnmarshalRevokeAction(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RevokeAction)
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RevokeActionResult : Properties that are returned with a successful `revoke` action.
+// This model "extends" ConfigElementActionResultConfig
+type RevokeActionResult struct {
+	// The time until the certificate authority is revoked.
+	RevocationTime *int64 `json:"revocation_time,omitempty"`
+}
+
+func (*RevokeActionResult) isaConfigElementActionResultConfig() bool {
+	return true
+}
+
+// UnmarshalRevokeActionResult unmarshals an instance of RevokeActionResult from the specified map of raw messages.
+func UnmarshalRevokeActionResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RevokeActionResult)
+	err = core.UnmarshalPrimitive(m, "revocation_time", &obj.RevocationTime)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RootCertificateAuthoritiesConfig : Root certificate authorities configuration.
+// This model "extends" GetConfigElementsResourcesItem
+type RootCertificateAuthoritiesConfig struct {
+	RootCertificateAuthorities []RootCertificateAuthoritiesConfigItem `json:"root_certificate_authorities" validate:"required"`
+}
+
+func (*RootCertificateAuthoritiesConfig) isaGetConfigElementsResourcesItem() bool {
+	return true
+}
+
+// UnmarshalRootCertificateAuthoritiesConfig unmarshals an instance of RootCertificateAuthoritiesConfig from the specified map of raw messages.
+func UnmarshalRootCertificateAuthoritiesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RootCertificateAuthoritiesConfig)
+	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthoritiesConfigItem)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RootCertificateAuthorityConfig : Root certificate authority configuration.
+// This model "extends" ConfigElementDefConfig
+type RootCertificateAuthorityConfig struct {
+	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
+	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
+	// seconds (integer).
+	//
+	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
+	MaxTTL interface{} `json:"max_ttl" validate:"required"`
+
+	// The time until the certificate revocation list (CRL) expires. The value can be supplied as a string representation
+	// of a duration in hours, such as `48h`. The default is 72 hours. Note that in the API response the value is returned
+	// in seconds (integer).
+	CrlExpiry interface{} `json:"crl_expiry,omitempty"`
+
+	// Determines whether to disable certificate revocation list (CRL) building.
+	//
+	// By default, each request rebuilds a CRL. To disable CRL building, set this field to `true`.
+	CrlDisable *bool `json:"crl_disable,omitempty"`
+
+	// Determines whether to encode the certificate revocation list (CRL) distribution points in the private certificates
+	// that are issued by a certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// Determines whether to encode the URL of the issuing certificate in the private certificates that are issued by a
+	// certificate authority.
+	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
+	// The date that the certificate expires. The date format follows RFC 3339.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration, such as `12h`. The value can't exceed the
+	// `max_ttl` that is defined in the associated certificate template. Note that in the API response the value is
+	// returned in seconds (integer).
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The format of the generated private key.
+	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use when generating the private key.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The data that is associated with the root certificate authority. The data object contains the following fields:
+	//
+	// - `certificate`: The root certificate content.
+	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
+	// - `serial_number`: The unique serial number of the root certificate.
+	Data interface{} `json:"data,omitempty"`
+}
+
+// Constants associated with the RootCertificateAuthorityConfig.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	RootCertificateAuthorityConfigStatusCertificateTemplateRequiredConst = "certificate_template_required"
+	RootCertificateAuthorityConfigStatusConfiguredConst                  = "configured"
+	RootCertificateAuthorityConfigStatusExpiredConst                     = "expired"
+	RootCertificateAuthorityConfigStatusRevokedConst                     = "revoked"
+	RootCertificateAuthorityConfigStatusSignedCertificateRequiredConst   = "signed_certificate_required"
+	RootCertificateAuthorityConfigStatusSigningRequiredConst             = "signing_required"
+)
+
+// Constants associated with the RootCertificateAuthorityConfig.Format property.
+// The format of the returned data.
+const (
+	RootCertificateAuthorityConfigFormatDerConst       = "der"
+	RootCertificateAuthorityConfigFormatPemConst       = "pem"
+	RootCertificateAuthorityConfigFormatPemBundleConst = "pem_bundle"
+)
+
+// Constants associated with the RootCertificateAuthorityConfig.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	RootCertificateAuthorityConfigPrivateKeyFormatDerConst   = "der"
+	RootCertificateAuthorityConfigPrivateKeyFormatPkcs8Const = "pkcs8"
+)
+
+// Constants associated with the RootCertificateAuthorityConfig.KeyType property.
+// The type of private key to generate.
+const (
+	RootCertificateAuthorityConfigKeyTypeEcConst      = "ec"
+	RootCertificateAuthorityConfigKeyTypeEd25519Const = "ed25519"
+	RootCertificateAuthorityConfigKeyTypeRsaConst     = "rsa"
+)
+
+// NewRootCertificateAuthorityConfig : Instantiate RootCertificateAuthorityConfig (Generic Model Constructor)
+func (*SecretsManagerV1) NewRootCertificateAuthorityConfig(maxTTL interface{}, commonName string) (_model *RootCertificateAuthorityConfig, err error) {
+	_model = &RootCertificateAuthorityConfig{
+		MaxTTL:     maxTTL,
+		CommonName: core.StringPtr(commonName),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*RootCertificateAuthorityConfig) isaConfigElementDefConfig() bool {
+	return true
+}
+
+// UnmarshalRootCertificateAuthorityConfig unmarshals an instance of RootCertificateAuthorityConfig from the specified map of raw messages.
+func UnmarshalRootCertificateAuthorityConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RootCertificateAuthorityConfig)
+	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // RotateArbitrarySecretBody : The request body of a `rotate` action.
 // This model "extends" SecretAction
 type RotateArbitrarySecretBody struct {
 	// The new secret data to assign to an `arbitrary` secret.
-	Payload *string `json:"payload" validate:"required"`
+	Payload interface{} `json:"payload" validate:"required"`
 }
 
 // NewRotateArbitrarySecretBody : Instantiate RotateArbitrarySecretBody (Generic Model Constructor)
@@ -8920,6 +12719,22 @@ func UnmarshalRotateCertificateBody(m map[string]json.RawMessage, result interfa
 	if err != nil {
 		return
 	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RotateCrlActionResult : Properties that are returned with a successful `rotate_crl` action.
+// This model "extends" ConfigElementActionResultConfig
+type RotateCrlActionResult struct {
+}
+
+func (*RotateCrlActionResult) isaConfigElementActionResultConfig() bool {
+	return true
+}
+
+// UnmarshalRotateCrlActionResult unmarshals an instance of RotateCrlActionResult from the specified map of raw messages.
+func UnmarshalRotateCrlActionResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RotateCrlActionResult)
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -9020,15 +12835,15 @@ func UnmarshalRotateUsernamePasswordSecretBody(m map[string]json.RawMessage, res
 // SecretPolicyRotationRotationPolicyRotation : The secret rotation time interval.
 // This model "extends" SecretPolicyRotationRotation
 type SecretPolicyRotationRotationPolicyRotation struct {
-	// Specifies the length of the secret rotation time interval.
+	// The length of the secret rotation time interval.
 	Interval *int64 `json:"interval" validate:"required"`
 
-	// Specifies the units for the secret rotation time interval.
+	// The units for the secret rotation time interval.
 	Unit *string `json:"unit" validate:"required"`
 }
 
 // Constants associated with the SecretPolicyRotationRotationPolicyRotation.Unit property.
-// Specifies the units for the secret rotation time interval.
+// The units for the secret rotation time interval.
 const (
 	SecretPolicyRotationRotationPolicyRotationUnitDayConst   = "day"
 	SecretPolicyRotationRotationPolicyRotationUnitMonthConst = "month"
@@ -9093,6 +12908,838 @@ func UnmarshalSecretPolicyRotationRotationPublicCertPolicyRotation(m map[string]
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SetSignedAction : A request to set a signed certificate in an intermediate certificate authority.
+// This model "extends" ConfigAction
+type SetSignedAction struct {
+	// The PEM-encoded certificate.
+	Certificate *string `json:"certificate" validate:"required"`
+}
+
+// NewSetSignedAction : Instantiate SetSignedAction (Generic Model Constructor)
+func (*SecretsManagerV1) NewSetSignedAction(certificate string) (_model *SetSignedAction, err error) {
+	_model = &SetSignedAction{
+		Certificate: core.StringPtr(certificate),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*SetSignedAction) isaConfigAction() bool {
+	return true
+}
+
+// UnmarshalSetSignedAction unmarshals an instance of SetSignedAction from the specified map of raw messages.
+func UnmarshalSetSignedAction(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SetSignedAction)
+	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SetSignedActionResult : Properties that are returned with a successful `set_signed` action.
+// This model "extends" ConfigElementActionResultConfig
+type SetSignedActionResult struct {
+}
+
+func (*SetSignedActionResult) isaConfigElementActionResultConfig() bool {
+	return true
+}
+
+// UnmarshalSetSignedActionResult unmarshals an instance of SetSignedActionResult from the specified map of raw messages.
+func UnmarshalSetSignedActionResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SetSignedActionResult)
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SignCsrAction : A request to sign a certificate signing request (CSR).
+// This model "extends" ConfigAction
+type SignCsrAction struct {
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
+	// the `max_ttl` that is defined in the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// Determines whether to use values from a certificate signing request (CSR) to complete a `sign_csr` action. If set to
+	// `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than using the values
+	// provided in the other parameters to this operation.
+	//
+	// 2) Any key usages (for example, non-repudiation) that are requested in the CSR are added to the basic set of key
+	// usages used for CA certs signed by this intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The PEM-encoded certificate signing request (CSR). This field is required for the `sign_csr` action.
+	Csr *string `json:"csr" validate:"required"`
+}
+
+// Constants associated with the SignCsrAction.Format property.
+// The format of the returned data.
+const (
+	SignCsrActionFormatDerConst       = "der"
+	SignCsrActionFormatPemConst       = "pem"
+	SignCsrActionFormatPemBundleConst = "pem_bundle"
+)
+
+// NewSignCsrAction : Instantiate SignCsrAction (Generic Model Constructor)
+func (*SecretsManagerV1) NewSignCsrAction(csr string) (_model *SignCsrAction, err error) {
+	_model = &SignCsrAction{
+		Csr: core.StringPtr(csr),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*SignCsrAction) isaConfigAction() bool {
+	return true
+}
+
+// UnmarshalSignCsrAction unmarshals an instance of SignCsrAction from the specified map of raw messages.
+func UnmarshalSignCsrAction(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SignCsrAction)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SignCsrActionResult : Properties that are returned with a successful `sign_csr` action.
+// This model "extends" ConfigElementActionResultConfig
+type SignCsrActionResult struct {
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
+	// the `max_ttl` that is defined in the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// Determines whether to use values from a certificate signing request (CSR) to complete a `sign_csr` action. If set to
+	// `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than using the values
+	// provided in the other parameters to this operation.
+	//
+	// 2) Any key usages (for example, non-repudiation) that are requested in the CSR are added to the basic set of key
+	// usages used for CA certs signed by this intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Properties that are returned with a successful `sign` action.
+	Data *SignActionResultData `json:"data" validate:"required"`
+
+	// The PEM-encoded certificate signing request (CSR).
+	Csr *string `json:"csr" validate:"required"`
+}
+
+// Constants associated with the SignCsrActionResult.Format property.
+// The format of the returned data.
+const (
+	SignCsrActionResultFormatDerConst       = "der"
+	SignCsrActionResultFormatPemConst       = "pem"
+	SignCsrActionResultFormatPemBundleConst = "pem_bundle"
+)
+
+func (*SignCsrActionResult) isaConfigElementActionResultConfig() bool {
+	return true
+}
+
+// UnmarshalSignCsrActionResult unmarshals an instance of SignCsrActionResult from the specified map of raw messages.
+func UnmarshalSignCsrActionResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SignCsrActionResult)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalSignActionResultData)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SignIntermediateAction : A request to sign an intermediate certificate authority.
+// This model "extends" ConfigAction
+type SignIntermediateAction struct {
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
+	// the `max_ttl` that is defined in the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// Determines whether to use values from a certificate signing request (CSR) to complete a `sign_csr` action. If set to
+	// `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than using the values
+	// provided in the other parameters to this operation.
+	//
+	// 2) Any key usages (for example, non-repudiation) that are requested in the CSR are added to the basic set of key
+	// usages used for CA certs signed by this intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The intermediate certificate authority to be signed. The name must match one of the pre-configured intermediate
+	// certificate authorities.
+	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority" validate:"required"`
+}
+
+// Constants associated with the SignIntermediateAction.Format property.
+// The format of the returned data.
+const (
+	SignIntermediateActionFormatDerConst       = "der"
+	SignIntermediateActionFormatPemConst       = "pem"
+	SignIntermediateActionFormatPemBundleConst = "pem_bundle"
+)
+
+// NewSignIntermediateAction : Instantiate SignIntermediateAction (Generic Model Constructor)
+func (*SecretsManagerV1) NewSignIntermediateAction(intermediateCertificateAuthority string) (_model *SignIntermediateAction, err error) {
+	_model = &SignIntermediateAction{
+		IntermediateCertificateAuthority: core.StringPtr(intermediateCertificateAuthority),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*SignIntermediateAction) isaConfigAction() bool {
+	return true
+}
+
+// UnmarshalSignIntermediateAction unmarshals an instance of SignIntermediateAction from the specified map of raw messages.
+func UnmarshalSignIntermediateAction(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SignIntermediateAction)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_certificate_authority", &obj.IntermediateCertificateAuthority)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SignIntermediateActionResult : Properties that are returned with a successful `sign_intermediate` action.
+// This model "extends" ConfigElementActionResultConfig
+type SignIntermediateActionResult struct {
+	// The fully qualified domain name or host domain name for the certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	//
+	// The alternative names can be host names or email addresses.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IPSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	URISans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
+	// the `max_ttl` that is defined in the associated certificate template.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
+	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
+	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// Determines whether to use values from a certificate signing request (CSR) to complete a `sign_csr` action. If set to
+	// `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than using the values
+	// provided in the other parameters to this operation.
+	//
+	// 2) Any key usages (for example, non-repudiation) that are requested in the CSR are added to the basic set of key
+	// usages used for CA certs signed by this intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The Street Address values in the subject field of the resulting CA certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The Postal Code values in the subject field of the resulting CA certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
+	// this field.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// Properties that are returned with a successful `sign` action.
+	Data *SignIntermediateActionResultData `json:"data" validate:"required"`
+
+	// The signed intermediate certificate authority.
+	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority" validate:"required"`
+}
+
+// Constants associated with the SignIntermediateActionResult.Format property.
+// The format of the returned data.
+const (
+	SignIntermediateActionResultFormatDerConst       = "der"
+	SignIntermediateActionResultFormatPemConst       = "pem"
+	SignIntermediateActionResultFormatPemBundleConst = "pem_bundle"
+)
+
+func (*SignIntermediateActionResult) isaConfigElementActionResultConfig() bool {
+	return true
+}
+
+// UnmarshalSignIntermediateActionResult unmarshals an instance of SignIntermediateActionResult from the specified map of raw messages.
+func UnmarshalSignIntermediateActionResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SignIntermediateActionResult)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDNSDomains)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalSignIntermediateActionResultData)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "intermediate_certificate_authority", &obj.IntermediateCertificateAuthority)
 	if err != nil {
 		return
 	}
@@ -9172,6 +13819,7 @@ const (
 	UsernamePasswordSecretMetadataSecretTypeIamCredentialsConst   = "iam_credentials"
 	UsernamePasswordSecretMetadataSecretTypeImportedCertConst     = "imported_cert"
 	UsernamePasswordSecretMetadataSecretTypeKvConst               = "kv"
+	UsernamePasswordSecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	UsernamePasswordSecretMetadataSecretTypePublicCertConst       = "public_cert"
 	UsernamePasswordSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
@@ -9318,9 +13966,8 @@ type UsernamePasswordSecretResource struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `username`: The username that is associated with the secret version.
-	//
-	// `password`: The password that is associated with the secret version.
+	// - `username`: The username that is associated with the secret version.
+	// - `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
@@ -9468,9 +14115,8 @@ type UsernamePasswordSecretVersion struct {
 
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
-	// `username`: The username that is associated with the secret version.
-	//
-	// `password`: The password that is associated with the secret version.
+	// - `username`: The username that is associated with the secret version.
+	// - `password`: The password that is associated with the secret version.
 	SecretData interface{} `json:"secret_data,omitempty"`
 }
 
