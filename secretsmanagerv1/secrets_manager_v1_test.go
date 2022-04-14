@@ -5926,7 +5926,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the SignCsrAction model
 				configActionModel := new(secretsmanagerv1.SignCsrAction)
 				configActionModel.CommonName = core.StringPtr("example.com")
-				configActionModel.AltNames = core.StringPtr("testString")
+				configActionModel.AltNames = []string{"testString"}
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
@@ -6006,7 +6006,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": "AltNames", "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": ["AltNames"], "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
 				}))
 			})
 			It(`Invoke ActionOnConfigElement successfully with retries`, func() {
@@ -6021,7 +6021,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the SignCsrAction model
 				configActionModel := new(secretsmanagerv1.SignCsrAction)
 				configActionModel.CommonName = core.StringPtr("example.com")
-				configActionModel.AltNames = core.StringPtr("testString")
+				configActionModel.AltNames = []string{"testString"}
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
@@ -6104,7 +6104,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": "AltNames", "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": ["AltNames"], "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
 				}))
 			})
 			It(`Invoke ActionOnConfigElement successfully`, func() {
@@ -6124,7 +6124,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the SignCsrAction model
 				configActionModel := new(secretsmanagerv1.SignCsrAction)
 				configActionModel.CommonName = core.StringPtr("example.com")
-				configActionModel.AltNames = core.StringPtr("testString")
+				configActionModel.AltNames = []string{"testString"}
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
@@ -6171,7 +6171,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the SignCsrAction model
 				configActionModel := new(secretsmanagerv1.SignCsrAction)
 				configActionModel.CommonName = core.StringPtr("example.com")
-				configActionModel.AltNames = core.StringPtr("testString")
+				configActionModel.AltNames = []string{"testString"}
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
@@ -6239,7 +6239,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the SignCsrAction model
 				configActionModel := new(secretsmanagerv1.SignCsrAction)
 				configActionModel.CommonName = core.StringPtr("example.com")
-				configActionModel.AltNames = core.StringPtr("testString")
+				configActionModel.AltNames = []string{"testString"}
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
@@ -6938,7 +6938,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel := new(secretsmanagerv1.SignCsrAction)
 				Expect(configActionModel).ToNot(BeNil())
 				configActionModel.CommonName = core.StringPtr("example.com")
-				configActionModel.AltNames = core.StringPtr("testString")
+				configActionModel.AltNames = []string{"testString"}
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
@@ -6958,7 +6958,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
 				configActionModel.Csr = core.StringPtr("testString")
 				Expect(configActionModel.CommonName).To(Equal(core.StringPtr("example.com")))
-				Expect(configActionModel.AltNames).To(Equal(core.StringPtr("testString")))
+				Expect(configActionModel.AltNames).To(Equal([]string{"testString"}))
 				Expect(configActionModel.IPSans).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.URISans).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.OtherSans).To(Equal([]string{"testString"}))

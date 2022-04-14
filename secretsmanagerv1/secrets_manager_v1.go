@@ -2331,7 +2331,7 @@ type ConfigAction struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -2609,7 +2609,7 @@ type ConfigElementActionResultConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -2950,7 +2950,7 @@ type ConfigElementDefConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -2982,6 +2982,9 @@ type ConfigElementDefConfig struct {
 	KeyType *string `json:"key_type,omitempty"`
 
 	// The number of bits to use when generating the private key.
+	//
+	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
+	// default for RSA keys is 2048, and the default for EC keys is 256.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
@@ -3202,9 +3205,8 @@ const (
 // Constants associated with the ConfigElementDefConfig.KeyType property.
 // The type of private key to generate.
 const (
-	ConfigElementDefConfigKeyTypeEcConst      = "ec"
-	ConfigElementDefConfigKeyTypeEd25519Const = "ed25519"
-	ConfigElementDefConfigKeyTypeRsaConst     = "rsa"
+	ConfigElementDefConfigKeyTypeEcConst  = "ec"
+	ConfigElementDefConfigKeyTypeRsaConst = "rsa"
 )
 
 // Constants associated with the ConfigElementDefConfig.SigningMethod property.
@@ -8803,7 +8805,7 @@ type CertificateTemplateConfig struct {
 	// The value can be supplied as a string representation of a duration, such as `12h`. Hour (`h`) is the largest time
 	// suffix. The value can't exceed the `max_ttl` that is defined in the associated certificate template. Note that in
 	// the API response the value is returned in seconds (integer).
-	TTL interface{} `json:"ttl,omitempty"`
+	TTL *string `json:"ttl,omitempty"`
 
 	// Determines whether to allow `localhost` to be included as one of the requested common names.
 	AllowLocalhost *bool `json:"allow_localhost,omitempty"`
@@ -8878,11 +8880,13 @@ type CertificateTemplateConfig struct {
 	// The type of private key to generate for private certificates and the type of key that is expected for submitted
 	// certificate signing requests (CSRs).
 	//
-	// Allowable values are: `rsa`, `ec` and `any`. A value of `any` allow keys of either type and with any bit size. The
-	// bit size must be greater than 1024 bits for RSA keys.
+	// Allowable values are: `rsa` and `ec`.
 	KeyType *string `json:"key_type,omitempty"`
 
 	// The number of bits to use when generating the private key.
+	//
+	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
+	// default for RSA keys is 2048, and the default for EC keys is 256.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The allowed key usage constraint to define for private certificates.
@@ -8964,10 +8968,8 @@ type CertificateTemplateConfig struct {
 // The type of private key to generate for private certificates and the type of key that is expected for submitted
 // certificate signing requests (CSRs).
 //
-// Allowable values are: `rsa`, `ec` and `any`. A value of `any` allow keys of either type and with any bit size. The
-// bit size must be greater than 1024 bits for RSA keys.
+// Allowable values are: `rsa` and `ec`.
 const (
-	CertificateTemplateConfigKeyTypeAnyConst = "any"
 	CertificateTemplateConfigKeyTypeEcConst  = "ec"
 	CertificateTemplateConfigKeyTypeRsaConst = "rsa"
 )
@@ -9701,7 +9703,7 @@ type IamCredentialsSecretResource struct {
 	// or `24h`.
 	//
 	// Minimum duration is 1 minute. Maximum is 90 days.
-	TTL interface{} `json:"ttl,omitempty"`
+	TTL *string `json:"ttl,omitempty"`
 
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
 	// `iam_credentials` secret. If you prefer to use an existing service ID that is already assigned the access policies
@@ -10100,7 +10102,7 @@ type IntermediateCertificateAuthorityConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -10125,6 +10127,9 @@ type IntermediateCertificateAuthorityConfig struct {
 	KeyType *string `json:"key_type,omitempty"`
 
 	// The number of bits to use when generating the private key.
+	//
+	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
+	// default for RSA keys is 2048, and the default for EC keys is 256.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
@@ -10208,9 +10213,8 @@ const (
 // Constants associated with the IntermediateCertificateAuthorityConfig.KeyType property.
 // The type of private key to generate.
 const (
-	IntermediateCertificateAuthorityConfigKeyTypeEcConst      = "ec"
-	IntermediateCertificateAuthorityConfigKeyTypeEd25519Const = "ed25519"
-	IntermediateCertificateAuthorityConfigKeyTypeRsaConst     = "rsa"
+	IntermediateCertificateAuthorityConfigKeyTypeEcConst  = "ec"
+	IntermediateCertificateAuthorityConfigKeyTypeRsaConst = "rsa"
 )
 
 // NewIntermediateCertificateAuthorityConfig : Instantiate IntermediateCertificateAuthorityConfig (Generic Model Constructor)
@@ -10816,7 +10820,7 @@ type PrivateCertificateSecretMetadata struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -11120,7 +11124,7 @@ type PrivateCertificateSecretResource struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -12392,7 +12396,7 @@ type RootCertificateAuthorityConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -12424,6 +12428,9 @@ type RootCertificateAuthorityConfig struct {
 	KeyType *string `json:"key_type,omitempty"`
 
 	// The number of bits to use when generating the private key.
+	//
+	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
+	// default for RSA keys is 2048, and the default for EC keys is 256.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
@@ -12505,9 +12512,8 @@ const (
 // Constants associated with the RootCertificateAuthorityConfig.KeyType property.
 // The type of private key to generate.
 const (
-	RootCertificateAuthorityConfigKeyTypeEcConst      = "ec"
-	RootCertificateAuthorityConfigKeyTypeEd25519Const = "ed25519"
-	RootCertificateAuthorityConfigKeyTypeRsaConst     = "rsa"
+	RootCertificateAuthorityConfigKeyTypeEcConst  = "ec"
+	RootCertificateAuthorityConfigKeyTypeRsaConst = "rsa"
 )
 
 // NewRootCertificateAuthorityConfig : Instantiate RootCertificateAuthorityConfig (Generic Model Constructor)
@@ -12971,7 +12977,7 @@ type SignCsrAction struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -13168,7 +13174,7 @@ type SignCsrActionResult struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -13363,7 +13369,7 @@ type SignIntermediateAction struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -13561,7 +13567,7 @@ type SignIntermediateActionResult struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames *string `json:"alt_names,omitempty"`
+	AltNames []string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
