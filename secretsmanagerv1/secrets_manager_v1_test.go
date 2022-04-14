@@ -1274,17 +1274,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1357,17 +1357,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1448,17 +1448,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1484,17 +1484,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -1541,17 +1541,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv1.CreateSecretOptions)
@@ -3046,6 +3046,236 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			})
 		})
 	})
+	Describe(`UpdateSecretVersion(updateSecretVersionOptions *UpdateSecretVersionOptions) - Operation response error`, func() {
+		updateSecretVersionPath := "/api/v1/secrets/private_cert/testString/versions/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"revoke"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateSecretVersion with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateSecretVersionOptions model
+				updateSecretVersionOptionsModel := new(secretsmanagerv1.UpdateSecretVersionOptions)
+				updateSecretVersionOptionsModel.SecretType = core.StringPtr("private_cert")
+				updateSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.Action = core.StringPtr("revoke")
+				updateSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateSecretVersion(updateSecretVersionOptions *UpdateSecretVersionOptions)`, func() {
+		updateSecretVersionPath := "/api/v1/secrets/private_cert/testString/versions/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"revoke"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke UpdateSecretVersion successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateSecretVersionOptions model
+				updateSecretVersionOptionsModel := new(secretsmanagerv1.UpdateSecretVersionOptions)
+				updateSecretVersionOptionsModel.SecretType = core.StringPtr("private_cert")
+				updateSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.Action = core.StringPtr("revoke")
+				updateSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.UpdateSecretVersionWithContext(ctx, updateSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.UpdateSecretVersionWithContext(ctx, updateSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"revoke"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+				}))
+			})
+			It(`Invoke UpdateSecretVersion successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.UpdateSecretVersion(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateSecretVersionOptions model
+				updateSecretVersionOptionsModel := new(secretsmanagerv1.UpdateSecretVersionOptions)
+				updateSecretVersionOptionsModel.SecretType = core.StringPtr("private_cert")
+				updateSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.Action = core.StringPtr("revoke")
+				updateSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateSecretVersion with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateSecretVersionOptions model
+				updateSecretVersionOptionsModel := new(secretsmanagerv1.UpdateSecretVersionOptions)
+				updateSecretVersionOptionsModel.SecretType = core.StringPtr("private_cert")
+				updateSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.Action = core.StringPtr("revoke")
+				updateSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateSecretVersionOptions model with no property values
+				updateSecretVersionOptionsModelNew := new(secretsmanagerv1.UpdateSecretVersionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateSecretVersion successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateSecretVersionOptions model
+				updateSecretVersionOptionsModel := new(secretsmanagerv1.UpdateSecretVersionOptions)
+				updateSecretVersionOptionsModel.SecretType = core.StringPtr("private_cert")
+				updateSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				updateSecretVersionOptionsModel.Action = core.StringPtr("revoke")
+				updateSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.UpdateSecretVersion(updateSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) - Operation response error`, func() {
 		getSecretVersionMetadataPath := "/api/v1/secrets/arbitrary/testString/versions/testString/metadata"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -3510,15 +3740,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3592,15 +3822,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3682,15 +3912,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3717,15 +3947,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -3773,15 +4003,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				updateSecretMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretMetadataOptions)
@@ -4700,16 +4930,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -4775,16 +5006,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4858,16 +5090,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4886,16 +5119,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4935,16 +5169,17 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
 
 				// Construct an instance of the CreateConfigElementOptions model
 				createConfigElementOptionsModel := new(secretsmanagerv1.CreateConfigElementOptions)
 				createConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				createConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
-				createConfigElementOptionsModel.Name = core.StringPtr("testString")
-				createConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				createConfigElementOptionsModel.Name = core.StringPtr("cis-example-config")
+				createConfigElementOptionsModel.Type = core.StringPtr("cis")
 				createConfigElementOptionsModel.Config = configElementDefConfigModel
 				createConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5428,7 +5663,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -5499,7 +5734,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5578,7 +5813,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5602,7 +5837,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -5647,12 +5882,394 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateConfigElementOptionsModel.SecretType = core.StringPtr("public_cert")
 				updateConfigElementOptionsModel.ConfigElement = core.StringPtr("certificate_authorities")
 				updateConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
-				updateConfigElementOptionsModel.Type = core.StringPtr("letsencrypt")
+				updateConfigElementOptionsModel.Type = core.StringPtr("cis")
 				updateConfigElementOptionsModel.Config = map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
 				result, response, operationErr := secretsManagerService.UpdateConfigElement(updateConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ActionOnConfigElement(actionOnConfigElementOptions *ActionOnConfigElementOptions) - Operation response error`, func() {
+		actionOnConfigElementPath := "/api/v1/config/private_cert/root_certificate_authorities/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(actionOnConfigElementPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"sign_intermediate"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ActionOnConfigElement with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the SignCsrAction model
+				configActionModel := new(secretsmanagerv1.SignCsrAction)
+				configActionModel.CommonName = core.StringPtr("example.com")
+				configActionModel.AltNames = []string{"testString"}
+				configActionModel.IPSans = core.StringPtr("testString")
+				configActionModel.URISans = core.StringPtr("testString")
+				configActionModel.OtherSans = []string{"testString"}
+				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.Format = core.StringPtr("pem")
+				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
+				configActionModel.PermittedDNSDomains = []string{"testString"}
+				configActionModel.UseCsrValues = core.BoolPtr(false)
+				configActionModel.Ou = []string{"testString"}
+				configActionModel.Organization = []string{"testString"}
+				configActionModel.Country = []string{"testString"}
+				configActionModel.Locality = []string{"testString"}
+				configActionModel.Province = []string{"testString"}
+				configActionModel.StreetAddress = []string{"testString"}
+				configActionModel.PostalCode = []string{"testString"}
+				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
+				configActionModel.Csr = core.StringPtr("testString")
+
+				// Construct an instance of the ActionOnConfigElementOptions model
+				actionOnConfigElementOptionsModel := new(secretsmanagerv1.ActionOnConfigElementOptions)
+				actionOnConfigElementOptionsModel.SecretType = core.StringPtr("private_cert")
+				actionOnConfigElementOptionsModel.ConfigElement = core.StringPtr("root_certificate_authorities")
+				actionOnConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				actionOnConfigElementOptionsModel.Action = core.StringPtr("sign_intermediate")
+				actionOnConfigElementOptionsModel.Config = configActionModel
+				actionOnConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ActionOnConfigElement(actionOnConfigElementOptions *ActionOnConfigElementOptions)`, func() {
+		actionOnConfigElementPath := "/api/v1/config/private_cert/root_certificate_authorities/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(actionOnConfigElementPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"sign_intermediate"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": ["AltNames"], "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
+				}))
+			})
+			It(`Invoke ActionOnConfigElement successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the SignCsrAction model
+				configActionModel := new(secretsmanagerv1.SignCsrAction)
+				configActionModel.CommonName = core.StringPtr("example.com")
+				configActionModel.AltNames = []string{"testString"}
+				configActionModel.IPSans = core.StringPtr("testString")
+				configActionModel.URISans = core.StringPtr("testString")
+				configActionModel.OtherSans = []string{"testString"}
+				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.Format = core.StringPtr("pem")
+				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
+				configActionModel.PermittedDNSDomains = []string{"testString"}
+				configActionModel.UseCsrValues = core.BoolPtr(false)
+				configActionModel.Ou = []string{"testString"}
+				configActionModel.Organization = []string{"testString"}
+				configActionModel.Country = []string{"testString"}
+				configActionModel.Locality = []string{"testString"}
+				configActionModel.Province = []string{"testString"}
+				configActionModel.StreetAddress = []string{"testString"}
+				configActionModel.PostalCode = []string{"testString"}
+				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
+				configActionModel.Csr = core.StringPtr("testString")
+
+				// Construct an instance of the ActionOnConfigElementOptions model
+				actionOnConfigElementOptionsModel := new(secretsmanagerv1.ActionOnConfigElementOptions)
+				actionOnConfigElementOptionsModel.SecretType = core.StringPtr("private_cert")
+				actionOnConfigElementOptionsModel.ConfigElement = core.StringPtr("root_certificate_authorities")
+				actionOnConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				actionOnConfigElementOptionsModel.Action = core.StringPtr("sign_intermediate")
+				actionOnConfigElementOptionsModel.Config = configActionModel
+				actionOnConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.ActionOnConfigElementWithContext(ctx, actionOnConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.ActionOnConfigElementWithContext(ctx, actionOnConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(actionOnConfigElementPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["action"]).To(Equal([]string{"sign_intermediate"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": ["AltNames"], "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
+				}))
+			})
+			It(`Invoke ActionOnConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.ActionOnConfigElement(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the SignCsrAction model
+				configActionModel := new(secretsmanagerv1.SignCsrAction)
+				configActionModel.CommonName = core.StringPtr("example.com")
+				configActionModel.AltNames = []string{"testString"}
+				configActionModel.IPSans = core.StringPtr("testString")
+				configActionModel.URISans = core.StringPtr("testString")
+				configActionModel.OtherSans = []string{"testString"}
+				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.Format = core.StringPtr("pem")
+				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
+				configActionModel.PermittedDNSDomains = []string{"testString"}
+				configActionModel.UseCsrValues = core.BoolPtr(false)
+				configActionModel.Ou = []string{"testString"}
+				configActionModel.Organization = []string{"testString"}
+				configActionModel.Country = []string{"testString"}
+				configActionModel.Locality = []string{"testString"}
+				configActionModel.Province = []string{"testString"}
+				configActionModel.StreetAddress = []string{"testString"}
+				configActionModel.PostalCode = []string{"testString"}
+				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
+				configActionModel.Csr = core.StringPtr("testString")
+
+				// Construct an instance of the ActionOnConfigElementOptions model
+				actionOnConfigElementOptionsModel := new(secretsmanagerv1.ActionOnConfigElementOptions)
+				actionOnConfigElementOptionsModel.SecretType = core.StringPtr("private_cert")
+				actionOnConfigElementOptionsModel.ConfigElement = core.StringPtr("root_certificate_authorities")
+				actionOnConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				actionOnConfigElementOptionsModel.Action = core.StringPtr("sign_intermediate")
+				actionOnConfigElementOptionsModel.Config = configActionModel
+				actionOnConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ActionOnConfigElement with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the SignCsrAction model
+				configActionModel := new(secretsmanagerv1.SignCsrAction)
+				configActionModel.CommonName = core.StringPtr("example.com")
+				configActionModel.AltNames = []string{"testString"}
+				configActionModel.IPSans = core.StringPtr("testString")
+				configActionModel.URISans = core.StringPtr("testString")
+				configActionModel.OtherSans = []string{"testString"}
+				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.Format = core.StringPtr("pem")
+				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
+				configActionModel.PermittedDNSDomains = []string{"testString"}
+				configActionModel.UseCsrValues = core.BoolPtr(false)
+				configActionModel.Ou = []string{"testString"}
+				configActionModel.Organization = []string{"testString"}
+				configActionModel.Country = []string{"testString"}
+				configActionModel.Locality = []string{"testString"}
+				configActionModel.Province = []string{"testString"}
+				configActionModel.StreetAddress = []string{"testString"}
+				configActionModel.PostalCode = []string{"testString"}
+				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
+				configActionModel.Csr = core.StringPtr("testString")
+
+				// Construct an instance of the ActionOnConfigElementOptions model
+				actionOnConfigElementOptionsModel := new(secretsmanagerv1.ActionOnConfigElementOptions)
+				actionOnConfigElementOptionsModel.SecretType = core.StringPtr("private_cert")
+				actionOnConfigElementOptionsModel.ConfigElement = core.StringPtr("root_certificate_authorities")
+				actionOnConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				actionOnConfigElementOptionsModel.Action = core.StringPtr("sign_intermediate")
+				actionOnConfigElementOptionsModel.Config = configActionModel
+				actionOnConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the ActionOnConfigElementOptions model with no property values
+				actionOnConfigElementOptionsModelNew := new(secretsmanagerv1.ActionOnConfigElementOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ActionOnConfigElement successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the SignCsrAction model
+				configActionModel := new(secretsmanagerv1.SignCsrAction)
+				configActionModel.CommonName = core.StringPtr("example.com")
+				configActionModel.AltNames = []string{"testString"}
+				configActionModel.IPSans = core.StringPtr("testString")
+				configActionModel.URISans = core.StringPtr("testString")
+				configActionModel.OtherSans = []string{"testString"}
+				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.Format = core.StringPtr("pem")
+				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
+				configActionModel.PermittedDNSDomains = []string{"testString"}
+				configActionModel.UseCsrValues = core.BoolPtr(false)
+				configActionModel.Ou = []string{"testString"}
+				configActionModel.Organization = []string{"testString"}
+				configActionModel.Country = []string{"testString"}
+				configActionModel.Locality = []string{"testString"}
+				configActionModel.Province = []string{"testString"}
+				configActionModel.StreetAddress = []string{"testString"}
+				configActionModel.PostalCode = []string{"testString"}
+				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
+				configActionModel.Csr = core.StringPtr("testString")
+
+				// Construct an instance of the ActionOnConfigElementOptions model
+				actionOnConfigElementOptionsModel := new(secretsmanagerv1.ActionOnConfigElementOptions)
+				actionOnConfigElementOptionsModel.SecretType = core.StringPtr("private_cert")
+				actionOnConfigElementOptionsModel.ConfigElement = core.StringPtr("root_certificate_authorities")
+				actionOnConfigElementOptionsModel.ConfigName = core.StringPtr("testString")
+				actionOnConfigElementOptionsModel.Action = core.StringPtr("sign_intermediate")
+				actionOnConfigElementOptionsModel.Config = configActionModel
+				actionOnConfigElementOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.ActionOnConfigElement(actionOnConfigElementOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -6316,6 +6933,71 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				URL:           "http://secretsmanagerv1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
+			It(`Invoke NewActionOnConfigElementOptions successfully`, func() {
+				// Construct an instance of the SignCsrAction model
+				configActionModel := new(secretsmanagerv1.SignCsrAction)
+				Expect(configActionModel).ToNot(BeNil())
+				configActionModel.CommonName = core.StringPtr("example.com")
+				configActionModel.AltNames = []string{"testString"}
+				configActionModel.IPSans = core.StringPtr("testString")
+				configActionModel.URISans = core.StringPtr("testString")
+				configActionModel.OtherSans = []string{"testString"}
+				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.Format = core.StringPtr("pem")
+				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
+				configActionModel.PermittedDNSDomains = []string{"testString"}
+				configActionModel.UseCsrValues = core.BoolPtr(false)
+				configActionModel.Ou = []string{"testString"}
+				configActionModel.Organization = []string{"testString"}
+				configActionModel.Country = []string{"testString"}
+				configActionModel.Locality = []string{"testString"}
+				configActionModel.Province = []string{"testString"}
+				configActionModel.StreetAddress = []string{"testString"}
+				configActionModel.PostalCode = []string{"testString"}
+				configActionModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5")
+				configActionModel.Csr = core.StringPtr("testString")
+				Expect(configActionModel.CommonName).To(Equal(core.StringPtr("example.com")))
+				Expect(configActionModel.AltNames).To(Equal([]string{"testString"}))
+				Expect(configActionModel.IPSans).To(Equal(core.StringPtr("testString")))
+				Expect(configActionModel.URISans).To(Equal(core.StringPtr("testString")))
+				Expect(configActionModel.OtherSans).To(Equal([]string{"testString"}))
+				Expect(configActionModel.TTL).To(Equal(core.StringPtr("12h")))
+				Expect(configActionModel.Format).To(Equal(core.StringPtr("pem")))
+				Expect(configActionModel.MaxPathLength).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(configActionModel.ExcludeCnFromSans).To(Equal(core.BoolPtr(false)))
+				Expect(configActionModel.PermittedDNSDomains).To(Equal([]string{"testString"}))
+				Expect(configActionModel.UseCsrValues).To(Equal(core.BoolPtr(false)))
+				Expect(configActionModel.Ou).To(Equal([]string{"testString"}))
+				Expect(configActionModel.Organization).To(Equal([]string{"testString"}))
+				Expect(configActionModel.Country).To(Equal([]string{"testString"}))
+				Expect(configActionModel.Locality).To(Equal([]string{"testString"}))
+				Expect(configActionModel.Province).To(Equal([]string{"testString"}))
+				Expect(configActionModel.StreetAddress).To(Equal([]string{"testString"}))
+				Expect(configActionModel.PostalCode).To(Equal([]string{"testString"}))
+				Expect(configActionModel.SerialNumber).To(Equal(core.StringPtr("d9:be:fe:35:ba:09:42:b5")))
+				Expect(configActionModel.Csr).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ActionOnConfigElementOptions model
+				secretType := "private_cert"
+				configElement := "root_certificate_authorities"
+				configName := "testString"
+				action := "sign_intermediate"
+				actionOnConfigElementOptionsModel := secretsManagerService.NewActionOnConfigElementOptions(secretType, configElement, configName, action)
+				actionOnConfigElementOptionsModel.SetSecretType("private_cert")
+				actionOnConfigElementOptionsModel.SetConfigElement("root_certificate_authorities")
+				actionOnConfigElementOptionsModel.SetConfigName("testString")
+				actionOnConfigElementOptionsModel.SetAction("sign_intermediate")
+				actionOnConfigElementOptionsModel.SetConfig(configActionModel)
+				actionOnConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(actionOnConfigElementOptionsModel).ToNot(BeNil())
+				Expect(actionOnConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("private_cert")))
+				Expect(actionOnConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("root_certificate_authorities")))
+				Expect(actionOnConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
+				Expect(actionOnConfigElementOptionsModel.Action).To(Equal(core.StringPtr("sign_intermediate")))
+				Expect(actionOnConfigElementOptionsModel.Config).To(Equal(configActionModel))
+				Expect(actionOnConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCollectionMetadata successfully`, func() {
 				collectionType := "application/vnd.ibm.secrets-manager.config+json"
 				collectionTotal := int64(1)
@@ -6331,30 +7013,32 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewCreateConfigElementOptions successfully`, func() {
-				// Construct an instance of the ConfigElementDefConfigLetsEncryptConfig model
-				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigLetsEncryptConfig)
+				// Construct an instance of the ConfigElementDefConfigCloudInternetServicesConfig model
+				configElementDefConfigModel := new(secretsmanagerv1.ConfigElementDefConfigCloudInternetServicesConfig)
 				Expect(configElementDefConfigModel).ToNot(BeNil())
-				configElementDefConfigModel.PrivateKey = core.StringPtr("testString")
-				Expect(configElementDefConfigModel.PrivateKey).To(Equal(core.StringPtr("testString")))
+				configElementDefConfigModel.CisCRN = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")
+				configElementDefConfigModel.CisApikey = core.StringPtr("cis_apikey_value")
+				Expect(configElementDefConfigModel.CisCRN).To(Equal(core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/<account-id>:<service-instance>::")))
+				Expect(configElementDefConfigModel.CisApikey).To(Equal(core.StringPtr("cis_apikey_value")))
 
 				// Construct an instance of the CreateConfigElementOptions model
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
-				createConfigElementOptionsName := "testString"
-				createConfigElementOptionsType := "letsencrypt"
+				createConfigElementOptionsName := "cis-example-config"
+				createConfigElementOptionsType := "cis"
 				var createConfigElementOptionsConfig secretsmanagerv1.ConfigElementDefConfigIntf = nil
 				createConfigElementOptionsModel := secretsManagerService.NewCreateConfigElementOptions(secretType, configElement, createConfigElementOptionsName, createConfigElementOptionsType, createConfigElementOptionsConfig)
 				createConfigElementOptionsModel.SetSecretType("public_cert")
 				createConfigElementOptionsModel.SetConfigElement("certificate_authorities")
-				createConfigElementOptionsModel.SetName("testString")
-				createConfigElementOptionsModel.SetType("letsencrypt")
+				createConfigElementOptionsModel.SetName("cis-example-config")
+				createConfigElementOptionsModel.SetType("cis")
 				createConfigElementOptionsModel.SetConfig(configElementDefConfigModel)
 				createConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createConfigElementOptionsModel).ToNot(BeNil())
 				Expect(createConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
 				Expect(createConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
-				Expect(createConfigElementOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("letsencrypt")))
+				Expect(createConfigElementOptionsModel.Name).To(Equal(core.StringPtr("cis-example-config")))
+				Expect(createConfigElementOptionsModel.Type).To(Equal(core.StringPtr("cis")))
 				Expect(createConfigElementOptionsModel.Config).To(Equal(configElementDefConfigModel))
 				Expect(createConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -6424,26 +7108,26 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ArbitrarySecretResource model
 				secretResourceModel := new(secretsmanagerv1.ArbitrarySecretResource)
 				Expect(secretResourceModel).ToNot(BeNil())
-				secretResourceModel.Name = core.StringPtr("testString")
-				secretResourceModel.Description = core.StringPtr("testString")
-				secretResourceModel.SecretGroupID = core.StringPtr("testString")
-				secretResourceModel.Labels = []string{"testString"}
-				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
-				secretResourceModel.Payload = core.StringPtr("testString")
-				Expect(secretResourceModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.Description).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.SecretGroupID).To(Equal(core.StringPtr("testString")))
-				Expect(secretResourceModel.Labels).To(Equal([]string{"testString"}))
-				Expect(secretResourceModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00.000Z")))
-				Expect(secretResourceModel.Payload).To(Equal(core.StringPtr("testString")))
+				secretResourceModel.Name = core.StringPtr("example-arbitrary-secret")
+				secretResourceModel.Description = core.StringPtr("Extended description for this secret.")
+				secretResourceModel.SecretGroupID = core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")
+				secretResourceModel.Labels = []string{"dev", "us-south"}
+				secretResourceModel.ExpirationDate = CreateMockDateTime("2030-01-01T00:00:00Z")
+				secretResourceModel.Payload = core.StringPtr("secret-data")
+				Expect(secretResourceModel.Name).To(Equal(core.StringPtr("example-arbitrary-secret")))
+				Expect(secretResourceModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
+				Expect(secretResourceModel.SecretGroupID).To(Equal(core.StringPtr("bc656587-8fda-4d05-9ad8-b1de1ec7e712")))
+				Expect(secretResourceModel.Labels).To(Equal([]string{"dev", "us-south"}))
+				Expect(secretResourceModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-01-01T00:00:00Z")))
+				Expect(secretResourceModel.Payload).To(Equal(core.StringPtr("secret-data")))
 
 				// Construct an instance of the CreateSecretOptions model
 				secretType := "arbitrary"
@@ -6780,20 +7464,20 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				secretType := "public_cert"
 				configElement := "certificate_authorities"
 				configName := "testString"
-				updateConfigElementOptionsType := "letsencrypt"
+				updateConfigElementOptionsType := "cis"
 				updateConfigElementOptionsConfig := map[string]interface{}{"anyKey": "anyValue"}
 				updateConfigElementOptionsModel := secretsManagerService.NewUpdateConfigElementOptions(secretType, configElement, configName, updateConfigElementOptionsType, updateConfigElementOptionsConfig)
 				updateConfigElementOptionsModel.SetSecretType("public_cert")
 				updateConfigElementOptionsModel.SetConfigElement("certificate_authorities")
 				updateConfigElementOptionsModel.SetConfigName("testString")
-				updateConfigElementOptionsModel.SetType("letsencrypt")
+				updateConfigElementOptionsModel.SetType("cis")
 				updateConfigElementOptionsModel.SetConfig(map[string]interface{}{"anyKey": "anyValue"})
 				updateConfigElementOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateConfigElementOptionsModel).ToNot(BeNil())
 				Expect(updateConfigElementOptionsModel.SecretType).To(Equal(core.StringPtr("public_cert")))
 				Expect(updateConfigElementOptionsModel.ConfigElement).To(Equal(core.StringPtr("certificate_authorities")))
 				Expect(updateConfigElementOptionsModel.ConfigName).To(Equal(core.StringPtr("testString")))
-				Expect(updateConfigElementOptionsModel.Type).To(Equal(core.StringPtr("letsencrypt")))
+				Expect(updateConfigElementOptionsModel.Type).To(Equal(core.StringPtr("cis")))
 				Expect(updateConfigElementOptionsModel.Config).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(updateConfigElementOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -6833,22 +7517,22 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				// Construct an instance of the CollectionMetadata model
 				collectionMetadataModel := new(secretsmanagerv1.CollectionMetadata)
 				Expect(collectionMetadataModel).ToNot(BeNil())
-				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.config+json")
+				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
-				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.config+json")))
+				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				Expect(secretMetadataModel).ToNot(BeNil())
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
-				secretMetadataModel.Name = core.StringPtr("example-secret")
-				secretMetadataModel.Description = core.StringPtr("Extended description for this secret.")
-				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00.000Z")
+				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
+				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
+				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 				Expect(secretMetadataModel.Labels).To(Equal([]string{"dev", "us-south"}))
-				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("example-secret")))
-				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
-				Expect(secretMetadataModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00.000Z")))
+				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("updated-secret-name")))
+				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Updated description for this secret.")))
+				Expect(secretMetadataModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00Z")))
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
 				secretType := "arbitrary"
@@ -6892,6 +7576,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(updateSecretOptionsModel.SecretAction).To(Equal(secretActionModel))
 				Expect(updateSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewUpdateSecretVersionOptions successfully`, func() {
+				// Construct an instance of the UpdateSecretVersionOptions model
+				secretType := "private_cert"
+				id := "testString"
+				versionID := "testString"
+				action := "revoke"
+				updateSecretVersionOptionsModel := secretsManagerService.NewUpdateSecretVersionOptions(secretType, id, versionID, action)
+				updateSecretVersionOptionsModel.SetSecretType("private_cert")
+				updateSecretVersionOptionsModel.SetID("testString")
+				updateSecretVersionOptionsModel.SetVersionID("testString")
+				updateSecretVersionOptionsModel.SetAction("revoke")
+				updateSecretVersionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateSecretVersionOptionsModel).ToNot(BeNil())
+				Expect(updateSecretVersionOptionsModel.SecretType).To(Equal(core.StringPtr("private_cert")))
+				Expect(updateSecretVersionOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(updateSecretVersionOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
+				Expect(updateSecretVersionOptionsModel.Action).To(Equal(core.StringPtr("revoke")))
+				Expect(updateSecretVersionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewArbitrarySecretMetadata successfully`, func() {
 				name := "example-secret"
 				_model, err := secretsManagerService.NewArbitrarySecretMetadata(name)
@@ -6913,6 +7616,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			It(`Invoke NewCertificateSecretResource successfully`, func() {
 				name := "testString"
 				_model, err := secretsManagerService.NewCertificateSecretResource(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewCertificateTemplateConfig successfully`, func() {
+				certificateAuthority := "testString"
+				_model, err := secretsManagerService.NewCertificateTemplateConfig(certificateAuthority)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -6953,6 +7662,14 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewIntermediateCertificateAuthorityConfig successfully`, func() {
+				maxTTL := core.StringPtr("8760h")
+				signingMethod := "internal"
+				commonName := "example.com"
+				_model, err := secretsManagerService.NewIntermediateCertificateAuthorityConfig(maxTTL, signingMethod, commonName)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewKvSecretMetadata successfully`, func() {
 				name := "example-secret"
 				_model, err := secretsManagerService.NewKvSecretMetadata(name)
@@ -6965,9 +7682,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewPrivateCertPolicyRotation successfully`, func() {
+				autoRotate := false
+				_model, err := secretsManagerService.NewPrivateCertPolicyRotation(autoRotate)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewPrivateCertificateSecretMetadata successfully`, func() {
 				name := "example-secret"
-				_model, err := secretsManagerService.NewPrivateCertificateSecretMetadata(name)
+				certificateTemplate := "cert-template-1"
+				commonName := "example.com"
+				_model, err := secretsManagerService.NewPrivateCertificateSecretMetadata(name, certificateTemplate, commonName)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewPrivateCertificateSecretResource successfully`, func() {
+				name := "testString"
+				certificateTemplate := "cert-template-1"
+				commonName := "example.com"
+				_model, err := secretsManagerService.NewPrivateCertificateSecretResource(name, certificateTemplate, commonName)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -6986,6 +7719,19 @@ var _ = Describe(`SecretsManagerV1`, func() {
 			It(`Invoke NewRestoreIamCredentialsSecretBody successfully`, func() {
 				versionID := "testString"
 				_model, err := secretsManagerService.NewRestoreIamCredentialsSecretBody(versionID)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewRevokeAction successfully`, func() {
+				serialNumber := "testString"
+				_model, err := secretsManagerService.NewRevokeAction(serialNumber)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewRootCertificateAuthorityConfig successfully`, func() {
+				maxTTL := core.StringPtr("8760h")
+				commonName := "example.com"
+				_model, err := secretsManagerService.NewRootCertificateAuthorityConfig(maxTTL, commonName)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -7030,6 +7776,24 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				autoRotate := false
 				rotateKeys := false
 				_model, err := secretsManagerService.NewSecretPolicyRotationRotationPublicCertPolicyRotation(autoRotate, rotateKeys)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSetSignedAction successfully`, func() {
+				certificate := "testString"
+				_model, err := secretsManagerService.NewSetSignedAction(certificate)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSignCsrAction successfully`, func() {
+				csr := "testString"
+				_model, err := secretsManagerService.NewSignCsrAction(csr)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSignIntermediateAction successfully`, func() {
+				intermediateCertificateAuthority := "testString"
+				_model, err := secretsManagerService.NewSignIntermediateAction(intermediateCertificateAuthority)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
