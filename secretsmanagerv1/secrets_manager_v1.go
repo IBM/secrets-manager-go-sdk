@@ -2420,7 +2420,6 @@ type ConfigAction struct {
 // Constants associated with the ConfigAction.Format property.
 // The format of the returned data.
 const (
-	ConfigActionFormatDerConst       = "der"
 	ConfigActionFormatPemConst       = "pem"
 	ConfigActionFormatPemBundleConst = "pem_bundle"
 )
@@ -2699,7 +2698,6 @@ type ConfigElementActionResultConfig struct {
 // Constants associated with the ConfigElementActionResultConfig.Format property.
 // The format of the returned data.
 const (
-	ConfigElementActionResultConfigFormatDerConst       = "der"
 	ConfigElementActionResultConfigFormatPemConst       = "pem"
 	ConfigElementActionResultConfigFormatPemBundleConst = "pem_bundle"
 )
@@ -3193,7 +3191,6 @@ const (
 // Constants associated with the ConfigElementDefConfig.Format property.
 // The format of the returned data.
 const (
-	ConfigElementDefConfigFormatDerConst       = "der"
 	ConfigElementDefConfigFormatPemConst       = "pem"
 	ConfigElementDefConfigFormatPemBundleConst = "pem_bundle"
 )
@@ -6371,7 +6368,7 @@ type SecretResource struct {
 
 	// The alternative names that are defined for the certificate.
 	//
-	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// For public certificates, this value is provided as an array of strings. For private certificates, this value is
 	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
 	// all the types of certificate secrets.
 	AltNames interface{} `json:"alt_names,omitempty"`
@@ -6449,7 +6446,6 @@ const (
 // Constants associated with the SecretResource.Format property.
 // The format of the returned data.
 const (
-	SecretResourceFormatDerConst       = "der"
 	SecretResourceFormatPemConst       = "pem"
 	SecretResourceFormatPemBundleConst = "pem_bundle"
 )
@@ -8351,7 +8347,7 @@ type CertificateSecretResource struct {
 
 	// The alternative names that are defined for the certificate.
 	//
-	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// For public certificates, this value is provided as an array of strings. For private certificates, this value is
 	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
 	// all the types of certificate secrets.
 	AltNames interface{} `json:"alt_names,omitempty"`
@@ -10150,7 +10146,6 @@ const (
 // Constants associated with the IntermediateCertificateAuthorityConfig.Format property.
 // The format of the returned data.
 const (
-	IntermediateCertificateAuthorityConfigFormatDerConst       = "der"
 	IntermediateCertificateAuthorityConfigFormatPemConst       = "pem"
 	IntermediateCertificateAuthorityConfigFormatPemBundleConst = "pem_bundle"
 )
@@ -10998,7 +10993,7 @@ type PrivateCertificateSecretResource struct {
 
 	// The alternative names that are defined for the certificate.
 	//
-	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// For public certificates, this value is provided as an array of strings. For private certificates, this value is
 	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
 	// all the types of certificate secrets.
 	AltNames interface{} `json:"alt_names,omitempty"`
@@ -11082,7 +11077,6 @@ const (
 // Constants associated with the PrivateCertificateSecretResource.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateSecretResourceFormatDerConst       = "der"
 	PrivateCertificateSecretResourceFormatPemConst       = "pem"
 	PrivateCertificateSecretResourceFormatPemBundleConst = "pem_bundle"
 )
@@ -11937,7 +11931,7 @@ type PublicCertificateSecretResource struct {
 
 	// The alternative names that are defined for the certificate.
 	//
-	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// For public certificates, this value is provided as an array of strings. For private certificates, this value is
 	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
 	// all the types of certificate secrets.
 	AltNames interface{} `json:"alt_names,omitempty"`
@@ -12383,7 +12377,6 @@ const (
 // Constants associated with the RootCertificateAuthorityConfig.Format property.
 // The format of the returned data.
 const (
-	RootCertificateAuthorityConfigFormatDerConst       = "der"
 	RootCertificateAuthorityConfigFormatPemConst       = "pem"
 	RootCertificateAuthorityConfigFormatPemBundleConst = "pem_bundle"
 )
@@ -12945,7 +12938,6 @@ type SignCsrAction struct {
 // Constants associated with the SignCsrAction.Format property.
 // The format of the returned data.
 const (
-	SignCsrActionFormatDerConst       = "der"
 	SignCsrActionFormatPemConst       = "pem"
 	SignCsrActionFormatPemBundleConst = "pem_bundle"
 )
@@ -13144,7 +13136,6 @@ type SignCsrActionResult struct {
 // Constants associated with the SignCsrActionResult.Format property.
 // The format of the returned data.
 const (
-	SignCsrActionResultFormatDerConst       = "der"
 	SignCsrActionResultFormatPemConst       = "pem"
 	SignCsrActionResultFormatPemBundleConst = "pem_bundle"
 )
@@ -13336,7 +13327,6 @@ type SignIntermediateAction struct {
 // Constants associated with the SignIntermediateAction.Format property.
 // The format of the returned data.
 const (
-	SignIntermediateActionFormatDerConst       = "der"
 	SignIntermediateActionFormatPemConst       = "pem"
 	SignIntermediateActionFormatPemBundleConst = "pem_bundle"
 )
@@ -13535,7 +13525,6 @@ type SignIntermediateActionResult struct {
 // Constants associated with the SignIntermediateActionResult.Format property.
 // The format of the returned data.
 const (
-	SignIntermediateActionResultFormatDerConst       = "der"
 	SignIntermediateActionResultFormatPemConst       = "pem"
 	SignIntermediateActionResultFormatPemBundleConst = "pem_bundle"
 )
