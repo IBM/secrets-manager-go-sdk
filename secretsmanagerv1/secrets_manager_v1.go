@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.47.1-be944570-20220406-170244
+ * IBM OpenAPI SDK Code Generator Version: 3.48.0-e80b60a1-20220414-145125
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -2331,7 +2331,7 @@ type ConfigAction struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -2346,7 +2346,7 @@ type ConfigAction struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
 	// the `max_ttl` that is defined in the associated certificate template.
@@ -2382,29 +2382,28 @@ type ConfigAction struct {
 	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
 	UseCsrValues *bool `json:"use_csr_values,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The PEM-encoded certificate signing request (CSR). This field is required for the `sign_csr` action.
@@ -2609,7 +2608,7 @@ type ConfigElementActionResultConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -2624,7 +2623,7 @@ type ConfigElementActionResultConfig struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
 	// the `max_ttl` that is defined in the associated certificate template.
@@ -2660,29 +2659,28 @@ type ConfigElementActionResultConfig struct {
 	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
 	UseCsrValues *bool `json:"use_csr_values,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// Properties that are returned with a successful `sign` action.
@@ -2911,28 +2909,33 @@ type ConfigElementDefConfig struct {
 	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 
-	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
-	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
-	// seconds (integer).
+	// The maximum time-to-live (TTL) for certificates that are created by this CA.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
+	// response, this value is returned in seconds (integer).
 	//
 	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
 	MaxTTL interface{} `json:"max_ttl,omitempty"`
 
-	// The time until the certificate revocation list (CRL) expires. The value can be supplied as a string representation
-	// of a duration in hours, such as `48h`. The default is 72 hours. Note that in the API response the value is returned
-	// in seconds (integer).
+	// The time until the certificate revocation list (CRL) expires.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `48h`. The default is 72 hours.
+	// In the API response, this value is returned in seconds (integer).
+	//
+	// **Note:** The CRL is rotated automatically before it expires.
 	CrlExpiry interface{} `json:"crl_expiry,omitempty"`
 
-	// Determines whether to disable certificate revocation list (CRL) building.
+	// Disables or enables certificate revocation list (CRL) building.
 	//
-	// By default, each request rebuilds a CRL. To disable CRL building, set this field to `true`.
+	// If CRL building is disabled, a signed but zero-length CRL is returned when downloading the CRL. If CRL building is
+	// enabled,  it will rebuild the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
-	// Determines whether to encode the certificate revocation list (CRL) distribution points in the private certificates
-	// that are issued by a certificate authority.
+	// Determines whether to encode the certificate revocation list (CRL) distribution points in the certificates that are
+	// issued by this certificate authority.
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
-	// Determines whether to encode the URL of the issuing certificate in the private certificates that are issued by a
+	// Determines whether to encode the URL of the issuing certificate in the certificates that are issued by this
 	// certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
 
@@ -2950,7 +2953,7 @@ type ConfigElementDefConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -2965,12 +2968,12 @@ type ConfigElementDefConfig struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to this CA certificate.
 	//
 	// The value can be supplied as a string representation of a duration, such as `12h`. The value can't exceed the
-	// `max_ttl` that is defined in the associated certificate template. Note that in the API response the value is
-	// returned in seconds (integer).
-	TTL *string `json:"ttl,omitempty"`
+	// `max_ttl` that is defined in the associated certificate template. In the API response, this value is returned in
+	// seconds (integer).
+	TTL interface{} `json:"ttl,omitempty"`
 
 	// The format of the returned data.
 	Format *string `json:"format,omitempty"`
@@ -2983,8 +2986,8 @@ type ConfigElementDefConfig struct {
 
 	// The number of bits to use when generating the private key.
 	//
-	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
-	// default for RSA keys is 2048, and the default for EC keys is 256.
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
@@ -3002,29 +3005,28 @@ type ConfigElementDefConfig struct {
 	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
 	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The data that is associated with the root certificate authority. The data object contains the following fields:
@@ -3168,9 +3170,10 @@ type ConfigElementDefConfig struct {
 	// certificates.
 	BasicConstraintsValidForNonCa *bool `json:"basic_constraints_valid_for_non_ca,omitempty"`
 
-	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate. The value
-	// can be supplied as a string representation of a duration, such as `30s`. Note that in the API response the value is
-	// returned in seconds (integer).
+	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate.
+	//
+	// The value can be supplied as a string representation of a duration, such as `30s`. In the API response, this value
+	// is returned in seconds (integer).
 	NotBeforeDuration interface{} `json:"not_before_duration,omitempty"`
 }
 
@@ -5882,31 +5885,6 @@ type SecretMetadata struct {
 	// The intermediate certificate authority that signed this certificate.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
 
-	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
-	IPSans *string `json:"ip_sans,omitempty"`
-
-	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
-	URISans *string `json:"uri_sans,omitempty"`
-
-	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
-	//
-	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
-	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
-	// `UTF8`.
-	OtherSans []string `json:"other_sans,omitempty"`
-
-	// The format of the returned data.
-	Format *string `json:"format,omitempty"`
-
-	// The format of the generated private key.
-	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
-
-	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
-	//
-	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
-	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
-	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
-
 	// The timestamp of the certificate revocation.
 	RevocationTime *int64 `json:"revocation_time,omitempty"`
 
@@ -5924,21 +5902,6 @@ const (
 	SecretMetadataSecretTypePrivateCertConst      = "private_cert"
 	SecretMetadataSecretTypePublicCertConst       = "public_cert"
 	SecretMetadataSecretTypeUsernamePasswordConst = "username_password"
-)
-
-// Constants associated with the SecretMetadata.Format property.
-// The format of the returned data.
-const (
-	SecretMetadataFormatDerConst       = "der"
-	SecretMetadataFormatPemConst       = "pem"
-	SecretMetadataFormatPemBundleConst = "pem_bundle"
-)
-
-// Constants associated with the SecretMetadata.PrivateKeyFormat property.
-// The format of the generated private key.
-const (
-	SecretMetadataPrivateKeyFormatDerConst   = "der"
-	SecretMetadataPrivateKeyFormatPkcs8Const = "pkcs8"
 )
 
 func (*SecretMetadata) isaSecretMetadata() bool {
@@ -6081,30 +6044,6 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
 		return
 	}
@@ -6431,7 +6370,11 @@ type SecretResource struct {
 	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
 
 	// The alternative names that are defined for the certificate.
-	AltNames []string `json:"alt_names,omitempty"`
+	//
+	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
+	// all the types of certificate secrets.
+	AltNames interface{} `json:"alt_names,omitempty"`
 
 	// Determines whether your issued certificate is bundled with intermediate certificates.
 	//
@@ -8407,7 +8350,11 @@ type CertificateSecretResource struct {
 	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
 
 	// The alternative names that are defined for the certificate.
-	AltNames []string `json:"alt_names,omitempty"`
+	//
+	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
+	// all the types of certificate secrets.
+	AltNames interface{} `json:"alt_names,omitempty"`
 
 	// The date that the certificate expires. The date format follows RFC 3339.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
@@ -8793,19 +8740,20 @@ type CertificateTemplateConfig struct {
 	// This field can be supplied as a comma-delimited list of secret group IDs.
 	AllowedSecretGroups *string `json:"allowed_secret_groups,omitempty"`
 
-	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
-	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
-	// seconds (integer).
+	// The maximum time-to-live (TTL) for certificates that are created by this CA.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
+	// response, this value is returned in seconds (integer).
 	//
 	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
 	MaxTTL interface{} `json:"max_ttl,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration, such as `12h`. Hour (`h`) is the largest time
-	// suffix. The value can't exceed the `max_ttl` that is defined in the associated certificate template. Note that in
-	// the API response the value is returned in seconds (integer).
-	TTL *string `json:"ttl,omitempty"`
+	// suffix. The value can't exceed the `max_ttl` that is defined in the associated certificate template. In the API
+	// response, this value is returned in seconds (integer).
+	TTL interface{} `json:"ttl,omitempty"`
 
 	// Determines whether to allow `localhost` to be included as one of the requested common names.
 	AllowLocalhost *bool `json:"allow_localhost,omitempty"`
@@ -8885,8 +8833,8 @@ type CertificateTemplateConfig struct {
 
 	// The number of bits to use when generating the private key.
 	//
-	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
-	// default for RSA keys is 2048, and the default for EC keys is 256.
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The allowed key usage constraint to define for private certificates.
@@ -8920,29 +8868,28 @@ type CertificateTemplateConfig struct {
 	// Does not include the common name in the CSR. To use the common name, include the `use_csr_common_name` property.
 	UseCsrSans *bool `json:"use_csr_sans,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// Determines whether to require a common name to create a private certificate.
@@ -8958,9 +8905,10 @@ type CertificateTemplateConfig struct {
 	// certificates.
 	BasicConstraintsValidForNonCa *bool `json:"basic_constraints_valid_for_non_ca,omitempty"`
 
-	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate. The value
-	// can be supplied as a string representation of a duration, such as `30s`. Note that in the API response the value is
-	// returned in seconds (integer).
+	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate.
+	//
+	// The value can be supplied as a string representation of a duration, such as `30s`. In the API response, this value
+	// is returned in seconds (integer).
 	NotBeforeDuration interface{} `json:"not_before_duration,omitempty"`
 }
 
@@ -9703,7 +9651,7 @@ type IamCredentialsSecretResource struct {
 	// or `24h`.
 	//
 	// Minimum duration is 1 minute. Maximum is 90 days.
-	TTL *string `json:"ttl,omitempty"`
+	TTL interface{} `json:"ttl,omitempty"`
 
 	// The access groups that define the capabilities of the service ID and API key that are generated for an
 	// `iam_credentials` secret. If you prefer to use an existing service ID that is already assigned the access policies
@@ -10051,9 +9999,10 @@ func UnmarshalIntermediateCertificateAuthoritiesConfig(m map[string]json.RawMess
 // IntermediateCertificateAuthorityConfig : Intermediate certificate authority configuration.
 // This model "extends" ConfigElementDefConfig
 type IntermediateCertificateAuthorityConfig struct {
-	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
-	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
-	// seconds (integer).
+	// The maximum time-to-live (TTL) for certificates that are created by this CA.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
+	// response, this value is returned in seconds (integer).
 	//
 	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
 	MaxTTL interface{} `json:"max_ttl" validate:"required"`
@@ -10070,21 +10019,25 @@ type IntermediateCertificateAuthorityConfig struct {
 	// authority that is configured in the Secrets Manager service instance.
 	Issuer *string `json:"issuer,omitempty"`
 
-	// The time until the certificate revocation list (CRL) expires. The value can be supplied as a string representation
-	// of a duration in hours, such as `48h`. The default is 72 hours. Note that in the API response the value is returned
-	// in seconds (integer).
+	// The time until the certificate revocation list (CRL) expires.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `48h`. The default is 72 hours.
+	// In the API response, this value is returned in seconds (integer).
+	//
+	// **Note:** The CRL is rotated automatically before it expires.
 	CrlExpiry interface{} `json:"crl_expiry,omitempty"`
 
-	// Determines whether to disable certificate revocation list (CRL) building.
+	// Disables or enables certificate revocation list (CRL) building.
 	//
-	// By default, each request rebuilds a CRL. To disable CRL building, set this field to `true`.
+	// If CRL building is disabled, a signed but zero-length CRL is returned when downloading the CRL. If CRL building is
+	// enabled,  it will rebuild the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
-	// Determines whether to encode the certificate revocation list (CRL) distribution points in the private certificates
-	// that are issued by a certificate authority.
+	// Determines whether to encode the certificate revocation list (CRL) distribution points in the certificates that are
+	// issued by this certificate authority.
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
-	// Determines whether to encode the URL of the issuing certificate in the private certificates that are issued by a
+	// Determines whether to encode the URL of the issuing certificate in the certificates that are issued by this
 	// certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
 
@@ -10102,7 +10055,7 @@ type IntermediateCertificateAuthorityConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -10128,8 +10081,8 @@ type IntermediateCertificateAuthorityConfig struct {
 
 	// The number of bits to use when generating the private key.
 	//
-	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
-	// default for RSA keys is 2048, and the default for EC keys is 256.
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
@@ -10138,29 +10091,28 @@ type IntermediateCertificateAuthorityConfig struct {
 	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
 	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The data that is associated with the intermediate certificate authority. The data object contains the
@@ -10809,48 +10761,16 @@ type PrivateCertificateSecretMetadata struct {
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
 	// The name of the certificate template.
-	CertificateTemplate *string `json:"certificate_template" validate:"required"`
+	CertificateTemplate *string `json:"certificate_template,omitempty"`
 
 	// The intermediate certificate authority that signed this certificate.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
 
 	// The fully qualified domain name or host domain name for the certificate.
-	CommonName *string `json:"common_name" validate:"required"`
+	CommonName *string `json:"common_name,omitempty"`
 
-	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
-	//
-	// The alternative names can be host names or email addresses.
+	// The alternative names that are defined for the certificate.
 	AltNames []string `json:"alt_names,omitempty"`
-
-	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
-	IPSans *string `json:"ip_sans,omitempty"`
-
-	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
-	URISans *string `json:"uri_sans,omitempty"`
-
-	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
-	//
-	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
-	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
-	// `UTF8`.
-	OtherSans []string `json:"other_sans,omitempty"`
-
-	// The time-to-live (TTL) or lease duration to assign to a private certificate. The value can be supplied as a string
-	// representation of a duration in hours, for example '12h'. The value can't exceed the `max_ttl` that is defined in
-	// the associated certificate template.
-	TTL *string `json:"ttl,omitempty"`
-
-	// The format of the returned data.
-	Format *string `json:"format,omitempty"`
-
-	// The format of the generated private key.
-	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
-
-	// Controls whether the common name is excluded from Subject Alternative Names (SANs).
-	//
-	// If set to `true`, the common name is is not included in DNS or Email SANs if they apply. This field can be useful if
-	// the common name is not a hostname or an email address, but is instead a human-readable identifier.
-	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
 
 	Rotation *Rotation `json:"rotation,omitempty"`
 
@@ -10889,27 +10809,10 @@ const (
 	PrivateCertificateSecretMetadataSecretTypeUsernamePasswordConst = "username_password"
 )
 
-// Constants associated with the PrivateCertificateSecretMetadata.Format property.
-// The format of the returned data.
-const (
-	PrivateCertificateSecretMetadataFormatDerConst       = "der"
-	PrivateCertificateSecretMetadataFormatPemConst       = "pem"
-	PrivateCertificateSecretMetadataFormatPemBundleConst = "pem_bundle"
-)
-
-// Constants associated with the PrivateCertificateSecretMetadata.PrivateKeyFormat property.
-// The format of the generated private key.
-const (
-	PrivateCertificateSecretMetadataPrivateKeyFormatDerConst   = "der"
-	PrivateCertificateSecretMetadataPrivateKeyFormatPkcs8Const = "pkcs8"
-)
-
 // NewPrivateCertificateSecretMetadata : Instantiate PrivateCertificateSecretMetadata (Generic Model Constructor)
-func (*SecretsManagerV1) NewPrivateCertificateSecretMetadata(name string, certificateTemplate string, commonName string) (_model *PrivateCertificateSecretMetadata, err error) {
+func (*SecretsManagerV1) NewPrivateCertificateSecretMetadata(name string) (_model *PrivateCertificateSecretMetadata, err error) {
 	_model = &PrivateCertificateSecretMetadata{
-		Name:                core.StringPtr(name),
-		CertificateTemplate: core.StringPtr(certificateTemplate),
-		CommonName:          core.StringPtr(commonName),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -10987,34 +10890,6 @@ func UnmarshalPrivateCertificateSecretMetadata(m map[string]json.RawMessage, res
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IPSans)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.URISans)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
 		return
 	}
@@ -11121,10 +10996,12 @@ type PrivateCertificateSecretResource struct {
 	// The fully qualified domain name or host domain name for the certificate.
 	CommonName *string `json:"common_name" validate:"required"`
 
-	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	// The alternative names that are defined for the certificate.
 	//
-	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
+	// all the types of certificate secrets.
+	AltNames interface{} `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -11139,9 +11016,10 @@ type PrivateCertificateSecretResource struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate. The value can be supplied as a string
-	// representation of a duration in hours, for example '12h'. The value can't exceed the `max_ttl` that is defined in
-	// the associated certificate template.
+	// The time-to-live (TTL) to assign to a private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '12h'. The value can't
+	// exceed the `max_ttl` that is defined in the associated certificate template.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The format of the returned data.
@@ -12058,7 +11936,11 @@ type PublicCertificateSecretResource struct {
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// The alternative names that are defined for the certificate.
-	AltNames []string `json:"alt_names,omitempty"`
+	//
+	// For public certificate this value is provided as an array of strings. For private certificates, this value is
+	// provided as a comma-delimited list (string). In the API response, this value is returned as an array of strings for
+	// all the types of certificate secrets.
+	AltNames interface{} `json:"alt_names,omitempty"`
 
 	// The fully qualified domain name or host domain name for the certificate.
 	CommonName *string `json:"common_name,omitempty"`
@@ -12357,28 +12239,33 @@ func UnmarshalRootCertificateAuthoritiesConfig(m map[string]json.RawMessage, res
 // RootCertificateAuthorityConfig : Root certificate authority configuration.
 // This model "extends" ConfigElementDefConfig
 type RootCertificateAuthorityConfig struct {
-	// The maximum time-to-live (TTL) for certificates that are created by this CA. The value can be supplied as a string
-	// representation of a duration in hours, for example '8760h'. Note that in the API response the value is returned in
-	// seconds (integer).
+	// The maximum time-to-live (TTL) for certificates that are created by this CA.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
+	// response, this value is returned in seconds (integer).
 	//
 	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
 	MaxTTL interface{} `json:"max_ttl" validate:"required"`
 
-	// The time until the certificate revocation list (CRL) expires. The value can be supplied as a string representation
-	// of a duration in hours, such as `48h`. The default is 72 hours. Note that in the API response the value is returned
-	// in seconds (integer).
+	// The time until the certificate revocation list (CRL) expires.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `48h`. The default is 72 hours.
+	// In the API response, this value is returned in seconds (integer).
+	//
+	// **Note:** The CRL is rotated automatically before it expires.
 	CrlExpiry interface{} `json:"crl_expiry,omitempty"`
 
-	// Determines whether to disable certificate revocation list (CRL) building.
+	// Disables or enables certificate revocation list (CRL) building.
 	//
-	// By default, each request rebuilds a CRL. To disable CRL building, set this field to `true`.
+	// If CRL building is disabled, a signed but zero-length CRL is returned when downloading the CRL. If CRL building is
+	// enabled,  it will rebuild the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
-	// Determines whether to encode the certificate revocation list (CRL) distribution points in the private certificates
-	// that are issued by a certificate authority.
+	// Determines whether to encode the certificate revocation list (CRL) distribution points in the certificates that are
+	// issued by this certificate authority.
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
-	// Determines whether to encode the URL of the issuing certificate in the private certificates that are issued by a
+	// Determines whether to encode the URL of the issuing certificate in the certificates that are issued by this
 	// certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
 
@@ -12396,7 +12283,7 @@ type RootCertificateAuthorityConfig struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -12411,12 +12298,12 @@ type RootCertificateAuthorityConfig struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to this CA certificate.
 	//
 	// The value can be supplied as a string representation of a duration, such as `12h`. The value can't exceed the
-	// `max_ttl` that is defined in the associated certificate template. Note that in the API response the value is
-	// returned in seconds (integer).
-	TTL *string `json:"ttl,omitempty"`
+	// `max_ttl` that is defined in the associated certificate template. In the API response, this value is returned in
+	// seconds (integer).
+	TTL interface{} `json:"ttl,omitempty"`
 
 	// The format of the returned data.
 	Format *string `json:"format,omitempty"`
@@ -12429,8 +12316,8 @@ type RootCertificateAuthorityConfig struct {
 
 	// The number of bits to use when generating the private key.
 	//
-	// Allowable values for RSA keys are: 2048 and 4096. Allowable values for EC keys are: 224, 256, 384 And 521. The
-	// default for RSA keys is 2048, and the default for EC keys is 256.
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
@@ -12448,29 +12335,28 @@ type RootCertificateAuthorityConfig struct {
 	// The allowed DNS domains or subdomains for the certificates to be signed and issued by this CA certificate.
 	PermittedDNSDomains []string `json:"permitted_dns_domains,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The data that is associated with the root certificate authority. The data object contains the following fields:
@@ -12977,7 +12863,7 @@ type SignCsrAction struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -12992,7 +12878,7 @@ type SignCsrAction struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
 	// the `max_ttl` that is defined in the associated certificate template.
@@ -13028,29 +12914,28 @@ type SignCsrAction struct {
 	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
 	UseCsrValues *bool `json:"use_csr_values,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The PEM-encoded certificate signing request (CSR). This field is required for the `sign_csr` action.
@@ -13174,7 +13059,7 @@ type SignCsrActionResult struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -13189,7 +13074,7 @@ type SignCsrActionResult struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
 	// the `max_ttl` that is defined in the associated certificate template.
@@ -13225,29 +13110,28 @@ type SignCsrActionResult struct {
 	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
 	UseCsrValues *bool `json:"use_csr_values,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// Properties that are returned with a successful `sign` action.
@@ -13369,7 +13253,7 @@ type SignIntermediateAction struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -13384,7 +13268,7 @@ type SignIntermediateAction struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
 	// the `max_ttl` that is defined in the associated certificate template.
@@ -13420,29 +13304,28 @@ type SignIntermediateAction struct {
 	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
 	UseCsrValues *bool `json:"use_csr_values,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The intermediate certificate authority to be signed. The name must match one of the pre-configured intermediate
@@ -13567,7 +13450,7 @@ type SignIntermediateActionResult struct {
 	// The Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	//
 	// The alternative names can be host names or email addresses.
-	AltNames []string `json:"alt_names,omitempty"`
+	AltNames *string `json:"alt_names,omitempty"`
 
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
@@ -13582,7 +13465,7 @@ type SignIntermediateActionResult struct {
 	// `UTF8`.
 	OtherSans []string `json:"other_sans,omitempty"`
 
-	// The time-to-live (TTL) or lease duration to assign to a private certificate.
+	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `12h`. The value can't exceed
 	// the `max_ttl` that is defined in the associated certificate template.
@@ -13618,29 +13501,28 @@ type SignIntermediateActionResult struct {
 	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
 	UseCsrValues *bool `json:"use_csr_values,omitempty"`
 
-	// The Organizational Unit (OU) values to define in the subject field of the resulting CA certificate.
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
 	Ou []string `json:"ou,omitempty"`
 
-	// The Organization (O) values to define in the subject field of the resulting CA certificate.
+	// The Organization (O) values to define in the subject field of the resulting certificate.
 	Organization []string `json:"organization,omitempty"`
 
-	// The Country (C) values to define in the subject field of the resulting CA certificate.
+	// The Country (C) values to define in the subject field of the resulting certificate.
 	Country []string `json:"country,omitempty"`
 
-	// The Locality (L) values to define in the subject field of the resulting CA certificate.
+	// The Locality (L) values to define in the subject field of the resulting certificate.
 	Locality []string `json:"locality,omitempty"`
 
-	// The Province (ST) values to define in the subject field of the resulting CA certificate.
+	// The Province (ST) values to define in the subject field of the resulting certificate.
 	Province []string `json:"province,omitempty"`
 
-	// The Street Address values in the subject field of the resulting CA certificate.
+	// The Street Address values in the subject field of the resulting certificate.
 	StreetAddress []string `json:"street_address,omitempty"`
 
-	// The Postal Code values in the subject field of the resulting CA certificate.
+	// The Postal Code values in the subject field of the resulting certificate.
 	PostalCode []string `json:"postal_code,omitempty"`
 
-	// The serial number to assign to the generated private certificate. To assign a random serial number, you can omit
-	// this field.
+	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// Properties that are returned with a successful `sign` action.
