@@ -2273,6 +2273,51 @@ func UnmarshalCertificateSecretData(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// CertificateTemplatesConfigItem : Certificate templates configuration.
+type CertificateTemplatesConfigItem struct {
+	// The human-readable name to assign to your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+	Type *string `json:"type" validate:"required"`
+
+	// Properties that describe a certificate template. You can use a certificate template to control the parameters that
+	// are applied to your issued private certificates. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-certificate-templates).
+	Config *CertificateTemplateConfig `json:"config,omitempty"`
+}
+
+// Constants associated with the CertificateTemplatesConfigItem.Type property.
+// The type of configuration. Value options differ depending on the `config_element` property that you want to define.
+const (
+	CertificateTemplatesConfigItemTypeCertificateTemplateConst              = "certificate_template"
+	CertificateTemplatesConfigItemTypeCisConst                              = "cis"
+	CertificateTemplatesConfigItemTypeClassicInfrastructureConst            = "classic_infrastructure"
+	CertificateTemplatesConfigItemTypeIntermediateCertificateAuthorityConst = "intermediate_certificate_authority"
+	CertificateTemplatesConfigItemTypeLetsencryptConst                      = "letsencrypt"
+	CertificateTemplatesConfigItemTypeLetsencryptStageConst                 = "letsencrypt-stage"
+	CertificateTemplatesConfigItemTypeRootCertificateAuthorityConst         = "root_certificate_authority"
+)
+
+// UnmarshalCertificateTemplatesConfigItem unmarshals an instance of CertificateTemplatesConfigItem from the specified map of raw messages.
+func UnmarshalCertificateTemplatesConfigItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CertificateTemplatesConfigItem)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalCertificateTemplateConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // CollectionMetadata : The metadata that describes the resource array.
 type CollectionMetadata struct {
 	// The type of resources in the resource array.
@@ -4167,6 +4212,7 @@ func (options *GetConfigElementsOptions) SetHeaders(param map[string]string) *Ge
 // - GetConfigElementsResourcesItemDNSProvidersConfig
 // - RootCertificateAuthoritiesConfig
 // - IntermediateCertificateAuthoritiesConfig
+// - CertificateTemplatesConfig
 type GetConfigElementsResourcesItem struct {
 	CertificateAuthorities []ConfigElementMetadata `json:"certificate_authorities,omitempty"`
 
@@ -4175,6 +4221,8 @@ type GetConfigElementsResourcesItem struct {
 	RootCertificateAuthorities []RootCertificateAuthoritiesConfigItem `json:"root_certificate_authorities,omitempty"`
 
 	IntermediateCertificateAuthorities []IntermediateCertificateAuthoritiesConfigItem `json:"intermediate_certificate_authorities,omitempty"`
+
+	CertificateTemplates []CertificateTemplatesConfigItem `json:"certificate_templates,omitempty"`
 }
 
 func (*GetConfigElementsResourcesItem) isaGetConfigElementsResourcesItem() bool {
@@ -4201,6 +4249,10 @@ func UnmarshalGetConfigElementsResourcesItem(m map[string]json.RawMessage, resul
 		return
 	}
 	err = core.UnmarshalModel(m, "intermediate_certificate_authorities", &obj.IntermediateCertificateAuthorities, UnmarshalIntermediateCertificateAuthoritiesConfigItem)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplatesConfigItem)
 	if err != nil {
 		return
 	}
@@ -4257,13 +4309,13 @@ type GetConfigResourcesItem struct {
 	DNSProviders []ConfigElementMetadata `json:"dns_providers,omitempty"`
 
 	// The root certificate authority configurations that are associated with your instance.
-	RootCertificateAuthorities []RootCertificateAuthorityConfig `json:"root_certificate_authorities,omitempty"`
+	RootCertificateAuthorities []RootCertificateAuthoritiesConfigItem `json:"root_certificate_authorities,omitempty"`
 
 	// The intermediate certificate authority configurations that are associated with your instance.
-	IntermdiateCertificateAuthorities []IntermediateCertificateAuthorityConfig `json:"intermdiate_certificate_authorities,omitempty"`
+	IntermediateCertificateAuthorities []IntermediateCertificateAuthoritiesConfigItem `json:"intermediate_certificate_authorities,omitempty"`
 
 	// The certificate templates that are associated with your instance.
-	CertificateTemplates []CertificateTemplateConfig `json:"certificate_templates,omitempty"`
+	CertificateTemplates []CertificateTemplatesConfigItem `json:"certificate_templates,omitempty"`
 
 	// An IBM Cloud API key that can create and manage service IDs.
 	//
@@ -4295,15 +4347,15 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthorityConfig)
+	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthoritiesConfigItem)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "intermdiate_certificate_authorities", &obj.IntermdiateCertificateAuthorities, UnmarshalIntermediateCertificateAuthorityConfig)
+	err = core.UnmarshalModel(m, "intermediate_certificate_authorities", &obj.IntermediateCertificateAuthorities, UnmarshalIntermediateCertificateAuthoritiesConfigItem)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplateConfig)
+	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplatesConfigItem)
 	if err != nil {
 		return
 	}
@@ -9090,6 +9142,27 @@ func UnmarshalCertificateTemplateConfig(m map[string]json.RawMessage, result int
 	return
 }
 
+// CertificateTemplatesConfig : Certificate templates configuration.
+// This model "extends" GetConfigElementsResourcesItem
+type CertificateTemplatesConfig struct {
+	CertificateTemplates []CertificateTemplatesConfigItem `json:"certificate_templates" validate:"required"`
+}
+
+func (*CertificateTemplatesConfig) isaGetConfigElementsResourcesItem() bool {
+	return true
+}
+
+// UnmarshalCertificateTemplatesConfig unmarshals an instance of CertificateTemplatesConfig from the specified map of raw messages.
+func UnmarshalCertificateTemplatesConfig(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CertificateTemplatesConfig)
+	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplatesConfigItem)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ConfigElementDefConfigClassicInfrastructureConfig : Properties that describe an IBM Cloud classic infrastructure (SoftLayer) configuration.
 // This model "extends" ConfigElementDefConfig
 type ConfigElementDefConfigClassicInfrastructureConfig struct {
@@ -10669,13 +10742,13 @@ func UnmarshalPrivateCertPolicyRotation(m map[string]json.RawMessage, result int
 // This model "extends" GetConfigResourcesItem
 type PrivateCertSecretEngineRootConfig struct {
 	// The root certificate authority configurations that are associated with your instance.
-	RootCertificateAuthorities []RootCertificateAuthorityConfig `json:"root_certificate_authorities,omitempty"`
+	RootCertificateAuthorities []RootCertificateAuthoritiesConfigItem `json:"root_certificate_authorities,omitempty"`
 
 	// The intermediate certificate authority configurations that are associated with your instance.
-	IntermdiateCertificateAuthorities []IntermediateCertificateAuthorityConfig `json:"intermdiate_certificate_authorities,omitempty"`
+	IntermediateCertificateAuthorities []IntermediateCertificateAuthoritiesConfigItem `json:"intermediate_certificate_authorities,omitempty"`
 
 	// The certificate templates that are associated with your instance.
-	CertificateTemplates []CertificateTemplateConfig `json:"certificate_templates,omitempty"`
+	CertificateTemplates []CertificateTemplatesConfigItem `json:"certificate_templates,omitempty"`
 }
 
 func (*PrivateCertSecretEngineRootConfig) isaGetConfigResourcesItem() bool {
@@ -10685,15 +10758,15 @@ func (*PrivateCertSecretEngineRootConfig) isaGetConfigResourcesItem() bool {
 // UnmarshalPrivateCertSecretEngineRootConfig unmarshals an instance of PrivateCertSecretEngineRootConfig from the specified map of raw messages.
 func UnmarshalPrivateCertSecretEngineRootConfig(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PrivateCertSecretEngineRootConfig)
-	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthorityConfig)
+	err = core.UnmarshalModel(m, "root_certificate_authorities", &obj.RootCertificateAuthorities, UnmarshalRootCertificateAuthoritiesConfigItem)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "intermdiate_certificate_authorities", &obj.IntermdiateCertificateAuthorities, UnmarshalIntermediateCertificateAuthorityConfig)
+	err = core.UnmarshalModel(m, "intermediate_certificate_authorities", &obj.IntermediateCertificateAuthorities, UnmarshalIntermediateCertificateAuthoritiesConfigItem)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplateConfig)
+	err = core.UnmarshalModel(m, "certificate_templates", &obj.CertificateTemplates, UnmarshalCertificateTemplatesConfigItem)
 	if err != nil {
 		return
 	}
