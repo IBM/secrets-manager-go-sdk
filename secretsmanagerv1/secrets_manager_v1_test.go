@@ -5930,7 +5930,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.TTL = core.StringPtr("testString")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6006,7 +6006,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": "AltNames", "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": "AltNames", "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "anyValue", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
 				}))
 			})
 			It(`Invoke ActionOnConfigElement successfully with retries`, func() {
@@ -6025,7 +6025,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.TTL = core.StringPtr("testString")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6104,7 +6104,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": "AltNames", "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "12h", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "type": "letsencrypt", "config": {"common_name": "example.com", "alt_names": "AltNames", "ip_sans": "IPSans", "uri_sans": "URISans", "other_sans": ["OtherSans"], "ttl": "anyValue", "format": "pem", "max_path_length": 13, "exclude_cn_from_sans": false, "permitted_dns_domains": ["PermittedDNSDomains"], "use_csr_values": false, "ou": ["Ou"], "organization": ["Organization"], "country": ["Country"], "locality": ["Locality"], "province": ["Province"], "street_address": ["StreetAddress"], "postal_code": ["PostalCode"], "serial_number": "d9:be:fe:35:ba:09:42:b5", "data": {"certificate": "Certificate", "serial_number": "d9:be:fe:35:ba:09:42:b5", "issuing_ca": "IssuingCa", "ca_chain": ["CaChain"], "expiration": 10}, "csr": "Csr"}}]}`)
 				}))
 			})
 			It(`Invoke ActionOnConfigElement successfully`, func() {
@@ -6128,7 +6128,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.TTL = core.StringPtr("testString")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6175,7 +6175,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.TTL = core.StringPtr("testString")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6243,7 +6243,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.TTL = core.StringPtr("testString")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6942,7 +6942,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("12h")
+				configActionModel.TTL = core.StringPtr("testString")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6962,7 +6962,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(configActionModel.IPSans).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.URISans).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.OtherSans).To(Equal([]string{"testString"}))
-				Expect(configActionModel.TTL).To(Equal(core.StringPtr("12h")))
+				Expect(configActionModel.TTL).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.Format).To(Equal(core.StringPtr("pem")))
 				Expect(configActionModel.MaxPathLength).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(configActionModel.ExcludeCnFromSans).To(Equal(core.BoolPtr(false)))
