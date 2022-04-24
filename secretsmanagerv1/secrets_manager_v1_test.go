@@ -5930,7 +5930,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("testString")
+				configActionModel.TTL = core.StringPtr("12h")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6025,7 +6025,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("testString")
+				configActionModel.TTL = core.StringPtr("12h")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6128,7 +6128,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("testString")
+				configActionModel.TTL = core.StringPtr("12h")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6175,7 +6175,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("testString")
+				configActionModel.TTL = core.StringPtr("12h")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6243,7 +6243,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("testString")
+				configActionModel.TTL = core.StringPtr("12h")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6942,7 +6942,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				configActionModel.IPSans = core.StringPtr("testString")
 				configActionModel.URISans = core.StringPtr("testString")
 				configActionModel.OtherSans = []string{"testString"}
-				configActionModel.TTL = core.StringPtr("testString")
+				configActionModel.TTL = core.StringPtr("12h")
 				configActionModel.Format = core.StringPtr("pem")
 				configActionModel.MaxPathLength = core.Int64Ptr(int64(38))
 				configActionModel.ExcludeCnFromSans = core.BoolPtr(false)
@@ -6962,7 +6962,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(configActionModel.IPSans).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.URISans).To(Equal(core.StringPtr("testString")))
 				Expect(configActionModel.OtherSans).To(Equal([]string{"testString"}))
-				Expect(configActionModel.TTL).To(Equal(core.StringPtr("testString")))
+				Expect(configActionModel.TTL).To(Equal(core.StringPtr("12h")))
 				Expect(configActionModel.Format).To(Equal(core.StringPtr("pem")))
 				Expect(configActionModel.MaxPathLength).To(Equal(core.Int64Ptr(int64(38))))
 				Expect(configActionModel.ExcludeCnFromSans).To(Equal(core.BoolPtr(false)))
