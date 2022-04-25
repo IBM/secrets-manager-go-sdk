@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.47.1-be944570-20220406-170244
+ * IBM OpenAPI SDK Code Generator Version: 3.48.0-e80b60a1-20220414-145125
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -11088,7 +11088,7 @@ type PrivateCertificateSecretResource struct {
 	//
 	// The value can be supplied as a string representation of a duration in hours, for example '12h'. The value can't
 	// exceed the `max_ttl` that is defined in the associated certificate template.
-	TTL *string `json:"ttl,omitempty"`
+	TTL interface{} `json:"ttl,omitempty"`
 
 	// The format of the returned data.
 	Format *string `json:"format,omitempty"`
