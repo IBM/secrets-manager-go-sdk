@@ -556,6 +556,75 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		})
 	})
 
+	Context(`Secret Locks`, func() {
+		It(`Create a secret with lock and delete lock and secret`, func() {
+			// create arbitrary secret
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.ArbitrarySecretResource{
+						Name:           core.StringPtr(generateName()),
+						Description:    core.StringPtr("Integration test generated"),
+						Labels:         []string{"label1", "label2"},
+						ExpirationDate: generateExpirationDate(),
+						Payload:        core.StringPtr("secret-data"),
+					},
+				},
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			arbitrarySecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
+			Expect(ok).To(BeTrue())
+			secretId := arbitrarySecretResource.ID
+
+			// Lock secret
+			locks := []secretsmanagerv1.LockSecretBodyLocksItem{
+				secretsmanagerv1.LockSecretBodyLocksItem{
+					Name:        core.StringPtr("test-lock"),
+					Description: core.StringPtr("exclusive"),
+					Attributes:  map[string]interface{}{"Key": "Value"},
+				},
+			}
+
+			_, resp, err = secretsManager.LockSecret(&secretsmanagerv1.LockSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+				Locks:      locks,
+				Mode:       core.StringPtr("exclusive"),
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// delete arbitrary secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+			})
+			Expect(resp.StatusCode).To(Equal(http.StatusPreconditionFailed))
+
+			// Unlock secret
+			_, resp, err = secretsManager.UnlockSecret(&secretsmanagerv1.UnlockSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+				Locks:      []string{"test-lock"},
+				Headers:    nil,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// delete arbitrary secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+		})
+	})
 })
 
 func generateName() string {

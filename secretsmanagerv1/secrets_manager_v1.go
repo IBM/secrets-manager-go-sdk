@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.48.0-e80b60a1-20220414-145125
+ * IBM OpenAPI SDK Code Generator Version: 3.50.0-af9e48c4-20220523-163800
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -1273,6 +1273,548 @@ func (secretsManager *SecretsManagerV1) UpdateSecretMetadataWithContext(ctx cont
 	return
 }
 
+// GetLocks : List secret locks
+// List the locks that are associated with a specified secret.
+func (secretsManager *SecretsManagerV1) GetLocks(getLocksOptions *GetLocksOptions) (result *ListSecretLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.GetLocksWithContext(context.Background(), getLocksOptions)
+}
+
+// GetLocksWithContext is an alternate form of the GetLocks method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetLocksWithContext(ctx context.Context, getLocksOptions *GetLocksOptions) (result *ListSecretLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getLocksOptions, "getLocksOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getLocksOptions, "getLocksOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *getLocksOptions.SecretType,
+		"id":          *getLocksOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks/{secret_type}/{id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getLocksOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetLocks")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getLocksOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*getLocksOptions.Limit))
+	}
+	if getLocksOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*getLocksOptions.Offset))
+	}
+	if getLocksOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*getLocksOptions.Search))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListSecretLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// LockSecret : Lock a secret
+// Create a lock on the current version of a secret.
+//
+// A lock can be used to prevent a secret from being deleted or modified while it's in use by your applications. A
+// successful request attaches a new lock to your secret, or replaces a lock of the same name if it already exists.
+// Additionally, you can use this method to clear any matching locks on a secret by using one of the following optional
+// lock modes:
+//
+// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
+// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if it
+// doesn't have any locks.
+//
+// For more information about locking secrets, check out the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-locks).
+func (secretsManager *SecretsManagerV1) LockSecret(lockSecretOptions *LockSecretOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.LockSecretWithContext(context.Background(), lockSecretOptions)
+}
+
+// LockSecretWithContext is an alternate form of the LockSecret method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) LockSecretWithContext(ctx context.Context, lockSecretOptions *LockSecretOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(lockSecretOptions, "lockSecretOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(lockSecretOptions, "lockSecretOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *lockSecretOptions.SecretType,
+		"id":          *lockSecretOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks/{secret_type}/{id}/lock`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range lockSecretOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "LockSecret")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	if lockSecretOptions.Mode != nil {
+		builder.AddQuery("mode", fmt.Sprint(*lockSecretOptions.Mode))
+	}
+
+	body := make(map[string]interface{})
+	if lockSecretOptions.Locks != nil {
+		body["locks"] = lockSecretOptions.Locks
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UnlockSecret : Unlock a secret
+// Delete one or more locks that are associated with a secret.
+//
+// A successful request deletes the locks that you specify. To remove all locks, you can pass `{"locks": ["*"]}` in in
+// the request body. Otherwise, specify the names of the locks that you want to delete. For example, `{"locks":
+// ["lock1", "lock2"]}`.
+//
+// **Note:** A secret is considered unlocked and able to be rotated or deleted only after all of its locks are removed.
+// To understand whether a secret contains locks, check the `total_locks` field that is returned as part of the metadata
+// of your secret.
+func (secretsManager *SecretsManagerV1) UnlockSecret(unlockSecretOptions *UnlockSecretOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.UnlockSecretWithContext(context.Background(), unlockSecretOptions)
+}
+
+// UnlockSecretWithContext is an alternate form of the UnlockSecret method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) UnlockSecretWithContext(ctx context.Context, unlockSecretOptions *UnlockSecretOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(unlockSecretOptions, "unlockSecretOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(unlockSecretOptions, "unlockSecretOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *unlockSecretOptions.SecretType,
+		"id":          *unlockSecretOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks/{secret_type}/{id}/unlock`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range unlockSecretOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UnlockSecret")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if unlockSecretOptions.Locks != nil {
+		body["locks"] = unlockSecretOptions.Locks
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetSecretVersionLocks : List secret version locks
+// List the locks that are associated with a specified secret version.
+func (secretsManager *SecretsManagerV1) GetSecretVersionLocks(getSecretVersionLocksOptions *GetSecretVersionLocksOptions) (result *ListSecretLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.GetSecretVersionLocksWithContext(context.Background(), getSecretVersionLocksOptions)
+}
+
+// GetSecretVersionLocksWithContext is an alternate form of the GetSecretVersionLocks method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) GetSecretVersionLocksWithContext(ctx context.Context, getSecretVersionLocksOptions *GetSecretVersionLocksOptions) (result *ListSecretLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getSecretVersionLocksOptions, "getSecretVersionLocksOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(getSecretVersionLocksOptions, "getSecretVersionLocksOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *getSecretVersionLocksOptions.SecretType,
+		"id":          *getSecretVersionLocksOptions.ID,
+		"version_id":  *getSecretVersionLocksOptions.VersionID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks/{secret_type}/{id}/versions/{version_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getSecretVersionLocksOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "GetSecretVersionLocks")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getSecretVersionLocksOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*getSecretVersionLocksOptions.Limit))
+	}
+	if getSecretVersionLocksOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*getSecretVersionLocksOptions.Offset))
+	}
+	if getSecretVersionLocksOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*getSecretVersionLocksOptions.Search))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListSecretLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// LockSecretVersion : Lock a secret version
+// Create a lock on the specified version of a secret.
+//
+// A lock can be used to prevent a secret from being deleted or modified while it's in use by your applications. A
+// successful request attaches a new lock to the specified version, or replaces a lock of the same name if it already
+// exists. Additionally, you can use this method to clear any matching locks on a secret version by using one of the
+// following optional lock modes:
+//
+// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
+// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if it
+// doesn't have any locks.
+//
+// For more information about locking secrets, check out the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-locks).
+func (secretsManager *SecretsManagerV1) LockSecretVersion(lockSecretVersionOptions *LockSecretVersionOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.LockSecretVersionWithContext(context.Background(), lockSecretVersionOptions)
+}
+
+// LockSecretVersionWithContext is an alternate form of the LockSecretVersion method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) LockSecretVersionWithContext(ctx context.Context, lockSecretVersionOptions *LockSecretVersionOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(lockSecretVersionOptions, "lockSecretVersionOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(lockSecretVersionOptions, "lockSecretVersionOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *lockSecretVersionOptions.SecretType,
+		"id":          *lockSecretVersionOptions.ID,
+		"version_id":  *lockSecretVersionOptions.VersionID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks/{secret_type}/{id}/versions/{version_id}/lock`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range lockSecretVersionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "LockSecretVersion")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	if lockSecretVersionOptions.Mode != nil {
+		builder.AddQuery("mode", fmt.Sprint(*lockSecretVersionOptions.Mode))
+	}
+
+	body := make(map[string]interface{})
+	if lockSecretVersionOptions.Locks != nil {
+		body["locks"] = lockSecretVersionOptions.Locks
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// UnlockSecretVersion : Unlock a secret version
+// Delete one or more locks that are associated with the specified secret version.
+//
+// A successful request deletes the locks that you specify. To remove all locks, you can pass `{"locks": ["*"]}` in in
+// the request body. Otherwise, specify the names of the locks that you want to delete. For example, `{"locks":
+// ["lock-1", "lock-2"]}`.
+//
+// **Note:** A secret is considered unlocked and able to be rotated or deleted only after all of its locks are removed.
+// To understand whether a secret contains locks, check the `total_locks` field that is returned as part of the metadata
+// of your secret.
+func (secretsManager *SecretsManagerV1) UnlockSecretVersion(unlockSecretVersionOptions *UnlockSecretVersionOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.UnlockSecretVersionWithContext(context.Background(), unlockSecretVersionOptions)
+}
+
+// UnlockSecretVersionWithContext is an alternate form of the UnlockSecretVersion method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) UnlockSecretVersionWithContext(ctx context.Context, unlockSecretVersionOptions *UnlockSecretVersionOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(unlockSecretVersionOptions, "unlockSecretVersionOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(unlockSecretVersionOptions, "unlockSecretVersionOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_type": *unlockSecretVersionOptions.SecretType,
+		"id":          *unlockSecretVersionOptions.ID,
+		"version_id":  *unlockSecretVersionOptions.VersionID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks/{secret_type}/{id}/versions/{version_id}/unlock`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range unlockSecretVersionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "UnlockSecretVersion")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if unlockSecretVersionOptions.Locks != nil {
+		body["locks"] = unlockSecretVersionOptions.Locks
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ListInstanceSecretsLocks : List all locks
+// List all of the locks that are associated with the secrets in your Secrets Manager instance.
+func (secretsManager *SecretsManagerV1) ListInstanceSecretsLocks(listInstanceSecretsLocksOptions *ListInstanceSecretsLocksOptions) (result *GetInstanceLocks, response *core.DetailedResponse, err error) {
+	return secretsManager.ListInstanceSecretsLocksWithContext(context.Background(), listInstanceSecretsLocksOptions)
+}
+
+// ListInstanceSecretsLocksWithContext is an alternate form of the ListInstanceSecretsLocks method which supports a Context parameter
+func (secretsManager *SecretsManagerV1) ListInstanceSecretsLocksWithContext(ctx context.Context, listInstanceSecretsLocksOptions *ListInstanceSecretsLocksOptions) (result *GetInstanceLocks, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listInstanceSecretsLocksOptions, "listInstanceSecretsLocksOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v1/locks`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range listInstanceSecretsLocksOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V1", "ListInstanceSecretsLocks")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if listInstanceSecretsLocksOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*listInstanceSecretsLocksOptions.Limit))
+	}
+	if listInstanceSecretsLocksOptions.Offset != nil {
+		builder.AddQuery("offset", fmt.Sprint(*listInstanceSecretsLocksOptions.Offset))
+	}
+	if listInstanceSecretsLocksOptions.Search != nil {
+		builder.AddQuery("search", fmt.Sprint(*listInstanceSecretsLocksOptions.Search))
+	}
+	if listInstanceSecretsLocksOptions.Groups != nil {
+		builder.AddQuery("groups", strings.Join(listInstanceSecretsLocksOptions.Groups, ","))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetInstanceLocks)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // PutPolicy : Set secret policies
 // Create or update one or more policies, such as an [automatic rotation
 // policy](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-automatic-rotation), for the specified
@@ -2334,6 +2876,7 @@ const (
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerErrorJSONConst         = "application/vnd.ibm.secrets-manager.error+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretGroupJSONConst   = "application/vnd.ibm.secrets-manager.secret.group+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst        = "application/vnd.ibm.secrets-manager.secret+json"
+	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretLockJSONConst    = "application/vnd.ibm.secrets-manager.secret.lock+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretPolicyJSONConst  = "application/vnd.ibm.secrets-manager.secret.policy+json"
 	CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretVersionJSONConst = "application/vnd.ibm.secrets-manager.secret.version+json"
 )
@@ -4371,6 +4914,118 @@ func UnmarshalGetConfigResourcesItem(m map[string]json.RawMessage, result interf
 	return
 }
 
+// GetInstanceLocks : Properties that describe the locks that are associated with an instance.
+type GetInstanceLocks struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []InstanceSecretsLocks `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetInstanceLocks unmarshals an instance of GetInstanceLocks from the specified map of raw messages.
+func UnmarshalGetInstanceLocks(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetInstanceLocks)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalInstanceSecretsLocks)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// GetLocksOptions : The GetLocks options.
+type GetLocksOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The number of secrets with locks to retrieve. By default, list operations return the first 25 items. To retrieve a
+	// different set of items, use `limit` with `offset` to page through your available resources.
+	//
+	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 with locks, use
+	// `..?limit=5`.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
+	// value. Use `offset` with `limit` to page through your available resources.
+	//
+	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
+	// `..?offset=25&limit=25`.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Filter locks that contain the specified string in the field "name".
+	//
+	// **Usage:** If you want to list only the locks that contain the string "text" in the field "name", use
+	// `..?search=text`.
+	Search *string `json:"search,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the GetLocksOptions.SecretType property.
+// The secret type.
+const (
+	GetLocksOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetLocksOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetLocksOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetLocksOptionsSecretTypeKvConst               = "kv"
+	GetLocksOptionsSecretTypePrivateCertConst      = "private_cert"
+	GetLocksOptionsSecretTypePublicCertConst       = "public_cert"
+	GetLocksOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewGetLocksOptions : Instantiate GetLocksOptions
+func (*SecretsManagerV1) NewGetLocksOptions(secretType string, id string) *GetLocksOptions {
+	return &GetLocksOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *GetLocksOptions) SetSecretType(secretType string) *GetLocksOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *GetLocksOptions) SetID(id string) *GetLocksOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *GetLocksOptions) SetLimit(limit int64) *GetLocksOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetOffset : Allow user to set Offset
+func (_options *GetLocksOptions) SetOffset(offset int64) *GetLocksOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *GetLocksOptions) SetSearch(search string) *GetLocksOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetLocksOptions) SetHeaders(param map[string]string) *GetLocksOptions {
+	options.Headers = param
+	return options
+}
+
 // GetNotificationsRegistrationOptions : The GetNotificationsRegistration options.
 type GetNotificationsRegistrationOptions struct {
 
@@ -4524,6 +5179,30 @@ func (_options *GetSecretGroupOptions) SetID(id string) *GetSecretGroupOptions {
 func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSecretGroupOptions {
 	options.Headers = param
 	return options
+}
+
+// GetSecretLocks : Properties that describe the lock of a secret or a secret version.
+type GetSecretLocks struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []SecretsLocks `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetSecretLocks unmarshals an instance of GetSecretLocks from the specified map of raw messages.
+func UnmarshalGetSecretLocks(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetSecretLocks)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalSecretsLocks)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // GetSecretMetadataOptions : The GetSecretMetadata options.
@@ -4682,6 +5361,108 @@ func UnmarshalGetSecretVersion(m map[string]json.RawMessage, result interface{})
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// GetSecretVersionLocksOptions : The GetSecretVersionLocks options.
+type GetSecretVersionLocksOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
+	// version.
+	//
+	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
+	// the response details.
+	VersionID *string `json:"version_id" validate:"required,ne="`
+
+	// The number of secrets with locks to retrieve. By default, list operations return the first 25 items. To retrieve a
+	// different set of items, use `limit` with `offset` to page through your available resources.
+	//
+	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 with locks, use
+	// `..?limit=5`.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
+	// value. Use `offset` with `limit` to page through your available resources.
+	//
+	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
+	// `..?offset=25&limit=25`.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Filter locks that contain the specified string in the field "name".
+	//
+	// **Usage:** If you want to list only the locks that contain the string "text" in the field "name", use
+	// `..?search=text`.
+	Search *string `json:"search,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the GetSecretVersionLocksOptions.SecretType property.
+// The secret type.
+const (
+	GetSecretVersionLocksOptionsSecretTypeArbitraryConst        = "arbitrary"
+	GetSecretVersionLocksOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	GetSecretVersionLocksOptionsSecretTypeImportedCertConst     = "imported_cert"
+	GetSecretVersionLocksOptionsSecretTypeKvConst               = "kv"
+	GetSecretVersionLocksOptionsSecretTypePrivateCertConst      = "private_cert"
+	GetSecretVersionLocksOptionsSecretTypePublicCertConst       = "public_cert"
+	GetSecretVersionLocksOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewGetSecretVersionLocksOptions : Instantiate GetSecretVersionLocksOptions
+func (*SecretsManagerV1) NewGetSecretVersionLocksOptions(secretType string, id string, versionID string) *GetSecretVersionLocksOptions {
+	return &GetSecretVersionLocksOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+		VersionID:  core.StringPtr(versionID),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *GetSecretVersionLocksOptions) SetSecretType(secretType string) *GetSecretVersionLocksOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *GetSecretVersionLocksOptions) SetID(id string) *GetSecretVersionLocksOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetVersionID : Allow user to set VersionID
+func (_options *GetSecretVersionLocksOptions) SetVersionID(versionID string) *GetSecretVersionLocksOptions {
+	_options.VersionID = core.StringPtr(versionID)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *GetSecretVersionLocksOptions) SetLimit(limit int64) *GetSecretVersionLocksOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetOffset : Allow user to set Offset
+func (_options *GetSecretVersionLocksOptions) SetOffset(offset int64) *GetSecretVersionLocksOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *GetSecretVersionLocksOptions) SetSearch(search string) *GetSecretVersionLocksOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetSecretVersionLocksOptions) SetHeaders(param map[string]string) *GetSecretVersionLocksOptions {
+	options.Headers = param
+	return options
 }
 
 // GetSecretVersionMetadata : Properties that describe the version of a secret.
@@ -4860,6 +5641,124 @@ func UnmarshalGetSingleConfigElement(m map[string]json.RawMessage, result interf
 	return
 }
 
+// InstanceSecretsLocks : Properties that describe the locks that are associated with an instance.
+type InstanceSecretsLocks struct {
+	// The unique ID of the secret.
+	SecretID *string `json:"secret_id,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// The secret type.
+	SecretType *string `json:"secret_type,omitempty"`
+
+	// A collection of locks that are attached to a secret version.
+	Versions []SecretLockVersion `json:"versions,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// Constants associated with the InstanceSecretsLocks.SecretType property.
+// The secret type.
+const (
+	InstanceSecretsLocksSecretTypeArbitraryConst        = "arbitrary"
+	InstanceSecretsLocksSecretTypeIamCredentialsConst   = "iam_credentials"
+	InstanceSecretsLocksSecretTypeImportedCertConst     = "imported_cert"
+	InstanceSecretsLocksSecretTypeKvConst               = "kv"
+	InstanceSecretsLocksSecretTypePrivateCertConst      = "private_cert"
+	InstanceSecretsLocksSecretTypePublicCertConst       = "public_cert"
+	InstanceSecretsLocksSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// SetProperty allows the user to set an arbitrary property on an instance of InstanceSecretsLocks
+func (o *InstanceSecretsLocks) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of InstanceSecretsLocks
+func (o *InstanceSecretsLocks) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of InstanceSecretsLocks
+func (o *InstanceSecretsLocks) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of InstanceSecretsLocks
+func (o *InstanceSecretsLocks) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of InstanceSecretsLocks
+func (o *InstanceSecretsLocks) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.SecretID != nil {
+		m["secret_id"] = o.SecretID
+	}
+	if o.SecretGroupID != nil {
+		m["secret_group_id"] = o.SecretGroupID
+	}
+	if o.SecretType != nil {
+		m["secret_type"] = o.SecretType
+	}
+	if o.Versions != nil {
+		m["versions"] = o.Versions
+	}
+	buffer, err = json.Marshal(m)
+	return
+}
+
+// UnmarshalInstanceSecretsLocks unmarshals an instance of InstanceSecretsLocks from the specified map of raw messages.
+func UnmarshalInstanceSecretsLocks(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(InstanceSecretsLocks)
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		return
+	}
+	delete(m, "secret_id")
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	delete(m, "secret_group_id")
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		return
+	}
+	delete(m, "secret_type")
+	err = core.UnmarshalModel(m, "versions", &obj.Versions, UnmarshalSecretLockVersion)
+	if err != nil {
+		return
+	}
+	delete(m, "versions")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // IntermediateCertificateAuthoritiesConfigItem : Intermediate certificate authorities configuration.
 type IntermediateCertificateAuthoritiesConfigItem struct {
 	// The human-readable name to assign to your configuration.
@@ -4986,27 +5885,27 @@ type ListAllSecretsOptions struct {
 	// set of items, use `limit` with `offset` to page through your available resources.
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
-	// `../secrets/{secret-type}?limit=5`.
+	// `../secrets/{secret_type}?limit=5`.
 	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
-	// `../secrets/{secret-type}?offset=25&limit=25`.
+	// `..?offset=25&limit=25`.
 	Offset *int64 `json:"offset,omitempty"`
 
 	// Filter secrets that contain the specified string. The fields that are searched include: id, name, description,
 	// labels, secret_type.
 	//
 	// **Usage:** If you want to list only the secrets that contain the string "text", use
-	// `../secrets/{secret-type}?search=text`.
+	// `../secrets/{secret_type}?search=text`.
 	Search *string `json:"search,omitempty"`
 
 	// Sort a list of secrets by the specified field.
 	//
 	// **Usage:** To sort a list of secrets by their creation date, use
-	// `../secrets/{secret-type}?sort_by=creation_date`.
+	// `../secrets/{secret_type}?sort_by=creation_date`.
 	SortBy *string `json:"sort_by,omitempty"`
 
 	// Filter secrets by groups.
@@ -5015,7 +5914,7 @@ type ListAllSecretsOptions struct {
 	// that are in the default secret group, use the `default` keyword.
 	//
 	// **Usage:** To retrieve a list of secrets that are associated with an existing secret group or the default group, use
-	// `../secrets?groups={secret_group_ID},default`.
+	// `..?groups={secret_group_ID},default`.
 	Groups []string `json:"groups,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -5026,7 +5925,7 @@ type ListAllSecretsOptions struct {
 // Sort a list of secrets by the specified field.
 //
 // **Usage:** To sort a list of secrets by their creation date, use
-// `../secrets/{secret-type}?sort_by=creation_date`.
+// `../secrets/{secret_type}?sort_by=creation_date`.
 const (
 	ListAllSecretsOptionsSortByCreationDateConst   = "creation_date"
 	ListAllSecretsOptionsSortByExpirationDateConst = "expiration_date"
@@ -5076,6 +5975,76 @@ func (options *ListAllSecretsOptions) SetHeaders(param map[string]string) *ListA
 	return options
 }
 
+// ListInstanceSecretsLocksOptions : The ListInstanceSecretsLocks options.
+type ListInstanceSecretsLocksOptions struct {
+	// The number of secrets with locks to retrieve. By default, list operations return the first 25 items. To retrieve a
+	// different set of items, use `limit` with `offset` to page through your available resources.
+	//
+	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 with locks, use
+	// `..?limit=5`.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
+	// value. Use `offset` with `limit` to page through your available resources.
+	//
+	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
+	// `..?offset=25&limit=25`.
+	Offset *int64 `json:"offset,omitempty"`
+
+	// Filter locks that contain the specified string in the field "name".
+	//
+	// **Usage:** If you want to list only the locks that contain the string "text" in the field "name", use
+	// `..?search=text`.
+	Search *string `json:"search,omitempty"`
+
+	// Filter secrets by groups.
+	//
+	// You can apply multiple filters by using a comma-separated list of secret group IDs. If you need to filter secrets
+	// that are in the default secret group, use the `default` keyword.
+	//
+	// **Usage:** To retrieve a list of secrets that are associated with an existing secret group or the default group, use
+	// `..?groups={secret_group_ID},default`.
+	Groups []string `json:"groups,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewListInstanceSecretsLocksOptions : Instantiate ListInstanceSecretsLocksOptions
+func (*SecretsManagerV1) NewListInstanceSecretsLocksOptions() *ListInstanceSecretsLocksOptions {
+	return &ListInstanceSecretsLocksOptions{}
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *ListInstanceSecretsLocksOptions) SetLimit(limit int64) *ListInstanceSecretsLocksOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetOffset : Allow user to set Offset
+func (_options *ListInstanceSecretsLocksOptions) SetOffset(offset int64) *ListInstanceSecretsLocksOptions {
+	_options.Offset = core.Int64Ptr(offset)
+	return _options
+}
+
+// SetSearch : Allow user to set Search
+func (_options *ListInstanceSecretsLocksOptions) SetSearch(search string) *ListInstanceSecretsLocksOptions {
+	_options.Search = core.StringPtr(search)
+	return _options
+}
+
+// SetGroups : Allow user to set Groups
+func (_options *ListInstanceSecretsLocksOptions) SetGroups(groups []string) *ListInstanceSecretsLocksOptions {
+	_options.Groups = groups
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListInstanceSecretsLocksOptions) SetHeaders(param map[string]string) *ListInstanceSecretsLocksOptions {
+	options.Headers = param
+	return options
+}
+
 // ListSecretGroupsOptions : The ListSecretGroups options.
 type ListSecretGroupsOptions struct {
 
@@ -5092,6 +6061,30 @@ func (*SecretsManagerV1) NewListSecretGroupsOptions() *ListSecretGroupsOptions {
 func (options *ListSecretGroupsOptions) SetHeaders(param map[string]string) *ListSecretGroupsOptions {
 	options.Headers = param
 	return options
+}
+
+// ListSecretLocks : Properties that describe the locks of a secret or a secret version.
+type ListSecretLocks struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []SecretLockData `json:"resources" validate:"required"`
+}
+
+// UnmarshalListSecretLocks unmarshals an instance of ListSecretLocks from the specified map of raw messages.
+func UnmarshalListSecretLocks(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ListSecretLocks)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalSecretLockData)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // ListSecretVersions : Properties that describe a list of versions of a secret.
@@ -5201,14 +6194,14 @@ type ListSecretsOptions struct {
 	// set of items, use `limit` with `offset` to page through your available resources.
 	//
 	// **Usage:** If you have 20 secrets in your instance, and you want to retrieve only the first 5 secrets, use
-	// `../secrets/{secret-type}?limit=5`.
+	// `../secrets/{secret_type}?limit=5`.
 	Limit *int64 `json:"limit,omitempty"`
 
 	// The number of secrets to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
 	// value. Use `offset` with `limit` to page through your available resources.
 	//
 	// **Usage:** If you have 100 secrets in your instance, and you want to retrieve secrets 26 through 50, use
-	// `../secrets/{secret-type}?offset=25&limit=25`.
+	// `..?offset=25&limit=25`.
 	Offset *int64 `json:"offset,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -5254,6 +6247,237 @@ func (_options *ListSecretsOptions) SetOffset(offset int64) *ListSecretsOptions 
 
 // SetHeaders : Allow user to set Headers
 func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecretsOptions {
+	options.Headers = param
+	return options
+}
+
+// LockSecretBodyLocksItem : LockSecretBodyLocksItem struct
+type LockSecretBodyLocksItem struct {
+	// A human-readable name to assign to your secret lock.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret lock.
+	Name *string `json:"name" validate:"required"`
+
+	// An extended description of your secret lock.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// lock.
+	Description *string `json:"description" validate:"required"`
+
+	// Optional information to associate with a lock, such as resources CRNs to be used by automation.
+	Attributes interface{} `json:"attributes" validate:"required"`
+}
+
+// NewLockSecretBodyLocksItem : Instantiate LockSecretBodyLocksItem (Generic Model Constructor)
+func (*SecretsManagerV1) NewLockSecretBodyLocksItem(name string, description string, attributes interface{}) (_model *LockSecretBodyLocksItem, err error) {
+	_model = &LockSecretBodyLocksItem{
+		Name:        core.StringPtr(name),
+		Description: core.StringPtr(description),
+		Attributes:  attributes,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalLockSecretBodyLocksItem unmarshals an instance of LockSecretBodyLocksItem from the specified map of raw messages.
+func UnmarshalLockSecretBodyLocksItem(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LockSecretBodyLocksItem)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "attributes", &obj.Attributes)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// LockSecretOptions : The LockSecret options.
+type LockSecretOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The lock data to be attached to a secret version.
+	Locks []LockSecretBodyLocksItem `json:"locks,omitempty"`
+
+	// An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
+	// secret version.
+	//
+	// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
+	// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if
+	// it doesn't have any locks.
+	Mode *string `json:"mode,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the LockSecretOptions.SecretType property.
+// The secret type.
+const (
+	LockSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	LockSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	LockSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	LockSecretOptionsSecretTypeKvConst               = "kv"
+	LockSecretOptionsSecretTypePrivateCertConst      = "private_cert"
+	LockSecretOptionsSecretTypePublicCertConst       = "public_cert"
+	LockSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the LockSecretOptions.Mode property.
+// An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
+// secret version.
+//
+// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
+// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if it
+// doesn't have any locks.
+const (
+	LockSecretOptionsModeExclusiveConst       = "exclusive"
+	LockSecretOptionsModeExclusiveDeleteConst = "exclusive_delete"
+)
+
+// NewLockSecretOptions : Instantiate LockSecretOptions
+func (*SecretsManagerV1) NewLockSecretOptions(secretType string, id string) *LockSecretOptions {
+	return &LockSecretOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *LockSecretOptions) SetSecretType(secretType string) *LockSecretOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *LockSecretOptions) SetID(id string) *LockSecretOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetLocks : Allow user to set Locks
+func (_options *LockSecretOptions) SetLocks(locks []LockSecretBodyLocksItem) *LockSecretOptions {
+	_options.Locks = locks
+	return _options
+}
+
+// SetMode : Allow user to set Mode
+func (_options *LockSecretOptions) SetMode(mode string) *LockSecretOptions {
+	_options.Mode = core.StringPtr(mode)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *LockSecretOptions) SetHeaders(param map[string]string) *LockSecretOptions {
+	options.Headers = param
+	return options
+}
+
+// LockSecretVersionOptions : The LockSecretVersion options.
+type LockSecretVersionOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
+	// version.
+	//
+	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
+	// the response details.
+	VersionID *string `json:"version_id" validate:"required,ne="`
+
+	// The lock data to be attached to a secret version.
+	Locks []LockSecretBodyLocksItem `json:"locks,omitempty"`
+
+	// An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
+	// secret version.
+	//
+	// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
+	// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if
+	// it doesn't have any locks.
+	Mode *string `json:"mode,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the LockSecretVersionOptions.SecretType property.
+// The secret type.
+const (
+	LockSecretVersionOptionsSecretTypeArbitraryConst        = "arbitrary"
+	LockSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	LockSecretVersionOptionsSecretTypeImportedCertConst     = "imported_cert"
+	LockSecretVersionOptionsSecretTypeKvConst               = "kv"
+	LockSecretVersionOptionsSecretTypePrivateCertConst      = "private_cert"
+	LockSecretVersionOptionsSecretTypePublicCertConst       = "public_cert"
+	LockSecretVersionOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// Constants associated with the LockSecretVersionOptions.Mode property.
+// An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
+// secret version.
+//
+// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
+// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if it
+// doesn't have any locks.
+const (
+	LockSecretVersionOptionsModeExclusiveConst       = "exclusive"
+	LockSecretVersionOptionsModeExclusiveDeleteConst = "exclusive_delete"
+)
+
+// NewLockSecretVersionOptions : Instantiate LockSecretVersionOptions
+func (*SecretsManagerV1) NewLockSecretVersionOptions(secretType string, id string, versionID string) *LockSecretVersionOptions {
+	return &LockSecretVersionOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+		VersionID:  core.StringPtr(versionID),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *LockSecretVersionOptions) SetSecretType(secretType string) *LockSecretVersionOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *LockSecretVersionOptions) SetID(id string) *LockSecretVersionOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetVersionID : Allow user to set VersionID
+func (_options *LockSecretVersionOptions) SetVersionID(versionID string) *LockSecretVersionOptions {
+	_options.VersionID = core.StringPtr(versionID)
+	return _options
+}
+
+// SetLocks : Allow user to set Locks
+func (_options *LockSecretVersionOptions) SetLocks(locks []LockSecretBodyLocksItem) *LockSecretVersionOptions {
+	_options.Locks = locks
+	return _options
+}
+
+// SetMode : Allow user to set Mode
+func (_options *LockSecretVersionOptions) SetMode(mode string) *LockSecretVersionOptions {
+	_options.Mode = core.StringPtr(mode)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *LockSecretVersionOptions) SetHeaders(param map[string]string) *LockSecretVersionOptions {
 	options.Headers = param
 	return options
 }
@@ -5793,6 +7017,206 @@ func UnmarshalSecretGroupResource(m map[string]json.RawMessage, result interface
 	return
 }
 
+// SecretLockData : Properties that describe a lock.
+type SecretLockData struct {
+	// A human-readable name to assign to the secret lock.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for the secret lock.
+	Name *string `json:"name,omitempty"`
+
+	// An extended description of the secret lock.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for the secret
+	// lock.
+	Description *string `json:"description,omitempty"`
+
+	// The date the secret lock was created. The date format follows RFC 3339.
+	CreationDate *strfmt.DateTime `json:"creation_date,omitempty"`
+
+	// The unique identifier for the entity that created the secret lock.
+	CreatedBy *string `json:"created_by,omitempty"`
+
+	// The information that is associated with a lock, such as resources CRNs to be used by automation.
+	Attributes interface{} `json:"attributes,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret version.
+	SecretVersionID *string `json:"secret_version_id,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret.
+	SecretID *string `json:"secret_id,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// Updates when the actual secret is modified. The date format follows RFC 3339.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
+
+	// A representation for the 2 last secret versions. Could be "current" for version (n) or "previous" for version (n-1).
+	SecretVersionAlias *string `json:"secret_version_alias,omitempty"`
+}
+
+// UnmarshalSecretLockData unmarshals an instance of SecretLockData from the specified map of raw messages.
+func UnmarshalSecretLockData(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretLockData)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "attributes", &obj.Attributes)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_version_id", &obj.SecretVersionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_version_alias", &obj.SecretVersionAlias)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretLockVersion : Properties that describe the secret locks.
+type SecretLockVersion struct {
+	// The v4 UUID that uniquely identifies the lock.
+	ID *string `json:"id,omitempty"`
+
+	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+	// for version `n-1`.
+	Alias *string `json:"alias,omitempty"`
+
+	// The names of all locks that are associated with this secret.
+	Locks []string `json:"locks,omitempty"`
+
+	// Indicates whether the payload for the secret version is stored and available.
+	PayloadAvailable *bool `json:"payload_available,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// Constants associated with the SecretLockVersion.Alias property.
+// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+// for version `n-1`.
+const (
+	SecretLockVersionAliasCurrentConst  = "current"
+	SecretLockVersionAliasPreviousConst = "previous"
+)
+
+// SetProperty allows the user to set an arbitrary property on an instance of SecretLockVersion
+func (o *SecretLockVersion) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of SecretLockVersion
+func (o *SecretLockVersion) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of SecretLockVersion
+func (o *SecretLockVersion) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of SecretLockVersion
+func (o *SecretLockVersion) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of SecretLockVersion
+func (o *SecretLockVersion) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.ID != nil {
+		m["id"] = o.ID
+	}
+	if o.Alias != nil {
+		m["alias"] = o.Alias
+	}
+	if o.Locks != nil {
+		m["locks"] = o.Locks
+	}
+	if o.PayloadAvailable != nil {
+		m["payload_available"] = o.PayloadAvailable
+	}
+	buffer, err = json.Marshal(m)
+	return
+}
+
+// UnmarshalSecretLockVersion unmarshals an instance of SecretLockVersion from the specified map of raw messages.
+func UnmarshalSecretLockVersion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretLockVersion)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	delete(m, "id")
+	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
+	if err != nil {
+		return
+	}
+	delete(m, "alias")
+	err = core.UnmarshalPrimitive(m, "locks", &obj.Locks)
+	if err != nil {
+		return
+	}
+	delete(m, "locks")
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		return
+	}
+	delete(m, "payload_available")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // SecretMetadata : SecretMetadata struct
 // Models which "extend" this model:
 // - ArbitrarySecretMetadata
@@ -5851,8 +7275,11 @@ type SecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -6013,6 +7440,10 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -6301,6 +7732,9 @@ type SecretResource struct {
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
 
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
 	// You can set an expiration date on supported secret types at their creation. If you create a secret without
@@ -6576,6 +8010,10 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
 		return
@@ -6760,6 +8198,9 @@ type SecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
@@ -6814,6 +8255,10 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -7000,6 +8445,9 @@ type SecretVersionMetadata struct {
 	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
@@ -7060,6 +8508,10 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
 		return
@@ -7091,6 +8543,101 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
 	if err != nil {
 		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretsLocks : Properties that describe the secret locks.
+type SecretsLocks struct {
+	// The unique ID of the secret.
+	SecretID *string `json:"secret_id,omitempty"`
+
+	// The v4 UUID that uniquely identifies the secret group to assign to this secret.
+	//
+	// If you omit this parameter, your secret is assigned to the `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// A collection of locks that are attached to a secret version.
+	Versions []SecretLockVersion `json:"versions,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of SecretsLocks
+func (o *SecretsLocks) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of SecretsLocks
+func (o *SecretsLocks) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of SecretsLocks
+func (o *SecretsLocks) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of SecretsLocks
+func (o *SecretsLocks) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of SecretsLocks
+func (o *SecretsLocks) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.SecretID != nil {
+		m["secret_id"] = o.SecretID
+	}
+	if o.SecretGroupID != nil {
+		m["secret_group_id"] = o.SecretGroupID
+	}
+	if o.Versions != nil {
+		m["versions"] = o.Versions
+	}
+	buffer, err = json.Marshal(m)
+	return
+}
+
+// UnmarshalSecretsLocks unmarshals an instance of SecretsLocks from the specified map of raw messages.
+func UnmarshalSecretsLocks(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretsLocks)
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		return
+	}
+	delete(m, "secret_id")
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		return
+	}
+	delete(m, "secret_group_id")
+	err = core.UnmarshalModel(m, "versions", &obj.Versions, UnmarshalSecretLockVersion)
+	if err != nil {
+		return
+	}
+	delete(m, "versions")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -7202,6 +8749,138 @@ func UnmarshalSignIntermediateActionResultData(m map[string]json.RawMessage, res
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// UnlockSecretOptions : The UnlockSecret options.
+type UnlockSecretOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// A comma-separated list of locks to delete.
+	Locks []string `json:"locks,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the UnlockSecretOptions.SecretType property.
+// The secret type.
+const (
+	UnlockSecretOptionsSecretTypeArbitraryConst        = "arbitrary"
+	UnlockSecretOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	UnlockSecretOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UnlockSecretOptionsSecretTypeKvConst               = "kv"
+	UnlockSecretOptionsSecretTypePrivateCertConst      = "private_cert"
+	UnlockSecretOptionsSecretTypePublicCertConst       = "public_cert"
+	UnlockSecretOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewUnlockSecretOptions : Instantiate UnlockSecretOptions
+func (*SecretsManagerV1) NewUnlockSecretOptions(secretType string, id string) *UnlockSecretOptions {
+	return &UnlockSecretOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *UnlockSecretOptions) SetSecretType(secretType string) *UnlockSecretOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *UnlockSecretOptions) SetID(id string) *UnlockSecretOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetLocks : Allow user to set Locks
+func (_options *UnlockSecretOptions) SetLocks(locks []string) *UnlockSecretOptions {
+	_options.Locks = locks
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UnlockSecretOptions) SetHeaders(param map[string]string) *UnlockSecretOptions {
+	options.Headers = param
+	return options
+}
+
+// UnlockSecretVersionOptions : The UnlockSecretVersion options.
+type UnlockSecretVersionOptions struct {
+	// The secret type.
+	SecretType *string `json:"secret_type" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The v4 UUID that uniquely identifies the secret version. You can also use `previous` to retrieve the previous
+	// version.
+	//
+	// **Note:** To find the version ID of a secret, use the [Get secret metadata](#get-secret-metadata) method and check
+	// the response details.
+	VersionID *string `json:"version_id" validate:"required,ne="`
+
+	// A comma-separated list of locks to delete.
+	Locks []string `json:"locks,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the UnlockSecretVersionOptions.SecretType property.
+// The secret type.
+const (
+	UnlockSecretVersionOptionsSecretTypeArbitraryConst        = "arbitrary"
+	UnlockSecretVersionOptionsSecretTypeIamCredentialsConst   = "iam_credentials"
+	UnlockSecretVersionOptionsSecretTypeImportedCertConst     = "imported_cert"
+	UnlockSecretVersionOptionsSecretTypeKvConst               = "kv"
+	UnlockSecretVersionOptionsSecretTypePrivateCertConst      = "private_cert"
+	UnlockSecretVersionOptionsSecretTypePublicCertConst       = "public_cert"
+	UnlockSecretVersionOptionsSecretTypeUsernamePasswordConst = "username_password"
+)
+
+// NewUnlockSecretVersionOptions : Instantiate UnlockSecretVersionOptions
+func (*SecretsManagerV1) NewUnlockSecretVersionOptions(secretType string, id string, versionID string) *UnlockSecretVersionOptions {
+	return &UnlockSecretVersionOptions{
+		SecretType: core.StringPtr(secretType),
+		ID:         core.StringPtr(id),
+		VersionID:  core.StringPtr(versionID),
+	}
+}
+
+// SetSecretType : Allow user to set SecretType
+func (_options *UnlockSecretVersionOptions) SetSecretType(secretType string) *UnlockSecretVersionOptions {
+	_options.SecretType = core.StringPtr(secretType)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *UnlockSecretVersionOptions) SetID(id string) *UnlockSecretVersionOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetVersionID : Allow user to set VersionID
+func (_options *UnlockSecretVersionOptions) SetVersionID(versionID string) *UnlockSecretVersionOptions {
+	_options.VersionID = core.StringPtr(versionID)
+	return _options
+}
+
+// SetLocks : Allow user to set Locks
+func (_options *UnlockSecretVersionOptions) SetLocks(locks []string) *UnlockSecretVersionOptions {
+	_options.Locks = locks
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UnlockSecretVersionOptions) SetHeaders(param map[string]string) *UnlockSecretVersionOptions {
+	options.Headers = param
+	return options
 }
 
 // UpdateConfigElementOptions : The UpdateConfigElement options.
@@ -7646,8 +9325,11 @@ type ArbitrarySecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -7740,6 +9422,10 @@ func UnmarshalArbitrarySecretMetadata(m map[string]json.RawMessage, result inter
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
 		return
@@ -7805,6 +9491,9 @@ type ArbitrarySecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -7909,6 +9598,10 @@ func UnmarshalArbitrarySecretResource(m map[string]json.RawMessage, result inter
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
 		return
@@ -7940,6 +9633,9 @@ type ArbitrarySecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
@@ -7966,6 +9662,10 @@ func UnmarshalArbitrarySecretVersion(m map[string]json.RawMessage, result interf
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -8049,6 +9749,9 @@ type ArbitrarySecretVersionMetadata struct {
 	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
 	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 }
 
 func (*ArbitrarySecretVersionMetadata) isaSecretVersionMetadata() bool {
@@ -8079,6 +9782,10 @@ func UnmarshalArbitrarySecretVersionMetadata(m map[string]json.RawMessage, resul
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -8137,8 +9844,11 @@ type CertificateSecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -8252,6 +9962,10 @@ func UnmarshalCertificateSecretMetadata(m map[string]json.RawMessage, result int
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
 		return
@@ -8353,6 +10067,9 @@ type CertificateSecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The contents of your certificate. The data must be formatted on a single line with embedded newline characters.
 	Certificate *string `json:"certificate,omitempty"`
@@ -8492,6 +10209,10 @@ func UnmarshalCertificateSecretResource(m map[string]json.RawMessage, result int
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
 		return
@@ -8567,6 +10288,9 @@ type CertificateSecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -8603,6 +10327,10 @@ func UnmarshalCertificateSecretVersion(m map[string]json.RawMessage, result inte
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -8719,6 +10447,9 @@ type CertificateSecretVersionMetadata struct {
 	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
@@ -8756,6 +10487,10 @@ func UnmarshalCertificateSecretVersionMetadata(m map[string]json.RawMessage, res
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -9521,8 +11256,11 @@ type IamCredentialsSecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The time-to-live (TTL) or lease duration that is assigned to the secret. For `iam_credentials` secrets, the TTL
 	// defines for how long each generated API key remains valid.
@@ -9631,6 +11369,10 @@ func UnmarshalIamCredentialsSecretMetadata(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
 		return
@@ -9712,6 +11454,9 @@ type IamCredentialsSecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to generated credentials.
 	//
@@ -9849,6 +11594,10 @@ func UnmarshalIamCredentialsSecretResource(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
 		return
@@ -9896,6 +11645,9 @@ type IamCredentialsSecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// The data that is associated with the secret version. The data object contains the following fields:
 	//
 	// - `api_key`: The API key that is generated for this secret.
@@ -9924,6 +11676,10 @@ func UnmarshalIamCredentialsSecretVersion(m map[string]json.RawMessage, result i
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -10007,6 +11763,9 @@ type IamCredentialsSecretVersionMetadata struct {
 	// Indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
 	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 }
 
 func (*IamCredentialsSecretVersionMetadata) isaSecretVersionMetadata() bool {
@@ -10037,6 +11796,10 @@ func UnmarshalIamCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -10422,8 +12185,11 @@ type KvSecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 }
 
 // Constants associated with the KvSecretMetadata.SecretType property.
@@ -10506,6 +12272,10 @@ func UnmarshalKvSecretMetadata(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -10567,6 +12337,9 @@ type KvSecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -10668,6 +12441,10 @@ func UnmarshalKvSecretResource(m map[string]json.RawMessage, result interface{})
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -10825,8 +12602,11 @@ type PrivateCertificateSecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The name of the certificate template.
 	CertificateTemplate *string `json:"certificate_template,omitempty"`
@@ -10945,6 +12725,10 @@ func UnmarshalPrivateCertificateSecretMetadata(m map[string]json.RawMessage, res
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
 	if err != nil {
 		return
@@ -11054,6 +12838,9 @@ type PrivateCertificateSecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The name of the certificate template.
 	CertificateTemplate *string `json:"certificate_template" validate:"required"`
@@ -11235,6 +13022,10 @@ func UnmarshalPrivateCertificateSecretResource(m map[string]json.RawMessage, res
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
 	if err != nil {
 		return
@@ -11334,6 +13125,9 @@ type PrivateCertificateSecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
@@ -11386,6 +13180,10 @@ func UnmarshalPrivateCertificateSecretVersion(m map[string]json.RawMessage, resu
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -11558,6 +13356,9 @@ type PrivateCertificateSecretVersionMetadata struct {
 	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
@@ -11611,6 +13412,10 @@ func UnmarshalPrivateCertificateSecretVersionMetadata(m map[string]json.RawMessa
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -11730,8 +13535,11 @@ type PublicCertificateSecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
@@ -11862,6 +13670,10 @@ func UnmarshalPublicCertificateSecretMetadata(m map[string]json.RawMessage, resu
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
 		return
@@ -11971,6 +13783,9 @@ type PublicCertificateSecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
@@ -12131,6 +13946,10 @@ func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, resu
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions", &obj.Versions)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -13748,8 +15567,11 @@ type UsernamePasswordSecretMetadata struct {
 	// Updates when any part of the secret metadata is modified. The date format follows RFC 3339.
 	LastUpdateDate *strfmt.DateTime `json:"last_update_date,omitempty"`
 
-	// The number of versions the secret has.
+	// The number of versions that are associated with a secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -13842,6 +15664,10 @@ func UnmarshalUsernamePasswordSecretMetadata(m map[string]json.RawMessage, resul
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
 		return
@@ -13907,6 +15733,9 @@ type UsernamePasswordSecretResource struct {
 	// An array that contains metadata for each secret version. For more information on the metadata properties, see [Get
 	// secret version metadata](#get-secret-version-metadata).
 	Versions []map[string]interface{} `json:"versions,omitempty"`
+
+	// The number of locks that are associated with a secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The username to assign to this secret.
 	Username *string `json:"username,omitempty"`
@@ -14021,6 +15850,10 @@ func UnmarshalUsernamePasswordSecretResource(m map[string]json.RawMessage, resul
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
 		return
@@ -14060,6 +15893,9 @@ type UsernamePasswordSecretVersion struct {
 	// The unique identifier for the entity that created the secret version.
 	CreatedBy *string `json:"created_by,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
@@ -14090,6 +15926,10 @@ func UnmarshalUsernamePasswordSecretVersion(m map[string]json.RawMessage, result
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}
@@ -14185,6 +16025,9 @@ type UsernamePasswordSecretVersionMetadata struct {
 	// API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
+	// The number of locks that are associated with a secret version.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 }
@@ -14217,6 +16060,10 @@ func UnmarshalUsernamePasswordSecretVersionMetadata(m map[string]json.RawMessage
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
 		return
 	}

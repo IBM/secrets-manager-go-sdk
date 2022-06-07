@@ -1343,7 +1343,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
@@ -1429,7 +1429,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -1641,7 +1641,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -1699,7 +1699,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -1875,7 +1875,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListAllSecrets successfully with retries`, func() {
@@ -1937,7 +1937,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListAllSecrets successfully`, func() {
@@ -2101,7 +2101,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
@@ -2156,7 +2156,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
@@ -2342,7 +2342,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecret successfully with retries`, func() {
@@ -2420,7 +2420,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecret successfully`, func() {
@@ -2888,7 +2888,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "locks_total": 1, "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully with retries`, func() {
@@ -2944,7 +2944,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "locks_total": 1, "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully`, func() {
@@ -3113,7 +3113,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersion successfully with retries`, func() {
@@ -3171,7 +3171,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "name": "Name", "description": "Description", "secret_group_id": "SecretGroupID", "labels": ["Labels"], "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "versions": [{"mapKey": "anyValue"}], "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z", "payload": "Payload", "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersion successfully`, func() {
@@ -3340,7 +3340,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully with retries`, func() {
@@ -3396,7 +3396,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully`, func() {
@@ -3561,7 +3561,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -3616,7 +3616,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -3808,7 +3808,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -3893,7 +3893,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -4023,6 +4023,1824 @@ var _ = Describe(`SecretsManagerV1`, func() {
 
 				// Invoke operation
 				result, response, operationErr := secretsManagerService.UpdateSecretMetadata(updateSecretMetadataOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetLocks(getLocksOptions *GetLocksOptions) - Operation response error`, func() {
+		getLocksPath := "/api/v1/locks/arbitrary/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetLocks with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetLocksOptions model
+				getLocksOptionsModel := new(secretsmanagerv1.GetLocksOptions)
+				getLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getLocksOptionsModel.ID = core.StringPtr("testString")
+				getLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getLocksOptionsModel.Search = core.StringPtr("testString")
+				getLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.GetLocks(getLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.GetLocks(getLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetLocks(getLocksOptions *GetLocksOptions)`, func() {
+		getLocksPath := "/api/v1/locks/arbitrary/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "description": "Description", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "attributes": {"anyKey": "anyValue"}, "secret_version_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_id": "SecretID", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "last_update_date": "2018-04-12T23:20:50.520Z", "secret_version_alias": "current"}]}`)
+				}))
+			})
+			It(`Invoke GetLocks successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetLocksOptions model
+				getLocksOptionsModel := new(secretsmanagerv1.GetLocksOptions)
+				getLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getLocksOptionsModel.ID = core.StringPtr("testString")
+				getLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getLocksOptionsModel.Search = core.StringPtr("testString")
+				getLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.GetLocksWithContext(ctx, getLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.GetLocks(getLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.GetLocksWithContext(ctx, getLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "description": "Description", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "attributes": {"anyKey": "anyValue"}, "secret_version_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_id": "SecretID", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "last_update_date": "2018-04-12T23:20:50.520Z", "secret_version_alias": "current"}]}`)
+				}))
+			})
+			It(`Invoke GetLocks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.GetLocks(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetLocksOptions model
+				getLocksOptionsModel := new(secretsmanagerv1.GetLocksOptions)
+				getLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getLocksOptionsModel.ID = core.StringPtr("testString")
+				getLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getLocksOptionsModel.Search = core.StringPtr("testString")
+				getLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.GetLocks(getLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetLocks with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetLocksOptions model
+				getLocksOptionsModel := new(secretsmanagerv1.GetLocksOptions)
+				getLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getLocksOptionsModel.ID = core.StringPtr("testString")
+				getLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getLocksOptionsModel.Search = core.StringPtr("testString")
+				getLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.GetLocks(getLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetLocksOptions model with no property values
+				getLocksOptionsModelNew := new(secretsmanagerv1.GetLocksOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.GetLocks(getLocksOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetLocks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetLocksOptions model
+				getLocksOptionsModel := new(secretsmanagerv1.GetLocksOptions)
+				getLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getLocksOptionsModel.ID = core.StringPtr("testString")
+				getLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getLocksOptionsModel.Search = core.StringPtr("testString")
+				getLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.GetLocks(getLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`LockSecret(lockSecretOptions *LockSecretOptions) - Operation response error`, func() {
+		lockSecretPath := "/api/v1/locks/arbitrary/testString/lock"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(lockSecretPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke LockSecret with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretOptions model
+				lockSecretOptionsModel := new(secretsmanagerv1.LockSecretOptions)
+				lockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretOptionsModel.ID = core.StringPtr("testString")
+				lockSecretOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.LockSecret(lockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.LockSecret(lockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`LockSecret(lockSecretOptions *LockSecretOptions)`, func() {
+		lockSecretPath := "/api/v1/locks/arbitrary/testString/lock"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(lockSecretPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke LockSecret successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretOptions model
+				lockSecretOptionsModel := new(secretsmanagerv1.LockSecretOptions)
+				lockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretOptionsModel.ID = core.StringPtr("testString")
+				lockSecretOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.LockSecretWithContext(ctx, lockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.LockSecret(lockSecretOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.LockSecretWithContext(ctx, lockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(lockSecretPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke LockSecret successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.LockSecret(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretOptions model
+				lockSecretOptionsModel := new(secretsmanagerv1.LockSecretOptions)
+				lockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretOptionsModel.ID = core.StringPtr("testString")
+				lockSecretOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.LockSecret(lockSecretOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke LockSecret with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretOptions model
+				lockSecretOptionsModel := new(secretsmanagerv1.LockSecretOptions)
+				lockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretOptionsModel.ID = core.StringPtr("testString")
+				lockSecretOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.LockSecret(lockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the LockSecretOptions model with no property values
+				lockSecretOptionsModelNew := new(secretsmanagerv1.LockSecretOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.LockSecret(lockSecretOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke LockSecret successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretOptions model
+				lockSecretOptionsModel := new(secretsmanagerv1.LockSecretOptions)
+				lockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretOptionsModel.ID = core.StringPtr("testString")
+				lockSecretOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.LockSecret(lockSecretOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UnlockSecret(unlockSecretOptions *UnlockSecretOptions) - Operation response error`, func() {
+		unlockSecretPath := "/api/v1/locks/arbitrary/testString/unlock"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(unlockSecretPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UnlockSecret with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UnlockSecretOptions model
+				unlockSecretOptionsModel := new(secretsmanagerv1.UnlockSecretOptions)
+				unlockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretOptionsModel.Locks = []string{"testString"}
+				unlockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.UnlockSecret(unlockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.UnlockSecret(unlockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UnlockSecret(unlockSecretOptions *UnlockSecretOptions)`, func() {
+		unlockSecretPath := "/api/v1/locks/arbitrary/testString/unlock"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(unlockSecretPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke UnlockSecret successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the UnlockSecretOptions model
+				unlockSecretOptionsModel := new(secretsmanagerv1.UnlockSecretOptions)
+				unlockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretOptionsModel.Locks = []string{"testString"}
+				unlockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.UnlockSecretWithContext(ctx, unlockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.UnlockSecret(unlockSecretOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.UnlockSecretWithContext(ctx, unlockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(unlockSecretPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke UnlockSecret successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.UnlockSecret(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UnlockSecretOptions model
+				unlockSecretOptionsModel := new(secretsmanagerv1.UnlockSecretOptions)
+				unlockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretOptionsModel.Locks = []string{"testString"}
+				unlockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.UnlockSecret(unlockSecretOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UnlockSecret with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UnlockSecretOptions model
+				unlockSecretOptionsModel := new(secretsmanagerv1.UnlockSecretOptions)
+				unlockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretOptionsModel.Locks = []string{"testString"}
+				unlockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.UnlockSecret(unlockSecretOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UnlockSecretOptions model with no property values
+				unlockSecretOptionsModelNew := new(secretsmanagerv1.UnlockSecretOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.UnlockSecret(unlockSecretOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UnlockSecret successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UnlockSecretOptions model
+				unlockSecretOptionsModel := new(secretsmanagerv1.UnlockSecretOptions)
+				unlockSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretOptionsModel.Locks = []string{"testString"}
+				unlockSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.UnlockSecret(unlockSecretOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretVersionLocks(getSecretVersionLocksOptions *GetSecretVersionLocksOptions) - Operation response error`, func() {
+		getSecretVersionLocksPath := "/api/v1/locks/arbitrary/testString/versions/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretVersionLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSecretVersionLocks with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretVersionLocksOptions model
+				getSecretVersionLocksOptionsModel := new(secretsmanagerv1.GetSecretVersionLocksOptions)
+				getSecretVersionLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretVersionLocksOptionsModel.ID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.VersionID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getSecretVersionLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getSecretVersionLocksOptionsModel.Search = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretVersionLocks(getSecretVersionLocksOptions *GetSecretVersionLocksOptions)`, func() {
+		getSecretVersionLocksPath := "/api/v1/locks/arbitrary/testString/versions/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretVersionLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "description": "Description", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "attributes": {"anyKey": "anyValue"}, "secret_version_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_id": "SecretID", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "last_update_date": "2018-04-12T23:20:50.520Z", "secret_version_alias": "current"}]}`)
+				}))
+			})
+			It(`Invoke GetSecretVersionLocks successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSecretVersionLocksOptions model
+				getSecretVersionLocksOptionsModel := new(secretsmanagerv1.GetSecretVersionLocksOptions)
+				getSecretVersionLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretVersionLocksOptionsModel.ID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.VersionID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getSecretVersionLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getSecretVersionLocksOptionsModel.Search = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.GetSecretVersionLocksWithContext(ctx, getSecretVersionLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.GetSecretVersionLocksWithContext(ctx, getSecretVersionLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretVersionLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"name": "Name", "description": "Description", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "CreatedBy", "attributes": {"anyKey": "anyValue"}, "secret_version_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_id": "SecretID", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "last_update_date": "2018-04-12T23:20:50.520Z", "secret_version_alias": "current"}]}`)
+				}))
+			})
+			It(`Invoke GetSecretVersionLocks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.GetSecretVersionLocks(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSecretVersionLocksOptions model
+				getSecretVersionLocksOptionsModel := new(secretsmanagerv1.GetSecretVersionLocksOptions)
+				getSecretVersionLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretVersionLocksOptionsModel.ID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.VersionID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getSecretVersionLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getSecretVersionLocksOptionsModel.Search = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSecretVersionLocks with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretVersionLocksOptions model
+				getSecretVersionLocksOptionsModel := new(secretsmanagerv1.GetSecretVersionLocksOptions)
+				getSecretVersionLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretVersionLocksOptionsModel.ID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.VersionID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getSecretVersionLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getSecretVersionLocksOptionsModel.Search = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSecretVersionLocksOptions model with no property values
+				getSecretVersionLocksOptionsModelNew := new(secretsmanagerv1.GetSecretVersionLocksOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSecretVersionLocks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretVersionLocksOptions model
+				getSecretVersionLocksOptionsModel := new(secretsmanagerv1.GetSecretVersionLocksOptions)
+				getSecretVersionLocksOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretVersionLocksOptionsModel.ID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.VersionID = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				getSecretVersionLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				getSecretVersionLocksOptionsModel.Search = core.StringPtr("testString")
+				getSecretVersionLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.GetSecretVersionLocks(getSecretVersionLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`LockSecretVersion(lockSecretVersionOptions *LockSecretVersionOptions) - Operation response error`, func() {
+		lockSecretVersionPath := "/api/v1/locks/arbitrary/testString/versions/testString/lock"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(lockSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke LockSecretVersion with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretVersionOptions model
+				lockSecretVersionOptionsModel := new(secretsmanagerv1.LockSecretVersionOptions)
+				lockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretVersionOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`LockSecretVersion(lockSecretVersionOptions *LockSecretVersionOptions)`, func() {
+		lockSecretVersionPath := "/api/v1/locks/arbitrary/testString/versions/testString/lock"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(lockSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke LockSecretVersion successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretVersionOptions model
+				lockSecretVersionOptionsModel := new(secretsmanagerv1.LockSecretVersionOptions)
+				lockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretVersionOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.LockSecretVersionWithContext(ctx, lockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.LockSecretVersionWithContext(ctx, lockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(lockSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke LockSecretVersion successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.LockSecretVersion(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretVersionOptions model
+				lockSecretVersionOptionsModel := new(secretsmanagerv1.LockSecretVersionOptions)
+				lockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretVersionOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke LockSecretVersion with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretVersionOptions model
+				lockSecretVersionOptionsModel := new(secretsmanagerv1.LockSecretVersionOptions)
+				lockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretVersionOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the LockSecretVersionOptions model with no property values
+				lockSecretVersionOptionsModelNew := new(secretsmanagerv1.LockSecretVersionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke LockSecretVersion successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the LockSecretVersionOptions model
+				lockSecretVersionOptionsModel := new(secretsmanagerv1.LockSecretVersionOptions)
+				lockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				lockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				lockSecretVersionOptionsModel.Locks = []secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}
+				lockSecretVersionOptionsModel.Mode = core.StringPtr("exclusive")
+				lockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.LockSecretVersion(lockSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UnlockSecretVersion(unlockSecretVersionOptions *UnlockSecretVersionOptions) - Operation response error`, func() {
+		unlockSecretVersionPath := "/api/v1/locks/arbitrary/testString/versions/testString/unlock"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(unlockSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UnlockSecretVersion with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UnlockSecretVersionOptions model
+				unlockSecretVersionOptionsModel := new(secretsmanagerv1.UnlockSecretVersionOptions)
+				unlockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.Locks = []string{"testString"}
+				unlockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UnlockSecretVersion(unlockSecretVersionOptions *UnlockSecretVersionOptions)`, func() {
+		unlockSecretVersionPath := "/api/v1/locks/arbitrary/testString/versions/testString/unlock"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(unlockSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke UnlockSecretVersion successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the UnlockSecretVersionOptions model
+				unlockSecretVersionOptionsModel := new(secretsmanagerv1.UnlockSecretVersionOptions)
+				unlockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.Locks = []string{"testString"}
+				unlockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.UnlockSecretVersionWithContext(ctx, unlockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.UnlockSecretVersionWithContext(ctx, unlockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(unlockSecretVersionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke UnlockSecretVersion successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.UnlockSecretVersion(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UnlockSecretVersionOptions model
+				unlockSecretVersionOptionsModel := new(secretsmanagerv1.UnlockSecretVersionOptions)
+				unlockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.Locks = []string{"testString"}
+				unlockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UnlockSecretVersion with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UnlockSecretVersionOptions model
+				unlockSecretVersionOptionsModel := new(secretsmanagerv1.UnlockSecretVersionOptions)
+				unlockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.Locks = []string{"testString"}
+				unlockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UnlockSecretVersionOptions model with no property values
+				unlockSecretVersionOptionsModelNew := new(secretsmanagerv1.UnlockSecretVersionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UnlockSecretVersion successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the UnlockSecretVersionOptions model
+				unlockSecretVersionOptionsModel := new(secretsmanagerv1.UnlockSecretVersionOptions)
+				unlockSecretVersionOptionsModel.SecretType = core.StringPtr("arbitrary")
+				unlockSecretVersionOptionsModel.ID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.VersionID = core.StringPtr("testString")
+				unlockSecretVersionOptionsModel.Locks = []string{"testString"}
+				unlockSecretVersionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.UnlockSecretVersion(unlockSecretVersionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListInstanceSecretsLocks(listInstanceSecretsLocksOptions *ListInstanceSecretsLocksOptions) - Operation response error`, func() {
+		listInstanceSecretsLocksPath := "/api/v1/locks"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listInstanceSecretsLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListInstanceSecretsLocks with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the ListInstanceSecretsLocksOptions model
+				listInstanceSecretsLocksOptionsModel := new(secretsmanagerv1.ListInstanceSecretsLocksOptions)
+				listInstanceSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listInstanceSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listInstanceSecretsLocksOptionsModel.Search = core.StringPtr("testString")
+				listInstanceSecretsLocksOptionsModel.Groups = []string{"testString"}
+				listInstanceSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.ListInstanceSecretsLocks(listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.ListInstanceSecretsLocks(listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListInstanceSecretsLocks(listInstanceSecretsLocksOptions *ListInstanceSecretsLocksOptions)`, func() {
+		listInstanceSecretsLocksPath := "/api/v1/locks"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listInstanceSecretsLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "secret_type": "arbitrary", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke ListInstanceSecretsLocks successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListInstanceSecretsLocksOptions model
+				listInstanceSecretsLocksOptionsModel := new(secretsmanagerv1.ListInstanceSecretsLocksOptions)
+				listInstanceSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listInstanceSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listInstanceSecretsLocksOptionsModel.Search = core.StringPtr("testString")
+				listInstanceSecretsLocksOptionsModel.Groups = []string{"testString"}
+				listInstanceSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.ListInstanceSecretsLocksWithContext(ctx, listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.ListInstanceSecretsLocks(listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.ListInstanceSecretsLocksWithContext(ctx, listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listInstanceSecretsLocksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.URL.Query()["limit"]).To(Equal([]string{fmt.Sprint(int64(1))}))
+					Expect(req.URL.Query()["offset"]).To(Equal([]string{fmt.Sprint(int64(0))}))
+					Expect(req.URL.Query()["search"]).To(Equal([]string{"testString"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"secret_id": "b0283d74-0894-830b-f81d-1f115f67729f", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "secret_type": "arbitrary", "versions": [{"id": "bc656587-8fda-4d05-9ad8-b1de1ec7e712", "alias": "current", "locks": ["Locks"], "payload_available": true}]}]}`)
+				}))
+			})
+			It(`Invoke ListInstanceSecretsLocks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.ListInstanceSecretsLocks(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListInstanceSecretsLocksOptions model
+				listInstanceSecretsLocksOptionsModel := new(secretsmanagerv1.ListInstanceSecretsLocksOptions)
+				listInstanceSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listInstanceSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listInstanceSecretsLocksOptionsModel.Search = core.StringPtr("testString")
+				listInstanceSecretsLocksOptionsModel.Groups = []string{"testString"}
+				listInstanceSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.ListInstanceSecretsLocks(listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListInstanceSecretsLocks with error: Operation request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the ListInstanceSecretsLocksOptions model
+				listInstanceSecretsLocksOptionsModel := new(secretsmanagerv1.ListInstanceSecretsLocksOptions)
+				listInstanceSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listInstanceSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listInstanceSecretsLocksOptionsModel.Search = core.StringPtr("testString")
+				listInstanceSecretsLocksOptionsModel.Groups = []string{"testString"}
+				listInstanceSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.ListInstanceSecretsLocks(listInstanceSecretsLocksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListInstanceSecretsLocks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv1.NewSecretsManagerV1(&secretsmanagerv1.SecretsManagerV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the ListInstanceSecretsLocksOptions model
+				listInstanceSecretsLocksOptionsModel := new(secretsmanagerv1.ListInstanceSecretsLocksOptions)
+				listInstanceSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(1))
+				listInstanceSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
+				listInstanceSecretsLocksOptionsModel.Search = core.StringPtr("testString")
+				listInstanceSecretsLocksOptionsModel.Groups = []string{"testString"}
+				listInstanceSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.ListInstanceSecretsLocks(listInstanceSecretsLocksOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -7229,6 +9047,25 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getConfigOptionsModel.SecretType).To(Equal(core.StringPtr("iam_credentials")))
 				Expect(getConfigOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetLocksOptions successfully`, func() {
+				// Construct an instance of the GetLocksOptions model
+				secretType := "arbitrary"
+				id := "testString"
+				getLocksOptionsModel := secretsManagerService.NewGetLocksOptions(secretType, id)
+				getLocksOptionsModel.SetSecretType("arbitrary")
+				getLocksOptionsModel.SetID("testString")
+				getLocksOptionsModel.SetLimit(int64(1))
+				getLocksOptionsModel.SetOffset(int64(0))
+				getLocksOptionsModel.SetSearch("testString")
+				getLocksOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getLocksOptionsModel).ToNot(BeNil())
+				Expect(getLocksOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(getLocksOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(getLocksOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(getLocksOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(getLocksOptionsModel.Search).To(Equal(core.StringPtr("testString")))
+				Expect(getLocksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetNotificationsRegistrationOptions successfully`, func() {
 				// Construct an instance of the GetNotificationsRegistrationOptions model
 				getNotificationsRegistrationOptionsModel := secretsManagerService.NewGetNotificationsRegistrationOptions()
@@ -7287,6 +9124,28 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(getSecretOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(getSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetSecretVersionLocksOptions successfully`, func() {
+				// Construct an instance of the GetSecretVersionLocksOptions model
+				secretType := "arbitrary"
+				id := "testString"
+				versionID := "testString"
+				getSecretVersionLocksOptionsModel := secretsManagerService.NewGetSecretVersionLocksOptions(secretType, id, versionID)
+				getSecretVersionLocksOptionsModel.SetSecretType("arbitrary")
+				getSecretVersionLocksOptionsModel.SetID("testString")
+				getSecretVersionLocksOptionsModel.SetVersionID("testString")
+				getSecretVersionLocksOptionsModel.SetLimit(int64(1))
+				getSecretVersionLocksOptionsModel.SetOffset(int64(0))
+				getSecretVersionLocksOptionsModel.SetSearch("testString")
+				getSecretVersionLocksOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSecretVersionLocksOptionsModel).ToNot(BeNil())
+				Expect(getSecretVersionLocksOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(getSecretVersionLocksOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(getSecretVersionLocksOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
+				Expect(getSecretVersionLocksOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(getSecretVersionLocksOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(getSecretVersionLocksOptionsModel.Search).To(Equal(core.StringPtr("testString")))
+				Expect(getSecretVersionLocksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetSecretVersionMetadataOptions successfully`, func() {
 				// Construct an instance of the GetSecretVersionMetadataOptions model
 				secretType := "arbitrary"
@@ -7336,6 +9195,21 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(listAllSecretsOptionsModel.Groups).To(Equal([]string{"testString"}))
 				Expect(listAllSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewListInstanceSecretsLocksOptions successfully`, func() {
+				// Construct an instance of the ListInstanceSecretsLocksOptions model
+				listInstanceSecretsLocksOptionsModel := secretsManagerService.NewListInstanceSecretsLocksOptions()
+				listInstanceSecretsLocksOptionsModel.SetLimit(int64(1))
+				listInstanceSecretsLocksOptionsModel.SetOffset(int64(0))
+				listInstanceSecretsLocksOptionsModel.SetSearch("testString")
+				listInstanceSecretsLocksOptionsModel.SetGroups([]string{"testString"})
+				listInstanceSecretsLocksOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listInstanceSecretsLocksOptionsModel).ToNot(BeNil())
+				Expect(listInstanceSecretsLocksOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(listInstanceSecretsLocksOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(listInstanceSecretsLocksOptionsModel.Search).To(Equal(core.StringPtr("testString")))
+				Expect(listInstanceSecretsLocksOptionsModel.Groups).To(Equal([]string{"testString"}))
+				Expect(listInstanceSecretsLocksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewListSecretGroupsOptions successfully`, func() {
 				// Construct an instance of the ListSecretGroupsOptions model
 				listSecretGroupsOptionsModel := secretsManagerService.NewListSecretGroupsOptions()
@@ -7369,6 +9243,71 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(listSecretsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(listSecretsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewLockSecretBodyLocksItem successfully`, func() {
+				name := "testString"
+				description := "testString"
+				attributes := map[string]interface{}{"anyKey": "anyValue"}
+				_model, err := secretsManagerService.NewLockSecretBodyLocksItem(name, description, attributes)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewLockSecretOptions successfully`, func() {
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				Expect(lockSecretBodyLocksItemModel).ToNot(BeNil())
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				Expect(lockSecretBodyLocksItemModel.Name).To(Equal(core.StringPtr("lock-1")))
+				Expect(lockSecretBodyLocksItemModel.Description).To(Equal(core.StringPtr("lock for consumer-1")))
+				Expect(lockSecretBodyLocksItemModel.Attributes).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+
+				// Construct an instance of the LockSecretOptions model
+				secretType := "arbitrary"
+				id := "testString"
+				lockSecretOptionsModel := secretsManagerService.NewLockSecretOptions(secretType, id)
+				lockSecretOptionsModel.SetSecretType("arbitrary")
+				lockSecretOptionsModel.SetID("testString")
+				lockSecretOptionsModel.SetLocks([]secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel})
+				lockSecretOptionsModel.SetMode("exclusive")
+				lockSecretOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(lockSecretOptionsModel).ToNot(BeNil())
+				Expect(lockSecretOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(lockSecretOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(lockSecretOptionsModel.Locks).To(Equal([]secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}))
+				Expect(lockSecretOptionsModel.Mode).To(Equal(core.StringPtr("exclusive")))
+				Expect(lockSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewLockSecretVersionOptions successfully`, func() {
+				// Construct an instance of the LockSecretBodyLocksItem model
+				lockSecretBodyLocksItemModel := new(secretsmanagerv1.LockSecretBodyLocksItem)
+				Expect(lockSecretBodyLocksItemModel).ToNot(BeNil())
+				lockSecretBodyLocksItemModel.Name = core.StringPtr("lock-1")
+				lockSecretBodyLocksItemModel.Description = core.StringPtr("lock for consumer-1")
+				lockSecretBodyLocksItemModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				Expect(lockSecretBodyLocksItemModel.Name).To(Equal(core.StringPtr("lock-1")))
+				Expect(lockSecretBodyLocksItemModel.Description).To(Equal(core.StringPtr("lock for consumer-1")))
+				Expect(lockSecretBodyLocksItemModel.Attributes).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+
+				// Construct an instance of the LockSecretVersionOptions model
+				secretType := "arbitrary"
+				id := "testString"
+				versionID := "testString"
+				lockSecretVersionOptionsModel := secretsManagerService.NewLockSecretVersionOptions(secretType, id, versionID)
+				lockSecretVersionOptionsModel.SetSecretType("arbitrary")
+				lockSecretVersionOptionsModel.SetID("testString")
+				lockSecretVersionOptionsModel.SetVersionID("testString")
+				lockSecretVersionOptionsModel.SetLocks([]secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel})
+				lockSecretVersionOptionsModel.SetMode("exclusive")
+				lockSecretVersionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(lockSecretVersionOptionsModel).ToNot(BeNil())
+				Expect(lockSecretVersionOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(lockSecretVersionOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(lockSecretVersionOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
+				Expect(lockSecretVersionOptionsModel.Locks).To(Equal([]secretsmanagerv1.LockSecretBodyLocksItem{*lockSecretBodyLocksItemModel}))
+				Expect(lockSecretVersionOptionsModel.Mode).To(Equal(core.StringPtr("exclusive")))
+				Expect(lockSecretVersionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutConfigOptions successfully`, func() {
 				// Construct an instance of the CreateIamCredentialsSecretEngineRootConfig model
@@ -7458,6 +9397,39 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				sendTestNotificationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(sendTestNotificationOptionsModel).ToNot(BeNil())
 				Expect(sendTestNotificationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUnlockSecretOptions successfully`, func() {
+				// Construct an instance of the UnlockSecretOptions model
+				secretType := "arbitrary"
+				id := "testString"
+				unlockSecretOptionsModel := secretsManagerService.NewUnlockSecretOptions(secretType, id)
+				unlockSecretOptionsModel.SetSecretType("arbitrary")
+				unlockSecretOptionsModel.SetID("testString")
+				unlockSecretOptionsModel.SetLocks([]string{"testString"})
+				unlockSecretOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(unlockSecretOptionsModel).ToNot(BeNil())
+				Expect(unlockSecretOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(unlockSecretOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(unlockSecretOptionsModel.Locks).To(Equal([]string{"testString"}))
+				Expect(unlockSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUnlockSecretVersionOptions successfully`, func() {
+				// Construct an instance of the UnlockSecretVersionOptions model
+				secretType := "arbitrary"
+				id := "testString"
+				versionID := "testString"
+				unlockSecretVersionOptionsModel := secretsManagerService.NewUnlockSecretVersionOptions(secretType, id, versionID)
+				unlockSecretVersionOptionsModel.SetSecretType("arbitrary")
+				unlockSecretVersionOptionsModel.SetID("testString")
+				unlockSecretVersionOptionsModel.SetVersionID("testString")
+				unlockSecretVersionOptionsModel.SetLocks([]string{"testString"})
+				unlockSecretVersionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(unlockSecretVersionOptionsModel).ToNot(BeNil())
+				Expect(unlockSecretVersionOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(unlockSecretVersionOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(unlockSecretVersionOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
+				Expect(unlockSecretVersionOptionsModel.Locks).To(Equal([]string{"testString"}))
+				Expect(unlockSecretVersionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateConfigElementOptions successfully`, func() {
 				// Construct an instance of the UpdateConfigElementOptions model
