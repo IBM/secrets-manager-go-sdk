@@ -579,7 +579,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(ok).To(BeTrue())
 			secretId := arbitrarySecretResource.ID
 
-			// Lock secret
+			// lock secret
 			locks := []secretsmanagerv1.LockSecretBodyLocksItem{
 				secretsmanagerv1.LockSecretBodyLocksItem{
 					Name:        core.StringPtr("test-lock"),
@@ -597,14 +597,14 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
 
-			// delete arbitrary secret
+			// fail to delete locked secret
 			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
 				ID:         secretId,
 			})
 			Expect(resp.StatusCode).To(Equal(http.StatusPreconditionFailed))
 
-			// Unlock secret
+			// unlock secret
 			_, resp, err = secretsManager.UnlockSecret(&secretsmanagerv1.UnlockSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
 				ID:         secretId,
@@ -646,7 +646,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(ok).To(BeTrue())
 			secretId := arbitrarySecretResource.ID
 
-			// Lock secret
+			// lock secret
 			locks := []secretsmanagerv1.LockSecretBodyLocksItem{
 				secretsmanagerv1.LockSecretBodyLocksItem{
 					Name:        core.StringPtr("test-lock"),
@@ -664,11 +664,10 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			Expect(err).To(BeNil())
 			Expect(resp.StatusCode).To(Equal(http.StatusOK))
 
-			// Construct an instance of the RotateArbitrarySecretBody model
+			// rotate secret - 1st rotation, should pass
 			secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 			secretActionModel.Payload = core.StringPtr("new-secret-data")
 
-			// Construct an instance of the UpdateSecretOptions model
 			updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
 			updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 			updateSecretOptionsModel.ID = secretId
@@ -678,11 +677,10 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			_, _, operationErr := secretsManager.UpdateSecret(updateSecretOptionsModel)
 			Expect(operationErr).To(BeNil())
 
-			// Construct an instance of the RotateArbitrarySecretBody model
+			// rotate secret - 2nd rotation, should fail
 			secretActionModel = new(secretsmanagerv1.RotateArbitrarySecretBody)
 			secretActionModel.Payload = core.StringPtr("even-newer-secret-data")
 
-			// Construct an instance of the UpdateSecretOptions model
 			updateSecretOptionsModel = new(secretsmanagerv1.UpdateSecretOptions)
 			updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
 			updateSecretOptionsModel.ID = secretId
@@ -692,7 +690,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			_, _, operationErr = secretsManager.UpdateSecret(updateSecretOptionsModel)
 			Expect(operationErr).ToNot(BeNil())
 
-			// Unlock secret
+			// unlock secret
 			_, resp, err = secretsManager.UnlockSecretVersion(&secretsmanagerv1.UnlockSecretVersionOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
 				ID:         secretId,
