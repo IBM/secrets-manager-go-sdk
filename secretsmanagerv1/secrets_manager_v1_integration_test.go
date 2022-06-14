@@ -557,7 +557,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 	})
 
 	Context(`Secret Locks`, func() {
-		It(`Check locked secret can't be deleted'`, func() {
+		It(`Check locked secret can't be deleted`, func() {
 			// create arbitrary secret
 			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
