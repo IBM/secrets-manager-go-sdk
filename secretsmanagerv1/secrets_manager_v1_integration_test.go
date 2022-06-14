@@ -25,7 +25,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			URL:    os.Getenv("AUTH_URL"),
 		},
 	})
-	Expect(os.Getenv("SERVICE_URL")).To(BeNil())
+	Expect(secretsManager).ToNot(BeNil())
 	Expect(serviceErr).To(BeNil())
 
 	AfterSuite(func() {
@@ -37,6 +37,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 	Context(`Create and delete secret`, func() {
 
 		It(`Should create an arbitrary secret`, func() {
+			Expect(os.Getenv("SERVICE_URL")).To(BeNil())
 			// create arbitrary secret
 			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
 				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
