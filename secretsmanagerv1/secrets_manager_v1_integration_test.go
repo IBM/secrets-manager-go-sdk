@@ -25,7 +25,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			URL:    os.Getenv("AUTH_URL"),
 		},
 	})
-	Expect(os.Getenv("SERVICE_URL")).ToNot(BeNil())
+	Expect(os.Getenv("SERVICE_URL")).To(BeNil())
 	Expect(serviceErr).To(BeNil())
 
 	AfterSuite(func() {
