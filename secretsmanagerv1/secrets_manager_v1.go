@@ -1439,7 +1439,7 @@ func (secretsManager *SecretsManagerV1) LockSecretWithContext(ctx context.Contex
 // ["lock1", "lock2"]}`.
 //
 // **Note:** A secret is considered unlocked and able to be rotated or deleted only after all of its locks are removed.
-// To understand whether a secret contains locks, check the `total_locks` field that is returned as part of the metadata
+// To understand whether a secret contains locks, check the `locks_total` field that is returned as part of the metadata
 // of your secret.
 func (secretsManager *SecretsManagerV1) UnlockSecret(unlockSecretOptions *UnlockSecretOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
 	return secretsManager.UnlockSecretWithContext(context.Background(), unlockSecretOptions)
@@ -1678,7 +1678,7 @@ func (secretsManager *SecretsManagerV1) LockSecretVersionWithContext(ctx context
 // ["lock-1", "lock-2"]}`.
 //
 // **Note:** A secret is considered unlocked and able to be rotated or deleted only after all of its locks are removed.
-// To understand whether a secret contains locks, check the `total_locks` field that is returned as part of the metadata
+// To understand whether a secret contains locks, check the `locks_total` field that is returned as part of the metadata
 // of your secret.
 func (secretsManager *SecretsManagerV1) UnlockSecretVersion(unlockSecretVersionOptions *UnlockSecretVersionOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
 	return secretsManager.UnlockSecretVersionWithContext(context.Background(), unlockSecretVersionOptions)
