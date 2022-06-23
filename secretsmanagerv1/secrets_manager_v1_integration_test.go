@@ -556,6 +556,160 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 		})
 	})
 
+	Context(`Secret Locks`, func() {
+		It(`Check locked secret can't be deleted`, func() {
+			// create arbitrary secret
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.ArbitrarySecretResource{
+						Name:           core.StringPtr(generateName()),
+						ExpirationDate: generateExpirationDate(),
+						Payload:        core.StringPtr("secret-data"),
+					},
+				},
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			arbitrarySecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
+			Expect(ok).To(BeTrue())
+			secretId := arbitrarySecretResource.ID
+
+			// lock secret
+			locks := []secretsmanagerv1.LockSecretBodyLocksItem{
+				secretsmanagerv1.LockSecretBodyLocksItem{
+					Name:        core.StringPtr("test-lock"),
+					Description: core.StringPtr("exclusive"),
+					Attributes:  map[string]interface{}{"Key": "Value"},
+				},
+			}
+
+			_, resp, err = secretsManager.LockSecret(&secretsmanagerv1.LockSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+				Locks:      locks,
+				Mode:       core.StringPtr("exclusive"),
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// fail to delete locked secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+			})
+			Expect(resp.StatusCode).To(Equal(http.StatusPreconditionFailed))
+
+			// unlock secret
+			_, resp, err = secretsManager.UnlockSecret(&secretsmanagerv1.UnlockSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+				Locks:      []string{"test-lock"},
+				Headers:    nil,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// delete arbitrary secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+		})
+
+		It(`Check locked secret can rotate once`, func() {
+			// create arbitrary secret
+			createRes, resp, err := secretsManager.CreateSecret(&secretsmanagerv1.CreateSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				Metadata: &secretsmanagerv1.CollectionMetadata{
+					CollectionType:  core.StringPtr(secretsmanagerv1.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
+					CollectionTotal: core.Int64Ptr(1),
+				},
+				Resources: []secretsmanagerv1.SecretResourceIntf{
+					&secretsmanagerv1.ArbitrarySecretResource{
+						Name:           core.StringPtr(generateName()),
+						Description:    core.StringPtr("Lock test generated"),
+						ExpirationDate: generateExpirationDate(),
+						Payload:        core.StringPtr("secret-data"),
+					},
+				},
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+			arbitrarySecretResource, ok := createRes.Resources[0].(*secretsmanagerv1.SecretResource)
+			Expect(ok).To(BeTrue())
+			secretId := arbitrarySecretResource.ID
+
+			// lock secret
+			locks := []secretsmanagerv1.LockSecretBodyLocksItem{
+				secretsmanagerv1.LockSecretBodyLocksItem{
+					Name:        core.StringPtr("test-lock"),
+					Description: core.StringPtr("exclusive"),
+					Attributes:  map[string]interface{}{"Key": "Value"},
+				},
+			}
+
+			_, resp, err = secretsManager.LockSecret(&secretsmanagerv1.LockSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+				Locks:      locks,
+				Mode:       core.StringPtr("exclusive"),
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// rotate secret - 1st rotation, should pass
+			secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
+			secretActionModel.Payload = core.StringPtr("new-secret-data")
+
+			updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
+			updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+			updateSecretOptionsModel.ID = secretId
+			updateSecretOptionsModel.Action = core.StringPtr("rotate")
+			updateSecretOptionsModel.SecretAction = secretActionModel
+
+			_, _, operationErr := secretsManager.UpdateSecret(updateSecretOptionsModel)
+			Expect(operationErr).To(BeNil())
+
+			// rotate secret - 2nd rotation, should fail
+			secretActionModel = new(secretsmanagerv1.RotateArbitrarySecretBody)
+			secretActionModel.Payload = core.StringPtr("even-newer-secret-data")
+
+			updateSecretOptionsModel = new(secretsmanagerv1.UpdateSecretOptions)
+			updateSecretOptionsModel.SecretType = core.StringPtr("arbitrary")
+			updateSecretOptionsModel.ID = secretId
+			updateSecretOptionsModel.Action = core.StringPtr("rotate")
+			updateSecretOptionsModel.SecretAction = secretActionModel
+			// Expect response parsing to fail since secret is locked an already rotated once
+			_, _, operationErr = secretsManager.UpdateSecret(updateSecretOptionsModel)
+			Expect(operationErr).ToNot(BeNil())
+
+			// unlock secret
+			_, resp, err = secretsManager.UnlockSecretVersion(&secretsmanagerv1.UnlockSecretVersionOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.CreateSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+				VersionID:  core.StringPtr(secretsmanagerv1.SecretLockVersionAliasPreviousConst),
+				Locks:      []string{"test-lock"},
+				Headers:    nil,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusOK))
+
+			// delete arbitrary secret
+			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
+				SecretType: core.StringPtr(secretsmanagerv1.DeleteSecretOptionsSecretTypeArbitraryConst),
+				ID:         secretId,
+			})
+			Expect(err).To(BeNil())
+			Expect(resp.StatusCode).To(Equal(http.StatusNoContent))
+		})
+	})
 })
 
 func generateName() string {
