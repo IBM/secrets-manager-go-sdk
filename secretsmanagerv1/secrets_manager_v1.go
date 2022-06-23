@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.50.0-af9e48c4-20220523-163800
+ * IBM OpenAPI SDK Code Generator Version: 3.51.0-5b8b699d-20220613-200818
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -1432,13 +1432,13 @@ func (secretsManager *SecretsManagerV1) LockSecretWithContext(ctx context.Contex
 }
 
 // UnlockSecret : Unlock a secret
-// Delete one or more locks that are associated with a secret.
+// Delete one or more locks that are associated with the current version of a secret.
 //
 // A successful request deletes the locks that you specify. To remove all locks, you can pass `{"locks": ["*"]}` in in
 // the request body. Otherwise, specify the names of the locks that you want to delete. For example, `{"locks":
 // ["lock1", "lock2"]}`.
 //
-// **Note:** A secret is considered unlocked and able to be rotated or deleted only after all of its locks are removed.
+// **Note:** A secret is considered unlocked and able to be revoked or deleted only after all of its locks are removed.
 // To understand whether a secret contains locks, check the `locks_total` field that is returned as part of the metadata
 // of your secret.
 func (secretsManager *SecretsManagerV1) UnlockSecret(unlockSecretOptions *UnlockSecretOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
@@ -1677,7 +1677,7 @@ func (secretsManager *SecretsManagerV1) LockSecretVersionWithContext(ctx context
 // the request body. Otherwise, specify the names of the locks that you want to delete. For example, `{"locks":
 // ["lock-1", "lock-2"]}`.
 //
-// **Note:** A secret is considered unlocked and able to be rotated or deleted only after all of its locks are removed.
+// **Note:** A secret is considered unlocked and able to be revoked or deleted only after all of its locks are removed.
 // To understand whether a secret contains locks, check the `locks_total` field that is returned as part of the metadata
 // of your secret.
 func (secretsManager *SecretsManagerV1) UnlockSecretVersion(unlockSecretVersionOptions *UnlockSecretVersionOptions) (result *GetSecretLocks, response *core.DetailedResponse, err error) {
@@ -1750,8 +1750,8 @@ func (secretsManager *SecretsManagerV1) UnlockSecretVersionWithContext(ctx conte
 	return
 }
 
-// ListInstanceSecretsLocks : List all locks
-// List all of the locks that are associated with the secrets in your Secrets Manager instance.
+// ListInstanceSecretsLocks : List all secrets and locks
+// List the lock details that are associated with all secrets in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV1) ListInstanceSecretsLocks(listInstanceSecretsLocksOptions *ListInstanceSecretsLocksOptions) (result *GetInstanceLocks, response *core.DetailedResponse, err error) {
 	return secretsManager.ListInstanceSecretsLocksWithContext(context.Background(), listInstanceSecretsLocksOptions)
 }
@@ -6253,12 +6253,12 @@ func (options *ListSecretsOptions) SetHeaders(param map[string]string) *ListSecr
 
 // LockSecretBodyLocksItem : LockSecretBodyLocksItem struct
 type LockSecretBodyLocksItem struct {
-	// A human-readable name to assign to your secret lock.
+	// A human-readable name to assign to the lock. The lock name must be unique per secret version.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret lock.
 	Name *string `json:"name" validate:"required"`
 
-	// An extended description of your secret lock.
+	// An extended description of the lock.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
 	// lock.
