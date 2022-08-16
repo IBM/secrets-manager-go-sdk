@@ -7810,10 +7810,10 @@ type SecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -8094,11 +8094,11 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -9753,10 +9753,10 @@ type ArbitrarySecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -9865,11 +9865,11 @@ func UnmarshalArbitrarySecretResource(m map[string]json.RawMessage, result inter
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -10371,10 +10371,10 @@ type CertificateSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The contents of your certificate. The data must be formatted on a single line with embedded newline characters.
 	Certificate *string `json:"certificate,omitempty"`
@@ -10518,11 +10518,11 @@ func UnmarshalCertificateSecretResource(m map[string]json.RawMessage, result int
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -11800,10 +11800,10 @@ type IamCredentialsSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to generated credentials.
 	//
@@ -11945,11 +11945,11 @@ func UnmarshalIamCredentialsSecretResource(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -12725,10 +12725,10 @@ type KvSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -12837,11 +12837,11 @@ func UnmarshalKvSecretResource(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -13247,10 +13247,10 @@ type PrivateCertificateSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The name of the certificate template.
 	CertificateTemplate *string `json:"certificate_template" validate:"required"`
@@ -13436,11 +13436,11 @@ func UnmarshalPrivateCertificateSecretResource(m map[string]json.RawMessage, res
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -14234,10 +14234,10 @@ type PublicCertificateSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
@@ -14405,11 +14405,11 @@ func UnmarshalPublicCertificateSecretResource(m map[string]json.RawMessage, resu
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
@@ -16290,10 +16290,10 @@ type UsernamePasswordSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// User customized metadata for secret.
-	CustomMetadata *CustomMetadata `json:"custom_metadata,omitempty"`
+	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
 
 	// User customized metadata for secret version.
-	VersionCustomMetadata *VersionCustomMetadata `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The username to assign to this secret.
 	Username *string `json:"username,omitempty"`
@@ -16412,11 +16412,11 @@ func UnmarshalUsernamePasswordSecretResource(m map[string]json.RawMessage, resul
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "custom_metadata", &obj.CustomMetadata, UnmarshalCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "version_custom_metadata", &obj.VersionCustomMetadata, UnmarshalVersionCustomMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
 		return
 	}
