@@ -2289,17 +2289,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the RotateArbitrarySecretBody model
 				secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 				secretActionModel.Payload = core.StringPtr("testString")
-				secretActionModel.CustomMetadata = customMetadataModel
-				secretActionModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretActionModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretActionModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretOptions model
 				updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
@@ -2372,17 +2366,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the RotateArbitrarySecretBody model
 				secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 				secretActionModel.Payload = core.StringPtr("testString")
-				secretActionModel.CustomMetadata = customMetadataModel
-				secretActionModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretActionModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretActionModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretOptions model
 				updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
@@ -2463,17 +2451,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the RotateArbitrarySecretBody model
 				secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 				secretActionModel.Payload = core.StringPtr("testString")
-				secretActionModel.CustomMetadata = customMetadataModel
-				secretActionModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretActionModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretActionModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretOptions model
 				updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
@@ -2498,17 +2480,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the RotateArbitrarySecretBody model
 				secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 				secretActionModel.Payload = core.StringPtr("testString")
-				secretActionModel.CustomMetadata = customMetadataModel
-				secretActionModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretActionModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretActionModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretOptions model
 				updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
@@ -2554,17 +2530,11 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the RotateArbitrarySecretBody model
 				secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 				secretActionModel.Payload = core.StringPtr("testString")
-				secretActionModel.CustomMetadata = customMetadataModel
-				secretActionModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretActionModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretActionModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretOptions model
 				updateSecretOptionsModel := new(secretsmanagerv1.UpdateSecretOptions)
@@ -2720,7 +2690,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "version_custom_metadata": {}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "version_custom_metadata": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecretVersions successfully with retries`, func() {
@@ -2775,7 +2745,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "version_custom_metadata": {}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "version_custom_metadata": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecretVersions successfully`, func() {
@@ -2938,7 +2908,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "locks_total": 1, "version_custom_metadata": {}, "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "locks_total": 1, "version_custom_metadata": {"anyKey": "anyValue"}, "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully with retries`, func() {
@@ -2994,7 +2964,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "locks_total": 1, "version_custom_metadata": {}, "secret_data": {"anyKey": "anyValue"}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "locks_total": 1, "version_custom_metadata": {"anyKey": "anyValue"}, "secret_data": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully`, func() {
@@ -3390,7 +3360,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully with retries`, func() {
@@ -3446,7 +3416,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully`, func() {
@@ -3576,13 +3546,10 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretVersionMetadata model
 				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
 				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3643,7 +3610,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersionMetadata successfully with retries`, func() {
@@ -3660,13 +3627,10 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretVersionMetadata model
 				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
 				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3730,7 +3694,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {}}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "ID", "version_id": "4a0225e9-17a0-46c1-ace7-f25bcf4237d4", "creation_date": "2019-01-01T12:00:00.000Z", "created_by": "CreatedBy", "payload_available": true, "downloaded": true, "locks_total": 1, "version_custom_metadata": {"anyKey": "anyValue"}}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersionMetadata successfully`, func() {
@@ -3752,13 +3716,10 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretVersionMetadata model
 				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
 				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3789,13 +3750,10 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretVersionMetadata model
 				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
 				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3847,13 +3805,10 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretVersionMetadata model
 				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
 				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3940,7 +3895,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {"anyKey": "anyValue"}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -3995,7 +3950,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {"anyKey": "anyValue"}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -4122,15 +4077,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
 				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
 				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
-				secretMetadataModel.CustomMetadata = customMetadataModel
+				secretMetadataModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
@@ -4191,7 +4143,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {"anyKey": "anyValue"}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -4208,15 +4160,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
 				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
 				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
-				secretMetadataModel.CustomMetadata = customMetadataModel
+				secretMetadataModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
@@ -4280,7 +4229,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"metadata": {"collection_type": "application/vnd.ibm.secrets-manager.config+json", "collection_total": 1}, "resources": [{"id": "b0283d74-0894-830b-f81d-1f115f67729f", "labels": ["Labels"], "name": "example-secret", "description": "Extended description for this secret.", "secret_group_id": "f5283d74-9024-230a-b72c-1f115f61290f", "state": 0, "state_description": "Active", "secret_type": "arbitrary", "crn": "crn:v1:bluemix:public:secrets-manager:<region>:a/<account-id>:<service-instance>:secret:<secret-id>", "creation_date": "2018-04-12T23:20:50.520Z", "created_by": "ServiceId-cb258cb9-8de3-4ac0-9aec-b2b2d27ac976", "last_update_date": "2018-04-12T23:20:50.520Z", "versions_total": 1, "locks_total": 1, "custom_metadata": {"anyKey": "anyValue"}, "expiration_date": "2030-04-01T09:30:00.000Z"}]}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -4302,15 +4251,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
 				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
 				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
-				secretMetadataModel.CustomMetadata = customMetadataModel
+				secretMetadataModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
@@ -4341,15 +4287,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
 				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
 				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
-				secretMetadataModel.CustomMetadata = customMetadataModel
+				secretMetadataModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
@@ -4401,15 +4344,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
 				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
 				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
-				secretMetadataModel.CustomMetadata = customMetadataModel
+				secretMetadataModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
@@ -9903,22 +9843,18 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-				Expect(customMetadataModel).ToNot(BeNil())
-
 				// Construct an instance of the ArbitrarySecretMetadata model
 				secretMetadataModel := new(secretsmanagerv1.ArbitrarySecretMetadata)
 				Expect(secretMetadataModel).ToNot(BeNil())
 				secretMetadataModel.Labels = []string{"dev", "us-south"}
 				secretMetadataModel.Name = core.StringPtr("updated-secret-name")
 				secretMetadataModel.Description = core.StringPtr("Updated description for this secret.")
-				secretMetadataModel.CustomMetadata = customMetadataModel
+				secretMetadataModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretMetadataModel.ExpirationDate = CreateMockDateTime("2030-04-01T09:30:00Z")
 				Expect(secretMetadataModel.Labels).To(Equal([]string{"dev", "us-south"}))
 				Expect(secretMetadataModel.Name).To(Equal(core.StringPtr("updated-secret-name")))
 				Expect(secretMetadataModel.Description).To(Equal(core.StringPtr("Updated description for this secret.")))
-				Expect(secretMetadataModel.CustomMetadata).To(Equal(customMetadataModel))
+				Expect(secretMetadataModel.CustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(secretMetadataModel.ExpirationDate).To(Equal(CreateMockDateTime("2030-04-01T09:30:00Z")))
 
 				// Construct an instance of the UpdateSecretMetadataOptions model
@@ -9940,23 +9876,15 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(updateSecretMetadataOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretOptions successfully`, func() {
-				// Construct an instance of the CustomMetadata model
-				customMetadataModel := new(secretsmanagerv1.CustomMetadata)
-				Expect(customMetadataModel).ToNot(BeNil())
-
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-				Expect(versionCustomMetadataModel).ToNot(BeNil())
-
 				// Construct an instance of the RotateArbitrarySecretBody model
 				secretActionModel := new(secretsmanagerv1.RotateArbitrarySecretBody)
 				Expect(secretActionModel).ToNot(BeNil())
 				secretActionModel.Payload = core.StringPtr("testString")
-				secretActionModel.CustomMetadata = customMetadataModel
-				secretActionModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretActionModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretActionModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				Expect(secretActionModel.Payload).To(Equal(core.StringPtr("testString")))
-				Expect(secretActionModel.CustomMetadata).To(Equal(customMetadataModel))
-				Expect(secretActionModel.VersionCustomMetadata).To(Equal(versionCustomMetadataModel))
+				Expect(secretActionModel.CustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(secretActionModel.VersionCustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 
 				// Construct an instance of the UpdateSecretOptions model
 				secretType := "arbitrary"
@@ -9984,17 +9912,13 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
-				// Construct an instance of the VersionCustomMetadata model
-				versionCustomMetadataModel := new(secretsmanagerv1.VersionCustomMetadata)
-				Expect(versionCustomMetadataModel).ToNot(BeNil())
-
 				// Construct an instance of the ArbitrarySecretVersionMetadata model
 				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
 				Expect(secretVersionMetadataModel).ToNot(BeNil())
 				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = versionCustomMetadataModel
+				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				Expect(secretVersionMetadataModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(secretVersionMetadataModel.VersionCustomMetadata).To(Equal(versionCustomMetadataModel))
+				Expect(secretVersionMetadataModel.VersionCustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				secretType := "arbitrary"
