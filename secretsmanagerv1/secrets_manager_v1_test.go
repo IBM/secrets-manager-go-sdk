@@ -3546,10 +3546,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the ArbitrarySecretVersionMetadata model
-				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
-				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				// Construct an instance of the UpdateSecretVersionMetadata model
+				updateSecretVersionMetadataModel := new(secretsmanagerv1.UpdateSecretVersionMetadata)
+				updateSecretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3557,7 +3556,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateSecretVersionMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.VersionID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel}
+				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel}
 				updateSecretVersionMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.UpdateSecretVersionMetadata(updateSecretVersionMetadataOptionsModel)
@@ -3627,10 +3626,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the ArbitrarySecretVersionMetadata model
-				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
-				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				// Construct an instance of the UpdateSecretVersionMetadata model
+				updateSecretVersionMetadataModel := new(secretsmanagerv1.UpdateSecretVersionMetadata)
+				updateSecretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3638,7 +3636,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateSecretVersionMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.VersionID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel}
+				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel}
 				updateSecretVersionMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3716,10 +3714,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the ArbitrarySecretVersionMetadata model
-				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
-				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				// Construct an instance of the UpdateSecretVersionMetadata model
+				updateSecretVersionMetadataModel := new(secretsmanagerv1.UpdateSecretVersionMetadata)
+				updateSecretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3727,7 +3724,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateSecretVersionMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.VersionID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel}
+				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel}
 				updateSecretVersionMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3750,10 +3747,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the ArbitrarySecretVersionMetadata model
-				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
-				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				// Construct an instance of the UpdateSecretVersionMetadata model
+				updateSecretVersionMetadataModel := new(secretsmanagerv1.UpdateSecretVersionMetadata)
+				updateSecretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3761,7 +3757,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateSecretVersionMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.VersionID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel}
+				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel}
 				updateSecretVersionMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -3805,10 +3801,9 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				collectionMetadataModel.CollectionType = core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")
 				collectionMetadataModel.CollectionTotal = core.Int64Ptr(int64(1))
 
-				// Construct an instance of the ArbitrarySecretVersionMetadata model
-				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
-				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				// Construct an instance of the UpdateSecretVersionMetadata model
+				updateSecretVersionMetadataModel := new(secretsmanagerv1.UpdateSecretVersionMetadata)
+				updateSecretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				updateSecretVersionMetadataOptionsModel := new(secretsmanagerv1.UpdateSecretVersionMetadataOptions)
@@ -3816,7 +3811,7 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				updateSecretVersionMetadataOptionsModel.ID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.VersionID = core.StringPtr("testString")
 				updateSecretVersionMetadataOptionsModel.Metadata = collectionMetadataModel
-				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel}
+				updateSecretVersionMetadataOptionsModel.Resources = []secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel}
 				updateSecretVersionMetadataOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -9734,12 +9729,6 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				_, err := secretsManagerService.NewSecretPolicyRotation(typeVar, rotation)
 				Expect(err).ToNot(BeNil())
 			})
-			It(`Invoke NewSecretVersionMetadataRequest successfully`, func() {
-				var metadata *secretsmanagerv1.CollectionMetadata = nil
-				resources := []secretsmanagerv1.SecretVersionMetadataIntf{}
-				_, err := secretsManagerService.NewSecretVersionMetadataRequest(metadata, resources)
-				Expect(err).ToNot(BeNil())
-			})
 			It(`Invoke NewSendTestNotificationOptions successfully`, func() {
 				// Construct an instance of the SendTestNotificationOptions model
 				sendTestNotificationOptionsModel := secretsManagerService.NewSendTestNotificationOptions()
@@ -9912,33 +9901,31 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(collectionMetadataModel.CollectionType).To(Equal(core.StringPtr("application/vnd.ibm.secrets-manager.secret+json")))
 				Expect(collectionMetadataModel.CollectionTotal).To(Equal(core.Int64Ptr(int64(1))))
 
-				// Construct an instance of the ArbitrarySecretVersionMetadata model
-				secretVersionMetadataModel := new(secretsmanagerv1.ArbitrarySecretVersionMetadata)
-				Expect(secretVersionMetadataModel).ToNot(BeNil())
-				secretVersionMetadataModel.ID = core.StringPtr("testString")
-				secretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				Expect(secretVersionMetadataModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(secretVersionMetadataModel.VersionCustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				// Construct an instance of the UpdateSecretVersionMetadata model
+				updateSecretVersionMetadataModel := new(secretsmanagerv1.UpdateSecretVersionMetadata)
+				Expect(updateSecretVersionMetadataModel).ToNot(BeNil())
+				updateSecretVersionMetadataModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				Expect(updateSecretVersionMetadataModel.VersionCustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 
 				// Construct an instance of the UpdateSecretVersionMetadataOptions model
 				secretType := "arbitrary"
 				id := "testString"
 				versionID := "testString"
 				var updateSecretVersionMetadataOptionsMetadata *secretsmanagerv1.CollectionMetadata = nil
-				updateSecretVersionMetadataOptionsResources := []secretsmanagerv1.SecretVersionMetadataIntf{}
+				updateSecretVersionMetadataOptionsResources := []secretsmanagerv1.UpdateSecretVersionMetadata{}
 				updateSecretVersionMetadataOptionsModel := secretsManagerService.NewUpdateSecretVersionMetadataOptions(secretType, id, versionID, updateSecretVersionMetadataOptionsMetadata, updateSecretVersionMetadataOptionsResources)
 				updateSecretVersionMetadataOptionsModel.SetSecretType("arbitrary")
 				updateSecretVersionMetadataOptionsModel.SetID("testString")
 				updateSecretVersionMetadataOptionsModel.SetVersionID("testString")
 				updateSecretVersionMetadataOptionsModel.SetMetadata(collectionMetadataModel)
-				updateSecretVersionMetadataOptionsModel.SetResources([]secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel})
+				updateSecretVersionMetadataOptionsModel.SetResources([]secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel})
 				updateSecretVersionMetadataOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateSecretVersionMetadataOptionsModel).ToNot(BeNil())
 				Expect(updateSecretVersionMetadataOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
 				Expect(updateSecretVersionMetadataOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(updateSecretVersionMetadataOptionsModel.VersionID).To(Equal(core.StringPtr("testString")))
 				Expect(updateSecretVersionMetadataOptionsModel.Metadata).To(Equal(collectionMetadataModel))
-				Expect(updateSecretVersionMetadataOptionsModel.Resources).To(Equal([]secretsmanagerv1.SecretVersionMetadataIntf{secretVersionMetadataModel}))
+				Expect(updateSecretVersionMetadataOptionsModel.Resources).To(Equal([]secretsmanagerv1.UpdateSecretVersionMetadata{*updateSecretVersionMetadataModel}))
 				Expect(updateSecretVersionMetadataOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretVersionOptions successfully`, func() {

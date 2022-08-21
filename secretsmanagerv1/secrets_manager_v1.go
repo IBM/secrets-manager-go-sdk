@@ -1073,12 +1073,12 @@ func (secretsManager *SecretsManagerV1) UpdateSecretVersionWithContext(ctx conte
 // Get the metadata of a secret version by specifying the ID of the version or the alias `previous`.
 //
 // A successful request returns the metadata that is associated with the specified version of your secret.
-func (secretsManager *SecretsManagerV1) GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result *SecretVersionMetadataRequest, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result *GetSecretVersionMetadata, response *core.DetailedResponse, err error) {
 	return secretsManager.GetSecretVersionMetadataWithContext(context.Background(), getSecretVersionMetadataOptions)
 }
 
 // GetSecretVersionMetadataWithContext is an alternate form of the GetSecretVersionMetadata method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx context.Context, getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result *SecretVersionMetadataRequest, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx context.Context, getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result *GetSecretVersionMetadata, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretVersionMetadataOptions, "getSecretVersionMetadataOptions cannot be nil")
 	if err != nil {
 		return
@@ -1123,7 +1123,7 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx 
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersionMetadataRequest)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretVersionMetadata)
 		if err != nil {
 			return
 		}
@@ -1135,12 +1135,12 @@ func (secretsManager *SecretsManagerV1) GetSecretVersionMetadataWithContext(ctx 
 
 // UpdateSecretVersionMetadata : Update secret version metadata
 // Update the metadata of a secret version, such as version_custom_metadata.
-func (secretsManager *SecretsManagerV1) UpdateSecretVersionMetadata(updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) (result *SecretVersionMetadataRequest, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) UpdateSecretVersionMetadata(updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) (result *GetSecretVersionMetadata, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretVersionMetadataWithContext(context.Background(), updateSecretVersionMetadataOptions)
 }
 
 // UpdateSecretVersionMetadataWithContext is an alternate form of the UpdateSecretVersionMetadata method which supports a Context parameter
-func (secretsManager *SecretsManagerV1) UpdateSecretVersionMetadataWithContext(ctx context.Context, updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) (result *SecretVersionMetadataRequest, response *core.DetailedResponse, err error) {
+func (secretsManager *SecretsManagerV1) UpdateSecretVersionMetadataWithContext(ctx context.Context, updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) (result *GetSecretVersionMetadata, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretVersionMetadataOptions, "updateSecretVersionMetadataOptions cannot be nil")
 	if err != nil {
 		return
@@ -1198,7 +1198,7 @@ func (secretsManager *SecretsManagerV1) UpdateSecretVersionMetadataWithContext(c
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersionMetadataRequest)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGetSecretVersionMetadata)
 		if err != nil {
 			return
 		}
@@ -5542,6 +5542,30 @@ func (options *GetSecretVersionLocksOptions) SetHeaders(param map[string]string)
 	return options
 }
 
+// GetSecretVersionMetadata : Properties that describe the version of a secret.
+type GetSecretVersionMetadata struct {
+	// The metadata that describes the resource array.
+	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
+
+	// A collection of resources.
+	Resources []SecretVersionMetadataIntf `json:"resources" validate:"required"`
+}
+
+// UnmarshalGetSecretVersionMetadata unmarshals an instance of GetSecretVersionMetadata from the specified map of raw messages.
+func UnmarshalGetSecretVersionMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(GetSecretVersionMetadata)
+	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalSecretVersionMetadata)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
 	// The secret type.
@@ -6363,7 +6387,7 @@ type LockSecretOptions struct {
 	Locks []LockSecretBodyLocksItem `json:"locks,omitempty"`
 
 	// An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
-	// secret version.
+	// secret version. Note: When you are locking the `previous` version, the mode parameter is ignored.
 	//
 	// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
 	// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if
@@ -6388,7 +6412,7 @@ const (
 
 // Constants associated with the LockSecretOptions.Mode property.
 // An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
-// secret version.
+// secret version. Note: When you are locking the `previous` version, the mode parameter is ignored.
 //
 // - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
 // - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if it
@@ -6455,7 +6479,7 @@ type LockSecretVersionOptions struct {
 	Locks []LockSecretBodyLocksItem `json:"locks,omitempty"`
 
 	// An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
-	// secret version.
+	// secret version. Note: When you are locking the `previous` version, the mode parameter is ignored.
 	//
 	// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
 	// - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if
@@ -6480,7 +6504,7 @@ const (
 
 // Constants associated with the LockSecretVersionOptions.Mode property.
 // An optional lock mode. At lock creation, you can set one of the following modes to clear any matching locks on a
-// secret version.
+// secret version. Note: When you are locking the `previous` version, the mode parameter is ignored.
 //
 // - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
 // - `exclusive_delete`: Same as `exclusive`, but also permanently deletes the data of the previous secret version if it
@@ -8657,40 +8681,6 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// SecretVersionMetadataRequest : Properties that describe the version of a secret.
-type SecretVersionMetadataRequest struct {
-	// The metadata that describes the resource array.
-	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
-
-	// A collection of resources.
-	Resources []SecretVersionMetadataIntf `json:"resources" validate:"required"`
-}
-
-// NewSecretVersionMetadataRequest : Instantiate SecretVersionMetadataRequest (Generic Model Constructor)
-func (*SecretsManagerV1) NewSecretVersionMetadataRequest(metadata *CollectionMetadata, resources []SecretVersionMetadataIntf) (_model *SecretVersionMetadataRequest, err error) {
-	_model = &SecretVersionMetadataRequest{
-		Metadata:  metadata,
-		Resources: resources,
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalSecretVersionMetadataRequest unmarshals an instance of SecretVersionMetadataRequest from the specified map of raw messages.
-func UnmarshalSecretVersionMetadataRequest(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(SecretVersionMetadataRequest)
-	err = core.UnmarshalModel(m, "metadata", &obj.Metadata, UnmarshalCollectionMetadata)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "resources", &obj.Resources, UnmarshalSecretVersionMetadata)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // SecretsLocks : Properties that describe the secret locks.
 type SecretsLocks struct {
 	// The unique ID of the secret.
@@ -9320,6 +9310,23 @@ func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateS
 	return options
 }
 
+// UpdateSecretVersionMetadata : Updatable properties for update a secret version metadata.
+type UpdateSecretVersionMetadata struct {
+	// User customized metadata for secret version.
+	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+}
+
+// UnmarshalUpdateSecretVersionMetadata unmarshals an instance of UpdateSecretVersionMetadata from the specified map of raw messages.
+func UnmarshalUpdateSecretVersionMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateSecretVersionMetadata)
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // UpdateSecretVersionMetadataOptions : The UpdateSecretVersionMetadata options.
 type UpdateSecretVersionMetadataOptions struct {
 	// The secret type.
@@ -9339,7 +9346,7 @@ type UpdateSecretVersionMetadataOptions struct {
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []SecretVersionMetadataIntf `json:"resources" validate:"required"`
+	Resources []UpdateSecretVersionMetadata `json:"resources" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9358,7 +9365,7 @@ const (
 )
 
 // NewUpdateSecretVersionMetadataOptions : Instantiate UpdateSecretVersionMetadataOptions
-func (*SecretsManagerV1) NewUpdateSecretVersionMetadataOptions(secretType string, id string, versionID string, metadata *CollectionMetadata, resources []SecretVersionMetadataIntf) *UpdateSecretVersionMetadataOptions {
+func (*SecretsManagerV1) NewUpdateSecretVersionMetadataOptions(secretType string, id string, versionID string, metadata *CollectionMetadata, resources []UpdateSecretVersionMetadata) *UpdateSecretVersionMetadataOptions {
 	return &UpdateSecretVersionMetadataOptions{
 		SecretType: core.StringPtr(secretType),
 		ID:         core.StringPtr(id),
@@ -9393,7 +9400,7 @@ func (_options *UpdateSecretVersionMetadataOptions) SetMetadata(metadata *Collec
 }
 
 // SetResources : Allow user to set Resources
-func (_options *UpdateSecretVersionMetadataOptions) SetResources(resources []SecretVersionMetadataIntf) *UpdateSecretVersionMetadataOptions {
+func (_options *UpdateSecretVersionMetadataOptions) SetResources(resources []UpdateSecretVersionMetadata) *UpdateSecretVersionMetadataOptions {
 	_options.Resources = resources
 	return _options
 }
