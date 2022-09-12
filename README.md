@@ -29,9 +29,9 @@ Service name | Package name
 - An [IBM Cloud account](https://cloud.ibm.com/registration).
 - A [Secrets Manager service instance](https://cloud.ibm.com/catalog/services/secrets-manager).
 - An [IBM Cloud API key](https://cloud.ibm.com/iam/apikeys) that allows the SDK to access your account. 
-- Go version 1.16 or above.
+- Go version 1.17 or above.
 
-  This SDK is tested with Go versions 1.16 and up. The SDK may work on previous versions, but this is not supported officially.
+  This SDK is tested with Go versions 1.17 and up. The SDK may work on previous versions, but this is not supported officially.
 
 ## Installation
 
