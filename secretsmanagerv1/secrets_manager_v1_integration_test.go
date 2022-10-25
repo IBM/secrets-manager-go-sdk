@@ -14,7 +14,6 @@ import (
 	"time"
 )
 
-const dummy = "a"
 const TESTCASEPREFIX = "Go-SDK_"
 
 var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
