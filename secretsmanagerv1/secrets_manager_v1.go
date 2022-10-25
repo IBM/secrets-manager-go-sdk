@@ -6929,7 +6929,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotateKvSecretBody
 type SecretAction struct {
 	// The new secret data to assign to an `arbitrary` secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
@@ -7962,7 +7962,7 @@ type SecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
@@ -9866,7 +9866,7 @@ type ArbitrarySecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload *string `json:"payload,omitempty"`
+	Payload interface{} `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
@@ -15032,7 +15032,7 @@ func UnmarshalRootCertificateAuthorityConfig(m map[string]json.RawMessage, resul
 // This model "extends" SecretAction
 type RotateArbitrarySecretBody struct {
 	// The new secret data to assign to an `arbitrary` secret.
-	Payload *string `json:"payload" validate:"required"`
+	Payload interface{} `json:"payload" validate:"required"`
 
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
