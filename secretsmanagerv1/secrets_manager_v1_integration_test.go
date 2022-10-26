@@ -66,7 +66,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
-			secretData := secret.SecretData.(map[string]interface{})
+			secretData := secret.SecretData
 			Expect(secretData["payload"].(string)).To(Equal("secret-data"))
 			// delete arbitrary secret
 			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
@@ -158,7 +158,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
-			secretData := secret.SecretData.(map[string]interface{})
+			secretData := secret.SecretData
 			Expect(secretData["payload"]).To(Equal(payload))
 			// delete kv secret
 			resp, err = secretsManager.DeleteSecret(&secretsmanagerv1.DeleteSecretOptions{
@@ -286,7 +286,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
-			secretData := secret.SecretData.(map[string]interface{})
+			secretData := secret.SecretData
 			Expect(secretData["username"].(string)).To(Equal("test_user"))
 			Expect(secretData["password"].(string)).To(Equal("test_password"))
 			Expect(secret.NextRotationDate).NotTo(BeNil())
@@ -336,7 +336,7 @@ var _ = Describe(`IbmCloudSecretsManagerApiV1_integration`, func() {
 			})
 			Expect(err).To(BeNil())
 			secret := getSecretRes.Resources[0].(*secretsmanagerv1.SecretResource)
-			secretData := secret.SecretData.(map[string]interface{})
+			secretData := secret.SecretData
 			Expect(secretData["certificate"].(string)).To(Equal(testCertificate))
 			Expect(secretData["private_key"].(string)).To(Equal(testPrivateKey))
 			// delete certificate secret

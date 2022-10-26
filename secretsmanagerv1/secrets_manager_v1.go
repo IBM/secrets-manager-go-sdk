@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.55.1-b24c7487-20220831-201343
+ * IBM OpenAPI SDK Code Generator Version: 3.60.0-13f6e1ba-20221019-164457
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -756,7 +756,7 @@ func (secretsManager *SecretsManagerV1) GetSecretWithContext(ctx context.Context
 // - `restore`: Restore a previous version of an `iam_credentials` secret.
 // - `revoke`: Revoke a private certificate.
 // - `delete_credentials`: Delete the API key that is associated with an `iam_credentials` secret.
-// - `validate_dns_challenge`: Validate challenge for public certificate order with manual dns provider.
+// - `validate_dns_challenge`: Validate challenges for a public certificate that is ordered with a manual DNS provider.
 func (secretsManager *SecretsManagerV1) UpdateSecret(updateSecretOptions *UpdateSecretOptions) (result *GetSecret, response *core.DetailedResponse, err error) {
 	return secretsManager.UpdateSecretWithContext(context.Background(), updateSecretOptions)
 }
@@ -1894,7 +1894,7 @@ func (secretsManager *SecretsManagerV1) ListInstanceSecretsLocksWithContext(ctx 
 // PutPolicy : Set secret policies
 // Create or update one or more policies, such as an [automatic rotation
 // policy](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-automatic-rotation), for the specified
-// secret.
+// secret. To remove a policy, keep the resources block empty.
 func (secretsManager *SecretsManagerV1) PutPolicy(putPolicyOptions *PutPolicyOptions) (result GetSecretPoliciesIntf, response *core.DetailedResponse, err error) {
 	return secretsManager.PutPolicyWithContext(context.Background(), putPolicyOptions)
 }
@@ -2882,11 +2882,61 @@ func (options *ActionOnConfigElementOptions) SetHeaders(param map[string]string)
 // - `private_key`: The private key that is associated with the certificate.
 // - `intermediate`: The intermediate certificate that is associated with the certificate.
 type CertificateSecretData struct {
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of CertificateSecretData
+func (o *CertificateSecretData) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of CertificateSecretData
+func (o *CertificateSecretData) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of CertificateSecretData
+func (o *CertificateSecretData) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of CertificateSecretData
+func (o *CertificateSecretData) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of CertificateSecretData
+func (o *CertificateSecretData) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	buffer, err = json.Marshal(m)
+	return
 }
 
 // UnmarshalCertificateSecretData unmarshals an instance of CertificateSecretData from the specified map of raw messages.
 func UnmarshalCertificateSecretData(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CertificateSecretData)
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -2929,6 +2979,51 @@ func UnmarshalCertificateTemplatesConfigItem(m map[string]json.RawMessage, resul
 		return
 	}
 	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalCertificateTemplateConfig)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ChallengeResource : Properties that describe a challenge.
+type ChallengeResource struct {
+	// The challenge domain.
+	Domain *string `json:"domain,omitempty"`
+
+	// The challenge expiration date. The date format follows RFC 3339.
+	Expiration *strfmt.DateTime `json:"expiration,omitempty"`
+
+	// The challenge status.
+	Status *string `json:"status,omitempty"`
+
+	// The txt_record_name.
+	TxtRecordName *string `json:"txt_record_name,omitempty"`
+
+	// The txt_record_value.
+	TxtRecordValue *string `json:"txt_record_value,omitempty"`
+}
+
+// UnmarshalChallengeResource unmarshals an instance of ChallengeResource from the specified map of raw messages.
+func UnmarshalChallengeResource(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ChallengeResource)
+	err = core.UnmarshalPrimitive(m, "domain", &obj.Domain)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "txt_record_name", &obj.TxtRecordName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "txt_record_value", &obj.TxtRecordValue)
 	if err != nil {
 		return
 	}
@@ -3697,7 +3792,7 @@ type ConfigElementDefConfig struct {
 	// - `certificate`: The root certificate content.
 	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
 	// - `serial_number`: The unique serial number of the root certificate.
-	Data interface{} `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 
 	// The signing method to use with this certificate authority to generate private certificates.
 	//
@@ -5391,7 +5486,7 @@ type GetSecretPolicies struct {
 	Metadata *CollectionMetadata `json:"metadata,omitempty"`
 
 	// A collection of resources.
-	Resources []interface{} `json:"resources,omitempty"`
+	Resources []map[string]interface{} `json:"resources,omitempty"`
 }
 
 func (*GetSecretPolicies) isaGetSecretPolicies() bool {
@@ -5912,6 +6007,12 @@ type IssuanceInfo struct {
 
 	// The name that was assigned to the DNS provider configuration.
 	DNS *string `json:"dns,omitempty"`
+
+	// The set of challenges, will be returned only when ordering public certificate using manual DNS configuration.
+	Challenges []ChallengeResource `json:"challenges,omitempty"`
+
+	// The date a user called "validate dns challenges" for "manual" DNS provider. The date format follows RFC 3339.
+	DNSChallengeValidationTime *strfmt.DateTime `json:"dns_challenge_validation_time,omitempty"`
 }
 
 // UnmarshalIssuanceInfo unmarshals an instance of IssuanceInfo from the specified map of raw messages.
@@ -5950,6 +6051,14 @@ func UnmarshalIssuanceInfo(m map[string]json.RawMessage, result interface{}) (er
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "dns", &obj.DNS)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "challenges", &obj.Challenges, UnmarshalChallengeResource)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "dns_challenge_validation_time", &obj.DNSChallengeValidationTime)
 	if err != nil {
 		return
 	}
@@ -6340,18 +6449,16 @@ type LockSecretBodyLocksItem struct {
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
 	// lock.
-	Description *string `json:"description" validate:"required"`
+	Description *string `json:"description,omitempty"`
 
 	// Optional information to associate with a lock, such as resources CRNs to be used by automation.
-	Attributes interface{} `json:"attributes" validate:"required"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 }
 
 // NewLockSecretBodyLocksItem : Instantiate LockSecretBodyLocksItem (Generic Model Constructor)
-func (*SecretsManagerV1) NewLockSecretBodyLocksItem(name string, description string, attributes interface{}) (_model *LockSecretBodyLocksItem, err error) {
+func (*SecretsManagerV1) NewLockSecretBodyLocksItem(name string) (_model *LockSecretBodyLocksItem, err error) {
 	_model = &LockSecretBodyLocksItem{
-		Name:        core.StringPtr(name),
-		Description: core.StringPtr(description),
-		Attributes:  attributes,
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -6825,10 +6932,10 @@ type SecretAction struct {
 	Payload interface{} `json:"payload,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Determine whether keys must be rotated.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
@@ -6856,6 +6963,7 @@ type SecretAction struct {
 	// secrets that were created with a service ID that was generated by Secrets Manager.
 	//
 	// **Deprecated.** Use the `api_key_id` field instead.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	ServiceID *string `json:"service_id,omitempty"`
 }
 
@@ -7132,7 +7240,7 @@ type SecretLockData struct {
 	CreatedBy *string `json:"created_by,omitempty"`
 
 	// The information that is associated with a lock, such as resources CRNs to be used by automation.
-	Attributes interface{} `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 
 	// The v4 UUID that uniquely identifies the secret version.
 	SecretVersionID *string `json:"secret_version_id,omitempty"`
@@ -7377,7 +7485,7 @@ type SecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -7838,10 +7946,10 @@ type SecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -7859,7 +7967,7 @@ type SecretResource struct {
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 
 	// The username to assign to this secret.
 	Username *string `json:"username,omitempty"`
@@ -8318,12 +8426,12 @@ type SecretVersion struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -8450,7 +8558,7 @@ type SecretVersionInfo struct {
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -8579,7 +8687,7 @@ type SecretVersionMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -9035,7 +9143,7 @@ type UpdateConfigElementOptions struct {
 	Type *string `json:"type" validate:"required"`
 
 	// Properties that describe a configuration, which depends on type.
-	Config interface{} `json:"config" validate:"required"`
+	Config map[string]interface{} `json:"config" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9071,7 +9179,7 @@ const (
 )
 
 // NewUpdateConfigElementOptions : Instantiate UpdateConfigElementOptions
-func (*SecretsManagerV1) NewUpdateConfigElementOptions(secretType string, configElement string, configName string, typeVar string, config interface{}) *UpdateConfigElementOptions {
+func (*SecretsManagerV1) NewUpdateConfigElementOptions(secretType string, configElement string, configName string, typeVar string, config map[string]interface{}) *UpdateConfigElementOptions {
 	return &UpdateConfigElementOptions{
 		SecretType:    core.StringPtr(secretType),
 		ConfigElement: core.StringPtr(configElement),
@@ -9106,7 +9214,7 @@ func (_options *UpdateConfigElementOptions) SetType(typeVar string) *UpdateConfi
 }
 
 // SetConfig : Allow user to set Config
-func (_options *UpdateConfigElementOptions) SetConfig(config interface{}) *UpdateConfigElementOptions {
+func (_options *UpdateConfigElementOptions) SetConfig(config map[string]interface{}) *UpdateConfigElementOptions {
 	_options.Config = config
 	return _options
 }
@@ -9317,7 +9425,7 @@ func (options *UpdateSecretOptions) SetHeaders(param map[string]string) *UpdateS
 // UpdateSecretVersionMetadata : Properties that update the metadata of a secret version.
 type UpdateSecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // UnmarshalUpdateSecretVersionMetadata unmarshals an instance of UpdateSecretVersionMetadata from the specified map of raw messages.
@@ -9571,7 +9679,7 @@ type ArbitrarySecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -9742,10 +9850,10 @@ type ArbitrarySecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -9763,7 +9871,7 @@ type ArbitrarySecretResource struct {
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 // Constants associated with the ArbitrarySecretResource.SecretType property.
@@ -9897,12 +10005,12 @@ type ArbitrarySecretVersion struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 func (*ArbitrarySecretVersion) isaSecretVersion() bool {
@@ -9964,7 +10072,7 @@ type ArbitrarySecretVersionInfo struct {
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 func (*ArbitrarySecretVersionInfo) isaSecretVersionInfo() bool {
@@ -10028,7 +10136,7 @@ type ArbitrarySecretVersionMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 func (*ArbitrarySecretVersionMetadata) isaSecretVersionMetadata() bool {
@@ -10132,7 +10240,7 @@ type CertificateSecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -10360,10 +10468,10 @@ type CertificateSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The contents of your certificate. The data must be formatted on a single line with embedded newline characters.
 	Certificate *string `json:"certificate,omitempty"`
@@ -10381,7 +10489,7 @@ type CertificateSecretResource struct {
 	// - `certificate`: The contents of the certificate.
 	// - `private_key`: The private key that is associated with the certificate.
 	// - `intermediate`: The intermediate certificate that is associated with the certificate.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -10594,7 +10702,7 @@ type CertificateSecretVersion struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
@@ -10683,7 +10791,7 @@ type CertificateSecretVersionInfo struct {
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -10767,7 +10875,7 @@ type CertificateSecretVersionMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -11402,6 +11510,7 @@ type DeleteCredentialsForIamCredentialsSecret struct {
 	// secrets that were created with a service ID that was generated by Secrets Manager.
 	//
 	// **Deprecated.** Use the `api_key_id` field instead.
+	// Deprecated: this field is deprecated and may be removed in a future release.
 	ServiceID *string `json:"service_id,omitempty"`
 }
 
@@ -11473,7 +11582,7 @@ type GetSecretPolicyRotation struct {
 	Metadata *CollectionMetadata `json:"metadata" validate:"required"`
 
 	// A collection of resources.
-	Resources []interface{} `json:"resources" validate:"required"`
+	Resources []map[string]interface{} `json:"resources" validate:"required"`
 }
 
 func (*GetSecretPolicyRotation) isaGetSecretPolicies() bool {
@@ -11586,7 +11695,7 @@ type IamCredentialsSecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration that is assigned to the secret. For `iam_credentials` secrets, the TTL
 	// defines for how long each generated API key remains valid.
@@ -11789,10 +11898,10 @@ type IamCredentialsSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to generated credentials.
 	//
@@ -12003,7 +12112,7 @@ type IamCredentialsSecretVersion struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -12013,7 +12122,7 @@ type IamCredentialsSecretVersion struct {
 	// - `api_key`: The API key that is generated for this secret.
 	// - `api_key_id`: The ID of the API key that is generated for this secret.
 	// - `service_id`: The service ID under which the API key is created.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 func (*IamCredentialsSecretVersion) isaSecretVersion() bool {
@@ -12079,7 +12188,7 @@ type IamCredentialsSecretVersionInfo struct {
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -12150,7 +12259,7 @@ type IamCredentialsSecretVersionMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -12349,7 +12458,7 @@ type IntermediateCertificateAuthorityConfig struct {
 	// - `csr`: The PEM-encoded certificate signing request.
 	// - `private_key`: The private key.
 	// - `private_key_type`: The type of private key, for example `rsa`.
-	Data interface{} `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 // Constants associated with the IntermediateCertificateAuthorityConfig.SigningMethod property.
@@ -12588,7 +12697,7 @@ type KvSecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 }
 
 // Constants associated with the KvSecretMetadata.SecretType property.
@@ -12745,10 +12854,10 @@ type KvSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -12761,12 +12870,12 @@ type KvSecretResource struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The new secret data to assign to the secret.
-	Payload interface{} `json:"payload,omitempty"`
+	Payload map[string]interface{} `json:"payload,omitempty"`
 
 	// The data that is associated with the secret version.
 	//
 	// The data object contains the field `payload`.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 // Constants associated with the KvSecretResource.SecretType property.
@@ -13026,7 +13135,7 @@ type PrivateCertificateSecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The name of the certificate template.
 	CertificateTemplate *string `json:"certificate_template,omitempty"`
@@ -13267,10 +13376,10 @@ type PrivateCertificateSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The name of the certificate template.
 	CertificateTemplate *string `json:"certificate_template" validate:"required"`
@@ -13349,7 +13458,7 @@ type PrivateCertificateSecretResource struct {
 	// - `private_key`: The private key that is associated with the certificate.
 	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
 	// - `ca_chain`: The chain of certificate authorities that are associated with the certificate.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 // Constants associated with the PrivateCertificateSecretResource.SecretType property.
@@ -13567,7 +13676,7 @@ type PrivateCertificateSecretVersion struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
@@ -13692,7 +13801,7 @@ type PrivateCertificateSecretVersionInfo struct {
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -13812,7 +13921,7 @@ type PrivateCertificateSecretVersionMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The unique serial number that was assigned to the certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
@@ -14001,7 +14110,7 @@ type PublicCertificateSecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
@@ -14254,10 +14363,10 @@ type PublicCertificateSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
@@ -14320,7 +14429,7 @@ type PublicCertificateSecretResource struct {
 	// - `certificate`: The contents of the certificate.
 	// - `private_key`: The private key that is associated with the certificate.
 	// - `intermediate`: The intermediate certificate that is associated with the certificate.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 // Constants associated with the PublicCertificateSecretResource.SecretType property.
@@ -14504,10 +14613,10 @@ type RestoreIamCredentialsSecretBody struct {
 	VersionID *string `json:"version_id" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRestoreIamCredentialsSecretBody : Instantiate RestoreIamCredentialsSecretBody (Generic Model Constructor)
@@ -14745,7 +14854,7 @@ type RootCertificateAuthorityConfig struct {
 	// - `certificate`: The root certificate content.
 	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
 	// - `serial_number`: The unique serial number of the root certificate.
-	Data interface{} `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 // Constants associated with the RootCertificateAuthorityConfig.Status property.
@@ -14926,10 +15035,10 @@ type RotateArbitrarySecretBody struct {
 	Payload interface{} `json:"payload" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRotateArbitrarySecretBody : Instantiate RotateArbitrarySecretBody (Generic Model Constructor)
@@ -14977,10 +15086,10 @@ type RotateCertificateBody struct {
 	Intermediate *string `json:"intermediate,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRotateCertificateBody : Instantiate RotateCertificateBody (Generic Model Constructor)
@@ -15043,17 +15152,17 @@ func UnmarshalRotateCrlActionResult(m map[string]json.RawMessage, result interfa
 // This model "extends" SecretAction
 type RotateKvSecretBody struct {
 	// The new secret data to assign to a key-value secret.
-	Payload interface{} `json:"payload" validate:"required"`
+	Payload map[string]interface{} `json:"payload" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRotateKvSecretBody : Instantiate RotateKvSecretBody (Generic Model Constructor)
-func (*SecretsManagerV1) NewRotateKvSecretBody(payload interface{}) (_model *RotateKvSecretBody, err error) {
+func (*SecretsManagerV1) NewRotateKvSecretBody(payload map[string]interface{}) (_model *RotateKvSecretBody, err error) {
 	_model = &RotateKvSecretBody{
 		Payload: payload,
 	}
@@ -15088,14 +15197,14 @@ func UnmarshalRotateKvSecretBody(m map[string]json.RawMessage, result interface{
 // This model "extends" SecretAction
 type RotatePrivateCertBody struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata" validate:"required"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata" validate:"required"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRotatePrivateCertBody : Instantiate RotatePrivateCertBody (Generic Model Constructor)
-func (*SecretsManagerV1) NewRotatePrivateCertBody(customMetadata interface{}) (_model *RotatePrivateCertBody, err error) {
+func (*SecretsManagerV1) NewRotatePrivateCertBody(customMetadata map[string]interface{}) (_model *RotatePrivateCertBody, err error) {
 	_model = &RotatePrivateCertBody{
 		CustomMetadata: customMetadata,
 	}
@@ -15126,11 +15235,11 @@ func UnmarshalRotatePrivateCertBody(m map[string]json.RawMessage, result interfa
 // This model "extends" SecretAction
 type RotatePrivateCertBodyWithVersionCustomMetadata struct {
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata" validate:"required"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata" validate:"required"`
 }
 
 // NewRotatePrivateCertBodyWithVersionCustomMetadata : Instantiate RotatePrivateCertBodyWithVersionCustomMetadata (Generic Model Constructor)
-func (*SecretsManagerV1) NewRotatePrivateCertBodyWithVersionCustomMetadata(versionCustomMetadata interface{}) (_model *RotatePrivateCertBodyWithVersionCustomMetadata, err error) {
+func (*SecretsManagerV1) NewRotatePrivateCertBodyWithVersionCustomMetadata(versionCustomMetadata map[string]interface{}) (_model *RotatePrivateCertBodyWithVersionCustomMetadata, err error) {
 	_model = &RotatePrivateCertBodyWithVersionCustomMetadata{
 		VersionCustomMetadata: versionCustomMetadata,
 	}
@@ -15160,10 +15269,10 @@ type RotatePublicCertBody struct {
 	RotateKeys *bool `json:"rotate_keys" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRotatePublicCertBody : Instantiate RotatePublicCertBody (Generic Model Constructor)
@@ -15205,10 +15314,10 @@ type RotateUsernamePasswordSecretBody struct {
 	Password *string `json:"password" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewRotateUsernamePasswordSecretBody : Instantiate RotateUsernamePasswordSecretBody (Generic Model Constructor)
@@ -15653,7 +15762,7 @@ type SignCsrActionResult struct {
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// Properties that are returned with a successful `sign` action.
-	Data *SignActionResultData `json:"data" validate:"required"`
+	Data *SignActionResultData `json:"data,omitempty"`
 
 	// The PEM-encoded certificate signing request (CSR).
 	Csr *string `json:"csr" validate:"required"`
@@ -16042,7 +16151,7 @@ type SignIntermediateActionResult struct {
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// Properties that are returned with a successful `sign` action.
-	Data *SignIntermediateActionResultData `json:"data" validate:"required"`
+	Data *SignIntermediateActionResultData `json:"data,omitempty"`
 
 	// The signed intermediate certificate authority.
 	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority" validate:"required"`
@@ -16208,7 +16317,7 @@ type UsernamePasswordSecretMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -16379,10 +16488,10 @@ type UsernamePasswordSecretResource struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata interface{} `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The username to assign to this secret.
 	Username *string `json:"username,omitempty"`
@@ -16394,7 +16503,7 @@ type UsernamePasswordSecretResource struct {
 	//
 	// - `username`: The username that is associated with the secret version.
 	// - `password`: The password that is associated with the secret version.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 
 	// The date the secret material expires. The date format follows RFC 3339.
 	//
@@ -16552,7 +16661,7 @@ type UsernamePasswordSecretVersion struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -16561,7 +16670,7 @@ type UsernamePasswordSecretVersion struct {
 	//
 	// - `username`: The username that is associated with the secret version.
 	// - `password`: The password that is associated with the secret version.
-	SecretData interface{} `json:"secret_data,omitempty"`
+	SecretData map[string]interface{} `json:"secret_data,omitempty"`
 }
 
 func (*UsernamePasswordSecretVersion) isaSecretVersion() bool {
@@ -16627,7 +16736,7 @@ type UsernamePasswordSecretVersionInfo struct {
 	Downloaded *bool `json:"downloaded,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -16698,7 +16807,7 @@ type UsernamePasswordSecretVersionMetadata struct {
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata interface{} `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
