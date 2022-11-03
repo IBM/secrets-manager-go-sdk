@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.60.0-13f6e1ba-20221019-164457
+ * IBM OpenAPI SDK Code Generator Version: 3.60.2-95dc7721-20221102-203229
  */
 
 // Package secretsmanagerv1 : Operations and models for the SecretsManagerV1 service
@@ -6923,6 +6923,7 @@ func UnmarshalRotation(m map[string]json.RawMessage, result interface{}) (err er
 // - RotateUsernamePasswordSecretBody
 // - RotateCertificateBody
 // - RotatePrivateCertBody
+// - RotatePrivateCertBodyWithCsr
 // - RotatePrivateCertBodyWithVersionCustomMetadata
 // - RestoreIamCredentialsSecretBody
 // - DeleteCredentialsForIamCredentialsSecret
@@ -6951,6 +6952,12 @@ type SecretAction struct {
 
 	// The new intermediate certificate to associate with the certificate.
 	Intermediate *string `json:"intermediate,omitempty"`
+
+	// The certificate signing request. If you provide a CSR, it is used for auto rotation and manual rotation requests
+	// that do not include a CSR. If you don't include the CSR, the certificate is generated with the last CSR that you
+	// provided to create the private certificate, or on a previous request to rotate the certificate. If no CSR was
+	// provided in the past, the certificate is generated with a CSR that is created internally.
+	Csr *string `json:"csr,omitempty"`
 
 	// The ID of the target version or the alias `previous`.
 	VersionID *string `json:"version_id,omitempty"`
@@ -7007,6 +7014,10 @@ func UnmarshalSecretAction(m map[string]json.RawMessage, result interface{}) (er
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
 		return
 	}
@@ -8101,6 +8112,11 @@ type SecretResource struct {
 	// The intermediate certificate authority that signed this certificate.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
 
+	// The certificate signing request. If you don't include this parameter, the CSR that is used to generate the
+	// certificate is created internally. If you provide a CSR, it is used also for auto rotation and manual rotation,
+	// unless you provide another CSR in the manual rotation request.
+	Csr *string `json:"csr,omitempty"`
+
 	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IPSans *string `json:"ip_sans,omitempty"`
 
@@ -8363,6 +8379,10 @@ func UnmarshalSecretResource(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
 		return
 	}
@@ -13387,7 +13407,13 @@ type PrivateCertificateSecretResource struct {
 	// The intermediate certificate authority that signed this certificate.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
 
-	// The fully qualified domain name or host domain name for the certificate.
+	// The certificate signing request. If you don't include this parameter, the CSR that is used to generate the
+	// certificate is created internally. If you provide a CSR, it is used also for auto rotation and manual rotation,
+	// unless you provide another CSR in the manual rotation request.
+	Csr *string `json:"csr,omitempty"`
+
+	// The fully qualified domain name or host domain name for the certificate. If you provide a CSR that includes a common
+	// name value, the certificate is generated with the common name that is provided in the CSR.
 	CommonName *string `json:"common_name" validate:"required"`
 
 	// The alternative names that are defined for the certificate.
@@ -13455,7 +13481,8 @@ type PrivateCertificateSecretResource struct {
 	// The data that is associated with the secret. The data object contains the following fields:
 	//
 	// - `certificate`: The contents of the certificate.
-	// - `private_key`: The private key that is associated with the certificate.
+	// - `private_key`: The private key that is associated with the certificate. If you provide a CSR in the request, the
+	// private_key field is not included in the data.
 	// - `issuing_ca`: The certificate of the certificate authority that signed and issued this certificate.
 	// - `ca_chain`: The chain of certificate authorities that are associated with the certificate.
 	SecretData map[string]interface{} `json:"secret_data,omitempty"`
@@ -13578,6 +13605,10 @@ func UnmarshalPrivateCertificateSecretResource(m map[string]json.RawMessage, res
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
 		return
 	}
@@ -15219,6 +15250,54 @@ func (*RotatePrivateCertBody) isaSecretAction() bool {
 // UnmarshalRotatePrivateCertBody unmarshals an instance of RotatePrivateCertBody from the specified map of raw messages.
 func UnmarshalRotatePrivateCertBody(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RotatePrivateCertBody)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// RotatePrivateCertBodyWithCsr : The body of a request to rotate a private certificate.
+// This model "extends" SecretAction
+type RotatePrivateCertBodyWithCsr struct {
+	// The certificate signing request. If you provide a CSR, it is used for auto rotation and manual rotation requests
+	// that do not include a CSR. If you don't include the CSR, the certificate is generated with the last CSR that you
+	// provided to create the private certificate, or on a previous request to rotate the certificate. If no CSR was
+	// provided in the past, the certificate is generated with a CSR that is created internally.
+	Csr *string `json:"csr" validate:"required"`
+
+	// The secret metadata that a user can customize.
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// The secret version metadata that a user can customize.
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
+}
+
+// NewRotatePrivateCertBodyWithCsr : Instantiate RotatePrivateCertBodyWithCsr (Generic Model Constructor)
+func (*SecretsManagerV1) NewRotatePrivateCertBodyWithCsr(csr string) (_model *RotatePrivateCertBodyWithCsr, err error) {
+	_model = &RotatePrivateCertBodyWithCsr{
+		Csr: core.StringPtr(csr),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+func (*RotatePrivateCertBodyWithCsr) isaSecretAction() bool {
+	return true
+}
+
+// UnmarshalRotatePrivateCertBodyWithCsr unmarshals an instance of RotatePrivateCertBodyWithCsr from the specified map of raw messages.
+func UnmarshalRotatePrivateCertBodyWithCsr(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(RotatePrivateCertBodyWithCsr)
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		return
