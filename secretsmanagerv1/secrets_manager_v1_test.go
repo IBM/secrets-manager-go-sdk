@@ -10106,6 +10106,12 @@ var _ = Describe(`SecretsManagerV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewRotatePrivateCertBodyWithCsr successfully`, func() {
+				csr := "testString"
+				_model, err := secretsManagerService.NewRotatePrivateCertBodyWithCsr(csr)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewRotatePrivateCertBodyWithVersionCustomMetadata successfully`, func() {
 				versionCustomMetadata := map[string]interface{}{"anyKey": "anyValue"}
 				_model, err := secretsManagerService.NewRotatePrivateCertBodyWithVersionCustomMetadata(versionCustomMetadata)
