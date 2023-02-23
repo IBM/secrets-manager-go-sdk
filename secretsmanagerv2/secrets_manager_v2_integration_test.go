@@ -437,6 +437,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 				Description:    core.StringPtr("updated Arbitrary Secret description"),
 				Labels:         []string{"dev", "us-south"},
 				CustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
+				ExpirationDate: CreateMockDateTime("2025-04-12T23:20:50.520Z"),
 			}
 			secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
@@ -458,7 +459,6 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateSecretAction(createSecretActionOptions *CreateSecretActionOptions)`, func() {
-			Skip("Runs in manual tests")
 			secretActionPrototypeModel := &secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype{
 				ActionType: core.StringPtr("private_cert_action_revoke_certificate"),
 			}
@@ -561,7 +561,6 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateSecretVersionAction(createSecretVersionActionOptions *CreateSecretVersionActionOptions)`, func() {
-			Skip("Runs in manual tests")
 			secretVersionActionPrototypeModel := &secretsmanagerv2.PrivateCertificateVersionActionRevokePrototype{
 				ActionType: core.StringPtr("private_cert_action_revoke_certificate"),
 			}
@@ -1002,7 +1001,6 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`DeleteSecretVersionData(deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions)`, func() {
-			Skip("Runs in manual tests")
 			deleteSecretVersionDataOptions := &secretsmanagerv2.DeleteSecretVersionDataOptions{
 				SecretID: &secretIdForGetSecretLink,
 				ID:       &secretIdForGetSecretLink,

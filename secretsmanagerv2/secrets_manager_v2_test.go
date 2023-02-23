@@ -160,8 +160,24 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
+	Describe(`Parameterized URL tests`, func() {
+		It(`Format parameterized URL with all default values`, func() {
+			constructedURL, err := secretsmanagerv2.ConstructServiceURL(nil)
+			Expect(constructedURL).To(Equal("https://provide-here-your-smgr-instanceuuid.us-south.secrets-manager.appdomain.cloud"))
+			Expect(constructedURL).ToNot(BeNil())
+			Expect(err).To(BeNil())
+		})
+		It(`Return an error if a provided variable name is invalid`, func() {
+			var providedUrlVariables = map[string]string{
+				"invalid_variable_name": "value",
+			}
+			constructedURL, err := secretsmanagerv2.ConstructServiceURL(providedUrlVariables)
+			Expect(constructedURL).To(Equal(""))
+			Expect(err).ToNot(BeNil())
+		})
+	})
 	Describe(`CreateSecretGroup(createSecretGroupOptions *CreateSecretGroupOptions) - Operation response error`, func() {
-		createSecretGroupPath := "/v2/secret_groups"
+		createSecretGroupPath := "/api/v2/secret_groups"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -207,7 +223,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretGroup(createSecretGroupOptions *CreateSecretGroupOptions)`, func() {
-		createSecretGroupPath := "/v2/secret_groups"
+		createSecretGroupPath := "/api/v2/secret_groups"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -410,7 +426,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions) - Operation response error`, func() {
-		listSecretGroupsPath := "/v2/secret_groups"
+		listSecretGroupsPath := "/api/v2/secret_groups"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -454,7 +470,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions)`, func() {
-		listSecretGroupsPath := "/v2/secret_groups"
+		listSecretGroupsPath := "/api/v2/secret_groups"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -610,7 +626,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions) - Operation response error`, func() {
-		getSecretGroupPath := "/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
+		getSecretGroupPath := "/api/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -655,7 +671,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions)`, func() {
-		getSecretGroupPath := "/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
+		getSecretGroupPath := "/api/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -822,7 +838,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateSecretGroup(updateSecretGroupOptions *UpdateSecretGroupOptions) - Operation response error`, func() {
-		updateSecretGroupPath := "/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
+		updateSecretGroupPath := "/api/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -875,7 +891,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateSecretGroup(updateSecretGroupOptions *UpdateSecretGroupOptions)`, func() {
-		updateSecretGroupPath := "/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
+		updateSecretGroupPath := "/api/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1106,7 +1122,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecretGroup(deleteSecretGroupOptions *DeleteSecretGroupOptions)`, func() {
-		deleteSecretGroupPath := "/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
+		deleteSecretGroupPath := "/api/v2/secret_groups/d898bb90-82f6-4d61-b5cc-b079b66cfa76"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1174,7 +1190,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecret(createSecretOptions *CreateSecretOptions) - Operation response error`, func() {
-		createSecretPath := "/v2/secrets"
+		createSecretPath := "/api/v2/secrets"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1231,7 +1247,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecret(createSecretOptions *CreateSecretOptions)`, func() {
-		createSecretPath := "/v2/secrets"
+		createSecretPath := "/api/v2/secrets"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1263,7 +1279,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
@@ -1345,7 +1361,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -1478,7 +1494,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecrets(listSecretsOptions *ListSecretsOptions) - Operation response error`, func() {
-		listSecretsPath := "/v2/secrets"
+		listSecretsPath := "/api/v2/secrets"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1531,7 +1547,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecrets(listSecretsOptions *ListSecretsOptions)`, func() {
-		listSecretsPath := "/v2/secrets"
+		listSecretsPath := "/api/v2/secrets"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1551,7 +1567,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2022-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2025-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -1613,7 +1629,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2022-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2025-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -1767,9 +1783,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"imported_cert","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"signing_algorithm":"SHA256-RSA","alt_names":["AltNames"],"common_name":"example.com","expiration_date":"2022-04-12T23:20:50.520Z","intermediate_included":true,"issuer":"Lets Encrypt","key_algorithm":"RSA2048","private_key_included":true,"serial_number":"38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18","validity":{"not_before":"2025-04-12T23:20:50.000Z","not_after":"2025-04-12T23:20:50.000Z"}}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"imported_cert","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"signing_algorithm":"SHA256-RSA","alt_names":["AltNames"],"common_name":"example.com","expiration_date":"2025-04-12T23:20:50.520Z","intermediate_included":true,"issuer":"Lets Encrypt","key_algorithm":"RSA2048","private_key_included":true,"serial_number":"38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18","validity":{"not_before":"2025-04-12T23:20:50.000Z","not_after":"2025-04-12T23:20:50.000Z"}}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"imported_cert","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"signing_algorithm":"SHA256-RSA","alt_names":["AltNames"],"common_name":"example.com","expiration_date":"2022-04-12T23:20:50.520Z","intermediate_included":true,"issuer":"Lets Encrypt","key_algorithm":"RSA2048","private_key_included":true,"serial_number":"38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18","validity":{"not_before":"2025-04-12T23:20:50.000Z","not_after":"2025-04-12T23:20:50.000Z"}}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"imported_cert","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"signing_algorithm":"SHA256-RSA","alt_names":["AltNames"],"common_name":"example.com","expiration_date":"2025-04-12T23:20:50.520Z","intermediate_included":true,"issuer":"Lets Encrypt","key_algorithm":"RSA2048","private_key_included":true,"serial_number":"38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18","validity":{"not_before":"2025-04-12T23:20:50.000Z","not_after":"2025-04-12T23:20:50.000Z"}}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -1830,7 +1846,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecret(getSecretOptions *GetSecretOptions) - Operation response error`, func() {
-		getSecretPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+		getSecretPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1875,7 +1891,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecret(getSecretOptions *GetSecretOptions)`, func() {
-		getSecretPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+		getSecretPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1891,7 +1907,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
@@ -1945,7 +1961,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
@@ -2042,7 +2058,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecret(deleteSecretOptions *DeleteSecretOptions)`, func() {
-		deleteSecretPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+		deleteSecretPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2110,7 +2126,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretMetadata(getSecretMetadataOptions *GetSecretMetadataOptions) - Operation response error`, func() {
-		getSecretMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
+		getSecretMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2155,7 +2171,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretMetadata(getSecretMetadataOptions *GetSecretMetadataOptions)`, func() {
-		getSecretMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
+		getSecretMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2171,7 +2187,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2022-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2025-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -2225,7 +2241,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2022-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2025-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -2322,7 +2338,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateSecretMetadata(updateSecretMetadataOptions *UpdateSecretMetadataOptions) - Operation response error`, func() {
-		updateSecretMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
+		updateSecretMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2350,6 +2366,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2025-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -2377,7 +2394,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateSecretMetadata(updateSecretMetadataOptions *UpdateSecretMetadataOptions)`, func() {
-		updateSecretMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
+		updateSecretMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/metadata"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2409,7 +2426,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2022-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2025-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -2427,6 +2444,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2025-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -2489,7 +2507,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2022-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2025-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -2512,6 +2530,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2025-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -2542,6 +2561,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2025-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -2593,6 +2613,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2025-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -2616,7 +2637,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretAction(createSecretActionOptions *CreateSecretActionOptions) - Operation response error`, func() {
-		createSecretActionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/actions"
+		createSecretActionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/actions"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2666,7 +2687,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretAction(createSecretActionOptions *CreateSecretActionOptions)`, func() {
-		createSecretActionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/actions"
+		createSecretActionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/actions"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2885,7 +2906,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretVersion(createSecretVersionOptions *CreateSecretVersionOptions) - Operation response error`, func() {
-		createSecretVersionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
+		createSecretVersionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2937,7 +2958,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretVersion(createSecretVersionOptions *CreateSecretVersionOptions)`, func() {
-		createSecretVersionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
+		createSecretVersionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2969,7 +2990,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecretVersion successfully with retries`, func() {
@@ -3046,7 +3067,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecretVersion successfully`, func() {
@@ -3164,7 +3185,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretVersions(listSecretVersionsOptions *ListSecretVersionsOptions) - Operation response error`, func() {
-		listSecretVersionsPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
+		listSecretVersionsPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3209,7 +3230,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretVersions(listSecretVersionsOptions *ListSecretVersionsOptions)`, func() {
-		listSecretVersionsPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
+		listSecretVersionsPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3225,7 +3246,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z"}], "total_count": 0}`)
+					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z"}], "total_count": 0}`)
 				}))
 			})
 			It(`Invoke ListSecretVersions successfully with retries`, func() {
@@ -3279,7 +3300,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z"}], "total_count": 0}`)
+					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z"}], "total_count": 0}`)
 				}))
 			})
 			It(`Invoke ListSecretVersions successfully`, func() {
@@ -3376,7 +3397,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretVersion(getSecretVersionOptions *GetSecretVersionOptions) - Operation response error`, func() {
-		getSecretVersionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535"
+		getSecretVersionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3422,7 +3443,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretVersion(getSecretVersionOptions *GetSecretVersionOptions)`, func() {
-		getSecretVersionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535"
+		getSecretVersionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3438,7 +3459,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully with retries`, func() {
@@ -3493,7 +3514,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully`, func() {
@@ -3593,7 +3614,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecretVersionData(deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions)`, func() {
-		deleteSecretVersionDataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/secret_data"
+		deleteSecretVersionDataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/secret_data"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3663,7 +3684,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) - Operation response error`, func() {
-		getSecretVersionMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
+		getSecretVersionMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3709,7 +3730,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions)`, func() {
-		getSecretVersionMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
+		getSecretVersionMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3725,7 +3746,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully with retries`, func() {
@@ -3780,7 +3801,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully`, func() {
@@ -3880,7 +3901,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateSecretVersionMetadata(updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) - Operation response error`, func() {
-		updateSecretVersionMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
+		updateSecretVersionMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3933,7 +3954,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateSecretVersionMetadata(updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions)`, func() {
-		updateSecretVersionMetadataPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
+		updateSecretVersionMetadataPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/metadata"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3965,7 +3986,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersionMetadata successfully with retries`, func() {
@@ -4043,7 +4064,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2025-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersionMetadata successfully`, func() {
@@ -4164,7 +4185,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretVersionAction(createSecretVersionActionOptions *CreateSecretVersionActionOptions) - Operation response error`, func() {
-		createSecretVersionActionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/actions"
+		createSecretVersionActionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/actions"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4215,7 +4236,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretVersionAction(createSecretVersionActionOptions *CreateSecretVersionActionOptions)`, func() {
-		createSecretVersionActionPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/actions"
+		createSecretVersionActionPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/actions"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4438,7 +4459,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) - Operation response error`, func() {
-		listSecretsLocksPath := "/v2/secrets_locks"
+		listSecretsLocksPath := "/api/v2/secrets_locks"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4489,7 +4510,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions)`, func() {
-		listSecretsLocksPath := "/v2/secrets_locks"
+		listSecretsLocksPath := "/api/v2/secrets_locks"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4780,7 +4801,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions) - Operation response error`, func() {
-		listSecretLocksPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks"
+		listSecretLocksPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4833,7 +4854,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions)`, func() {
-		listSecretLocksPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks"
+		listSecretLocksPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5139,7 +5160,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretLocksBulk(createSecretLocksBulkOptions *CreateSecretLocksBulkOptions) - Operation response error`, func() {
-		createSecretLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
+		createSecretLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5193,7 +5214,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretLocksBulk(createSecretLocksBulkOptions *CreateSecretLocksBulkOptions)`, func() {
-		createSecretLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
+		createSecretLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5426,7 +5447,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecretLocksBulk(deleteSecretLocksBulkOptions *DeleteSecretLocksBulkOptions) - Operation response error`, func() {
-		deleteSecretLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
+		deleteSecretLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5472,7 +5493,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecretLocksBulk(deleteSecretLocksBulkOptions *DeleteSecretLocksBulkOptions)`, func() {
-		deleteSecretLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
+		deleteSecretLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/locks_bulk"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5643,7 +5664,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions) - Operation response error`, func() {
-		listSecretVersionLocksPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks"
+		listSecretVersionLocksPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5697,7 +5718,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions)`, func() {
-		listSecretVersionLocksPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks"
+		listSecretVersionLocksPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6009,7 +6030,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions) - Operation response error`, func() {
-		createSecretVersionLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
+		createSecretVersionLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6064,7 +6085,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions)`, func() {
-		createSecretVersionLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
+		createSecretVersionLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6301,7 +6322,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecretVersionLocksBulk(deleteSecretVersionLocksBulkOptions *DeleteSecretVersionLocksBulkOptions) - Operation response error`, func() {
-		deleteSecretVersionLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
+		deleteSecretVersionLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6348,7 +6369,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteSecretVersionLocksBulk(deleteSecretVersionLocksBulkOptions *DeleteSecretVersionLocksBulkOptions)`, func() {
-		deleteSecretVersionLocksBulkPath := "/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
+		deleteSecretVersionLocksBulkPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/versions/eb4cf24d-9cae-424b-945e-159788a5f535/locks_bulk"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6523,7 +6544,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateConfiguration(createConfigurationOptions *CreateConfigurationOptions) - Operation response error`, func() {
-		createConfigurationPath := "/v2/configurations"
+		createConfigurationPath := "/api/v2/configurations"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6599,7 +6620,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateConfiguration(createConfigurationOptions *CreateConfigurationOptions)`, func() {
-		createConfigurationPath := "/v2/configurations"
+		createConfigurationPath := "/api/v2/configurations"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6922,7 +6943,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) - Operation response error`, func() {
-		listConfigurationsPath := "/v2/configurations"
+		listConfigurationsPath := "/api/v2/configurations"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -6974,7 +6995,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions)`, func() {
-		listConfigurationsPath := "/v2/configurations"
+		listConfigurationsPath := "/api/v2/configurations"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7267,7 +7288,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetConfiguration(getConfigurationOptions *GetConfigurationOptions) - Operation response error`, func() {
-		getConfigurationPath := "/v2/configurations/configuration-name"
+		getConfigurationPath := "/api/v2/configurations/configuration-name"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7315,7 +7336,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetConfiguration(getConfigurationOptions *GetConfigurationOptions)`, func() {
-		getConfigurationPath := "/v2/configurations/configuration-name"
+		getConfigurationPath := "/api/v2/configurations/configuration-name"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7490,7 +7511,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateConfiguration(updateConfigurationOptions *UpdateConfigurationOptions) - Operation response error`, func() {
-		updateConfigurationPath := "/v2/configurations/configuration-name"
+		updateConfigurationPath := "/api/v2/configurations/configuration-name"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7545,7 +7566,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`UpdateConfiguration(updateConfigurationOptions *UpdateConfigurationOptions)`, func() {
-		updateConfigurationPath := "/v2/configurations/configuration-name"
+		updateConfigurationPath := "/api/v2/configurations/configuration-name"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7780,7 +7801,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteConfiguration(deleteConfigurationOptions *DeleteConfigurationOptions)`, func() {
-		deleteConfigurationPath := "/v2/configurations/configuration-name"
+		deleteConfigurationPath := "/api/v2/configurations/configuration-name"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7852,7 +7873,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateConfigurationAction(createConfigurationActionOptions *CreateConfigurationActionOptions) - Operation response error`, func() {
-		createConfigurationActionPath := "/v2/configurations/configuration-name/actions"
+		createConfigurationActionPath := "/api/v2/configurations/configuration-name/actions"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -7905,7 +7926,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateConfigurationAction(createConfigurationActionOptions *CreateConfigurationActionOptions)`, func() {
-		createConfigurationActionPath := "/v2/configurations/configuration-name/actions"
+		createConfigurationActionPath := "/api/v2/configurations/configuration-name/actions"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8132,7 +8153,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) - Operation response error`, func() {
-		createNotificationsRegistrationPath := "/v2/notifications/registration"
+		createNotificationsRegistrationPath := "/api/v2/notifications/registration"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8179,7 +8200,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions)`, func() {
-		createNotificationsRegistrationPath := "/v2/notifications/registration"
+		createNotificationsRegistrationPath := "/api/v2/notifications/registration"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8386,7 +8407,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) - Operation response error`, func() {
-		getNotificationsRegistrationPath := "/v2/notifications/registration"
+		getNotificationsRegistrationPath := "/api/v2/notifications/registration"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8430,7 +8451,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions)`, func() {
-		getNotificationsRegistrationPath := "/v2/notifications/registration"
+		getNotificationsRegistrationPath := "/api/v2/notifications/registration"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8586,7 +8607,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions)`, func() {
-		deleteNotificationsRegistrationPath := "/v2/notifications/registration"
+		deleteNotificationsRegistrationPath := "/api/v2/notifications/registration"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8646,7 +8667,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 	})
 	Describe(`GetNotificationsRegistrationTest(getNotificationsRegistrationTestOptions *GetNotificationsRegistrationTestOptions)`, func() {
-		getNotificationsRegistrationTestPath := "/v2/notifications/registration/test"
+		getNotificationsRegistrationTestPath := "/api/v2/notifications/registration/test"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -8833,7 +8854,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretPrototypeModel).ToNot(BeNil())
 				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				secretPrototypeModel.Description = core.StringPtr("Extended description for this secret.")
-				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2022-04-12T23:20:50.520Z")
+				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2025-04-12T23:20:50.520Z")
 				secretPrototypeModel.Labels = []string{"my-label"}
 				secretPrototypeModel.Name = core.StringPtr("my-secret-example")
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
@@ -8842,7 +8863,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 				Expect(secretPrototypeModel.CustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(secretPrototypeModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
-				Expect(secretPrototypeModel.ExpirationDate).To(Equal(CreateMockDateTime("2022-04-12T23:20:50.520Z")))
+				Expect(secretPrototypeModel.ExpirationDate).To(Equal(CreateMockDateTime("2025-04-12T23:20:50.520Z")))
 				Expect(secretPrototypeModel.Labels).To(Equal([]string{"my-label"}))
 				Expect(secretPrototypeModel.Name).To(Equal(core.StringPtr("my-secret-example")))
 				Expect(secretPrototypeModel.SecretGroupID).To(Equal(core.StringPtr("default")))
@@ -9370,7 +9391,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			})
 			It(`Invoke NewPrivateCertificateConfigurationActionSignIntermediatePrototype successfully`, func() {
 				actionType := "private_cert_configuration_action_sign_intermediate"
-				_model, err := secretsManagerService.NewPrivateCertificateConfigurationActionSignIntermediatePrototype(actionType)
+				intermediateCertificateAuthority := "my-secret-engine-config"
+				_model, err := secretsManagerService.NewPrivateCertificateConfigurationActionSignIntermediatePrototype(actionType, intermediateCertificateAuthority)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
