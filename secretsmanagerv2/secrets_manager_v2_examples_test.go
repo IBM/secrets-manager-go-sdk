@@ -650,34 +650,6 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println(string(b))
 			// end-list_secret_locks
 		})
-		It(`ListSecretVersionLocks request example`, func() {
-			fmt.Println("\nListSecretVersionLocks() result:")
-			// begin-list_secret_version_locks
-			listSecretVersionLocksOptions := &secretsmanagerv2.ListSecretVersionLocksOptions{
-				SecretID: &secretIdForListSecretVersionLocksLink,
-				ID:       &secretVersionIdForListSecretVersionLocksLink,
-				Limit:    core.Int64Ptr(int64(10)),
-				Sort:     core.StringPtr("name"),
-				Search:   core.StringPtr("example"),
-			}
-
-			pager, err := secretsManagerService.NewSecretVersionLocksPager(listSecretVersionLocksOptions)
-			if err != nil {
-				panic(err)
-			}
-
-			var allResults []secretsmanagerv2.SecretLock
-			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				if err != nil {
-					panic(err)
-				}
-				allResults = append(allResults, nextPage...)
-			}
-			b, _ := json.MarshalIndent(allResults, "", "  ")
-			fmt.Println(string(b))
-			// end-list_secret_version_locks
-		})
 		It(`CreateSecretVersionLocksBulk request example`, func() {
 			fmt.Println("\nCreateSecretVersionLocksBulk() result:")
 			// begin-create_secret_version_locks_bulk
@@ -705,6 +677,34 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(secretLocks).ToNot(BeNil())
+		})
+		It(`ListSecretVersionLocks request example`, func() {
+			fmt.Println("\nListSecretVersionLocks() result:")
+			// begin-list_secret_version_locks
+			listSecretVersionLocksOptions := &secretsmanagerv2.ListSecretVersionLocksOptions{
+				SecretID: &secretIdForListSecretVersionLocksLink,
+				ID:       &secretVersionIdForListSecretVersionLocksLink,
+				Limit:    core.Int64Ptr(int64(10)),
+				Sort:     core.StringPtr("name"),
+				Search:   core.StringPtr("example"),
+			}
+
+			pager, err := secretsManagerService.NewSecretVersionLocksPager(listSecretVersionLocksOptions)
+			if err != nil {
+				panic(err)
+			}
+
+			var allResults []secretsmanagerv2.SecretLock
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				if err != nil {
+					panic(err)
+				}
+				allResults = append(allResults, nextPage...)
+			}
+			b, _ := json.MarshalIndent(allResults, "", "  ")
+			fmt.Println(string(b))
+			// end-list_secret_version_locks
 		})
 		It(`ListConfigurations request example`, func() {
 			fmt.Println("\nListConfigurations() result:")

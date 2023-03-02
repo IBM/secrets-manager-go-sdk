@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.60.2-95dc7721-20221102-203229
+ * IBM OpenAPI SDK Code Generator Version: 3.68.0-c188a613-20230301-190553
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -1115,7 +1115,7 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.
 // DeleteSecretVersionData : Delete the data of a secret version
 // Delete the data of a secret version by specifying the ID of the version.
 //
-// This operation is available for secret type: iam_credentials.
+// This operation is available for secret type: iam_credentials current version.
 func (secretsManager *SecretsManagerV2) DeleteSecretVersionData(deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions) (response *core.DetailedResponse, err error) {
 	return secretsManager.DeleteSecretVersionDataWithContext(context.Background(), deleteSecretVersionDataOptions)
 }

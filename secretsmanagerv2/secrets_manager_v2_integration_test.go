@@ -437,7 +437,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 				Description:    core.StringPtr("updated Arbitrary Secret description"),
 				Labels:         []string{"dev", "us-south"},
 				CustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
-				ExpirationDate: CreateMockDateTime("2025-04-12T23:20:50.520Z"),
+				ExpirationDate: CreateMockDateTime("2033-04-12T23:20:50.520Z"),
 			}
 			secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
@@ -458,21 +458,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`CreateSecretAction(createSecretActionOptions *CreateSecretActionOptions)`, func() {
-			secretActionPrototypeModel := &secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype{
-				ActionType: core.StringPtr("private_cert_action_revoke_certificate"),
-			}
 
-			createSecretActionOptions := &secretsmanagerv2.CreateSecretActionOptions{
-				ID:                    &secretIdForGetSecretLink,
-				SecretActionPrototype: secretActionPrototypeModel,
-			}
-
-			secretAction, response, err := secretsManagerService.CreateSecretAction(createSecretActionOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(secretAction).ToNot(BeNil())
-		})
+		// The integration test for CreateSecretAction has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`CreateSecretAction()`, func() {})
 	})
 
 	Describe(`CreateSecretVersion - Create a new secret version`, func() {
@@ -560,22 +549,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`CreateSecretVersionAction(createSecretVersionActionOptions *CreateSecretVersionActionOptions)`, func() {
-			secretVersionActionPrototypeModel := &secretsmanagerv2.PrivateCertificateVersionActionRevokePrototype{
-				ActionType: core.StringPtr("private_cert_action_revoke_certificate"),
-			}
 
-			createSecretVersionActionOptions := &secretsmanagerv2.CreateSecretVersionActionOptions{
-				SecretID:                     &secretIdForGetSecretLink,
-				ID:                           &secretIdForGetSecretLink,
-				SecretVersionActionPrototype: secretVersionActionPrototypeModel,
-			}
-
-			versionAction, response, err := secretsManagerService.CreateSecretVersionAction(createSecretVersionActionOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(versionAction).ToNot(BeNil())
-		})
+		// The integration test for CreateSecretVersionAction has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`CreateSecretVersionAction()`, func() {})
 	})
 
 	Describe(`ListSecretsLocks - List secrets and their locks`, func() {
@@ -712,6 +689,31 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`CreateSecretVersionLocksBulk - Create secret version locks`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions)`, func() {
+			secretLockPrototypeModel := &secretsmanagerv2.SecretLockPrototype{
+				Name:        core.StringPtr("lock-example-1"),
+				Description: core.StringPtr("lock for consumer 1"),
+				Attributes:  map[string]interface{}{"anyKey": "anyValue"},
+			}
+
+			createSecretVersionLocksBulkOptions := &secretsmanagerv2.CreateSecretVersionLocksBulkOptions{
+				SecretID: &secretIdForCreateSecretVersionLocksLink,
+				ID:       &secretVersionIdForCreateSecretVersionLocksLink,
+				Locks:    []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
+				Mode:     core.StringPtr("exclusive"),
+			}
+
+			secretLocks, response, err := secretsManagerService.CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(secretLocks).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ListSecretVersionLocks - List secret version locks`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -779,31 +781,6 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 
 			Expect(len(allItems)).To(Equal(len(allResults)))
 			fmt.Fprintf(GinkgoWriter, "ListSecretVersionLocks() returned a total of %d item(s) using SecretVersionLocksPager.\n", len(allResults))
-		})
-	})
-
-	Describe(`CreateSecretVersionLocksBulk - Create secret version locks`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions)`, func() {
-			secretLockPrototypeModel := &secretsmanagerv2.SecretLockPrototype{
-				Name:        core.StringPtr("lock-example-1"),
-				Description: core.StringPtr("lock for consumer 1"),
-				Attributes:  map[string]interface{}{"anyKey": "anyValue"},
-			}
-
-			createSecretVersionLocksBulkOptions := &secretsmanagerv2.CreateSecretVersionLocksBulkOptions{
-				SecretID: &secretIdForCreateSecretVersionLocksLink,
-				ID:       &secretVersionIdForCreateSecretVersionLocksLink,
-				Locks:    []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
-				Mode:     core.StringPtr("exclusive"),
-			}
-
-			secretLocks, response, err := secretsManagerService.CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(secretLocks).ToNot(BeNil())
 		})
 	})
 
@@ -972,13 +949,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetNotificationsRegistrationTest(getNotificationsRegistrationTestOptions *GetNotificationsRegistrationTestOptions)`, func() {
-			getNotificationsRegistrationTestOptions := &secretsmanagerv2.GetNotificationsRegistrationTestOptions{}
 
-			response, err := secretsManagerService.GetNotificationsRegistrationTest(getNotificationsRegistrationTestOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
+		// The integration test for GetNotificationsRegistrationTest has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`GetNotificationsRegistrationTest()`, func() {})
 	})
 
 	Describe(`DeleteSecretGroup - Delete a secret group`, func() {
@@ -1000,16 +974,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteSecretVersionData(deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions)`, func() {
-			deleteSecretVersionDataOptions := &secretsmanagerv2.DeleteSecretVersionDataOptions{
-				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretIdForGetSecretLink,
-			}
 
-			response, err := secretsManagerService.DeleteSecretVersionData(deleteSecretVersionDataOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
+		// The integration test for DeleteSecretVersionData has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`DeleteSecretVersionData()`, func() {})
 	})
 
 	Describe(`DeleteSecretLocksBulk - Delete secret locks`, func() {
