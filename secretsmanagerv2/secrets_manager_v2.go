@@ -19663,7 +19663,10 @@ type PublicCertificatePrototype struct {
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically.
-	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+	//
+	// For public certificates, if `auto_rotate` is set to `true`, the service reorders your certificate for 31 days,
+	// before it expires.
+	Rotation *PublicCertificateRotationPolicy `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
@@ -19749,7 +19752,7 @@ func UnmarshalPublicCertificatePrototype(m map[string]json.RawMessage, result in
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalPublicCertificateRotationPolicy)
 	if err != nil {
 		return
 	}
