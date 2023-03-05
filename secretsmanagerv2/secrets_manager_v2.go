@@ -19777,25 +19777,12 @@ type PublicCertificateRotationPolicy struct {
 	// interval.
 	AutoRotate *bool `json:"auto_rotate" validate:"required"`
 
-	// The length of the secret rotation time interval.
-	Interval *int64 `json:"interval,omitempty"`
-
-	// The units for the secret rotation time interval.
-	Unit *string `json:"unit,omitempty"`
-
 	// This field indicates whether Secrets Manager rotates the private key for your public certificate automatically.
 	//
 	// The default is `false`. If it is set to `true`, the service generates and stores a new private key for your rotated
 	// certificate.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
 }
-
-// Constants associated with the PublicCertificateRotationPolicy.Unit property.
-// The units for the secret rotation time interval.
-const (
-	PublicCertificateRotationPolicy_Unit_Day   = "day"
-	PublicCertificateRotationPolicy_Unit_Month = "month"
-)
 
 // NewPublicCertificateRotationPolicy : Instantiate PublicCertificateRotationPolicy (Generic Model Constructor)
 func (*SecretsManagerV2) NewPublicCertificateRotationPolicy(autoRotate bool) (_model *PublicCertificateRotationPolicy, err error) {
@@ -19814,14 +19801,6 @@ func (*PublicCertificateRotationPolicy) isaRotationPolicy() bool {
 func UnmarshalPublicCertificateRotationPolicy(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PublicCertificateRotationPolicy)
 	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "interval", &obj.Interval)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "unit", &obj.Unit)
 	if err != nil {
 		return
 	}
