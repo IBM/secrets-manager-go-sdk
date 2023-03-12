@@ -9494,7 +9494,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			})
 			It(`Invoke NewPublicCertificateRotationPolicy successfully`, func() {
 				autoRotate := true
-				_model, err := secretsManagerService.NewPublicCertificateRotationPolicy(autoRotate)
+				rotateKeys := true
+				_model, err := secretsManagerService.NewPublicCertificateRotationPolicy(autoRotate, rotateKeys)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})

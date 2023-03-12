@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.68.0-c188a613-20230301-190553
+ * IBM OpenAPI SDK Code Generator Version: 3.68.1-a0d93f2c-20230308-204643
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -19663,10 +19663,7 @@ type PublicCertificatePrototype struct {
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically.
-	//
-	// For public certificates, if `auto_rotate` is set to `true`, the service reorders your certificate for 31 days,
-	// before it expires.
-	Rotation *PublicCertificateRotationPolicy `json:"rotation,omitempty"`
+	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
@@ -19752,7 +19749,7 @@ func UnmarshalPublicCertificatePrototype(m map[string]json.RawMessage, result in
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalPublicCertificateRotationPolicy)
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
 		return
 	}
@@ -19784,13 +19781,14 @@ type PublicCertificateRotationPolicy struct {
 	//
 	// The default is `false`. If it is set to `true`, the service generates and stores a new private key for your rotated
 	// certificate.
-	RotateKeys *bool `json:"rotate_keys,omitempty"`
+	RotateKeys *bool `json:"rotate_keys" validate:"required"`
 }
 
 // NewPublicCertificateRotationPolicy : Instantiate PublicCertificateRotationPolicy (Generic Model Constructor)
-func (*SecretsManagerV2) NewPublicCertificateRotationPolicy(autoRotate bool) (_model *PublicCertificateRotationPolicy, err error) {
+func (*SecretsManagerV2) NewPublicCertificateRotationPolicy(autoRotate bool, rotateKeys bool) (_model *PublicCertificateRotationPolicy, err error) {
 	_model = &PublicCertificateRotationPolicy{
 		AutoRotate: core.BoolPtr(autoRotate),
+		RotateKeys: core.BoolPtr(rotateKeys),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
