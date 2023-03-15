@@ -256,10 +256,22 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 				ConfigType:                     core.StringPtr("private_cert_configuration_root_ca"),
 				Name:                           core.StringPtr("example-root-CA"),
 				MaxTTL:                         core.StringPtr("43830h"),
+				CrlExpiry:                      core.StringPtr("72h"),
 				CrlDisable:                     core.BoolPtr(false),
 				CrlDistributionPointsEncoded:   core.BoolPtr(true),
 				IssuingCertificatesUrlsEncoded: core.BoolPtr(true),
 				CommonName:                     core.StringPtr("example.com"),
+				AltNames:                       []string{"alt-name-1", "alt-name-2"},
+				IpSans:                         core.StringPtr("127.0.0.1"),
+				UriSans:                        core.StringPtr("https://www.example.com/test"),
+				OtherSans:                      []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"},
+				TTL:                            core.StringPtr("2190h"),
+				Format:                         core.StringPtr("pem"),
+				PrivateKeyFormat:               core.StringPtr("der"),
+				KeyType:                        core.StringPtr("rsa"),
+				KeyBits:                        core.Int64Ptr(int64(4096)),
+				MaxPathLength:                  core.Int64Ptr(int64(-1)),
+				ExcludeCnFromSans:              core.BoolPtr(false),
 			}
 
 			createConfigurationOptions := secretsManagerService.NewCreateConfigurationOptions(
