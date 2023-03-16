@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.68.1-a0d93f2c-20230308-204643
+ * IBM OpenAPI SDK Code Generator Version: 3.68.2-ac7def68-20230310-195410
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -2686,13 +2686,13 @@ type Configuration struct {
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
 
-	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
-	// newline characters.
-	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
-
 	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
 	// no match, the default offered chain will be used.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
+
+	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
+	// newline characters.
+	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
 
 	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
 	//
@@ -3437,6 +3437,13 @@ type ConfigurationMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
+
+	// The configuration of the Let's Encrypt CA environment.
+	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
+
+	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
+	// no match, the default offered chain will be used.
+	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 }
 
 // Constants associated with the ConfigurationMetadata.ConfigType property.
@@ -3462,6 +3469,13 @@ const (
 	ConfigurationMetadata_SecretType_PrivateCert      = "private_cert"
 	ConfigurationMetadata_SecretType_PublicCert       = "public_cert"
 	ConfigurationMetadata_SecretType_UsernamePassword = "username_password"
+)
+
+// Constants associated with the ConfigurationMetadata.LetsEncryptEnvironment property.
+// The configuration of the Let's Encrypt CA environment.
+const (
+	ConfigurationMetadata_LetsEncryptEnvironment_Production = "production"
+	ConfigurationMetadata_LetsEncryptEnvironment_Staging    = "staging"
 )
 
 func (*ConfigurationMetadata) isaConfigurationMetadata() bool {
@@ -6528,6 +6542,9 @@ type SecretGroup struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
 }
@@ -6548,6 +6565,10 @@ func UnmarshalSecretGroup(m map[string]json.RawMessage, result interface{}) (err
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
 		return
 	}
@@ -18329,13 +18350,13 @@ type PublicCertificateConfigurationCALetsEncrypt struct {
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment" validate:"required"`
 
-	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
-	// newline characters.
-	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key" validate:"required"`
-
 	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
 	// no match, the default offered chain will be used.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
+
+	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
+	// newline characters.
+	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key" validate:"required"`
 }
 
 // Constants associated with the PublicCertificateConfigurationCALetsEncrypt.ConfigType property.
@@ -18405,11 +18426,11 @@ func UnmarshalPublicCertificateConfigurationCALetsEncrypt(m map[string]json.RawM
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "lets_encrypt_private_key", &obj.LetsEncryptPrivateKey)
+	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
+	err = core.UnmarshalPrimitive(m, "lets_encrypt_private_key", &obj.LetsEncryptPrivateKey)
 	if err != nil {
 		return
 	}
@@ -18438,6 +18459,13 @@ type PublicCertificateConfigurationCALetsEncryptMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The configuration of the Let's Encrypt CA environment.
+	LetsEncryptEnvironment *string `json:"lets_encrypt_environment" validate:"required"`
+
+	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
+	// no match, the default offered chain will be used.
+	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 }
 
 // Constants associated with the PublicCertificateConfigurationCALetsEncryptMetadata.ConfigType property.
@@ -18463,6 +18491,13 @@ const (
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_PrivateCert      = "private_cert"
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_PublicCert       = "public_cert"
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_UsernamePassword = "username_password"
+)
+
+// Constants associated with the PublicCertificateConfigurationCALetsEncryptMetadata.LetsEncryptEnvironment property.
+// The configuration of the Let's Encrypt CA environment.
+const (
+	PublicCertificateConfigurationCALetsEncryptMetadata_LetsEncryptEnvironment_Production = "production"
+	PublicCertificateConfigurationCALetsEncryptMetadata_LetsEncryptEnvironment_Staging    = "staging"
 )
 
 func (*PublicCertificateConfigurationCALetsEncryptMetadata) isaConfigurationMetadata() bool {
@@ -18493,6 +18528,14 @@ func UnmarshalPublicCertificateConfigurationCALetsEncryptMetadata(m map[string]j
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "lets_encrypt_environment", &obj.LetsEncryptEnvironment)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
 		return
 	}

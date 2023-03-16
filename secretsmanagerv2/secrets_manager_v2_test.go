@@ -255,7 +255,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke CreateSecretGroup successfully with retries`, func() {
@@ -326,7 +326,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke CreateSecretGroup successfully`, func() {
@@ -486,7 +486,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"secret_groups": [{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}], "total_count": 0}`)
+					fmt.Fprintf(res, "%s", `{"secret_groups": [{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}], "total_count": 0}`)
 				}))
 			})
 			It(`Invoke ListSecretGroups successfully with retries`, func() {
@@ -539,7 +539,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"secret_groups": [{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}], "total_count": 0}`)
+					fmt.Fprintf(res, "%s", `{"secret_groups": [{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}], "total_count": 0}`)
 				}))
 			})
 			It(`Invoke ListSecretGroups successfully`, func() {
@@ -687,7 +687,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretGroup successfully with retries`, func() {
@@ -741,7 +741,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretGroup successfully`, func() {
@@ -923,7 +923,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretGroup successfully with retries`, func() {
@@ -1001,7 +1001,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"id": "default", "name": "my-secret-group", "description": "Extended description for this group.", "created_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "updated_at": "2022-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretGroup successfully`, func() {
@@ -6652,7 +6652,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_private_key": "LetsEncryptPrivateKey", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain"}`)
+					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain", "lets_encrypt_private_key": "LetsEncryptPrivateKey"}`)
 				}))
 			})
 			It(`Invoke CreateConfiguration successfully with retries`, func() {
@@ -6753,7 +6753,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_private_key": "LetsEncryptPrivateKey", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain"}`)
+					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain", "lets_encrypt_private_key": "LetsEncryptPrivateKey"}`)
 				}))
 			})
 			It(`Invoke CreateConfiguration successfully`, func() {
@@ -7354,7 +7354,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_private_key": "LetsEncryptPrivateKey", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain"}`)
+					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain", "lets_encrypt_private_key": "LetsEncryptPrivateKey"}`)
 				}))
 			})
 			It(`Invoke GetConfiguration successfully with retries`, func() {
@@ -7411,7 +7411,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_private_key": "LetsEncryptPrivateKey", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain"}`)
+					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain", "lets_encrypt_private_key": "LetsEncryptPrivateKey"}`)
 				}))
 			})
 			It(`Invoke GetConfiguration successfully`, func() {
@@ -7600,7 +7600,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_private_key": "LetsEncryptPrivateKey", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain"}`)
+					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain", "lets_encrypt_private_key": "LetsEncryptPrivateKey"}`)
 				}))
 			})
 			It(`Invoke UpdateConfiguration successfully with retries`, func() {
@@ -7680,7 +7680,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_private_key": "LetsEncryptPrivateKey", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain"}`)
+					fmt.Fprintf(res, "%s", `{"config_type": "public_cert_configuration_ca_lets_encrypt", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "lets_encrypt_environment": "production", "lets_encrypt_preferred_chain": "LetsEncryptPreferredChain", "lets_encrypt_private_key": "LetsEncryptPrivateKey"}`)
 				}))
 			})
 			It(`Invoke UpdateConfiguration successfully`, func() {
