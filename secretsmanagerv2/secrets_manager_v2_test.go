@@ -5169,7 +5169,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(createSecretLocksBulkPath))
 					Expect(req.Method).To(Equal("POST"))
-					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"remove_previous"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -5193,7 +5193,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
 				createSecretLocksBulkOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.CreateSecretLocksBulk(createSecretLocksBulkOptionsModel)
@@ -5240,7 +5240,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"remove_previous"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -5269,7 +5269,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
 				createSecretLocksBulkOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -5322,7 +5322,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"remove_previous"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -5353,7 +5353,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
 				createSecretLocksBulkOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5381,7 +5381,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
 				createSecretLocksBulkOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -5430,7 +5430,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
 				createSecretLocksBulkOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -6039,7 +6039,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(createSecretVersionLocksBulkPath))
 					Expect(req.Method).To(Equal("POST"))
-					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"remove_previous"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -6064,7 +6064,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretVersionLocksBulkOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretVersionLocksBulkOptionsModel.ID = core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535")
 				createSecretVersionLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretVersionLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptionsModel)
@@ -6111,7 +6111,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"remove_previous"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -6141,7 +6141,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretVersionLocksBulkOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretVersionLocksBulkOptionsModel.ID = core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535")
 				createSecretVersionLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretVersionLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -6194,7 +6194,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.URL.Query()["mode"]).To(Equal([]string{"exclusive"}))
+					Expect(req.URL.Query()["mode"]).To(Equal([]string{"remove_previous"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -6226,7 +6226,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretVersionLocksBulkOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretVersionLocksBulkOptionsModel.ID = core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535")
 				createSecretVersionLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretVersionLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -6255,7 +6255,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretVersionLocksBulkOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretVersionLocksBulkOptionsModel.ID = core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535")
 				createSecretVersionLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretVersionLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -6305,7 +6305,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretVersionLocksBulkOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretVersionLocksBulkOptionsModel.ID = core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535")
 				createSecretVersionLocksBulkOptionsModel.Locks = []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}
-				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("exclusive")
+				createSecretVersionLocksBulkOptionsModel.Mode = core.StringPtr("remove_previous")
 				createSecretVersionLocksBulkOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -8840,12 +8840,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretLocksBulkOptionsModel := secretsManagerService.NewCreateSecretLocksBulkOptions(id, createSecretLocksBulkOptionsLocks)
 				createSecretLocksBulkOptionsModel.SetID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretLocksBulkOptionsModel.SetLocks([]secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel})
-				createSecretLocksBulkOptionsModel.SetMode("exclusive")
+				createSecretLocksBulkOptionsModel.SetMode("remove_previous")
 				createSecretLocksBulkOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createSecretLocksBulkOptionsModel).ToNot(BeNil())
 				Expect(createSecretLocksBulkOptionsModel.ID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
 				Expect(createSecretLocksBulkOptionsModel.Locks).To(Equal([]secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}))
-				Expect(createSecretLocksBulkOptionsModel.Mode).To(Equal(core.StringPtr("exclusive")))
+				Expect(createSecretLocksBulkOptionsModel.Mode).To(Equal(core.StringPtr("remove_previous")))
 				Expect(createSecretLocksBulkOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecretOptions successfully`, func() {
@@ -8921,13 +8921,13 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createSecretVersionLocksBulkOptionsModel.SetSecretID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
 				createSecretVersionLocksBulkOptionsModel.SetID("eb4cf24d-9cae-424b-945e-159788a5f535")
 				createSecretVersionLocksBulkOptionsModel.SetLocks([]secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel})
-				createSecretVersionLocksBulkOptionsModel.SetMode("exclusive")
+				createSecretVersionLocksBulkOptionsModel.SetMode("remove_previous")
 				createSecretVersionLocksBulkOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createSecretVersionLocksBulkOptionsModel).ToNot(BeNil())
 				Expect(createSecretVersionLocksBulkOptionsModel.SecretID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
 				Expect(createSecretVersionLocksBulkOptionsModel.ID).To(Equal(core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535")))
 				Expect(createSecretVersionLocksBulkOptionsModel.Locks).To(Equal([]secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel}))
-				Expect(createSecretVersionLocksBulkOptionsModel.Mode).To(Equal(core.StringPtr("exclusive")))
+				Expect(createSecretVersionLocksBulkOptionsModel.Mode).To(Equal(core.StringPtr("remove_previous")))
 				Expect(createSecretVersionLocksBulkOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecretVersionOptions successfully`, func() {

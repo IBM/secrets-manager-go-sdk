@@ -206,7 +206,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			createSecretLocksBulkOptions := &secretsmanagerv2.CreateSecretLocksBulkOptions{
 				ID:    &secretIdForGetSecretLink,
 				Locks: []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
-				Mode:  core.StringPtr("exclusive"),
+				Mode:  core.StringPtr("remove_previous"),
 			}
 
 			secretLocks, response, err := secretsManagerService.CreateSecretLocksBulk(createSecretLocksBulkOptions)
@@ -704,7 +704,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 				SecretID: &secretIdForCreateSecretVersionLocksLink,
 				ID:       &secretVersionIdForCreateSecretVersionLocksLink,
 				Locks:    []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
-				Mode:     core.StringPtr("exclusive"),
+				Mode:     core.StringPtr("remove_previous"),
 			}
 
 			secretLocks, response, err := secretsManagerService.CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions)
