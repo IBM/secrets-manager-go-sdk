@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.68.2-ac7def68-20230310-195410
+ * IBM OpenAPI SDK Code Generator Version: 3.69.0-370d6400-20230329-174648
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -1509,9 +1509,10 @@ func (secretsManager *SecretsManagerV2) ListSecretLocksWithContext(ctx context.C
 // Additionally, you can use this operation to clear any matching locks on a secret by using one of the following
 // optional lock modes:
 //
-// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.\n
-// - `exclusive_delete`: Carries out the same function as `exclusive`, but also permanently deletes the data of the
-// previous secret version if it doesn't have any locks.
+// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
+// secret.\n
+// - `remove_previous_and_delete`: Carries out the same function as `remove_previous`, but also permanently deletes the
+// data of the previous secret version if it doesn't have any locks.
 func (secretsManager *SecretsManagerV2) CreateSecretLocksBulk(createSecretLocksBulkOptions *CreateSecretLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
 	return secretsManager.CreateSecretLocksBulkWithContext(context.Background(), createSecretLocksBulkOptions)
 }
@@ -1738,9 +1739,10 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx co
 // Additionally, you can use this operation to clear any matching locks on a secret by using one of the following
 // optional lock modes:
 //
-// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
-// - `exclusive_delete`: Carries out the same function as `exclusive`, but also permanently deletes the data of the
-// previous secret version if it doesn't have any locks.
+// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
+// secret.
+// - `remove_previous_and_delete`: Carries out the same function as `remove_previous`, but also permanently deletes the
+// data of the previous secret version if it doesn't have any locks.
 func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
 	return secretsManager.CreateSecretVersionLocksBulkWithContext(context.Background(), createSecretVersionLocksBulkOptions)
 }
@@ -2727,6 +2729,30 @@ type Configuration struct {
 	// want to continue to use the same API key for future read operations, see the `reuse_api_key` field.
 	ApiKey *string `json:"api_key,omitempty"`
 
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
+	// certificates that are issued by this certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
 	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
 	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
 
@@ -2739,16 +2765,9 @@ type Configuration struct {
 	// building is enabled, it rebuilds the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
-	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
-	// certificates that are issued by this certificate authority.
-	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
-
 	// This field determines whether to encode the URL of the issuing certificate in the certificates that are issued by
 	// this certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
-
-	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
-	CommonName *string `json:"common_name,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
@@ -2775,15 +2794,6 @@ type Configuration struct {
 
 	// The format of the generated private key.
 	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
-
-	// The type of private key to generate.
-	KeyType *string `json:"key_type,omitempty"`
-
-	// The number of bits to use to generate the private key.
-	//
-	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
-	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
-	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
 	//
@@ -2824,25 +2834,17 @@ type Configuration struct {
 	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
-	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
-	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
-	Status *string `json:"status,omitempty"`
-
-	// The date when the secret material expires. The date format follows the `RFC 3339` format.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
-
 	// The configuration data of your Private Certificate.
 	Data PrivateCertificateCADataIntf `json:"data,omitempty"`
+
+	// The distinguished name that identifies the entity that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
 
 	// The signing method to use with this certificate authority to generate private certificates.
 	//
 	// You can choose between internal or externally signed options. For more information, see the
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
 	SigningMethod *string `json:"signing_method,omitempty"`
-
-	// The distinguished name that identifies the entity that signed and issued the certificate.
-	Issuer *string `json:"issuer,omitempty"`
 
 	// The name of the intermediate certificate authority.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
@@ -3005,20 +3007,6 @@ const (
 	Configuration_LetsEncryptEnvironment_Staging    = "staging"
 )
 
-// Constants associated with the Configuration.Format property.
-// The format of the returned data.
-const (
-	Configuration_Format_Pem       = "pem"
-	Configuration_Format_PemBundle = "pem_bundle"
-)
-
-// Constants associated with the Configuration.PrivateKeyFormat property.
-// The format of the generated private key.
-const (
-	Configuration_PrivateKeyFormat_Der   = "der"
-	Configuration_PrivateKeyFormat_Pkcs8 = "pkcs8"
-)
-
 // Constants associated with the Configuration.KeyType property.
 // The type of private key to generate.
 const (
@@ -3037,6 +3025,20 @@ const (
 	Configuration_Status_Revoked                     = "revoked"
 	Configuration_Status_SignedCertificateRequired   = "signed_certificate_required"
 	Configuration_Status_SigningRequired             = "signing_required"
+)
+
+// Constants associated with the Configuration.Format property.
+// The format of the returned data.
+const (
+	Configuration_Format_Pem       = "pem"
+	Configuration_Format_PemBundle = "pem_bundle"
+)
+
+// Constants associated with the Configuration.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	Configuration_PrivateKeyFormat_Der   = "der"
+	Configuration_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
 // Constants associated with the Configuration.SigningMethod property.
@@ -3444,6 +3446,42 @@ type ConfigurationMetadata struct {
 	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
 	// no match, the default offered chain will be used.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
+
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
+	// certificates that are issued by this certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
+	// The distinguished name that identifies the entity that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// The signing method to use with this certificate authority to generate private certificates.
+	//
+	// You can choose between internal or externally signed options. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+	SigningMethod *string `json:"signing_method,omitempty"`
+
+	// The name of the intermediate certificate authority.
+	CertificateAuthority *string `json:"certificate_authority,omitempty"`
 }
 
 // Constants associated with the ConfigurationMetadata.ConfigType property.
@@ -3476,6 +3514,36 @@ const (
 const (
 	ConfigurationMetadata_LetsEncryptEnvironment_Production = "production"
 	ConfigurationMetadata_LetsEncryptEnvironment_Staging    = "staging"
+)
+
+// Constants associated with the ConfigurationMetadata.KeyType property.
+// The type of private key to generate.
+const (
+	ConfigurationMetadata_KeyType_Ec  = "ec"
+	ConfigurationMetadata_KeyType_Rsa = "rsa"
+)
+
+// Constants associated with the ConfigurationMetadata.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	ConfigurationMetadata_Status_CertificateTemplateRequired = "certificate_template_required"
+	ConfigurationMetadata_Status_Configured                  = "configured"
+	ConfigurationMetadata_Status_Expired                     = "expired"
+	ConfigurationMetadata_Status_Revoked                     = "revoked"
+	ConfigurationMetadata_Status_SignedCertificateRequired   = "signed_certificate_required"
+	ConfigurationMetadata_Status_SigningRequired             = "signing_required"
+)
+
+// Constants associated with the ConfigurationMetadata.SigningMethod property.
+// The signing method to use with this certificate authority to generate private certificates.
+//
+// You can choose between internal or externally signed options. For more information, see the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+const (
+	ConfigurationMetadata_SigningMethod_External = "external"
+	ConfigurationMetadata_SigningMethod_Internal = "internal"
 )
 
 func (*ConfigurationMetadata) isaConfigurationMetadata() bool {
@@ -4723,9 +4791,9 @@ type CreateSecretLocksBulkOptions struct {
 
 	// An optional lock mode. When you create a lock, you can set one of the following modes to clear any matching locks on
 	// a secret version.
-	// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
-	// - `exclusive_delete`: Completes the same action as `exclusive`, but also permanently deletes the data of the
-	// previous secret version if it doesn't have any locks.
+	// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
+	// secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
+	// the data of the previous secret version if it doesn't have any locks.
 	Mode *string `json:"mode,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -4735,12 +4803,12 @@ type CreateSecretLocksBulkOptions struct {
 // Constants associated with the CreateSecretLocksBulkOptions.Mode property.
 // An optional lock mode. When you create a lock, you can set one of the following modes to clear any matching locks on
 // a secret version.
-// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret. -
-// `exclusive_delete`: Completes the same action as `exclusive`, but also permanently deletes the data of the previous
-// secret version if it doesn't have any locks.
+// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
+// secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
+// the data of the previous secret version if it doesn't have any locks.
 const (
-	CreateSecretLocksBulkOptions_Mode_Exclusive       = "exclusive"
-	CreateSecretLocksBulkOptions_Mode_ExclusiveDelete = "exclusive_delete"
+	CreateSecretLocksBulkOptions_Mode_RemovePrevious          = "remove_previous"
+	CreateSecretLocksBulkOptions_Mode_RemovePreviousAndDelete = "remove_previous_and_delete"
 )
 
 // NewCreateSecretLocksBulkOptions : Instantiate CreateSecretLocksBulkOptions
@@ -4866,9 +4934,9 @@ type CreateSecretVersionLocksBulkOptions struct {
 
 	// An optional lock mode. When you create a lock, you can set one of the following modes to clear any matching locks on
 	// a secret version.
-	// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret.
-	// - `exclusive_delete`: Completes the same action as `exclusive`, but also permanently deletes the data of the
-	// previous secret version if it doesn't have any locks.
+	// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
+	// secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
+	// the data of the previous secret version if it doesn't have any locks.
 	Mode *string `json:"mode,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -4878,12 +4946,12 @@ type CreateSecretVersionLocksBulkOptions struct {
 // Constants associated with the CreateSecretVersionLocksBulkOptions.Mode property.
 // An optional lock mode. When you create a lock, you can set one of the following modes to clear any matching locks on
 // a secret version.
-// - `exclusive`: Removes any other locks with matching names if they are found in the previous version of the secret. -
-// `exclusive_delete`: Completes the same action as `exclusive`, but also permanently deletes the data of the previous
-// secret version if it doesn't have any locks.
+// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
+// secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
+// the data of the previous secret version if it doesn't have any locks.
 const (
-	CreateSecretVersionLocksBulkOptions_Mode_Exclusive       = "exclusive"
-	CreateSecretVersionLocksBulkOptions_Mode_ExclusiveDelete = "exclusive_delete"
+	CreateSecretVersionLocksBulkOptions_Mode_RemovePrevious          = "remove_previous"
+	CreateSecretVersionLocksBulkOptions_Mode_RemovePreviousAndDelete = "remove_previous_and_delete"
 )
 
 // NewCreateSecretVersionLocksBulkOptions : Instantiate CreateSecretVersionLocksBulkOptions
@@ -14144,8 +14212,27 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
 
-	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
-	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
+	// certificates that are issued by this certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The distinguished name that identifies the entity that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
+	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The signing method to use with this certificate authority to generate private certificates.
 	//
@@ -14153,8 +14240,13 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
 	SigningMethod *string `json:"signing_method" validate:"required"`
 
-	// The distinguished name that identifies the entity that signed and issued the certificate.
-	Issuer *string `json:"issuer,omitempty"`
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
+	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
+	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
 
 	// The time until the certificate revocation list (CRL) expires, in seconds.
 	CrlExpirySeconds *int64 `json:"crl_expiry_seconds,omitempty"`
@@ -14165,16 +14257,9 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 	// building is enabled, it rebuilds the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
-	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
-	// certificates that are issued by this certificate authority.
-	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
-
 	// This field determines whether to encode the URL of the issuing certificate in the certificates that are issued by
 	// this certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
-
-	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
-	CommonName *string `json:"common_name" validate:"required"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
@@ -14198,15 +14283,6 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 
 	// The format of the generated private key.
 	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
-
-	// The type of private key to generate.
-	KeyType *string `json:"key_type,omitempty"`
-
-	// The number of bits to use to generate the private key.
-	//
-	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
-	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
-	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
 	//
@@ -14238,14 +14314,6 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
-	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
-	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
-	Status *string `json:"status,omitempty"`
-
-	// The date when the secret material expires. The date format follows the `RFC 3339` format.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
-
 	// The configuration data of your Private Certificate.
 	Data PrivateCertificateCADataIntf `json:"data,omitempty"`
 }
@@ -14275,6 +14343,13 @@ const (
 	PrivateCertificateConfigurationIntermediateCA_SecretType_UsernamePassword = "username_password"
 )
 
+// Constants associated with the PrivateCertificateConfigurationIntermediateCA.KeyType property.
+// The type of private key to generate.
+const (
+	PrivateCertificateConfigurationIntermediateCA_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationIntermediateCA_KeyType_Rsa = "rsa"
+)
+
 // Constants associated with the PrivateCertificateConfigurationIntermediateCA.SigningMethod property.
 // The signing method to use with this certificate authority to generate private certificates.
 //
@@ -14283,6 +14358,19 @@ const (
 const (
 	PrivateCertificateConfigurationIntermediateCA_SigningMethod_External = "external"
 	PrivateCertificateConfigurationIntermediateCA_SigningMethod_Internal = "internal"
+)
+
+// Constants associated with the PrivateCertificateConfigurationIntermediateCA.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	PrivateCertificateConfigurationIntermediateCA_Status_CertificateTemplateRequired = "certificate_template_required"
+	PrivateCertificateConfigurationIntermediateCA_Status_Configured                  = "configured"
+	PrivateCertificateConfigurationIntermediateCA_Status_Expired                     = "expired"
+	PrivateCertificateConfigurationIntermediateCA_Status_Revoked                     = "revoked"
+	PrivateCertificateConfigurationIntermediateCA_Status_SignedCertificateRequired   = "signed_certificate_required"
+	PrivateCertificateConfigurationIntermediateCA_Status_SigningRequired             = "signing_required"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCA.Format property.
@@ -14297,26 +14385,6 @@ const (
 const (
 	PrivateCertificateConfigurationIntermediateCA_PrivateKeyFormat_Der   = "der"
 	PrivateCertificateConfigurationIntermediateCA_PrivateKeyFormat_Pkcs8 = "pkcs8"
-)
-
-// Constants associated with the PrivateCertificateConfigurationIntermediateCA.KeyType property.
-// The type of private key to generate.
-const (
-	PrivateCertificateConfigurationIntermediateCA_KeyType_Ec  = "ec"
-	PrivateCertificateConfigurationIntermediateCA_KeyType_Rsa = "rsa"
-)
-
-// Constants associated with the PrivateCertificateConfigurationIntermediateCA.Status property.
-// The status of the certificate authority. The status of a root certificate authority is either `configured` or
-// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
-// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
-const (
-	PrivateCertificateConfigurationIntermediateCA_Status_CertificateTemplateRequired = "certificate_template_required"
-	PrivateCertificateConfigurationIntermediateCA_Status_Configured                  = "configured"
-	PrivateCertificateConfigurationIntermediateCA_Status_Expired                     = "expired"
-	PrivateCertificateConfigurationIntermediateCA_Status_Revoked                     = "revoked"
-	PrivateCertificateConfigurationIntermediateCA_Status_SignedCertificateRequired   = "signed_certificate_required"
-	PrivateCertificateConfigurationIntermediateCA_Status_SigningRequired             = "signing_required"
 )
 
 func (*PrivateCertificateConfigurationIntermediateCA) isaConfiguration() bool {
@@ -14350,7 +14418,27 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCA(m map[string]json.Ra
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "max_ttl_seconds", &obj.MaxTtlSeconds)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
 		return
 	}
@@ -14358,7 +14446,11 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCA(m map[string]json.Ra
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_ttl_seconds", &obj.MaxTtlSeconds)
 	if err != nil {
 		return
 	}
@@ -14370,15 +14462,7 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCA(m map[string]json.Ra
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
 		return
 	}
@@ -14403,14 +14487,6 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCA(m map[string]json.Ra
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
 		return
 	}
@@ -14447,14 +14523,6 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCA(m map[string]json.Ra
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
 		return
 	}
@@ -14538,6 +14606,39 @@ type PrivateCertificateConfigurationIntermediateCAMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
+	// certificates that are issued by this certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The distinguished name that identifies the entity that signed and issued the certificate.
+	Issuer *string `json:"issuer,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The signing method to use with this certificate authority to generate private certificates.
+	//
+	// You can choose between internal or externally signed options. For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+	SigningMethod *string `json:"signing_method" validate:"required"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
 }
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.ConfigType property.
@@ -14563,6 +14664,36 @@ const (
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_PrivateCert      = "private_cert"
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_PublicCert       = "public_cert"
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_UsernamePassword = "username_password"
+)
+
+// Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.KeyType property.
+// The type of private key to generate.
+const (
+	PrivateCertificateConfigurationIntermediateCAMetadata_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationIntermediateCAMetadata_KeyType_Rsa = "rsa"
+)
+
+// Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.SigningMethod property.
+// The signing method to use with this certificate authority to generate private certificates.
+//
+// You can choose between internal or externally signed options. For more information, see the
+// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-intermediate-certificate-authorities).
+const (
+	PrivateCertificateConfigurationIntermediateCAMetadata_SigningMethod_External = "external"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SigningMethod_Internal = "internal"
+)
+
+// Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_CertificateTemplateRequired = "certificate_template_required"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Configured                  = "configured"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Expired                     = "expired"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Revoked                     = "revoked"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_SignedCertificateRequired   = "signed_certificate_required"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_SigningRequired             = "signing_required"
 )
 
 func (*PrivateCertificateConfigurationIntermediateCAMetadata) isaConfigurationMetadata() bool {
@@ -14593,6 +14724,38 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCAMetadata(m map[string
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "signing_method", &obj.SigningMethod)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
@@ -14988,6 +15151,30 @@ type PrivateCertificateConfigurationRootCA struct {
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
 
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
+	// certificates that are issued by this certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
+
 	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
 	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
 
@@ -15000,16 +15187,9 @@ type PrivateCertificateConfigurationRootCA struct {
 	// building is enabled, it rebuilds the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
-	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
-	// certificates that are issued by this certificate authority.
-	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
-
 	// This field determines whether to encode the URL of the issuing certificate in the certificates that are issued by
 	// this certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
-
-	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
-	CommonName *string `json:"common_name" validate:"required"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
@@ -15036,15 +15216,6 @@ type PrivateCertificateConfigurationRootCA struct {
 
 	// The format of the generated private key.
 	PrivateKeyFormat *string `json:"private_key_format,omitempty"`
-
-	// The type of private key to generate.
-	KeyType *string `json:"key_type,omitempty"`
-
-	// The number of bits to use to generate the private key.
-	//
-	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
-	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
-	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
 	//
@@ -15085,14 +15256,6 @@ type PrivateCertificateConfigurationRootCA struct {
 	// The serial number to assign to the generated certificate. To assign a random serial number, you can omit this field.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
-	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
-	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
-	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
-	Status *string `json:"status,omitempty"`
-
-	// The date when the secret material expires. The date format follows the `RFC 3339` format.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
-
 	// The configuration data of your Private Certificate.
 	Data PrivateCertificateCADataIntf `json:"data,omitempty"`
 }
@@ -15122,20 +15285,6 @@ const (
 	PrivateCertificateConfigurationRootCA_SecretType_UsernamePassword = "username_password"
 )
 
-// Constants associated with the PrivateCertificateConfigurationRootCA.Format property.
-// The format of the returned data.
-const (
-	PrivateCertificateConfigurationRootCA_Format_Pem       = "pem"
-	PrivateCertificateConfigurationRootCA_Format_PemBundle = "pem_bundle"
-)
-
-// Constants associated with the PrivateCertificateConfigurationRootCA.PrivateKeyFormat property.
-// The format of the generated private key.
-const (
-	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Der   = "der"
-	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Pkcs8 = "pkcs8"
-)
-
 // Constants associated with the PrivateCertificateConfigurationRootCA.KeyType property.
 // The type of private key to generate.
 const (
@@ -15154,6 +15303,20 @@ const (
 	PrivateCertificateConfigurationRootCA_Status_Revoked                     = "revoked"
 	PrivateCertificateConfigurationRootCA_Status_SignedCertificateRequired   = "signed_certificate_required"
 	PrivateCertificateConfigurationRootCA_Status_SigningRequired             = "signing_required"
+)
+
+// Constants associated with the PrivateCertificateConfigurationRootCA.Format property.
+// The format of the returned data.
+const (
+	PrivateCertificateConfigurationRootCA_Format_Pem       = "pem"
+	PrivateCertificateConfigurationRootCA_Format_PemBundle = "pem_bundle"
+)
+
+// Constants associated with the PrivateCertificateConfigurationRootCA.PrivateKeyFormat property.
+// The format of the generated private key.
+const (
+	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Der   = "der"
+	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
 func (*PrivateCertificateConfigurationRootCA) isaConfiguration() bool {
@@ -15187,6 +15350,30 @@ func UnmarshalPrivateCertificateConfigurationRootCA(m map[string]json.RawMessage
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "max_ttl_seconds", &obj.MaxTtlSeconds)
 	if err != nil {
 		return
@@ -15199,15 +15386,7 @@ func UnmarshalPrivateCertificateConfigurationRootCA(m map[string]json.RawMessage
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
 		return
 	}
@@ -15236,14 +15415,6 @@ func UnmarshalPrivateCertificateConfigurationRootCA(m map[string]json.RawMessage
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
 		return
 	}
@@ -15291,14 +15462,6 @@ func UnmarshalPrivateCertificateConfigurationRootCA(m map[string]json.RawMessage
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalPrivateCertificateCAData)
 	if err != nil {
 		return
@@ -15328,6 +15491,30 @@ type PrivateCertificateConfigurationRootCAMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name" validate:"required"`
+
+	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
+	// certificates that are issued by this certificate authority.
+	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+	Status *string `json:"status,omitempty"`
 }
 
 // Constants associated with the PrivateCertificateConfigurationRootCAMetadata.ConfigType property.
@@ -15353,6 +15540,26 @@ const (
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_PrivateCert      = "private_cert"
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_PublicCert       = "public_cert"
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_UsernamePassword = "username_password"
+)
+
+// Constants associated with the PrivateCertificateConfigurationRootCAMetadata.KeyType property.
+// The type of private key to generate.
+const (
+	PrivateCertificateConfigurationRootCAMetadata_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationRootCAMetadata_KeyType_Rsa = "rsa"
+)
+
+// Constants associated with the PrivateCertificateConfigurationRootCAMetadata.Status property.
+// The status of the certificate authority. The status of a root certificate authority is either `configured` or
+// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
+const (
+	PrivateCertificateConfigurationRootCAMetadata_Status_CertificateTemplateRequired = "certificate_template_required"
+	PrivateCertificateConfigurationRootCAMetadata_Status_Configured                  = "configured"
+	PrivateCertificateConfigurationRootCAMetadata_Status_Expired                     = "expired"
+	PrivateCertificateConfigurationRootCAMetadata_Status_Revoked                     = "revoked"
+	PrivateCertificateConfigurationRootCAMetadata_Status_SignedCertificateRequired   = "signed_certificate_required"
+	PrivateCertificateConfigurationRootCAMetadata_Status_SigningRequired             = "signing_required"
 )
 
 func (*PrivateCertificateConfigurationRootCAMetadata) isaConfigurationMetadata() bool {
@@ -15383,6 +15590,30 @@ func UnmarshalPrivateCertificateConfigurationRootCAMetadata(m map[string]json.Ra
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
@@ -16186,6 +16417,9 @@ type PrivateCertificateConfigurationTemplateMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The name of the intermediate certificate authority.
+	CertificateAuthority *string `json:"certificate_authority" validate:"required"`
 }
 
 // Constants associated with the PrivateCertificateConfigurationTemplateMetadata.ConfigType property.
@@ -16241,6 +16475,10 @@ func UnmarshalPrivateCertificateConfigurationTemplateMetadata(m map[string]json.
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
 	if err != nil {
 		return
 	}
@@ -21102,9 +21340,7 @@ func UnmarshalUsernamePasswordSecretVersionPrototype(m map[string]json.RawMessag
 	return
 }
 
-//
 // SecretsPager can be used to simplify the use of the "ListSecrets" method.
-//
 type SecretsPager struct {
 	hasNext     bool
 	options     *ListSecretsOptions
@@ -21189,9 +21425,7 @@ func (pager *SecretsPager) GetAll() (allItems []SecretMetadataIntf, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // SecretsLocksPager can be used to simplify the use of the "ListSecretsLocks" method.
-//
 type SecretsLocksPager struct {
 	hasNext     bool
 	options     *ListSecretsLocksOptions
@@ -21276,9 +21510,7 @@ func (pager *SecretsLocksPager) GetAll() (allItems []SecretLocks, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // SecretLocksPager can be used to simplify the use of the "ListSecretLocks" method.
-//
 type SecretLocksPager struct {
 	hasNext     bool
 	options     *ListSecretLocksOptions
@@ -21363,9 +21595,7 @@ func (pager *SecretLocksPager) GetAll() (allItems []SecretLock, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // SecretVersionLocksPager can be used to simplify the use of the "ListSecretVersionLocks" method.
-//
 type SecretVersionLocksPager struct {
 	hasNext     bool
 	options     *ListSecretVersionLocksOptions
@@ -21450,9 +21680,7 @@ func (pager *SecretVersionLocksPager) GetAll() (allItems []SecretLock, err error
 	return pager.GetAllWithContext(context.Background())
 }
 
-//
 // ConfigurationsPager can be used to simplify the use of the "ListConfigurations" method.
-//
 type ConfigurationsPager struct {
 	hasNext     bool
 	options     *ListConfigurationsOptions
