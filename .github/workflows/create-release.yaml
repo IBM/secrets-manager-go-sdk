@@ -9,20 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Changelog
-        uses: scottbrenner/generate-changelog-action@master
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          token: ${{ secrets.ADMIN_TOKEN }}
+
+      - name: setup nodejs
+        uses: actions/setup-node@v3
         with:
-          tag_name: v1.0.${{ github.run_number }}
-          release_name: Release v1.0.${{ github.run_number }}
-          body: |
-            ${{ steps.Changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
+          node-version: '18'
+
+      - name: release using semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          GIT_AUTHOR_NAME: secrets.automation.dev
+          GIT_AUTHOR_EMAIL: secrets.automation.dev@il.ibm.com
+          GIT_COMMITTER_NAME: secrets.automation.dev
+          GIT_COMMITTER_EMAIL: secrets.automation.dev@il.ibm.com
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3
+          pip install --user bumpversion
+          npm install @semantic-release/changelog
+          npm install @semantic-release/exec
+          npm install @semantic-release/git
+          npm install @semantic-release/github
+          npm install @semantic-release/release-notes-generator -D
+          npx semantic-release
