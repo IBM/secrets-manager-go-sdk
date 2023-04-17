@@ -1,4 +1,4 @@
-module github.com/IBM/secrets-manager-go-sdk
+module github.com/IBM/secrets-manager-go-sdk/v2
 
 go 1.18
 
