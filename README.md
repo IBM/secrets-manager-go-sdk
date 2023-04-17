@@ -1,4 +1,4 @@
-# IBM Cloud Secrets Manager Go SDK
+# IBM Cloud Secrets Manager Go SDK v2
 
 A Go client library to interact with the [IBM Cloud® Secrets Manager APIs](https://cloud.ibm.com/apidocs/secrets-manager).
 
