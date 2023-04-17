@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv2"
+	"github.com/IBM/secrets-manager-go-sdk/v2/secretsmanagerv2"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -9486,8 +9486,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretType := "public_cert"
 				name := "my-secret-example"
 				commonName := "example.com"
-				ca := "my-example-engine-config"
-				dns := "my-example-engine-config"
+				ca := "my-ca-config"
+				dns := "my-dns-config"
 				_model, err := secretsManagerService.NewPublicCertificatePrototype(secretType, name, commonName, ca, dns)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
