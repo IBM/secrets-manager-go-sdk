@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,16 @@
  * limitations under the License.
  */
 
-package common
+package secretsmanagerv2_test
 
-// Version of the SDK
-const Version = "1.0.50"
+import (
+	"testing"
+
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+)
+
+func TestSecretsManagerV2(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "SecretsManagerV2 Suite")
+}
