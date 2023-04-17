@@ -1,4 +1,4 @@
-# IBM Cloud Secrets Manager Go SDK v2
+# IBM Cloud Secrets Manager Go SDK
 
 A Go client library to interact with the [IBM Cloud® Secrets Manager APIs](https://cloud.ibm.com/apidocs/secrets-manager).
 
@@ -188,4 +188,3 @@ For general contribution guidelines, see [CONTRIBUTING](CONTRIBUTING.md).
 ## License
 
 This SDK project is released under the Apache 2.0 license. The license's full text can be found in [LICENSE](LICENSE).
-
