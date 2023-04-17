@@ -32,7 +32,7 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	common "github.com/IBM/secrets-manager-go-sdk/common"
+	common "github.com/IBM/secrets-manager-go-sdk/v2/common"
 	"github.com/go-openapi/strfmt"
 )
 
@@ -6347,10 +6347,10 @@ type Secret struct {
 	// Indicates whether the issued certificate is bundled with intermediate certificates.
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
-	// The name that is assigned to the certificate authority configuration.
+	// The name of the certificate authority configuration.
 	Ca *string `json:"ca,omitempty"`
 
-	// The name that is assigned to the DNS provider configuration.
+	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 
 	// The intermediate certificate authority that signed this certificate.
@@ -7100,10 +7100,10 @@ type SecretMetadata struct {
 	// Indicates whether the issued certificate is bundled with intermediate certificates.
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
-	// The name that is assigned to the certificate authority configuration.
+	// The name of the certificate authority configuration.
 	Ca *string `json:"ca,omitempty"`
 
-	// The name that is assigned to the DNS provider configuration.
+	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -7551,14 +7551,10 @@ type SecretPrototype struct {
 	// more encryption protection. Allowed values:  `RSA2048`, `RSA4096`, `EC256`, and `EC384`.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
-	// A human-readable unique name to assign to your configuration.
-	//
-	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
+	// The name of the certificate authority configuration.
 	Ca *string `json:"ca,omitempty"`
 
-	// A human-readable unique name to assign to your configuration.
-	//
-	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
+	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 
 	// This field indicates whether your issued certificate is bundled with intermediate certificates. Set to `false` for
@@ -18315,10 +18311,10 @@ type PublicCertificate struct {
 	// Indicates whether the issued certificate is bundled with intermediate certificates.
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
-	// The name that is assigned to the certificate authority configuration.
+	// The name of the certificate authority configuration.
 	Ca *string `json:"ca,omitempty"`
 
-	// The name that is assigned to the DNS provider configuration.
+	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
@@ -19660,10 +19656,10 @@ type PublicCertificateMetadata struct {
 	// Indicates whether the issued certificate is bundled with intermediate certificates.
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
-	// The name that is assigned to the certificate authority configuration.
+	// The name of the certificate authority configuration.
 	Ca *string `json:"ca,omitempty"`
 
-	// The name that is assigned to the DNS provider configuration.
+	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 }
 
@@ -19929,14 +19925,10 @@ type PublicCertificatePrototype struct {
 	// more encryption protection. Allowed values:  `RSA2048`, `RSA4096`, `EC256`, and `EC384`.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
-	// A human-readable unique name to assign to your configuration.
-	//
-	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
+	// The name of the certificate authority configuration.
 	Ca *string `json:"ca" validate:"required"`
 
-	// A human-readable unique name to assign to your configuration.
-	//
-	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
+	// The name of the DNS provider configuration.
 	Dns *string `json:"dns" validate:"required"`
 
 	// This field indicates whether your issued certificate is bundled with intermediate certificates. Set to `false` for
@@ -21340,7 +21332,9 @@ func UnmarshalUsernamePasswordSecretVersionPrototype(m map[string]json.RawMessag
 	return
 }
 
+//
 // SecretsPager can be used to simplify the use of the "ListSecrets" method.
+//
 type SecretsPager struct {
 	hasNext     bool
 	options     *ListSecretsOptions
@@ -21425,7 +21419,9 @@ func (pager *SecretsPager) GetAll() (allItems []SecretMetadataIntf, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // SecretsLocksPager can be used to simplify the use of the "ListSecretsLocks" method.
+//
 type SecretsLocksPager struct {
 	hasNext     bool
 	options     *ListSecretsLocksOptions
@@ -21510,7 +21506,9 @@ func (pager *SecretsLocksPager) GetAll() (allItems []SecretLocks, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // SecretLocksPager can be used to simplify the use of the "ListSecretLocks" method.
+//
 type SecretLocksPager struct {
 	hasNext     bool
 	options     *ListSecretLocksOptions
@@ -21595,7 +21593,9 @@ func (pager *SecretLocksPager) GetAll() (allItems []SecretLock, err error) {
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // SecretVersionLocksPager can be used to simplify the use of the "ListSecretVersionLocks" method.
+//
 type SecretVersionLocksPager struct {
 	hasNext     bool
 	options     *ListSecretVersionLocksOptions
@@ -21680,7 +21680,9 @@ func (pager *SecretVersionLocksPager) GetAll() (allItems []SecretLock, err error
 	return pager.GetAllWithContext(context.Background())
 }
 
+//
 // ConfigurationsPager can be used to simplify the use of the "ListConfigurations" method.
+//
 type ConfigurationsPager struct {
 	hasNext     bool
 	options     *ListConfigurationsOptions
