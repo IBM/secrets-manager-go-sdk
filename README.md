@@ -22,7 +22,7 @@ The IBM Cloud Secrets Manager Go SDK allows developers to programmatically inter
 
 | Service name                                                     | Package name     |
 |------------------------------------------------------------------|------------------|
-| [Secrets Manager](https://cloud.ibm.com/apidocs/secrets-manager) | SecretsManagerV1 |
+| [Secrets Manager](https://cloud.ibm.com/apidocs/secrets-manager) | SecretsManagerV2 |
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ There are a few different ways to download and install the Secrets Manager Go SD
 Use this command to download and install the SDK:
 
 ```
-go get -u github.com/IBM/secrets-manager-go-sdk
+go get -u github.com/IBM/secrets-manager-go-sdk/v2
 ```
 
 #### Go modules  
@@ -51,7 +51,7 @@ If your application uses Go modules, you can add the following import to your Go
 
 ```go
 import (
-	"github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
+	"github.com/IBM/secrets-manager-go-sdk/v2/secretsmanagerv2"
 )
 ```
 
@@ -63,8 +63,8 @@ If your application is using the `dep` dependency management tool, you can add a
 
 ```
 [[constraint]]
-  name = "github.com/IBM/secrets-manager-go-sdk"
-  version = "0.2.X"
+  name = "github.com/IBM/secrets-manager-go-sdk/v2"
+  version = "2.0.X"
 ```
 ## Authentication
 
@@ -106,12 +106,12 @@ package main
 import (
     "fmt"
     "github.com/IBM/go-sdk-core/v5/core"
-    sm "github.com/IBM/secrets-manager-go-sdk/secretsmanagerv1"
+    sm "github.com/IBM/secrets-manager-go-sdk/v2/secretsmanagerv2"
 )
 
 func main() {
 
-    secretsManager, err := sm.NewSecretsManagerV1(&sm.SecretsManagerV1Options{
+    secretsManager, err := sm.NewSecretsManagerV2(&sm.SecretsManagerV2Options{
         URL: "<SERVICE_URL>",
         Authenticator: &core.IamAuthenticator{
             ApiKey: "<IBM_CLOUD_API_KEY>",
@@ -122,46 +122,38 @@ func main() {
         panic(err)
     }
 
-    createRes, resp, err := secretsManager.CreateSecret(&sm.CreateSecretOptions{
-        SecretType: core.StringPtr(sm.CreateSecretOptionsSecretTypeArbitraryConst),
-        Metadata: &sm.CollectionMetadata{
-            CollectionType:  core.StringPtr(sm.CollectionMetadataCollectionTypeApplicationVndIBMSecretsManagerSecretJSONConst),
-            CollectionTotal: core.Int64Ptr(1),
-        },
-        Resources: []sm.SecretResourceIntf{
-            &sm.ArbitrarySecretResource{
-                Name:        core.StringPtr("example-arbitrary-secret"),
-                Description: core.StringPtr("Extended description for this secret."),
-                Payload:     core.StringPtr("secret-data"),
-            },
-        },
-    })
+  secretPrototypeModel := &sm.ArbitrarySecretPrototype{
+    Description:   core.StringPtr("Description of my arbitrary secret."),
+            Labels:        []string{"dev", "us-south"},
+    Name:          core.StringPtr("example-arbitrary-secret"),
+            SecretGroupID: core.StringPtr("default"),
+            SecretType:    core.StringPtr("arbitrary"),
+            Payload:       core.StringPtr("secret-data"),
+  }
 
-    if err != nil {
-        panic(err)
-    }
+  createSecretOptions := secretsManager.NewCreateSecretOptions(
+          secretPrototypeModel,
+  )
 
-    fmt.Println("Secret created! " + resp.String())
+  secret, _, err := secretsManager.CreateSecret(createSecretOptions)
+  if err != nil {
+    panic(err)
+  }
+  b, _ := json.MarshalIndent(secret, "", "  ")
+  fmt.Println("Secret created! " + string(b))
 
-    arbitrarySecretResource := createRes.Resources[0].(*sm.SecretResource)
 
-    secretId := arbitrarySecretResource.ID
+  secretId := *secret.(*sm.ArbitrarySecret).ID
 
-    getSecretRes, resp, err := secretsManager.GetSecret(&sm.GetSecretOptions{
-        SecretType: core.StringPtr(sm.GetSecretOptionsSecretTypeArbitraryConst),
-        ID:         secretId,
-    })
+  getSecretRes, _, err := secretsManager.GetSecret(&sm.GetSecretOptions{
+    ID:         &secretId,
+  })
 
-    if err != nil {
-        panic(err)
-    }
-
-    secret := getSecretRes.Resources[0].(*sm.SecretResource)
-
-    secretData := secret.SecretData.(map[string]interface{})
-    arbitrarySecretPayload := secretData["payload"].(string)
-    fmt.Println("Arbitrary secret payload: " + arbitrarySecretPayload)
-
+  if err != nil {
+    panic(err)
+  }
+  arbitrarySecretPayload := getSecretRes.(*sm.ArbitrarySecret).Payload
+  fmt.Println("Arbitrary secret payload: " + *arbitrarySecretPayload)
 }
 ```
 
