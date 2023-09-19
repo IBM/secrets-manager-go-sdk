@@ -60,6 +60,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 		secretIdForGetSecretVersionLink                   string
 		secretIdForListSecretLocksLink                    string
 		secretIdForListSecretVersionLocksLink             string
+		secretNameLink                                    string
 		secretVersionIdForCreateSecretVersionLocksLink    string
 		secretVersionIdForDeleteSecretVersionLocksLink    string
 		secretVersionIdForGetSecretVersionLink            string
@@ -177,6 +178,39 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Fprintf(GinkgoWriter, "Saved secretIdForGetSecretLink value: %v\n", secretIdForGetSecretLink)
 			secretIdForGetSecretVersionLink = *secret.(*secretsmanagerv2.ArbitrarySecret).ID
 			fmt.Fprintf(GinkgoWriter, "Saved secretIdForGetSecretVersionLink value: %v\n", secretIdForGetSecretVersionLink)
+		})
+		It(`UpdateSecretMetadata request example`, func() {
+			fmt.Println("\nUpdateSecretMetadata() result:")
+			// begin-update_secret_metadata
+
+			secretMetadataPatchModel := &secretsmanagerv2.ArbitrarySecretMetadataPatch{
+				Name:        core.StringPtr("updated-arbitrary-secret-name-example"),
+				Description: core.StringPtr("updated Arbitrary Secret description"),
+				Labels:      []string{"dev", "us-south"},
+			}
+			secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
+			Expect(asPatchErr).To(BeNil())
+
+			updateSecretMetadataOptions := secretsManagerService.NewUpdateSecretMetadataOptions(
+				secretIdForGetSecretLink,
+				secretMetadataPatchModelAsPatch,
+			)
+
+			secretMetadata, response, err := secretsManagerService.UpdateSecretMetadata(updateSecretMetadataOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(secretMetadata, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_secret_metadata
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(secretMetadata).ToNot(BeNil())
+
+			secretNameLink = *secretMetadata.(*secretsmanagerv2.ArbitrarySecretMetadata).Name
+			fmt.Fprintf(GinkgoWriter, "Saved secretNameLink value: %v\n", secretNameLink)
 		})
 		It(`ListSecretVersions request example`, func() {
 			fmt.Println("\nListSecretVersions() result:")
@@ -367,7 +401,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 				Limit:  core.Int64Ptr(int64(10)),
 				Sort:   core.StringPtr("created_at"),
 				Search: core.StringPtr("example"),
-				Groups: []string{"default"},
+				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 			}
 
 			pager, err := secretsManagerService.NewSecretsPager(listSecretsOptions)
@@ -429,41 +463,11 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(secretMetadata).ToNot(BeNil())
 		})
-		It(`UpdateSecretMetadata request example`, func() {
-			fmt.Println("\nUpdateSecretMetadata() result:")
-			// begin-update_secret_metadata
-
-			secretMetadataPatchModel := &secretsmanagerv2.ArbitrarySecretMetadataPatch{
-				Name:        core.StringPtr("updated-arbitrary-secret-name"),
-				Description: core.StringPtr("updated Arbitrary Secret description"),
-				Labels:      []string{"dev", "us-south"},
-			}
-			secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
-			Expect(asPatchErr).To(BeNil())
-
-			updateSecretMetadataOptions := secretsManagerService.NewUpdateSecretMetadataOptions(
-				secretIdForGetSecretLink,
-				secretMetadataPatchModelAsPatch,
-			)
-
-			secretMetadata, response, err := secretsManagerService.UpdateSecretMetadata(updateSecretMetadataOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(secretMetadata, "", "  ")
-			fmt.Println(string(b))
-
-			// end-update_secret_metadata
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(secretMetadata).ToNot(BeNil())
-		})
 		It(`CreateSecretAction request example`, func() {
 			fmt.Println("\nCreateSecretAction() result:")
 			// begin-create_secret_action
 
-			secretActionPrototypeModel := &secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype{
+			secretActionPrototypeModel := &secretsmanagerv2.PrivateCertificateActionRevokePrototype{
 				ActionType: core.StringPtr("private_cert_action_revoke_certificate"),
 			}
 
@@ -485,6 +489,29 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(secretAction).ToNot(BeNil())
 		})
+		It(`GetSecretByNameType request example`, func() {
+			fmt.Println("\nGetSecretByNameType() result:")
+			// begin-get_secret_by_name_type
+
+			getSecretByNameTypeOptions := secretsManagerService.NewGetSecretByNameTypeOptions(
+				"arbitrary",
+				secretNameLink,
+				"default",
+			)
+
+			secret, response, err := secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(secret, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_secret_by_name_type
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(secret).ToNot(BeNil())
+		})
 		It(`CreateSecretVersion request example`, func() {
 			fmt.Println("\nCreateSecretVersion() result:")
 			// begin-create_secret_version
@@ -494,7 +521,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			}
 
 			createSecretVersionOptions := secretsManagerService.NewCreateSecretVersionOptions(
-				secretIdForCreateSecretVersionLink,
+				secretIdForGetSecretLink,
 				secretVersionPrototypeModel,
 			)
 
@@ -516,7 +543,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			// begin-get_secret_version
 
 			getSecretVersionOptions := secretsManagerService.NewGetSecretVersionOptions(
-				secretIdForGetSecretVersionLink,
+				secretIdForGetSecretLink,
 				secretVersionIdForGetSecretVersionLink,
 			)
 
@@ -539,7 +566,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 
 			getSecretVersionMetadataOptions := secretsManagerService.NewGetSecretVersionMetadataOptions(
 				secretIdForGetSecretLink,
-				secretVersionIdForGetSecretVersionMetadataLink,
+				secretVersionIdForGetSecretVersionLink,
 			)
 
 			secretVersionMetadata, response, err := secretsManagerService.GetSecretVersionMetadata(getSecretVersionMetadataOptions)
@@ -565,7 +592,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 
 			updateSecretVersionMetadataOptions := secretsManagerService.NewUpdateSecretVersionMetadataOptions(
 				secretIdForGetSecretLink,
-				secretVersionIdForUpdateSecretVersionMetadataLink,
+				secretVersionIdForGetSecretVersionLink,
 				secretVersionMetadataPatchModelAsPatch,
 			)
 
@@ -592,7 +619,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 
 			createSecretVersionActionOptions := secretsManagerService.NewCreateSecretVersionActionOptions(
 				secretIdForGetSecretLink,
-				secretIdForGetSecretLink,
+				secretVersionIdForGetSecretVersionLink,
 				secretVersionActionPrototypeModel,
 			)
 
@@ -615,7 +642,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			listSecretsLocksOptions := &secretsmanagerv2.ListSecretsLocksOptions{
 				Limit:  core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("example"),
-				Groups: []string{"default"},
+				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 			}
 
 			pager, err := secretsManagerService.NewSecretsLocksPager(listSecretsLocksOptions)
@@ -639,7 +666,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nListSecretLocks() result:")
 			// begin-list_secret_locks
 			listSecretLocksOptions := &secretsmanagerv2.ListSecretLocksOptions{
-				ID:     &secretIdForListSecretLocksLink,
+				ID:     &secretIdForGetSecretLink,
 				Limit:  core.Int64Ptr(int64(10)),
 				Sort:   core.StringPtr("name"),
 				Search: core.StringPtr("example"),
@@ -672,8 +699,8 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			}
 
 			createSecretVersionLocksBulkOptions := secretsManagerService.NewCreateSecretVersionLocksBulkOptions(
-				secretIdForCreateSecretVersionLocksLink,
-				secretVersionIdForCreateSecretVersionLocksLink,
+				secretIdForGetSecretLink,
+				secretVersionIdForGetSecretVersionLink,
 				[]secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
 			)
 
@@ -694,8 +721,8 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nListSecretVersionLocks() result:")
 			// begin-list_secret_version_locks
 			listSecretVersionLocksOptions := &secretsmanagerv2.ListSecretVersionLocksOptions{
-				SecretID: &secretIdForListSecretVersionLocksLink,
-				ID:       &secretVersionIdForListSecretVersionLocksLink,
+				SecretID: &secretIdForGetSecretLink,
+				ID:       &secretVersionIdForGetSecretVersionLink,
 				Limit:    core.Int64Ptr(int64(10)),
 				Sort:     core.StringPtr("name"),
 				Search:   core.StringPtr("example"),
@@ -907,7 +934,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 
 			deleteSecretVersionDataOptions := secretsManagerService.NewDeleteSecretVersionDataOptions(
 				secretIdForGetSecretLink,
-				secretIdForGetSecretLink,
+				secretVersionIdForGetSecretVersionLink,
 			)
 
 			response, err := secretsManagerService.DeleteSecretVersionData(deleteSecretVersionDataOptions)
@@ -951,7 +978,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 
 			deleteSecretVersionLocksBulkOptions := secretsManagerService.NewDeleteSecretVersionLocksBulkOptions(
 				secretIdForGetSecretLink,
-				secretVersionIdForDeleteSecretVersionLocksLink,
+				secretVersionIdForGetSecretVersionLink,
 			)
 			deleteSecretVersionLocksBulkOptions.SetName([]string{"lock-example-1"})
 

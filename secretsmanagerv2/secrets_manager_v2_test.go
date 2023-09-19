@@ -1526,7 +1526,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
-				listSecretsOptionsModel.Groups = []string{"default"}
+				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListSecrets(listSecretsOptionsModel)
@@ -1567,7 +1567,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2033-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -1585,7 +1585,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
-				listSecretsOptionsModel.Groups = []string{"default"}
+				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1629,7 +1629,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2033-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -1652,7 +1652,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
-				listSecretsOptionsModel.Groups = []string{"default"}
+				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1676,7 +1676,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
-				listSecretsOptionsModel.Groups = []string{"default"}
+				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -1714,7 +1714,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
-				listSecretsOptionsModel.Groups = []string{"default"}
+				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1783,9 +1783,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"imported_cert","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"signing_algorithm":"SHA256-RSA","alt_names":["AltNames"],"common_name":"example.com","expiration_date":"2033-04-12T23:20:50.520Z","intermediate_included":true,"issuer":"Lets Encrypt","key_algorithm":"RSA2048","private_key_included":true,"serial_number":"38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18","validity":{"not_before":"2025-04-12T23:20:50.000Z","not_after":"2025-04-12T23:20:50.000Z"}}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"imported_cert","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"signing_algorithm":"SHA256-RSA","alt_names":["AltNames"],"common_name":"example.com","expiration_date":"2033-04-12T23:20:50.520Z","intermediate_included":true,"issuer":"Lets Encrypt","key_algorithm":"RSA2048","private_key_included":true,"serial_number":"38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18","validity":{"not_before":"2025-04-12T23:20:50.000Z","not_after":"2025-04-12T23:20:50.000Z"}}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -1803,7 +1803,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Limit:  core.Int64Ptr(int64(10)),
 					Sort:   core.StringPtr("created_at"),
 					Search: core.StringPtr("example"),
-					Groups: []string{"default"},
+					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 				}
 
 				pager, err := secretsManagerService.NewSecretsPager(listSecretsOptionsModel)
@@ -1831,7 +1831,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Limit:  core.Int64Ptr(int64(10)),
 					Sort:   core.StringPtr("created_at"),
 					Search: core.StringPtr("example"),
-					Groups: []string{"default"},
+					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 				}
 
 				pager, err := secretsManagerService.NewSecretsPager(listSecretsOptionsModel)
@@ -2187,7 +2187,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2033-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -2241,7 +2241,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2033-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -2362,7 +2362,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretMetadataPatch model
 				secretMetadataPatchModel := new(secretsmanagerv2.ArbitrarySecretMetadataPatch)
-				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name")
+				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
@@ -2426,7 +2426,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2033-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -2440,7 +2440,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretMetadataPatch model
 				secretMetadataPatchModel := new(secretsmanagerv2.ArbitrarySecretMetadataPatch)
-				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name")
+				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
@@ -2507,7 +2507,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "imported_cert", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "signing_algorithm": "SHA256-RSA", "alt_names": ["AltNames"], "common_name": "example.com", "expiration_date": "2033-04-12T23:20:50.520Z", "intermediate_included": true, "issuer": "Lets Encrypt", "key_algorithm": "RSA2048", "private_key_included": true, "serial_number": "38:eb:01:a3:22:e9:de:55:24:56:9b:14:cb:e2:f3:e3:e2:fb:f5:18", "validity": {"not_before": "2025-04-12T23:20:50.000Z", "not_after": "2025-04-12T23:20:50.000Z"}}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -2526,7 +2526,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretMetadataPatch model
 				secretMetadataPatchModel := new(secretsmanagerv2.ArbitrarySecretMetadataPatch)
-				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name")
+				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
@@ -2557,7 +2557,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretMetadataPatch model
 				secretMetadataPatchModel := new(secretsmanagerv2.ArbitrarySecretMetadataPatch)
-				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name")
+				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
@@ -2609,7 +2609,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretMetadataPatch model
 				secretMetadataPatchModel := new(secretsmanagerv2.ArbitrarySecretMetadataPatch)
-				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name")
+				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
 				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
@@ -2659,9 +2659,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the PublicCertificateActionValidateManualDNSPrototype model
-				secretActionPrototypeModel := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
-				secretActionPrototypeModel.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+				// Construct an instance of the PrivateCertificateActionRevokePrototype model
+				secretActionPrototypeModel := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
+				secretActionPrototypeModel.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
 
 				// Construct an instance of the CreateSecretActionOptions model
 				createSecretActionOptionsModel := new(secretsmanagerv2.CreateSecretActionOptions)
@@ -2731,9 +2731,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the PublicCertificateActionValidateManualDNSPrototype model
-				secretActionPrototypeModel := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
-				secretActionPrototypeModel.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+				// Construct an instance of the PrivateCertificateActionRevokePrototype model
+				secretActionPrototypeModel := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
+				secretActionPrototypeModel.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
 
 				// Construct an instance of the CreateSecretActionOptions model
 				createSecretActionOptionsModel := new(secretsmanagerv2.CreateSecretActionOptions)
@@ -2811,9 +2811,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the PublicCertificateActionValidateManualDNSPrototype model
-				secretActionPrototypeModel := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
-				secretActionPrototypeModel.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+				// Construct an instance of the PrivateCertificateActionRevokePrototype model
+				secretActionPrototypeModel := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
+				secretActionPrototypeModel.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
 
 				// Construct an instance of the CreateSecretActionOptions model
 				createSecretActionOptionsModel := new(secretsmanagerv2.CreateSecretActionOptions)
@@ -2836,9 +2836,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the PublicCertificateActionValidateManualDNSPrototype model
-				secretActionPrototypeModel := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
-				secretActionPrototypeModel.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+				// Construct an instance of the PrivateCertificateActionRevokePrototype model
+				secretActionPrototypeModel := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
+				secretActionPrototypeModel.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
 
 				// Construct an instance of the CreateSecretActionOptions model
 				createSecretActionOptionsModel := new(secretsmanagerv2.CreateSecretActionOptions)
@@ -2882,9 +2882,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the PublicCertificateActionValidateManualDNSPrototype model
-				secretActionPrototypeModel := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
-				secretActionPrototypeModel.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+				// Construct an instance of the PrivateCertificateActionRevokePrototype model
+				secretActionPrototypeModel := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
+				secretActionPrototypeModel.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
 
 				// Construct an instance of the CreateSecretActionOptions model
 				createSecretActionOptionsModel := new(secretsmanagerv2.CreateSecretActionOptions)
@@ -2894,6 +2894,228 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Invoke operation
 				result, response, operationErr := secretsManagerService.CreateSecretAction(createSecretActionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretByNameType(getSecretByNameTypeOptions *GetSecretByNameTypeOptions) - Operation response error`, func() {
+		getSecretByNameTypePath := "/api/v2/secret_groups/default/secret_types/arbitrary/secrets/my-secret"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretByNameTypePath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSecretByNameType with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretByNameTypeOptions model
+				getSecretByNameTypeOptionsModel := new(secretsmanagerv2.GetSecretByNameTypeOptions)
+				getSecretByNameTypeOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretByNameTypeOptionsModel.Name = core.StringPtr("my-secret")
+				getSecretByNameTypeOptionsModel.SecretGroupName = core.StringPtr("default")
+				getSecretByNameTypeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretByNameType(getSecretByNameTypeOptions *GetSecretByNameTypeOptions)`, func() {
+		getSecretByNameTypePath := "/api/v2/secret_groups/default/secret_types/arbitrary/secrets/my-secret"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretByNameTypePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+				}))
+			})
+			It(`Invoke GetSecretByNameType successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSecretByNameTypeOptions model
+				getSecretByNameTypeOptionsModel := new(secretsmanagerv2.GetSecretByNameTypeOptions)
+				getSecretByNameTypeOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretByNameTypeOptionsModel.Name = core.StringPtr("my-secret")
+				getSecretByNameTypeOptionsModel.SecretGroupName = core.StringPtr("default")
+				getSecretByNameTypeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.GetSecretByNameTypeWithContext(ctx, getSecretByNameTypeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.GetSecretByNameTypeWithContext(ctx, getSecretByNameTypeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretByNameTypePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+				}))
+			})
+			It(`Invoke GetSecretByNameType successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.GetSecretByNameType(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSecretByNameTypeOptions model
+				getSecretByNameTypeOptionsModel := new(secretsmanagerv2.GetSecretByNameTypeOptions)
+				getSecretByNameTypeOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretByNameTypeOptionsModel.Name = core.StringPtr("my-secret")
+				getSecretByNameTypeOptionsModel.SecretGroupName = core.StringPtr("default")
+				getSecretByNameTypeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSecretByNameType with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretByNameTypeOptions model
+				getSecretByNameTypeOptionsModel := new(secretsmanagerv2.GetSecretByNameTypeOptions)
+				getSecretByNameTypeOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretByNameTypeOptionsModel.Name = core.StringPtr("my-secret")
+				getSecretByNameTypeOptionsModel.SecretGroupName = core.StringPtr("default")
+				getSecretByNameTypeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSecretByNameTypeOptions model with no property values
+				getSecretByNameTypeOptionsModelNew := new(secretsmanagerv2.GetSecretByNameTypeOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSecretByNameType successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretByNameTypeOptions model
+				getSecretByNameTypeOptionsModel := new(secretsmanagerv2.GetSecretByNameTypeOptions)
+				getSecretByNameTypeOptionsModel.SecretType = core.StringPtr("arbitrary")
+				getSecretByNameTypeOptionsModel.Name = core.StringPtr("my-secret")
+				getSecretByNameTypeOptionsModel.SecretGroupName = core.StringPtr("default")
+				getSecretByNameTypeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.GetSecretByNameType(getSecretByNameTypeOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -4489,7 +4711,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsLocksOptionsModel.Search = core.StringPtr("example")
-				listSecretsLocksOptionsModel.Groups = []string{"default"}
+				listSecretsLocksOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListSecretsLocks(listSecretsLocksOptionsModel)
@@ -4529,7 +4751,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets_locks": [{"secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_group_id": "default", "secret_type": "arbitrary", "secret_name": "my-secret", "versions": [{"version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "version_alias": "current", "locks": ["lock-example"], "payload_available": true}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets_locks": [{"secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_group_id": "default", "secret_type": "arbitrary", "secret_name": "my-secret", "versions": [{"version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "version_alias": "current", "locks": ["lock-example"], "payload_available": true}]}]}`)
 				}))
 			})
 			It(`Invoke ListSecretsLocks successfully with retries`, func() {
@@ -4546,7 +4768,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsLocksOptionsModel.Search = core.StringPtr("example")
-				listSecretsLocksOptionsModel.Groups = []string{"default"}
+				listSecretsLocksOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4589,7 +4811,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets_locks": [{"secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_group_id": "default", "secret_type": "arbitrary", "secret_name": "my-secret", "versions": [{"version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "version_alias": "current", "locks": ["lock-example"], "payload_available": true}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets_locks": [{"secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_group_id": "default", "secret_type": "arbitrary", "secret_name": "my-secret", "versions": [{"version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "version_alias": "current", "locks": ["lock-example"], "payload_available": true}]}]}`)
 				}))
 			})
 			It(`Invoke ListSecretsLocks successfully`, func() {
@@ -4611,7 +4833,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsLocksOptionsModel.Search = core.StringPtr("example")
-				listSecretsLocksOptionsModel.Groups = []string{"default"}
+				listSecretsLocksOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4634,7 +4856,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsLocksOptionsModel.Search = core.StringPtr("example")
-				listSecretsLocksOptionsModel.Groups = []string{"default"}
+				listSecretsLocksOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -4671,7 +4893,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel.Offset = core.Int64Ptr(int64(0))
 				listSecretsLocksOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listSecretsLocksOptionsModel.Search = core.StringPtr("example")
-				listSecretsLocksOptionsModel.Groups = []string{"default"}
+				listSecretsLocksOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
 				listSecretsLocksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4759,7 +4981,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel := &secretsmanagerv2.ListSecretsLocksOptions{
 					Limit:  core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("example"),
-					Groups: []string{"default"},
+					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 				}
 
 				pager, err := secretsManagerService.NewSecretsLocksPager(listSecretsLocksOptionsModel)
@@ -4786,7 +5008,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel := &secretsmanagerv2.ListSecretsLocksOptions{
 					Limit:  core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("example"),
-					Groups: []string{"default"},
+					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 				}
 
 				pager, err := secretsManagerService.NewSecretsLocksPager(listSecretsLocksOptionsModel)
@@ -4874,7 +5096,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretLocks successfully with retries`, func() {
@@ -4936,7 +5158,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretLocks successfully`, func() {
@@ -5738,7 +5960,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretVersionLocks successfully with retries`, func() {
@@ -5801,7 +6023,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretVersionLocks successfully`, func() {
@@ -7015,7 +7237,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListConfigurations successfully with retries`, func() {
@@ -7076,7 +7298,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 0, "offset": 0, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListConfigurations successfully`, func() {
@@ -8754,19 +8976,65 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(createConfigurationActionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateConfigurationOptions successfully`, func() {
-				// Construct an instance of the PublicCertificateConfigurationCALetsEncryptPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationCALetsEncryptPrototype)
+				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
 				Expect(configurationPrototypeModel).ToNot(BeNil())
-				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_ca_lets_encrypt")
+				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
 				configurationPrototypeModel.Name = core.StringPtr("my-example-engine-config")
-				configurationPrototypeModel.LetsEncryptEnvironment = core.StringPtr("production")
-				configurationPrototypeModel.LetsEncryptPrivateKey = core.StringPtr("testString")
-				configurationPrototypeModel.LetsEncryptPreferredChain = core.StringPtr("testString")
-				Expect(configurationPrototypeModel.ConfigType).To(Equal(core.StringPtr("public_cert_configuration_ca_lets_encrypt")))
+				configurationPrototypeModel.MaxTTL = core.StringPtr("8760h")
+				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
+				configurationPrototypeModel.CrlDisable = core.BoolPtr(true)
+				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
+				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+				configurationPrototypeModel.CommonName = core.StringPtr("localhost")
+				configurationPrototypeModel.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+				configurationPrototypeModel.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+				configurationPrototypeModel.UriSans = core.StringPtr("testString")
+				configurationPrototypeModel.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+				configurationPrototypeModel.TTL = core.StringPtr("8760h")
+				configurationPrototypeModel.Format = core.StringPtr("pem")
+				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
+				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
+				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
+				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(38))
+				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(true)
+				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
+				configurationPrototypeModel.Ou = []string{"testString"}
+				configurationPrototypeModel.Organization = []string{"testString"}
+				configurationPrototypeModel.Country = []string{"testString"}
+				configurationPrototypeModel.Locality = []string{"testString"}
+				configurationPrototypeModel.Province = []string{"testString"}
+				configurationPrototypeModel.StreetAddress = []string{"testString"}
+				configurationPrototypeModel.PostalCode = []string{"testString"}
+				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+				Expect(configurationPrototypeModel.ConfigType).To(Equal(core.StringPtr("private_cert_configuration_root_ca")))
 				Expect(configurationPrototypeModel.Name).To(Equal(core.StringPtr("my-example-engine-config")))
-				Expect(configurationPrototypeModel.LetsEncryptEnvironment).To(Equal(core.StringPtr("production")))
-				Expect(configurationPrototypeModel.LetsEncryptPrivateKey).To(Equal(core.StringPtr("testString")))
-				Expect(configurationPrototypeModel.LetsEncryptPreferredChain).To(Equal(core.StringPtr("testString")))
+				Expect(configurationPrototypeModel.MaxTTL).To(Equal(core.StringPtr("8760h")))
+				Expect(configurationPrototypeModel.CrlExpiry).To(Equal(core.StringPtr("72h")))
+				Expect(configurationPrototypeModel.CrlDisable).To(Equal(core.BoolPtr(true)))
+				Expect(configurationPrototypeModel.CrlDistributionPointsEncoded).To(Equal(core.BoolPtr(true)))
+				Expect(configurationPrototypeModel.IssuingCertificatesUrlsEncoded).To(Equal(core.BoolPtr(true)))
+				Expect(configurationPrototypeModel.CommonName).To(Equal(core.StringPtr("localhost")))
+				Expect(configurationPrototypeModel.AltNames).To(Equal([]string{"s1.example.com", "*.s2.example.com"}))
+				Expect(configurationPrototypeModel.IpSans).To(Equal(core.StringPtr("1.1.1.1, 2.2.2.2")))
+				Expect(configurationPrototypeModel.UriSans).To(Equal(core.StringPtr("testString")))
+				Expect(configurationPrototypeModel.OtherSans).To(Equal([]string{"2.5.4.5;UTF8:*.example.com"}))
+				Expect(configurationPrototypeModel.TTL).To(Equal(core.StringPtr("8760h")))
+				Expect(configurationPrototypeModel.Format).To(Equal(core.StringPtr("pem")))
+				Expect(configurationPrototypeModel.PrivateKeyFormat).To(Equal(core.StringPtr("der")))
+				Expect(configurationPrototypeModel.KeyType).To(Equal(core.StringPtr("rsa")))
+				Expect(configurationPrototypeModel.KeyBits).To(Equal(core.Int64Ptr(int64(4096))))
+				Expect(configurationPrototypeModel.MaxPathLength).To(Equal(core.Int64Ptr(int64(38))))
+				Expect(configurationPrototypeModel.ExcludeCnFromSans).To(Equal(core.BoolPtr(true)))
+				Expect(configurationPrototypeModel.PermittedDnsDomains).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.Ou).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.Organization).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.Country).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.Locality).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.Province).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.StreetAddress).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.PostalCode).To(Equal([]string{"testString"}))
+				Expect(configurationPrototypeModel.SerialNumber).To(Equal(core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")))
 
 				// Construct an instance of the CreateConfigurationOptions model
 				var configurationPrototype secretsmanagerv2.ConfigurationPrototypeIntf = nil
@@ -8793,11 +9061,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(createNotificationsRegistrationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateSecretActionOptions successfully`, func() {
-				// Construct an instance of the PublicCertificateActionValidateManualDNSPrototype model
-				secretActionPrototypeModel := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
+				// Construct an instance of the PrivateCertificateActionRevokePrototype model
+				secretActionPrototypeModel := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
 				Expect(secretActionPrototypeModel).ToNot(BeNil())
-				secretActionPrototypeModel.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
-				Expect(secretActionPrototypeModel.ActionType).To(Equal(core.StringPtr("public_cert_action_validate_dns_challenge")))
+				secretActionPrototypeModel.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
+				Expect(secretActionPrototypeModel.ActionType).To(Equal(core.StringPtr("private_cert_action_revoke_certificate")))
 
 				// Construct an instance of the CreateSecretActionOptions model
 				id := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
@@ -9058,6 +9326,22 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(getNotificationsRegistrationTestOptionsModel).ToNot(BeNil())
 				Expect(getNotificationsRegistrationTestOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetSecretByNameTypeOptions successfully`, func() {
+				// Construct an instance of the GetSecretByNameTypeOptions model
+				secretType := "arbitrary"
+				name := "my-secret"
+				secretGroupName := "default"
+				getSecretByNameTypeOptionsModel := secretsManagerService.NewGetSecretByNameTypeOptions(secretType, name, secretGroupName)
+				getSecretByNameTypeOptionsModel.SetSecretType("arbitrary")
+				getSecretByNameTypeOptionsModel.SetName("my-secret")
+				getSecretByNameTypeOptionsModel.SetSecretGroupName("default")
+				getSecretByNameTypeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSecretByNameTypeOptionsModel).ToNot(BeNil())
+				Expect(getSecretByNameTypeOptionsModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
+				Expect(getSecretByNameTypeOptionsModel.Name).To(Equal(core.StringPtr("my-secret")))
+				Expect(getSecretByNameTypeOptionsModel.SecretGroupName).To(Equal(core.StringPtr("default")))
+				Expect(getSecretByNameTypeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetSecretGroupOptions successfully`, func() {
 				// Construct an instance of the GetSecretGroupOptions model
 				id := "d898bb90-82f6-4d61-b5cc-b079b66cfa76"
@@ -9191,13 +9475,13 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsLocksOptionsModel.SetOffset(int64(0))
 				listSecretsLocksOptionsModel.SetLimit(int64(10))
 				listSecretsLocksOptionsModel.SetSearch("example")
-				listSecretsLocksOptionsModel.SetGroups([]string{"default"})
+				listSecretsLocksOptionsModel.SetGroups([]string{"default", "cac40995-c37a-4dcb-9506-472869077634"})
 				listSecretsLocksOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listSecretsLocksOptionsModel).ToNot(BeNil())
 				Expect(listSecretsLocksOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSecretsLocksOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listSecretsLocksOptionsModel.Search).To(Equal(core.StringPtr("example")))
-				Expect(listSecretsLocksOptionsModel.Groups).To(Equal([]string{"default"}))
+				Expect(listSecretsLocksOptionsModel.Groups).To(Equal([]string{"default", "cac40995-c37a-4dcb-9506-472869077634"}))
 				Expect(listSecretsLocksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretsOptions successfully`, func() {
@@ -9207,14 +9491,14 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.SetLimit(int64(10))
 				listSecretsOptionsModel.SetSort("created_at")
 				listSecretsOptionsModel.SetSearch("example")
-				listSecretsOptionsModel.SetGroups([]string{"default"})
+				listSecretsOptionsModel.SetGroups([]string{"default", "cac40995-c37a-4dcb-9506-472869077634"})
 				listSecretsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listSecretsOptionsModel).ToNot(BeNil())
 				Expect(listSecretsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listSecretsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listSecretsOptionsModel.Sort).To(Equal(core.StringPtr("created_at")))
 				Expect(listSecretsOptionsModel.Search).To(Equal(core.StringPtr("example")))
-				Expect(listSecretsOptionsModel.Groups).To(Equal([]string{"default"}))
+				Expect(listSecretsOptionsModel.Groups).To(Equal([]string{"default", "cac40995-c37a-4dcb-9506-472869077634"}))
 				Expect(listSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewSecretLockPrototype successfully`, func() {
@@ -9510,12 +9794,6 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				username := "testString"
 				password := "testString"
 				_model, err := secretsManagerService.NewUsernamePasswordSecretPrototype(secretType, name, username, password)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewUsernamePasswordSecretVersionPrototype successfully`, func() {
-				password := "testString"
-				_model, err := secretsManagerService.NewUsernamePasswordSecretVersionPrototype(password)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
