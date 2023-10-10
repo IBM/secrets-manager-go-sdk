@@ -137,7 +137,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			secretPrototypeModel := &secretsmanagerv2.ArbitrarySecretPrototype{
 				CustomMetadata:        map[string]interface{}{"anyKey": "anyValue"},
 				Description:           core.StringPtr("Description of my arbitrary secret."),
-				ExpirationDate:        CreateMockDateTime("2023-10-05T11:49:42Z"),
+				ExpirationDate:        CreateMockDateTime("2030-10-05T11:49:42Z"),
 				Labels:                []string{"dev", "us-south"},
 				Name:                  core.StringPtr("example-arbitrary-secret"),
 				SecretGroupID:         core.StringPtr("default"),
