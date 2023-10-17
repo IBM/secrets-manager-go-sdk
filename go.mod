@@ -1,6 +1,6 @@
 module github.com/IBM/secrets-manager-go-sdk/v2
 
-go 1.18
+go 1.19
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.14.1
