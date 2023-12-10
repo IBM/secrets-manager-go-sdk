@@ -30,7 +30,6 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-//
 // This file provides an example of how to use the secrets-manager service.
 //
 // The following configuration properties are assumed to be defined:
@@ -42,7 +41,6 @@ import (
 // These configuration properties can be exported as environment variables, or stored
 // in a configuration file and then:
 // export IBM_CREDENTIALS_FILE=<name of configuration file>
-//
 var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 
 	const externalConfigFile = "../secrets_manager_v2.env"
