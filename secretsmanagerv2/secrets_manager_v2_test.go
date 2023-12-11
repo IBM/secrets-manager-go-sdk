@@ -9507,6 +9507,17 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewServiceCredentialsSecretSourceService successfully`, func() {
+				var instance *secretsmanagerv2.ServiceCredentialsSourceServiceInstance = nil
+				_, err := secretsManagerService.NewServiceCredentialsSecretSourceService(instance)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewServiceCredentialsSourceServiceRole successfully`, func() {
+				crn := "testString"
+				_model, err := secretsManagerService.NewServiceCredentialsSourceServiceRole(crn)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewUpdateConfigurationOptions successfully`, func() {
 				// Construct an instance of the UpdateConfigurationOptions model
 				name := "configuration-name"
@@ -9601,7 +9612,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			It(`Invoke NewIAMCredentialsSecretPrototype successfully`, func() {
 				secretType := "iam_credentials"
 				name := "my-secret-example"
-				ttl := "30m"
+				ttl := "1d"
 				reuseApiKey := true
 				_model, err := secretsManagerService.NewIAMCredentialsSecretPrototype(secretType, name, ttl, reuseApiKey)
 				Expect(_model).ToNot(BeNil())
@@ -9786,6 +9797,13 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			It(`Invoke NewPublicCertificateVersionPrototype successfully`, func() {
 				var rotation *secretsmanagerv2.PublicCertificateRotationObject = nil
 				_, err := secretsManagerService.NewPublicCertificateVersionPrototype(rotation)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewServiceCredentialsSecretPrototype successfully`, func() {
+				name := "my-secret-example"
+				secretType := "service_credentials"
+				var sourceService *secretsmanagerv2.ServiceCredentialsSecretSourceService = nil
+				_, err := secretsManagerService.NewServiceCredentialsSecretPrototype(name, secretType, sourceService)
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewUsernamePasswordSecretPrototype successfully`, func() {
