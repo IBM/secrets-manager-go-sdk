@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9686,7 +9686,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			})
 			It(`Invoke NewPrivateCertificateConfigurationActionSignIntermediatePrototype successfully`, func() {
 				actionType := "private_cert_configuration_action_sign_intermediate"
-				intermediateCertificateAuthority := "my-secret-engine-config"
+				intermediateCertificateAuthority := "example-intermediate-CA"
 				_model, err := secretsManagerService.NewPrivateCertificateConfigurationActionSignIntermediatePrototype(actionType, intermediateCertificateAuthority)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
@@ -9810,8 +9810,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretType := "username_password"
 				name := "my-secret-example"
 				username := "testString"
-				password := "testString"
-				_model, err := secretsManagerService.NewUsernamePasswordSecretPrototype(secretType, name, username, password)
+				_model, err := secretsManagerService.NewUsernamePasswordSecretPrototype(secretType, name, username)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
