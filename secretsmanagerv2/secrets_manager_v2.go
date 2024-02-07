@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.82.1-2082d402-20231115-195014
+ * IBM OpenAPI SDK Code Generator Version: 3.84.2-a032c73d-20240125-175315
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -2756,24 +2756,30 @@ type Configuration struct {
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 
 	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
 	// newline characters.
 	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
 
-	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
 	//
 	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`).
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
 	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
 	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
 	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
@@ -3267,7 +3273,7 @@ type ConfigurationAction struct {
 	// The data that is associated with the root certificate authority.
 	Data *PrivateCertificateConfigurationCACertificate `json:"data,omitempty"`
 
-	// The unique name of your configuration.
+	// The name of the intermediate certificate authority configuration.
 	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
@@ -3429,7 +3435,7 @@ type ConfigurationActionPrototype struct {
 	// The certificate signing request.
 	Csr *string `json:"csr,omitempty"`
 
-	// The unique name of your configuration.
+	// The name of the intermediate certificate authority configuration.
 	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
@@ -3524,8 +3530,8 @@ type ConfigurationMetadata struct {
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 
 	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
@@ -3975,20 +3981,26 @@ type ConfigurationPatch struct {
 	// newline characters.
 	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 
-	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
 	//
 	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`).
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
 	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
 	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
 	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
@@ -4530,20 +4542,26 @@ type ConfigurationPrototype struct {
 	// newline characters.
 	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 
-	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
 	//
 	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`).
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
 	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
 	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
 	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
@@ -4655,30 +4673,6 @@ func UnmarshalConfigurationPrototype(m map[string]json.RawMessage, result interf
 	} else {
 		err = fmt.Errorf("unrecognized value for discriminator property 'config_type': %s", discValue)
 	}
-	return
-}
-
-// CosHmacKeys : The Cloud Object Storage HMAC keys that are returned after you create a service credentials secret.
-type CosHmacKeys struct {
-	// The access key ID for Cloud Object Storage HMAC credentials.
-	AccessKeyID *string `json:"access_key_id,omitempty"`
-
-	// The secret access key ID for Cloud Object Storage HMAC credentials.
-	SecretAccessKey *string `json:"secret_access_key,omitempty"`
-}
-
-// UnmarshalCosHmacKeys unmarshals an instance of CosHmacKeys from the specified map of raw messages.
-func UnmarshalCosHmacKeys(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CosHmacKeys)
-	err = core.UnmarshalPrimitive(m, "access_key_id", &obj.AccessKeyID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "secret_access_key", &obj.SecretAccessKey)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -6240,6 +6234,121 @@ func UnmarshalPaginatedCollectionPrevious(m map[string]json.RawMessage, result i
 	return
 }
 
+// PasswordGenerationPolicy : Policy for auto-generated passwords.
+type PasswordGenerationPolicy struct {
+	// The length of auto-generated passwords.
+	Length *int64 `json:"length,omitempty"`
+
+	// Include digits in auto-generated passwords.
+	IncludeDigits *bool `json:"include_digits,omitempty"`
+
+	// Include symbols in auto-generated passwords.
+	IncludeSymbols *bool `json:"include_symbols,omitempty"`
+
+	// Include uppercase letters in auto-generated passwords.
+	IncludeUppercase *bool `json:"include_uppercase,omitempty"`
+}
+
+// UnmarshalPasswordGenerationPolicy unmarshals an instance of PasswordGenerationPolicy from the specified map of raw messages.
+func UnmarshalPasswordGenerationPolicy(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PasswordGenerationPolicy)
+	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_digits", &obj.IncludeDigits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_symbols", &obj.IncludeSymbols)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_uppercase", &obj.IncludeUppercase)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PasswordGenerationPolicyPatch : Policy patch for auto-generated passwords. Policy properties that are included in the patch are updated. Properties
+// that are not included in the patch remain unchanged.
+type PasswordGenerationPolicyPatch struct {
+	// The length of auto-generated passwords.
+	Length *int64 `json:"length,omitempty"`
+
+	// Include digits in auto-generated passwords.
+	IncludeDigits *bool `json:"include_digits,omitempty"`
+
+	// Include symbols in auto-generated passwords.
+	IncludeSymbols *bool `json:"include_symbols,omitempty"`
+
+	// Include uppercase letters in auto-generated passwords.
+	IncludeUppercase *bool `json:"include_uppercase,omitempty"`
+}
+
+// UnmarshalPasswordGenerationPolicyPatch unmarshals an instance of PasswordGenerationPolicyPatch from the specified map of raw messages.
+func UnmarshalPasswordGenerationPolicyPatch(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PasswordGenerationPolicyPatch)
+	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_digits", &obj.IncludeDigits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_symbols", &obj.IncludeSymbols)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_uppercase", &obj.IncludeUppercase)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PasswordGenerationPolicyRO : Policy for auto-generated passwords.
+type PasswordGenerationPolicyRO struct {
+	// The length of auto-generated passwords.
+	Length *int64 `json:"length,omitempty"`
+
+	// Include digits in auto-generated passwords.
+	IncludeDigits *bool `json:"include_digits,omitempty"`
+
+	// Include symbols in auto-generated passwords.
+	IncludeSymbols *bool `json:"include_symbols,omitempty"`
+
+	// Include uppercase letters in auto-generated passwords.
+	IncludeUppercase *bool `json:"include_uppercase,omitempty"`
+}
+
+// UnmarshalPasswordGenerationPolicyRO unmarshals an instance of PasswordGenerationPolicyRO from the specified map of raw messages.
+func UnmarshalPasswordGenerationPolicyRO(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PasswordGenerationPolicyRO)
+	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_digits", &obj.IncludeDigits)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_symbols", &obj.IncludeSymbols)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "include_uppercase", &obj.IncludeUppercase)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PrivateCertificateCAData : The configuration data of your Private Certificate.
 // Models which "extend" this model:
 // - PrivateCertificateConfigurationIntermediateCACSR
@@ -6606,11 +6715,14 @@ type Secret struct {
 	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 
-	// The properties that are required to create the service credentials for the specified source service instance.
-	SourceService *ServiceCredentialsSecretSourceService `json:"source_service,omitempty"`
+	// The properties of the resource key that was created for this source service instance.
+	SourceService *ServiceCredentialsSecretSourceServiceRO `json:"source_service,omitempty"`
 
 	// The properties of the service credentials secret payload.
 	Credentials *ServiceCredentialsSecretCredentials `json:"credentials,omitempty"`
+
+	// Policy for auto-generated passwords.
+	PasswordGenerationPolicy *PasswordGenerationPolicyRO `json:"password_generation_policy,omitempty"`
 
 	// The username that is assigned to an `username_password` secret.
 	Username *string `json:"username,omitempty"`
@@ -7356,8 +7468,11 @@ type SecretMetadata struct {
 	// The name of the DNS provider configuration.
 	Dns *string `json:"dns,omitempty"`
 
-	// The properties that are required to create the service credentials for the specified source service instance.
-	SourceService *ServiceCredentialsSecretSourceService `json:"source_service,omitempty"`
+	// The properties of the resource key that was created for this source service instance.
+	SourceService *ServiceCredentialsSecretSourceServiceRO `json:"source_service,omitempty"`
+
+	// Policy for auto-generated passwords.
+	PasswordGenerationPolicy *PasswordGenerationPolicyRO `json:"password_generation_policy,omitempty"`
 }
 
 // Constants associated with the SecretMetadata.SecretType property.
@@ -7557,6 +7672,10 @@ type SecretMetadataPatch struct {
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+
+	// Policy patch for auto-generated passwords. Policy properties that are included in the patch are updated.
+	// Properties that are not included in the patch remain unchanged.
+	PasswordGenerationPolicy *PasswordGenerationPolicyPatch `json:"password_generation_policy,omitempty"`
 }
 
 func (*SecretMetadataPatch) isaSecretMetadataPatch() bool {
@@ -7595,6 +7714,10 @@ func UnmarshalSecretMetadataPatch(m map[string]json.RawMessage, result interface
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyPatch)
 	if err != nil {
 		return
 	}
@@ -7770,8 +7893,12 @@ type SecretPrototype struct {
 	// The username that is assigned to an `username_password` secret.
 	Username *string `json:"username,omitempty"`
 
-	// The password that is assigned to an `username_password` secret.
+	// The password that is assigned to an `username_password` secret. If you omit this parameter, Secrets Manager
+	// generates a new random password for your secret.
 	Password *string `json:"password,omitempty"`
+
+	// Policy for auto-generated passwords.
+	PasswordGenerationPolicy *PasswordGenerationPolicy `json:"password_generation_policy,omitempty"`
 }
 
 // Constants associated with the SecretPrototype.SecretType property.
@@ -8436,7 +8563,8 @@ type SecretVersionPrototype struct {
 	// Defines the rotation object that is used to manually rotate public certificates.
 	Rotation *PublicCertificateRotationObject `json:"rotation,omitempty"`
 
-	// The password that is assigned to an `username_password` secret.
+	// The password that is assigned to an `username_password` secret. If you omit this parameter, Secrets Manager
+	// generates a new random password for your secret.
 	Password *string `json:"password,omitempty"`
 }
 
@@ -8614,12 +8742,6 @@ type ServiceCredentialsSecretCredentials struct {
 	// understand the duration of the lease.
 	Apikey *string `json:"apikey,omitempty"`
 
-	// The Cloud Object Storage HMAC keys that are returned after you create a service credentials secret.
-	CosHmacKeys *CosHmacKeys `json:"cos_hmac_keys,omitempty"`
-
-	// The endpoints that are returned after you create a service credentials secret.
-	Endpoints *string `json:"endpoints,omitempty"`
-
 	// The IAM API key description for the generated service credentials.
 	IamApikeyDescription *string `json:"iam_apikey_description,omitempty"`
 
@@ -8635,8 +8757,64 @@ type ServiceCredentialsSecretCredentials struct {
 	// The IAM Service ID CRN.
 	IamServiceidCrn *string `json:"iam_serviceid_crn,omitempty"`
 
-	// The resource instance CRN that is returned after you create a service credentials secret.
-	ResourceInstanceID *string `json:"resource_instance_id,omitempty"`
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.Apikey != nil {
+		m["apikey"] = o.Apikey
+	}
+	if o.IamApikeyDescription != nil {
+		m["iam_apikey_description"] = o.IamApikeyDescription
+	}
+	if o.IamApikeyID != nil {
+		m["iam_apikey_id"] = o.IamApikeyID
+	}
+	if o.IamApikeyName != nil {
+		m["iam_apikey_name"] = o.IamApikeyName
+	}
+	if o.IamRoleCrn != nil {
+		m["iam_role_crn"] = o.IamRoleCrn
+	}
+	if o.IamServiceidCrn != nil {
+		m["iam_serviceid_crn"] = o.IamServiceidCrn
+	}
+	buffer, err = json.Marshal(m)
+	return
 }
 
 // UnmarshalServiceCredentialsSecretCredentials unmarshals an instance of ServiceCredentialsSecretCredentials from the specified map of raw messages.
@@ -8646,37 +8824,40 @@ func UnmarshalServiceCredentialsSecretCredentials(m map[string]json.RawMessage, 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "cos_hmac_keys", &obj.CosHmacKeys, UnmarshalCosHmacKeys)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "endpoints", &obj.Endpoints)
-	if err != nil {
-		return
-	}
+	delete(m, "apikey")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_description", &obj.IamApikeyDescription)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_apikey_description")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_id", &obj.IamApikeyID)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_apikey_id")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_name", &obj.IamApikeyName)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_apikey_name")
 	err = core.UnmarshalPrimitive(m, "iam_role_crn", &obj.IamRoleCrn)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_role_crn")
 	err = core.UnmarshalPrimitive(m, "iam_serviceid_crn", &obj.IamServiceidCrn)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "resource_instance_id", &obj.ResourceInstanceID)
-	if err != nil {
-		return
+	delete(m, "iam_serviceid_crn")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -8684,6 +8865,51 @@ func UnmarshalServiceCredentialsSecretCredentials(m map[string]json.RawMessage, 
 
 // ServiceCredentialsSecretSourceService : The properties that are required to create the service credentials for the specified source service instance.
 type ServiceCredentialsSecretSourceService struct {
+	// The source service instance identifier.
+	Instance *ServiceCredentialsSourceServiceInstance `json:"instance" validate:"required"`
+
+	// Configuration options represented as key-value pairs. Service-defined options are used in the generation of
+	// credentials for some services. For example, Cloud Object Storage accepts the optional boolean parameter HMAC for
+	// creating specific kind of credentials.
+	Parameters *ServiceCredentialsSourceServiceParameters `json:"parameters,omitempty"`
+
+	// The service-specific custom role. CRN is accepted. The role is assigned as part of an access policy to any
+	// auto-generated IAM service ID.  If you provide an existing service ID, it is added to the access policy for that ID.
+	//  If a role is not provided, any new service IDs that are autogenerated, will not have an assigned access policy and
+	// provided service IDs are not changed in any way.  Refer to the service documentation for supported roles.
+	Role *ServiceCredentialsSourceServiceRole `json:"role,omitempty"`
+}
+
+// NewServiceCredentialsSecretSourceService : Instantiate ServiceCredentialsSecretSourceService (Generic Model Constructor)
+func (*SecretsManagerV2) NewServiceCredentialsSecretSourceService(instance *ServiceCredentialsSourceServiceInstance) (_model *ServiceCredentialsSecretSourceService, err error) {
+	_model = &ServiceCredentialsSecretSourceService{
+		Instance: instance,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalServiceCredentialsSecretSourceService unmarshals an instance of ServiceCredentialsSecretSourceService from the specified map of raw messages.
+func UnmarshalServiceCredentialsSecretSourceService(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ServiceCredentialsSecretSourceService)
+	err = core.UnmarshalModel(m, "instance", &obj.Instance, UnmarshalServiceCredentialsSourceServiceInstance)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "parameters", &obj.Parameters, UnmarshalServiceCredentialsSourceServiceParameters)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "role", &obj.Role, UnmarshalServiceCredentialsSourceServiceRole)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ServiceCredentialsSecretSourceServiceRO : The properties of the resource key that was created for this source service instance.
+type ServiceCredentialsSecretSourceServiceRO struct {
 	// The source service instance identifier.
 	Instance *ServiceCredentialsSourceServiceInstance `json:"instance" validate:"required"`
 
@@ -8705,18 +8931,9 @@ type ServiceCredentialsSecretSourceService struct {
 	ResourceKey *ServiceCredentialsResourceKey `json:"resource_key,omitempty"`
 }
 
-// NewServiceCredentialsSecretSourceService : Instantiate ServiceCredentialsSecretSourceService (Generic Model Constructor)
-func (*SecretsManagerV2) NewServiceCredentialsSecretSourceService(instance *ServiceCredentialsSourceServiceInstance) (_model *ServiceCredentialsSecretSourceService, err error) {
-	_model = &ServiceCredentialsSecretSourceService{
-		Instance: instance,
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalServiceCredentialsSecretSourceService unmarshals an instance of ServiceCredentialsSecretSourceService from the specified map of raw messages.
-func UnmarshalServiceCredentialsSecretSourceService(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ServiceCredentialsSecretSourceService)
+// UnmarshalServiceCredentialsSecretSourceServiceRO unmarshals an instance of ServiceCredentialsSecretSourceServiceRO from the specified map of raw messages.
+func UnmarshalServiceCredentialsSecretSourceServiceRO(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ServiceCredentialsSecretSourceServiceRO)
 	err = core.UnmarshalModel(m, "instance", &obj.Instance, UnmarshalServiceCredentialsSourceServiceInstance)
 	if err != nil {
 		return
@@ -14474,7 +14691,7 @@ type PrivateCertificateConfigurationActionSignIntermediate struct {
 	// The type of configuration action.
 	ActionType *string `json:"action_type" validate:"required"`
 
-	// The unique name of your configuration.
+	// The name of the intermediate certificate authority configuration.
 	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority" validate:"required"`
 }
 
@@ -14681,7 +14898,7 @@ type PrivateCertificateConfigurationActionSignIntermediatePrototype struct {
 	// The type of configuration action.
 	ActionType *string `json:"action_type" validate:"required"`
 
-	// The unique name of your configuration.
+	// The name of the intermediate certificate authority configuration.
 	IntermediateCertificateAuthority *string `json:"intermediate_certificate_authority" validate:"required"`
 }
 
@@ -19317,8 +19534,8 @@ type PublicCertificateConfigurationCALetsEncrypt struct {
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment" validate:"required"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 
 	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
@@ -19435,8 +19652,8 @@ type PublicCertificateConfigurationCALetsEncryptMetadata struct {
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment" validate:"required"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 }
 
@@ -19528,8 +19745,8 @@ type PublicCertificateConfigurationCALetsEncryptPatch struct {
 	// newline characters.
 	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 }
 
@@ -19602,8 +19819,8 @@ type PublicCertificateConfigurationCALetsEncryptPrototype struct {
 	// newline characters.
 	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key" validate:"required"`
 
-	// If the CA offers multiple certificate chains, prefer the chain with an issuer matching this Subject Common Name. If
-	// no match, the default offered chain will be used.
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 }
 
@@ -20015,16 +20232,22 @@ type PublicCertificateConfigurationDNSCloudInternetServices struct {
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
 
-	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
 	//
 	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`).
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
 	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
 	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
 	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
@@ -20193,16 +20416,22 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesMetadata(m m
 // PublicCertificateConfigurationDNSCloudInternetServicesPatch : The configuration update of the Cloud Internet Services DNS.
 // This model "extends" ConfigurationPatch
 type PublicCertificateConfigurationDNSCloudInternetServicesPatch struct {
-	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
 	//
 	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`).
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
 	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
 	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
 	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey" validate:"required"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
@@ -20260,16 +20489,22 @@ type PublicCertificateConfigurationDNSCloudInternetServicesPrototype struct {
 	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
 	Name *string `json:"name" validate:"required"`
 
-	// An IBM Cloud API key that can to list domains in your Cloud Internet Services instance.
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
 	//
 	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`).
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
 	//
-	// If you need to manage specific domains, you can assign the Manager role. For production environments, it is
-	// recommended that you assign the Reader access role, and then use the
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
 	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains. For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-specific-domains).
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
 	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
@@ -21304,8 +21539,8 @@ type ServiceCredentialsSecret struct {
 	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
-	// The properties that are required to create the service credentials for the specified source service instance.
-	SourceService *ServiceCredentialsSecretSourceService `json:"source_service" validate:"required"`
+	// The properties of the resource key that was created for this source service instance.
+	SourceService *ServiceCredentialsSecretSourceServiceRO `json:"source_service" validate:"required"`
 
 	// The properties of the service credentials secret payload.
 	Credentials *ServiceCredentialsSecretCredentials `json:"credentials" validate:"required"`
@@ -21418,7 +21653,7 @@ func UnmarshalServiceCredentialsSecret(m map[string]json.RawMessage, result inte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceService)
+	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceServiceRO)
 	if err != nil {
 		return
 	}
@@ -21509,8 +21744,8 @@ type ServiceCredentialsSecretMetadata struct {
 	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
-	// The properties that are required to create the service credentials for the specified source service instance.
-	SourceService *ServiceCredentialsSecretSourceService `json:"source_service" validate:"required"`
+	// The properties of the resource key that was created for this source service instance.
+	SourceService *ServiceCredentialsSecretSourceServiceRO `json:"source_service" validate:"required"`
 }
 
 // Constants associated with the ServiceCredentialsSecretMetadata.SecretType property.
@@ -21620,7 +21855,7 @@ func UnmarshalServiceCredentialsSecretMetadata(m map[string]json.RawMessage, res
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceService)
+	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceServiceRO)
 	if err != nil {
 		return
 	}
@@ -22225,6 +22460,9 @@ type UsernamePasswordSecret struct {
 	// secrets that can be auto-rotated and an existing rotation policy.
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
+	// Policy for auto-generated passwords.
+	PasswordGenerationPolicy *PasswordGenerationPolicyRO `json:"password_generation_policy,omitempty"`
+
 	// The username that is assigned to an `username_password` secret.
 	Username *string `json:"username" validate:"required"`
 
@@ -22339,6 +22577,10 @@ func UnmarshalUsernamePasswordSecret(m map[string]json.RawMessage, result interf
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyRO)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
 		return
@@ -22425,6 +22667,9 @@ type UsernamePasswordSecretMetadata struct {
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
 	// secrets that can be auto-rotated and an existing rotation policy.
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
+
+	// Policy for auto-generated passwords.
+	PasswordGenerationPolicy *PasswordGenerationPolicyRO `json:"password_generation_policy,omitempty"`
 }
 
 // Constants associated with the UsernamePasswordSecretMetadata.SecretType property.
@@ -22534,6 +22779,10 @@ func UnmarshalUsernamePasswordSecretMetadata(m map[string]json.RawMessage, resul
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyRO)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -22569,6 +22818,10 @@ type UsernamePasswordSecretMetadataPatch struct {
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// Policy patch for auto-generated passwords. Policy properties that are included in the patch are updated.
+	// Properties that are not included in the patch remain unchanged.
+	PasswordGenerationPolicy *PasswordGenerationPolicyPatch `json:"password_generation_policy,omitempty"`
 }
 
 func (*UsernamePasswordSecretMetadataPatch) isaSecretMetadataPatch() bool {
@@ -22599,6 +22852,10 @@ func UnmarshalUsernamePasswordSecretMetadataPatch(m map[string]json.RawMessage, 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyPatch)
 	if err != nil {
 		return
 	}
@@ -22647,8 +22904,9 @@ type UsernamePasswordSecretPrototype struct {
 	// The username that is assigned to an `username_password` secret.
 	Username *string `json:"username" validate:"required"`
 
-	// The password that is assigned to an `username_password` secret.
-	Password *string `json:"password" validate:"required"`
+	// The password that is assigned to an `username_password` secret. If you omit this parameter, Secrets Manager
+	// generates a new random password for your secret.
+	Password *string `json:"password,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
@@ -22663,6 +22921,9 @@ type UsernamePasswordSecretPrototype struct {
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+
+	// Policy for auto-generated passwords.
+	PasswordGenerationPolicy *PasswordGenerationPolicy `json:"password_generation_policy,omitempty"`
 }
 
 // Constants associated with the UsernamePasswordSecretPrototype.SecretType property.
@@ -22680,12 +22941,11 @@ const (
 )
 
 // NewUsernamePasswordSecretPrototype : Instantiate UsernamePasswordSecretPrototype (Generic Model Constructor)
-func (*SecretsManagerV2) NewUsernamePasswordSecretPrototype(secretType string, name string, username string, password string) (_model *UsernamePasswordSecretPrototype, err error) {
+func (*SecretsManagerV2) NewUsernamePasswordSecretPrototype(secretType string, name string, username string) (_model *UsernamePasswordSecretPrototype, err error) {
 	_model = &UsernamePasswordSecretPrototype{
 		SecretType: core.StringPtr(secretType),
 		Name:       core.StringPtr(name),
 		Username:   core.StringPtr(username),
-		Password:   core.StringPtr(password),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -22739,6 +22999,10 @@ func UnmarshalUsernamePasswordSecretPrototype(m map[string]json.RawMessage, resu
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicy)
 	if err != nil {
 		return
 	}
@@ -23011,7 +23275,8 @@ func UnmarshalUsernamePasswordSecretVersionMetadata(m map[string]json.RawMessage
 // UsernamePasswordSecretVersionPrototype : UsernamePasswordSecretVersionPrototype struct
 // This model "extends" SecretVersionPrototype
 type UsernamePasswordSecretVersionPrototype struct {
-	// The password that is assigned to an `username_password` secret.
+	// The password that is assigned to an `username_password` secret. If you omit this parameter, Secrets Manager
+	// generates a new random password for your secret.
 	Password *string `json:"password,omitempty"`
 
 	// The secret metadata that a user can customize.
