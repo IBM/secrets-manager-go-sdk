@@ -57,15 +57,6 @@ import (
 
 Then run `go mod tidy` to download and install the new dependency and update the `go.mod` file for your application.
 
-#### `dep` dependency manager 
-
-If your application is using the `dep` dependency management tool, you can add a dependency to your `Gopkg.toml` file. Here is an example:
-
-```
-[[constraint]]
-  name = "github.com/IBM/secrets-manager-go-sdk/v2"
-  version = "2.0.X"
-```
 ## Authentication
 
 Secrets Manager uses token-based Identity and Access Management (IAM) authentication.
