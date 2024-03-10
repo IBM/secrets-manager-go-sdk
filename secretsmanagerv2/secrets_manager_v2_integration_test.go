@@ -363,11 +363,13 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`ListSecrets(listSecretsOptions *ListSecretsOptions) with pagination`, func() {
 			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
-				Offset: core.Int64Ptr(int64(0)),
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("created_at"),
-				Search: core.StringPtr("example"),
-				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				Offset:         core.Int64Ptr(int64(0)),
+				Limit:          core.Int64Ptr(int64(10)),
+				Sort:           core.StringPtr("created_at"),
+				Search:         core.StringPtr("example"),
+				Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				SecretTypes:    []string{"arbitrary", "kv"},
+				MatchAllLabels: []string{"dev", "us-south"},
 			}
 
 			listSecretsOptions.Offset = nil
@@ -392,10 +394,12 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`ListSecrets(listSecretsOptions *ListSecretsOptions) using SecretsPager`, func() {
 			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("created_at"),
-				Search: core.StringPtr("example"),
-				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				Limit:          core.Int64Ptr(int64(10)),
+				Sort:           core.StringPtr("created_at"),
+				Search:         core.StringPtr("example"),
+				Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				SecretTypes:    []string{"arbitrary", "kv"},
+				MatchAllLabels: []string{"dev", "us-south"},
 			}
 
 			// Test GetNext().

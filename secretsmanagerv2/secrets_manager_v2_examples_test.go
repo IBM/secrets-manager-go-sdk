@@ -395,10 +395,12 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nListSecrets() result:")
 			// begin-list_secrets
 			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("created_at"),
-				Search: core.StringPtr("example"),
-				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				Limit:          core.Int64Ptr(int64(10)),
+				Sort:           core.StringPtr("created_at"),
+				Search:         core.StringPtr("example"),
+				Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				SecretTypes:    []string{"arbitrary", "kv"},
+				MatchAllLabels: []string{"dev", "us-south"},
 			}
 
 			pager, err := secretsManagerService.NewSecretsPager(listSecretsOptions)

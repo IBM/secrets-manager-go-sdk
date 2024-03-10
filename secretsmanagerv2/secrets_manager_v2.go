@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.84.2-a032c73d-20240125-175315
+ * IBM OpenAPI SDK Code Generator Version: 3.86.1-c3d7bcef-20240308-215042
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -592,6 +592,12 @@ func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Conte
 	}
 	if listSecretsOptions.Groups != nil {
 		builder.AddQuery("groups", strings.Join(listSecretsOptions.Groups, ","))
+	}
+	if listSecretsOptions.SecretTypes != nil {
+		builder.AddQuery("secret_types", strings.Join(listSecretsOptions.SecretTypes, ","))
+	}
+	if listSecretsOptions.MatchAllLabels != nil {
+		builder.AddQuery("match_all_labels", strings.Join(listSecretsOptions.MatchAllLabels, ","))
 	}
 
 	request, err := builder.Build()
@@ -6104,9 +6110,37 @@ type ListSecretsOptions struct {
 	// `..?groups={secret_group_ID},default`.
 	Groups []string `json:"groups,omitempty"`
 
+	// Filter secrets by types.
+	//
+	// You can apply multiple filters by using a comma-separated list of secret types.
+	//
+	// **Usage:** To retrieve a list of imported certificates and public certificates use
+	// `..?secret_types=imported_cert,public_cert`.
+	SecretTypes []string `json:"secret_types,omitempty"`
+
+	// Filter secrets by labels.
+	//
+	// You can use a comma-separated list of labels to filter secrets that include all of the labels in the list.
+	//
+	// **Usage:** To retrieve a list of secrets that include both the label "dev" and the label "us-south" in their list of
+	// labels, use `..?labels=dev,us-south`.
+	MatchAllLabels []string `json:"match_all_labels,omitempty"`
+
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
+
+// Constants associated with the ListSecretsOptions.SecretTypes property.
+const (
+	ListSecretsOptions_SecretTypes_Arbitrary          = "arbitrary"
+	ListSecretsOptions_SecretTypes_IamCredentials     = "iam_credentials"
+	ListSecretsOptions_SecretTypes_ImportedCert       = "imported_cert"
+	ListSecretsOptions_SecretTypes_Kv                 = "kv"
+	ListSecretsOptions_SecretTypes_PrivateCert        = "private_cert"
+	ListSecretsOptions_SecretTypes_PublicCert         = "public_cert"
+	ListSecretsOptions_SecretTypes_ServiceCredentials = "service_credentials"
+	ListSecretsOptions_SecretTypes_UsernamePassword   = "username_password"
+)
 
 // NewListSecretsOptions : Instantiate ListSecretsOptions
 func (*SecretsManagerV2) NewListSecretsOptions() *ListSecretsOptions {
@@ -6140,6 +6174,18 @@ func (_options *ListSecretsOptions) SetSearch(search string) *ListSecretsOptions
 // SetGroups : Allow user to set Groups
 func (_options *ListSecretsOptions) SetGroups(groups []string) *ListSecretsOptions {
 	_options.Groups = groups
+	return _options
+}
+
+// SetSecretTypes : Allow user to set SecretTypes
+func (_options *ListSecretsOptions) SetSecretTypes(secretTypes []string) *ListSecretsOptions {
+	_options.SecretTypes = secretTypes
+	return _options
+}
+
+// SetMatchAllLabels : Allow user to set MatchAllLabels
+func (_options *ListSecretsOptions) SetMatchAllLabels(matchAllLabels []string) *ListSecretsOptions {
+	_options.MatchAllLabels = matchAllLabels
 	return _options
 }
 
@@ -6548,7 +6594,7 @@ type Secret struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -7331,7 +7377,7 @@ type SecretMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -7649,7 +7695,7 @@ type SecretMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -7761,7 +7807,7 @@ type SecretPrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -9433,7 +9479,7 @@ type ArbitrarySecret struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -9609,7 +9655,7 @@ type ArbitrarySecretMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -9764,7 +9810,7 @@ type ArbitrarySecretMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -9836,7 +9882,7 @@ type ArbitrarySecretPrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -10626,7 +10672,7 @@ type IAMCredentialsSecret struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -10704,6 +10750,10 @@ type IAMCredentialsSecret struct {
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
 	// secrets that can be auto-rotated and an existing rotation policy.
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The API key that is generated for this secret.
 	//
@@ -10840,6 +10890,10 @@ func UnmarshalIAMCredentialsSecret(m map[string]json.RawMessage, result interfac
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
 		return
@@ -10878,7 +10932,7 @@ type IAMCredentialsSecretMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -10956,6 +11010,10 @@ type IAMCredentialsSecretMetadata struct {
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
 	// secrets that can be auto-rotated and an existing rotation policy.
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
 // Constants associated with the IAMCredentialsSecretMetadata.SecretType property.
@@ -11085,6 +11143,10 @@ func UnmarshalIAMCredentialsSecretMetadata(m map[string]json.RawMessage, result 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -11105,7 +11167,7 @@ type IAMCredentialsSecretMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -11194,7 +11256,7 @@ type IAMCredentialsSecretPrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -11729,7 +11791,7 @@ type ImportedCertificate struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -11987,7 +12049,7 @@ type ImportedCertificateMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -12208,7 +12270,7 @@ type ImportedCertificateMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -12277,7 +12339,7 @@ type ImportedCertificatePrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -12782,7 +12844,7 @@ type KVSecret struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -12950,7 +13012,7 @@ type KVSecretMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -13097,7 +13159,7 @@ type KVSecretMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -13166,7 +13228,7 @@ type KVSecretPrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -13579,7 +13641,7 @@ type PrivateCertificate struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -18209,7 +18271,7 @@ type PrivateCertificateMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -18462,7 +18524,7 @@ type PrivateCertificateMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -18539,7 +18601,7 @@ type PrivateCertificatePrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -19185,7 +19247,7 @@ type PublicCertificate struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -20593,7 +20655,7 @@ type PublicCertificateMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -20840,7 +20902,7 @@ type PublicCertificateMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -20917,7 +20979,7 @@ type PublicCertificatePrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -21490,7 +21552,7 @@ type ServiceCredentialsSecret struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -21538,6 +21600,10 @@ type ServiceCredentialsSecret struct {
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
 	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The properties of the resource key that was created for this source service instance.
 	SourceService *ServiceCredentialsSecretSourceServiceRO `json:"source_service" validate:"required"`
@@ -21653,6 +21719,10 @@ func UnmarshalServiceCredentialsSecret(m map[string]json.RawMessage, result inte
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceServiceRO)
 	if err != nil {
 		return
@@ -21695,7 +21765,7 @@ type ServiceCredentialsSecretMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -21743,6 +21813,10 @@ type ServiceCredentialsSecretMetadata struct {
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
 	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The properties of the resource key that was created for this source service instance.
 	SourceService *ServiceCredentialsSecretSourceServiceRO `json:"source_service" validate:"required"`
@@ -21855,6 +21929,10 @@ func UnmarshalServiceCredentialsSecretMetadata(m map[string]json.RawMessage, res
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceServiceRO)
 	if err != nil {
 		return
@@ -21877,7 +21955,7 @@ type ServiceCredentialsSecretMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -21959,7 +22037,7 @@ type ServiceCredentialsSecretPrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -22415,7 +22493,7 @@ type UsernamePasswordSecret struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -22623,7 +22701,7 @@ type UsernamePasswordSecretMetadata struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -22803,7 +22881,7 @@ type UsernamePasswordSecretMetadataPatch struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
@@ -22896,7 +22974,7 @@ type UsernamePasswordSecretPrototype struct {
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
 	//
-	// Label can be between 2-30 characters, including spaces.
+	// Label can be between 2-64 characters, including spaces.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
