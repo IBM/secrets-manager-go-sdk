@@ -19,6 +19,7 @@ package secretsmanagerv2_test
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -1527,6 +1528,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
 				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
+				listSecretsOptionsModel.SecretTypes = []string{"arbitrary", "kv"}
+				listSecretsOptionsModel.MatchAllLabels = []string{"dev", "us-south"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListSecrets(listSecretsOptionsModel)
@@ -1586,6 +1589,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
 				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
+				listSecretsOptionsModel.SecretTypes = []string{"arbitrary", "kv"}
+				listSecretsOptionsModel.MatchAllLabels = []string{"dev", "us-south"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1653,6 +1658,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
 				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
+				listSecretsOptionsModel.SecretTypes = []string{"arbitrary", "kv"}
+				listSecretsOptionsModel.MatchAllLabels = []string{"dev", "us-south"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1677,6 +1684,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
 				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
+				listSecretsOptionsModel.SecretTypes = []string{"arbitrary", "kv"}
+				listSecretsOptionsModel.MatchAllLabels = []string{"dev", "us-south"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -1715,6 +1724,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.Sort = core.StringPtr("created_at")
 				listSecretsOptionsModel.Search = core.StringPtr("example")
 				listSecretsOptionsModel.Groups = []string{"default", "cac40995-c37a-4dcb-9506-472869077634"}
+				listSecretsOptionsModel.SecretTypes = []string{"arbitrary", "kv"}
+				listSecretsOptionsModel.MatchAllLabels = []string{"dev", "us-south"}
 				listSecretsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1800,10 +1811,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretsOptionsModel := &secretsmanagerv2.ListSecretsOptions{
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("created_at"),
-					Search: core.StringPtr("example"),
-					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+					Limit:          core.Int64Ptr(int64(10)),
+					Sort:           core.StringPtr("created_at"),
+					Search:         core.StringPtr("example"),
+					Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+					SecretTypes:    []string{"arbitrary", "kv"},
+					MatchAllLabels: []string{"dev", "us-south"},
 				}
 
 				pager, err := secretsManagerService.NewSecretsPager(listSecretsOptionsModel)
@@ -1828,10 +1841,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretsOptionsModel := &secretsmanagerv2.ListSecretsOptions{
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("created_at"),
-					Search: core.StringPtr("example"),
-					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+					Limit:          core.Int64Ptr(int64(10)),
+					Sort:           core.StringPtr("created_at"),
+					Search:         core.StringPtr("example"),
+					Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+					SecretTypes:    []string{"arbitrary", "kv"},
+					MatchAllLabels: []string{"dev", "us-south"},
 				}
 
 				pager, err := secretsManagerService.NewSecretsPager(listSecretsOptionsModel)
@@ -9492,6 +9507,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listSecretsOptionsModel.SetSort("created_at")
 				listSecretsOptionsModel.SetSearch("example")
 				listSecretsOptionsModel.SetGroups([]string{"default", "cac40995-c37a-4dcb-9506-472869077634"})
+				listSecretsOptionsModel.SetSecretTypes([]string{"arbitrary", "kv"})
+				listSecretsOptionsModel.SetMatchAllLabels([]string{"dev", "us-south"})
 				listSecretsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listSecretsOptionsModel).ToNot(BeNil())
 				Expect(listSecretsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
@@ -9499,6 +9516,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(listSecretsOptionsModel.Sort).To(Equal(core.StringPtr("created_at")))
 				Expect(listSecretsOptionsModel.Search).To(Equal(core.StringPtr("example")))
 				Expect(listSecretsOptionsModel.Groups).To(Equal([]string{"default", "cac40995-c37a-4dcb-9506-472869077634"}))
+				Expect(listSecretsOptionsModel.SecretTypes).To(Equal([]string{"arbitrary", "kv"}))
+				Expect(listSecretsOptionsModel.MatchAllLabels).To(Equal([]string{"dev", "us-south"}))
 				Expect(listSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewSecretLockPrototype successfully`, func() {
@@ -9816,6 +9835,1763 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			})
 		})
 	})
+	Describe(`Model unmarshaling tests`, func() {
+		It(`Invoke UnmarshalConfigurationActionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ConfigurationActionPrototype)
+			model.ActionType = core.StringPtr("private_cert_configuration_action_rotate_crl")
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.TTL = core.StringPtr("12h")
+			model.Format = core.StringPtr("pem")
+			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.PermittedDnsDomains = []string{"testString"}
+			model.UseCsrValues = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.Csr = core.StringPtr("testString")
+			model.IntermediateCertificateAuthority = core.StringPtr("example-intermediate-CA")
+			model.Certificate = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalConfigurationActionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalConfigurationPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ConfigurationPatch)
+			model.ApiKey = core.StringPtr("testString")
+			model.MaxTTL = core.StringPtr("8760h")
+			model.CrlExpiry = core.StringPtr("72h")
+			model.CrlDisable = core.BoolPtr(true)
+			model.CrlDistributionPointsEncoded = core.BoolPtr(true)
+			model.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+			model.AllowedSecretGroups = core.StringPtr("testString")
+			model.TTL = core.StringPtr("8760h")
+			model.AllowLocalhost = core.BoolPtr(true)
+			model.AllowedDomains = []string{"testString"}
+			model.AllowedDomainsTemplate = core.BoolPtr(true)
+			model.AllowBareDomains = core.BoolPtr(true)
+			model.AllowSubdomains = core.BoolPtr(true)
+			model.AllowGlobDomains = core.BoolPtr(true)
+			model.AllowAnyName = core.BoolPtr(true)
+			model.EnforceHostnames = core.BoolPtr(true)
+			model.AllowIpSans = core.BoolPtr(true)
+			model.AllowedUriSans = []string{"testString"}
+			model.AllowedOtherSans = []string{"2.5.4.5;UTF8:*"}
+			model.ServerFlag = core.BoolPtr(true)
+			model.ClientFlag = core.BoolPtr(true)
+			model.CodeSigningFlag = core.BoolPtr(true)
+			model.EmailProtectionFlag = core.BoolPtr(true)
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.KeyUsage = []string{"DigitalSignature", "KeyAgreement", "KeyEncipherment"}
+			model.ExtKeyUsage = []string{"testString"}
+			model.ExtKeyUsageOids = []string{"testString"}
+			model.UseCsrCommonName = core.BoolPtr(true)
+			model.UseCsrSans = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.RequireCn = core.BoolPtr(true)
+			model.PolicyIdentifiers = []string{"testString"}
+			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
+			model.NotBeforeDuration = core.StringPtr("30s")
+			model.LetsEncryptEnvironment = core.StringPtr("production")
+			model.LetsEncryptPrivateKey = core.StringPtr("testString")
+			model.LetsEncryptPreferredChain = core.StringPtr("testString")
+			model.CloudInternetServicesApikey = core.StringPtr("testString")
+			model.CloudInternetServicesCrn = core.StringPtr("testString")
+			model.ClassicInfrastructureUsername = core.StringPtr("testString")
+			model.ClassicInfrastructurePassword = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ConfigurationPatch
+			err = secretsmanagerv2.UnmarshalConfigurationPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalConfigurationPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ConfigurationPrototype)
+			model.ConfigType = core.StringPtr("public_cert_configuration_ca_lets_encrypt")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.MaxTTL = core.StringPtr("8760h")
+			model.CrlExpiry = core.StringPtr("72h")
+			model.CrlDisable = core.BoolPtr(true)
+			model.CrlDistributionPointsEncoded = core.BoolPtr(true)
+			model.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.TTL = core.StringPtr("8760h")
+			model.Format = core.StringPtr("pem")
+			model.PrivateKeyFormat = core.StringPtr("der")
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.PermittedDnsDomains = []string{"testString"}
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.SigningMethod = core.StringPtr("internal")
+			model.Issuer = core.StringPtr("Lets Encrypt")
+			model.CertificateAuthority = core.StringPtr("testString")
+			model.AllowedSecretGroups = core.StringPtr("testString")
+			model.AllowLocalhost = core.BoolPtr(true)
+			model.AllowedDomains = []string{"testString"}
+			model.AllowedDomainsTemplate = core.BoolPtr(true)
+			model.AllowBareDomains = core.BoolPtr(true)
+			model.AllowSubdomains = core.BoolPtr(true)
+			model.AllowGlobDomains = core.BoolPtr(true)
+			model.AllowWildcardCertificates = core.BoolPtr(true)
+			model.AllowAnyName = core.BoolPtr(true)
+			model.EnforceHostnames = core.BoolPtr(true)
+			model.AllowIpSans = core.BoolPtr(true)
+			model.AllowedUriSans = []string{"testString"}
+			model.AllowedOtherSans = []string{"2.5.4.5;UTF8:*"}
+			model.ServerFlag = core.BoolPtr(true)
+			model.ClientFlag = core.BoolPtr(true)
+			model.CodeSigningFlag = core.BoolPtr(true)
+			model.EmailProtectionFlag = core.BoolPtr(true)
+			model.KeyUsage = []string{"DigitalSignature", "KeyAgreement", "KeyEncipherment"}
+			model.ExtKeyUsage = []string{"testString"}
+			model.ExtKeyUsageOids = []string{"testString"}
+			model.UseCsrCommonName = core.BoolPtr(true)
+			model.UseCsrSans = core.BoolPtr(true)
+			model.RequireCn = core.BoolPtr(true)
+			model.PolicyIdentifiers = []string{"testString"}
+			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
+			model.NotBeforeDuration = core.StringPtr("30s")
+			model.LetsEncryptEnvironment = core.StringPtr("production")
+			model.LetsEncryptPrivateKey = core.StringPtr("testString")
+			model.LetsEncryptPreferredChain = core.StringPtr("testString")
+			model.CloudInternetServicesApikey = core.StringPtr("testString")
+			model.CloudInternetServicesCrn = core.StringPtr("testString")
+			model.ClassicInfrastructureUsername = core.StringPtr("testString")
+			model.ClassicInfrastructurePassword = core.StringPtr("testString")
+			model.ApiKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalConfigurationPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalPasswordGenerationPolicy successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PasswordGenerationPolicy)
+			model.Length = core.Int64Ptr(int64(32))
+			model.IncludeDigits = core.BoolPtr(true)
+			model.IncludeSymbols = core.BoolPtr(true)
+			model.IncludeUppercase = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PasswordGenerationPolicy
+			err = secretsmanagerv2.UnmarshalPasswordGenerationPolicy(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPasswordGenerationPolicyPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PasswordGenerationPolicyPatch)
+			model.Length = core.Int64Ptr(int64(12))
+			model.IncludeDigits = core.BoolPtr(true)
+			model.IncludeSymbols = core.BoolPtr(true)
+			model.IncludeUppercase = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PasswordGenerationPolicyPatch
+			err = secretsmanagerv2.UnmarshalPasswordGenerationPolicyPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateRotationObject successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateRotationObject)
+			model.RotateKeys = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateRotationObject
+			err = secretsmanagerv2.UnmarshalPublicCertificateRotationObject(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalRotationPolicy successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.RotationPolicy)
+			model.AutoRotate = core.BoolPtr(true)
+			model.Interval = core.Int64Ptr(int64(1))
+			model.Unit = core.StringPtr("day")
+			model.RotateKeys = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.RotationPolicy
+			err = secretsmanagerv2.UnmarshalRotationPolicy(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretActionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretActionPrototype)
+			model.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalSecretActionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalSecretGroupPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretGroupPatch)
+			model.Name = core.StringPtr("my-secret-group")
+			model.Description = core.StringPtr("Extended description for this group.")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretGroupPatch
+			err = secretsmanagerv2.UnmarshalSecretGroupPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretLockPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretLockPrototype)
+			model.Name = core.StringPtr("lock-example")
+			model.Description = core.StringPtr("testString")
+			model.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretLockPrototype
+			err = secretsmanagerv2.UnmarshalSecretLockPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
+			model.TTL = core.StringPtr("1d")
+			model.Rotation = nil
+			model.PasswordGenerationPolicy = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalSecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
+			model.Labels = []string{"my-label"}
+			model.Name = core.StringPtr("my-secret-example")
+			model.SecretGroupID = core.StringPtr("default")
+			model.SecretType = core.StringPtr("arbitrary")
+			model.Payload = core.StringPtr("secret-credentials")
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.TTL = core.StringPtr("1d")
+			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
+			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
+			model.ReuseApiKey = core.BoolPtr(true)
+			model.Rotation = nil
+			model.Certificate = core.StringPtr("testString")
+			model.Intermediate = core.StringPtr("testString")
+			model.PrivateKey = core.StringPtr("testString")
+			model.Data = map[string]interface{}{"anyKey": "anyValue"}
+			model.CertificateTemplate = core.StringPtr("cert-template-1")
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.Csr = core.StringPtr("testString")
+			model.Format = core.StringPtr("pem")
+			model.PrivateKeyFormat = core.StringPtr("der")
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.KeyAlgorithm = core.StringPtr("RSA2048")
+			model.Ca = core.StringPtr("my-ca-config")
+			model.Dns = core.StringPtr("my-dns-config")
+			model.BundleCerts = core.BoolPtr(true)
+			model.SourceService = nil
+			model.Username = core.StringPtr("testString")
+			model.Password = core.StringPtr("testString")
+			model.PasswordGenerationPolicy = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalSecretVersionActionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretVersionActionPrototype)
+			model.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalSecretVersionActionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalSecretVersionMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretVersionMetadataPatch)
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretVersionMetadataPatch
+			err = secretsmanagerv2.UnmarshalSecretVersionMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretVersionPrototype)
+			model.Payload = core.StringPtr("secret-credentials")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.RestoreFromVersion = core.StringPtr("current")
+			model.Certificate = core.StringPtr("testString")
+			model.Intermediate = core.StringPtr("testString")
+			model.PrivateKey = core.StringPtr("testString")
+			model.Data = map[string]interface{}{"anyKey": "anyValue"}
+			model.Csr = core.StringPtr("testString")
+			model.Rotation = nil
+			model.Password = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalSecretVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSecretSourceService successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSecretSourceService)
+			model.Instance = nil
+			model.Parameters = nil
+			model.Role = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSecretSourceService
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSecretSourceService(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSourceServiceInstance successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSourceServiceInstance)
+			model.Crn = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSourceServiceInstance
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSourceServiceInstance(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSourceServiceParameters successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSourceServiceParameters)
+			model.ServiceidCrn = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSourceServiceParameters
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSourceServiceParameters(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSourceServiceRole successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSourceServiceRole)
+			model.Crn = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSourceServiceRole
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSourceServiceRole(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalArbitrarySecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ArbitrarySecretMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ArbitrarySecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalArbitrarySecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalArbitrarySecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ArbitrarySecretPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
+			model.Labels = []string{"my-label"}
+			model.Name = core.StringPtr("my-secret-example")
+			model.SecretGroupID = core.StringPtr("default")
+			model.SecretType = core.StringPtr("arbitrary")
+			model.Payload = core.StringPtr("secret-credentials")
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ArbitrarySecretPrototype
+			err = secretsmanagerv2.UnmarshalArbitrarySecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalArbitrarySecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
+			model.Payload = core.StringPtr("secret-credentials")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ArbitrarySecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalArbitrarySecretVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCommonRotationPolicy successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CommonRotationPolicy)
+			model.AutoRotate = core.BoolPtr(true)
+			model.Interval = core.Int64Ptr(int64(1))
+			model.Unit = core.StringPtr("day")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CommonRotationPolicy
+			err = secretsmanagerv2.UnmarshalCommonRotationPolicy(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIAMCredentialsConfigurationPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
+			model.ApiKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.IAMCredentialsConfigurationPatch
+			err = secretsmanagerv2.UnmarshalIAMCredentialsConfigurationPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIAMCredentialsConfigurationPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.IAMCredentialsConfigurationPrototype)
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.ConfigType = core.StringPtr("iam_credentials_configuration")
+			model.ApiKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.IAMCredentialsConfigurationPrototype
+			err = secretsmanagerv2.UnmarshalIAMCredentialsConfigurationPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIAMCredentialsSecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.IAMCredentialsSecretMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.TTL = core.StringPtr("1d")
+			model.Rotation = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.IAMCredentialsSecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalIAMCredentialsSecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIAMCredentialsSecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.IAMCredentialsSecretPrototype)
+			model.SecretType = core.StringPtr("iam_credentials")
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.SecretGroupID = core.StringPtr("default")
+			model.Labels = []string{"my-label"}
+			model.TTL = core.StringPtr("1d")
+			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
+			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
+			model.ReuseApiKey = core.BoolPtr(true)
+			model.Rotation = nil
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.IAMCredentialsSecretPrototype
+			err = secretsmanagerv2.UnmarshalIAMCredentialsSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIAMCredentialsSecretRestoreFromVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.IAMCredentialsSecretRestoreFromVersionPrototype)
+			model.RestoreFromVersion = core.StringPtr("current")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.IAMCredentialsSecretRestoreFromVersionPrototype
+			err = secretsmanagerv2.UnmarshalIAMCredentialsSecretRestoreFromVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIAMCredentialsSecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.IAMCredentialsSecretVersionPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.IAMCredentialsSecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalIAMCredentialsSecretVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportedCertificateMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ImportedCertificateMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ImportedCertificateMetadataPatch
+			err = secretsmanagerv2.UnmarshalImportedCertificateMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportedCertificatePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ImportedCertificatePrototype)
+			model.SecretType = core.StringPtr("imported_cert")
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.SecretGroupID = core.StringPtr("default")
+			model.Labels = []string{"my-label"}
+			model.Certificate = core.StringPtr("testString")
+			model.Intermediate = core.StringPtr("testString")
+			model.PrivateKey = core.StringPtr("testString")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ImportedCertificatePrototype
+			err = secretsmanagerv2.UnmarshalImportedCertificatePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalImportedCertificateVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ImportedCertificateVersionPrototype)
+			model.Certificate = core.StringPtr("testString")
+			model.Intermediate = core.StringPtr("testString")
+			model.PrivateKey = core.StringPtr("testString")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ImportedCertificateVersionPrototype
+			err = secretsmanagerv2.UnmarshalImportedCertificateVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalKVSecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.KVSecretMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.KVSecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalKVSecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalKVSecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.KVSecretPrototype)
+			model.SecretType = core.StringPtr("kv")
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.SecretGroupID = core.StringPtr("default")
+			model.Labels = []string{"my-label"}
+			model.Data = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.KVSecretPrototype
+			err = secretsmanagerv2.UnmarshalKVSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalKVSecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.KVSecretVersionPrototype)
+			model.Data = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.KVSecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalKVSecretVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateActionRevokePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateActionRevokePrototype)
+			model.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateActionRevokePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateActionRevokePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationActionRevokePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationActionRevokePrototype)
+			model.ActionType = core.StringPtr("private_cert_configuration_action_revoke_ca_certificate")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationActionRevokePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionRevokePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationActionRotateCRLPrototype)
+			model.ActionType = core.StringPtr("private_cert_configuration_action_rotate_crl")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationActionRotateCRLPrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationActionSetSignedPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationActionSetSignedPrototype)
+			model.ActionType = core.StringPtr("private_cert_configuration_action_set_signed")
+			model.Certificate = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationActionSetSignedPrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionSetSignedPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationActionSignCSRPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationActionSignCSRPrototype)
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.TTL = core.StringPtr("12h")
+			model.Format = core.StringPtr("pem")
+			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.PermittedDnsDomains = []string{"testString"}
+			model.UseCsrValues = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.ActionType = core.StringPtr("private_cert_configuration_action_sign_csr")
+			model.Csr = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationActionSignCSRPrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionSignCSRPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationActionSignIntermediatePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationActionSignIntermediatePrototype)
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.TTL = core.StringPtr("12h")
+			model.Format = core.StringPtr("pem")
+			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.PermittedDnsDomains = []string{"testString"}
+			model.UseCsrValues = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.ActionType = core.StringPtr("private_cert_configuration_action_sign_intermediate")
+			model.IntermediateCertificateAuthority = core.StringPtr("example-intermediate-CA")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationActionSignIntermediatePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionSignIntermediatePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationIntermediateCAPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationIntermediateCAPatch)
+			model.MaxTTL = core.StringPtr("8760h")
+			model.CrlExpiry = core.StringPtr("72h")
+			model.CrlDisable = core.BoolPtr(true)
+			model.CrlDistributionPointsEncoded = core.BoolPtr(true)
+			model.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationIntermediateCAPatch
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationIntermediateCAPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationIntermediateCAPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationIntermediateCAPrototype)
+			model.ConfigType = core.StringPtr("private_cert_configuration_intermediate_ca")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.MaxTTL = core.StringPtr("8760h")
+			model.SigningMethod = core.StringPtr("internal")
+			model.Issuer = core.StringPtr("Lets Encrypt")
+			model.CrlExpiry = core.StringPtr("72h")
+			model.CrlDisable = core.BoolPtr(true)
+			model.CrlDistributionPointsEncoded = core.BoolPtr(true)
+			model.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.Format = core.StringPtr("pem")
+			model.PrivateKeyFormat = core.StringPtr("der")
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationIntermediateCAPrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationIntermediateCAPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationRootCAPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPatch)
+			model.MaxTTL = core.StringPtr("8760h")
+			model.CrlExpiry = core.StringPtr("72h")
+			model.CrlDisable = core.BoolPtr(true)
+			model.CrlDistributionPointsEncoded = core.BoolPtr(true)
+			model.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationRootCAPatch
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationRootCAPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationRootCAPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
+			model.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.MaxTTL = core.StringPtr("8760h")
+			model.CrlExpiry = core.StringPtr("72h")
+			model.CrlDisable = core.BoolPtr(true)
+			model.CrlDistributionPointsEncoded = core.BoolPtr(true)
+			model.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.TTL = core.StringPtr("8760h")
+			model.Format = core.StringPtr("pem")
+			model.PrivateKeyFormat = core.StringPtr("der")
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.PermittedDnsDomains = []string{"testString"}
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationRootCAPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationTemplatePatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationTemplatePatch)
+			model.AllowedSecretGroups = core.StringPtr("testString")
+			model.MaxTTL = core.StringPtr("8760h")
+			model.TTL = core.StringPtr("8760h")
+			model.AllowLocalhost = core.BoolPtr(true)
+			model.AllowedDomains = []string{"testString"}
+			model.AllowedDomainsTemplate = core.BoolPtr(true)
+			model.AllowBareDomains = core.BoolPtr(true)
+			model.AllowSubdomains = core.BoolPtr(true)
+			model.AllowGlobDomains = core.BoolPtr(true)
+			model.AllowAnyName = core.BoolPtr(true)
+			model.EnforceHostnames = core.BoolPtr(true)
+			model.AllowIpSans = core.BoolPtr(true)
+			model.AllowedUriSans = []string{"testString"}
+			model.AllowedOtherSans = []string{"2.5.4.5;UTF8:*"}
+			model.ServerFlag = core.BoolPtr(true)
+			model.ClientFlag = core.BoolPtr(true)
+			model.CodeSigningFlag = core.BoolPtr(true)
+			model.EmailProtectionFlag = core.BoolPtr(true)
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.KeyUsage = []string{"DigitalSignature", "KeyAgreement", "KeyEncipherment"}
+			model.ExtKeyUsage = []string{"testString"}
+			model.ExtKeyUsageOids = []string{"testString"}
+			model.UseCsrCommonName = core.BoolPtr(true)
+			model.UseCsrSans = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.RequireCn = core.BoolPtr(true)
+			model.PolicyIdentifiers = []string{"testString"}
+			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
+			model.NotBeforeDuration = core.StringPtr("30s")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationTemplatePatch
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationTemplatePatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationTemplatePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationTemplatePrototype)
+			model.ConfigType = core.StringPtr("private_cert_configuration_template")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.CertificateAuthority = core.StringPtr("testString")
+			model.AllowedSecretGroups = core.StringPtr("testString")
+			model.MaxTTL = core.StringPtr("8760h")
+			model.TTL = core.StringPtr("8760h")
+			model.AllowLocalhost = core.BoolPtr(true)
+			model.AllowedDomains = []string{"testString"}
+			model.AllowedDomainsTemplate = core.BoolPtr(true)
+			model.AllowBareDomains = core.BoolPtr(true)
+			model.AllowSubdomains = core.BoolPtr(true)
+			model.AllowGlobDomains = core.BoolPtr(true)
+			model.AllowWildcardCertificates = core.BoolPtr(true)
+			model.AllowAnyName = core.BoolPtr(true)
+			model.EnforceHostnames = core.BoolPtr(true)
+			model.AllowIpSans = core.BoolPtr(true)
+			model.AllowedUriSans = []string{"testString"}
+			model.AllowedOtherSans = []string{"2.5.4.5;UTF8:*"}
+			model.ServerFlag = core.BoolPtr(true)
+			model.ClientFlag = core.BoolPtr(true)
+			model.CodeSigningFlag = core.BoolPtr(true)
+			model.EmailProtectionFlag = core.BoolPtr(true)
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.KeyUsage = []string{"DigitalSignature", "KeyAgreement", "KeyEncipherment"}
+			model.ExtKeyUsage = []string{"testString"}
+			model.ExtKeyUsageOids = []string{"testString"}
+			model.UseCsrCommonName = core.BoolPtr(true)
+			model.UseCsrSans = core.BoolPtr(true)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+			model.RequireCn = core.BoolPtr(true)
+			model.PolicyIdentifiers = []string{"testString"}
+			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
+			model.NotBeforeDuration = core.StringPtr("30s")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationTemplatePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationTemplatePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Rotation = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateMetadataPatch
+			err = secretsmanagerv2.UnmarshalPrivateCertificateMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificatePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificatePrototype)
+			model.SecretType = core.StringPtr("private_cert")
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.SecretGroupID = core.StringPtr("default")
+			model.Labels = []string{"my-label"}
+			model.CertificateTemplate = core.StringPtr("cert-template-1")
+			model.CommonName = core.StringPtr("localhost")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
+			model.Csr = core.StringPtr("testString")
+			model.Format = core.StringPtr("pem")
+			model.PrivateKeyFormat = core.StringPtr("der")
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.TTL = core.StringPtr("12h")
+			model.Rotation = nil
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificatePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificatePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateVersionActionRevokePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateVersionActionRevokePrototype)
+			model.ActionType = core.StringPtr("private_cert_action_revoke_certificate")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateVersionActionRevokePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateVersionActionRevokePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateVersionPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Csr = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateVersionPrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateActionValidateManualDNSPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype)
+			model.ActionType = core.StringPtr("public_cert_action_validate_dns_challenge")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateActionValidateManualDNSPrototype
+			err = secretsmanagerv2.UnmarshalPublicCertificateActionValidateManualDNSPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateConfigurationCALetsEncryptPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateConfigurationCALetsEncryptPatch)
+			model.LetsEncryptEnvironment = core.StringPtr("production")
+			model.LetsEncryptPrivateKey = core.StringPtr("testString")
+			model.LetsEncryptPreferredChain = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateConfigurationCALetsEncryptPatch
+			err = secretsmanagerv2.UnmarshalPublicCertificateConfigurationCALetsEncryptPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateConfigurationCALetsEncryptPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateConfigurationCALetsEncryptPrototype)
+			model.ConfigType = core.StringPtr("public_cert_configuration_ca_lets_encrypt")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.LetsEncryptEnvironment = core.StringPtr("production")
+			model.LetsEncryptPrivateKey = core.StringPtr("testString")
+			model.LetsEncryptPreferredChain = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateConfigurationCALetsEncryptPrototype
+			err = secretsmanagerv2.UnmarshalPublicCertificateConfigurationCALetsEncryptPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateConfigurationDNSClassicInfrastructurePatch)
+			model.ClassicInfrastructureUsername = core.StringPtr("testString")
+			model.ClassicInfrastructurePassword = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateConfigurationDNSClassicInfrastructurePatch
+			err = secretsmanagerv2.UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateConfigurationDNSClassicInfrastructurePrototype)
+			model.ConfigType = core.StringPtr("public_cert_configuration_dns_classic_infrastructure")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.ClassicInfrastructureUsername = core.StringPtr("testString")
+			model.ClassicInfrastructurePassword = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateConfigurationDNSClassicInfrastructurePrototype
+			err = secretsmanagerv2.UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch)
+			model.CloudInternetServicesApikey = core.StringPtr("testString")
+			model.CloudInternetServicesCrn = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch
+			err = secretsmanagerv2.UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+			model.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.CloudInternetServicesApikey = core.StringPtr("testString")
+			model.CloudInternetServicesCrn = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype
+			err = secretsmanagerv2.UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Rotation = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateMetadataPatch
+			err = secretsmanagerv2.UnmarshalPublicCertificateMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificatePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificatePrototype)
+			model.SecretType = core.StringPtr("public_cert")
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.SecretGroupID = core.StringPtr("default")
+			model.Labels = []string{"my-label"}
+			model.CommonName = core.StringPtr("example.com")
+			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
+			model.KeyAlgorithm = core.StringPtr("RSA2048")
+			model.Ca = core.StringPtr("my-ca-config")
+			model.Dns = core.StringPtr("my-dns-config")
+			model.BundleCerts = core.BoolPtr(true)
+			model.Rotation = nil
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificatePrototype
+			err = secretsmanagerv2.UnmarshalPublicCertificatePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateRotationPolicy successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateRotationPolicy)
+			model.AutoRotate = core.BoolPtr(true)
+			model.RotateKeys = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateRotationPolicy
+			err = secretsmanagerv2.UnmarshalPublicCertificateRotationPolicy(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPublicCertificateVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PublicCertificateVersionPrototype)
+			model.Rotation = nil
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PublicCertificateVersionPrototype
+			err = secretsmanagerv2.UnmarshalPublicCertificateVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSecretMetadataPatch)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.Name = core.StringPtr("my-secret-example")
+			model.Rotation = nil
+			model.TTL = core.StringPtr("1d")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSecretPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.Name = core.StringPtr("my-secret-example")
+			model.Rotation = nil
+			model.SecretGroupID = core.StringPtr("default")
+			model.SecretType = core.StringPtr("service_credentials")
+			model.SourceService = nil
+			model.TTL = core.StringPtr("1d")
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSecretPrototype
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceCredentialsSecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ServiceCredentialsSecretVersionPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ServiceCredentialsSecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalServiceCredentialsSecretVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUsernamePasswordSecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.UsernamePasswordSecretMetadataPatch)
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Rotation = nil
+			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
+			model.PasswordGenerationPolicy = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.UsernamePasswordSecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalUsernamePasswordSecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUsernamePasswordSecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.UsernamePasswordSecretPrototype)
+			model.SecretType = core.StringPtr("username_password")
+			model.Name = core.StringPtr("my-secret-example")
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.SecretGroupID = core.StringPtr("default")
+			model.Labels = []string{"my-label"}
+			model.Username = core.StringPtr("testString")
+			model.Password = core.StringPtr("testString")
+			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Rotation = nil
+			model.PasswordGenerationPolicy = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.UsernamePasswordSecretPrototype
+			err = secretsmanagerv2.UnmarshalUsernamePasswordSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUsernamePasswordSecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.UsernamePasswordSecretVersionPrototype)
+			model.Password = core.StringPtr("testString")
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.UsernamePasswordSecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalUsernamePasswordSecretVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+	})
+
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
 			mockByteArray := CreateMockByteArray("This is a test")
@@ -9845,8 +11621,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 //
 
 func CreateMockByteArray(mockData string) *[]byte {
-	ba := make([]byte, 0)
-	ba = append(ba, mockData...)
+	ba := []byte(mockData)
 	return &ba
 }
 
