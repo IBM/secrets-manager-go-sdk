@@ -66,7 +66,6 @@ With IAM authentication, you supply an API key that is used to generate an acces
 Authentication for this SDK is accomplished by using [IAM authenticators](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md#authentication). Import authenticators from `github.com/IBM/go-sdk-core/v4/core`.
 
 ### Examples
-
 #### Programmatic credentials
 
 ```js
