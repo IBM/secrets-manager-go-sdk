@@ -19,6 +19,8 @@ package common
 import (
 	"fmt"
 	"runtime"
+
+	"github.com/IBM/go-sdk-core/v5/core"
 )
 
 const (
