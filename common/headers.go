@@ -80,3 +80,8 @@ var systemInfo = fmt.Sprintf("(lang=go; arch=%s; os=%s; go.version=%s)", runtime
 func GetSystemInfo() string {
 	return systemInfo
 }
+
+func GetComponentInfo() *core.ProblemComponent {
+	// This should match the module name in go.mod.
+	return core.NewProblemComponent("github.ibm.com/CloudEngineering/go-sdk-template", Version)
+}
