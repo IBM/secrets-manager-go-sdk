@@ -1215,7 +1215,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretPrototype model
 				secretPrototypeModel := new(secretsmanagerv2.ArbitrarySecretPrototype)
-				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretPrototypeModel.Description = core.StringPtr("Description of my arbitrary secret.")
 				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2030-10-05T11:49:42Z")
 				secretPrototypeModel.Labels = []string{"dev", "us-south"}
@@ -1223,7 +1223,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
 				secretPrototypeModel.SecretType = core.StringPtr("arbitrary")
 				secretPrototypeModel.Payload = core.StringPtr("secret-data")
-				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv2.CreateSecretOptions)
@@ -1280,7 +1280,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
@@ -1294,7 +1294,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretPrototype model
 				secretPrototypeModel := new(secretsmanagerv2.ArbitrarySecretPrototype)
-				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretPrototypeModel.Description = core.StringPtr("Description of my arbitrary secret.")
 				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2030-10-05T11:49:42Z")
 				secretPrototypeModel.Labels = []string{"dev", "us-south"}
@@ -1302,7 +1302,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
 				secretPrototypeModel.SecretType = core.StringPtr("arbitrary")
 				secretPrototypeModel.Payload = core.StringPtr("secret-data")
-				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv2.CreateSecretOptions)
@@ -1362,7 +1362,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -1381,7 +1381,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretPrototype model
 				secretPrototypeModel := new(secretsmanagerv2.ArbitrarySecretPrototype)
-				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretPrototypeModel.Description = core.StringPtr("Description of my arbitrary secret.")
 				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2030-10-05T11:49:42Z")
 				secretPrototypeModel.Labels = []string{"dev", "us-south"}
@@ -1389,7 +1389,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
 				secretPrototypeModel.SecretType = core.StringPtr("arbitrary")
 				secretPrototypeModel.Payload = core.StringPtr("secret-data")
-				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv2.CreateSecretOptions)
@@ -1413,7 +1413,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretPrototype model
 				secretPrototypeModel := new(secretsmanagerv2.ArbitrarySecretPrototype)
-				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretPrototypeModel.Description = core.StringPtr("Description of my arbitrary secret.")
 				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2030-10-05T11:49:42Z")
 				secretPrototypeModel.Labels = []string{"dev", "us-south"}
@@ -1421,7 +1421,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
 				secretPrototypeModel.SecretType = core.StringPtr("arbitrary")
 				secretPrototypeModel.Payload = core.StringPtr("secret-data")
-				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv2.CreateSecretOptions)
@@ -1466,7 +1466,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the ArbitrarySecretPrototype model
 				secretPrototypeModel := new(secretsmanagerv2.ArbitrarySecretPrototype)
-				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretPrototypeModel.Description = core.StringPtr("Description of my arbitrary secret.")
 				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2030-10-05T11:49:42Z")
 				secretPrototypeModel.Labels = []string{"dev", "us-south"}
@@ -1474,7 +1474,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
 				secretPrototypeModel.SecretType = core.StringPtr("arbitrary")
 				secretPrototypeModel.Payload = core.StringPtr("secret-data")
-				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretOptions model
 				createSecretOptionsModel := new(secretsmanagerv2.CreateSecretOptions)
@@ -1570,7 +1570,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -1634,7 +1634,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -1794,9 +1794,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"mapKey":"Inner"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"mapKey":"Inner"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -1922,7 +1922,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
@@ -1976,7 +1976,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
@@ -2202,7 +2202,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -2256,7 +2256,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -2380,7 +2380,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
-				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
@@ -2441,7 +2441,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -2458,7 +2458,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
-				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
@@ -2522,7 +2522,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -2544,7 +2544,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
-				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
@@ -2575,7 +2575,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
-				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
@@ -2627,7 +2627,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretMetadataPatchModel.Name = core.StringPtr("updated-arbitrary-secret-name-example")
 				secretMetadataPatchModel.Description = core.StringPtr("updated Arbitrary Secret description")
 				secretMetadataPatchModel.Labels = []string{"dev", "us-south"}
-				secretMetadataPatchModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretMetadataPatchModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretMetadataPatchModel.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 				secretMetadataPatchModelAsPatch, asPatchErr := secretMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
@@ -2984,7 +2984,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretByNameType successfully with retries`, func() {
@@ -3040,7 +3040,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"mapKey": "Inner"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretByNameType successfully`, func() {
@@ -3168,8 +3168,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the ArbitrarySecretVersionPrototype model
 				secretVersionPrototypeModel := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 				secretVersionPrototypeModel.Payload = core.StringPtr("updated secret credentials")
-				secretVersionPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				secretVersionPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
+				secretVersionPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionOptions model
 				createSecretVersionOptionsModel := new(secretsmanagerv2.CreateSecretVersionOptions)
@@ -3227,7 +3227,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecretVersion successfully with retries`, func() {
@@ -3242,8 +3242,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the ArbitrarySecretVersionPrototype model
 				secretVersionPrototypeModel := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 				secretVersionPrototypeModel.Payload = core.StringPtr("updated secret credentials")
-				secretVersionPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				secretVersionPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
+				secretVersionPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionOptions model
 				createSecretVersionOptionsModel := new(secretsmanagerv2.CreateSecretVersionOptions)
@@ -3304,7 +3304,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecretVersion successfully`, func() {
@@ -3324,8 +3324,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the ArbitrarySecretVersionPrototype model
 				secretVersionPrototypeModel := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 				secretVersionPrototypeModel.Payload = core.StringPtr("updated secret credentials")
-				secretVersionPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				secretVersionPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
+				secretVersionPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionOptions model
 				createSecretVersionOptionsModel := new(secretsmanagerv2.CreateSecretVersionOptions)
@@ -3351,8 +3351,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the ArbitrarySecretVersionPrototype model
 				secretVersionPrototypeModel := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 				secretVersionPrototypeModel.Payload = core.StringPtr("updated secret credentials")
-				secretVersionPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				secretVersionPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
+				secretVersionPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionOptions model
 				createSecretVersionOptionsModel := new(secretsmanagerv2.CreateSecretVersionOptions)
@@ -3399,8 +3399,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the ArbitrarySecretVersionPrototype model
 				secretVersionPrototypeModel := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 				secretVersionPrototypeModel.Payload = core.StringPtr("updated secret credentials")
-				secretVersionPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				secretVersionPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
+				secretVersionPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionOptions model
 				createSecretVersionOptionsModel := new(secretsmanagerv2.CreateSecretVersionOptions)
@@ -3483,7 +3483,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}], "total_count": 0}`)
+					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}], "total_count": 0}`)
 				}))
 			})
 			It(`Invoke ListSecretVersions successfully with retries`, func() {
@@ -3537,7 +3537,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}], "total_count": 0}`)
+					fmt.Fprintf(res, "%s", `{"versions": [{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}], "total_count": 0}`)
 				}))
 			})
 			It(`Invoke ListSecretVersions successfully`, func() {
@@ -3696,7 +3696,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully with retries`, func() {
@@ -3751,7 +3751,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersion successfully`, func() {
@@ -3983,7 +3983,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully with retries`, func() {
@@ -4038,7 +4038,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretVersionMetadata successfully`, func() {
@@ -4162,7 +4162,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the SecretVersionMetadataPatch model
 				secretVersionMetadataPatchModel := new(secretsmanagerv2.SecretVersionMetadataPatch)
-				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 				secretVersionMetadataPatchModelAsPatch, asPatchErr := secretVersionMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -4223,7 +4223,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersionMetadata successfully with retries`, func() {
@@ -4237,7 +4237,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the SecretVersionMetadataPatch model
 				secretVersionMetadataPatchModel := new(secretsmanagerv2.SecretVersionMetadataPatch)
-				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 				secretVersionMetadataPatchModelAsPatch, asPatchErr := secretVersionMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -4301,7 +4301,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"anyKey": "anyValue"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"auto_rotated": false, "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_name": "my-secret", "secret_type": "arbitrary", "secret_group_id": "default", "payload_available": true, "alias": "current", "version_custom_metadata": {"mapKey": "Inner"}, "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretVersionMetadata successfully`, func() {
@@ -4320,7 +4320,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the SecretVersionMetadataPatch model
 				secretVersionMetadataPatchModel := new(secretsmanagerv2.SecretVersionMetadataPatch)
-				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 				secretVersionMetadataPatchModelAsPatch, asPatchErr := secretVersionMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -4348,7 +4348,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the SecretVersionMetadataPatch model
 				secretVersionMetadataPatchModel := new(secretsmanagerv2.SecretVersionMetadataPatch)
-				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 				secretVersionMetadataPatchModelAsPatch, asPatchErr := secretVersionMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -4397,7 +4397,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				// Construct an instance of the SecretVersionMetadataPatch model
 				secretVersionMetadataPatchModel := new(secretsmanagerv2.SecretVersionMetadataPatch)
-				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionMetadataPatchModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 				secretVersionMetadataPatchModelAsPatch, asPatchErr := secretVersionMetadataPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -5111,7 +5111,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"mapKey": "Inner"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretLocks successfully with retries`, func() {
@@ -5173,7 +5173,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"mapKey": "Inner"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretLocks successfully`, func() {
@@ -5334,9 +5334,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"mapKey":"Inner"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"mapKey":"Inner"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -5424,7 +5424,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretLocksBulkOptions model
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
@@ -5500,7 +5500,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretLocksBulkOptions model
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
@@ -5584,7 +5584,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretLocksBulkOptions model
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
@@ -5612,7 +5612,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretLocksBulkOptions model
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
@@ -5661,7 +5661,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretLocksBulkOptions model
 				createSecretLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretLocksBulkOptions)
@@ -5975,7 +5975,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"mapKey": "Inner"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretVersionLocks successfully with retries`, func() {
@@ -6038,7 +6038,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"anyKey": "anyValue"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "locks": [{"name": "lock-example", "description": "Description", "attributes": {"mapKey": "Inner"}, "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "secret_group_id": "default", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_alias": "current"}]}`)
 				}))
 			})
 			It(`Invoke ListSecretVersionLocks successfully`, func() {
@@ -6202,9 +6202,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"mapKey":"Inner"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"mapKey":"Inner"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -6294,7 +6294,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionLocksBulkOptions model
 				createSecretVersionLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretVersionLocksBulkOptions)
@@ -6371,7 +6371,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionLocksBulkOptions model
 				createSecretVersionLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretVersionLocksBulkOptions)
@@ -6456,7 +6456,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionLocksBulkOptions model
 				createSecretVersionLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretVersionLocksBulkOptions)
@@ -6485,7 +6485,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionLocksBulkOptions model
 				createSecretVersionLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretVersionLocksBulkOptions)
@@ -6535,7 +6535,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretLockPrototypeModel := new(secretsmanagerv2.SecretLockPrototype)
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 
 				// Construct an instance of the CreateSecretVersionLocksBulkOptions model
 				createSecretVersionLocksBulkOptionsModel := new(secretsmanagerv2.CreateSecretVersionLocksBulkOptions)
@@ -9112,10 +9112,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretLockPrototypeModel).ToNot(BeNil())
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 				Expect(secretLockPrototypeModel.Name).To(Equal(core.StringPtr("lock-example-1")))
 				Expect(secretLockPrototypeModel.Description).To(Equal(core.StringPtr("lock for consumer 1")))
-				Expect(secretLockPrototypeModel.Attributes).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(secretLockPrototypeModel.Attributes).To(Equal(map[string]string{"key1": "testString"}))
 
 				// Construct an instance of the CreateSecretLocksBulkOptions model
 				id := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
@@ -9135,7 +9135,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the ArbitrarySecretPrototype model
 				secretPrototypeModel := new(secretsmanagerv2.ArbitrarySecretPrototype)
 				Expect(secretPrototypeModel).ToNot(BeNil())
-				secretPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
 				secretPrototypeModel.Description = core.StringPtr("Extended description for this secret.")
 				secretPrototypeModel.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 				secretPrototypeModel.Labels = []string{"my-label"}
@@ -9143,8 +9143,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretPrototypeModel.SecretGroupID = core.StringPtr("default")
 				secretPrototypeModel.SecretType = core.StringPtr("arbitrary")
 				secretPrototypeModel.Payload = core.StringPtr("secret-credentials")
-				secretPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				Expect(secretPrototypeModel.CustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				secretPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
+				Expect(secretPrototypeModel.CustomMetadata).To(Equal(map[string]string{"key1": "testString"}))
 				Expect(secretPrototypeModel.Description).To(Equal(core.StringPtr("Extended description for this secret.")))
 				Expect(secretPrototypeModel.ExpirationDate).To(Equal(CreateMockDateTime("2033-04-12T23:20:50.520Z")))
 				Expect(secretPrototypeModel.Labels).To(Equal([]string{"my-label"}))
@@ -9152,7 +9152,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretPrototypeModel.SecretGroupID).To(Equal(core.StringPtr("default")))
 				Expect(secretPrototypeModel.SecretType).To(Equal(core.StringPtr("arbitrary")))
 				Expect(secretPrototypeModel.Payload).To(Equal(core.StringPtr("secret-credentials")))
-				Expect(secretPrototypeModel.VersionCustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(secretPrototypeModel.VersionCustomMetadata).To(Equal(map[string]string{"key1": "testString"}))
 
 				// Construct an instance of the CreateSecretOptions model
 				var secretPrototype secretsmanagerv2.SecretPrototypeIntf = nil
@@ -9191,10 +9191,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretLockPrototypeModel).ToNot(BeNil())
 				secretLockPrototypeModel.Name = core.StringPtr("lock-example-1")
 				secretLockPrototypeModel.Description = core.StringPtr("lock for consumer 1")
-				secretLockPrototypeModel.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+				secretLockPrototypeModel.Attributes = map[string]string{"key1": "testString"}
 				Expect(secretLockPrototypeModel.Name).To(Equal(core.StringPtr("lock-example-1")))
 				Expect(secretLockPrototypeModel.Description).To(Equal(core.StringPtr("lock for consumer 1")))
-				Expect(secretLockPrototypeModel.Attributes).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(secretLockPrototypeModel.Attributes).To(Equal(map[string]string{"key1": "testString"}))
 
 				// Construct an instance of the CreateSecretVersionLocksBulkOptions model
 				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
@@ -9218,11 +9218,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				secretVersionPrototypeModel := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 				Expect(secretVersionPrototypeModel).ToNot(BeNil())
 				secretVersionPrototypeModel.Payload = core.StringPtr("secret-credentials")
-				secretVersionPrototypeModel.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-				secretVersionPrototypeModel.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+				secretVersionPrototypeModel.CustomMetadata = map[string]string{"key1": "testString"}
+				secretVersionPrototypeModel.VersionCustomMetadata = map[string]string{"key1": "testString"}
 				Expect(secretVersionPrototypeModel.Payload).To(Equal(core.StringPtr("secret-credentials")))
-				Expect(secretVersionPrototypeModel.CustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(secretVersionPrototypeModel.VersionCustomMetadata).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(secretVersionPrototypeModel.CustomMetadata).To(Equal(map[string]string{"key1": "testString"}))
+				Expect(secretVersionPrototypeModel.VersionCustomMetadata).To(Equal(map[string]string{"key1": "testString"}))
 
 				// Construct an instance of the CreateSecretVersionOptions model
 				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
@@ -9660,13 +9660,13 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			It(`Invoke NewKVSecretPrototype successfully`, func() {
 				secretType := "kv"
 				name := "my-secret-example"
-				data := map[string]interface{}{"anyKey": "anyValue"}
+				data := map[string]string{"key1": "testString"}
 				_model, err := secretsManagerService.NewKVSecretPrototype(secretType, name, data)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewKVSecretVersionPrototype successfully`, func() {
-				data := map[string]interface{}{"anyKey": "anyValue"}
+				data := map[string]string{"key1": "testString"}
 				_model, err := secretsManagerService.NewKVSecretVersionPrototype(data)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
@@ -10144,7 +10144,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model := new(secretsmanagerv2.SecretLockPrototype)
 			model.Name = core.StringPtr("lock-example")
 			model.Description = core.StringPtr("testString")
-			model.Attributes = map[string]interface{}{"anyKey": "anyValue"}
+			model.Attributes = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10165,7 +10165,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 			model.TTL = core.StringPtr("1d")
 			model.Rotation = nil
@@ -10187,7 +10187,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalSecretPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.SecretPrototype)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 			model.Labels = []string{"my-label"}
@@ -10195,7 +10195,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.SecretGroupID = core.StringPtr("default")
 			model.SecretType = core.StringPtr("arbitrary")
 			model.Payload = core.StringPtr("secret-credentials")
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 			model.TTL = core.StringPtr("1d")
 			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
 			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
@@ -10204,7 +10204,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Certificate = core.StringPtr("testString")
 			model.Intermediate = core.StringPtr("testString")
 			model.PrivateKey = core.StringPtr("testString")
-			model.Data = map[string]interface{}{"anyKey": "anyValue"}
+			model.Data = map[string]string{"key1": "testString"}
 			model.CertificateTemplate = core.StringPtr("cert-template-1")
 			model.CommonName = core.StringPtr("localhost")
 			model.AltNames = []string{"s1.example.com", "*.s2.example.com"}
@@ -10256,7 +10256,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalSecretVersionMetadataPatch successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.SecretVersionMetadataPatch)
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10275,13 +10275,13 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.SecretVersionPrototype)
 			model.Payload = core.StringPtr("secret-credentials")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 			model.RestoreFromVersion = core.StringPtr("current")
 			model.Certificate = core.StringPtr("testString")
 			model.Intermediate = core.StringPtr("testString")
 			model.PrivateKey = core.StringPtr("testString")
-			model.Data = map[string]interface{}{"anyKey": "anyValue"}
+			model.Data = map[string]string{"key1": "testString"}
 			model.Csr = core.StringPtr("testString")
 			model.Rotation = nil
 			model.Password = core.StringPtr("testString")
@@ -10379,7 +10379,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 
 			b, err := json.Marshal(model)
@@ -10398,7 +10398,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalArbitrarySecretPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ArbitrarySecretPrototype)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 			model.Labels = []string{"my-label"}
@@ -10406,7 +10406,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.SecretGroupID = core.StringPtr("default")
 			model.SecretType = core.StringPtr("arbitrary")
 			model.Payload = core.StringPtr("secret-credentials")
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10425,8 +10425,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ArbitrarySecretVersionPrototype)
 			model.Payload = core.StringPtr("secret-credentials")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10505,7 +10505,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.TTL = core.StringPtr("1d")
 			model.Rotation = nil
 
@@ -10535,8 +10535,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
 			model.ReuseApiKey = core.BoolPtr(true)
 			model.Rotation = nil
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10555,8 +10555,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.IAMCredentialsSecretRestoreFromVersionPrototype)
 			model.RestoreFromVersion = core.StringPtr("current")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10574,8 +10574,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalIAMCredentialsSecretVersionPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.IAMCredentialsSecretVersionPrototype)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10596,7 +10596,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10622,8 +10622,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Certificate = core.StringPtr("testString")
 			model.Intermediate = core.StringPtr("testString")
 			model.PrivateKey = core.StringPtr("testString")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10644,8 +10644,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Certificate = core.StringPtr("testString")
 			model.Intermediate = core.StringPtr("testString")
 			model.PrivateKey = core.StringPtr("testString")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10666,7 +10666,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10689,9 +10689,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.SecretGroupID = core.StringPtr("default")
 			model.Labels = []string{"my-label"}
-			model.Data = map[string]interface{}{"anyKey": "anyValue"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Data = map[string]string{"key1": "testString"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10709,9 +10709,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalKVSecretVersionPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.KVSecretVersionPrototype)
-			model.Data = map[string]interface{}{"anyKey": "anyValue"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Data = map[string]string{"key1": "testString"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -11126,7 +11126,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Rotation = nil
 
 			b, err := json.Marshal(model)
@@ -11162,8 +11162,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.ExcludeCnFromSans = core.BoolPtr(true)
 			model.TTL = core.StringPtr("12h")
 			model.Rotation = nil
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -11199,8 +11199,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalPrivateCertificateVersionPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.PrivateCertificateVersionPrototype)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 			model.Csr = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
@@ -11362,7 +11362,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Rotation = nil
 
 			b, err := json.Marshal(model)
@@ -11393,8 +11393,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Dns = core.StringPtr("my-dns-config")
 			model.BundleCerts = core.BoolPtr(true)
 			model.Rotation = nil
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -11432,8 +11432,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.PublicCertificateVersionPrototype)
 			model.Rotation = nil
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -11451,7 +11451,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalServiceCredentialsSecretMetadataPatch successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ServiceCredentialsSecretMetadataPatch)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
 			model.Name = core.StringPtr("my-secret-example")
@@ -11474,7 +11474,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalServiceCredentialsSecretPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ServiceCredentialsSecretPrototype)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
 			model.Name = core.StringPtr("my-secret-example")
@@ -11483,7 +11483,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.SecretType = core.StringPtr("service_credentials")
 			model.SourceService = nil
 			model.TTL = core.StringPtr("1d")
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -11501,8 +11501,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalServiceCredentialsSecretVersionPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ServiceCredentialsSecretVersionPrototype)
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -11523,7 +11523,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-secret-example")
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
 			model.Rotation = nil
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 			model.PasswordGenerationPolicy = nil
@@ -11552,8 +11552,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Username = core.StringPtr("testString")
 			model.Password = core.StringPtr("testString")
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 			model.Rotation = nil
 			model.PasswordGenerationPolicy = nil
 
@@ -11574,8 +11574,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.UsernamePasswordSecretVersionPrototype)
 			model.Password = core.StringPtr("testString")
-			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
-			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.CustomMetadata = map[string]string{"key1": "testString"}
+			model.VersionCustomMetadata = map[string]string{"key1": "testString"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
