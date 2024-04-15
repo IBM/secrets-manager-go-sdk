@@ -6577,7 +6577,7 @@ type Secret struct {
 	Crn *string `json:"crn,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -6637,8 +6637,7 @@ type Secret struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -6730,7 +6729,7 @@ type Secret struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 
 	// The intermediate certificate authority that signed this certificate.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
@@ -7072,7 +7071,7 @@ type SecretLock struct {
 	Description *string `json:"description,omitempty"`
 
 	// Optional information to associate with a lock, such as resources CRNs to be used by automation.
-	Attributes map[string]string `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
@@ -7166,7 +7165,7 @@ type SecretLockPrototype struct {
 	Description *string `json:"description,omitempty"`
 
 	// Optional information to associate with a lock, such as resources CRNs to be used by automation.
-	Attributes map[string]string `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 }
 
 // NewSecretLockPrototype : Instantiate SecretLockPrototype (Generic Model Constructor)
@@ -7361,7 +7360,7 @@ type SecretMetadata struct {
 	Crn *string `json:"crn,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -7418,8 +7417,7 @@ type SecretMetadata struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -7703,7 +7701,7 @@ type SecretMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
@@ -7714,8 +7712,7 @@ type SecretMetadataPatch struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
@@ -7796,7 +7793,7 @@ func (secretMetadataPatch *SecretMetadataPatch) AsPatch() (_patch map[string]int
 // - UsernamePasswordSecretPrototype
 type SecretPrototype struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -7831,15 +7828,14 @@ type SecretPrototype struct {
 	Payload *string `json:"payload,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
 	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -7879,7 +7875,7 @@ type SecretPrototype struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 
 	// The name of the certificate template.
 	CertificateTemplate *string `json:"certificate_template,omitempty"`
@@ -8067,7 +8063,7 @@ type SecretVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id,omitempty"`
@@ -8117,7 +8113,7 @@ type SecretVersion struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 
 	// The PEM-encoded certificate of the certificate authority that signed and issued this certificate.
 	IssuingCa *string `json:"issuing_ca,omitempty"`
@@ -8421,7 +8417,7 @@ type SecretVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id,omitempty"`
@@ -8545,7 +8541,7 @@ func UnmarshalSecretVersionMetadataCollection(m map[string]json.RawMessage, resu
 // SecretVersionMetadataPatch : Update your secret version metadata.
 type SecretVersionMetadataPatch struct {
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // UnmarshalSecretVersionMetadataPatch unmarshals an instance of SecretVersionMetadataPatch from the specified map of raw messages.
@@ -8585,10 +8581,10 @@ type SecretVersionPrototype struct {
 	Payload *string `json:"payload,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier, or `current` or `previous` secret version aliases.
 	RestoreFromVersion *string `json:"restore_from_version,omitempty"`
@@ -8605,7 +8601,7 @@ type SecretVersionPrototype struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data,omitempty"`
+	Data map[string]interface{} `json:"data,omitempty"`
 
 	// The certificate signing request.
 	Csr *string `json:"csr,omitempty"`
@@ -8806,6 +8802,65 @@ type ServiceCredentialsSecretCredentials struct {
 
 	// The IAM Service ID CRN.
 	IamServiceidCrn *string `json:"iam_serviceid_crn,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of ServiceCredentialsSecretCredentials
+func (o *ServiceCredentialsSecretCredentials) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.Apikey != nil {
+		m["apikey"] = o.Apikey
+	}
+	if o.IamApikeyDescription != nil {
+		m["iam_apikey_description"] = o.IamApikeyDescription
+	}
+	if o.IamApikeyID != nil {
+		m["iam_apikey_id"] = o.IamApikeyID
+	}
+	if o.IamApikeyName != nil {
+		m["iam_apikey_name"] = o.IamApikeyName
+	}
+	if o.IamRoleCrn != nil {
+		m["iam_role_crn"] = o.IamRoleCrn
+	}
+	if o.IamServiceidCrn != nil {
+		m["iam_serviceid_crn"] = o.IamServiceidCrn
+	}
+	buffer, err = json.Marshal(m)
+	return
 }
 
 // UnmarshalServiceCredentialsSecretCredentials unmarshals an instance of ServiceCredentialsSecretCredentials from the specified map of raw messages.
@@ -8815,25 +8870,40 @@ func UnmarshalServiceCredentialsSecretCredentials(m map[string]json.RawMessage, 
 	if err != nil {
 		return
 	}
+	delete(m, "apikey")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_description", &obj.IamApikeyDescription)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_apikey_description")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_id", &obj.IamApikeyID)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_apikey_id")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_name", &obj.IamApikeyName)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_apikey_name")
 	err = core.UnmarshalPrimitive(m, "iam_role_crn", &obj.IamRoleCrn)
 	if err != nil {
 		return
 	}
+	delete(m, "iam_role_crn")
 	err = core.UnmarshalPrimitive(m, "iam_serviceid_crn", &obj.IamServiceidCrn)
 	if err != nil {
 		return
+	}
+	delete(m, "iam_serviceid_crn")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -9053,6 +9123,50 @@ func UnmarshalServiceCredentialsSourceServiceInstance(m map[string]json.RawMessa
 type ServiceCredentialsSourceServiceParameters struct {
 	// An optional platform defined option to reuse an existing IAM Service ID for the role assignment.
 	ServiceidCrn *string `json:"serviceid_crn,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSourceServiceParameters
+func (o *ServiceCredentialsSourceServiceParameters) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSourceServiceParameters
+func (o *ServiceCredentialsSourceServiceParameters) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSourceServiceParameters
+func (o *ServiceCredentialsSourceServiceParameters) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSourceServiceParameters
+func (o *ServiceCredentialsSourceServiceParameters) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of ServiceCredentialsSourceServiceParameters
+func (o *ServiceCredentialsSourceServiceParameters) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.ServiceidCrn != nil {
+		m["serviceid_crn"] = o.ServiceidCrn
+	}
+	buffer, err = json.Marshal(m)
+	return
 }
 
 // UnmarshalServiceCredentialsSourceServiceParameters unmarshals an instance of ServiceCredentialsSourceServiceParameters from the specified map of raw messages.
@@ -9061,6 +9175,16 @@ func UnmarshalServiceCredentialsSourceServiceParameters(m map[string]json.RawMes
 	err = core.UnmarshalPrimitive(m, "serviceid_crn", &obj.ServiceidCrn)
 	if err != nil {
 		return
+	}
+	delete(m, "serviceid_crn")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = e
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -9338,7 +9462,7 @@ type ArbitrarySecret struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -9514,7 +9638,7 @@ type ArbitrarySecretMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -9692,7 +9816,7 @@ type ArbitrarySecretMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
@@ -9744,7 +9868,7 @@ func (arbitrarySecretMetadataPatch *ArbitrarySecretMetadataPatch) AsPatch() (_pa
 // This model "extends" SecretPrototype
 type ArbitrarySecretPrototype struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -9779,7 +9903,7 @@ type ArbitrarySecretPrototype struct {
 	Payload *string `json:"payload" validate:"required"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the ArbitrarySecretPrototype.SecretType property.
@@ -9891,7 +10015,7 @@ type ArbitrarySecretVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -10030,7 +10154,7 @@ type ArbitrarySecretVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -10132,10 +10256,10 @@ type ArbitrarySecretVersionPrototype struct {
 	Payload *string `json:"payload" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewArbitrarySecretVersionPrototype : Instantiate ArbitrarySecretVersionPrototype (Generic Model Constructor)
@@ -10531,7 +10655,7 @@ type IAMCredentialsSecret struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -10584,8 +10708,7 @@ type IAMCredentialsSecret struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -10792,7 +10915,7 @@ type IAMCredentialsSecretMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -10845,8 +10968,7 @@ type IAMCredentialsSecretMetadata struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -11051,15 +11173,14 @@ type IAMCredentialsSecretMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
 	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
@@ -11145,8 +11266,7 @@ type IAMCredentialsSecretPrototype struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -11175,10 +11295,10 @@ type IAMCredentialsSecretPrototype struct {
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the IAMCredentialsSecretPrototype.SecretType property.
@@ -11273,10 +11393,10 @@ type IAMCredentialsSecretRestoreFromVersionPrototype struct {
 	RestoreFromVersion *string `json:"restore_from_version" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewIAMCredentialsSecretRestoreFromVersionPrototype : Instantiate IAMCredentialsSecretRestoreFromVersionPrototype (Generic Model Constructor)
@@ -11348,7 +11468,7 @@ type IAMCredentialsSecretVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -11504,7 +11624,7 @@ type IAMCredentialsSecretVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -11616,10 +11736,10 @@ func UnmarshalIAMCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 // This model "extends" SecretVersionPrototype
 type IAMCredentialsSecretVersionPrototype struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 func (*IAMCredentialsSecretVersionPrototype) isaSecretVersionPrototype() bool {
@@ -11654,7 +11774,7 @@ type ImportedCertificate struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -11912,7 +12032,7 @@ type ImportedCertificateMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -12156,7 +12276,7 @@ type ImportedCertificateMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 }
 
 func (*ImportedCertificateMetadataPatch) isaSecretMetadataPatch() bool {
@@ -12236,10 +12356,10 @@ type ImportedCertificatePrototype struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the ImportedCertificatePrototype.SecretType property.
@@ -12355,7 +12475,7 @@ type ImportedCertificateVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -12524,7 +12644,7 @@ type ImportedCertificateVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -12648,10 +12768,10 @@ type ImportedCertificateVersionPrototype struct {
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewImportedCertificateVersionPrototype : Instantiate ImportedCertificateVersionPrototype (Generic Model Constructor)
@@ -12707,7 +12827,7 @@ type KVSecret struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -12756,7 +12876,7 @@ type KVSecret struct {
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data" validate:"required"`
+	Data map[string]interface{} `json:"data" validate:"required"`
 }
 
 // Constants associated with the KVSecret.SecretType property.
@@ -12875,7 +12995,7 @@ type KVSecretMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -13045,7 +13165,7 @@ type KVSecretMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 }
 
 func (*KVSecretMetadataPatch) isaSecretMetadataPatch() bool {
@@ -13114,13 +13234,13 @@ type KVSecretPrototype struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data" validate:"required"`
+	Data map[string]interface{} `json:"data" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the KVSecretPrototype.SecretType property.
@@ -13138,7 +13258,7 @@ const (
 )
 
 // NewKVSecretPrototype : Instantiate KVSecretPrototype (Generic Model Constructor)
-func (*SecretsManagerV2) NewKVSecretPrototype(secretType string, name string, data map[string]string) (_model *KVSecretPrototype, err error) {
+func (*SecretsManagerV2) NewKVSecretPrototype(secretType string, name string, data map[string]interface{}) (_model *KVSecretPrototype, err error) {
 	_model = &KVSecretPrototype{
 		SecretType: core.StringPtr(secretType),
 		Name:       core.StringPtr(name),
@@ -13228,13 +13348,13 @@ type KVSecretVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data" validate:"required"`
+	Data map[string]interface{} `json:"data" validate:"required"`
 }
 
 // Constants associated with the KVSecretVersion.SecretType property.
@@ -13359,7 +13479,7 @@ type KVSecretVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -13450,17 +13570,17 @@ func UnmarshalKVSecretVersionMetadata(m map[string]json.RawMessage, result inter
 // This model "extends" SecretVersionPrototype
 type KVSecretVersionPrototype struct {
 	// The payload data of a key-value secret.
-	Data map[string]string `json:"data" validate:"required"`
+	Data map[string]interface{} `json:"data" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewKVSecretVersionPrototype : Instantiate KVSecretVersionPrototype (Generic Model Constructor)
-func (*SecretsManagerV2) NewKVSecretVersionPrototype(data map[string]string) (_model *KVSecretVersionPrototype, err error) {
+func (*SecretsManagerV2) NewKVSecretVersionPrototype(data map[string]interface{}) (_model *KVSecretVersionPrototype, err error) {
 	_model = &KVSecretVersionPrototype{
 		Data: data,
 	}
@@ -13504,7 +13624,7 @@ type PrivateCertificate struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -18134,7 +18254,7 @@ type PrivateCertificateMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -18410,7 +18530,7 @@ type PrivateCertificateMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
@@ -18535,10 +18655,10 @@ type PrivateCertificatePrototype struct {
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the PrivateCertificatePrototype.SecretType property.
@@ -18705,7 +18825,7 @@ type PrivateCertificateVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -18952,7 +19072,7 @@ type PrivateCertificateVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -19065,10 +19185,10 @@ func UnmarshalPrivateCertificateVersionMetadata(m map[string]json.RawMessage, re
 // This model "extends" SecretVersionPrototype
 type PrivateCertificateVersionPrototype struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The certificate signing request.
 	Csr *string `json:"csr,omitempty"`
@@ -19110,7 +19230,7 @@ type PublicCertificate struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -20518,7 +20638,7 @@ type PublicCertificateMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -20788,7 +20908,7 @@ type PublicCertificateMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
@@ -20894,10 +21014,10 @@ type PublicCertificatePrototype struct {
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the PublicCertificatePrototype.SecretType property.
@@ -21079,7 +21199,7 @@ type PublicCertificateVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -21248,7 +21368,7 @@ type PublicCertificateVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -21364,10 +21484,10 @@ type PublicCertificateVersionPrototype struct {
 	Rotation *PublicCertificateRotationObject `json:"rotation" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // NewPublicCertificateVersionPrototype : Instantiate PublicCertificateVersionPrototype (Generic Model Constructor)
@@ -21415,7 +21535,7 @@ type ServiceCredentialsSecret struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -21478,8 +21598,7 @@ type ServiceCredentialsSecret struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -21629,7 +21748,7 @@ type ServiceCredentialsSecretMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -21692,8 +21811,7 @@ type ServiceCredentialsSecretMetadata struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -21827,7 +21945,7 @@ func UnmarshalServiceCredentialsSecretMetadata(m map[string]json.RawMessage, res
 // This model "extends" SecretMetadataPatch
 type ServiceCredentialsSecretMetadataPatch struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -21856,8 +21974,7 @@ type ServiceCredentialsSecretMetadataPatch struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 }
 
@@ -21910,7 +22027,7 @@ func (serviceCredentialsSecretMetadataPatch *ServiceCredentialsSecretMetadataPat
 // This model "extends" SecretPrototype
 type ServiceCredentialsSecretPrototype struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -21949,12 +22066,11 @@ type ServiceCredentialsSecretPrototype struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 // Constants associated with the ServiceCredentialsSecretPrototype.SecretType property.
@@ -22070,7 +22186,7 @@ type ServiceCredentialsSecretVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -22216,7 +22332,7 @@ type ServiceCredentialsSecretVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -22322,10 +22438,10 @@ func UnmarshalServiceCredentialsSecretVersionMetadata(m map[string]json.RawMessa
 // This model "extends" SecretVersionPrototype
 type ServiceCredentialsSecretVersionPrototype struct {
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 func (*ServiceCredentialsSecretVersionPrototype) isaSecretVersionPrototype() bool {
@@ -22360,7 +22476,7 @@ type UsernamePasswordSecret struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -22568,7 +22684,7 @@ type UsernamePasswordSecretMetadata struct {
 	Crn *string `json:"crn" validate:"required"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// An extended description of your secret.
 	//
@@ -22771,7 +22887,7 @@ type UsernamePasswordSecretMetadataPatch struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
@@ -22875,10 +22991,10 @@ type UsernamePasswordSecretPrototype struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
@@ -23009,7 +23125,7 @@ type UsernamePasswordSecretVersion struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -23147,7 +23263,7 @@ type UsernamePasswordSecretVersionMetadata struct {
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
@@ -23242,10 +23358,10 @@ type UsernamePasswordSecretVersionPrototype struct {
 	Password *string `json:"password,omitempty"`
 
 	// The secret metadata that a user can customize.
-	CustomMetadata map[string]string `json:"custom_metadata,omitempty"`
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The secret version metadata that a user can customize.
-	VersionCustomMetadata map[string]string `json:"version_custom_metadata,omitempty"`
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 }
 
 func (*UsernamePasswordSecretVersionPrototype) isaSecretVersionPrototype() bool {
