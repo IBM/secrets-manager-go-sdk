@@ -58,7 +58,7 @@ var defaultUrlVariables = map[string]string{
 	"region":      "us-south",
 }
 
-// SecretsManagerV2Options : Service options
+// SecretsManagerV2Options : Service options.
 type SecretsManagerV2Options struct {
 	ServiceName   string
 	URL           string
