@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.86.1-c3d7bcef-20240308-215042
+ * IBM OpenAPI SDK Code Generator Version: 3.92.1-44330004-20240620-143510
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -74,22 +74,26 @@ func NewSecretsManagerV2UsingExternalConfig(options *SecretsManagerV2Options) (s
 	if options.Authenticator == nil {
 		options.Authenticator, err = core.GetAuthenticatorFromEnvironment(options.ServiceName)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "env-auth-error", common.GetComponentInfo())
 			return
 		}
 	}
 
 	secretsManager, err = NewSecretsManagerV2(options)
+	err = core.RepurposeSDKProblem(err, "new-client-error")
 	if err != nil {
 		return
 	}
 
 	err = secretsManager.Service.ConfigureService(options.ServiceName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "client-config-error", common.GetComponentInfo())
 		return
 	}
 
 	if options.URL != "" {
 		err = secretsManager.Service.SetServiceURL(options.URL)
+		err = core.RepurposeSDKProblem(err, "url-set-error")
 	}
 	return
 }
@@ -103,12 +107,14 @@ func NewSecretsManagerV2(options *SecretsManagerV2Options) (service *SecretsMana
 
 	baseService, err := core.NewBaseService(serviceOptions)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "new-base-error", common.GetComponentInfo())
 		return
 	}
 
 	if options.URL != "" {
 		err = baseService.SetServiceURL(options.URL)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "set-url-error", common.GetComponentInfo())
 			return
 		}
 	}
@@ -122,7 +128,7 @@ func NewSecretsManagerV2(options *SecretsManagerV2Options) (service *SecretsMana
 
 // GetServiceURLForRegion returns the service URL to be used for the specified region
 func GetServiceURLForRegion(region string) (string, error) {
-	return "", fmt.Errorf("service does not support regional URLs")
+	return "", core.SDKErrorf(nil, "service does not support regional URLs", "no-regional-support", common.GetComponentInfo())
 }
 
 // Clone makes a copy of "secretsManager" suitable for processing requests.
@@ -142,7 +148,11 @@ func ConstructServiceURL(providedUrlVariables map[string]string) (string, error)
 
 // SetServiceURL sets the service URL
 func (secretsManager *SecretsManagerV2) SetServiceURL(url string) error {
-	return secretsManager.Service.SetServiceURL(url)
+	err := secretsManager.Service.SetServiceURL(url)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-set-error", common.GetComponentInfo())
+	}
+	return err
 }
 
 // GetServiceURL returns the service URL
@@ -182,17 +192,21 @@ func (secretsManager *SecretsManagerV2) DisableRetries() {
 // A successful request returns the ID value of the secret group, along with other properties. To learn more about
 // secret groups, check out the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-secret-groups).
 func (secretsManager *SecretsManagerV2) CreateSecretGroup(createSecretGroupOptions *CreateSecretGroupOptions) (result *SecretGroup, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretGroupWithContext(context.Background(), createSecretGroupOptions)
+	result, response, err = secretsManager.CreateSecretGroupWithContext(context.Background(), createSecretGroupOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretGroupWithContext is an alternate form of the CreateSecretGroup method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretGroupWithContext(ctx context.Context, createSecretGroupOptions *CreateSecretGroupOptions) (result *SecretGroup, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretGroupOptions, "createSecretGroupOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretGroupOptions, "createSecretGroupOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -201,6 +215,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretGroupWithContext(ctx context
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secret_groups`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -224,22 +239,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretGroupWithContext(ctx context
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret_group", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretGroup)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -251,13 +271,16 @@ func (secretsManager *SecretsManagerV2) CreateSecretGroupWithContext(ctx context
 // ListSecretGroups : List secret groups
 // List the secret groups that are available in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV2) ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListSecretGroupsWithContext(context.Background(), listSecretGroupsOptions)
+	result, response, err = secretsManager.ListSecretGroupsWithContext(context.Background(), listSecretGroupsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSecretGroupsWithContext is an alternate form of the ListSecretGroups method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListSecretGroupsWithContext(ctx context.Context, listSecretGroupsOptions *ListSecretGroupsOptions) (result *SecretGroupCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listSecretGroupsOptions, "listSecretGroupsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -266,6 +289,7 @@ func (secretsManager *SecretsManagerV2) ListSecretGroupsWithContext(ctx context.
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secret_groups`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -281,17 +305,21 @@ func (secretsManager *SecretsManagerV2) ListSecretGroupsWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secret_groups", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretGroupCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -303,17 +331,21 @@ func (secretsManager *SecretsManagerV2) ListSecretGroupsWithContext(ctx context.
 // GetSecretGroup : Get a secret group
 // Get the properties of an existing secret group by specifying the ID of the group.
 func (secretsManager *SecretsManagerV2) GetSecretGroup(getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroup, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretGroupWithContext(context.Background(), getSecretGroupOptions)
+	result, response, err = secretsManager.GetSecretGroupWithContext(context.Background(), getSecretGroupOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSecretGroupWithContext is an alternate form of the GetSecretGroup method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetSecretGroupWithContext(ctx context.Context, getSecretGroupOptions *GetSecretGroupOptions) (result *SecretGroup, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretGroupOptions, "getSecretGroupOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSecretGroupOptions, "getSecretGroupOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -326,6 +358,7 @@ func (secretsManager *SecretsManagerV2) GetSecretGroupWithContext(ctx context.Co
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secret_groups/{id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -341,17 +374,21 @@ func (secretsManager *SecretsManagerV2) GetSecretGroupWithContext(ctx context.Co
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret_group", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretGroup)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -363,17 +400,21 @@ func (secretsManager *SecretsManagerV2) GetSecretGroupWithContext(ctx context.Co
 // UpdateSecretGroup : Update a secret group
 // Update the properties of an existing secret group, such as its name or description.
 func (secretsManager *SecretsManagerV2) UpdateSecretGroup(updateSecretGroupOptions *UpdateSecretGroupOptions) (result *SecretGroup, response *core.DetailedResponse, err error) {
-	return secretsManager.UpdateSecretGroupWithContext(context.Background(), updateSecretGroupOptions)
+	result, response, err = secretsManager.UpdateSecretGroupWithContext(context.Background(), updateSecretGroupOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateSecretGroupWithContext is an alternate form of the UpdateSecretGroup method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) UpdateSecretGroupWithContext(ctx context.Context, updateSecretGroupOptions *UpdateSecretGroupOptions) (result *SecretGroup, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretGroupOptions, "updateSecretGroupOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateSecretGroupOptions, "updateSecretGroupOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -386,6 +427,7 @@ func (secretsManager *SecretsManagerV2) UpdateSecretGroupWithContext(ctx context
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secret_groups/{id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -402,22 +444,27 @@ func (secretsManager *SecretsManagerV2) UpdateSecretGroupWithContext(ctx context
 
 	_, err = builder.SetBodyContentJSON(updateSecretGroupOptions.SecretGroupPatch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_secret_group", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretGroup)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -432,17 +479,21 @@ func (secretsManager *SecretsManagerV2) UpdateSecretGroupWithContext(ctx context
 // **Note:** To delete a secret group, it must be empty. If you need to remove a secret group that contains secrets, you
 // must first [delete the secrets](#delete-secret) that are associated with the group.
 func (secretsManager *SecretsManagerV2) DeleteSecretGroup(deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteSecretGroupWithContext(context.Background(), deleteSecretGroupOptions)
+	response, err = secretsManager.DeleteSecretGroupWithContext(context.Background(), deleteSecretGroupOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteSecretGroupWithContext is an alternate form of the DeleteSecretGroup method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteSecretGroupWithContext(ctx context.Context, deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretGroupOptions, "deleteSecretGroupOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteSecretGroupOptions, "deleteSecretGroupOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -455,6 +506,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretGroupWithContext(ctx context
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secret_groups/{id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -469,10 +521,16 @@ func (secretsManager *SecretsManagerV2) DeleteSecretGroupWithContext(ctx context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_secret_group", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -488,17 +546,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretGroupWithContext(ctx context
 // To learn more about the types of secrets that you can create with Secrets Manager, check out the
 // [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-what-is-secret).
 func (secretsManager *SecretsManagerV2) CreateSecret(createSecretOptions *CreateSecretOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretWithContext(context.Background(), createSecretOptions)
+	result, response, err = secretsManager.CreateSecretWithContext(context.Background(), createSecretOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretWithContext is an alternate form of the CreateSecret method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretWithContext(ctx context.Context, createSecretOptions *CreateSecretOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretOptions, "createSecretOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretOptions, "createSecretOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -507,6 +569,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretWithContext(ctx context.Cont
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -523,22 +586,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretWithContext(ctx context.Cont
 
 	_, err = builder.SetBodyContentJSON(createSecretOptions.SecretPrototype)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecret)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -550,13 +618,16 @@ func (secretsManager *SecretsManagerV2) CreateSecretWithContext(ctx context.Cont
 // ListSecrets : List secrets
 // List the secrets that are available in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV2) ListSecrets(listSecretsOptions *ListSecretsOptions) (result *SecretMetadataPaginatedCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListSecretsWithContext(context.Background(), listSecretsOptions)
+	result, response, err = secretsManager.ListSecretsWithContext(context.Background(), listSecretsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSecretsWithContext is an alternate form of the ListSecrets method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Context, listSecretsOptions *ListSecretsOptions) (result *SecretMetadataPaginatedCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listSecretsOptions, "listSecretsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -565,6 +636,7 @@ func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Conte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -602,17 +674,21 @@ func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Conte
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secrets", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretMetadataPaginatedCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -628,17 +704,21 @@ func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Conte
 // only the details of a specified secret without retrieving its value, use the [Get secret
 // metadata](#get-secret-metadata) operation.
 func (secretsManager *SecretsManagerV2) GetSecret(getSecretOptions *GetSecretOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretWithContext(context.Background(), getSecretOptions)
+	result, response, err = secretsManager.GetSecretWithContext(context.Background(), getSecretOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSecretWithContext is an alternate form of the GetSecret method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetSecretWithContext(ctx context.Context, getSecretOptions *GetSecretOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretOptions, "getSecretOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSecretOptions, "getSecretOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -651,6 +731,7 @@ func (secretsManager *SecretsManagerV2) GetSecretWithContext(ctx context.Context
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -666,17 +747,21 @@ func (secretsManager *SecretsManagerV2) GetSecretWithContext(ctx context.Context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecret)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -688,17 +773,21 @@ func (secretsManager *SecretsManagerV2) GetSecretWithContext(ctx context.Context
 // DeleteSecret : Delete a secret
 // Delete a secret by specifying the ID of the secret.
 func (secretsManager *SecretsManagerV2) DeleteSecret(deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteSecretWithContext(context.Background(), deleteSecretOptions)
+	response, err = secretsManager.DeleteSecretWithContext(context.Background(), deleteSecretOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteSecretWithContext is an alternate form of the DeleteSecret method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteSecretWithContext(ctx context.Context, deleteSecretOptions *DeleteSecretOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretOptions, "deleteSecretOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteSecretOptions, "deleteSecretOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -711,6 +800,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretWithContext(ctx context.Cont
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -725,10 +815,16 @@ func (secretsManager *SecretsManagerV2) DeleteSecretWithContext(ctx context.Cont
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_secret", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -736,17 +832,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretWithContext(ctx context.Cont
 // GetSecretMetadata : Get the metadata of a secret
 // Get the metadata of a secret by specifying the ID of the secret.
 func (secretsManager *SecretsManagerV2) GetSecretMetadata(getSecretMetadataOptions *GetSecretMetadataOptions) (result SecretMetadataIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretMetadataWithContext(context.Background(), getSecretMetadataOptions)
+	result, response, err = secretsManager.GetSecretMetadataWithContext(context.Background(), getSecretMetadataOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSecretMetadataWithContext is an alternate form of the GetSecretMetadata method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetSecretMetadataWithContext(ctx context.Context, getSecretMetadataOptions *GetSecretMetadataOptions) (result SecretMetadataIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretMetadataOptions, "getSecretMetadataOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSecretMetadataOptions, "getSecretMetadataOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -759,6 +859,7 @@ func (secretsManager *SecretsManagerV2) GetSecretMetadataWithContext(ctx context
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}/metadata`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -774,17 +875,21 @@ func (secretsManager *SecretsManagerV2) GetSecretMetadataWithContext(ctx context
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret_metadata", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretMetadata)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -796,17 +901,21 @@ func (secretsManager *SecretsManagerV2) GetSecretMetadataWithContext(ctx context
 // UpdateSecretMetadata : Update the metadata of a secret
 // Update the metadata of a secret, such as its name or description.
 func (secretsManager *SecretsManagerV2) UpdateSecretMetadata(updateSecretMetadataOptions *UpdateSecretMetadataOptions) (result SecretMetadataIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.UpdateSecretMetadataWithContext(context.Background(), updateSecretMetadataOptions)
+	result, response, err = secretsManager.UpdateSecretMetadataWithContext(context.Background(), updateSecretMetadataOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateSecretMetadataWithContext is an alternate form of the UpdateSecretMetadata method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) UpdateSecretMetadataWithContext(ctx context.Context, updateSecretMetadataOptions *UpdateSecretMetadataOptions) (result SecretMetadataIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretMetadataOptions, "updateSecretMetadataOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateSecretMetadataOptions, "updateSecretMetadataOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -819,6 +928,7 @@ func (secretsManager *SecretsManagerV2) UpdateSecretMetadataWithContext(ctx cont
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}/metadata`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -835,22 +945,27 @@ func (secretsManager *SecretsManagerV2) UpdateSecretMetadataWithContext(ctx cont
 
 	_, err = builder.SetBodyContentJSON(updateSecretMetadataOptions.SecretMetadataPatch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_secret_metadata", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretMetadata)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -862,17 +977,21 @@ func (secretsManager *SecretsManagerV2) UpdateSecretMetadataWithContext(ctx cont
 // CreateSecretAction : Create a secret action
 // Create a secret action. This operation supports the following actions:.
 func (secretsManager *SecretsManagerV2) CreateSecretAction(createSecretActionOptions *CreateSecretActionOptions) (result SecretActionIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretActionWithContext(context.Background(), createSecretActionOptions)
+	result, response, err = secretsManager.CreateSecretActionWithContext(context.Background(), createSecretActionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretActionWithContext is an alternate form of the CreateSecretAction method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretActionWithContext(ctx context.Context, createSecretActionOptions *CreateSecretActionOptions) (result SecretActionIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretActionOptions, "createSecretActionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretActionOptions, "createSecretActionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -885,6 +1004,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretActionWithContext(ctx contex
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}/actions`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -901,22 +1021,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretActionWithContext(ctx contex
 
 	_, err = builder.SetBodyContentJSON(createSecretActionOptions.SecretActionPrototype)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret_action", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretAction)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -932,17 +1057,21 @@ func (secretsManager *SecretsManagerV2) CreateSecretActionWithContext(ctx contex
 // only the details of a specified secret without retrieving its value, use the [Get secret
 // metadata](#get-secret-metadata) operation.
 func (secretsManager *SecretsManagerV2) GetSecretByNameType(getSecretByNameTypeOptions *GetSecretByNameTypeOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretByNameTypeWithContext(context.Background(), getSecretByNameTypeOptions)
+	result, response, err = secretsManager.GetSecretByNameTypeWithContext(context.Background(), getSecretByNameTypeOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSecretByNameTypeWithContext is an alternate form of the GetSecretByNameType method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetSecretByNameTypeWithContext(ctx context.Context, getSecretByNameTypeOptions *GetSecretByNameTypeOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretByNameTypeOptions, "getSecretByNameTypeOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSecretByNameTypeOptions, "getSecretByNameTypeOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -957,6 +1086,7 @@ func (secretsManager *SecretsManagerV2) GetSecretByNameTypeWithContext(ctx conte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secret_groups/{secret_group_name}/secret_types/{secret_type}/secrets/{name}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -972,17 +1102,21 @@ func (secretsManager *SecretsManagerV2) GetSecretByNameTypeWithContext(ctx conte
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret_by_name_type", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecret)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -994,17 +1128,21 @@ func (secretsManager *SecretsManagerV2) GetSecretByNameTypeWithContext(ctx conte
 // CreateSecretVersion : Create a new secret version
 // Create a new secret version.
 func (secretsManager *SecretsManagerV2) CreateSecretVersion(createSecretVersionOptions *CreateSecretVersionOptions) (result SecretVersionIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretVersionWithContext(context.Background(), createSecretVersionOptions)
+	result, response, err = secretsManager.CreateSecretVersionWithContext(context.Background(), createSecretVersionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretVersionWithContext is an alternate form of the CreateSecretVersion method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretVersionWithContext(ctx context.Context, createSecretVersionOptions *CreateSecretVersionOptions) (result SecretVersionIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretVersionOptions, "createSecretVersionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretVersionOptions, "createSecretVersionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1017,6 +1155,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionWithContext(ctx conte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1033,22 +1172,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionWithContext(ctx conte
 
 	_, err = builder.SetBodyContentJSON(createSecretVersionOptions.SecretVersionPrototype)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret_version", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersion)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1062,17 +1206,21 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionWithContext(ctx conte
 //
 // A successful request returns the list of versions of a secret, along with the metadata of each version.
 func (secretsManager *SecretsManagerV2) ListSecretVersions(listSecretVersionsOptions *ListSecretVersionsOptions) (result *SecretVersionMetadataCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListSecretVersionsWithContext(context.Background(), listSecretVersionsOptions)
+	result, response, err = secretsManager.ListSecretVersionsWithContext(context.Background(), listSecretVersionsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSecretVersionsWithContext is an alternate form of the ListSecretVersions method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListSecretVersionsWithContext(ctx context.Context, listSecretVersionsOptions *ListSecretVersionsOptions) (result *SecretVersionMetadataCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listSecretVersionsOptions, "listSecretVersionsOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(listSecretVersionsOptions, "listSecretVersionsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1085,6 +1233,7 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionsWithContext(ctx contex
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1100,17 +1249,21 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionsWithContext(ctx contex
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secret_versions", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersionMetadataCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1126,17 +1279,21 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionsWithContext(ctx contex
 // A successful request returns the secret data that is associated with the specified version of your secret, along with
 // other metadata.
 func (secretsManager *SecretsManagerV2) GetSecretVersion(getSecretVersionOptions *GetSecretVersionOptions) (result SecretVersionIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretVersionWithContext(context.Background(), getSecretVersionOptions)
+	result, response, err = secretsManager.GetSecretVersionWithContext(context.Background(), getSecretVersionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSecretVersionWithContext is an alternate form of the GetSecretVersion method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.Context, getSecretVersionOptions *GetSecretVersionOptions) (result SecretVersionIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretVersionOptions, "getSecretVersionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSecretVersionOptions, "getSecretVersionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1150,6 +1307,7 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1165,17 +1323,21 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret_version", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersion)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1189,17 +1351,21 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.
 //
 // This operation is available for secret type: iam_credentials current version.
 func (secretsManager *SecretsManagerV2) DeleteSecretVersionData(deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteSecretVersionDataWithContext(context.Background(), deleteSecretVersionDataOptions)
+	response, err = secretsManager.DeleteSecretVersionDataWithContext(context.Background(), deleteSecretVersionDataOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteSecretVersionDataWithContext is an alternate form of the DeleteSecretVersionData method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteSecretVersionDataWithContext(ctx context.Context, deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretVersionDataOptions, "deleteSecretVersionDataOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteSecretVersionDataOptions, "deleteSecretVersionDataOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1213,6 +1379,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionDataWithContext(ctx c
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/secret_data`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1227,10 +1394,16 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionDataWithContext(ctx c
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_secret_version_data", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -1241,17 +1414,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionDataWithContext(ctx c
 //
 // A successful request returns the metadata that is associated with the specified version of your secret.
 func (secretsManager *SecretsManagerV2) GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result SecretVersionMetadataIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetSecretVersionMetadataWithContext(context.Background(), getSecretVersionMetadataOptions)
+	result, response, err = secretsManager.GetSecretVersionMetadataWithContext(context.Background(), getSecretVersionMetadataOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetSecretVersionMetadataWithContext is an alternate form of the GetSecretVersionMetadata method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetSecretVersionMetadataWithContext(ctx context.Context, getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions) (result SecretVersionMetadataIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecretVersionMetadataOptions, "getSecretVersionMetadataOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getSecretVersionMetadataOptions, "getSecretVersionMetadataOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1265,6 +1442,7 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionMetadataWithContext(ctx 
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/metadata`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1280,17 +1458,21 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionMetadataWithContext(ctx 
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret_version_metadata", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersionMetadata)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1302,17 +1484,21 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionMetadataWithContext(ctx 
 // UpdateSecretVersionMetadata : Update the metadata of a secret version
 // Update the custom metadata of a secret version.
 func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadata(updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) (result SecretVersionMetadataIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.UpdateSecretVersionMetadataWithContext(context.Background(), updateSecretVersionMetadataOptions)
+	result, response, err = secretsManager.UpdateSecretVersionMetadataWithContext(context.Background(), updateSecretVersionMetadataOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateSecretVersionMetadataWithContext is an alternate form of the UpdateSecretVersionMetadata method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadataWithContext(ctx context.Context, updateSecretVersionMetadataOptions *UpdateSecretVersionMetadataOptions) (result SecretVersionMetadataIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateSecretVersionMetadataOptions, "updateSecretVersionMetadataOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateSecretVersionMetadataOptions, "updateSecretVersionMetadataOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1326,6 +1512,7 @@ func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadataWithContext(c
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/metadata`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1342,22 +1529,27 @@ func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadataWithContext(c
 
 	_, err = builder.SetBodyContentJSON(updateSecretVersionMetadataOptions.SecretVersionMetadataPatch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_secret_version_metadata", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersionMetadata)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1371,17 +1563,21 @@ func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadataWithContext(c
 //
 // - `private_cert_action_revoke_certificate`: Revoke a version of a private certificate.
 func (secretsManager *SecretsManagerV2) CreateSecretVersionAction(createSecretVersionActionOptions *CreateSecretVersionActionOptions) (result VersionActionIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretVersionActionWithContext(context.Background(), createSecretVersionActionOptions)
+	result, response, err = secretsManager.CreateSecretVersionActionWithContext(context.Background(), createSecretVersionActionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretVersionActionWithContext is an alternate form of the CreateSecretVersionAction method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx context.Context, createSecretVersionActionOptions *CreateSecretVersionActionOptions) (result VersionActionIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretVersionActionOptions, "createSecretVersionActionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretVersionActionOptions, "createSecretVersionActionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1395,6 +1591,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/actions`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1411,22 +1608,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx
 
 	_, err = builder.SetBodyContentJSON(createSecretVersionActionOptions.SecretVersionActionPrototype)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret_version_action", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalVersionAction)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1438,13 +1640,16 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx
 // ListSecretsLocks : List secrets and their locks
 // List the secrets and their locks in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV2) ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) (result *SecretsLocksPaginatedCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListSecretsLocksWithContext(context.Background(), listSecretsLocksOptions)
+	result, response, err = secretsManager.ListSecretsLocksWithContext(context.Background(), listSecretsLocksOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSecretsLocksWithContext is an alternate form of the ListSecretsLocks method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListSecretsLocksWithContext(ctx context.Context, listSecretsLocksOptions *ListSecretsLocksOptions) (result *SecretsLocksPaginatedCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listSecretsLocksOptions, "listSecretsLocksOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1453,6 +1658,7 @@ func (secretsManager *SecretsManagerV2) ListSecretsLocksWithContext(ctx context.
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets_locks`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1481,17 +1687,21 @@ func (secretsManager *SecretsManagerV2) ListSecretsLocksWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secrets_locks", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretsLocksPaginatedCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1503,17 +1713,21 @@ func (secretsManager *SecretsManagerV2) ListSecretsLocksWithContext(ctx context.
 // ListSecretLocks : List secret locks
 // List the locks that are associated with a specified secret.
 func (secretsManager *SecretsManagerV2) ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions) (result *SecretLocksPaginatedCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListSecretLocksWithContext(context.Background(), listSecretLocksOptions)
+	result, response, err = secretsManager.ListSecretLocksWithContext(context.Background(), listSecretLocksOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSecretLocksWithContext is an alternate form of the ListSecretLocks method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListSecretLocksWithContext(ctx context.Context, listSecretLocksOptions *ListSecretLocksOptions) (result *SecretLocksPaginatedCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listSecretLocksOptions, "listSecretLocksOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(listSecretLocksOptions, "listSecretLocksOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1526,6 +1740,7 @@ func (secretsManager *SecretsManagerV2) ListSecretLocksWithContext(ctx context.C
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}/locks`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1554,17 +1769,21 @@ func (secretsManager *SecretsManagerV2) ListSecretLocksWithContext(ctx context.C
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secret_locks", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretLocksPaginatedCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1586,17 +1805,21 @@ func (secretsManager *SecretsManagerV2) ListSecretLocksWithContext(ctx context.C
 // - `remove_previous_and_delete`: Carries out the same function as `remove_previous`, but also permanently deletes the
 // data of the previous secret version if it doesn't have any locks.
 func (secretsManager *SecretsManagerV2) CreateSecretLocksBulk(createSecretLocksBulkOptions *CreateSecretLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretLocksBulkWithContext(context.Background(), createSecretLocksBulkOptions)
+	result, response, err = secretsManager.CreateSecretLocksBulkWithContext(context.Background(), createSecretLocksBulkOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretLocksBulkWithContext is an alternate form of the CreateSecretLocksBulk method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretLocksBulkWithContext(ctx context.Context, createSecretLocksBulkOptions *CreateSecretLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretLocksBulkOptions, "createSecretLocksBulkOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretLocksBulkOptions, "createSecretLocksBulkOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1609,6 +1832,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretLocksBulkWithContext(ctx con
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}/locks_bulk`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1633,22 +1857,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretLocksBulkWithContext(ctx con
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret_locks_bulk", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretLocks)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1668,17 +1897,21 @@ func (secretsManager *SecretsManagerV2) CreateSecretLocksBulkWithContext(ctx con
 // whether a secret contains locks, check the `locks_total` field that is returned as part of the metadata of your
 // secret.
 func (secretsManager *SecretsManagerV2) DeleteSecretLocksBulk(deleteSecretLocksBulkOptions *DeleteSecretLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteSecretLocksBulkWithContext(context.Background(), deleteSecretLocksBulkOptions)
+	result, response, err = secretsManager.DeleteSecretLocksBulkWithContext(context.Background(), deleteSecretLocksBulkOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteSecretLocksBulkWithContext is an alternate form of the DeleteSecretLocksBulk method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteSecretLocksBulkWithContext(ctx context.Context, deleteSecretLocksBulkOptions *DeleteSecretLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretLocksBulkOptions, "deleteSecretLocksBulkOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteSecretLocksBulkOptions, "deleteSecretLocksBulkOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1691,6 +1924,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretLocksBulkWithContext(ctx con
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{id}/locks_bulk`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1710,17 +1944,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretLocksBulkWithContext(ctx con
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_secret_locks_bulk", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretLocks)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1732,17 +1970,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretLocksBulkWithContext(ctx con
 // ListSecretVersionLocks : List secret version locks
 // List the locks that are associated with a specified secret version.
 func (secretsManager *SecretsManagerV2) ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions) (result *SecretVersionLocksPaginatedCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListSecretVersionLocksWithContext(context.Background(), listSecretVersionLocksOptions)
+	result, response, err = secretsManager.ListSecretVersionLocksWithContext(context.Background(), listSecretVersionLocksOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListSecretVersionLocksWithContext is an alternate form of the ListSecretVersionLocks method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx context.Context, listSecretVersionLocksOptions *ListSecretVersionLocksOptions) (result *SecretVersionLocksPaginatedCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listSecretVersionLocksOptions, "listSecretVersionLocksOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(listSecretVersionLocksOptions, "listSecretVersionLocksOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1756,6 +1998,7 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx co
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/locks`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1784,17 +2027,21 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx co
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secret_version_locks", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretVersionLocksPaginatedCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1816,17 +2063,21 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx co
 // - `remove_previous_and_delete`: Carries out the same function as `remove_previous`, but also permanently deletes the
 // data of the previous secret version if it doesn't have any locks.
 func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateSecretVersionLocksBulkWithContext(context.Background(), createSecretVersionLocksBulkOptions)
+	result, response, err = secretsManager.CreateSecretVersionLocksBulkWithContext(context.Background(), createSecretVersionLocksBulkOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateSecretVersionLocksBulkWithContext is an alternate form of the CreateSecretVersionLocksBulk method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulkWithContext(ctx context.Context, createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createSecretVersionLocksBulkOptions, "createSecretVersionLocksBulkOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createSecretVersionLocksBulkOptions, "createSecretVersionLocksBulkOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1840,6 +2091,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulkWithContext(
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/locks_bulk`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1864,22 +2116,27 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulkWithContext(
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_secret_version_locks_bulk", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretLocks)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1899,17 +2156,21 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulkWithContext(
 // determine whether a secret contains locks, check the `locks_total` field that is returned as part of the metadata of
 // your secret.
 func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulk(deleteSecretVersionLocksBulkOptions *DeleteSecretVersionLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteSecretVersionLocksBulkWithContext(context.Background(), deleteSecretVersionLocksBulkOptions)
+	result, response, err = secretsManager.DeleteSecretVersionLocksBulkWithContext(context.Background(), deleteSecretVersionLocksBulkOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteSecretVersionLocksBulkWithContext is an alternate form of the DeleteSecretVersionLocksBulk method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(ctx context.Context, deleteSecretVersionLocksBulkOptions *DeleteSecretVersionLocksBulkOptions) (result *SecretLocks, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteSecretVersionLocksBulkOptions, "deleteSecretVersionLocksBulkOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteSecretVersionLocksBulkOptions, "deleteSecretVersionLocksBulkOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1923,6 +2184,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/versions/{id}/locks_bulk`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1942,17 +2204,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_secret_version_locks_bulk", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretLocks)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -1976,17 +2242,21 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(
 // - Up to 10 Intermediate CA configurations for private certificates.
 // - Up to 10 Certificate Template configurations for private certificates.
 func (secretsManager *SecretsManagerV2) CreateConfiguration(createConfigurationOptions *CreateConfigurationOptions) (result ConfigurationIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateConfigurationWithContext(context.Background(), createConfigurationOptions)
+	result, response, err = secretsManager.CreateConfigurationWithContext(context.Background(), createConfigurationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateConfigurationWithContext is an alternate form of the CreateConfiguration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateConfigurationWithContext(ctx context.Context, createConfigurationOptions *CreateConfigurationOptions) (result ConfigurationIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createConfigurationOptions, "createConfigurationOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createConfigurationOptions, "createConfigurationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -1995,6 +2265,7 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationWithContext(ctx conte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/configurations`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2011,22 +2282,27 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationWithContext(ctx conte
 
 	_, err = builder.SetBodyContentJSON(createConfigurationOptions.ConfigurationPrototype)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_configuration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfiguration)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2038,13 +2314,16 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationWithContext(ctx conte
 // ListConfigurations : List configurations
 // List the configurations that are available in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV2) ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) (result *ConfigurationMetadataPaginatedCollection, response *core.DetailedResponse, err error) {
-	return secretsManager.ListConfigurationsWithContext(context.Background(), listConfigurationsOptions)
+	result, response, err = secretsManager.ListConfigurationsWithContext(context.Background(), listConfigurationsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ListConfigurationsWithContext is an alternate form of the ListConfigurations method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) ListConfigurationsWithContext(ctx context.Context, listConfigurationsOptions *ListConfigurationsOptions) (result *ConfigurationMetadataPaginatedCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listConfigurationsOptions, "listConfigurationsOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2053,6 +2332,7 @@ func (secretsManager *SecretsManagerV2) ListConfigurationsWithContext(ctx contex
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/configurations`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2081,17 +2361,21 @@ func (secretsManager *SecretsManagerV2) ListConfigurationsWithContext(ctx contex
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "list_configurations", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfigurationMetadataPaginatedCollection)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2105,17 +2389,21 @@ func (secretsManager *SecretsManagerV2) ListConfigurationsWithContext(ctx contex
 //
 // A successful request returns the details of your configuration.
 func (secretsManager *SecretsManagerV2) GetConfiguration(getConfigurationOptions *GetConfigurationOptions) (result ConfigurationIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.GetConfigurationWithContext(context.Background(), getConfigurationOptions)
+	result, response, err = secretsManager.GetConfigurationWithContext(context.Background(), getConfigurationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetConfigurationWithContext is an alternate form of the GetConfiguration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetConfigurationWithContext(ctx context.Context, getConfigurationOptions *GetConfigurationOptions) (result ConfigurationIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getConfigurationOptions, "getConfigurationOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(getConfigurationOptions, "getConfigurationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2128,6 +2416,7 @@ func (secretsManager *SecretsManagerV2) GetConfigurationWithContext(ctx context.
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/configurations/{name}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2146,17 +2435,21 @@ func (secretsManager *SecretsManagerV2) GetConfigurationWithContext(ctx context.
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_configuration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfiguration)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2168,17 +2461,21 @@ func (secretsManager *SecretsManagerV2) GetConfigurationWithContext(ctx context.
 // UpdateConfiguration : Update configuration
 // Update a configuration.
 func (secretsManager *SecretsManagerV2) UpdateConfiguration(updateConfigurationOptions *UpdateConfigurationOptions) (result ConfigurationIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.UpdateConfigurationWithContext(context.Background(), updateConfigurationOptions)
+	result, response, err = secretsManager.UpdateConfigurationWithContext(context.Background(), updateConfigurationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // UpdateConfigurationWithContext is an alternate form of the UpdateConfiguration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) UpdateConfigurationWithContext(ctx context.Context, updateConfigurationOptions *UpdateConfigurationOptions) (result ConfigurationIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateConfigurationOptions, "updateConfigurationOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(updateConfigurationOptions, "updateConfigurationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2191,6 +2488,7 @@ func (secretsManager *SecretsManagerV2) UpdateConfigurationWithContext(ctx conte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/configurations/{name}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2210,22 +2508,27 @@ func (secretsManager *SecretsManagerV2) UpdateConfigurationWithContext(ctx conte
 
 	_, err = builder.SetBodyContentJSON(updateConfigurationOptions.ConfigurationPatch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "update_configuration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfiguration)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2237,17 +2540,21 @@ func (secretsManager *SecretsManagerV2) UpdateConfigurationWithContext(ctx conte
 // DeleteConfiguration : Delete a configuration
 // Delete a configuration by specifying its name.
 func (secretsManager *SecretsManagerV2) DeleteConfiguration(deleteConfigurationOptions *DeleteConfigurationOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteConfigurationWithContext(context.Background(), deleteConfigurationOptions)
+	response, err = secretsManager.DeleteConfigurationWithContext(context.Background(), deleteConfigurationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteConfigurationWithContext is an alternate form of the DeleteConfiguration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteConfigurationWithContext(ctx context.Context, deleteConfigurationOptions *DeleteConfigurationOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteConfigurationOptions, "deleteConfigurationOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(deleteConfigurationOptions, "deleteConfigurationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2260,6 +2567,7 @@ func (secretsManager *SecretsManagerV2) DeleteConfigurationWithContext(ctx conte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/configurations/{name}`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2277,10 +2585,16 @@ func (secretsManager *SecretsManagerV2) DeleteConfigurationWithContext(ctx conte
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_configuration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -2296,17 +2610,21 @@ func (secretsManager *SecretsManagerV2) DeleteConfigurationWithContext(ctx conte
 // - `private_cert_configuration_action_rotate_crl`: Rotate the certificate revocation list (CRL) of an intermediate
 // certificate authority.
 func (secretsManager *SecretsManagerV2) CreateConfigurationAction(createConfigurationActionOptions *CreateConfigurationActionOptions) (result ConfigurationActionIntf, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateConfigurationActionWithContext(context.Background(), createConfigurationActionOptions)
+	result, response, err = secretsManager.CreateConfigurationActionWithContext(context.Background(), createConfigurationActionOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateConfigurationActionWithContext is an alternate form of the CreateConfigurationAction method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateConfigurationActionWithContext(ctx context.Context, createConfigurationActionOptions *CreateConfigurationActionOptions) (result ConfigurationActionIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createConfigurationActionOptions, "createConfigurationActionOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createConfigurationActionOptions, "createConfigurationActionOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2319,6 +2637,7 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationActionWithContext(ctx
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/configurations/{name}/actions`, pathParamsMap)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2338,22 +2657,27 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationActionWithContext(ctx
 
 	_, err = builder.SetBodyContentJSON(createConfigurationActionOptions.ConfigActionPrototype)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_configuration_action", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalConfigurationAction)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2370,17 +2694,21 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationActionWithContext(ctx
 // For more information about enabling notifications for Secrets Manager, check out the
 // [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
 func (secretsManager *SecretsManagerV2) CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *NotificationsRegistration, response *core.DetailedResponse, err error) {
-	return secretsManager.CreateNotificationsRegistrationWithContext(context.Background(), createNotificationsRegistrationOptions)
+	result, response, err = secretsManager.CreateNotificationsRegistrationWithContext(context.Background(), createNotificationsRegistrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // CreateNotificationsRegistrationWithContext is an alternate form of the CreateNotificationsRegistration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) CreateNotificationsRegistrationWithContext(ctx context.Context, createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions) (result *NotificationsRegistration, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions cannot be nil")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
 		return
 	}
 	err = core.ValidateStruct(createNotificationsRegistrationOptions, "createNotificationsRegistrationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2389,6 +2717,7 @@ func (secretsManager *SecretsManagerV2) CreateNotificationsRegistrationWithConte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/notifications/registration`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2415,22 +2744,27 @@ func (secretsManager *SecretsManagerV2) CreateNotificationsRegistrationWithConte
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
 		return
 	}
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "create_notifications_registration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalNotificationsRegistration)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2442,13 +2776,16 @@ func (secretsManager *SecretsManagerV2) CreateNotificationsRegistrationWithConte
 // GetNotificationsRegistration : Get Event Notifications registration details
 // Get the details of the registration between your Secrets Manager instance and Event Notifications.
 func (secretsManager *SecretsManagerV2) GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *NotificationsRegistration, response *core.DetailedResponse, err error) {
-	return secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
+	result, response, err = secretsManager.GetNotificationsRegistrationWithContext(context.Background(), getNotificationsRegistrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetNotificationsRegistrationWithContext is an alternate form of the GetNotificationsRegistration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationWithContext(ctx context.Context, getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions) (result *NotificationsRegistration, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getNotificationsRegistrationOptions, "getNotificationsRegistrationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2457,6 +2794,7 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationWithContext(
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/notifications/registration`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2472,17 +2810,21 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationWithContext(
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	var rawResponse map[string]json.RawMessage
 	response, err = secretsManager.Service.Request(request, &rawResponse)
 	if err != nil {
+		core.EnrichHTTPProblem(err, "get_notifications_registration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
 		return
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalNotificationsRegistration)
 		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
 			return
 		}
 		response.Result = result
@@ -2496,13 +2838,16 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationWithContext(
 //
 // A successful request removes your Secrets Manager instance as a source in Event Notifications.
 func (secretsManager *SecretsManagerV2) DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.DeleteNotificationsRegistrationWithContext(context.Background(), deleteNotificationsRegistrationOptions)
+	response, err = secretsManager.DeleteNotificationsRegistrationWithContext(context.Background(), deleteNotificationsRegistrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // DeleteNotificationsRegistrationWithContext is an alternate form of the DeleteNotificationsRegistration method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) DeleteNotificationsRegistrationWithContext(ctx context.Context, deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(deleteNotificationsRegistrationOptions, "deleteNotificationsRegistrationOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2511,6 +2856,7 @@ func (secretsManager *SecretsManagerV2) DeleteNotificationsRegistrationWithConte
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/notifications/registration`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2525,10 +2871,16 @@ func (secretsManager *SecretsManagerV2) DeleteNotificationsRegistrationWithConte
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_notifications_registration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
 }
@@ -2541,13 +2893,16 @@ func (secretsManager *SecretsManagerV2) DeleteNotificationsRegistrationWithConte
 // notifications for Secrets Manager, check out the
 // [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-event-notifications).
 func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationTest(getNotificationsRegistrationTestOptions *GetNotificationsRegistrationTestOptions) (response *core.DetailedResponse, err error) {
-	return secretsManager.GetNotificationsRegistrationTestWithContext(context.Background(), getNotificationsRegistrationTestOptions)
+	response, err = secretsManager.GetNotificationsRegistrationTestWithContext(context.Background(), getNotificationsRegistrationTestOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetNotificationsRegistrationTestWithContext is an alternate form of the GetNotificationsRegistrationTest method which supports a Context parameter
 func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationTestWithContext(ctx context.Context, getNotificationsRegistrationTestOptions *GetNotificationsRegistrationTestOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getNotificationsRegistrationTestOptions, "getNotificationsRegistrationTestOptions")
 	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2556,6 +2911,7 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationTestWithCont
 	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/notifications/registration/test`, nil)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
 		return
 	}
 
@@ -2570,12 +2926,21 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationTestWithCont
 
 	request, err := builder.Build()
 	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
 		return
 	}
 
 	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "get_notifications_registration_test", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
 
 	return
+}
+func getServiceComponentInfo() *core.ProblemComponent {
+	return core.NewProblemComponent(DefaultServiceName, "2.0.0")
 }
 
 // CertificateIssuanceInfo : Issuance information that is associated with your certificate.
@@ -2625,34 +2990,42 @@ func UnmarshalCertificateIssuanceInfo(m map[string]json.RawMessage, result inter
 	obj := new(CertificateIssuanceInfo)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "challenges", &obj.Challenges, UnmarshalChallengeResource)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "challenges-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "dns_challenge_validation_time", &obj.DnsChallengeValidationTime)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "dns_challenge_validation_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "error_code", &obj.ErrorCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "error_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "error_message", &obj.ErrorMessage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "error_message-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ordered_on", &obj.OrderedOn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ordered_on-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -2673,10 +3046,12 @@ func UnmarshalCertificateValidity(m map[string]json.RawMessage, result interface
 	obj := new(CertificateValidity)
 	err = core.UnmarshalPrimitive(m, "not_before", &obj.NotBefore)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "not_before-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_after", &obj.NotAfter)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "not_after-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -2706,22 +3081,27 @@ func UnmarshalChallengeResource(m map[string]json.RawMessage, result interface{}
 	obj := new(ChallengeResource)
 	err = core.UnmarshalPrimitive(m, "domain", &obj.Domain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "domain-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "txt_record_name", &obj.TxtRecordName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "txt_record_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "txt_record_value", &obj.TxtRecordValue)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "txt_record_value-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -2832,6 +3212,9 @@ type Configuration struct {
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
 	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
@@ -3148,29 +3531,52 @@ func UnmarshalConfiguration(m map[string]json.RawMessage, result interface{}) (e
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "config_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'config_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'config_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'config_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'config_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
-	if discValue == "public_cert_configuration_ca_lets_encrypt" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationCALetsEncrypt)
-	} else if discValue == "public_cert_configuration_dns_cloud_internet_services" {
+	if discValue == "public_cert_configuration_dns_cloud_internet_services" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationDNSCloudInternetServices)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationDNSCloudInternetServices-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert_configuration_dns_classic_infrastructure" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationDNSClassicInfrastructure)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationDNSClassicInfrastructure-error", common.GetComponentInfo())
+		}
+	} else if discValue == "public_cert_configuration_ca_lets_encrypt" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationCALetsEncrypt)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationCALetsEncrypt-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials_configuration" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsConfiguration)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsConfiguration-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_root_ca" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationRootCA)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationRootCA-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_intermediate_ca" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationIntermediateCA)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationIntermediateCA-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_template" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationTemplate)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationTemplate-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'config_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'config_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -3320,25 +3726,42 @@ func UnmarshalConfigurationAction(m map[string]json.RawMessage, result interface
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "action_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'action_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'action_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "private_cert_configuration_action_revoke_ca_certificate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRevoke)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRevoke-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_sign_csr" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSignCSR)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionSignCSR-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_sign_intermediate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSignIntermediate)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionSignIntermediate-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_set_signed" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSetSigned)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionSetSigned-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_rotate_crl" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRotateCRL)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRotateCRL-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -3479,25 +3902,42 @@ func UnmarshalConfigurationActionPrototype(m map[string]json.RawMessage, result 
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "action_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'action_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'action_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "private_cert_configuration_action_rotate_crl" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRotateCRLPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_revoke_ca_certificate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRevokePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRevokePrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_sign_csr" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSignCSRPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionSignCSRPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_sign_intermediate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSignIntermediatePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionSignIntermediatePrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_set_signed" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSetSignedPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionSetSignedPrototype-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -3564,6 +4004,9 @@ type ConfigurationMetadata struct {
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
@@ -3657,29 +4100,52 @@ func UnmarshalConfigurationMetadata(m map[string]json.RawMessage, result interfa
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "config_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'config_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'config_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'config_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'config_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
-	if discValue == "iam_credentials_configuration" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsConfigurationMetadata)
-	} else if discValue == "public_cert_configuration_ca_lets_encrypt" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationCALetsEncryptMetadata)
-	} else if discValue == "public_cert_configuration_dns_cloud_internet_services" {
+	if discValue == "public_cert_configuration_dns_cloud_internet_services" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationDNSCloudInternetServicesMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert_configuration_dns_classic_infrastructure" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationDNSClassicInfrastructureMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationDNSClassicInfrastructureMetadata-error", common.GetComponentInfo())
+		}
+	} else if discValue == "public_cert_configuration_ca_lets_encrypt" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationCALetsEncryptMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationCALetsEncryptMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_root_ca" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationRootCAMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationRootCAMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_intermediate_ca" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationIntermediateCAMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationIntermediateCAMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_template" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationTemplateMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationTemplateMetadata-error", common.GetComponentInfo())
+		}
+	} else if discValue == "iam_credentials_configuration" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsConfigurationMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsConfigurationMetadata-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'config_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'config_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -3716,34 +4182,42 @@ func UnmarshalConfigurationMetadataPaginatedCollection(m map[string]json.RawMess
 	obj := new(ConfigurationMetadataPaginatedCollection)
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedCollectionFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedCollectionNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedCollectionPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedCollectionLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "configurations", &obj.Configurations, UnmarshalConfigurationMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "configurations-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -3756,12 +4230,16 @@ func (resp *ConfigurationMetadataPaginatedCollection) GetNextOffset() (*int64, e
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -4052,198 +4530,247 @@ func UnmarshalConfigurationPatch(m map[string]json.RawMessage, result interface{
 	obj := new(ConfigurationPatch)
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_secret_groups", &obj.AllowedSecretGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_secret_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_localhost", &obj.AllowLocalhost)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_localhost-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains", &obj.AllowedDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains_template", &obj.AllowedDomainsTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_bare_domains", &obj.AllowBareDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_bare_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_subdomains", &obj.AllowSubdomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_subdomains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_glob_domains", &obj.AllowGlobDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_glob_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_any_name", &obj.AllowAnyName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_any_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enforce_hostnames", &obj.EnforceHostnames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enforce_hostnames-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_ip_sans", &obj.AllowIpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_uri_sans", &obj.AllowedUriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_other_sans", &obj.AllowedOtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "server_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "client_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "code_signing_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "email_protection_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage_oids-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_common_name", &obj.UseCsrCommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_sans", &obj.UseCsrSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "require_cn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "policy_identifiers-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "basic_constraints_valid_for_non_ca", &obj.BasicConstraintsValidForNonCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "basic_constraints_valid_for_non_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_before_duration", &obj.NotBeforeDuration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "not_before_duration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_environment", &obj.LetsEncryptEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_environment-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_private_key", &obj.LetsEncryptPrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_preferred_chain-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_apikey", &obj.CloudInternetServicesApikey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_apikey-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_crn", &obj.CloudInternetServicesCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -4257,17 +4784,20 @@ func (configurationPatch *ConfigurationPatch) AsPatch() (_patch map[string]inter
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
 	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	}
 	return
 }
 
 // ConfigurationPrototype : The details of your configuration.
 // Models which "extend" this model:
+// - PublicCertificateConfigurationDNSCloudInternetServicesPrototype
+// - PublicCertificateConfigurationDNSClassicInfrastructurePrototype
+// - PublicCertificateConfigurationCALetsEncryptPrototype
 // - PrivateCertificateConfigurationRootCAPrototype
 // - PrivateCertificateConfigurationIntermediateCAPrototype
 // - PrivateCertificateConfigurationTemplatePrototype
-// - PublicCertificateConfigurationCALetsEncryptPrototype
-// - PublicCertificateConfigurationDNSCloudInternetServicesPrototype
-// - PublicCertificateConfigurationDNSClassicInfrastructurePrototype
 // - IAMCredentialsConfigurationPrototype
 type ConfigurationPrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
@@ -4279,6 +4809,53 @@ type ConfigurationPrototype struct {
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
 	Name *string `json:"name,omitempty"`
+
+	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
+	//
+	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
+	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
+	// need to assign the Manager role.
+	//
+	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
+	// environments, it is recommended that you assign the Reader access role, and then use the
+	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
+	// domains.
+	//
+	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
+	// service-to-service authorization.
+	//
+	// For more information, see the
+	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
+	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
+
+	// A CRN that uniquely identifies an IBM Cloud resource.
+	CloudInternetServicesCrn *string `json:"cloud_internet_services_crn,omitempty"`
+
+	// The username that is associated with your classic infrastructure account.
+	//
+	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. For more information,
+	// see the [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
+	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
+
+	// Your classic infrastructure API key.
+	//
+	// For information about viewing and accessing your classic infrastructure API key, see the
+	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
+	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
+
+	// The configuration of the Let's Encrypt CA environment.
+	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
+
+	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
+	// newline characters.
+	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
+
+	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
+	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
+	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The maximum time-to-live (TTL) for certificates that are created by this CA.
 	//
@@ -4541,50 +5118,6 @@ type ConfigurationPrototype struct {
 	// is returned in seconds (integer).
 	NotBeforeDuration *string `json:"not_before_duration,omitempty"`
 
-	// The configuration of the Let's Encrypt CA environment.
-	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
-
-	// The PEM-encoded private key of your Let's Encrypt account. The data must be formatted on a single line with embedded
-	// newline characters.
-	LetsEncryptPrivateKey *string `json:"lets_encrypt_private_key,omitempty"`
-
-	// This field supports only the chains that Let's Encrypt provides. Keep empty to use the default or supply a valid
-	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
-	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
-
-	// An IBM Cloud API key that can list domains in your Cloud Internet Services instance and add DNS records.
-	//
-	// To grant Secrets Manager the ability to view the Cloud Internet Services instance and all of its domains, the API
-	// key must be assigned the Reader service role on Internet Services (`internet-svcs`). In order to add DNS records you
-	// need to assign the Manager role.
-	//
-	// If you want to manage specific domains, you can assign the Manager role for this specific domain.  For production
-	// environments, it is recommended that you assign the Reader access role, and then use the
-	// [IAM Policy Management API](https://cloud.ibm.com/apidocs/iam-policy-management#create-policy) to control specific
-	// domains.
-	//
-	// If an IBM Cloud API key value is empty Secrets Manager tries to access your Cloud Internet Services instance  with
-	// service-to-service authorization.
-	//
-	// For more information, see the
-	// [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates#authorize-cis).
-	CloudInternetServicesApikey *string `json:"cloud_internet_services_apikey,omitempty"`
-
-	// A CRN that uniquely identifies an IBM Cloud resource.
-	CloudInternetServicesCrn *string `json:"cloud_internet_services_crn,omitempty"`
-
-	// The username that is associated with your classic infrastructure account.
-	//
-	// In most cases, your classic infrastructure username is your `<account_id>_<email_address>`. For more information,
-	// see the [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
-	ClassicInfrastructureUsername *string `json:"classic_infrastructure_username,omitempty"`
-
-	// Your classic infrastructure API key.
-	//
-	// For information about viewing and accessing your classic infrastructure API key, see the
-	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
-	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
-
 	// The API key that is used to set the iam_credentials engine.
 	ApiKey *string `json:"api_key,omitempty"`
 }
@@ -4601,6 +5134,13 @@ const (
 	ConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
 	ConfigurationPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	ConfigurationPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
+)
+
+// Constants associated with the ConfigurationPrototype.LetsEncryptEnvironment property.
+// The configuration of the Let's Encrypt CA environment.
+const (
+	ConfigurationPrototype_LetsEncryptEnvironment_Production = "production"
+	ConfigurationPrototype_LetsEncryptEnvironment_Staging    = "staging"
 )
 
 // Constants associated with the ConfigurationPrototype.Format property.
@@ -4634,13 +5174,6 @@ const (
 	ConfigurationPrototype_SigningMethod_Internal = "internal"
 )
 
-// Constants associated with the ConfigurationPrototype.LetsEncryptEnvironment property.
-// The configuration of the Let's Encrypt CA environment.
-const (
-	ConfigurationPrototype_LetsEncryptEnvironment_Production = "production"
-	ConfigurationPrototype_LetsEncryptEnvironment_Staging    = "staging"
-)
-
 func (*ConfigurationPrototype) isaConfigurationPrototype() bool {
 	return true
 }
@@ -4655,29 +5188,52 @@ func UnmarshalConfigurationPrototype(m map[string]json.RawMessage, result interf
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "config_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'config_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'config_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'config_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'config_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
-	if discValue == "private_cert_configuration_root_ca" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationRootCAPrototype)
-	} else if discValue == "private_cert_configuration_intermediate_ca" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationIntermediateCAPrototype)
-	} else if discValue == "private_cert_configuration_template" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationTemplatePrototype)
-	} else if discValue == "public_cert_configuration_ca_lets_encrypt" {
-		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationCALetsEncryptPrototype)
-	} else if discValue == "public_cert_configuration_dns_cloud_internet_services" {
+	if discValue == "public_cert_configuration_dns_cloud_internet_services" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationDNSCloudInternetServicesPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert_configuration_dns_classic_infrastructure" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationDNSClassicInfrastructurePrototype-error", common.GetComponentInfo())
+		}
+	} else if discValue == "public_cert_configuration_ca_lets_encrypt" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateConfigurationCALetsEncryptPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateConfigurationCALetsEncryptPrototype-error", common.GetComponentInfo())
+		}
+	} else if discValue == "private_cert_configuration_root_ca" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationRootCAPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationRootCAPrototype-error", common.GetComponentInfo())
+		}
+	} else if discValue == "private_cert_configuration_intermediate_ca" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationIntermediateCAPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationIntermediateCAPrototype-error", common.GetComponentInfo())
+		}
+	} else if discValue == "private_cert_configuration_template" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationTemplatePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationTemplatePrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials_configuration" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsConfigurationPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsConfigurationPrototype-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'config_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'config_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -6206,6 +6762,7 @@ func UnmarshalNotificationsRegistration(m map[string]json.RawMessage, result int
 	obj := new(NotificationsRegistration)
 	err = core.UnmarshalPrimitive(m, "event_notifications_instance_crn", &obj.EventNotificationsInstanceCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "event_notifications_instance_crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6223,6 +6780,7 @@ func UnmarshalPaginatedCollectionFirst(m map[string]json.RawMessage, result inte
 	obj := new(PaginatedCollectionFirst)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6240,6 +6798,7 @@ func UnmarshalPaginatedCollectionLast(m map[string]json.RawMessage, result inter
 	obj := new(PaginatedCollectionLast)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6257,6 +6816,7 @@ func UnmarshalPaginatedCollectionNext(m map[string]json.RawMessage, result inter
 	obj := new(PaginatedCollectionNext)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6274,6 +6834,7 @@ func UnmarshalPaginatedCollectionPrevious(m map[string]json.RawMessage, result i
 	obj := new(PaginatedCollectionPrevious)
 	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6300,18 +6861,22 @@ func UnmarshalPasswordGenerationPolicy(m map[string]json.RawMessage, result inte
 	obj := new(PasswordGenerationPolicy)
 	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_digits", &obj.IncludeDigits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_digits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_symbols", &obj.IncludeSymbols)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_symbols-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_uppercase", &obj.IncludeUppercase)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_uppercase-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6339,18 +6904,22 @@ func UnmarshalPasswordGenerationPolicyPatch(m map[string]json.RawMessage, result
 	obj := new(PasswordGenerationPolicyPatch)
 	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_digits", &obj.IncludeDigits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_digits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_symbols", &obj.IncludeSymbols)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_symbols-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_uppercase", &obj.IncludeUppercase)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_uppercase-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6377,18 +6946,22 @@ func UnmarshalPasswordGenerationPolicyRO(m map[string]json.RawMessage, result in
 	obj := new(PasswordGenerationPolicyRO)
 	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_digits", &obj.IncludeDigits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_digits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_symbols", &obj.IncludeSymbols)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_symbols-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "include_uppercase", &obj.IncludeUppercase)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "include_uppercase-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6443,33 +7016,155 @@ func UnmarshalPrivateCertificateCAData(m map[string]json.RawMessage, result inte
 	obj := new(PrivateCertificateCAData)
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_type", &obj.PrivateKeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_ca", &obj.IssuingCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca_chain-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateCryptoKey : The data that is associated with a cryptographic key.
+type PrivateCertificateCryptoKey struct {
+	// The id of a PKCS#11 key to use. If the key does not exist and generation is enabled, this is the ID that will  be
+	// given to the generated key. If the key exists, and generation is disabled, then this id will be used to look up the
+	// key. This value and/or crypto_key_label must be specified.
+	ID *string `json:"id,omitempty"`
+
+	// The label of the key to use. If the key does not exist and generation is enabled, this is the label that will  be
+	// given to the generated key. If the key exists, and generation is disabled, then this label will be used to  look up
+	// the key. This value and/or crypto_key_id must be specified.
+	Label *string `json:"label,omitempty"`
+
+	// Indicates whether a new key is generated by the crypto peovider if the given key name cannot be found.
+	AllowGenerateKey *bool `json:"allow_generate_key,omitempty"`
+
+	// The data that is associated with a cryptographic provider.
+	Provider PrivateCertificateCryptoProviderIntf `json:"provider" validate:"required"`
+}
+
+// NewPrivateCertificateCryptoKey : Instantiate PrivateCertificateCryptoKey (Generic Model Constructor)
+func (*SecretsManagerV2) NewPrivateCertificateCryptoKey(provider PrivateCertificateCryptoProviderIntf) (_model *PrivateCertificateCryptoKey, err error) {
+	_model = &PrivateCertificateCryptoKey{
+		Provider: provider,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalPrivateCertificateCryptoKey unmarshals an instance of PrivateCertificateCryptoKey from the specified map of raw messages.
+func UnmarshalPrivateCertificateCryptoKey(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateCryptoKey)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "label", &obj.Label)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "label-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_generate_key", &obj.AllowGenerateKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_generate_key-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "provider", &obj.Provider, UnmarshalPrivateCertificateCryptoProvider)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "provider-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateCryptoProvider : The data that is associated with a cryptographic provider.
+// Models which "extend" this model:
+// - PrivateCertificateCryptoProviderHPCS
+type PrivateCertificateCryptoProvider struct {
+	// The type of cryptographic provider.
+	Type *string `json:"type,omitempty"`
+
+	// The HPCS instance CRN.
+	InstanceCrn *string `json:"instance_crn,omitempty"`
+
+	// The secret Id of iam credentials with api key to access HPCS instance.
+	PinIamCredentialsSecretID *string `json:"pin_iam_credentials_secret_id,omitempty"`
+
+	// The HPCS private key store space id.
+	PrivateKeystoreID *string `json:"private_keystore_id,omitempty"`
+}
+
+// Constants associated with the PrivateCertificateCryptoProvider.Type property.
+// The type of cryptographic provider.
+const (
+	PrivateCertificateCryptoProvider_Type_HyperProtectCryptoServices = "hyper_protect_crypto_services"
+)
+
+func (*PrivateCertificateCryptoProvider) isaPrivateCertificateCryptoProvider() bool {
+	return true
+}
+
+type PrivateCertificateCryptoProviderIntf interface {
+	isaPrivateCertificateCryptoProvider() bool
+}
+
+// UnmarshalPrivateCertificateCryptoProvider unmarshals an instance of PrivateCertificateCryptoProvider from the specified map of raw messages.
+func UnmarshalPrivateCertificateCryptoProvider(m map[string]json.RawMessage, result interface{}) (err error) {
+	// Retrieve discriminator value to determine correct "subclass".
+	var discValue string
+	err = core.UnmarshalPrimitive(m, "type", &discValue)
+	if err != nil {
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
+		return
+	}
+	if discValue == "" {
+		err = core.SDKErrorf(err, "required discriminator property 'type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
+		return
+	}
+	if discValue == "hyper_protect_crypto_services" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateCryptoProviderHPCS)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateCryptoProviderHPCS-error", common.GetComponentInfo())
+		}
+	} else {
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -6487,6 +7182,7 @@ func UnmarshalPublicCertificateRotationObject(m map[string]json.RawMessage, resu
 	obj := new(PublicCertificateRotationObject)
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotate_keys-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6538,18 +7234,22 @@ func UnmarshalRotationPolicy(m map[string]json.RawMessage, result interface{}) (
 	obj := new(RotationPolicy)
 	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "interval", &obj.Interval)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "interval-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "unit", &obj.Unit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotate_keys-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6625,6 +7325,9 @@ type Secret struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
@@ -6637,7 +7340,8 @@ type Secret struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -6815,31 +7519,57 @@ func UnmarshalSecret(m map[string]json.RawMessage, result interface{}) (err erro
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "secret_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'secret_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'secret_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "arbitrary" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalArbitrarySecret)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ArbitrarySecret-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsSecret)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsSecret-error", common.GetComponentInfo())
+		}
 	} else if discValue == "imported_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalImportedCertificate)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ImportedCertificate-error", common.GetComponentInfo())
+		}
 	} else if discValue == "kv" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalKVSecret)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-KVSecret-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificate)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificate-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificate)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificate-error", common.GetComponentInfo())
+		}
 	} else if discValue == "service_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalServiceCredentialsSecret)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ServiceCredentialsSecret-error", common.GetComponentInfo())
+		}
 	} else if discValue == "username_password" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecret)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecret-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -6877,19 +7607,27 @@ func UnmarshalSecretAction(m map[string]json.RawMessage, result interface{}) (er
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "action_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'action_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'action_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "private_cert_action_revoke_certificate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateActionRevoke)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateActionRevoke-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert_action_validate_dns_challenge" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateActionValidateManualDNS)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateActionValidateManualDNS-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -6924,19 +7662,27 @@ func UnmarshalSecretActionPrototype(m map[string]json.RawMessage, result interfa
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "action_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'action_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'action_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "public_cert_action_validate_dns_challenge" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateActionValidateManualDNSPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateActionValidateManualDNSPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_action_revoke_certificate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateActionRevokePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateActionRevokePrototype-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -6970,26 +7716,32 @@ func UnmarshalSecretGroup(m map[string]json.RawMessage, result interface{}) (err
 	obj := new(SecretGroup)
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7010,10 +7762,12 @@ func UnmarshalSecretGroupCollection(m map[string]json.RawMessage, result interfa
 	obj := new(SecretGroupCollection)
 	err = core.UnmarshalModel(m, "secret_groups", &obj.SecretGroups, UnmarshalSecretGroup)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7037,10 +7791,12 @@ func UnmarshalSecretGroupPatch(m map[string]json.RawMessage, result interface{})
 	obj := new(SecretGroupPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7053,6 +7809,9 @@ func (secretGroupPatch *SecretGroupPatch) AsPatch() (_patch map[string]interface
 	jsonData, err = json.Marshal(secretGroupPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -7109,42 +7868,52 @@ func UnmarshalSecretLock(m map[string]json.RawMessage, result interface{}) (err 
 	obj := new(SecretLock)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "attributes", &obj.Attributes)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "attributes-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_version_id", &obj.SecretVersionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_version_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_version_alias", &obj.SecretVersionAlias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_version_alias-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7174,6 +7943,9 @@ func (*SecretsManagerV2) NewSecretLockPrototype(name string) (_model *SecretLock
 		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -7182,14 +7954,17 @@ func UnmarshalSecretLockPrototype(m map[string]json.RawMessage, result interface
 	obj := new(SecretLockPrototype)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "attributes", &obj.Attributes)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "attributes-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7234,22 +8009,27 @@ func UnmarshalSecretLocks(m map[string]json.RawMessage, result interface{}) (err
 	obj := new(SecretLocks)
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "versions", &obj.Versions, UnmarshalSecretVersionLocks)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7288,34 +8068,42 @@ func UnmarshalSecretLocksPaginatedCollection(m map[string]json.RawMessage, resul
 	obj := new(SecretLocksPaginatedCollection)
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedCollectionFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedCollectionNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedCollectionPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedCollectionLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "locks", &obj.Locks, UnmarshalSecretLock)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7328,12 +8116,16 @@ func (resp *SecretLocksPaginatedCollection) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -7408,6 +8200,9 @@ type SecretMetadata struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
@@ -7417,7 +8212,8 @@ type SecretMetadata struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -7559,31 +8355,57 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "secret_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'secret_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'secret_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "arbitrary" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalArbitrarySecretMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ArbitrarySecretMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsSecretMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsSecretMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "imported_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalImportedCertificateMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ImportedCertificateMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "kv" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalKVSecretMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-KVSecretMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "service_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalServiceCredentialsSecretMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ServiceCredentialsSecretMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "username_password" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecretMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretMetadata-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -7620,34 +8442,42 @@ func UnmarshalSecretMetadataPaginatedCollection(m map[string]json.RawMessage, re
 	obj := new(SecretMetadataPaginatedCollection)
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedCollectionFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedCollectionNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedCollectionPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedCollectionLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "secrets", &obj.Secrets, UnmarshalSecretMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secrets-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7660,12 +8490,16 @@ func (resp *SecretMetadataPaginatedCollection) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -7712,7 +8546,8 @@ type SecretMetadataPatch struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
@@ -7737,34 +8572,42 @@ func UnmarshalSecretMetadataPatch(m map[string]json.RawMessage, result interface
 	obj := new(SecretMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyPatch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7777,6 +8620,9 @@ func (secretMetadataPatch *SecretMetadataPatch) AsPatch() (_patch map[string]int
 	jsonData, err = json.Marshal(secretMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -7835,7 +8681,8 @@ type SecretPrototype struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -7989,31 +8836,57 @@ func UnmarshalSecretPrototype(m map[string]json.RawMessage, result interface{}) 
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "secret_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'secret_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'secret_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "arbitrary" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalArbitrarySecretPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ArbitrarySecretPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsSecretPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsSecretPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "imported_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalImportedCertificatePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ImportedCertificatePrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "kv" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalKVSecretPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-KVSecretPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificatePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificatePrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificatePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificatePrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "service_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalServiceCredentialsSecretPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ServiceCredentialsSecretPrototype-error", common.GetComponentInfo())
+		}
 	} else if discValue == "username_password" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecretPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretPrototype-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -8170,31 +9043,57 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "secret_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'secret_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'secret_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "arbitrary" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalArbitrarySecretVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ArbitrarySecretVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsSecretVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsSecretVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "imported_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalImportedCertificateVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ImportedCertificateVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "kv" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalKVSecretVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-KVSecretVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "service_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalServiceCredentialsSecretVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ServiceCredentialsSecretVersion-error", common.GetComponentInfo())
+		}
 	} else if discValue == "username_password" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecretVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretVersion-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -8227,17 +9126,22 @@ func UnmarshalSecretVersionActionPrototype(m map[string]json.RawMessage, result 
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "action_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'action_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'action_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "private_cert_action_revoke_certificate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateVersionActionRevokePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateVersionActionRevokePrototype-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -8271,18 +9175,22 @@ func UnmarshalSecretVersionLocks(m map[string]json.RawMessage, result interface{
 	obj := new(SecretVersionLocks)
 	err = core.UnmarshalPrimitive(m, "version_id", &obj.VersionID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_alias", &obj.VersionAlias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks", &obj.Locks)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8321,34 +9229,42 @@ func UnmarshalSecretVersionLocksPaginatedCollection(m map[string]json.RawMessage
 	obj := new(SecretVersionLocksPaginatedCollection)
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedCollectionFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedCollectionNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedCollectionPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedCollectionLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "locks", &obj.Locks, UnmarshalSecretLock)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8361,12 +9277,16 @@ func (resp *SecretVersionLocksPaginatedCollection) GetNextOffset() (*int64, erro
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -8485,31 +9405,57 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "secret_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'secret_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'secret_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'secret_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "arbitrary" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalArbitrarySecretVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ArbitrarySecretVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "iam_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsSecretVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsSecretVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "imported_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalImportedCertificateVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ImportedCertificateVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "kv" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalKVSecretVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-KVSecretVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "public_cert" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPublicCertificateVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PublicCertificateVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "service_credentials" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalServiceCredentialsSecretVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-ServiceCredentialsSecretVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else if discValue == "username_password" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecretVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -8528,10 +9474,12 @@ func UnmarshalSecretVersionMetadataCollection(m map[string]json.RawMessage, resu
 	obj := new(SecretVersionMetadataCollection)
 	err = core.UnmarshalModel(m, "versions", &obj.Versions, UnmarshalSecretVersionMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8549,6 +9497,7 @@ func UnmarshalSecretVersionMetadataPatch(m map[string]json.RawMessage, result in
 	obj := new(SecretVersionMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8561,6 +9510,9 @@ func (secretVersionMetadataPatch *SecretVersionMetadataPatch) AsPatch() (_patch 
 	jsonData, err = json.Marshal(secretVersionMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -8627,46 +9579,57 @@ func UnmarshalSecretVersionPrototype(m map[string]json.RawMessage, result interf
 	obj := new(SecretVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "restore_from_version", &obj.RestoreFromVersion)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "restore_from_version-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalPublicCertificateRotationObject)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8705,34 +9668,42 @@ func UnmarshalSecretsLocksPaginatedCollection(m map[string]json.RawMessage, resu
 	obj := new(SecretsLocksPaginatedCollection)
 	err = core.UnmarshalPrimitive(m, "total_count", &obj.TotalCount)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "total_count-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "offset", &obj.Offset)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "offset-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "first", &obj.First, UnmarshalPaginatedCollectionFirst)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "first-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "next", &obj.Next, UnmarshalPaginatedCollectionNext)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "previous", &obj.Previous, UnmarshalPaginatedCollectionPrevious)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "previous-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "last", &obj.Last, UnmarshalPaginatedCollectionLast)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "last-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "secrets_locks", &obj.SecretsLocks, UnmarshalSecretLocks)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secrets_locks-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8745,12 +9716,16 @@ func (resp *SecretsLocksPaginatedCollection) GetNextOffset() (*int64, error) {
 		return nil, nil
 	}
 	offset, err := core.GetQueryParam(resp.Next.Href, "offset")
-	if err != nil || offset == nil {
+	if err != nil {
+		err = core.SDKErrorf(err, "", "read-query-param-error", common.GetComponentInfo())
 		return nil, err
+	} else if offset == nil {
+		return nil, nil
 	}
 	var offsetValue int64
 	offsetValue, err = strconv.ParseInt(*offset, 10, 64)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parse-int-query-error", common.GetComponentInfo())
 		return nil, err
 	}
 	return core.Int64Ptr(offsetValue), nil
@@ -8770,10 +9745,12 @@ func UnmarshalServiceCredentialsResourceKey(m map[string]json.RawMessage, result
 	obj := new(ServiceCredentialsResourceKey)
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8860,6 +9837,9 @@ func (o *ServiceCredentialsSecretCredentials) MarshalJSON() (buffer []byte, err 
 		m["iam_serviceid_crn"] = o.IamServiceidCrn
 	}
 	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -8868,31 +9848,37 @@ func UnmarshalServiceCredentialsSecretCredentials(m map[string]json.RawMessage, 
 	obj := new(ServiceCredentialsSecretCredentials)
 	err = core.UnmarshalPrimitive(m, "apikey", &obj.Apikey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "apikey-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "apikey")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_description", &obj.IamApikeyDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "iam_apikey_description-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "iam_apikey_description")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_id", &obj.IamApikeyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "iam_apikey_id-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "iam_apikey_id")
 	err = core.UnmarshalPrimitive(m, "iam_apikey_name", &obj.IamApikeyName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "iam_apikey_name-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "iam_apikey_name")
 	err = core.UnmarshalPrimitive(m, "iam_role_crn", &obj.IamRoleCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "iam_role_crn-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "iam_role_crn")
 	err = core.UnmarshalPrimitive(m, "iam_serviceid_crn", &obj.IamServiceidCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "iam_serviceid_crn-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "iam_serviceid_crn")
@@ -8900,7 +9886,7 @@ func UnmarshalServiceCredentialsSecretCredentials(m map[string]json.RawMessage, 
 		var v interface{}
 		e := core.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
-			err = e
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
 		}
 		obj.SetProperty(k, v)
@@ -8932,6 +9918,9 @@ func (*SecretsManagerV2) NewServiceCredentialsSecretSourceService(instance *Serv
 		Instance: instance,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -8940,14 +9929,17 @@ func UnmarshalServiceCredentialsSecretSourceService(m map[string]json.RawMessage
 	obj := new(ServiceCredentialsSecretSourceService)
 	err = core.UnmarshalModel(m, "instance", &obj.Instance, UnmarshalServiceCredentialsSourceServiceInstance)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "instance-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "parameters", &obj.Parameters, UnmarshalServiceCredentialsSourceServiceParameters)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "role", &obj.Role, UnmarshalServiceCredentialsSourceServiceRole)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "role-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -8982,22 +9974,27 @@ func UnmarshalServiceCredentialsSecretSourceServiceRO(m map[string]json.RawMessa
 	obj := new(ServiceCredentialsSecretSourceServiceRO)
 	err = core.UnmarshalModel(m, "instance", &obj.Instance, UnmarshalServiceCredentialsSourceServiceInstance)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "instance-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "parameters", &obj.Parameters, UnmarshalServiceCredentialsSourceServiceParameters)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "role", &obj.Role, UnmarshalServiceCredentialsSourceServiceRole)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "role-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "iam", &obj.Iam, UnmarshalServiceCredentialsSourceServiceIam)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "iam-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "resource_key", &obj.ResourceKey, UnmarshalServiceCredentialsResourceKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9021,14 +10018,17 @@ func UnmarshalServiceCredentialsSourceServiceIam(m map[string]json.RawMessage, r
 	obj := new(ServiceCredentialsSourceServiceIam)
 	err = core.UnmarshalModel(m, "apikey", &obj.Apikey, UnmarshalServiceCredentialsSourceServiceIamApikey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "apikey-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "role", &obj.Role, UnmarshalServiceCredentialsSourceServiceIamRole)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "role-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "serviceid", &obj.Serviceid, UnmarshalServiceCredentialsSourceServiceIamServiceid)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serviceid-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9052,14 +10052,17 @@ func UnmarshalServiceCredentialsSourceServiceIamApikey(m map[string]json.RawMess
 	obj := new(ServiceCredentialsSourceServiceIamApikey)
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9077,6 +10080,7 @@ func UnmarshalServiceCredentialsSourceServiceIamRole(m map[string]json.RawMessag
 	obj := new(ServiceCredentialsSourceServiceIamRole)
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9094,6 +10098,7 @@ func UnmarshalServiceCredentialsSourceServiceIamServiceid(m map[string]json.RawM
 	obj := new(ServiceCredentialsSourceServiceIamServiceid)
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9111,6 +10116,7 @@ func UnmarshalServiceCredentialsSourceServiceInstance(m map[string]json.RawMessa
 	obj := new(ServiceCredentialsSourceServiceInstance)
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9166,6 +10172,9 @@ func (o *ServiceCredentialsSourceServiceParameters) MarshalJSON() (buffer []byte
 		m["serviceid_crn"] = o.ServiceidCrn
 	}
 	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -9174,6 +10183,7 @@ func UnmarshalServiceCredentialsSourceServiceParameters(m map[string]json.RawMes
 	obj := new(ServiceCredentialsSourceServiceParameters)
 	err = core.UnmarshalPrimitive(m, "serviceid_crn", &obj.ServiceidCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serviceid_crn-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "serviceid_crn")
@@ -9181,7 +10191,7 @@ func UnmarshalServiceCredentialsSourceServiceParameters(m map[string]json.RawMes
 		var v interface{}
 		e := core.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
-			err = e
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
 		}
 		obj.SetProperty(k, v)
@@ -9205,6 +10215,9 @@ func (*SecretsManagerV2) NewServiceCredentialsSourceServiceRole(crn string) (_mo
 		Crn: core.StringPtr(crn),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -9213,6 +10226,7 @@ func UnmarshalServiceCredentialsSourceServiceRole(m map[string]json.RawMessage, 
 	obj := new(ServiceCredentialsSourceServiceRole)
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9434,17 +10448,22 @@ func UnmarshalVersionAction(m map[string]json.RawMessage, result interface{}) (e
 	var discValue string
 	err = core.UnmarshalPrimitive(m, "action_type", &discValue)
 	if err != nil {
-		err = fmt.Errorf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'action_type': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
 	if discValue == "" {
-		err = fmt.Errorf("required discriminator property 'action_type' not found in JSON object")
+		err = core.SDKErrorf(err, "required discriminator property 'action_type' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
 	if discValue == "private_cert_action_revoke_certificate" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateVersionActionRevoke)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateVersionActionRevoke-error", common.GetComponentInfo())
+		}
 	} else {
-		err = fmt.Errorf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'action_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
 }
@@ -9510,6 +10529,9 @@ type ArbitrarySecret struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
@@ -9551,74 +10573,97 @@ func UnmarshalArbitrarySecret(m map[string]json.RawMessage, result interface{}) 
 	obj := new(ArbitrarySecret)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9686,6 +10731,9 @@ type ArbitrarySecretMetadata struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
@@ -9724,70 +10772,92 @@ func UnmarshalArbitrarySecretMetadata(m map[string]json.RawMessage, result inter
 	obj := new(ArbitrarySecretMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9832,22 +10902,27 @@ func UnmarshalArbitrarySecretMetadataPatch(m map[string]json.RawMessage, result 
 	obj := new(ArbitrarySecretMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -9860,6 +10935,9 @@ func (arbitrarySecretMetadataPatch *ArbitrarySecretMetadataPatch) AsPatch() (_pa
 	jsonData, err = json.Marshal(arbitrarySecretMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -9928,6 +11006,9 @@ func (*SecretsManagerV2) NewArbitrarySecretPrototype(name string, secretType str
 		Payload:    core.StringPtr(payload),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -9940,38 +11021,47 @@ func UnmarshalArbitrarySecretPrototype(m map[string]json.RawMessage, result inte
 	obj := new(ArbitrarySecretPrototype)
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10059,58 +11149,72 @@ func UnmarshalArbitrarySecretVersion(m map[string]json.RawMessage, result interf
 	obj := new(ArbitrarySecretVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10195,54 +11299,67 @@ func UnmarshalArbitrarySecretVersionMetadata(m map[string]json.RawMessage, resul
 	obj := new(ArbitrarySecretVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10268,6 +11385,9 @@ func (*SecretsManagerV2) NewArbitrarySecretVersionPrototype(payload string) (_mo
 		Payload: core.StringPtr(payload),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -10280,14 +11400,17 @@ func UnmarshalArbitrarySecretVersionPrototype(m map[string]json.RawMessage, resu
 	obj := new(ArbitrarySecretVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10323,6 +11446,9 @@ func (*SecretsManagerV2) NewCommonRotationPolicy(autoRotate bool) (_model *Commo
 		AutoRotate: core.BoolPtr(autoRotate),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -10335,14 +11461,17 @@ func UnmarshalCommonRotationPolicy(m map[string]json.RawMessage, result interfac
 	obj := new(CommonRotationPolicy)
 	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "interval", &obj.Interval)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "interval-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "unit", &obj.Unit)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "unit-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10416,30 +11545,37 @@ func UnmarshalIAMCredentialsConfiguration(m map[string]json.RawMessage, result i
 	obj := new(IAMCredentialsConfiguration)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10508,26 +11644,32 @@ func UnmarshalIAMCredentialsConfigurationMetadata(m map[string]json.RawMessage, 
 	obj := new(IAMCredentialsConfigurationMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10549,6 +11691,9 @@ func (*SecretsManagerV2) NewIAMCredentialsConfigurationPatch(apiKey string) (_mo
 		ApiKey: core.StringPtr(apiKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -10561,6 +11706,7 @@ func UnmarshalIAMCredentialsConfigurationPatch(m map[string]json.RawMessage, res
 	obj := new(IAMCredentialsConfigurationPatch)
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10573,6 +11719,9 @@ func (iAMCredentialsConfigurationPatch *IAMCredentialsConfigurationPatch) AsPatc
 	jsonData, err = json.Marshal(iAMCredentialsConfigurationPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -10616,6 +11765,9 @@ func (*SecretsManagerV2) NewIAMCredentialsConfigurationPrototype(name string, co
 		ApiKey:     core.StringPtr(apiKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -10628,14 +11780,17 @@ func UnmarshalIAMCredentialsConfigurationPrototype(m map[string]json.RawMessage,
 	obj := new(IAMCredentialsConfigurationPrototype)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10703,12 +11858,16 @@ type IAMCredentialsSecret struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
 	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -10796,106 +11955,137 @@ func UnmarshalIAMCredentialsSecret(m map[string]json.RawMessage, result interfac
 	obj := new(IAMCredentialsSecret)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "access_groups", &obj.AccessGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "access_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.ApiKeyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIdIsStatic)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id_is_static-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "reuse_api_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10963,12 +12153,16 @@ type IAMCredentialsSecretMetadata struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
 	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -11049,102 +12243,132 @@ func UnmarshalIAMCredentialsSecretMetadata(m map[string]json.RawMessage, result 
 	obj := new(IAMCredentialsSecretMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "access_groups", &obj.AccessGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "access_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.ApiKeyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIdIsStatic)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id_is_static-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "reuse_api_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11180,7 +12404,8 @@ type IAMCredentialsSecretMetadataPatch struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
@@ -11197,26 +12422,32 @@ func UnmarshalIAMCredentialsSecretMetadataPatch(m map[string]json.RawMessage, re
 	obj := new(IAMCredentialsSecretMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11229,6 +12460,9 @@ func (iAMCredentialsSecretMetadataPatch *IAMCredentialsSecretMetadataPatch) AsPa
 	jsonData, err = json.Marshal(iAMCredentialsSecretMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -11266,7 +12500,8 @@ type IAMCredentialsSecretPrototype struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -11324,6 +12559,9 @@ func (*SecretsManagerV2) NewIAMCredentialsSecretPrototype(secretType string, nam
 		ReuseApiKey: core.BoolPtr(reuseApiKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -11336,50 +12574,62 @@ func UnmarshalIAMCredentialsSecretPrototype(m map[string]json.RawMessage, result
 	obj := new(IAMCredentialsSecretPrototype)
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "access_groups", &obj.AccessGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "access_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "reuse_api_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11405,6 +12655,9 @@ func (*SecretsManagerV2) NewIAMCredentialsSecretRestoreFromVersionPrototype(rest
 		RestoreFromVersion: core.StringPtr(restoreFromVersion),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -11417,14 +12670,17 @@ func UnmarshalIAMCredentialsSecretRestoreFromVersionPrototype(m map[string]json.
 	obj := new(IAMCredentialsSecretRestoreFromVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "restore_from_version", &obj.RestoreFromVersion)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "restore_from_version-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11525,62 +12781,77 @@ func UnmarshalIAMCredentialsSecretVersion(m map[string]json.RawMessage, result i
 	obj := new(IAMCredentialsSecretVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.ApiKeyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11674,58 +12945,72 @@ func UnmarshalIAMCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	obj := new(IAMCredentialsSecretVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.ApiKeyID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11751,10 +13036,12 @@ func UnmarshalIAMCredentialsSecretVersionPrototype(m map[string]json.RawMessage,
 	obj := new(IAMCredentialsSecretVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11821,6 +13108,9 @@ type ImportedCertificate struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
@@ -11901,118 +13191,152 @@ func UnmarshalImportedCertificate(m map[string]json.RawMessage, result interface
 	obj := new(ImportedCertificate)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_algorithm", &obj.SigningAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate_included", &obj.IntermediateIncluded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate_included-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_included", &obj.PrivateKeyIncluded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_included-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12079,6 +13403,9 @@ type ImportedCertificateMetadata struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
@@ -12148,106 +13475,137 @@ func UnmarshalImportedCertificateMetadata(m map[string]json.RawMessage, result i
 	obj := new(ImportedCertificateMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_algorithm", &obj.SigningAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate_included", &obj.IntermediateIncluded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate_included-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_included", &obj.PrivateKeyIncluded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_included-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12288,18 +13646,22 @@ func UnmarshalImportedCertificateMetadataPatch(m map[string]json.RawMessage, res
 	obj := new(ImportedCertificateMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12312,6 +13674,9 @@ func (importedCertificateMetadataPatch *ImportedCertificateMetadataPatch) AsPatc
 	jsonData, err = json.Marshal(importedCertificateMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -12384,6 +13749,9 @@ func (*SecretsManagerV2) NewImportedCertificatePrototype(secretType string, name
 		Certificate: core.StringPtr(certificate),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -12396,42 +13764,52 @@ func UnmarshalImportedCertificatePrototype(m map[string]json.RawMessage, result 
 	obj := new(ImportedCertificatePrototype)
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12533,74 +13911,92 @@ func UnmarshalImportedCertificateVersion(m map[string]json.RawMessage, result in
 	obj := new(ImportedCertificateVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12691,62 +14087,77 @@ func UnmarshalImportedCertificateVersionMetadata(m map[string]json.RawMessage, r
 	obj := new(ImportedCertificateVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12780,6 +14191,9 @@ func (*SecretsManagerV2) NewImportedCertificateVersionPrototype(certificate stri
 		Certificate: core.StringPtr(certificate),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -12792,22 +14206,27 @@ func UnmarshalImportedCertificateVersionPrototype(m map[string]json.RawMessage, 
 	obj := new(ImportedCertificateVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12875,6 +14294,9 @@ type KVSecret struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The payload data of a key-value secret.
 	Data map[string]interface{} `json:"data" validate:"required"`
 }
@@ -12912,70 +14334,92 @@ func UnmarshalKVSecret(m map[string]json.RawMessage, result interface{}) (err er
 	obj := new(KVSecret)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13042,6 +14486,9 @@ type KVSecretMetadata struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 }
 
 // Constants associated with the KVSecretMetadata.SecretType property.
@@ -13077,66 +14524,87 @@ func UnmarshalKVSecretMetadata(m map[string]json.RawMessage, result interface{})
 	obj := new(KVSecretMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13177,18 +14645,22 @@ func UnmarshalKVSecretMetadataPatch(m map[string]json.RawMessage, result interfa
 	obj := new(KVSecretMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13201,6 +14673,9 @@ func (kVSecretMetadataPatch *KVSecretMetadataPatch) AsPatch() (_patch map[string
 	jsonData, err = json.Marshal(kVSecretMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -13265,6 +14740,9 @@ func (*SecretsManagerV2) NewKVSecretPrototype(secretType string, name string, da
 		Data:       data,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -13277,34 +14755,42 @@ func UnmarshalKVSecretPrototype(m map[string]json.RawMessage, result interface{}
 	obj := new(KVSecretPrototype)
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13388,54 +14874,67 @@ func UnmarshalKVSecretVersion(m map[string]json.RawMessage, result interface{}) 
 	obj := new(KVSecretVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13516,50 +15015,62 @@ func UnmarshalKVSecretVersionMetadata(m map[string]json.RawMessage, result inter
 	obj := new(KVSecretVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13585,6 +15096,9 @@ func (*SecretsManagerV2) NewKVSecretVersionPrototype(data map[string]interface{}
 		Data: data,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -13597,14 +15111,17 @@ func UnmarshalKVSecretVersionPrototype(m map[string]json.RawMessage, result inte
 	obj := new(KVSecretVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13671,6 +15188,9 @@ type PrivateCertificate struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
@@ -13769,138 +15289,177 @@ func UnmarshalPrivateCertificate(m map[string]json.RawMessage, result interface{
 	obj := new(PrivateCertificate)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_algorithm", &obj.SigningAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_seconds", &obj.RevocationTimeSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_rfc3339-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_ca", &obj.IssuingCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca_chain-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13933,10 +15492,12 @@ func UnmarshalPrivateCertificateActionRevoke(m map[string]json.RawMessage, resul
 	obj := new(PrivateCertificateActionRevoke)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_seconds", &obj.RevocationTimeSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_seconds-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13963,6 +15524,9 @@ func (*SecretsManagerV2) NewPrivateCertificateActionRevokePrototype(actionType s
 		ActionType: core.StringPtr(actionType),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -13975,6 +15539,7 @@ func UnmarshalPrivateCertificateActionRevokePrototype(m map[string]json.RawMessa
 	obj := new(PrivateCertificateActionRevokePrototype)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14010,10 +15575,12 @@ func UnmarshalPrivateCertificateConfigurationActionRevoke(m map[string]json.RawM
 	obj := new(PrivateCertificateConfigurationActionRevoke)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_seconds", &obj.RevocationTimeSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_seconds-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14043,6 +15610,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionRevokePrototype
 		ActionType: core.StringPtr(actionType),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -14055,6 +15625,7 @@ func UnmarshalPrivateCertificateConfigurationActionRevokePrototype(m map[string]
 	obj := new(PrivateCertificateConfigurationActionRevokePrototype)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14091,10 +15662,12 @@ func UnmarshalPrivateCertificateConfigurationActionRotateCRL(m map[string]json.R
 	obj := new(PrivateCertificateConfigurationActionRotateCRL)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "success", &obj.Success)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "success-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14125,6 +15698,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionRotateCRLProtot
 		ActionType: core.StringPtr(actionType),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -14137,6 +15713,7 @@ func UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype(m map[stri
 	obj := new(PrivateCertificateConfigurationActionRotateCRLPrototype)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14173,10 +15750,12 @@ func UnmarshalPrivateCertificateConfigurationActionSetSigned(m map[string]json.R
 	obj := new(PrivateCertificateConfigurationActionSetSigned)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14211,6 +15790,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionSetSignedProtot
 		Certificate: core.StringPtr(certificate),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -14223,10 +15805,12 @@ func UnmarshalPrivateCertificateConfigurationActionSetSignedPrototype(m map[stri
 	obj := new(PrivateCertificateConfigurationActionSetSignedPrototype)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14356,90 +15940,112 @@ func UnmarshalPrivateCertificateConfigurationActionSignCSR(m map[string]json.Raw
 	obj := new(PrivateCertificateConfigurationActionSignCSR)
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_values-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalPrivateCertificateConfigurationCACertificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14564,6 +16170,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionSignCSRPrototyp
 		Csr:        core.StringPtr(csr),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -14576,86 +16185,107 @@ func UnmarshalPrivateCertificateConfigurationActionSignCSRPrototype(m map[string
 	obj := new(PrivateCertificateConfigurationActionSignCSRPrototype)
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_values-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14783,86 +16413,107 @@ func UnmarshalPrivateCertificateConfigurationActionSignIntermediate(m map[string
 	obj := new(PrivateCertificateConfigurationActionSignIntermediate)
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_values-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate_certificate_authority", &obj.IntermediateCertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate_certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -14988,6 +16639,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionSignIntermediat
 		IntermediateCertificateAuthority: core.StringPtr(intermediateCertificateAuthority),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -15000,86 +16654,107 @@ func UnmarshalPrivateCertificateConfigurationActionSignIntermediatePrototype(m m
 	obj := new(PrivateCertificateConfigurationActionSignIntermediatePrototype)
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_values-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate_certificate_authority", &obj.IntermediateCertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate_certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15111,18 +16786,22 @@ func UnmarshalPrivateCertificateConfigurationCACertificate(m map[string]json.Raw
 	obj := new(PrivateCertificateConfigurationCACertificate)
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_ca", &obj.IssuingCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca_chain-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15186,6 +16865,9 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
 	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
@@ -15341,138 +17023,177 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCA(m map[string]json.Ra
 	obj := new(PrivateCertificateConfigurationIntermediateCA)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_method", &obj.SigningMethod)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_method-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "crypto_key", &obj.CryptoKey, UnmarshalPrivateCertificateCryptoKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crypto_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl_seconds", &obj.MaxTtlSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry_seconds", &obj.CrlExpirySeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalPrivateCertificateCAData)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15512,18 +17233,22 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCACSR(m map[string]json
 	obj := new(PrivateCertificateConfigurationIntermediateCACSR)
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_type", &obj.PrivateKeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration", &obj.Expiration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15587,6 +17312,9 @@ type PrivateCertificateConfigurationIntermediateCAMetadata struct {
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 }
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.ConfigType property.
@@ -15656,58 +17384,77 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCAMetadata(m map[string
 	obj := new(PrivateCertificateConfigurationIntermediateCAMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_method", &obj.SigningMethod)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_method-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "crypto_key", &obj.CryptoKey, UnmarshalPrivateCertificateCryptoKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crypto_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15757,22 +17504,27 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCAPatch(m map[string]js
 	obj := new(PrivateCertificateConfigurationIntermediateCAPatch)
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15785,6 +17537,9 @@ func (privateCertificateConfigurationIntermediateCAPatch *PrivateCertificateConf
 	jsonData, err = json.Marshal(privateCertificateConfigurationIntermediateCAPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -15801,6 +17556,9 @@ type PrivateCertificateConfigurationIntermediateCAPrototype struct {
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
 	Name *string `json:"name" validate:"required"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The maximum time-to-live (TTL) for certificates that are created by this CA.
 	//
@@ -15966,6 +17724,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationIntermediateCAPrototy
 		CommonName:    core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -15978,110 +17739,142 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCAPrototype(m map[strin
 	obj := new(PrivateCertificateConfigurationIntermediateCAPrototype)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "crypto_key", &obj.CryptoKey, UnmarshalPrivateCertificateCryptoKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crypto_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_method", &obj.SigningMethod)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_method-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -16136,6 +17929,9 @@ type PrivateCertificateConfigurationRootCA struct {
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The maximum time-to-live (TTL) for certificates that are created by this CA in seconds.
 	MaxTtlSeconds *int64 `json:"max_ttl_seconds,omitempty"`
@@ -16293,142 +18089,182 @@ func UnmarshalPrivateCertificateConfigurationRootCA(m map[string]json.RawMessage
 	obj := new(PrivateCertificateConfigurationRootCA)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "crypto_key", &obj.CryptoKey, UnmarshalPrivateCertificateCryptoKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crypto_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl_seconds", &obj.MaxTtlSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry_seconds", &obj.CrlExpirySeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl_seconds", &obj.TtlSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalPrivateCertificateCAData)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -16483,6 +18319,9 @@ type PrivateCertificateConfigurationRootCAMetadata struct {
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 }
 
 // Constants associated with the PrivateCertificateConfigurationRootCAMetadata.ConfigType property.
@@ -16542,50 +18381,67 @@ func UnmarshalPrivateCertificateConfigurationRootCAMetadata(m map[string]json.Ra
 	obj := new(PrivateCertificateConfigurationRootCAMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "crypto_key", &obj.CryptoKey, UnmarshalPrivateCertificateCryptoKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crypto_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -16635,22 +18491,27 @@ func UnmarshalPrivateCertificateConfigurationRootCAPatch(m map[string]json.RawMe
 	obj := new(PrivateCertificateConfigurationRootCAPatch)
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -16663,6 +18524,9 @@ func (privateCertificateConfigurationRootCAPatch *PrivateCertificateConfiguratio
 	jsonData, err = json.Marshal(privateCertificateConfigurationRootCAPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -16679,6 +18543,9 @@ type PrivateCertificateConfigurationRootCAPrototype struct {
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
 	Name *string `json:"name" validate:"required"`
+
+	// The data that is associated with a cryptographic key.
+	CryptoKey *PrivateCertificateCryptoKey `json:"crypto_key,omitempty"`
 
 	// The maximum time-to-live (TTL) for certificates that are created by this CA.
 	//
@@ -16840,6 +18707,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationRootCAPrototype(confi
 		CommonName: core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -16852,114 +18722,147 @@ func UnmarshalPrivateCertificateConfigurationRootCAPrototype(m map[string]json.R
 	obj := new(PrivateCertificateConfigurationRootCAPrototype)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "crypto_key", &obj.CryptoKey, UnmarshalPrivateCertificateCryptoKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crypto_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_expiry", &obj.CrlExpiry)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_expiry-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_disable", &obj.CrlDisable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_disable-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crl_distribution_points_encoded", &obj.CrlDistributionPointsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crl_distribution_points_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_certificates_urls_encoded", &obj.IssuingCertificatesUrlsEncoded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_certificates_urls_encoded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -17202,178 +19105,222 @@ func UnmarshalPrivateCertificateConfigurationTemplate(m map[string]json.RawMessa
 	obj := new(PrivateCertificateConfigurationTemplate)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_secret_groups", &obj.AllowedSecretGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_secret_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl_seconds", &obj.MaxTtlSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl_seconds", &obj.TtlSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_localhost", &obj.AllowLocalhost)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_localhost-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains", &obj.AllowedDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains_template", &obj.AllowedDomainsTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_bare_domains", &obj.AllowBareDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_bare_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_subdomains", &obj.AllowSubdomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_subdomains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_glob_domains", &obj.AllowGlobDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_glob_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_any_name", &obj.AllowAnyName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_any_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enforce_hostnames", &obj.EnforceHostnames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enforce_hostnames-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_ip_sans", &obj.AllowIpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_uri_sans", &obj.AllowedUriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_other_sans", &obj.AllowedOtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "server_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "client_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "code_signing_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "email_protection_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage_oids-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_common_name", &obj.UseCsrCommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_sans", &obj.UseCsrSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "require_cn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "policy_identifiers-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "basic_constraints_valid_for_non_ca", &obj.BasicConstraintsValidForNonCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "basic_constraints_valid_for_non_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_before_duration_seconds", &obj.NotBeforeDurationSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "not_before_duration_seconds-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -17445,30 +19392,37 @@ func UnmarshalPrivateCertificateConfigurationTemplateMetadata(m map[string]json.
 	obj := new(PrivateCertificateConfigurationTemplateMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -17673,150 +19627,187 @@ func UnmarshalPrivateCertificateConfigurationTemplatePatch(m map[string]json.Raw
 	obj := new(PrivateCertificateConfigurationTemplatePatch)
 	err = core.UnmarshalPrimitive(m, "allowed_secret_groups", &obj.AllowedSecretGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_secret_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_localhost", &obj.AllowLocalhost)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_localhost-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains", &obj.AllowedDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains_template", &obj.AllowedDomainsTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_bare_domains", &obj.AllowBareDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_bare_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_subdomains", &obj.AllowSubdomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_subdomains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_glob_domains", &obj.AllowGlobDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_glob_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_any_name", &obj.AllowAnyName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_any_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enforce_hostnames", &obj.EnforceHostnames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enforce_hostnames-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_ip_sans", &obj.AllowIpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_uri_sans", &obj.AllowedUriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_other_sans", &obj.AllowedOtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "server_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "client_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "code_signing_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "email_protection_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage_oids-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_common_name", &obj.UseCsrCommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_sans", &obj.UseCsrSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "require_cn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "policy_identifiers-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "basic_constraints_valid_for_non_ca", &obj.BasicConstraintsValidForNonCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "basic_constraints_valid_for_non_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_before_duration", &obj.NotBeforeDuration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "not_before_duration-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -17829,6 +19820,9 @@ func (privateCertificateConfigurationTemplatePatch *PrivateCertificateConfigurat
 	jsonData, err = json.Marshal(privateCertificateConfigurationTemplatePatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -18063,6 +20057,9 @@ func (*SecretsManagerV2) NewPrivateCertificateConfigurationTemplatePrototype(con
 		CertificateAuthority: core.StringPtr(certificateAuthority),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -18075,166 +20072,275 @@ func UnmarshalPrivateCertificateConfigurationTemplatePrototype(m map[string]json
 	obj := new(PrivateCertificateConfigurationTemplatePrototype)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_secret_groups", &obj.AllowedSecretGroups)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_secret_groups-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_localhost", &obj.AllowLocalhost)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_localhost-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains", &obj.AllowedDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_domains_template", &obj.AllowedDomainsTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_domains_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_bare_domains", &obj.AllowBareDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_bare_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_subdomains", &obj.AllowSubdomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_subdomains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_glob_domains", &obj.AllowGlobDomains)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_glob_domains-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_wildcard_certificates", &obj.AllowWildcardCertificates)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_wildcard_certificates-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_any_name", &obj.AllowAnyName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_any_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "enforce_hostnames", &obj.EnforceHostnames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "enforce_hostnames-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allow_ip_sans", &obj.AllowIpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allow_ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_uri_sans", &obj.AllowedUriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "allowed_other_sans", &obj.AllowedOtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "allowed_other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "server_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "client_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "code_signing_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "email_protection_flag-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage_oids-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_common_name", &obj.UseCsrCommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "use_csr_sans", &obj.UseCsrSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "require_cn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "policy_identifiers-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "basic_constraints_valid_for_non_ca", &obj.BasicConstraintsValidForNonCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "basic_constraints_valid_for_non_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "not_before_duration", &obj.NotBeforeDuration)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "not_before_duration-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateCryptoProviderHPCS : The data that is associated with Hyper Protect Crypto Services as the cryptographic provider.
+// This model "extends" PrivateCertificateCryptoProvider
+type PrivateCertificateCryptoProviderHPCS struct {
+	// The type of cryptographic provider.
+	Type *string `json:"type" validate:"required"`
+
+	// The HPCS instance CRN.
+	InstanceCrn *string `json:"instance_crn" validate:"required"`
+
+	// The secret Id of iam credentials with api key to access HPCS instance.
+	PinIamCredentialsSecretID *string `json:"pin_iam_credentials_secret_id" validate:"required"`
+
+	// The HPCS private key store space id.
+	PrivateKeystoreID *string `json:"private_keystore_id" validate:"required"`
+}
+
+// Constants associated with the PrivateCertificateCryptoProviderHPCS.Type property.
+// The type of cryptographic provider.
+const (
+	PrivateCertificateCryptoProviderHPCS_Type_HyperProtectCryptoServices = "hyper_protect_crypto_services"
+)
+
+// NewPrivateCertificateCryptoProviderHPCS : Instantiate PrivateCertificateCryptoProviderHPCS (Generic Model Constructor)
+func (*SecretsManagerV2) NewPrivateCertificateCryptoProviderHPCS(typeVar string, instanceCrn string, pinIamCredentialsSecretID string, privateKeystoreID string) (_model *PrivateCertificateCryptoProviderHPCS, err error) {
+	_model = &PrivateCertificateCryptoProviderHPCS{
+		Type:                      core.StringPtr(typeVar),
+		InstanceCrn:               core.StringPtr(instanceCrn),
+		PinIamCredentialsSecretID: core.StringPtr(pinIamCredentialsSecretID),
+		PrivateKeystoreID:         core.StringPtr(privateKeystoreID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*PrivateCertificateCryptoProviderHPCS) isaPrivateCertificateCryptoProvider() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateCryptoProviderHPCS unmarshals an instance of PrivateCertificateCryptoProviderHPCS from the specified map of raw messages.
+func UnmarshalPrivateCertificateCryptoProviderHPCS(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateCryptoProviderHPCS)
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "instance_crn", &obj.InstanceCrn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "instance_crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "pin_iam_credentials_secret_id", &obj.PinIamCredentialsSecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "pin_iam_credentials_secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_keystore_id", &obj.PrivateKeystoreID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_keystore_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -18301,6 +20407,9 @@ type PrivateCertificateMetadata struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
@@ -18386,122 +20495,157 @@ func UnmarshalPrivateCertificateMetadata(m map[string]json.RawMessage, result in
 	obj := new(PrivateCertificateMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_algorithm", &obj.SigningAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_authority", &obj.CertificateAuthority)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_authority-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_seconds", &obj.RevocationTimeSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_seconds-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_rfc3339", &obj.RevocationTimeRfc3339)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_rfc3339-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -18546,22 +20690,27 @@ func UnmarshalPrivateCertificateMetadataPatch(m map[string]json.RawMessage, resu
 	obj := new(PrivateCertificateMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -18574,6 +20723,9 @@ func (privateCertificateMetadataPatch *PrivateCertificateMetadataPatch) AsPatch(
 	jsonData, err = json.Marshal(privateCertificateMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -18698,6 +20850,9 @@ func (*SecretsManagerV2) NewPrivateCertificatePrototype(secretType string, name 
 		CommonName:          core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -18710,78 +20865,97 @@ func UnmarshalPrivateCertificatePrototype(m map[string]json.RawMessage, result i
 	obj := new(PrivateCertificatePrototype)
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate_template", &obj.CertificateTemplate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate_template-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key_format", &obj.PrivateKeyFormat)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key_format-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -18885,78 +21059,97 @@ func UnmarshalPrivateCertificateVersion(m map[string]json.RawMessage, result int
 	obj := new(PrivateCertificateVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuing_ca", &obj.IssuingCa)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuing_ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca_chain-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -18988,10 +21181,12 @@ func UnmarshalPrivateCertificateVersionActionRevoke(m map[string]json.RawMessage
 	obj := new(PrivateCertificateVersionActionRevoke)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "revocation_time_seconds", &obj.RevocationTimeSeconds)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "revocation_time_seconds-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19017,6 +21212,9 @@ func (*SecretsManagerV2) NewPrivateCertificateVersionActionRevokePrototype(actio
 		ActionType: core.StringPtr(actionType),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -19029,6 +21227,7 @@ func UnmarshalPrivateCertificateVersionActionRevokePrototype(m map[string]json.R
 	obj := new(PrivateCertificateVersionActionRevokePrototype)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19119,62 +21318,77 @@ func UnmarshalPrivateCertificateVersionMetadata(m map[string]json.RawMessage, re
 	obj := new(PrivateCertificateVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19203,14 +21417,17 @@ func UnmarshalPrivateCertificateVersionPrototype(m map[string]json.RawMessage, r
 	obj := new(PrivateCertificateVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19277,6 +21494,9 @@ type PublicCertificate struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
@@ -19371,130 +21591,167 @@ func UnmarshalPublicCertificate(m map[string]json.RawMessage, result interface{}
 	obj := new(PublicCertificate)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_algorithm", &obj.SigningAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalCertificateIssuanceInfo)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuance_info-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "bundle_certs-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "dns", &obj.Dns)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "dns-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19524,6 +21781,7 @@ func UnmarshalPublicCertificateActionValidateManualDNS(m map[string]json.RawMess
 	obj := new(PublicCertificateActionValidateManualDNS)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19551,6 +21809,9 @@ func (*SecretsManagerV2) NewPublicCertificateActionValidateManualDNSPrototype(ac
 		ActionType: core.StringPtr(actionType),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -19563,6 +21824,7 @@ func UnmarshalPublicCertificateActionValidateManualDNSPrototype(m map[string]jso
 	obj := new(PublicCertificateActionValidateManualDNSPrototype)
 	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19649,38 +21911,47 @@ func UnmarshalPublicCertificateConfigurationCALetsEncrypt(m map[string]json.RawM
 	obj := new(PublicCertificateConfigurationCALetsEncrypt)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_environment", &obj.LetsEncryptEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_environment-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_preferred_chain-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_private_key", &obj.LetsEncryptPrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_private_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19763,34 +22034,42 @@ func UnmarshalPublicCertificateConfigurationCALetsEncryptMetadata(m map[string]j
 	obj := new(PublicCertificateConfigurationCALetsEncryptMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_environment", &obj.LetsEncryptEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_environment-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_preferred_chain-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19825,6 +22104,9 @@ func (*SecretsManagerV2) NewPublicCertificateConfigurationCALetsEncryptPatch(let
 		LetsEncryptEnvironment: core.StringPtr(letsEncryptEnvironment),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -19837,14 +22119,17 @@ func UnmarshalPublicCertificateConfigurationCALetsEncryptPatch(m map[string]json
 	obj := new(PublicCertificateConfigurationCALetsEncryptPatch)
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_environment", &obj.LetsEncryptEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_environment-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_private_key", &obj.LetsEncryptPrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_preferred_chain-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19857,6 +22142,9 @@ func (publicCertificateConfigurationCALetsEncryptPatch *PublicCertificateConfigu
 	jsonData, err = json.Marshal(publicCertificateConfigurationCALetsEncryptPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -19916,6 +22204,9 @@ func (*SecretsManagerV2) NewPublicCertificateConfigurationCALetsEncryptPrototype
 		LetsEncryptPrivateKey:  core.StringPtr(letsEncryptPrivateKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -19928,22 +22219,27 @@ func UnmarshalPublicCertificateConfigurationCALetsEncryptPrototype(m map[string]
 	obj := new(PublicCertificateConfigurationCALetsEncryptPrototype)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_environment", &obj.LetsEncryptEnvironment)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_environment-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_private_key", &obj.LetsEncryptPrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_private_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "lets_encrypt_preferred_chain", &obj.LetsEncryptPreferredChain)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "lets_encrypt_preferred_chain-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20024,34 +22320,42 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructure(m map[strin
 	obj := new(PublicCertificateConfigurationDNSClassicInfrastructure)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20120,26 +22424,32 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructureMetadata(m m
 	obj := new(PublicCertificateConfigurationDNSClassicInfrastructureMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20171,10 +22481,12 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePatch(m map[
 	obj := new(PublicCertificateConfigurationDNSClassicInfrastructurePatch)
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20187,6 +22499,9 @@ func (publicCertificateConfigurationDNSClassicInfrastructurePatch *PublicCertifi
 	jsonData, err = json.Marshal(publicCertificateConfigurationDNSClassicInfrastructurePatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -20240,6 +22555,9 @@ func (*SecretsManagerV2) NewPublicCertificateConfigurationDNSClassicInfrastructu
 		ClassicInfrastructurePassword: core.StringPtr(classicInfrastructurePassword),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -20252,18 +22570,22 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePrototype(m 
 	obj := new(PublicCertificateConfigurationDNSClassicInfrastructurePrototype)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_username", &obj.ClassicInfrastructureUsername)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "classic_infrastructure_password", &obj.ClassicInfrastructurePassword)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "classic_infrastructure_password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20353,34 +22675,42 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServices(m map[strin
 	obj := new(PublicCertificateConfigurationDNSCloudInternetServices)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_apikey", &obj.CloudInternetServicesApikey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_apikey-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_crn", &obj.CloudInternetServicesCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20449,26 +22779,32 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesMetadata(m m
 	obj := new(PublicCertificateConfigurationDNSCloudInternetServicesMetadata)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20506,6 +22842,9 @@ func (*SecretsManagerV2) NewPublicCertificateConfigurationDNSCloudInternetServic
 		CloudInternetServicesApikey: core.StringPtr(cloudInternetServicesApikey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -20518,10 +22857,12 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPatch(m map[
 	obj := new(PublicCertificateConfigurationDNSCloudInternetServicesPatch)
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_apikey", &obj.CloudInternetServicesApikey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_apikey-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_crn", &obj.CloudInternetServicesCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20534,6 +22875,9 @@ func (publicCertificateConfigurationDNSCloudInternetServicesPatch *PublicCertifi
 	jsonData, err = json.Marshal(publicCertificateConfigurationDNSCloudInternetServicesPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -20595,6 +22939,9 @@ func (*SecretsManagerV2) NewPublicCertificateConfigurationDNSCloudInternetServic
 		CloudInternetServicesCrn: core.StringPtr(cloudInternetServicesCrn),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -20607,18 +22954,22 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPrototype(m 
 	obj := new(PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
 	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_apikey", &obj.CloudInternetServicesApikey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_apikey-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "cloud_internet_services_crn", &obj.CloudInternetServicesCrn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "cloud_internet_services_crn-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20685,6 +23036,9 @@ type PublicCertificateMetadata struct {
 
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
@@ -20768,118 +23122,152 @@ func UnmarshalPublicCertificateMetadata(m map[string]json.RawMessage, result int
 	obj := new(PublicCertificateMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "signing_algorithm", &obj.SigningAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "signing_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "issuance_info", &obj.IssuanceInfo, UnmarshalCertificateIssuanceInfo)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuance_info-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "issuer", &obj.Issuer)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "issuer-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "bundle_certs-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "dns", &obj.Dns)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "dns-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20924,22 +23312,27 @@ func UnmarshalPublicCertificateMetadataPatch(m map[string]json.RawMessage, resul
 	obj := new(PublicCertificateMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20952,6 +23345,9 @@ func (publicCertificateMetadataPatch *PublicCertificateMetadataPatch) AsPatch() 
 	jsonData, err = json.Marshal(publicCertificateMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -21044,6 +23440,9 @@ func (*SecretsManagerV2) NewPublicCertificatePrototype(secretType string, name s
 		Dns:        core.StringPtr(dns),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -21056,58 +23455,72 @@ func UnmarshalPublicCertificatePrototype(m map[string]json.RawMessage, result in
 	obj := new(PublicCertificatePrototype)
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "key_algorithm", &obj.KeyAlgorithm)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "key_algorithm-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ca", &obj.Ca)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ca-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "dns", &obj.Dns)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "dns-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "bundle_certs", &obj.BundleCerts)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "bundle_certs-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21140,6 +23553,9 @@ func (*SecretsManagerV2) NewPublicCertificateRotationPolicy(autoRotate bool, rot
 		RotateKeys: core.BoolPtr(rotateKeys),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -21152,10 +23568,12 @@ func UnmarshalPublicCertificateRotationPolicy(m map[string]json.RawMessage, resu
 	obj := new(PublicCertificateRotationPolicy)
 	err = core.UnmarshalPrimitive(m, "auto_rotate", &obj.AutoRotate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotate_keys-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21257,74 +23675,92 @@ func UnmarshalPublicCertificateVersion(m map[string]json.RawMessage, result inte
 	obj := new(PublicCertificateVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "intermediate", &obj.Intermediate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "intermediate-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21415,62 +23851,77 @@ func UnmarshalPublicCertificateVersionMetadata(m map[string]json.RawMessage, res
 	obj := new(PublicCertificateVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "validity", &obj.Validity, UnmarshalCertificateValidity)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21496,6 +23947,9 @@ func (*SecretsManagerV2) NewPublicCertificateVersionPrototype(rotation *PublicCe
 		Rotation: rotation,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -21508,14 +23962,17 @@ func UnmarshalPublicCertificateVersionPrototype(m map[string]json.RawMessage, re
 	obj := new(PublicCertificateVersionPrototype)
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalPublicCertificateRotationObject)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21583,6 +24040,9 @@ type ServiceCredentialsSecret struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The date that the secret is scheduled for automatic rotation.
 	//
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
@@ -21598,7 +24058,8 @@ type ServiceCredentialsSecret struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -21645,90 +24106,117 @@ func UnmarshalServiceCredentialsSecret(m map[string]json.RawMessage, result inte
 	obj := new(ServiceCredentialsSecret)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceServiceRO)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "source_service-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "credentials", &obj.Credentials, UnmarshalServiceCredentialsSecretCredentials)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21796,6 +24284,9 @@ type ServiceCredentialsSecretMetadata struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// The date that the secret is scheduled for automatic rotation.
 	//
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
@@ -21811,7 +24302,8 @@ type ServiceCredentialsSecretMetadata struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -21855,86 +24347,112 @@ func UnmarshalServiceCredentialsSecretMetadata(m map[string]json.RawMessage, res
 	obj := new(ServiceCredentialsSecretMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceServiceRO)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "source_service-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21974,7 +24492,8 @@ type ServiceCredentialsSecretMetadataPatch struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 }
 
@@ -21987,26 +24506,32 @@ func UnmarshalServiceCredentialsSecretMetadataPatch(m map[string]json.RawMessage
 	obj := new(ServiceCredentialsSecretMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22019,6 +24544,9 @@ func (serviceCredentialsSecretMetadataPatch *ServiceCredentialsSecretMetadataPat
 	jsonData, err = json.Marshal(serviceCredentialsSecretMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -22066,7 +24594,8 @@ type ServiceCredentialsSecretPrototype struct {
 	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
 	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
 	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0.
+	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
+	// applied only on the next secret rotation.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The secret version metadata that a user can customize.
@@ -22095,6 +24624,9 @@ func (*SecretsManagerV2) NewServiceCredentialsSecretPrototype(name string, secre
 		SourceService: sourceService,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -22107,42 +24639,52 @@ func UnmarshalServiceCredentialsSecretPrototype(m map[string]json.RawMessage, re
 	obj := new(ServiceCredentialsSecretPrototype)
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "source_service", &obj.SourceService, UnmarshalServiceCredentialsSecretSourceService)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "source_service-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22233,62 +24775,77 @@ func UnmarshalServiceCredentialsSecretVersion(m map[string]json.RawMessage, resu
 	obj := new(ServiceCredentialsSecretVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "resource_key", &obj.ResourceKey, UnmarshalServiceCredentialsResourceKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_key-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "credentials", &obj.Credentials, UnmarshalServiceCredentialsSecretCredentials)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22376,58 +24933,72 @@ func UnmarshalServiceCredentialsSecretVersionMetadata(m map[string]json.RawMessa
 	obj := new(ServiceCredentialsSecretVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "resource_key", &obj.ResourceKey, UnmarshalServiceCredentialsResourceKey)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "resource_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22453,10 +25024,12 @@ func UnmarshalServiceCredentialsSecretVersionPrototype(m map[string]json.RawMess
 	obj := new(ServiceCredentialsSecretVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22524,6 +25097,9 @@ type UsernamePasswordSecret struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
 	Rotation RotationPolicyIntf `json:"rotation" validate:"required"`
@@ -22581,90 +25157,117 @@ func UnmarshalUsernamePasswordSecret(m map[string]json.RawMessage, result interf
 	obj := new(UsernamePasswordSecret)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyRO)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22732,6 +25335,9 @@ type UsernamePasswordSecretMetadata struct {
 	// The number of versions of your secret.
 	VersionsTotal *int64 `json:"versions_total" validate:"required"`
 
+	// List of configurations that have reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
 	// username_password, private_cert, public_cert, iam_credentials.
 	Rotation RotationPolicyIntf `json:"rotation" validate:"required"`
@@ -22783,82 +25389,107 @@ func UnmarshalUsernamePasswordSecretMetadata(m map[string]json.RawMessage, resul
 	obj := new(UsernamePasswordSecretMetadata)
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyRO)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22911,30 +25542,37 @@ func UnmarshalUsernamePasswordSecretMetadataPatch(m map[string]json.RawMessage, 
 	obj := new(UsernamePasswordSecretMetadataPatch)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyPatch)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -22947,6 +25585,9 @@ func (usernamePasswordSecretMetadataPatch *UsernamePasswordSecretMetadataPatch) 
 	jsonData, err = json.Marshal(usernamePasswordSecretMetadataPatch)
 	if err == nil {
 		err = json.Unmarshal(jsonData, &_patch)
+	}
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
 	}
 	return
 }
@@ -23026,6 +25667,9 @@ func (*SecretsManagerV2) NewUsernamePasswordSecretPrototype(secretType string, n
 		Username:   core.StringPtr(username),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
 	return
 }
 
@@ -23038,50 +25682,62 @@ func UnmarshalUsernamePasswordSecretPrototype(m map[string]json.RawMessage, resu
 	obj := new(UsernamePasswordSecretPrototype)
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -23168,58 +25824,72 @@ func UnmarshalUsernamePasswordSecretVersion(m map[string]json.RawMessage, result
 	obj := new(UsernamePasswordSecretVersion)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -23300,50 +25970,62 @@ func UnmarshalUsernamePasswordSecretVersionMetadata(m map[string]json.RawMessage
 	obj := new(UsernamePasswordSecretVersionMetadata)
 	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -23373,14 +26055,17 @@ func UnmarshalUsernamePasswordSecretVersionPrototype(m map[string]json.RawMessag
 	obj := new(UsernamePasswordSecretVersionPrototype)
 	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
 	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -23400,7 +26085,7 @@ type SecretsPager struct {
 // NewSecretsPager returns a new SecretsPager instance.
 func (secretsManager *SecretsManagerV2) NewSecretsPager(options *ListSecretsOptions) (pager *SecretsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -23428,6 +26113,7 @@ func (pager *SecretsPager) GetNextWithContext(ctx context.Context) (page []Secre
 
 	result, _, err := pager.client.ListSecretsWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -23436,7 +26122,8 @@ func (pager *SecretsPager) GetNextWithContext(ctx context.Context) (page []Secre
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -23455,6 +26142,7 @@ func (pager *SecretsPager) GetAllWithContext(ctx context.Context) (allItems []Se
 		var nextPage []SecretMetadataIntf
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -23464,12 +26152,16 @@ func (pager *SecretsPager) GetAllWithContext(ctx context.Context) (allItems []Se
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *SecretsPager) GetNext() (page []SecretMetadataIntf, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SecretsPager) GetAll() (allItems []SecretMetadataIntf, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // SecretsLocksPager can be used to simplify the use of the "ListSecretsLocks" method.
@@ -23485,7 +26177,7 @@ type SecretsLocksPager struct {
 // NewSecretsLocksPager returns a new SecretsLocksPager instance.
 func (secretsManager *SecretsManagerV2) NewSecretsLocksPager(options *ListSecretsLocksOptions) (pager *SecretsLocksPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -23513,6 +26205,7 @@ func (pager *SecretsLocksPager) GetNextWithContext(ctx context.Context) (page []
 
 	result, _, err := pager.client.ListSecretsLocksWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -23521,7 +26214,8 @@ func (pager *SecretsLocksPager) GetNextWithContext(ctx context.Context) (page []
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -23540,6 +26234,7 @@ func (pager *SecretsLocksPager) GetAllWithContext(ctx context.Context) (allItems
 		var nextPage []SecretLocks
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -23549,12 +26244,16 @@ func (pager *SecretsLocksPager) GetAllWithContext(ctx context.Context) (allItems
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *SecretsLocksPager) GetNext() (page []SecretLocks, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SecretsLocksPager) GetAll() (allItems []SecretLocks, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // SecretLocksPager can be used to simplify the use of the "ListSecretLocks" method.
@@ -23570,7 +26269,7 @@ type SecretLocksPager struct {
 // NewSecretLocksPager returns a new SecretLocksPager instance.
 func (secretsManager *SecretsManagerV2) NewSecretLocksPager(options *ListSecretLocksOptions) (pager *SecretLocksPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -23598,6 +26297,7 @@ func (pager *SecretLocksPager) GetNextWithContext(ctx context.Context) (page []S
 
 	result, _, err := pager.client.ListSecretLocksWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -23606,7 +26306,8 @@ func (pager *SecretLocksPager) GetNextWithContext(ctx context.Context) (page []S
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -23625,6 +26326,7 @@ func (pager *SecretLocksPager) GetAllWithContext(ctx context.Context) (allItems 
 		var nextPage []SecretLock
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -23634,12 +26336,16 @@ func (pager *SecretLocksPager) GetAllWithContext(ctx context.Context) (allItems 
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *SecretLocksPager) GetNext() (page []SecretLock, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SecretLocksPager) GetAll() (allItems []SecretLock, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // SecretVersionLocksPager can be used to simplify the use of the "ListSecretVersionLocks" method.
@@ -23655,7 +26361,7 @@ type SecretVersionLocksPager struct {
 // NewSecretVersionLocksPager returns a new SecretVersionLocksPager instance.
 func (secretsManager *SecretsManagerV2) NewSecretVersionLocksPager(options *ListSecretVersionLocksOptions) (pager *SecretVersionLocksPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -23683,6 +26389,7 @@ func (pager *SecretVersionLocksPager) GetNextWithContext(ctx context.Context) (p
 
 	result, _, err := pager.client.ListSecretVersionLocksWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -23691,7 +26398,8 @@ func (pager *SecretVersionLocksPager) GetNextWithContext(ctx context.Context) (p
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -23710,6 +26418,7 @@ func (pager *SecretVersionLocksPager) GetAllWithContext(ctx context.Context) (al
 		var nextPage []SecretLock
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -23719,12 +26428,16 @@ func (pager *SecretVersionLocksPager) GetAllWithContext(ctx context.Context) (al
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *SecretVersionLocksPager) GetNext() (page []SecretLock, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *SecretVersionLocksPager) GetAll() (allItems []SecretLock, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // ConfigurationsPager can be used to simplify the use of the "ListConfigurations" method.
@@ -23740,7 +26453,7 @@ type ConfigurationsPager struct {
 // NewConfigurationsPager returns a new ConfigurationsPager instance.
 func (secretsManager *SecretsManagerV2) NewConfigurationsPager(options *ListConfigurationsOptions) (pager *ConfigurationsPager, err error) {
 	if options.Offset != nil && *options.Offset != 0 {
-		err = fmt.Errorf("the 'options.Offset' field should not be set")
+		err = core.SDKErrorf(nil, "the 'options.Offset' field should not be set", "no-query-setting", common.GetComponentInfo())
 		return
 	}
 
@@ -23768,6 +26481,7 @@ func (pager *ConfigurationsPager) GetNextWithContext(ctx context.Context) (page 
 
 	result, _, err := pager.client.ListConfigurationsWithContext(ctx, pager.options)
 	if err != nil {
+		err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 		return
 	}
 
@@ -23776,7 +26490,8 @@ func (pager *ConfigurationsPager) GetNextWithContext(ctx context.Context) (page 
 		var offset *int64
 		offset, err = core.GetQueryParamAsInt(result.Next.Href, "offset")
 		if err != nil {
-			err = fmt.Errorf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			errMsg := fmt.Sprintf("error retrieving 'offset' query parameter from URL '%s': %s", *result.Next.Href, err.Error())
+			err = core.SDKErrorf(err, errMsg, "get-query-error", common.GetComponentInfo())
 			return
 		}
 		next = offset
@@ -23795,6 +26510,7 @@ func (pager *ConfigurationsPager) GetAllWithContext(ctx context.Context) (allIte
 		var nextPage []ConfigurationMetadataIntf
 		nextPage, err = pager.GetNextWithContext(ctx)
 		if err != nil {
+			err = core.RepurposeSDKProblem(err, "error-getting-next-page")
 			return
 		}
 		allItems = append(allItems, nextPage...)
@@ -23804,10 +26520,14 @@ func (pager *ConfigurationsPager) GetAllWithContext(ctx context.Context) (allIte
 
 // GetNext invokes GetNextWithContext() using context.Background() as the Context parameter.
 func (pager *ConfigurationsPager) GetNext() (page []ConfigurationMetadataIntf, err error) {
-	return pager.GetNextWithContext(context.Background())
+	page, err = pager.GetNextWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }
 
 // GetAll invokes GetAllWithContext() using context.Background() as the Context parameter.
 func (pager *ConfigurationsPager) GetAll() (allItems []ConfigurationMetadataIntf, err error) {
-	return pager.GetAllWithContext(context.Background())
+	allItems, err = pager.GetAllWithContext(context.Background())
+	err = core.RepurposeSDKProblem(err, "")
+	return
 }

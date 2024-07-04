@@ -175,6 +175,32 @@ var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
 		})
 	})
 
+	Describe(`CreateConfigurationAction - Create a configuration action`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+			createRootCaConfig()
+		})
+		AfterEach(func() {
+			deleteConfig(rootCaConfigName, rootCaConfigType)
+		})
+		It(`CreateConfigurationAction(createConfigurationActionOptions *CreateConfigurationActionOptions)`, func() {
+			configurationActionPrototypeModel := &secretsmanagerv2.PrivateCertificateConfigurationActionRotateCRLPrototype{
+				ActionType: core.StringPtr("private_cert_configuration_action_rotate_crl"),
+			}
+
+			createConfigurationActionOptions := &secretsmanagerv2.CreateConfigurationActionOptions{
+				Name:                       &rootCaConfigName,
+				ConfigActionPrototype:      configurationActionPrototypeModel,
+				XSmAcceptConfigurationType: core.StringPtr("private_cert_configuration_root_ca"),
+			}
+
+			configurationAction, response, err := secretsManagerService.CreateConfigurationAction(createConfigurationActionOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(configurationAction).ToNot(BeNil())
+		})
+	})
+
 	Describe(`DeleteSecretVersionData - Delete the data of a secret version`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -231,19 +257,10 @@ func createRootCaConfig() {
 		CommonName: core.StringPtr("ibm.com"),
 		MaxTTL:     core.StringPtr("43830h"),
 	}
-
 	createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
 		ConfigurationPrototype: configurationPrototypeModel,
 	}
-
-	configuration, response, err := secretsManagerService.CreateConfiguration(createConfigurationOptions)
-	if err != nil && strings.Contains(err.Error(), "already exists") {
-		//if we get an error "already exists", we still can continue
-		return
-	}
-	Expect(err).To(BeNil())
-	Expect(response.StatusCode).To(Equal(201))
-	Expect(configuration).ToNot(BeNil())
+	createConfiguration(createConfigurationOptions, false)
 }
 
 func createIntermediateConfig() {
@@ -256,19 +273,10 @@ func createIntermediateConfig() {
 		SigningMethod:                  core.StringPtr("internal"),
 		IssuingCertificatesUrlsEncoded: core.BoolPtr(true),
 	}
-
 	createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
 		ConfigurationPrototype: configurationPrototypeModel,
 	}
-
-	configuration, response, err := secretsManagerService.CreateConfiguration(createConfigurationOptions)
-	if err != nil && strings.Contains(err.Error(), "already exists") {
-		//if we get an error "already exists", we still can continue
-		return
-	}
-	Expect(err).To(BeNil())
-	Expect(response.StatusCode).To(Equal(201))
-	Expect(configuration).ToNot(BeNil())
+	createConfiguration(createConfigurationOptions, false)
 }
 
 func signIntermediate() {
@@ -297,19 +305,10 @@ func createTemplateConfig(name string) {
 		AllowAnyName:         core.BoolPtr(true),
 		CertificateAuthority: core.StringPtr(interCaConfigName),
 	}
-
 	createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
 		ConfigurationPrototype: configurationPrototypeModel,
 	}
-
-	configuration, response, err := secretsManagerService.CreateConfiguration(createConfigurationOptions)
-	if err != nil && strings.Contains(err.Error(), "already exists") {
-		//if we get an error "already exists", we still can continue
-		return
-	}
-	Expect(err).To(BeNil())
-	Expect(response.StatusCode).To(Equal(201))
-	Expect(configuration).ToNot(BeNil())
+	createConfiguration(createConfigurationOptions, false)
 }
 
 func createPrivateCert(name string, template string) {
@@ -346,9 +345,13 @@ func createIAMConfig() {
 	createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
 		ConfigurationPrototype: configurationPrototypeModel,
 	}
+	createConfiguration(createConfigurationOptions, true)
+}
 
+func createConfiguration(createConfigurationOptions *secretsmanagerv2.CreateConfigurationOptions, iam bool) {
 	configuration, response, err := secretsManagerService.CreateConfiguration(createConfigurationOptions)
-	if err != nil && strings.Contains(err.Error(), "reached the maximum") {
+	if err != nil && (strings.Contains(err.Error(), "already exists") ||
+		strings.Contains(err.Error(), "reached the maximum") && iam) {
 		//if we get an error "already exists", we still can continue
 		return
 	}
