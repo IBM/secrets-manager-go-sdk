@@ -261,8 +261,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			configurationPrototypeModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype{
 				ConfigType:                  core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 				Name:                        core.StringPtr("example-cloud-internet-services-config"),
-				CloudInternetServicesApikey: core.StringPtr("SZvSSvLIJ5XxoVCxBJRnbnPhuecADDbpQFltxGPHm3mV"),
-				CloudInternetServicesCrn:    core.StringPtr("crn:v1:staging:public:internet-svcs-ci:global:a/791f5fb10986423e97aa8512f18b7e65:dc08a28a-9181-45db-bf0d-a8733a5796b6::"),
+				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
+				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 
 			createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
@@ -791,10 +791,11 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) with pagination`, func() {
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Offset: core.Int64Ptr(int64(0)),
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("config_type"),
-				Search: core.StringPtr("example"),
+				Offset:      core.Int64Ptr(int64(0)),
+				Limit:       core.Int64Ptr(int64(10)),
+				Sort:        core.StringPtr("config_type"),
+				Search:      core.StringPtr("example"),
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 			}
 
 			listConfigurationsOptions.Offset = nil
@@ -819,9 +820,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) using ConfigurationsPager`, func() {
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("config_type"),
-				Search: core.StringPtr("example"),
+				Limit:       core.Int64Ptr(int64(10)),
+				Sort:        core.StringPtr("config_type"),
+				Search:      core.StringPtr("example"),
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 			}
 
 			// Test GetNext().
@@ -874,8 +876,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`UpdateConfiguration(updateConfigurationOptions *UpdateConfigurationOptions)`, func() {
 			configurationPatchModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch{
-				CloudInternetServicesApikey: core.StringPtr("SZvSSvLIJ5XxoVCxBJRnbnPhuecADDbpQFltxGPHm3mV"),
-				CloudInternetServicesCrn:    core.StringPtr("crn:v1:staging:public:internet-svcs-ci:global:a/791f5fb10986423e97aa8512f18b7e65:dc08a28a-9181-45db-bf0d-a8733a5796b6::"),
+				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
+				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 			configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())

@@ -7093,6 +7093,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListConfigurations(listConfigurationsOptionsModel)
@@ -7151,6 +7152,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7217,6 +7219,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7240,6 +7243,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -7277,6 +7281,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -7362,9 +7367,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listConfigurationsOptionsModel := &secretsmanagerv2.ListConfigurationsOptions{
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("config_type"),
-					Search: core.StringPtr("example"),
+					Limit:       core.Int64Ptr(int64(10)),
+					Sort:        core.StringPtr("config_type"),
+					Search:      core.StringPtr("example"),
+					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 				}
 
 				pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptionsModel)
@@ -7389,9 +7395,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listConfigurationsOptionsModel := &secretsmanagerv2.ListConfigurationsOptions{
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("config_type"),
-					Search: core.StringPtr("example"),
+					Limit:       core.Int64Ptr(int64(10)),
+					Sort:        core.StringPtr("config_type"),
+					Search:      core.StringPtr("example"),
+					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 				}
 
 				pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptionsModel)
@@ -9258,12 +9265,14 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.SetLimit(int64(10))
 				listConfigurationsOptionsModel.SetSort("config_type")
 				listConfigurationsOptionsModel.SetSearch("example")
+				listConfigurationsOptionsModel.SetSecretTypes([]string{"iam_credentials", "public_cert", "private_cert"})
 				listConfigurationsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listConfigurationsOptionsModel).ToNot(BeNil())
 				Expect(listConfigurationsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listConfigurationsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listConfigurationsOptionsModel.Sort).To(Equal(core.StringPtr("config_type")))
 				Expect(listConfigurationsOptionsModel.Search).To(Equal(core.StringPtr("example")))
+				Expect(listConfigurationsOptionsModel.SecretTypes).To(Equal([]string{"iam_credentials", "public_cert", "private_cert"}))
 				Expect(listConfigurationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretGroupsOptions successfully`, func() {

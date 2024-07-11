@@ -733,9 +733,10 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nListConfigurations() result:")
 			// begin-list_configurations
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("config_type"),
-				Search: core.StringPtr("example"),
+				Limit:       core.Int64Ptr(int64(10)),
+				Sort:        core.StringPtr("config_type"),
+				Search:      core.StringPtr("example"),
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 			}
 
 			pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptions)
