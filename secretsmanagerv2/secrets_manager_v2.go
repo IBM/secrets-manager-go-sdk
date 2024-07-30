@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.92.2-3f2a0533-20240712-183330
+ * IBM OpenAPI SDK Code Generator Version: 3.93.0-c40121e6-20240729-182103
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -4782,14 +4782,155 @@ func UnmarshalConfigurationPatch(m map[string]json.RawMessage, result interface{
 
 // AsPatch returns a generic map representation of the ConfigurationPatch
 func (configurationPatch *ConfigurationPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(configurationPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(configurationPatch.ApiKey) {
+		_patch["api_key"] = configurationPatch.ApiKey
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(configurationPatch.MaxTTL) {
+		_patch["max_ttl"] = configurationPatch.MaxTTL
 	}
+	if !core.IsNil(configurationPatch.CrlExpiry) {
+		_patch["crl_expiry"] = configurationPatch.CrlExpiry
+	}
+	if !core.IsNil(configurationPatch.CrlDisable) {
+		_patch["crl_disable"] = configurationPatch.CrlDisable
+	}
+	if !core.IsNil(configurationPatch.CrlDistributionPointsEncoded) {
+		_patch["crl_distribution_points_encoded"] = configurationPatch.CrlDistributionPointsEncoded
+	}
+	if !core.IsNil(configurationPatch.IssuingCertificatesUrlsEncoded) {
+		_patch["issuing_certificates_urls_encoded"] = configurationPatch.IssuingCertificatesUrlsEncoded
+	}
+	if !core.IsNil(configurationPatch.AllowedSecretGroups) {
+		_patch["allowed_secret_groups"] = configurationPatch.AllowedSecretGroups
+	}
+	if !core.IsNil(configurationPatch.TTL) {
+		_patch["ttl"] = configurationPatch.TTL
+	}
+	if !core.IsNil(configurationPatch.AllowLocalhost) {
+		_patch["allow_localhost"] = configurationPatch.AllowLocalhost
+	}
+	if !core.IsNil(configurationPatch.AllowedDomains) {
+		_patch["allowed_domains"] = configurationPatch.AllowedDomains
+	}
+	if !core.IsNil(configurationPatch.AllowedDomainsTemplate) {
+		_patch["allowed_domains_template"] = configurationPatch.AllowedDomainsTemplate
+	}
+	if !core.IsNil(configurationPatch.AllowBareDomains) {
+		_patch["allow_bare_domains"] = configurationPatch.AllowBareDomains
+	}
+	if !core.IsNil(configurationPatch.AllowSubdomains) {
+		_patch["allow_subdomains"] = configurationPatch.AllowSubdomains
+	}
+	if !core.IsNil(configurationPatch.AllowGlobDomains) {
+		_patch["allow_glob_domains"] = configurationPatch.AllowGlobDomains
+	}
+	if !core.IsNil(configurationPatch.AllowAnyName) {
+		_patch["allow_any_name"] = configurationPatch.AllowAnyName
+	}
+	if !core.IsNil(configurationPatch.EnforceHostnames) {
+		_patch["enforce_hostnames"] = configurationPatch.EnforceHostnames
+	}
+	if !core.IsNil(configurationPatch.AllowIpSans) {
+		_patch["allow_ip_sans"] = configurationPatch.AllowIpSans
+	}
+	if !core.IsNil(configurationPatch.AllowedUriSans) {
+		_patch["allowed_uri_sans"] = configurationPatch.AllowedUriSans
+	}
+	if !core.IsNil(configurationPatch.AllowedOtherSans) {
+		_patch["allowed_other_sans"] = configurationPatch.AllowedOtherSans
+	}
+	if !core.IsNil(configurationPatch.ServerFlag) {
+		_patch["server_flag"] = configurationPatch.ServerFlag
+	}
+	if !core.IsNil(configurationPatch.ClientFlag) {
+		_patch["client_flag"] = configurationPatch.ClientFlag
+	}
+	if !core.IsNil(configurationPatch.CodeSigningFlag) {
+		_patch["code_signing_flag"] = configurationPatch.CodeSigningFlag
+	}
+	if !core.IsNil(configurationPatch.EmailProtectionFlag) {
+		_patch["email_protection_flag"] = configurationPatch.EmailProtectionFlag
+	}
+	if !core.IsNil(configurationPatch.KeyType) {
+		_patch["key_type"] = configurationPatch.KeyType
+	}
+	if !core.IsNil(configurationPatch.KeyBits) {
+		_patch["key_bits"] = configurationPatch.KeyBits
+	}
+	if !core.IsNil(configurationPatch.KeyUsage) {
+		_patch["key_usage"] = configurationPatch.KeyUsage
+	}
+	if !core.IsNil(configurationPatch.ExtKeyUsage) {
+		_patch["ext_key_usage"] = configurationPatch.ExtKeyUsage
+	}
+	if !core.IsNil(configurationPatch.ExtKeyUsageOids) {
+		_patch["ext_key_usage_oids"] = configurationPatch.ExtKeyUsageOids
+	}
+	if !core.IsNil(configurationPatch.UseCsrCommonName) {
+		_patch["use_csr_common_name"] = configurationPatch.UseCsrCommonName
+	}
+	if !core.IsNil(configurationPatch.UseCsrSans) {
+		_patch["use_csr_sans"] = configurationPatch.UseCsrSans
+	}
+	if !core.IsNil(configurationPatch.Ou) {
+		_patch["ou"] = configurationPatch.Ou
+	}
+	if !core.IsNil(configurationPatch.Organization) {
+		_patch["organization"] = configurationPatch.Organization
+	}
+	if !core.IsNil(configurationPatch.Country) {
+		_patch["country"] = configurationPatch.Country
+	}
+	if !core.IsNil(configurationPatch.Locality) {
+		_patch["locality"] = configurationPatch.Locality
+	}
+	if !core.IsNil(configurationPatch.Province) {
+		_patch["province"] = configurationPatch.Province
+	}
+	if !core.IsNil(configurationPatch.StreetAddress) {
+		_patch["street_address"] = configurationPatch.StreetAddress
+	}
+	if !core.IsNil(configurationPatch.PostalCode) {
+		_patch["postal_code"] = configurationPatch.PostalCode
+	}
+	if !core.IsNil(configurationPatch.SerialNumber) {
+		_patch["serial_number"] = configurationPatch.SerialNumber
+	}
+	if !core.IsNil(configurationPatch.RequireCn) {
+		_patch["require_cn"] = configurationPatch.RequireCn
+	}
+	if !core.IsNil(configurationPatch.PolicyIdentifiers) {
+		_patch["policy_identifiers"] = configurationPatch.PolicyIdentifiers
+	}
+	if !core.IsNil(configurationPatch.BasicConstraintsValidForNonCa) {
+		_patch["basic_constraints_valid_for_non_ca"] = configurationPatch.BasicConstraintsValidForNonCa
+	}
+	if !core.IsNil(configurationPatch.NotBeforeDuration) {
+		_patch["not_before_duration"] = configurationPatch.NotBeforeDuration
+	}
+	if !core.IsNil(configurationPatch.LetsEncryptEnvironment) {
+		_patch["lets_encrypt_environment"] = configurationPatch.LetsEncryptEnvironment
+	}
+	if !core.IsNil(configurationPatch.LetsEncryptPrivateKey) {
+		_patch["lets_encrypt_private_key"] = configurationPatch.LetsEncryptPrivateKey
+	}
+	if !core.IsNil(configurationPatch.LetsEncryptPreferredChain) {
+		_patch["lets_encrypt_preferred_chain"] = configurationPatch.LetsEncryptPreferredChain
+	}
+	if !core.IsNil(configurationPatch.CloudInternetServicesApikey) {
+		_patch["cloud_internet_services_apikey"] = configurationPatch.CloudInternetServicesApikey
+	}
+	if !core.IsNil(configurationPatch.CloudInternetServicesCrn) {
+		_patch["cloud_internet_services_crn"] = configurationPatch.CloudInternetServicesCrn
+	}
+	if !core.IsNil(configurationPatch.ClassicInfrastructureUsername) {
+		_patch["classic_infrastructure_username"] = configurationPatch.ClassicInfrastructureUsername
+	}
+	if !core.IsNil(configurationPatch.ClassicInfrastructurePassword) {
+		_patch["classic_infrastructure_password"] = configurationPatch.ClassicInfrastructurePassword
+	}
+
 	return
 }
 
@@ -5252,7 +5393,7 @@ type CreateConfigurationActionOptions struct {
 	// The configuration type of this configuration - use this header to resolve 300 error responses.
 	XSmAcceptConfigurationType *string `json:"X-Sm-Accept-Configuration-Type,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5305,7 +5446,7 @@ type CreateConfigurationOptions struct {
 	// The details of your configuration.
 	ConfigurationPrototype ConfigurationPrototypeIntf `json:"ConfigurationPrototype" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5339,7 +5480,7 @@ type CreateNotificationsRegistrationOptions struct {
 	// An optional description for the source that is in your Event Notifications instance.
 	EventNotificationsSourceDescription *string `json:"event_notifications_source_description,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5383,7 +5524,7 @@ type CreateSecretActionOptions struct {
 	// The request body to specify the properties for your secret action.
 	SecretActionPrototype SecretActionPrototypeIntf `json:"SecretActionPrototype" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5424,7 +5565,7 @@ type CreateSecretGroupOptions struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5468,7 +5609,7 @@ type CreateSecretLocksBulkOptions struct {
 	// the data of the previous secret version if it doesn't have any locks.
 	Mode *string `json:"mode,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5520,7 +5661,7 @@ type CreateSecretOptions struct {
 	// Specify the properties for your secret.
 	SecretPrototype SecretPrototypeIntf `json:"SecretPrototype" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5555,7 +5696,7 @@ type CreateSecretVersionActionOptions struct {
 	// The request body to specify the properties of the action to create a secret version.
 	SecretVersionActionPrototype SecretVersionActionPrototypeIntf `json:"SecretVersionActionPrototype" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5611,7 +5752,7 @@ type CreateSecretVersionLocksBulkOptions struct {
 	// the data of the previous secret version if it doesn't have any locks.
 	Mode *string `json:"mode,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5673,7 +5814,7 @@ type CreateSecretVersionOptions struct {
 	// Specify the properties for your new secret version.
 	SecretVersionPrototype SecretVersionPrototypeIntf `json:"SecretVersionPrototype" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5711,7 +5852,7 @@ type DeleteConfigurationOptions struct {
 	// The configuration type of this configuration - use this header to resolve 300 error responses.
 	XSmAcceptConfigurationType *string `json:"X-Sm-Accept-Configuration-Type,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5755,7 +5896,7 @@ func (options *DeleteConfigurationOptions) SetHeaders(param map[string]string) *
 // DeleteNotificationsRegistrationOptions : The DeleteNotificationsRegistration options.
 type DeleteNotificationsRegistrationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5775,7 +5916,7 @@ type DeleteSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies your secret group.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5806,7 +5947,7 @@ type DeleteSecretLocksBulkOptions struct {
 	// Specify the names of the secret locks to be deleted.
 	Name []string `json:"name,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5840,7 +5981,7 @@ type DeleteSecretOptions struct {
 	// The v4 UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5872,7 +6013,7 @@ type DeleteSecretVersionDataOptions struct {
 	// to the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5914,7 +6055,7 @@ type DeleteSecretVersionLocksBulkOptions struct {
 	// Specify the names of the secret locks to be deleted.
 	Name []string `json:"name,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5958,7 +6099,7 @@ type GetConfigurationOptions struct {
 	// The configuration type of this configuration - use this header to resolve 300 error responses.
 	XSmAcceptConfigurationType *string `json:"X-Sm-Accept-Configuration-Type,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6002,7 +6143,7 @@ func (options *GetConfigurationOptions) SetHeaders(param map[string]string) *Get
 // GetNotificationsRegistrationOptions : The GetNotificationsRegistration options.
 type GetNotificationsRegistrationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6020,7 +6161,7 @@ func (options *GetNotificationsRegistrationOptions) SetHeaders(param map[string]
 // GetNotificationsRegistrationTestOptions : The GetNotificationsRegistrationTest options.
 type GetNotificationsRegistrationTestOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6048,7 +6189,7 @@ type GetSecretByNameTypeOptions struct {
 	// The name of your secret group.
 	SecretGroupName *string `json:"secret_group_name" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6104,7 +6245,7 @@ type GetSecretGroupOptions struct {
 	// The v4 UUID that uniquely identifies your secret group.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6132,7 +6273,7 @@ type GetSecretMetadataOptions struct {
 	// The v4 UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6160,7 +6301,7 @@ type GetSecretOptions struct {
 	// The v4 UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6192,7 +6333,7 @@ type GetSecretVersionMetadataOptions struct {
 	// to the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6231,7 +6372,7 @@ type GetSecretVersionOptions struct {
 	// to the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6304,7 +6445,7 @@ type ListConfigurationsOptions struct {
 	// `..?secret_types=iam_credentials,public_cert,private_cert`.
 	SecretTypes []string `json:"secret_types,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6359,7 +6500,7 @@ func (options *ListConfigurationsOptions) SetHeaders(param map[string]string) *L
 // ListSecretGroupsOptions : The ListSecretGroups options.
 type ListSecretGroupsOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6408,7 +6549,7 @@ type ListSecretLocksOptions struct {
 	// `..?search=text`.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6493,7 +6634,7 @@ type ListSecretVersionLocksOptions struct {
 	// `..?search=text`.
 	Search *string `json:"search,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6552,7 +6693,7 @@ type ListSecretVersionsOptions struct {
 	// The v4 UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6607,7 +6748,7 @@ type ListSecretsLocksOptions struct {
 	// `..?groups={secret_group_ID},default`.
 	Groups []string `json:"groups,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6706,7 +6847,7 @@ type ListSecretsOptions struct {
 	// labels, use `..?labels=dev,us-south`.
 	MatchAllLabels []string `json:"match_all_labels,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6947,6 +7088,25 @@ func UnmarshalPasswordGenerationPolicyPatch(m map[string]json.RawMessage, result
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// asPatch returns a generic map representation of the PasswordGenerationPolicyPatch
+func (passwordGenerationPolicyPatch *PasswordGenerationPolicyPatch) asPatch() (_patch map[string]interface{}) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(passwordGenerationPolicyPatch.Length) {
+		_patch["length"] = passwordGenerationPolicyPatch.Length
+	}
+	if !core.IsNil(passwordGenerationPolicyPatch.IncludeDigits) {
+		_patch["include_digits"] = passwordGenerationPolicyPatch.IncludeDigits
+	}
+	if !core.IsNil(passwordGenerationPolicyPatch.IncludeSymbols) {
+		_patch["include_symbols"] = passwordGenerationPolicyPatch.IncludeSymbols
+	}
+	if !core.IsNil(passwordGenerationPolicyPatch.IncludeUppercase) {
+		_patch["include_uppercase"] = passwordGenerationPolicyPatch.IncludeUppercase
+	}
+
 	return
 }
 
@@ -7251,6 +7411,7 @@ func (*RotationPolicy) isaRotationPolicy() bool {
 
 type RotationPolicyIntf interface {
 	isaRotationPolicy() bool
+	asPatch() map[string]interface{}
 }
 
 // UnmarshalRotationPolicy unmarshals an instance of RotationPolicy from the specified map of raw messages.
@@ -7277,6 +7438,25 @@ func UnmarshalRotationPolicy(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// asPatch returns a generic map representation of the RotationPolicy
+func (rotationPolicy *RotationPolicy) asPatch() (_patch map[string]interface{}) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(rotationPolicy.AutoRotate) {
+		_patch["auto_rotate"] = rotationPolicy.AutoRotate
+	}
+	if !core.IsNil(rotationPolicy.Interval) {
+		_patch["interval"] = rotationPolicy.Interval
+	}
+	if !core.IsNil(rotationPolicy.Unit) {
+		_patch["unit"] = rotationPolicy.Unit
+	}
+	if !core.IsNil(rotationPolicy.RotateKeys) {
+		_patch["rotate_keys"] = rotationPolicy.RotateKeys
+	}
+
 	return
 }
 
@@ -7829,14 +8009,14 @@ func UnmarshalSecretGroupPatch(m map[string]json.RawMessage, result interface{})
 
 // AsPatch returns a generic map representation of the SecretGroupPatch
 func (secretGroupPatch *SecretGroupPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(secretGroupPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(secretGroupPatch.Name) {
+		_patch["name"] = secretGroupPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(secretGroupPatch.Description) {
+		_patch["description"] = secretGroupPatch.Description
 	}
+
 	return
 }
 
@@ -8640,14 +8820,32 @@ func UnmarshalSecretMetadataPatch(m map[string]json.RawMessage, result interface
 
 // AsPatch returns a generic map representation of the SecretMetadataPatch
 func (secretMetadataPatch *SecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(secretMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(secretMetadataPatch.Name) {
+		_patch["name"] = secretMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(secretMetadataPatch.Description) {
+		_patch["description"] = secretMetadataPatch.Description
 	}
+	if !core.IsNil(secretMetadataPatch.Labels) {
+		_patch["labels"] = secretMetadataPatch.Labels
+	}
+	if !core.IsNil(secretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = secretMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(secretMetadataPatch.ExpirationDate) {
+		_patch["expiration_date"] = secretMetadataPatch.ExpirationDate
+	}
+	if !core.IsNil(secretMetadataPatch.TTL) {
+		_patch["ttl"] = secretMetadataPatch.TTL
+	}
+	if !core.IsNil(secretMetadataPatch.Rotation) {
+		_patch["rotation"] = secretMetadataPatch.Rotation.asPatch()
+	}
+	if !core.IsNil(secretMetadataPatch.PasswordGenerationPolicy) {
+		_patch["password_generation_policy"] = secretMetadataPatch.PasswordGenerationPolicy.asPatch()
+	}
+
 	return
 }
 
@@ -9530,14 +9728,11 @@ func UnmarshalSecretVersionMetadataPatch(m map[string]json.RawMessage, result in
 
 // AsPatch returns a generic map representation of the SecretVersionMetadataPatch
 func (secretVersionMetadataPatch *SecretVersionMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(secretVersionMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(secretVersionMetadataPatch.VersionCustomMetadata) {
+		_patch["version_custom_metadata"] = secretVersionMetadataPatch.VersionCustomMetadata
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
-	}
+
 	return
 }
 
@@ -9782,6 +9977,7 @@ func UnmarshalServiceCredentialsResourceKey(m map[string]json.RawMessage, result
 }
 
 // ServiceCredentialsSecretCredentials : The properties of the service credentials secret payload.
+// This type supports additional properties of type interface{}.
 type ServiceCredentialsSecretCredentials struct {
 	// The API key that is generated for this secret.
 	//
@@ -9804,11 +10000,11 @@ type ServiceCredentialsSecretCredentials struct {
 	// The IAM Service ID CRN.
 	IamServiceidCrn *string `json:"iam_serviceid_crn,omitempty"`
 
-	// Allows users to set arbitrary properties
+	// Allows users to set arbitrary properties of type interface{}.
 	additionalProperties map[string]interface{}
 }
 
-// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSecretCredentials
+// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSecretCredentials.
 func (o *ServiceCredentialsSecretCredentials) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]interface{})
@@ -9816,7 +10012,7 @@ func (o *ServiceCredentialsSecretCredentials) SetProperty(key string, value inte
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSecretCredentials
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSecretCredentials.
 func (o *ServiceCredentialsSecretCredentials) SetProperties(m map[string]interface{}) {
 	o.additionalProperties = make(map[string]interface{})
 	for k, v := range m {
@@ -9824,12 +10020,12 @@ func (o *ServiceCredentialsSecretCredentials) SetProperties(m map[string]interfa
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSecretCredentials
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSecretCredentials.
 func (o *ServiceCredentialsSecretCredentials) GetProperty(key string) interface{} {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSecretCredentials
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSecretCredentials.
 func (o *ServiceCredentialsSecretCredentials) GetProperties() map[string]interface{} {
 	return o.additionalProperties
 }
@@ -10150,15 +10346,16 @@ func UnmarshalServiceCredentialsSourceServiceInstance(m map[string]json.RawMessa
 // ServiceCredentialsSourceServiceParameters : Configuration options represented as key-value pairs. Service-defined options are used in the generation of
 // credentials for some services. For example, Cloud Object Storage accepts the optional boolean parameter HMAC for
 // creating specific kind of credentials.
+// This type supports additional properties of type interface{}.
 type ServiceCredentialsSourceServiceParameters struct {
 	// An optional platform defined option to reuse an existing IAM Service ID for the role assignment.
 	ServiceidCrn *string `json:"serviceid_crn,omitempty"`
 
-	// Allows users to set arbitrary properties
+	// Allows users to set arbitrary properties of type interface{}.
 	additionalProperties map[string]interface{}
 }
 
-// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSourceServiceParameters
+// SetProperty allows the user to set an arbitrary property on an instance of ServiceCredentialsSourceServiceParameters.
 func (o *ServiceCredentialsSourceServiceParameters) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]interface{})
@@ -10166,7 +10363,7 @@ func (o *ServiceCredentialsSourceServiceParameters) SetProperty(key string, valu
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSourceServiceParameters
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServiceCredentialsSourceServiceParameters.
 func (o *ServiceCredentialsSourceServiceParameters) SetProperties(m map[string]interface{}) {
 	o.additionalProperties = make(map[string]interface{})
 	for k, v := range m {
@@ -10174,12 +10371,12 @@ func (o *ServiceCredentialsSourceServiceParameters) SetProperties(m map[string]i
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSourceServiceParameters
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServiceCredentialsSourceServiceParameters.
 func (o *ServiceCredentialsSourceServiceParameters) GetProperty(key string) interface{} {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSourceServiceParameters
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServiceCredentialsSourceServiceParameters.
 func (o *ServiceCredentialsSourceServiceParameters) GetProperties() map[string]interface{} {
 	return o.additionalProperties
 }
@@ -10268,7 +10465,7 @@ type UpdateConfigurationOptions struct {
 	// The configuration type of this configuration - use this header to resolve 300 error responses.
 	XSmAcceptConfigurationType *string `json:"X-Sm-Accept-Configuration-Type,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10324,7 +10521,7 @@ type UpdateSecretGroupOptions struct {
 	// The request body to update a secret group.
 	SecretGroupPatch map[string]interface{} `json:"SecretGroupPatch" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10362,7 +10559,7 @@ type UpdateSecretMetadataOptions struct {
 	// JSON Merge-Patch content for update_secret_metadata.
 	SecretMetadataPatch map[string]interface{} `json:"SecretMetadataPatch" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10404,7 +10601,7 @@ type UpdateSecretVersionMetadataOptions struct {
 	// JSON Merge-Patch content for update_secret_version_metadata.
 	SecretVersionMetadataPatch map[string]interface{} `json:"SecretVersionMetadataPatch" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10955,14 +11152,23 @@ func UnmarshalArbitrarySecretMetadataPatch(m map[string]json.RawMessage, result 
 
 // AsPatch returns a generic map representation of the ArbitrarySecretMetadataPatch
 func (arbitrarySecretMetadataPatch *ArbitrarySecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(arbitrarySecretMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(arbitrarySecretMetadataPatch.Name) {
+		_patch["name"] = arbitrarySecretMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(arbitrarySecretMetadataPatch.Description) {
+		_patch["description"] = arbitrarySecretMetadataPatch.Description
 	}
+	if !core.IsNil(arbitrarySecretMetadataPatch.Labels) {
+		_patch["labels"] = arbitrarySecretMetadataPatch.Labels
+	}
+	if !core.IsNil(arbitrarySecretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = arbitrarySecretMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(arbitrarySecretMetadataPatch.ExpirationDate) {
+		_patch["expiration_date"] = arbitrarySecretMetadataPatch.ExpirationDate
+	}
+
 	return
 }
 
@@ -11502,6 +11708,22 @@ func UnmarshalCommonRotationPolicy(m map[string]json.RawMessage, result interfac
 	return
 }
 
+// asPatch returns a generic map representation of the CommonRotationPolicy
+func (commonRotationPolicy *CommonRotationPolicy) asPatch() (_patch map[string]interface{}) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(commonRotationPolicy.AutoRotate) {
+		_patch["auto_rotate"] = commonRotationPolicy.AutoRotate
+	}
+	if !core.IsNil(commonRotationPolicy.Interval) {
+		_patch["interval"] = commonRotationPolicy.Interval
+	}
+	if !core.IsNil(commonRotationPolicy.Unit) {
+		_patch["unit"] = commonRotationPolicy.Unit
+	}
+
+	return
+}
+
 // IAMCredentialsConfiguration : Properties that describe a Classic Infrastructure DNS configuration.
 // This model "extends" Configuration
 type IAMCredentialsConfiguration struct {
@@ -11739,14 +11961,11 @@ func UnmarshalIAMCredentialsConfigurationPatch(m map[string]json.RawMessage, res
 
 // AsPatch returns a generic map representation of the IAMCredentialsConfigurationPatch
 func (iAMCredentialsConfigurationPatch *IAMCredentialsConfigurationPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(iAMCredentialsConfigurationPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(iAMCredentialsConfigurationPatch.ApiKey) {
+		_patch["api_key"] = iAMCredentialsConfigurationPatch.ApiKey
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
-	}
+
 	return
 }
 
@@ -12480,14 +12699,26 @@ func UnmarshalIAMCredentialsSecretMetadataPatch(m map[string]json.RawMessage, re
 
 // AsPatch returns a generic map representation of the IAMCredentialsSecretMetadataPatch
 func (iAMCredentialsSecretMetadataPatch *IAMCredentialsSecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(iAMCredentialsSecretMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(iAMCredentialsSecretMetadataPatch.Name) {
+		_patch["name"] = iAMCredentialsSecretMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(iAMCredentialsSecretMetadataPatch.Description) {
+		_patch["description"] = iAMCredentialsSecretMetadataPatch.Description
 	}
+	if !core.IsNil(iAMCredentialsSecretMetadataPatch.Labels) {
+		_patch["labels"] = iAMCredentialsSecretMetadataPatch.Labels
+	}
+	if !core.IsNil(iAMCredentialsSecretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = iAMCredentialsSecretMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(iAMCredentialsSecretMetadataPatch.TTL) {
+		_patch["ttl"] = iAMCredentialsSecretMetadataPatch.TTL
+	}
+	if !core.IsNil(iAMCredentialsSecretMetadataPatch.Rotation) {
+		_patch["rotation"] = iAMCredentialsSecretMetadataPatch.Rotation.asPatch()
+	}
+
 	return
 }
 
@@ -13694,14 +13925,20 @@ func UnmarshalImportedCertificateMetadataPatch(m map[string]json.RawMessage, res
 
 // AsPatch returns a generic map representation of the ImportedCertificateMetadataPatch
 func (importedCertificateMetadataPatch *ImportedCertificateMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(importedCertificateMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(importedCertificateMetadataPatch.Name) {
+		_patch["name"] = importedCertificateMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(importedCertificateMetadataPatch.Description) {
+		_patch["description"] = importedCertificateMetadataPatch.Description
 	}
+	if !core.IsNil(importedCertificateMetadataPatch.Labels) {
+		_patch["labels"] = importedCertificateMetadataPatch.Labels
+	}
+	if !core.IsNil(importedCertificateMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = importedCertificateMetadataPatch.CustomMetadata
+	}
+
 	return
 }
 
@@ -14693,14 +14930,20 @@ func UnmarshalKVSecretMetadataPatch(m map[string]json.RawMessage, result interfa
 
 // AsPatch returns a generic map representation of the KVSecretMetadataPatch
 func (kVSecretMetadataPatch *KVSecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(kVSecretMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(kVSecretMetadataPatch.Name) {
+		_patch["name"] = kVSecretMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(kVSecretMetadataPatch.Description) {
+		_patch["description"] = kVSecretMetadataPatch.Description
 	}
+	if !core.IsNil(kVSecretMetadataPatch.Labels) {
+		_patch["labels"] = kVSecretMetadataPatch.Labels
+	}
+	if !core.IsNil(kVSecretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = kVSecretMetadataPatch.CustomMetadata
+	}
+
 	return
 }
 
@@ -17557,14 +17800,23 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCAPatch(m map[string]js
 
 // AsPatch returns a generic map representation of the PrivateCertificateConfigurationIntermediateCAPatch
 func (privateCertificateConfigurationIntermediateCAPatch *PrivateCertificateConfigurationIntermediateCAPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(privateCertificateConfigurationIntermediateCAPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(privateCertificateConfigurationIntermediateCAPatch.MaxTTL) {
+		_patch["max_ttl"] = privateCertificateConfigurationIntermediateCAPatch.MaxTTL
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(privateCertificateConfigurationIntermediateCAPatch.CrlExpiry) {
+		_patch["crl_expiry"] = privateCertificateConfigurationIntermediateCAPatch.CrlExpiry
 	}
+	if !core.IsNil(privateCertificateConfigurationIntermediateCAPatch.CrlDisable) {
+		_patch["crl_disable"] = privateCertificateConfigurationIntermediateCAPatch.CrlDisable
+	}
+	if !core.IsNil(privateCertificateConfigurationIntermediateCAPatch.CrlDistributionPointsEncoded) {
+		_patch["crl_distribution_points_encoded"] = privateCertificateConfigurationIntermediateCAPatch.CrlDistributionPointsEncoded
+	}
+	if !core.IsNil(privateCertificateConfigurationIntermediateCAPatch.IssuingCertificatesUrlsEncoded) {
+		_patch["issuing_certificates_urls_encoded"] = privateCertificateConfigurationIntermediateCAPatch.IssuingCertificatesUrlsEncoded
+	}
+
 	return
 }
 
@@ -18544,14 +18796,23 @@ func UnmarshalPrivateCertificateConfigurationRootCAPatch(m map[string]json.RawMe
 
 // AsPatch returns a generic map representation of the PrivateCertificateConfigurationRootCAPatch
 func (privateCertificateConfigurationRootCAPatch *PrivateCertificateConfigurationRootCAPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(privateCertificateConfigurationRootCAPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(privateCertificateConfigurationRootCAPatch.MaxTTL) {
+		_patch["max_ttl"] = privateCertificateConfigurationRootCAPatch.MaxTTL
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(privateCertificateConfigurationRootCAPatch.CrlExpiry) {
+		_patch["crl_expiry"] = privateCertificateConfigurationRootCAPatch.CrlExpiry
 	}
+	if !core.IsNil(privateCertificateConfigurationRootCAPatch.CrlDisable) {
+		_patch["crl_disable"] = privateCertificateConfigurationRootCAPatch.CrlDisable
+	}
+	if !core.IsNil(privateCertificateConfigurationRootCAPatch.CrlDistributionPointsEncoded) {
+		_patch["crl_distribution_points_encoded"] = privateCertificateConfigurationRootCAPatch.CrlDistributionPointsEncoded
+	}
+	if !core.IsNil(privateCertificateConfigurationRootCAPatch.IssuingCertificatesUrlsEncoded) {
+		_patch["issuing_certificates_urls_encoded"] = privateCertificateConfigurationRootCAPatch.IssuingCertificatesUrlsEncoded
+	}
+
 	return
 }
 
@@ -19840,14 +20101,119 @@ func UnmarshalPrivateCertificateConfigurationTemplatePatch(m map[string]json.Raw
 
 // AsPatch returns a generic map representation of the PrivateCertificateConfigurationTemplatePatch
 func (privateCertificateConfigurationTemplatePatch *PrivateCertificateConfigurationTemplatePatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(privateCertificateConfigurationTemplatePatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowedSecretGroups) {
+		_patch["allowed_secret_groups"] = privateCertificateConfigurationTemplatePatch.AllowedSecretGroups
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.MaxTTL) {
+		_patch["max_ttl"] = privateCertificateConfigurationTemplatePatch.MaxTTL
 	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.TTL) {
+		_patch["ttl"] = privateCertificateConfigurationTemplatePatch.TTL
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowLocalhost) {
+		_patch["allow_localhost"] = privateCertificateConfigurationTemplatePatch.AllowLocalhost
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowedDomains) {
+		_patch["allowed_domains"] = privateCertificateConfigurationTemplatePatch.AllowedDomains
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowedDomainsTemplate) {
+		_patch["allowed_domains_template"] = privateCertificateConfigurationTemplatePatch.AllowedDomainsTemplate
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowBareDomains) {
+		_patch["allow_bare_domains"] = privateCertificateConfigurationTemplatePatch.AllowBareDomains
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowSubdomains) {
+		_patch["allow_subdomains"] = privateCertificateConfigurationTemplatePatch.AllowSubdomains
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowGlobDomains) {
+		_patch["allow_glob_domains"] = privateCertificateConfigurationTemplatePatch.AllowGlobDomains
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowAnyName) {
+		_patch["allow_any_name"] = privateCertificateConfigurationTemplatePatch.AllowAnyName
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.EnforceHostnames) {
+		_patch["enforce_hostnames"] = privateCertificateConfigurationTemplatePatch.EnforceHostnames
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowIpSans) {
+		_patch["allow_ip_sans"] = privateCertificateConfigurationTemplatePatch.AllowIpSans
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowedUriSans) {
+		_patch["allowed_uri_sans"] = privateCertificateConfigurationTemplatePatch.AllowedUriSans
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.AllowedOtherSans) {
+		_patch["allowed_other_sans"] = privateCertificateConfigurationTemplatePatch.AllowedOtherSans
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.ServerFlag) {
+		_patch["server_flag"] = privateCertificateConfigurationTemplatePatch.ServerFlag
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.ClientFlag) {
+		_patch["client_flag"] = privateCertificateConfigurationTemplatePatch.ClientFlag
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.CodeSigningFlag) {
+		_patch["code_signing_flag"] = privateCertificateConfigurationTemplatePatch.CodeSigningFlag
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.EmailProtectionFlag) {
+		_patch["email_protection_flag"] = privateCertificateConfigurationTemplatePatch.EmailProtectionFlag
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.KeyType) {
+		_patch["key_type"] = privateCertificateConfigurationTemplatePatch.KeyType
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.KeyBits) {
+		_patch["key_bits"] = privateCertificateConfigurationTemplatePatch.KeyBits
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.KeyUsage) {
+		_patch["key_usage"] = privateCertificateConfigurationTemplatePatch.KeyUsage
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.ExtKeyUsage) {
+		_patch["ext_key_usage"] = privateCertificateConfigurationTemplatePatch.ExtKeyUsage
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.ExtKeyUsageOids) {
+		_patch["ext_key_usage_oids"] = privateCertificateConfigurationTemplatePatch.ExtKeyUsageOids
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.UseCsrCommonName) {
+		_patch["use_csr_common_name"] = privateCertificateConfigurationTemplatePatch.UseCsrCommonName
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.UseCsrSans) {
+		_patch["use_csr_sans"] = privateCertificateConfigurationTemplatePatch.UseCsrSans
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.Ou) {
+		_patch["ou"] = privateCertificateConfigurationTemplatePatch.Ou
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.Organization) {
+		_patch["organization"] = privateCertificateConfigurationTemplatePatch.Organization
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.Country) {
+		_patch["country"] = privateCertificateConfigurationTemplatePatch.Country
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.Locality) {
+		_patch["locality"] = privateCertificateConfigurationTemplatePatch.Locality
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.Province) {
+		_patch["province"] = privateCertificateConfigurationTemplatePatch.Province
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.StreetAddress) {
+		_patch["street_address"] = privateCertificateConfigurationTemplatePatch.StreetAddress
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.PostalCode) {
+		_patch["postal_code"] = privateCertificateConfigurationTemplatePatch.PostalCode
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.SerialNumber) {
+		_patch["serial_number"] = privateCertificateConfigurationTemplatePatch.SerialNumber
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.RequireCn) {
+		_patch["require_cn"] = privateCertificateConfigurationTemplatePatch.RequireCn
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.PolicyIdentifiers) {
+		_patch["policy_identifiers"] = privateCertificateConfigurationTemplatePatch.PolicyIdentifiers
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.BasicConstraintsValidForNonCa) {
+		_patch["basic_constraints_valid_for_non_ca"] = privateCertificateConfigurationTemplatePatch.BasicConstraintsValidForNonCa
+	}
+	if !core.IsNil(privateCertificateConfigurationTemplatePatch.NotBeforeDuration) {
+		_patch["not_before_duration"] = privateCertificateConfigurationTemplatePatch.NotBeforeDuration
+	}
+
 	return
 }
 
@@ -20743,14 +21109,23 @@ func UnmarshalPrivateCertificateMetadataPatch(m map[string]json.RawMessage, resu
 
 // AsPatch returns a generic map representation of the PrivateCertificateMetadataPatch
 func (privateCertificateMetadataPatch *PrivateCertificateMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(privateCertificateMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(privateCertificateMetadataPatch.Name) {
+		_patch["name"] = privateCertificateMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(privateCertificateMetadataPatch.Description) {
+		_patch["description"] = privateCertificateMetadataPatch.Description
 	}
+	if !core.IsNil(privateCertificateMetadataPatch.Labels) {
+		_patch["labels"] = privateCertificateMetadataPatch.Labels
+	}
+	if !core.IsNil(privateCertificateMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = privateCertificateMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(privateCertificateMetadataPatch.Rotation) {
+		_patch["rotation"] = privateCertificateMetadataPatch.Rotation.asPatch()
+	}
+
 	return
 }
 
@@ -22162,14 +22537,17 @@ func UnmarshalPublicCertificateConfigurationCALetsEncryptPatch(m map[string]json
 
 // AsPatch returns a generic map representation of the PublicCertificateConfigurationCALetsEncryptPatch
 func (publicCertificateConfigurationCALetsEncryptPatch *PublicCertificateConfigurationCALetsEncryptPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(publicCertificateConfigurationCALetsEncryptPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(publicCertificateConfigurationCALetsEncryptPatch.LetsEncryptEnvironment) {
+		_patch["lets_encrypt_environment"] = publicCertificateConfigurationCALetsEncryptPatch.LetsEncryptEnvironment
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(publicCertificateConfigurationCALetsEncryptPatch.LetsEncryptPrivateKey) {
+		_patch["lets_encrypt_private_key"] = publicCertificateConfigurationCALetsEncryptPatch.LetsEncryptPrivateKey
 	}
+	if !core.IsNil(publicCertificateConfigurationCALetsEncryptPatch.LetsEncryptPreferredChain) {
+		_patch["lets_encrypt_preferred_chain"] = publicCertificateConfigurationCALetsEncryptPatch.LetsEncryptPreferredChain
+	}
+
 	return
 }
 
@@ -22519,14 +22897,14 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePatch(m map[
 
 // AsPatch returns a generic map representation of the PublicCertificateConfigurationDNSClassicInfrastructurePatch
 func (publicCertificateConfigurationDNSClassicInfrastructurePatch *PublicCertificateConfigurationDNSClassicInfrastructurePatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(publicCertificateConfigurationDNSClassicInfrastructurePatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(publicCertificateConfigurationDNSClassicInfrastructurePatch.ClassicInfrastructureUsername) {
+		_patch["classic_infrastructure_username"] = publicCertificateConfigurationDNSClassicInfrastructurePatch.ClassicInfrastructureUsername
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(publicCertificateConfigurationDNSClassicInfrastructurePatch.ClassicInfrastructurePassword) {
+		_patch["classic_infrastructure_password"] = publicCertificateConfigurationDNSClassicInfrastructurePatch.ClassicInfrastructurePassword
 	}
+
 	return
 }
 
@@ -22895,14 +23273,14 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServicesPatch(m map[
 
 // AsPatch returns a generic map representation of the PublicCertificateConfigurationDNSCloudInternetServicesPatch
 func (publicCertificateConfigurationDNSCloudInternetServicesPatch *PublicCertificateConfigurationDNSCloudInternetServicesPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(publicCertificateConfigurationDNSCloudInternetServicesPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(publicCertificateConfigurationDNSCloudInternetServicesPatch.CloudInternetServicesApikey) {
+		_patch["cloud_internet_services_apikey"] = publicCertificateConfigurationDNSCloudInternetServicesPatch.CloudInternetServicesApikey
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(publicCertificateConfigurationDNSCloudInternetServicesPatch.CloudInternetServicesCrn) {
+		_patch["cloud_internet_services_crn"] = publicCertificateConfigurationDNSCloudInternetServicesPatch.CloudInternetServicesCrn
 	}
+
 	return
 }
 
@@ -23365,14 +23743,23 @@ func UnmarshalPublicCertificateMetadataPatch(m map[string]json.RawMessage, resul
 
 // AsPatch returns a generic map representation of the PublicCertificateMetadataPatch
 func (publicCertificateMetadataPatch *PublicCertificateMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(publicCertificateMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(publicCertificateMetadataPatch.Name) {
+		_patch["name"] = publicCertificateMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(publicCertificateMetadataPatch.Description) {
+		_patch["description"] = publicCertificateMetadataPatch.Description
 	}
+	if !core.IsNil(publicCertificateMetadataPatch.Labels) {
+		_patch["labels"] = publicCertificateMetadataPatch.Labels
+	}
+	if !core.IsNil(publicCertificateMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = publicCertificateMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(publicCertificateMetadataPatch.Rotation) {
+		_patch["rotation"] = publicCertificateMetadataPatch.Rotation.asPatch()
+	}
+
 	return
 }
 
@@ -23601,6 +23988,19 @@ func UnmarshalPublicCertificateRotationPolicy(m map[string]json.RawMessage, resu
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// asPatch returns a generic map representation of the PublicCertificateRotationPolicy
+func (publicCertificateRotationPolicy *PublicCertificateRotationPolicy) asPatch() (_patch map[string]interface{}) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(publicCertificateRotationPolicy.AutoRotate) {
+		_patch["auto_rotate"] = publicCertificateRotationPolicy.AutoRotate
+	}
+	if !core.IsNil(publicCertificateRotationPolicy.RotateKeys) {
+		_patch["rotate_keys"] = publicCertificateRotationPolicy.RotateKeys
+	}
+
 	return
 }
 
@@ -24564,14 +24964,26 @@ func UnmarshalServiceCredentialsSecretMetadataPatch(m map[string]json.RawMessage
 
 // AsPatch returns a generic map representation of the ServiceCredentialsSecretMetadataPatch
 func (serviceCredentialsSecretMetadataPatch *ServiceCredentialsSecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(serviceCredentialsSecretMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(serviceCredentialsSecretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = serviceCredentialsSecretMetadataPatch.CustomMetadata
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(serviceCredentialsSecretMetadataPatch.Description) {
+		_patch["description"] = serviceCredentialsSecretMetadataPatch.Description
 	}
+	if !core.IsNil(serviceCredentialsSecretMetadataPatch.Labels) {
+		_patch["labels"] = serviceCredentialsSecretMetadataPatch.Labels
+	}
+	if !core.IsNil(serviceCredentialsSecretMetadataPatch.Name) {
+		_patch["name"] = serviceCredentialsSecretMetadataPatch.Name
+	}
+	if !core.IsNil(serviceCredentialsSecretMetadataPatch.Rotation) {
+		_patch["rotation"] = serviceCredentialsSecretMetadataPatch.Rotation.asPatch()
+	}
+	if !core.IsNil(serviceCredentialsSecretMetadataPatch.TTL) {
+		_patch["ttl"] = serviceCredentialsSecretMetadataPatch.TTL
+	}
+
 	return
 }
 
@@ -25605,14 +26017,29 @@ func UnmarshalUsernamePasswordSecretMetadataPatch(m map[string]json.RawMessage, 
 
 // AsPatch returns a generic map representation of the UsernamePasswordSecretMetadataPatch
 func (usernamePasswordSecretMetadataPatch *UsernamePasswordSecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(usernamePasswordSecretMetadataPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.Name) {
+		_patch["name"] = usernamePasswordSecretMetadataPatch.Name
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.Description) {
+		_patch["description"] = usernamePasswordSecretMetadataPatch.Description
 	}
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.Labels) {
+		_patch["labels"] = usernamePasswordSecretMetadataPatch.Labels
+	}
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = usernamePasswordSecretMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.Rotation) {
+		_patch["rotation"] = usernamePasswordSecretMetadataPatch.Rotation.asPatch()
+	}
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.ExpirationDate) {
+		_patch["expiration_date"] = usernamePasswordSecretMetadataPatch.ExpirationDate
+	}
+	if !core.IsNil(usernamePasswordSecretMetadataPatch.PasswordGenerationPolicy) {
+		_patch["password_generation_policy"] = usernamePasswordSecretMetadataPatch.PasswordGenerationPolicy.asPatch()
+	}
+
 	return
 }
 
