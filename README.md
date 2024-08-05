@@ -153,9 +153,7 @@ For more information and IBM Cloud SDK usage examples for Go, see the [IBM Cloud
 
 ## Questions
 
-If you're having difficulties using this SDK, you can ask questions about this project by
-using [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-secrets-manager). Be sure to include
-the `ibm-cloud` and `ibm-secrets-manager` tags.
+If you're having difficulties using this SDK, you can ask questions about this project by using [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-secrets-manager). Be sure to include the `ibm-cloud` and `ibm-secrets-manager` tags.
 
 You can also check out the [Secrets Manager documentation](https://cloud.ibm.com/docs/secrets-manager) and [API reference](https://cloud.ibm.com/apidocs/secrets-manager) for more information about the service.
 
