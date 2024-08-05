@@ -19,6 +19,7 @@ package secretsmanagerv2_test
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -1280,7 +1281,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
@@ -1362,7 +1363,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -1570,7 +1571,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -1634,7 +1635,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -1794,9 +1795,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -1922,7 +1923,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
@@ -1976,7 +1977,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
@@ -2202,7 +2203,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -2256,7 +2257,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -2441,7 +2442,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -2522,7 +2523,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -2984,7 +2985,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretByNameType successfully with retries`, func() {
@@ -3040,7 +3041,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretByNameType successfully`, func() {
@@ -6803,36 +6804,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
-				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
-				configurationPrototypeModel.Name = core.StringPtr("example-root-CA")
-				configurationPrototypeModel.MaxTTL = core.StringPtr("43830h")
-				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
-				configurationPrototypeModel.CrlDisable = core.BoolPtr(false)
-				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.CommonName = core.StringPtr("example.com")
-				configurationPrototypeModel.AltNames = []string{"alt-name-1", "alt-name-2"}
-				configurationPrototypeModel.IpSans = core.StringPtr("127.0.0.1")
-				configurationPrototypeModel.UriSans = core.StringPtr("https://www.example.com/test")
-				configurationPrototypeModel.OtherSans = []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"}
-				configurationPrototypeModel.TTL = core.StringPtr("2190h")
-				configurationPrototypeModel.Format = core.StringPtr("pem")
-				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
-				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
-				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
-				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(-1))
-				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(false)
-				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
-				configurationPrototypeModel.Ou = []string{"testString"}
-				configurationPrototypeModel.Organization = []string{"testString"}
-				configurationPrototypeModel.Country = []string{"testString"}
-				configurationPrototypeModel.Locality = []string{"testString"}
-				configurationPrototypeModel.Province = []string{"testString"}
-				configurationPrototypeModel.StreetAddress = []string{"testString"}
-				configurationPrototypeModel.PostalCode = []string{"testString"}
-				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
+				configurationPrototypeModel.Name = core.StringPtr("example-cloud-internet-services-config")
+				configurationPrototypeModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPrototypeModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 
 				// Construct an instance of the CreateConfigurationOptions model
 				createConfigurationOptionsModel := new(secretsmanagerv2.CreateConfigurationOptions)
@@ -6901,36 +6878,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
-				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
-				configurationPrototypeModel.Name = core.StringPtr("example-root-CA")
-				configurationPrototypeModel.MaxTTL = core.StringPtr("43830h")
-				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
-				configurationPrototypeModel.CrlDisable = core.BoolPtr(false)
-				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.CommonName = core.StringPtr("example.com")
-				configurationPrototypeModel.AltNames = []string{"alt-name-1", "alt-name-2"}
-				configurationPrototypeModel.IpSans = core.StringPtr("127.0.0.1")
-				configurationPrototypeModel.UriSans = core.StringPtr("https://www.example.com/test")
-				configurationPrototypeModel.OtherSans = []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"}
-				configurationPrototypeModel.TTL = core.StringPtr("2190h")
-				configurationPrototypeModel.Format = core.StringPtr("pem")
-				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
-				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
-				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
-				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(-1))
-				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(false)
-				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
-				configurationPrototypeModel.Ou = []string{"testString"}
-				configurationPrototypeModel.Organization = []string{"testString"}
-				configurationPrototypeModel.Country = []string{"testString"}
-				configurationPrototypeModel.Locality = []string{"testString"}
-				configurationPrototypeModel.Province = []string{"testString"}
-				configurationPrototypeModel.StreetAddress = []string{"testString"}
-				configurationPrototypeModel.PostalCode = []string{"testString"}
-				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
+				configurationPrototypeModel.Name = core.StringPtr("example-cloud-internet-services-config")
+				configurationPrototypeModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPrototypeModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 
 				// Construct an instance of the CreateConfigurationOptions model
 				createConfigurationOptionsModel := new(secretsmanagerv2.CreateConfigurationOptions)
@@ -7007,36 +6960,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
-				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
-				configurationPrototypeModel.Name = core.StringPtr("example-root-CA")
-				configurationPrototypeModel.MaxTTL = core.StringPtr("43830h")
-				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
-				configurationPrototypeModel.CrlDisable = core.BoolPtr(false)
-				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.CommonName = core.StringPtr("example.com")
-				configurationPrototypeModel.AltNames = []string{"alt-name-1", "alt-name-2"}
-				configurationPrototypeModel.IpSans = core.StringPtr("127.0.0.1")
-				configurationPrototypeModel.UriSans = core.StringPtr("https://www.example.com/test")
-				configurationPrototypeModel.OtherSans = []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"}
-				configurationPrototypeModel.TTL = core.StringPtr("2190h")
-				configurationPrototypeModel.Format = core.StringPtr("pem")
-				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
-				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
-				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
-				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(-1))
-				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(false)
-				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
-				configurationPrototypeModel.Ou = []string{"testString"}
-				configurationPrototypeModel.Organization = []string{"testString"}
-				configurationPrototypeModel.Country = []string{"testString"}
-				configurationPrototypeModel.Locality = []string{"testString"}
-				configurationPrototypeModel.Province = []string{"testString"}
-				configurationPrototypeModel.StreetAddress = []string{"testString"}
-				configurationPrototypeModel.PostalCode = []string{"testString"}
-				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
+				configurationPrototypeModel.Name = core.StringPtr("example-cloud-internet-services-config")
+				configurationPrototypeModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPrototypeModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 
 				// Construct an instance of the CreateConfigurationOptions model
 				createConfigurationOptionsModel := new(secretsmanagerv2.CreateConfigurationOptions)
@@ -7058,36 +6987,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
-				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
-				configurationPrototypeModel.Name = core.StringPtr("example-root-CA")
-				configurationPrototypeModel.MaxTTL = core.StringPtr("43830h")
-				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
-				configurationPrototypeModel.CrlDisable = core.BoolPtr(false)
-				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.CommonName = core.StringPtr("example.com")
-				configurationPrototypeModel.AltNames = []string{"alt-name-1", "alt-name-2"}
-				configurationPrototypeModel.IpSans = core.StringPtr("127.0.0.1")
-				configurationPrototypeModel.UriSans = core.StringPtr("https://www.example.com/test")
-				configurationPrototypeModel.OtherSans = []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"}
-				configurationPrototypeModel.TTL = core.StringPtr("2190h")
-				configurationPrototypeModel.Format = core.StringPtr("pem")
-				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
-				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
-				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
-				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(-1))
-				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(false)
-				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
-				configurationPrototypeModel.Ou = []string{"testString"}
-				configurationPrototypeModel.Organization = []string{"testString"}
-				configurationPrototypeModel.Country = []string{"testString"}
-				configurationPrototypeModel.Locality = []string{"testString"}
-				configurationPrototypeModel.Province = []string{"testString"}
-				configurationPrototypeModel.StreetAddress = []string{"testString"}
-				configurationPrototypeModel.PostalCode = []string{"testString"}
-				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
+				configurationPrototypeModel.Name = core.StringPtr("example-cloud-internet-services-config")
+				configurationPrototypeModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPrototypeModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 
 				// Construct an instance of the CreateConfigurationOptions model
 				createConfigurationOptionsModel := new(secretsmanagerv2.CreateConfigurationOptions)
@@ -7130,36 +7035,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
-				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
-				configurationPrototypeModel.Name = core.StringPtr("example-root-CA")
-				configurationPrototypeModel.MaxTTL = core.StringPtr("43830h")
-				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
-				configurationPrototypeModel.CrlDisable = core.BoolPtr(false)
-				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.CommonName = core.StringPtr("example.com")
-				configurationPrototypeModel.AltNames = []string{"alt-name-1", "alt-name-2"}
-				configurationPrototypeModel.IpSans = core.StringPtr("127.0.0.1")
-				configurationPrototypeModel.UriSans = core.StringPtr("https://www.example.com/test")
-				configurationPrototypeModel.OtherSans = []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"}
-				configurationPrototypeModel.TTL = core.StringPtr("2190h")
-				configurationPrototypeModel.Format = core.StringPtr("pem")
-				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
-				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
-				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
-				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(-1))
-				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(false)
-				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
-				configurationPrototypeModel.Ou = []string{"testString"}
-				configurationPrototypeModel.Organization = []string{"testString"}
-				configurationPrototypeModel.Country = []string{"testString"}
-				configurationPrototypeModel.Locality = []string{"testString"}
-				configurationPrototypeModel.Province = []string{"testString"}
-				configurationPrototypeModel.StreetAddress = []string{"testString"}
-				configurationPrototypeModel.PostalCode = []string{"testString"}
-				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
+				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
+				configurationPrototypeModel.Name = core.StringPtr("example-cloud-internet-services-config")
+				configurationPrototypeModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPrototypeModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 
 				// Construct an instance of the CreateConfigurationOptions model
 				createConfigurationOptionsModel := new(secretsmanagerv2.CreateConfigurationOptions)
@@ -7212,6 +7093,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListConfigurations(listConfigurationsOptionsModel)
@@ -7270,6 +7152,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7336,6 +7219,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7359,6 +7243,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -7396,6 +7281,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -7481,9 +7367,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listConfigurationsOptionsModel := &secretsmanagerv2.ListConfigurationsOptions{
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("config_type"),
-					Search: core.StringPtr("example"),
+					Limit:       core.Int64Ptr(int64(10)),
+					Sort:        core.StringPtr("config_type"),
+					Search:      core.StringPtr("example"),
+					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 				}
 
 				pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptionsModel)
@@ -7508,9 +7395,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listConfigurationsOptionsModel := &secretsmanagerv2.ListConfigurationsOptions{
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("config_type"),
-					Search: core.StringPtr("example"),
+					Limit:       core.Int64Ptr(int64(10)),
+					Sort:        core.StringPtr("config_type"),
+					Search:      core.StringPtr("example"),
+					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 				}
 
 				pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptionsModel)
@@ -7535,7 +7423,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getConfigurationPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -7552,7 +7440,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the GetConfigurationOptions model
 				getConfigurationOptionsModel := new(secretsmanagerv2.GetConfigurationOptions)
 				getConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				getConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.GetConfiguration(getConfigurationOptionsModel)
@@ -7584,7 +7472,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -7606,7 +7494,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the GetConfigurationOptions model
 				getConfigurationOptionsModel := new(secretsmanagerv2.GetConfigurationOptions)
 				getConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				getConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7644,7 +7532,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7668,7 +7556,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the GetConfigurationOptions model
 				getConfigurationOptionsModel := new(secretsmanagerv2.GetConfigurationOptions)
 				getConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				getConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7689,7 +7577,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the GetConfigurationOptions model
 				getConfigurationOptionsModel := new(secretsmanagerv2.GetConfigurationOptions)
 				getConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				getConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -7731,7 +7619,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the GetConfigurationOptions model
 				getConfigurationOptionsModel := new(secretsmanagerv2.GetConfigurationOptions)
 				getConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				getConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				getConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -7758,7 +7646,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(updateConfigurationPath))
 					Expect(req.Method).To(Equal("PATCH"))
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -7772,9 +7660,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the IAMCredentialsConfigurationPatch model
-				configurationPatchModel := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
-				configurationPatchModel.ApiKey = core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPatch model
+				configurationPatchModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch)
+				configurationPatchModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPatchModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 				configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -7782,7 +7671,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				updateConfigurationOptionsModel := new(secretsmanagerv2.UpdateConfigurationOptions)
 				updateConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
 				updateConfigurationOptionsModel.ConfigurationPatch = configurationPatchModelAsPatch
-				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				updateConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.UpdateConfiguration(updateConfigurationOptionsModel)
@@ -7830,7 +7719,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -7849,9 +7738,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 				secretsManagerService.EnableRetries(0, 0)
 
-				// Construct an instance of the IAMCredentialsConfigurationPatch model
-				configurationPatchModel := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
-				configurationPatchModel.ApiKey = core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPatch model
+				configurationPatchModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch)
+				configurationPatchModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPatchModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 				configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -7859,7 +7749,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				updateConfigurationOptionsModel := new(secretsmanagerv2.UpdateConfigurationOptions)
 				updateConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
 				updateConfigurationOptionsModel.ConfigurationPatch = configurationPatchModelAsPatch
-				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				updateConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7913,7 +7803,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7934,9 +7824,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the IAMCredentialsConfigurationPatch model
-				configurationPatchModel := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
-				configurationPatchModel.ApiKey = core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPatch model
+				configurationPatchModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch)
+				configurationPatchModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPatchModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 				configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -7944,7 +7835,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				updateConfigurationOptionsModel := new(secretsmanagerv2.UpdateConfigurationOptions)
 				updateConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
 				updateConfigurationOptionsModel.ConfigurationPatch = configurationPatchModelAsPatch
-				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				updateConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7962,9 +7853,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the IAMCredentialsConfigurationPatch model
-				configurationPatchModel := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
-				configurationPatchModel.ApiKey = core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPatch model
+				configurationPatchModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch)
+				configurationPatchModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPatchModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 				configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -7972,7 +7864,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				updateConfigurationOptionsModel := new(secretsmanagerv2.UpdateConfigurationOptions)
 				updateConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
 				updateConfigurationOptionsModel.ConfigurationPatch = configurationPatchModelAsPatch
-				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				updateConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -8011,9 +7903,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
 
-				// Construct an instance of the IAMCredentialsConfigurationPatch model
-				configurationPatchModel := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
-				configurationPatchModel.ApiKey = core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u")
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPatch model
+				configurationPatchModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch)
+				configurationPatchModel.CloudInternetServicesApikey = core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ")
+				configurationPatchModel.CloudInternetServicesCrn = core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::")
 				configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -8021,7 +7914,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				updateConfigurationOptionsModel := new(secretsmanagerv2.UpdateConfigurationOptions)
 				updateConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
 				updateConfigurationOptionsModel.ConfigurationPatch = configurationPatchModelAsPatch
-				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				updateConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				updateConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -8049,7 +7942,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					res.WriteHeader(204)
 				}))
 			})
@@ -8069,7 +7962,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the DeleteConfigurationOptions model
 				deleteConfigurationOptionsModel := new(secretsmanagerv2.DeleteConfigurationOptions)
 				deleteConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				deleteConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				deleteConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				deleteConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -8088,7 +7981,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the DeleteConfigurationOptions model
 				deleteConfigurationOptionsModel := new(secretsmanagerv2.DeleteConfigurationOptions)
 				deleteConfigurationOptionsModel.Name = core.StringPtr("configuration-name")
-				deleteConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				deleteConfigurationOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				deleteConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -8120,7 +8013,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(createConfigurationActionPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -8142,7 +8035,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createConfigurationActionOptionsModel := new(secretsmanagerv2.CreateConfigurationActionOptions)
 				createConfigurationActionOptionsModel.Name = core.StringPtr("configuration-name")
 				createConfigurationActionOptionsModel.ConfigActionPrototype = configurationActionPrototypeModel
-				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				createConfigurationActionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.CreateConfigurationAction(createConfigurationActionOptionsModel)
@@ -8190,7 +8083,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -8217,7 +8110,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createConfigurationActionOptionsModel := new(secretsmanagerv2.CreateConfigurationActionOptions)
 				createConfigurationActionOptionsModel.Name = core.StringPtr("configuration-name")
 				createConfigurationActionOptionsModel.ConfigActionPrototype = configurationActionPrototypeModel
-				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				createConfigurationActionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -8271,7 +8164,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["X-Sm-Accept-Configuration-Type"]).ToNot(BeNil())
-					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "private_cert_configuration_root_ca")))
+					Expect(req.Header["X-Sm-Accept-Configuration-Type"][0]).To(Equal(fmt.Sprintf("%v", "public_cert_configuration_dns_cloud_internet_services")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -8300,7 +8193,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createConfigurationActionOptionsModel := new(secretsmanagerv2.CreateConfigurationActionOptions)
 				createConfigurationActionOptionsModel.Name = core.StringPtr("configuration-name")
 				createConfigurationActionOptionsModel.ConfigActionPrototype = configurationActionPrototypeModel
-				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				createConfigurationActionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -8326,7 +8219,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createConfigurationActionOptionsModel := new(secretsmanagerv2.CreateConfigurationActionOptions)
 				createConfigurationActionOptionsModel.Name = core.StringPtr("configuration-name")
 				createConfigurationActionOptionsModel.ConfigActionPrototype = configurationActionPrototypeModel
-				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				createConfigurationActionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -8373,7 +8266,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createConfigurationActionOptionsModel := new(secretsmanagerv2.CreateConfigurationActionOptions)
 				createConfigurationActionOptionsModel.Name = core.StringPtr("configuration-name")
 				createConfigurationActionOptionsModel.ConfigActionPrototype = configurationActionPrototypeModel
-				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("private_cert_configuration_root_ca")
+				createConfigurationActionOptionsModel.XSmAcceptConfigurationType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				createConfigurationActionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -8982,74 +8875,26 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				createConfigurationActionOptionsModel := secretsManagerService.NewCreateConfigurationActionOptions(name, configActionPrototype)
 				createConfigurationActionOptionsModel.SetName("configuration-name")
 				createConfigurationActionOptionsModel.SetConfigActionPrototype(configurationActionPrototypeModel)
-				createConfigurationActionOptionsModel.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+				createConfigurationActionOptionsModel.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 				createConfigurationActionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createConfigurationActionOptionsModel).ToNot(BeNil())
 				Expect(createConfigurationActionOptionsModel.Name).To(Equal(core.StringPtr("configuration-name")))
 				Expect(createConfigurationActionOptionsModel.ConfigActionPrototype).To(Equal(configurationActionPrototypeModel))
-				Expect(createConfigurationActionOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("private_cert_configuration_root_ca")))
+				Expect(createConfigurationActionOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("public_cert_configuration_dns_cloud_internet_services")))
 				Expect(createConfigurationActionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateConfigurationOptions successfully`, func() {
-				// Construct an instance of the PrivateCertificateConfigurationRootCAPrototype model
-				configurationPrototypeModel := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
+				// Construct an instance of the PublicCertificateConfigurationDNSCloudInternetServicesPrototype model
+				configurationPrototypeModel := new(secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype)
 				Expect(configurationPrototypeModel).ToNot(BeNil())
-				configurationPrototypeModel.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
+				configurationPrototypeModel.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 				configurationPrototypeModel.Name = core.StringPtr("my-example-engine-config")
-				configurationPrototypeModel.MaxTTL = core.StringPtr("8760h")
-				configurationPrototypeModel.CrlExpiry = core.StringPtr("72h")
-				configurationPrototypeModel.CrlDisable = core.BoolPtr(true)
-				configurationPrototypeModel.CrlDistributionPointsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.IssuingCertificatesUrlsEncoded = core.BoolPtr(true)
-				configurationPrototypeModel.CommonName = core.StringPtr("localhost")
-				configurationPrototypeModel.AltNames = []string{"s1.example.com", "*.s2.example.com"}
-				configurationPrototypeModel.IpSans = core.StringPtr("1.1.1.1, 2.2.2.2")
-				configurationPrototypeModel.UriSans = core.StringPtr("testString")
-				configurationPrototypeModel.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
-				configurationPrototypeModel.TTL = core.StringPtr("8760h")
-				configurationPrototypeModel.Format = core.StringPtr("pem")
-				configurationPrototypeModel.PrivateKeyFormat = core.StringPtr("der")
-				configurationPrototypeModel.KeyType = core.StringPtr("rsa")
-				configurationPrototypeModel.KeyBits = core.Int64Ptr(int64(4096))
-				configurationPrototypeModel.MaxPathLength = core.Int64Ptr(int64(38))
-				configurationPrototypeModel.ExcludeCnFromSans = core.BoolPtr(true)
-				configurationPrototypeModel.PermittedDnsDomains = []string{"testString"}
-				configurationPrototypeModel.Ou = []string{"testString"}
-				configurationPrototypeModel.Organization = []string{"testString"}
-				configurationPrototypeModel.Country = []string{"testString"}
-				configurationPrototypeModel.Locality = []string{"testString"}
-				configurationPrototypeModel.Province = []string{"testString"}
-				configurationPrototypeModel.StreetAddress = []string{"testString"}
-				configurationPrototypeModel.PostalCode = []string{"testString"}
-				configurationPrototypeModel.SerialNumber = core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")
-				Expect(configurationPrototypeModel.ConfigType).To(Equal(core.StringPtr("private_cert_configuration_root_ca")))
+				configurationPrototypeModel.CloudInternetServicesApikey = core.StringPtr("testString")
+				configurationPrototypeModel.CloudInternetServicesCrn = core.StringPtr("testString")
+				Expect(configurationPrototypeModel.ConfigType).To(Equal(core.StringPtr("public_cert_configuration_dns_cloud_internet_services")))
 				Expect(configurationPrototypeModel.Name).To(Equal(core.StringPtr("my-example-engine-config")))
-				Expect(configurationPrototypeModel.MaxTTL).To(Equal(core.StringPtr("8760h")))
-				Expect(configurationPrototypeModel.CrlExpiry).To(Equal(core.StringPtr("72h")))
-				Expect(configurationPrototypeModel.CrlDisable).To(Equal(core.BoolPtr(true)))
-				Expect(configurationPrototypeModel.CrlDistributionPointsEncoded).To(Equal(core.BoolPtr(true)))
-				Expect(configurationPrototypeModel.IssuingCertificatesUrlsEncoded).To(Equal(core.BoolPtr(true)))
-				Expect(configurationPrototypeModel.CommonName).To(Equal(core.StringPtr("localhost")))
-				Expect(configurationPrototypeModel.AltNames).To(Equal([]string{"s1.example.com", "*.s2.example.com"}))
-				Expect(configurationPrototypeModel.IpSans).To(Equal(core.StringPtr("1.1.1.1, 2.2.2.2")))
-				Expect(configurationPrototypeModel.UriSans).To(Equal(core.StringPtr("testString")))
-				Expect(configurationPrototypeModel.OtherSans).To(Equal([]string{"2.5.4.5;UTF8:*.example.com"}))
-				Expect(configurationPrototypeModel.TTL).To(Equal(core.StringPtr("8760h")))
-				Expect(configurationPrototypeModel.Format).To(Equal(core.StringPtr("pem")))
-				Expect(configurationPrototypeModel.PrivateKeyFormat).To(Equal(core.StringPtr("der")))
-				Expect(configurationPrototypeModel.KeyType).To(Equal(core.StringPtr("rsa")))
-				Expect(configurationPrototypeModel.KeyBits).To(Equal(core.Int64Ptr(int64(4096))))
-				Expect(configurationPrototypeModel.MaxPathLength).To(Equal(core.Int64Ptr(int64(38))))
-				Expect(configurationPrototypeModel.ExcludeCnFromSans).To(Equal(core.BoolPtr(true)))
-				Expect(configurationPrototypeModel.PermittedDnsDomains).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.Ou).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.Organization).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.Country).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.Locality).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.Province).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.StreetAddress).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.PostalCode).To(Equal([]string{"testString"}))
-				Expect(configurationPrototypeModel.SerialNumber).To(Equal(core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5")))
+				Expect(configurationPrototypeModel.CloudInternetServicesApikey).To(Equal(core.StringPtr("testString")))
+				Expect(configurationPrototypeModel.CloudInternetServicesCrn).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CreateConfigurationOptions model
 				var configurationPrototype secretsmanagerv2.ConfigurationPrototypeIntf = nil
@@ -9241,11 +9086,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				name := "configuration-name"
 				deleteConfigurationOptionsModel := secretsManagerService.NewDeleteConfigurationOptions(name)
 				deleteConfigurationOptionsModel.SetName("configuration-name")
-				deleteConfigurationOptionsModel.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+				deleteConfigurationOptionsModel.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 				deleteConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteConfigurationOptionsModel).ToNot(BeNil())
 				Expect(deleteConfigurationOptionsModel.Name).To(Equal(core.StringPtr("configuration-name")))
-				Expect(deleteConfigurationOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("private_cert_configuration_root_ca")))
+				Expect(deleteConfigurationOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("public_cert_configuration_dns_cloud_internet_services")))
 				Expect(deleteConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteNotificationsRegistrationOptions successfully`, func() {
@@ -9320,11 +9165,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				name := "configuration-name"
 				getConfigurationOptionsModel := secretsManagerService.NewGetConfigurationOptions(name)
 				getConfigurationOptionsModel.SetName("configuration-name")
-				getConfigurationOptionsModel.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+				getConfigurationOptionsModel.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 				getConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getConfigurationOptionsModel).ToNot(BeNil())
 				Expect(getConfigurationOptionsModel.Name).To(Equal(core.StringPtr("configuration-name")))
-				Expect(getConfigurationOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("private_cert_configuration_root_ca")))
+				Expect(getConfigurationOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("public_cert_configuration_dns_cloud_internet_services")))
 				Expect(getConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetNotificationsRegistrationOptions successfully`, func() {
@@ -9420,12 +9265,14 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.SetLimit(int64(10))
 				listConfigurationsOptionsModel.SetSort("config_type")
 				listConfigurationsOptionsModel.SetSearch("example")
+				listConfigurationsOptionsModel.SetSecretTypes([]string{"iam_credentials", "public_cert", "private_cert"})
 				listConfigurationsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listConfigurationsOptionsModel).ToNot(BeNil())
 				Expect(listConfigurationsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listConfigurationsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listConfigurationsOptionsModel.Sort).To(Equal(core.StringPtr("config_type")))
 				Expect(listConfigurationsOptionsModel.Search).To(Equal(core.StringPtr("example")))
+				Expect(listConfigurationsOptionsModel.SecretTypes).To(Equal([]string{"iam_credentials", "public_cert", "private_cert"}))
 				Expect(listConfigurationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretGroupsOptions successfully`, func() {
@@ -9520,6 +9367,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(listSecretsOptionsModel.MatchAllLabels).To(Equal([]string{"dev", "us-south"}))
 				Expect(listSecretsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewPrivateCertificateCryptoKey successfully`, func() {
+				var provider secretsmanagerv2.PrivateCertificateCryptoProviderIntf = nil
+				_, err := secretsManagerService.NewPrivateCertificateCryptoKey(provider)
+				Expect(err).ToNot(BeNil())
+			})
 			It(`Invoke NewSecretLockPrototype successfully`, func() {
 				name := "lock-example"
 				_model, err := secretsManagerService.NewSecretLockPrototype(name)
@@ -9544,12 +9396,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				updateConfigurationOptionsModel := secretsManagerService.NewUpdateConfigurationOptions(name, configurationPatch)
 				updateConfigurationOptionsModel.SetName("configuration-name")
 				updateConfigurationOptionsModel.SetConfigurationPatch(map[string]interface{}{"anyKey": "anyValue"})
-				updateConfigurationOptionsModel.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+				updateConfigurationOptionsModel.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 				updateConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateConfigurationOptionsModel).ToNot(BeNil())
 				Expect(updateConfigurationOptionsModel.Name).To(Equal(core.StringPtr("configuration-name")))
 				Expect(updateConfigurationOptionsModel.ConfigurationPatch).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(updateConfigurationOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("private_cert_configuration_root_ca")))
+				Expect(updateConfigurationOptionsModel.XSmAcceptConfigurationType).To(Equal(core.StringPtr("public_cert_configuration_dns_cloud_internet_services")))
 				Expect(updateConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateSecretGroupOptions successfully`, func() {
@@ -9734,6 +9586,15 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				name := "my-example-engine-config"
 				certificateAuthority := "testString"
 				_model, err := secretsManagerService.NewPrivateCertificateConfigurationTemplatePrototype(configType, name, certificateAuthority)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewPrivateCertificateCryptoProviderHPCS successfully`, func() {
+				typeVar := "hyper_protect_crypto_services"
+				instanceCrn := "crn:v1:bluemix:public:hs-crypto:us-south:a/791f3fb10486421e97aa8512f18b7e65:b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5::"
+				pinIamCredentialsSecretID := "6ebb80d3-26d1-4e24-81d6-afb0d8e22f54"
+				privateKeystoreID := "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5"
+				_model, err := secretsManagerService.NewPrivateCertificateCryptoProviderHPCS(typeVar, instanceCrn, pinIamCredentialsSecretID, privateKeystoreID)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -9944,8 +9805,16 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		It(`Invoke UnmarshalConfigurationPrototype successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ConfigurationPrototype)
-			model.ConfigType = core.StringPtr("public_cert_configuration_ca_lets_encrypt")
+			model.ConfigType = core.StringPtr("public_cert_configuration_dns_cloud_internet_services")
 			model.Name = core.StringPtr("my-example-engine-config")
+			model.CloudInternetServicesApikey = core.StringPtr("testString")
+			model.CloudInternetServicesCrn = core.StringPtr("testString")
+			model.ClassicInfrastructureUsername = core.StringPtr("testString")
+			model.ClassicInfrastructurePassword = core.StringPtr("testString")
+			model.LetsEncryptEnvironment = core.StringPtr("production")
+			model.LetsEncryptPrivateKey = core.StringPtr("testString")
+			model.LetsEncryptPreferredChain = core.StringPtr("testString")
+			model.CryptoKey = nil
 			model.MaxTTL = core.StringPtr("8760h")
 			model.CrlExpiry = core.StringPtr("72h")
 			model.CrlDisable = core.BoolPtr(true)
@@ -10001,13 +9870,6 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.PolicyIdentifiers = []string{"testString"}
 			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
 			model.NotBeforeDuration = core.StringPtr("30s")
-			model.LetsEncryptEnvironment = core.StringPtr("production")
-			model.LetsEncryptPrivateKey = core.StringPtr("testString")
-			model.LetsEncryptPreferredChain = core.StringPtr("testString")
-			model.CloudInternetServicesApikey = core.StringPtr("testString")
-			model.CloudInternetServicesCrn = core.StringPtr("testString")
-			model.ClassicInfrastructureUsername = core.StringPtr("testString")
-			model.ClassicInfrastructurePassword = core.StringPtr("testString")
 			model.ApiKey = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
@@ -10063,6 +9925,47 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateCryptoKey successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateCryptoKey)
+			model.ID = core.StringPtr("ad629506-3aca-4191-b8fc-8b295ec7a19c")
+			model.Label = core.StringPtr("my_key")
+			model.AllowGenerateKey = core.BoolPtr(false)
+			model.Provider = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateCryptoKey
+			err = secretsmanagerv2.UnmarshalPrivateCertificateCryptoKey(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateCryptoProvider successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateCryptoProvider)
+			model.Type = core.StringPtr("hyper_protect_crypto_services")
+			model.InstanceCrn = core.StringPtr("crn:v1:bluemix:public:hs-crypto:us-south:a/791f3fb10486421e97aa8512f18b7e65:b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5::")
+			model.PinIamCredentialsSecretID = core.StringPtr("6ebb80d3-26d1-4e24-81d6-afb0d8e22f54")
+			model.PrivateKeystoreID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalPrivateCertificateCryptoProvider(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
 		})
 		It(`Invoke UnmarshalPublicCertificateRotationObject successfully`, func() {
 			// Construct an instance of the model.
@@ -10902,6 +10805,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model := new(secretsmanagerv2.PrivateCertificateConfigurationIntermediateCAPrototype)
 			model.ConfigType = core.StringPtr("private_cert_configuration_intermediate_ca")
 			model.Name = core.StringPtr("my-example-engine-config")
+			model.CryptoKey = nil
 			model.MaxTTL = core.StringPtr("8760h")
 			model.SigningMethod = core.StringPtr("internal")
 			model.Issuer = core.StringPtr("Lets Encrypt")
@@ -10968,6 +10872,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model := new(secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype)
 			model.ConfigType = core.StringPtr("private_cert_configuration_root_ca")
 			model.Name = core.StringPtr("my-example-engine-config")
+			model.CryptoKey = nil
 			model.MaxTTL = core.StringPtr("8760h")
 			model.CrlExpiry = core.StringPtr("72h")
 			model.CrlDisable = core.BoolPtr(true)
@@ -11116,6 +11021,27 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 			var result *secretsmanagerv2.PrivateCertificateConfigurationTemplatePrototype
 			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationTemplatePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateCryptoProviderHPCS successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateCryptoProviderHPCS)
+			model.Type = core.StringPtr("hyper_protect_crypto_services")
+			model.InstanceCrn = core.StringPtr("crn:v1:bluemix:public:hs-crypto:us-south:a/791f3fb10486421e97aa8512f18b7e65:b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5::")
+			model.PinIamCredentialsSecretID = core.StringPtr("6ebb80d3-26d1-4e24-81d6-afb0d8e22f54")
+			model.PrivateKeystoreID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateCryptoProviderHPCS
+			err = secretsmanagerv2.UnmarshalPrivateCertificateCryptoProviderHPCS(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -11591,10 +11517,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			Expect(result).To(Equal(model))
 		})
 	})
-
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
-			mockByteArray := CreateMockByteArray("This is a test")
+			mockByteArray := CreateMockByteArray("VGhpcyBpcyBhIHRlc3Qgb2YgdGhlIGVtZXJnZW5jeSBicm9hZGNhc3Qgc3lzdGVt")
 			Expect(mockByteArray).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockUUID() successfully`, func() {
@@ -11620,8 +11545,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 // Utility functions used by the generated test code
 //
 
-func CreateMockByteArray(mockData string) *[]byte {
-	ba := []byte(mockData)
+func CreateMockByteArray(encodedString string) *[]byte {
+	ba, err := base64.StdEncoding.DecodeString(encodedString)
+	if err != nil {
+		panic(err)
+	}
 	return &ba
 }
 

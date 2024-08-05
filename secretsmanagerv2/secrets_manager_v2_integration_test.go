@@ -258,35 +258,11 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateConfiguration(createConfigurationOptions *CreateConfigurationOptions)`, func() {
-			configurationPrototypeModel := &secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype{
-				ConfigType:                     core.StringPtr("private_cert_configuration_root_ca"),
-				Name:                           core.StringPtr("example-root-CA"),
-				MaxTTL:                         core.StringPtr("43830h"),
-				CrlExpiry:                      core.StringPtr("72h"),
-				CrlDisable:                     core.BoolPtr(false),
-				CrlDistributionPointsEncoded:   core.BoolPtr(true),
-				IssuingCertificatesUrlsEncoded: core.BoolPtr(true),
-				CommonName:                     core.StringPtr("example.com"),
-				AltNames:                       []string{"alt-name-1", "alt-name-2"},
-				IpSans:                         core.StringPtr("127.0.0.1"),
-				UriSans:                        core.StringPtr("https://www.example.com/test"),
-				OtherSans:                      []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"},
-				TTL:                            core.StringPtr("2190h"),
-				Format:                         core.StringPtr("pem"),
-				PrivateKeyFormat:               core.StringPtr("der"),
-				KeyType:                        core.StringPtr("rsa"),
-				KeyBits:                        core.Int64Ptr(int64(4096)),
-				MaxPathLength:                  core.Int64Ptr(int64(-1)),
-				ExcludeCnFromSans:              core.BoolPtr(false),
-				PermittedDnsDomains:            []string{"testString"},
-				Ou:                             []string{"testString"},
-				Organization:                   []string{"testString"},
-				Country:                        []string{"testString"},
-				Locality:                       []string{"testString"},
-				Province:                       []string{"testString"},
-				StreetAddress:                  []string{"testString"},
-				PostalCode:                     []string{"testString"},
-				SerialNumber:                   core.StringPtr("d9:be:fe:35:ba:09:42:b5:35:ba:09:42:b5"),
+			configurationPrototypeModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype{
+				ConfigType:                  core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
+				Name:                        core.StringPtr("example-cloud-internet-services-config"),
+				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
+				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 
 			createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
@@ -298,7 +274,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(configuration).ToNot(BeNil())
 
-			configurationNameForGetConfigurationLink = *configuration.(*secretsmanagerv2.PrivateCertificateConfigurationRootCA).Name
+			configurationNameForGetConfigurationLink = *configuration.(*secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServices).Name
 			fmt.Fprintf(GinkgoWriter, "Saved configurationNameForGetConfigurationLink value: %v\n", configurationNameForGetConfigurationLink)
 		})
 	})
@@ -815,10 +791,11 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) with pagination`, func() {
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Offset: core.Int64Ptr(int64(0)),
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("config_type"),
-				Search: core.StringPtr("example"),
+				Offset:      core.Int64Ptr(int64(0)),
+				Limit:       core.Int64Ptr(int64(10)),
+				Sort:        core.StringPtr("config_type"),
+				Search:      core.StringPtr("example"),
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 			}
 
 			listConfigurationsOptions.Offset = nil
@@ -843,9 +820,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) using ConfigurationsPager`, func() {
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("config_type"),
-				Search: core.StringPtr("example"),
+				Limit:       core.Int64Ptr(int64(10)),
+				Sort:        core.StringPtr("config_type"),
+				Search:      core.StringPtr("example"),
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 			}
 
 			// Test GetNext().
@@ -882,7 +860,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		It(`GetConfiguration(getConfigurationOptions *GetConfigurationOptions)`, func() {
 			getConfigurationOptions := &secretsmanagerv2.GetConfigurationOptions{
 				Name:                       &configurationNameForGetConfigurationLink,
-				XSmAcceptConfigurationType: core.StringPtr("private_cert_configuration_root_ca"),
+				XSmAcceptConfigurationType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 			}
 
 			configuration, response, err := secretsManagerService.GetConfiguration(getConfigurationOptions)
@@ -897,8 +875,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`UpdateConfiguration(updateConfigurationOptions *UpdateConfigurationOptions)`, func() {
-			configurationPatchModel := &secretsmanagerv2.IAMCredentialsConfigurationPatch{
-				ApiKey: core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u"),
+			configurationPatchModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch{
+				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
+				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 			configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
@@ -906,7 +885,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			updateConfigurationOptions := &secretsmanagerv2.UpdateConfigurationOptions{
 				Name:                       &configurationNameForGetConfigurationLink,
 				ConfigurationPatch:         configurationPatchModelAsPatch,
-				XSmAcceptConfigurationType: core.StringPtr("private_cert_configuration_root_ca"),
+				XSmAcceptConfigurationType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 			}
 
 			configuration, response, err := secretsManagerService.UpdateConfiguration(updateConfigurationOptions)
@@ -920,22 +899,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`CreateConfigurationAction(createConfigurationActionOptions *CreateConfigurationActionOptions)`, func() {
-			configurationActionPrototypeModel := &secretsmanagerv2.PrivateCertificateConfigurationActionRotateCRLPrototype{
-				ActionType: core.StringPtr("private_cert_configuration_action_rotate_crl"),
-			}
 
-			createConfigurationActionOptions := &secretsmanagerv2.CreateConfigurationActionOptions{
-				Name:                       &configurationNameForGetConfigurationLink,
-				ConfigActionPrototype:      configurationActionPrototypeModel,
-				XSmAcceptConfigurationType: core.StringPtr("private_cert_configuration_root_ca"),
-			}
-
-			configurationAction, response, err := secretsManagerService.CreateConfigurationAction(createConfigurationActionOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(configurationAction).ToNot(BeNil())
-		})
+		// The integration test for CreateConfigurationAction has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`CreateConfigurationAction()`, func() {})
 	})
 
 	Describe(`CreateNotificationsRegistration - Register with Event Notifications instance`, func() {
@@ -1062,7 +1029,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		It(`DeleteConfiguration(deleteConfigurationOptions *DeleteConfigurationOptions)`, func() {
 			deleteConfigurationOptions := &secretsmanagerv2.DeleteConfigurationOptions{
 				Name:                       &configurationNameForGetConfigurationLink,
-				XSmAcceptConfigurationType: core.StringPtr("private_cert_configuration_root_ca"),
+				XSmAcceptConfigurationType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 			}
 
 			response, err := secretsManagerService.DeleteConfiguration(deleteConfigurationOptions)

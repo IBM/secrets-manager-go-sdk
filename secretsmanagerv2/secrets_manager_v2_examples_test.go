@@ -283,26 +283,11 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nCreateConfiguration() result:")
 			// begin-create_configuration
 
-			configurationPrototypeModel := &secretsmanagerv2.PrivateCertificateConfigurationRootCAPrototype{
-				ConfigType:                     core.StringPtr("private_cert_configuration_root_ca"),
-				Name:                           core.StringPtr("example-root-CA"),
-				MaxTTL:                         core.StringPtr("43830h"),
-				CrlExpiry:                      core.StringPtr("72h"),
-				CrlDisable:                     core.BoolPtr(false),
-				CrlDistributionPointsEncoded:   core.BoolPtr(true),
-				IssuingCertificatesUrlsEncoded: core.BoolPtr(true),
-				CommonName:                     core.StringPtr("example.com"),
-				AltNames:                       []string{"alt-name-1", "alt-name-2"},
-				IpSans:                         core.StringPtr("127.0.0.1"),
-				UriSans:                        core.StringPtr("https://www.example.com/test"),
-				OtherSans:                      []string{"1.2.3.5.4.3.201.10.4.3;utf8:test@example.com"},
-				TTL:                            core.StringPtr("2190h"),
-				Format:                         core.StringPtr("pem"),
-				PrivateKeyFormat:               core.StringPtr("der"),
-				KeyType:                        core.StringPtr("rsa"),
-				KeyBits:                        core.Int64Ptr(int64(4096)),
-				MaxPathLength:                  core.Int64Ptr(int64(-1)),
-				ExcludeCnFromSans:              core.BoolPtr(false),
+			configurationPrototypeModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype{
+				ConfigType:                  core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
+				Name:                        core.StringPtr("example-cloud-internet-services-config"),
+				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
+				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 
 			createConfigurationOptions := secretsManagerService.NewCreateConfigurationOptions(
@@ -322,7 +307,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(configuration).ToNot(BeNil())
 
-			configurationNameForGetConfigurationLink = *configuration.(*secretsmanagerv2.PrivateCertificateConfigurationRootCA).Name
+			configurationNameForGetConfigurationLink = *configuration.(*secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServices).Name
 			fmt.Fprintf(GinkgoWriter, "Saved configurationNameForGetConfigurationLink value: %v\n", configurationNameForGetConfigurationLink)
 		})
 		It(`ListSecretGroups request example`, func() {
@@ -748,9 +733,10 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nListConfigurations() result:")
 			// begin-list_configurations
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("config_type"),
-				Search: core.StringPtr("example"),
+				Limit:       core.Int64Ptr(int64(10)),
+				Sort:        core.StringPtr("config_type"),
+				Search:      core.StringPtr("example"),
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
 			}
 
 			pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptions)
@@ -777,7 +763,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			getConfigurationOptions := secretsManagerService.NewGetConfigurationOptions(
 				configurationNameForGetConfigurationLink,
 			)
-			getConfigurationOptions.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+			getConfigurationOptions.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 
 			configuration, response, err := secretsManagerService.GetConfiguration(getConfigurationOptions)
 			if err != nil {
@@ -796,8 +782,9 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			fmt.Println("\nUpdateConfiguration() result:")
 			// begin-update_configuration
 
-			configurationPatchModel := &secretsmanagerv2.IAMCredentialsConfigurationPatch{
-				ApiKey: core.StringPtr("RmnPBn6n1dzoo0v3kyznKEpg0WzdTpW9lW7FtKa017_u"),
+			configurationPatchModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch{
+				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
+				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 			configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
@@ -806,7 +793,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 				configurationNameForGetConfigurationLink,
 				configurationPatchModelAsPatch,
 			)
-			updateConfigurationOptions.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+			updateConfigurationOptions.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 
 			configuration, response, err := secretsManagerService.UpdateConfiguration(updateConfigurationOptions)
 			if err != nil {
@@ -833,7 +820,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 				configurationNameForGetConfigurationLink,
 				configurationActionPrototypeModel,
 			)
-			createConfigurationActionOptions.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+			createConfigurationActionOptions.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 
 			configurationAction, response, err := secretsManagerService.CreateConfigurationAction(createConfigurationActionOptions)
 			if err != nil {
@@ -1020,7 +1007,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			deleteConfigurationOptions := secretsManagerService.NewDeleteConfigurationOptions(
 				configurationNameForGetConfigurationLink,
 			)
-			deleteConfigurationOptions.SetXSmAcceptConfigurationType("private_cert_configuration_root_ca")
+			deleteConfigurationOptions.SetXSmAcceptConfigurationType("public_cert_configuration_dns_cloud_internet_services")
 
 			response, err := secretsManagerService.DeleteConfiguration(deleteConfigurationOptions)
 			if err != nil {
