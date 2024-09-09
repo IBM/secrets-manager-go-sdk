@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.93.0-c40121e6-20240729-182103
+ * IBM OpenAPI SDK Code Generator Version: 3.94.1-71478489-20240820-161623
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -477,7 +477,7 @@ func (secretsManager *SecretsManagerV2) UpdateSecretGroupWithContext(ctx context
 // Delete a secret group by specifying the ID of the secret group.
 //
 // **Note:** To delete a secret group, it must be empty. If you need to remove a secret group that contains secrets, you
-// must first [delete the secrets](#delete-secret) that are associated with the group.
+// must first delete the secrets that are associated with the group.
 func (secretsManager *SecretsManagerV2) DeleteSecretGroup(deleteSecretGroupOptions *DeleteSecretGroupOptions) (response *core.DetailedResponse, err error) {
 	response, err = secretsManager.DeleteSecretGroupWithContext(context.Background(), deleteSecretGroupOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -701,8 +701,7 @@ func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Conte
 // Get a secret and its details by specifying the ID of the secret.
 //
 // A successful request returns the secret data that is associated with your secret, along with other metadata. To view
-// only the details of a specified secret without retrieving its value, use the [Get secret
-// metadata](#get-secret-metadata) operation.
+// only the details of a specified secret without retrieving its value, use the Get secret metadata operation.
 func (secretsManager *SecretsManagerV2) GetSecret(getSecretOptions *GetSecretOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
 	result, response, err = secretsManager.GetSecretWithContext(context.Background(), getSecretOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -1054,8 +1053,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretActionWithContext(ctx contex
 // Get a secret and its details by specifying the Name and Type of the secret.
 //
 // A successful request returns the secret data that is associated with your secret, along with other metadata. To view
-// only the details of a specified secret without retrieving its value, use the [Get secret
-// metadata](#get-secret-metadata) operation.
+// only the details of a specified secret without retrieving its value, use the Get secret metadata operation.
 func (secretsManager *SecretsManagerV2) GetSecretByNameType(getSecretByNameTypeOptions *GetSecretByNameTypeOptions) (result SecretIntf, response *core.DetailedResponse, err error) {
 	result, response, err = secretsManager.GetSecretByNameTypeWithContext(context.Background(), getSecretByNameTypeOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -12984,6 +12982,10 @@ type IAMCredentialsSecretVersion struct {
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
 	// The ID of the API key that is generated for this secret.
 	ApiKeyID *string `json:"api_key_id,omitempty"`
 
@@ -13094,6 +13096,11 @@ func UnmarshalIAMCredentialsSecretVersion(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.ApiKeyID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "api_key_id-error", common.GetComponentInfo())
@@ -13154,6 +13161,10 @@ type IAMCredentialsSecretVersionMetadata struct {
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The ID of the API key that is generated for this secret.
 	ApiKeyID *string `json:"api_key_id,omitempty"`
@@ -13256,6 +13267,11 @@ func UnmarshalIAMCredentialsSecretVersionMetadata(m map[string]json.RawMessage, 
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "api_key_id", &obj.ApiKeyID)
@@ -14121,7 +14137,7 @@ type ImportedCertificateVersion struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number" validate:"required"`
@@ -14308,7 +14324,7 @@ type ImportedCertificateVersionMetadata struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number" validate:"required"`
@@ -15106,6 +15122,10 @@ type KVSecretVersion struct {
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
 	// The payload data of a key-value secret.
 	Data map[string]interface{} `json:"data" validate:"required"`
 }
@@ -15199,6 +15219,11 @@ func UnmarshalKVSecretVersion(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
@@ -15249,6 +15274,10 @@ type KVSecretVersionMetadata struct {
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
 // Constants associated with the KVSecretVersionMetadata.SecretType property.
@@ -15338,6 +15367,11 @@ func UnmarshalKVSecretVersionMetadata(m map[string]json.RawMessage, result inter
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -21405,7 +21439,7 @@ type PrivateCertificateVersion struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number" validate:"required"`
@@ -21677,7 +21711,7 @@ type PrivateCertificateVersionMetadata struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number" validate:"required"`
@@ -26237,6 +26271,10 @@ type UsernamePasswordSecretVersion struct {
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
 	// The username that is assigned to an `username_password` secret.
 	Username *string `json:"username" validate:"required"`
 
@@ -26333,6 +26371,11 @@ func UnmarshalUsernamePasswordSecretVersion(m map[string]json.RawMessage, result
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
@@ -26388,6 +26431,10 @@ type UsernamePasswordSecretVersionMetadata struct {
 
 	// A v4 UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// Arbitrary, username_password.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
 // Constants associated with the UsernamePasswordSecretVersionMetadata.SecretType property.
@@ -26477,6 +26524,11 @@ func UnmarshalUsernamePasswordSecretVersionMetadata(m map[string]json.RawMessage
 	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
