@@ -1,3 +1,5 @@
+## [2.0.6](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.5...v2.0.6) (2024-09-09)
+
 ## [2.0.5](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.4...v2.0.5) (2024-08-05)
 
 ## [2.0.4](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.3...v2.0.4) (2024-03-11)
