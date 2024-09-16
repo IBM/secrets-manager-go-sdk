@@ -9466,12 +9466,6 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
-			It(`Invoke NewIAMCredentialsConfigurationPatch successfully`, func() {
-				apiKey := "testString"
-				_model, err := secretsManagerService.NewIAMCredentialsConfigurationPatch(apiKey)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
 			It(`Invoke NewIAMCredentialsConfigurationPrototype successfully`, func() {
 				name := "my-example-engine-config"
 				configType := "iam_credentials_configuration"
@@ -9740,6 +9734,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ConfigurationPatch)
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(true)
 			model.MaxTTL = core.StringPtr("8760h")
 			model.CrlExpiry = core.StringPtr("72h")
 			model.CrlDisable = core.BoolPtr(true)
@@ -9871,6 +9866,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
 			model.NotBeforeDuration = core.StringPtr("30s")
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(false)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10102,6 +10098,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.TTL = core.StringPtr("1d")
 			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
 			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
+			model.AccountID = core.StringPtr("708d4dc20986423e79bb8512f81b7f92")
 			model.ReuseApiKey = core.BoolPtr(true)
 			model.Rotation = nil
 			model.Certificate = core.StringPtr("testString")
@@ -10368,6 +10365,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10388,6 +10386,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-example-engine-config")
 			model.ConfigType = core.StringPtr("iam_credentials_configuration")
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(false)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10436,6 +10435,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.TTL = core.StringPtr("1d")
 			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
 			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
+			model.AccountID = core.StringPtr("708d4dc20986423e79bb8512f81b7f92")
 			model.ReuseApiKey = core.BoolPtr(true)
 			model.Rotation = nil
 			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
