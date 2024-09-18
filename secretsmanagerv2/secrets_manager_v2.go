@@ -3184,13 +3184,13 @@ type Configuration struct {
 	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// An IBM Cloud API key that can create and manage service IDs. The API key must be assigned the Editor platform role
 	// on the Access Groups Service and the Operator platform role on the IAM Identity Service.  For more information, see
 	// the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
 	ApiKey *string `json:"api_key,omitempty"`
-
-	// This parameter indicates whether the API key configuration is disabled.
-	Disabled *bool `json:"disabled,omitempty"`
 
 	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
@@ -3976,6 +3976,9 @@ type ConfigurationMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
+
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
 
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
@@ -11780,13 +11783,13 @@ type IAMCredentialsConfiguration struct {
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
 
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// An IBM Cloud API key that can create and manage service IDs. The API key must be assigned the Editor platform role
 	// on the Access Groups Service and the Operator platform role on the IAM Identity Service.  For more information, see
 	// the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
 	ApiKey *string `json:"api_key,omitempty"`
-
-	// This parameter indicates whether the API key configuration is disabled.
-	Disabled *bool `json:"disabled" validate:"required"`
 }
 
 // Constants associated with the IAMCredentialsConfiguration.ConfigType property.
@@ -11854,14 +11857,14 @@ func UnmarshalIAMCredentialsConfiguration(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11891,6 +11894,9 @@ type IAMCredentialsConfigurationMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
 }
 
 // Constants associated with the IAMCredentialsConfigurationMetadata.ConfigType property.
@@ -11956,6 +11962,11 @@ func UnmarshalIAMCredentialsConfigurationMetadata(m map[string]json.RawMessage, 
 	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))

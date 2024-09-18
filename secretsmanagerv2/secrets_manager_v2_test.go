@@ -7134,7 +7134,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "disabled": true}]}`)
 				}))
 			})
 			It(`Invoke ListConfigurations successfully with retries`, func() {
@@ -7196,7 +7196,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "disabled": true}]}`)
 				}))
 			})
 			It(`Invoke ListConfigurations successfully`, func() {
@@ -7350,9 +7350,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z"}],"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","disabled":true}],"limit":1}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z"}],"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","disabled":true}],"limit":1}`)
 					} else {
 						res.WriteHeader(400)
 					}
