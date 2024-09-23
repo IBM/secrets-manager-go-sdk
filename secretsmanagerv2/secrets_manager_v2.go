@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.94.1-71478489-20240820-161623
+ * IBM OpenAPI SDK Code Generator Version: 3.95.0-d0e386be-20240906-183310
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -3184,6 +3184,9 @@ type Configuration struct {
 	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
 
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// An IBM Cloud API key that can create and manage service IDs. The API key must be assigned the Editor platform role
 	// on the Access Groups Service and the Operator platform role on the IAM Identity Service.  For more information, see
 	// the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
@@ -3974,6 +3977,9 @@ type ConfigurationMetadata struct {
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// The configuration of the Let's Encrypt CA environment.
 	LetsEncryptEnvironment *string `json:"lets_encrypt_environment,omitempty"`
 
@@ -4261,6 +4267,12 @@ type ConfigurationPatch struct {
 	// the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
 	ApiKey *string `json:"api_key,omitempty"`
 
+	// This parameter indicates whether the API key configuration is disabled.
+	//
+	// If it is set to `disabled`, the IAM credentials engine doesn't use the configured API key for credentials
+	// management.
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// The maximum time-to-live (TTL) for certificates that are created by this CA.
 	//
 	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
@@ -4534,6 +4546,11 @@ func UnmarshalConfigurationPatch(m map[string]json.RawMessage, result interface{
 		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "max_ttl", &obj.MaxTTL)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "max_ttl-error", common.GetComponentInfo())
@@ -4783,6 +4800,9 @@ func (configurationPatch *ConfigurationPatch) AsPatch() (_patch map[string]inter
 	_patch = map[string]interface{}{}
 	if !core.IsNil(configurationPatch.ApiKey) {
 		_patch["api_key"] = configurationPatch.ApiKey
+	}
+	if !core.IsNil(configurationPatch.Disabled) {
+		_patch["disabled"] = configurationPatch.Disabled
 	}
 	if !core.IsNil(configurationPatch.MaxTTL) {
 		_patch["max_ttl"] = configurationPatch.MaxTTL
@@ -5262,6 +5282,11 @@ type ConfigurationPrototype struct {
 
 	// The API key that is used to set the iam_credentials engine.
 	ApiKey *string `json:"api_key,omitempty"`
+
+	// This parameter indicates whether the API key configuration is disabled.
+	//
+	// If it is set to `true`, the IAM credentials engine doesn't use the configured API key for credentials management.
+	Disabled *bool `json:"disabled,omitempty"`
 }
 
 // Constants associated with the ConfigurationPrototype.ConfigType property.
@@ -7564,6 +7589,10 @@ type Secret struct {
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
 
+	// The ID of the account in which the IAM credentials are created. Use this field only if the target account is not the
+	// same as the account of the Secrets Manager instance. Otherwise, the field can be omitted.
+	AccountID *string `json:"account_id,omitempty"`
+
 	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
 	// If it is set to `true`, the service ID for the secret was provided by the user at secret creation. If it is set to
@@ -8436,6 +8465,10 @@ type SecretMetadata struct {
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
 
+	// The ID of the account in which the IAM credentials are created. Use this field only if the target account is not the
+	// same as the account of the Secrets Manager instance. Otherwise, the field can be omitted.
+	AccountID *string `json:"account_id,omitempty"`
+
 	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
 	// If it is set to `true`, the service ID for the secret was provided by the user at secret creation. If it is set to
@@ -8919,6 +8952,10 @@ type SecretPrototype struct {
 	// retain the service ID after your secret expires, is rotated, or deleted. If you provide a service ID, do not include
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
+
+	// The ID of the account in which the IAM credentials are created. Use this field only if the target account is not the
+	// same as the account of the Secrets Manager instance. Otherwise, the field can be omitted.
+	AccountID *string `json:"account_id,omitempty"`
 
 	// (IAM credentials) This parameter indicates whether to reuse the service ID and API key for future read operations.
 	//
@@ -11746,6 +11783,9 @@ type IAMCredentialsConfiguration struct {
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
 
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
+
 	// An IBM Cloud API key that can create and manage service IDs. The API key must be assigned the Editor platform role
 	// on the Access Groups Service and the Operator platform role on the IAM Identity Service.  For more information, see
 	// the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
@@ -11817,6 +11857,11 @@ func UnmarshalIAMCredentialsConfiguration(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
@@ -11849,6 +11894,9 @@ type IAMCredentialsConfigurationMetadata struct {
 
 	// The date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// This parameter indicates whether the API key configuration is disabled.
+	Disabled *bool `json:"disabled,omitempty"`
 }
 
 // Constants associated with the IAMCredentialsConfigurationMetadata.ConfigType property.
@@ -11916,6 +11964,11 @@ func UnmarshalIAMCredentialsConfigurationMetadata(m map[string]json.RawMessage, 
 		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -11926,19 +11979,13 @@ type IAMCredentialsConfigurationPatch struct {
 	// An IBM Cloud API key that can create and manage service IDs. The API key must be assigned the Editor platform role
 	// on the Access Groups Service and the Operator platform role on the IAM Identity Service.  For more information, see
 	// the [docs](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-configure-iam-engine).
-	ApiKey *string `json:"api_key" validate:"required"`
-}
+	ApiKey *string `json:"api_key,omitempty"`
 
-// NewIAMCredentialsConfigurationPatch : Instantiate IAMCredentialsConfigurationPatch (Generic Model Constructor)
-func (*SecretsManagerV2) NewIAMCredentialsConfigurationPatch(apiKey string) (_model *IAMCredentialsConfigurationPatch, err error) {
-	_model = &IAMCredentialsConfigurationPatch{
-		ApiKey: core.StringPtr(apiKey),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	if err != nil {
-		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
-	}
-	return
+	// This parameter indicates whether the API key configuration is disabled.
+	//
+	// If it is set to `disabled`, the IAM credentials engine doesn't use the configured API key for credentials
+	// management.
+	Disabled *bool `json:"disabled,omitempty"`
 }
 
 func (*IAMCredentialsConfigurationPatch) isaConfigurationPatch() bool {
@@ -11953,6 +12000,11 @@ func UnmarshalIAMCredentialsConfigurationPatch(m map[string]json.RawMessage, res
 		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -11962,6 +12014,9 @@ func (iAMCredentialsConfigurationPatch *IAMCredentialsConfigurationPatch) AsPatc
 	_patch = map[string]interface{}{}
 	if !core.IsNil(iAMCredentialsConfigurationPatch.ApiKey) {
 		_patch["api_key"] = iAMCredentialsConfigurationPatch.ApiKey
+	}
+	if !core.IsNil(iAMCredentialsConfigurationPatch.Disabled) {
+		_patch["disabled"] = iAMCredentialsConfigurationPatch.Disabled
 	}
 
 	return
@@ -11982,6 +12037,11 @@ type IAMCredentialsConfigurationPrototype struct {
 
 	// The API key that is used to set the iam_credentials engine.
 	ApiKey *string `json:"api_key" validate:"required"`
+
+	// This parameter indicates whether the API key configuration is disabled.
+	//
+	// If it is set to `true`, the IAM credentials engine doesn't use the configured API key for credentials management.
+	Disabled *bool `json:"disabled,omitempty"`
 }
 
 // Constants associated with the IAMCredentialsConfigurationPrototype.ConfigType property.
@@ -12032,6 +12092,11 @@ func UnmarshalIAMCredentialsConfigurationPrototype(m map[string]json.RawMessage,
 	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "disabled", &obj.Disabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disabled-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12128,6 +12193,10 @@ type IAMCredentialsSecret struct {
 	// retain the service ID after your secret expires, is rotated, or deleted. If you provide a service ID, do not include
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
+
+	// The ID of the account in which the IAM credentials are created. Use this field only if the target account is not the
+	// same as the account of the Secrets Manager instance. Otherwise, the field can be omitted.
+	AccountID *string `json:"account_id,omitempty"`
 
 	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
@@ -12299,6 +12368,11 @@ func UnmarshalIAMCredentialsSecret(m map[string]json.RawMessage, result interfac
 		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "account_id", &obj.AccountID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "account_id-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIdIsStatic)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "service_id_is_static-error", common.GetComponentInfo())
@@ -12423,6 +12497,10 @@ type IAMCredentialsSecretMetadata struct {
 	// retain the service ID after your secret expires, is rotated, or deleted. If you provide a service ID, do not include
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
+
+	// The ID of the account in which the IAM credentials are created. Use this field only if the target account is not the
+	// same as the account of the Secrets Manager instance. Otherwise, the field can be omitted.
+	AccountID *string `json:"account_id,omitempty"`
 
 	// Indicates whether an `iam_credentials` secret was created with a static service ID.
 	//
@@ -12585,6 +12663,11 @@ func UnmarshalIAMCredentialsSecretMetadata(m map[string]json.RawMessage, result 
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "account_id", &obj.AccountID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "account_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "service_id_is_static", &obj.ServiceIdIsStatic)
@@ -12772,6 +12855,10 @@ type IAMCredentialsSecretPrototype struct {
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
 
+	// The ID of the account in which the IAM credentials are created. Use this field only if the target account is not the
+	// same as the account of the Secrets Manager instance. Otherwise, the field can be omitted.
+	AccountID *string `json:"account_id,omitempty"`
+
 	// (IAM credentials) This parameter indicates whether to reuse the service ID and API key for future read operations.
 	//
 	// If it is set to `true`, the service reuses the current credentials. If it is set to `false`, a new service ID and
@@ -12863,6 +12950,11 @@ func UnmarshalIAMCredentialsSecretPrototype(m map[string]json.RawMessage, result
 	err = core.UnmarshalPrimitive(m, "service_id", &obj.ServiceID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "service_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "account_id", &obj.AccountID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "account_id-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "reuse_api_key", &obj.ReuseApiKey)

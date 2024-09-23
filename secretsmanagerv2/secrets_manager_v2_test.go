@@ -7134,7 +7134,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "disabled": true}]}`)
 				}))
 			})
 			It(`Invoke ListConfigurations successfully with retries`, func() {
@@ -7196,7 +7196,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "configurations": [{"config_type": "iam_credentials_configuration", "name": "my-secret-engine-config", "secret_type": "arbitrary", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "updated_at": "2022-04-12T23:20:50.520Z", "disabled": true}]}`)
 				}))
 			})
 			It(`Invoke ListConfigurations successfully`, func() {
@@ -7350,9 +7350,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z"}],"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","disabled":true}],"limit":1}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z"}],"limit":1}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","disabled":true}],"limit":1}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -9466,12 +9466,6 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
-			It(`Invoke NewIAMCredentialsConfigurationPatch successfully`, func() {
-				apiKey := "testString"
-				_model, err := secretsManagerService.NewIAMCredentialsConfigurationPatch(apiKey)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
 			It(`Invoke NewIAMCredentialsConfigurationPrototype successfully`, func() {
 				name := "my-example-engine-config"
 				configType := "iam_credentials_configuration"
@@ -9740,6 +9734,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.ConfigurationPatch)
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(true)
 			model.MaxTTL = core.StringPtr("8760h")
 			model.CrlExpiry = core.StringPtr("72h")
 			model.CrlDisable = core.BoolPtr(true)
@@ -9871,6 +9866,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.BasicConstraintsValidForNonCa = core.BoolPtr(true)
 			model.NotBeforeDuration = core.StringPtr("30s")
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(false)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10102,6 +10098,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.TTL = core.StringPtr("1d")
 			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
 			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
+			model.AccountID = core.StringPtr("708d4dc20986423e79bb8512f81b7f92")
 			model.ReuseApiKey = core.BoolPtr(true)
 			model.Rotation = nil
 			model.Certificate = core.StringPtr("testString")
@@ -10368,6 +10365,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.IAMCredentialsConfigurationPatch)
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10388,6 +10386,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Name = core.StringPtr("my-example-engine-config")
 			model.ConfigType = core.StringPtr("iam_credentials_configuration")
 			model.ApiKey = core.StringPtr("testString")
+			model.Disabled = core.BoolPtr(false)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10436,6 +10435,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.TTL = core.StringPtr("1d")
 			model.AccessGroups = []string{"AccessGroupId-45884031-54be-4dd7-86ff-112511e92699"}
 			model.ServiceID = core.StringPtr("ServiceId-bb4ccc31-bd31-493a-bb58-52ec399800be")
+			model.AccountID = core.StringPtr("708d4dc20986423e79bb8512f81b7f92")
 			model.ReuseApiKey = core.BoolPtr(true)
 			model.Rotation = nil
 			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
