@@ -16,7 +16,6 @@ A Go client library to interact with the [IBM Cloud® Secrets Manager APIs](http
 </details>
 
 ## Overview
-
 The IBM Cloud Secrets Manager Go SDK allows developers to programmatically interact with the following IBM Cloud services:
 
 | Service name                                                     | Package name     |
