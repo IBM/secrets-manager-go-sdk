@@ -9535,6 +9535,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewPrivateCertificateConfigurationActionRotatePrototype successfully`, func() {
+				actionType := "private_cert_configuration_action_rotate_intermediate"
+				_model, err := secretsManagerService.NewPrivateCertificateConfigurationActionRotatePrototype(actionType)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewPrivateCertificateConfigurationActionSetSignedPrototype successfully`, func() {
 				actionType := "private_cert_configuration_action_set_signed"
 				certificate := "testString"
@@ -10679,6 +10685,24 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 			var result *secretsmanagerv2.PrivateCertificateConfigurationActionRotateCRLPrototype
 			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPrivateCertificateConfigurationActionRotatePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.PrivateCertificateConfigurationActionRotatePrototype)
+			model.ActionType = core.StringPtr("private_cert_configuration_action_rotate_intermediate")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.PrivateCertificateConfigurationActionRotatePrototype
+			err = secretsmanagerv2.UnmarshalPrivateCertificateConfigurationActionRotatePrototype(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))

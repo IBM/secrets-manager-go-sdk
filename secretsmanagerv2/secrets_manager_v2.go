@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.95.0-d0e386be-20240906-183310
+ * IBM OpenAPI SDK Code Generator Version: 3.95.2-120e65bc-20240924-152329
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -2610,6 +2610,8 @@ func (secretsManager *SecretsManagerV2) DeleteConfigurationWithContext(ctx conte
 // authority certificate.
 // - `private_cert_configuration_action_rotate_crl`: Rotate the certificate revocation list (CRL) of an intermediate
 // certificate authority.
+// - `private_cert_configuration_action_rotate_intermediate`: Rotate an internally signed intermediate certificate
+// authority certificate.
 func (secretsManager *SecretsManagerV2) CreateConfigurationAction(createConfigurationActionOptions *CreateConfigurationActionOptions) (result ConfigurationActionIntf, response *core.DetailedResponse, err error) {
 	result, response, err = secretsManager.CreateConfigurationActionWithContext(context.Background(), createConfigurationActionOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -3588,6 +3590,7 @@ func UnmarshalConfiguration(m map[string]json.RawMessage, result interface{}) (e
 // ConfigurationAction : The response body to specify the properties of the action to create a configuration.
 // Models which "extend" this model:
 // - PrivateCertificateConfigurationActionRevoke
+// - PrivateCertificateConfigurationActionRotate
 // - PrivateCertificateConfigurationActionSignCSR
 // - PrivateCertificateConfigurationActionSignIntermediate
 // - PrivateCertificateConfigurationActionSetSigned
@@ -3598,6 +3601,13 @@ type ConfigurationAction struct {
 
 	// The timestamp of the certificate revocation.
 	RevocationTimeSeconds *int64 `json:"revocation_time_seconds,omitempty"`
+
+	// The name of the intermediate certificate authority configuration.
+	Name *string `json:"name,omitempty"`
+
+	// The response body of the action to rotate an intermediate certificate authority for the private certificate
+	// configuration.
+	Config *PrivateCertificateConfigurationRotateAction `json:"config,omitempty"`
 
 	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
@@ -3704,6 +3714,7 @@ type ConfigurationAction struct {
 const (
 	ConfigurationAction_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	ConfigurationAction_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	ConfigurationAction_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	ConfigurationAction_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	ConfigurationAction_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	ConfigurationAction_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -3743,6 +3754,11 @@ func UnmarshalConfigurationAction(m map[string]json.RawMessage, result interface
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRevoke-error", common.GetComponentInfo())
 		}
+	} else if discValue == "private_cert_configuration_action_rotate_intermediate" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRotate)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRotate-error", common.GetComponentInfo())
+		}
 	} else if discValue == "private_cert_configuration_action_sign_csr" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSignCSR)
 		if err != nil {
@@ -3774,6 +3790,7 @@ func UnmarshalConfigurationAction(m map[string]json.RawMessage, result interface
 // Models which "extend" this model:
 // - PrivateCertificateConfigurationActionRotateCRLPrototype
 // - PrivateCertificateConfigurationActionRevokePrototype
+// - PrivateCertificateConfigurationActionRotatePrototype
 // - PrivateCertificateConfigurationActionSignCSRPrototype
 // - PrivateCertificateConfigurationActionSignIntermediatePrototype
 // - PrivateCertificateConfigurationActionSetSignedPrototype
@@ -3880,6 +3897,7 @@ type ConfigurationActionPrototype struct {
 const (
 	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -3923,6 +3941,11 @@ func UnmarshalConfigurationActionPrototype(m map[string]json.RawMessage, result 
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRevokePrototype)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRevokePrototype-error", common.GetComponentInfo())
+		}
+	} else if discValue == "private_cert_configuration_action_rotate_intermediate" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionRotatePrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationActionRotatePrototype-error", common.GetComponentInfo())
 		}
 	} else if discValue == "private_cert_configuration_action_sign_csr" {
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationActionSignCSRPrototype)
@@ -7254,6 +7277,216 @@ func UnmarshalPrivateCertificateCAData(m map[string]json.RawMessage, result inte
 	err = core.UnmarshalPrimitive(m, "ca_chain", &obj.CaChain)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ca_chain-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PrivateCertificateConfigurationRotateAction : The response body of the action to rotate an intermediate certificate authority for the private certificate
+// configuration.
+type PrivateCertificateConfigurationRotateAction struct {
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
+	// certificate.
+	AltNames []string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	IpSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	UriSans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
+	//
+	// The alternative names must match the values that are specified in the `allowed_other_sans` field in the associated
+	// certificate template. The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans []string `json:"other_sans,omitempty"`
+
+	// he requested TTL, after which the certificate expires.
+	TTL *int64 `json:"ttl,omitempty"`
+
+	// The format of the returned data.
+	Format *string `json:"format,omitempty"`
+
+	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero.
+	MaxPathLength *int64 `json:"max_path_length,omitempty"`
+
+	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
+	// useful if the common name is a human-readable identifier, instead of a hostname or an email address.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// The allowed DNS domains or subdomains for the certificates that are to be signed and issued by this CA certificate.
+	PermittedDnsDomains []string `json:"permitted_dns_domains,omitempty"`
+
+	// This field indicates whether to use values from a certificate signing request (CSR) to complete a
+	// `private_cert_configuration_action_sign_csr` action. If it is set to `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than by using the
+	// values that are provided in the other parameters to this operation.
+	//
+	// 2) Any key usage, for example, non-repudiation, that is requested in the CSR are added to the basic set of key
+	// usages used for CA certificates that are signed by the intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate.
+	UseCsrValues *bool `json:"use_csr_values,omitempty"`
+
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The street address values to define in the subject field of the resulting certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The postal code values to define in the subject field of the resulting certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// The requested value for the [`serialNumber`](https://datatracker.ietf.org/doc/html/rfc4519#section-2.31) attribute
+	// that is in the certificate's distinguished name (DN).
+	//
+	// **Note:** This field is not related to the `serial_number` field that is returned in the API response. The
+	// `serial_number` field represents the certificate's randomly assigned serial number.
+	SerialNumber *string `json:"serial_number,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr,omitempty"`
+
+	// The data that is associated with the root certificate authority.
+	Data *PrivateCertificateConfigurationCACertificate `json:"data,omitempty"`
+}
+
+// Constants associated with the PrivateCertificateConfigurationRotateAction.Format property.
+// The format of the returned data.
+const (
+	PrivateCertificateConfigurationRotateAction_Format_Pem       = "pem"
+	PrivateCertificateConfigurationRotateAction_Format_PemBundle = "pem_bundle"
+)
+
+// UnmarshalPrivateCertificateConfigurationRotateAction unmarshals an instance of PrivateCertificateConfigurationRotateAction from the specified map of raw messages.
+func UnmarshalPrivateCertificateConfigurationRotateAction(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateConfigurationRotateAction)
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "max_path_length", &obj.MaxPathLength)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "max_path_length-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "permitted_dns_domains", &obj.PermittedDnsDomains)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "permitted_dns_domains-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_csr_values", &obj.UseCsrValues)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "use_csr_values-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "serial_number", &obj.SerialNumber)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "serial_number-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "data", &obj.Data, UnmarshalPrivateCertificateConfigurationCACertificate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -15954,6 +16187,7 @@ type PrivateCertificateConfigurationActionRevoke struct {
 const (
 	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -15992,6 +16226,7 @@ type PrivateCertificateConfigurationActionRevokePrototype struct {
 const (
 	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16025,6 +16260,57 @@ func UnmarshalPrivateCertificateConfigurationActionRevokePrototype(m map[string]
 	return
 }
 
+// PrivateCertificateConfigurationActionRotate : The response body to specify the properties of the action to rotate the private certificate.
+// This model "extends" ConfigurationAction
+type PrivateCertificateConfigurationActionRotate struct {
+	// The type of configuration action.
+	ActionType *string `json:"action_type" validate:"required"`
+
+	// The name of the intermediate certificate authority configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The response body of the action to rotate an intermediate certificate authority for the private certificate
+	// configuration.
+	Config *PrivateCertificateConfigurationRotateAction `json:"config" validate:"required"`
+}
+
+// Constants associated with the PrivateCertificateConfigurationActionRotate.ActionType property.
+// The type of configuration action.
+const (
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+)
+
+func (*PrivateCertificateConfigurationActionRotate) isaConfigurationAction() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateConfigurationActionRotate unmarshals an instance of PrivateCertificateConfigurationActionRotate from the specified map of raw messages.
+func UnmarshalPrivateCertificateConfigurationActionRotate(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateConfigurationActionRotate)
+	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "config", &obj.Config, UnmarshalPrivateCertificateConfigurationRotateAction)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "config-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PrivateCertificateConfigurationActionRotateCRL : The response body of the action to rotate the CRL of an intermediate certificate authority for the private
 // certificate configuration.
 // This model "extends" ConfigurationAction
@@ -16041,6 +16327,7 @@ type PrivateCertificateConfigurationActionRotateCRL struct {
 const (
 	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16080,6 +16367,7 @@ type PrivateCertificateConfigurationActionRotateCRLPrototype struct {
 const (
 	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16113,6 +16401,52 @@ func UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype(m map[stri
 	return
 }
 
+// PrivateCertificateConfigurationActionRotatePrototype : The request body to specify the properties of the action to rotate the private certificate configuration.
+// This model "extends" ConfigurationActionPrototype
+type PrivateCertificateConfigurationActionRotatePrototype struct {
+	// The type of configuration action.
+	ActionType *string `json:"action_type" validate:"required"`
+}
+
+// Constants associated with the PrivateCertificateConfigurationActionRotatePrototype.ActionType property.
+// The type of configuration action.
+const (
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+)
+
+// NewPrivateCertificateConfigurationActionRotatePrototype : Instantiate PrivateCertificateConfigurationActionRotatePrototype (Generic Model Constructor)
+func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionRotatePrototype(actionType string) (_model *PrivateCertificateConfigurationActionRotatePrototype, err error) {
+	_model = &PrivateCertificateConfigurationActionRotatePrototype{
+		ActionType: core.StringPtr(actionType),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*PrivateCertificateConfigurationActionRotatePrototype) isaConfigurationActionPrototype() bool {
+	return true
+}
+
+// UnmarshalPrivateCertificateConfigurationActionRotatePrototype unmarshals an instance of PrivateCertificateConfigurationActionRotatePrototype from the specified map of raw messages.
+func UnmarshalPrivateCertificateConfigurationActionRotatePrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PrivateCertificateConfigurationActionRotatePrototype)
+	err = core.UnmarshalPrimitive(m, "action_type", &obj.ActionType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "action_type-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // PrivateCertificateConfigurationActionSetSigned : The response body of the action to set a signed intermediate certificate authority for the private certificate
 // configuration.
 // This model "extends" ConfigurationAction
@@ -16129,6 +16463,7 @@ type PrivateCertificateConfigurationActionSetSigned struct {
 const (
 	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16171,6 +16506,7 @@ type PrivateCertificateConfigurationActionSetSignedPrototype struct {
 const (
 	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16319,6 +16655,7 @@ const (
 const (
 	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16551,6 +16888,7 @@ const (
 const (
 	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -16792,6 +17130,7 @@ const (
 const (
 	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
@@ -17020,6 +17359,7 @@ const (
 const (
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
