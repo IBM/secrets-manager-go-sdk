@@ -32,7 +32,6 @@ The IBM Cloud Secrets Manager Go SDK allows developers to programmatically inter
   This SDK is tested with Go versions 1.19 and up. The SDK may work on previous versions, but this is not supported officially.
 
 ## Installation
-
 There are a few different ways to download and install the Secrets Manager Go SDK project for use by your Go application.
 
 #### `go get` command  
