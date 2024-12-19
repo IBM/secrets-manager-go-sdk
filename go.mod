@@ -7,7 +7,7 @@ require (
 	github.com/go-openapi/strfmt v0.22.1
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.31.1
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.10.0
 )
 
 require (
