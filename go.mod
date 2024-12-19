@@ -3,7 +3,7 @@ module github.com/IBM/secrets-manager-go-sdk/v2
 go 1.22.7
 
 require (
-	github.com/IBM/go-sdk-core/v5 v5.17.5
+	github.com/IBM/go-sdk-core/v5 v5.18.3
 	github.com/go-openapi/strfmt v0.22.1
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.31.1
