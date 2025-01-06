@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9492,8 +9492,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			It(`Invoke NewImportedCertificatePrototype successfully`, func() {
 				secretType := "imported_cert"
 				name := "my-secret-example"
-				certificate := "testString"
-				_model, err := secretsManagerService.NewImportedCertificatePrototype(secretType, name, certificate)
+				_model, err := secretsManagerService.NewImportedCertificatePrototype(secretType, name)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -9660,10 +9659,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			It(`Invoke NewPublicCertificatePrototype successfully`, func() {
 				secretType := "public_cert"
 				name := "my-secret-example"
-				commonName := "example.com"
 				ca := "my-ca-config"
 				dns := "my-dns-config"
-				_model, err := secretsManagerService.NewPublicCertificatePrototype(secretType, name, commonName, ca, dns)
+				_model, err := secretsManagerService.NewPublicCertificatePrototype(secretType, name, ca, dns)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -9886,6 +9884,51 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 		})
+		It(`Invoke UnmarshalImportedCertificateManagedCsr successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.ImportedCertificateManagedCsr)
+			model.Ou = []string{"testString"}
+			model.Organization = []string{"testString"}
+			model.Country = []string{"testString"}
+			model.Locality = []string{"testString"}
+			model.Province = []string{"testString"}
+			model.StreetAddress = []string{"testString"}
+			model.PostalCode = []string{"testString"}
+			model.RequireCn = core.BoolPtr(true)
+			model.CommonName = core.StringPtr("example.com")
+			model.AltNames = core.StringPtr("alt-name-1,alt-name-2")
+			model.IpSans = core.StringPtr("1.1.1.1,2.2.2.2")
+			model.UriSans = core.StringPtr("testString")
+			model.OtherSans = core.StringPtr("2.5.4.5;UTF8:*.example.com")
+			model.ExcludeCnFromSans = core.BoolPtr(true)
+			model.UserIds = core.StringPtr("user-1,user-2")
+			model.ServerFlag = core.BoolPtr(true)
+			model.ClientFlag = core.BoolPtr(true)
+			model.CodeSigningFlag = core.BoolPtr(true)
+			model.EmailProtectionFlag = core.BoolPtr(true)
+			model.KeyType = core.StringPtr("rsa")
+			model.KeyBits = core.Int64Ptr(int64(4096))
+			model.KeyUsage = core.StringPtr("DigitalSignature,KeyAgreement,KeyEncipherment")
+			model.ExtKeyUsage = core.StringPtr("ServerAuth,ClientAuth,EmailProtection")
+			model.PolicyIdentifiers = core.StringPtr("testString")
+			model.ExtKeyUsageOids = core.StringPtr("testString")
+			model.RotateKeys = core.BoolPtr(true)
+			model.Csr = core.StringPtr("testString")
+			model.PrivateKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.ImportedCertificateManagedCsr
+			err = secretsmanagerv2.UnmarshalImportedCertificateManagedCsr(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
 		It(`Invoke UnmarshalPasswordGenerationPolicy successfully`, func() {
 			// Construct an instance of the model.
 			model := new(secretsmanagerv2.PasswordGenerationPolicy)
@@ -10074,6 +10117,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.ExpirationDate = CreateMockDateTime("2033-04-12T23:20:50.520Z")
 			model.TTL = core.StringPtr("1d")
 			model.Rotation = nil
+			model.ManagedCsr = nil
 			model.PasswordGenerationPolicy = nil
 
 			b, err := json.Marshal(model)
@@ -10110,6 +10154,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Certificate = core.StringPtr("testString")
 			model.Intermediate = core.StringPtr("testString")
 			model.PrivateKey = core.StringPtr("testString")
+			model.ManagedCsr = nil
 			model.Data = map[string]interface{}{"anyKey": "anyValue"}
 			model.CertificateTemplate = core.StringPtr("cert-template-1")
 			model.CommonName = core.StringPtr("localhost")
@@ -10506,6 +10551,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Description = core.StringPtr("Extended description for this secret.")
 			model.Labels = []string{"my-label"}
 			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.ManagedCsr = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10531,6 +10577,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Certificate = core.StringPtr("testString")
 			model.Intermediate = core.StringPtr("testString")
 			model.PrivateKey = core.StringPtr("testString")
+			model.ManagedCsr = nil
 			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
 
