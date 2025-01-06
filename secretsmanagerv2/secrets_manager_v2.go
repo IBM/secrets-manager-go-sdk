@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.95.2-120e65bc-20240924-152329
+ * IBM OpenAPI SDK Code Generator Version: 3.98.0-8be2046a-20241205-162752
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -5564,7 +5564,7 @@ func (options *CreateNotificationsRegistrationOptions) SetHeaders(param map[stri
 
 // CreateSecretActionOptions : The CreateSecretAction options.
 type CreateSecretActionOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The request body to specify the properties for your secret action.
@@ -5642,7 +5642,7 @@ func (options *CreateSecretGroupOptions) SetHeaders(param map[string]string) *Cr
 
 // CreateSecretLocksBulkOptions : The CreateSecretLocksBulk options.
 type CreateSecretLocksBulkOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The locks data to be attached to a secret version.
@@ -5732,11 +5732,11 @@ func (options *CreateSecretOptions) SetHeaders(param map[string]string) *CreateS
 
 // CreateSecretVersionActionOptions : The CreateSecretVersionAction options.
 type CreateSecretVersionActionOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The request body to specify the properties of the action to create a secret version.
@@ -5781,11 +5781,11 @@ func (options *CreateSecretVersionActionOptions) SetHeaders(param map[string]str
 
 // CreateSecretVersionLocksBulkOptions : The CreateSecretVersionLocksBulk options.
 type CreateSecretVersionLocksBulkOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The locks data to be attached to a secret version.
@@ -5854,7 +5854,7 @@ func (options *CreateSecretVersionLocksBulkOptions) SetHeaders(param map[string]
 
 // CreateSecretVersionOptions : The CreateSecretVersion options.
 type CreateSecretVersionOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
 	// Specify the properties for your new secret version.
@@ -5959,7 +5959,7 @@ func (options *DeleteNotificationsRegistrationOptions) SetHeaders(param map[stri
 
 // DeleteSecretGroupOptions : The DeleteSecretGroup options.
 type DeleteSecretGroupOptions struct {
-	// The v4 UUID that uniquely identifies your secret group.
+	// The UUID that uniquely identifies your secret group.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -5987,7 +5987,7 @@ func (options *DeleteSecretGroupOptions) SetHeaders(param map[string]string) *De
 
 // DeleteSecretLocksBulkOptions : The DeleteSecretLocksBulk options.
 type DeleteSecretLocksBulkOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Specify the names of the secret locks to be deleted.
@@ -6024,7 +6024,7 @@ func (options *DeleteSecretLocksBulkOptions) SetHeaders(param map[string]string)
 
 // DeleteSecretOptions : The DeleteSecret options.
 type DeleteSecretOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6052,11 +6052,11 @@ func (options *DeleteSecretOptions) SetHeaders(param map[string]string) *DeleteS
 
 // DeleteSecretVersionDataOptions : The DeleteSecretVersionData options.
 type DeleteSecretVersionDataOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6091,11 +6091,11 @@ func (options *DeleteSecretVersionDataOptions) SetHeaders(param map[string]strin
 
 // DeleteSecretVersionLocksBulkOptions : The DeleteSecretVersionLocksBulk options.
 type DeleteSecretVersionLocksBulkOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Specify the names of the secret locks to be deleted.
@@ -6288,7 +6288,7 @@ func (options *GetSecretByNameTypeOptions) SetHeaders(param map[string]string) *
 
 // GetSecretGroupOptions : The GetSecretGroup options.
 type GetSecretGroupOptions struct {
-	// The v4 UUID that uniquely identifies your secret group.
+	// The UUID that uniquely identifies your secret group.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6316,7 +6316,7 @@ func (options *GetSecretGroupOptions) SetHeaders(param map[string]string) *GetSe
 
 // GetSecretMetadataOptions : The GetSecretMetadata options.
 type GetSecretMetadataOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6344,7 +6344,7 @@ func (options *GetSecretMetadataOptions) SetHeaders(param map[string]string) *Ge
 
 // GetSecretOptions : The GetSecret options.
 type GetSecretOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6372,11 +6372,11 @@ func (options *GetSecretOptions) SetHeaders(param map[string]string) *GetSecretO
 
 // GetSecretVersionMetadataOptions : The GetSecretVersionMetadata options.
 type GetSecretVersionMetadataOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6411,11 +6411,11 @@ func (options *GetSecretVersionMetadataOptions) SetHeaders(param map[string]stri
 
 // GetSecretVersionOptions : The GetSecretVersion options.
 type GetSecretVersionOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -6446,6 +6446,625 @@ func (_options *GetSecretVersionOptions) SetID(id string) *GetSecretVersionOptio
 func (options *GetSecretVersionOptions) SetHeaders(param map[string]string) *GetSecretVersionOptions {
 	options.Headers = param
 	return options
+}
+
+// ImportedCertificateManagedCsr : The data specified to create the CSR and the private key.
+type ImportedCertificateManagedCsr struct {
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
+	Ou []string `json:"ou,omitempty"`
+
+	// The Organization (O) values to define in the subject field of the resulting certificate.
+	Organization []string `json:"organization,omitempty"`
+
+	// The Country (C) values to define in the subject field of the resulting certificate.
+	Country []string `json:"country,omitempty"`
+
+	// The Locality (L) values to define in the subject field of the resulting certificate.
+	Locality []string `json:"locality,omitempty"`
+
+	// The Province (ST) values to define in the subject field of the resulting certificate.
+	Province []string `json:"province,omitempty"`
+
+	// The street address values to define in the subject field of the resulting certificate.
+	StreetAddress []string `json:"street_address,omitempty"`
+
+	// The postal code values to define in the subject field of the resulting certificate.
+	PostalCode []string `json:"postal_code,omitempty"`
+
+	// If set to false, makes the common_name field optional while generating a certificate.
+	RequireCn *bool `json:"require_cn,omitempty"`
+
+	// The Common Name (CN) represents the server name protected by the SSL certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
+	// certificate.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the certificate, in a comma-delimited list.
+	IpSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the certificate, in a comma-delimited list.
+	UriSans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the certificate, in a
+	// comma-delimited list.
+	//
+	// The alternative names must The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans *string `json:"other_sans,omitempty"`
+
+	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
+	// useful if the common name is a human-readable identifier, instead of a hostname or an email address.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans,omitempty"`
+
+	// Specifies the list of requested User ID (OID 0.9.2342.19200300.100.1.1) Subject values to be placed on the signed
+	// certificate.
+	UserIds *string `json:"user_ids,omitempty"`
+
+	// This field indicates whether certificate is flagged for server use.
+	ServerFlag *bool `json:"server_flag,omitempty"`
+
+	// This field indicates whether certificate is flagged for client use.
+	ClientFlag *bool `json:"client_flag,omitempty"`
+
+	// This field indicates whether certificate is flagged for code signing use.
+	CodeSigningFlag *bool `json:"code_signing_flag,omitempty"`
+
+	// This field indicates whether certificate is flagged for email protection use.
+	EmailProtectionFlag *bool `json:"email_protection_flag,omitempty"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type,omitempty"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048`, `3072`, `4096` and `8192`. Allowable values for EC keys are: `224`,
+	// `256`, `384`, and `521`. The default for RSA keys is `2048`. The default for EC keys is `256`. Ignored for ed25519
+	// key.
+	KeyBits *int64 `json:"key_bits,omitempty"`
+
+	// The allowed key usage constraint to define for certificate, in a comma-delimited list.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://pkg.go.dev/crypto/x509#KeyUsage). Omit the
+	// `KeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set this field to
+	// an empty string.
+	KeyUsage *string `json:"key_usage,omitempty"`
+
+	// The allowed extended key usage constraint on certificate, in a comma-delimited list.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://golang.org/pkg/crypto/x509/#ExtKeyUsage).
+	// Omit the `ExtKeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set
+	// this field to an empty string.
+	ExtKeyUsage *string `json:"ext_key_usage,omitempty"`
+
+	// A comma-delimited list of policy Object Identifiers (OIDs).
+	PolicyIdentifiers *string `json:"policy_identifiers,omitempty"`
+
+	// A comma-delimited list of extended key usage Object Identifiers (OIDs).
+	ExtKeyUsageOids *string `json:"ext_key_usage_oids,omitempty"`
+
+	// This field indicates whether the private key will be rotated.
+	RotateKeys *bool `json:"rotate_keys,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr,omitempty"`
+
+	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
+	// with embedded newline characters.
+	PrivateKey *string `json:"private_key,omitempty"`
+}
+
+// Constants associated with the ImportedCertificateManagedCsr.KeyType property.
+// The type of private key to generate.
+const (
+	ImportedCertificateManagedCsr_KeyType_Ec      = "ec"
+	ImportedCertificateManagedCsr_KeyType_Ed25519 = "ed25519"
+	ImportedCertificateManagedCsr_KeyType_Rsa     = "rsa"
+)
+
+// UnmarshalImportedCertificateManagedCsr unmarshals an instance of ImportedCertificateManagedCsr from the specified map of raw messages.
+func UnmarshalImportedCertificateManagedCsr(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportedCertificateManagedCsr)
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "require_cn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "user_ids", &obj.UserIds)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "user_ids-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "server_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "client_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_signing_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "email_protection_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_usage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "policy_identifiers-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage_oids-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rotate_keys-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// asPatch returns a generic map representation of the ImportedCertificateManagedCsr
+func (importedCertificateManagedCsr *ImportedCertificateManagedCsr) asPatch() (_patch map[string]interface{}) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(importedCertificateManagedCsr.Ou) {
+		_patch["ou"] = importedCertificateManagedCsr.Ou
+	}
+	if !core.IsNil(importedCertificateManagedCsr.Organization) {
+		_patch["organization"] = importedCertificateManagedCsr.Organization
+	}
+	if !core.IsNil(importedCertificateManagedCsr.Country) {
+		_patch["country"] = importedCertificateManagedCsr.Country
+	}
+	if !core.IsNil(importedCertificateManagedCsr.Locality) {
+		_patch["locality"] = importedCertificateManagedCsr.Locality
+	}
+	if !core.IsNil(importedCertificateManagedCsr.Province) {
+		_patch["province"] = importedCertificateManagedCsr.Province
+	}
+	if !core.IsNil(importedCertificateManagedCsr.StreetAddress) {
+		_patch["street_address"] = importedCertificateManagedCsr.StreetAddress
+	}
+	if !core.IsNil(importedCertificateManagedCsr.PostalCode) {
+		_patch["postal_code"] = importedCertificateManagedCsr.PostalCode
+	}
+	if !core.IsNil(importedCertificateManagedCsr.RequireCn) {
+		_patch["require_cn"] = importedCertificateManagedCsr.RequireCn
+	}
+	if !core.IsNil(importedCertificateManagedCsr.CommonName) {
+		_patch["common_name"] = importedCertificateManagedCsr.CommonName
+	}
+	if !core.IsNil(importedCertificateManagedCsr.AltNames) {
+		_patch["alt_names"] = importedCertificateManagedCsr.AltNames
+	}
+	if !core.IsNil(importedCertificateManagedCsr.IpSans) {
+		_patch["ip_sans"] = importedCertificateManagedCsr.IpSans
+	}
+	if !core.IsNil(importedCertificateManagedCsr.UriSans) {
+		_patch["uri_sans"] = importedCertificateManagedCsr.UriSans
+	}
+	if !core.IsNil(importedCertificateManagedCsr.OtherSans) {
+		_patch["other_sans"] = importedCertificateManagedCsr.OtherSans
+	}
+	if !core.IsNil(importedCertificateManagedCsr.ExcludeCnFromSans) {
+		_patch["exclude_cn_from_sans"] = importedCertificateManagedCsr.ExcludeCnFromSans
+	}
+	if !core.IsNil(importedCertificateManagedCsr.UserIds) {
+		_patch["user_ids"] = importedCertificateManagedCsr.UserIds
+	}
+	if !core.IsNil(importedCertificateManagedCsr.ServerFlag) {
+		_patch["server_flag"] = importedCertificateManagedCsr.ServerFlag
+	}
+	if !core.IsNil(importedCertificateManagedCsr.ClientFlag) {
+		_patch["client_flag"] = importedCertificateManagedCsr.ClientFlag
+	}
+	if !core.IsNil(importedCertificateManagedCsr.CodeSigningFlag) {
+		_patch["code_signing_flag"] = importedCertificateManagedCsr.CodeSigningFlag
+	}
+	if !core.IsNil(importedCertificateManagedCsr.EmailProtectionFlag) {
+		_patch["email_protection_flag"] = importedCertificateManagedCsr.EmailProtectionFlag
+	}
+	if !core.IsNil(importedCertificateManagedCsr.KeyType) {
+		_patch["key_type"] = importedCertificateManagedCsr.KeyType
+	}
+	if !core.IsNil(importedCertificateManagedCsr.KeyBits) {
+		_patch["key_bits"] = importedCertificateManagedCsr.KeyBits
+	}
+	if !core.IsNil(importedCertificateManagedCsr.KeyUsage) {
+		_patch["key_usage"] = importedCertificateManagedCsr.KeyUsage
+	}
+	if !core.IsNil(importedCertificateManagedCsr.ExtKeyUsage) {
+		_patch["ext_key_usage"] = importedCertificateManagedCsr.ExtKeyUsage
+	}
+	if !core.IsNil(importedCertificateManagedCsr.PolicyIdentifiers) {
+		_patch["policy_identifiers"] = importedCertificateManagedCsr.PolicyIdentifiers
+	}
+	if !core.IsNil(importedCertificateManagedCsr.ExtKeyUsageOids) {
+		_patch["ext_key_usage_oids"] = importedCertificateManagedCsr.ExtKeyUsageOids
+	}
+	if !core.IsNil(importedCertificateManagedCsr.RotateKeys) {
+		_patch["rotate_keys"] = importedCertificateManagedCsr.RotateKeys
+	}
+	if !core.IsNil(importedCertificateManagedCsr.Csr) {
+		_patch["csr"] = importedCertificateManagedCsr.Csr
+	}
+	if !core.IsNil(importedCertificateManagedCsr.PrivateKey) {
+		_patch["private_key"] = importedCertificateManagedCsr.PrivateKey
+	}
+
+	return
+}
+
+// ImportedCertificateManagedCsrResponse : The data specified to create the CSR and the private key.
+type ImportedCertificateManagedCsrResponse struct {
+	// The Organizational Unit (OU) values to define in the subject field of the resulting certificate.
+	Ou []string `json:"ou" validate:"required"`
+
+	// The Organization (O) values to define in the subject field of the resulting certificate.
+	Organization []string `json:"organization" validate:"required"`
+
+	// The Country (C) values to define in the subject field of the resulting certificate.
+	Country []string `json:"country" validate:"required"`
+
+	// The Locality (L) values to define in the subject field of the resulting certificate.
+	Locality []string `json:"locality" validate:"required"`
+
+	// The Province (ST) values to define in the subject field of the resulting certificate.
+	Province []string `json:"province" validate:"required"`
+
+	// The street address values to define in the subject field of the resulting certificate.
+	StreetAddress []string `json:"street_address" validate:"required"`
+
+	// The postal code values to define in the subject field of the resulting certificate.
+	PostalCode []string `json:"postal_code" validate:"required"`
+
+	// If set to false, makes the common_name field optional while generating a certificate.
+	RequireCn *bool `json:"require_cn" validate:"required"`
+
+	// The Common Name (CN) represents the server name protected by the SSL certificate.
+	CommonName *string `json:"common_name,omitempty"`
+
+	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
+	// certificate.
+	AltNames *string `json:"alt_names,omitempty"`
+
+	// The IP Subject Alternative Names to define for the certificate, in a comma-delimited list.
+	IpSans *string `json:"ip_sans,omitempty"`
+
+	// The URI Subject Alternative Names to define for the certificate, in a comma-delimited list.
+	UriSans *string `json:"uri_sans,omitempty"`
+
+	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the certificate, in a
+	// comma-delimited list.
+	//
+	// The alternative names must The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
+	// `UTF8`.
+	OtherSans *string `json:"other_sans,omitempty"`
+
+	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
+	// useful if the common name is a human-readable identifier, instead of a hostname or an email address.
+	ExcludeCnFromSans *bool `json:"exclude_cn_from_sans" validate:"required"`
+
+	// Specifies the list of requested User ID (OID 0.9.2342.19200300.100.1.1) Subject values to be placed on the signed
+	// certificate.
+	UserIds *string `json:"user_ids,omitempty"`
+
+	// This field indicates whether certificate is flagged for server use.
+	ServerFlag *bool `json:"server_flag" validate:"required"`
+
+	// This field indicates whether certificate is flagged for client use.
+	ClientFlag *bool `json:"client_flag" validate:"required"`
+
+	// This field indicates whether certificate is flagged for code signing use.
+	CodeSigningFlag *bool `json:"code_signing_flag" validate:"required"`
+
+	// This field indicates whether certificate is flagged for email protection use.
+	EmailProtectionFlag *bool `json:"email_protection_flag" validate:"required"`
+
+	// The type of private key to generate.
+	KeyType *string `json:"key_type" validate:"required"`
+
+	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048`, `3072`, `4096` and `8192`. Allowable values for EC keys are: `224`,
+	// `256`, `384`, and `521`. The default for RSA keys is `2048`. The default for EC keys is `256`. Ignored for ed25519
+	// key.
+	KeyBits *int64 `json:"key_bits" validate:"required"`
+
+	// The allowed key usage constraint to define for certificate, in a comma-delimited list.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://pkg.go.dev/crypto/x509#KeyUsage). Omit the
+	// `KeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set this field to
+	// an empty string.
+	KeyUsage *string `json:"key_usage,omitempty"`
+
+	// The allowed extended key usage constraint on certificate, in a comma-delimited list.
+	//
+	// You can find valid values in the [Go x509 package documentation](https://golang.org/pkg/crypto/x509/#ExtKeyUsage).
+	// Omit the `ExtKeyUsage` part of the value. Values are not case-sensitive. To specify no key usage constraints, set
+	// this field to an empty string.
+	ExtKeyUsage *string `json:"ext_key_usage,omitempty"`
+
+	// A comma-delimited list of policy Object Identifiers (OIDs).
+	PolicyIdentifiers *string `json:"policy_identifiers,omitempty"`
+
+	// A comma-delimited list of extended key usage Object Identifiers (OIDs).
+	ExtKeyUsageOids *string `json:"ext_key_usage_oids,omitempty"`
+
+	// This field indicates whether the private key will be rotated.
+	RotateKeys *bool `json:"rotate_keys,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr" validate:"required"`
+
+	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
+	// with embedded newline characters.
+	PrivateKey *string `json:"private_key" validate:"required"`
+}
+
+// Constants associated with the ImportedCertificateManagedCsrResponse.KeyType property.
+// The type of private key to generate.
+const (
+	ImportedCertificateManagedCsrResponse_KeyType_Ec      = "ec"
+	ImportedCertificateManagedCsrResponse_KeyType_Ed25519 = "ed25519"
+	ImportedCertificateManagedCsrResponse_KeyType_Rsa     = "rsa"
+)
+
+// UnmarshalImportedCertificateManagedCsrResponse unmarshals an instance of ImportedCertificateManagedCsrResponse from the specified map of raw messages.
+func UnmarshalImportedCertificateManagedCsrResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ImportedCertificateManagedCsrResponse)
+	err = core.UnmarshalPrimitive(m, "ou", &obj.Ou)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ou-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "organization", &obj.Organization)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "organization-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "country-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locality", &obj.Locality)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "locality-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "province", &obj.Province)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "province-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "street_address", &obj.StreetAddress)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "street_address-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "postal_code", &obj.PostalCode)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "postal_code-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "require_cn", &obj.RequireCn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "require_cn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "common_name", &obj.CommonName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "common_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alt_names", &obj.AltNames)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "alt_names-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ip_sans", &obj.IpSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ip_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "uri_sans", &obj.UriSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "uri_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "other_sans", &obj.OtherSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "other_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "exclude_cn_from_sans", &obj.ExcludeCnFromSans)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "exclude_cn_from_sans-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "user_ids", &obj.UserIds)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "user_ids-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "server_flag", &obj.ServerFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "server_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "client_flag", &obj.ClientFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "client_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code_signing_flag", &obj.CodeSigningFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_signing_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "email_protection_flag", &obj.EmailProtectionFlag)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "email_protection_flag-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_type", &obj.KeyType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_bits", &obj.KeyBits)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_bits-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "key_usage", &obj.KeyUsage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "key_usage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage", &obj.ExtKeyUsage)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "policy_identifiers", &obj.PolicyIdentifiers)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "policy_identifiers-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ext_key_usage_oids", &obj.ExtKeyUsageOids)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ext_key_usage_oids-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rotate_keys", &obj.RotateKeys)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rotate_keys-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // ListConfigurationsOptions : The ListConfigurations options.
@@ -6563,7 +7182,7 @@ func (options *ListSecretGroupsOptions) SetHeaders(param map[string]string) *Lis
 
 // ListSecretLocksOptions : The ListSecretLocks options.
 type ListSecretLocksOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The number of locks to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
@@ -6644,11 +7263,11 @@ func (options *ListSecretLocksOptions) SetHeaders(param map[string]string) *List
 
 // ListSecretVersionLocksOptions : The ListSecretVersionLocks options.
 type ListSecretVersionLocksOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The number of locks to skip. By specifying `offset`, you retrieve a subset of items that starts with the `offset`
@@ -6736,7 +7355,7 @@ func (options *ListSecretVersionLocksOptions) SetHeaders(param map[string]string
 
 // ListSecretVersionsOptions : The ListSecretVersions options.
 type ListSecretVersionsOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests.
@@ -7749,7 +8368,7 @@ type Secret struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -7765,7 +8384,7 @@ type Secret struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -7885,6 +8504,9 @@ type Secret struct {
 	// The date and time that the certificate validity period begins and ends.
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsrResponse `json:"managed_csr,omitempty"`
+
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
 	Certificate *string `json:"certificate,omitempty"`
 
@@ -7895,6 +8517,9 @@ type Secret struct {
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
 	// with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr,omitempty"`
 
 	// The payload data of a key-value secret.
 	Data map[string]interface{} `json:"data,omitempty"`
@@ -8153,7 +8778,7 @@ func UnmarshalSecretActionPrototype(m map[string]json.RawMessage, result interfa
 
 // SecretGroup : Properties that describe a secret group.
 type SecretGroup struct {
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	ID *string `json:"id" validate:"required"`
 
 	// The name of your existing secret group.
@@ -8305,13 +8930,13 @@ type SecretLock struct {
 	// The unique identifier that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretVersionID *string `json:"secret_version_id" validate:"required"`
 
 	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
@@ -8437,10 +9062,10 @@ func UnmarshalSecretLockPrototype(m map[string]json.RawMessage, result interface
 
 // SecretLocks : Create locks response body containing a collection of locks that are attached to a secret.
 type SecretLocks struct {
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -8628,7 +9253,7 @@ type SecretMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -8644,7 +9269,7 @@ type SecretMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -8753,6 +9378,9 @@ type SecretMetadata struct {
 
 	// The date and time that the certificate validity period begins and ends.
 	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsrResponse `json:"managed_csr,omitempty"`
 
 	// The intermediate certificate authority that signed this certificate.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
@@ -9022,6 +9650,9 @@ type SecretMetadataPatch struct {
 	// username_password, private_cert, public_cert, iam_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsr `json:"managed_csr,omitempty"`
+
 	// Policy patch for auto-generated passwords. Policy properties that are included in the patch are updated.
 	// Properties that are not included in the patch remain unchanged.
 	PasswordGenerationPolicy *PasswordGenerationPolicyPatch `json:"password_generation_policy,omitempty"`
@@ -9073,6 +9704,11 @@ func UnmarshalSecretMetadataPatch(m map[string]json.RawMessage, result interface
 		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "managed_csr", &obj.ManagedCsr, UnmarshalImportedCertificateManagedCsr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "managed_csr-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalModel(m, "password_generation_policy", &obj.PasswordGenerationPolicy, UnmarshalPasswordGenerationPolicyPatch)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
@@ -9105,6 +9741,9 @@ func (secretMetadataPatch *SecretMetadataPatch) AsPatch() (_patch map[string]int
 	}
 	if !core.IsNil(secretMetadataPatch.Rotation) {
 		_patch["rotation"] = secretMetadataPatch.Rotation.asPatch()
+	}
+	if !core.IsNil(secretMetadataPatch.ManagedCsr) {
+		_patch["managed_csr"] = secretMetadataPatch.ManagedCsr.asPatch()
 	}
 	if !core.IsNil(secretMetadataPatch.PasswordGenerationPolicy) {
 		_patch["password_generation_policy"] = secretMetadataPatch.PasswordGenerationPolicy.asPatch()
@@ -9149,7 +9788,7 @@ type SecretPrototype struct {
 	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -9210,6 +9849,9 @@ type SecretPrototype struct {
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
 	// with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsr `json:"managed_csr,omitempty"`
 
 	// The payload data of a key-value secret.
 	Data map[string]interface{} `json:"data,omitempty"`
@@ -9405,7 +10047,7 @@ type SecretVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id,omitempty"`
 
 	// The human-readable name of your secret.
@@ -9415,7 +10057,7 @@ type SecretVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -9428,7 +10070,7 @@ type SecretVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -9474,6 +10116,9 @@ type SecretVersion struct {
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
 	// with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr,omitempty"`
 
 	// The payload data of a key-value secret.
 	Data map[string]interface{} `json:"data,omitempty"`
@@ -9638,7 +10283,7 @@ func UnmarshalSecretVersionActionPrototype(m map[string]json.RawMessage, result 
 
 // SecretVersionLocks : SecretVersionLocks struct
 type SecretVersionLocks struct {
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	VersionID *string `json:"version_id" validate:"required"`
 
 	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
@@ -9806,7 +10451,7 @@ type SecretVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id,omitempty"`
 
 	// The human-readable name of your secret.
@@ -9816,7 +10461,7 @@ type SecretVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -9829,7 +10474,7 @@ type SecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -10025,7 +10670,7 @@ type SecretVersionPrototype struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier, or `current` or `previous` secret version aliases.
+	// A UUID identifier, or `current` or `previous` secret version aliases.
 	RestoreFromVersion *string `json:"restore_from_version,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
@@ -10783,7 +11428,7 @@ func (options *UpdateConfigurationOptions) SetHeaders(param map[string]string) *
 
 // UpdateSecretGroupOptions : The UpdateSecretGroup options.
 type UpdateSecretGroupOptions struct {
-	// The v4 UUID that uniquely identifies your secret group.
+	// The UUID that uniquely identifies your secret group.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// The request body to update a secret group.
@@ -10821,7 +11466,7 @@ func (options *UpdateSecretGroupOptions) SetHeaders(param map[string]string) *Up
 
 // UpdateSecretMetadataOptions : The UpdateSecretMetadata options.
 type UpdateSecretMetadataOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// JSON Merge-Patch content for update_secret_metadata.
@@ -10859,11 +11504,11 @@ func (options *UpdateSecretMetadataOptions) SetHeaders(param map[string]string) 
 
 // UpdateSecretVersionMetadataOptions : The UpdateSecretVersionMetadata options.
 type UpdateSecretVersionMetadataOptions struct {
-	// The v4 UUID that uniquely identifies your secret.
+	// The UUID that uniquely identifies your secret.
 	SecretID *string `json:"secret_id" validate:"required,ne="`
 
-	// The v4 UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer
-	// to the current or previous secret version.
+	// The UUID that uniquely identifies your secret version. You can use the `current` or `previous` aliases to refer to
+	// the current or previous secret version.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// JSON Merge-Patch content for update_secret_version_metadata.
@@ -10982,7 +11627,7 @@ type ArbitrarySecret struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -10998,7 +11643,7 @@ type ArbitrarySecret struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -11184,7 +11829,7 @@ type ArbitrarySecretMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -11200,7 +11845,7 @@ type ArbitrarySecretMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -11468,7 +12113,7 @@ type ArbitrarySecretPrototype struct {
 	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret.
 	Name *string `json:"name" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -11582,7 +12227,7 @@ type ArbitrarySecretVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -11592,7 +12237,7 @@ type ArbitrarySecretVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -11605,7 +12250,7 @@ type ArbitrarySecretVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -11735,7 +12380,7 @@ type ArbitrarySecretVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -11745,7 +12390,7 @@ type ArbitrarySecretVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -11758,7 +12403,7 @@ type ArbitrarySecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -12361,7 +13006,7 @@ type IAMCredentialsSecret struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -12377,7 +13022,7 @@ type IAMCredentialsSecret struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -12665,7 +13310,7 @@ type IAMCredentialsSecretMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -12681,7 +13326,7 @@ type IAMCredentialsSecretMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -13054,7 +13699,7 @@ type IAMCredentialsSecretPrototype struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -13217,7 +13862,7 @@ func UnmarshalIAMCredentialsSecretPrototype(m map[string]json.RawMessage, result
 // IAMCredentialsSecretRestoreFromVersionPrototype : IAMCredentialsSecretRestoreFromVersionPrototype struct
 // This model "extends" SecretVersionPrototype
 type IAMCredentialsSecretRestoreFromVersionPrototype struct {
-	// A v4 UUID identifier, or `current` or `previous` secret version aliases.
+	// A UUID identifier, or `current` or `previous` secret version aliases.
 	RestoreFromVersion *string `json:"restore_from_version" validate:"required"`
 
 	// The secret metadata that a user can customize.
@@ -13281,7 +13926,7 @@ type IAMCredentialsSecretVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -13291,7 +13936,7 @@ type IAMCredentialsSecretVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -13304,7 +13949,7 @@ type IAMCredentialsSecretVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -13461,7 +14106,7 @@ type IAMCredentialsSecretVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -13471,7 +14116,7 @@ type IAMCredentialsSecretVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -13484,7 +14129,7 @@ type IAMCredentialsSecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -13669,7 +14314,7 @@ type ImportedCertificate struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -13685,7 +14330,7 @@ type ImportedCertificate struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -13710,7 +14355,7 @@ type ImportedCertificate struct {
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
-	SigningAlgorithm *string `json:"signing_algorithm" validate:"required"`
+	SigningAlgorithm *string `json:"signing_algorithm,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
@@ -13721,29 +14366,32 @@ type ImportedCertificate struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated intermediate certificate.
-	IntermediateIncluded *bool `json:"intermediate_included" validate:"required"`
+	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
-	Issuer *string `json:"issuer" validate:"required"`
+	Issuer *string `json:"issuer,omitempty"`
 
 	// The identifier for the cryptographic algorithm used to generate the public key that is associated with the
 	// certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated private key.
-	PrivateKeyIncluded *bool `json:"private_key_included" validate:"required"`
+	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
-	SerialNumber *string `json:"serial_number" validate:"required"`
+	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date and time that the certificate validity period begins and ends.
-	Validity *CertificateValidity `json:"validity" validate:"required"`
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsrResponse `json:"managed_csr,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
-	Certificate *string `json:"certificate" validate:"required"`
+	Certificate *string `json:"certificate,omitempty"`
 
 	// The PEM-encoded intermediate certificate that is associated with the root certificate. The data must be formatted on
 	// a single line with embedded newline characters.
@@ -13752,6 +14400,9 @@ type ImportedCertificate struct {
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
 	// with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr,omitempty"`
 }
 
 // Constants associated with the ImportedCertificate.SecretType property.
@@ -13920,6 +14571,11 @@ func UnmarshalImportedCertificate(m map[string]json.RawMessage, result interface
 		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "managed_csr", &obj.ManagedCsr, UnmarshalImportedCertificateManagedCsrResponse)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "managed_csr-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "certificate", &obj.Certificate)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "certificate-error", common.GetComponentInfo())
@@ -13933,6 +14589,11 @@ func UnmarshalImportedCertificate(m map[string]json.RawMessage, result interface
 	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -13964,7 +14625,7 @@ type ImportedCertificateMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -13980,7 +14641,7 @@ type ImportedCertificateMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -14005,7 +14666,7 @@ type ImportedCertificateMetadata struct {
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
 	// certificate.
-	SigningAlgorithm *string `json:"signing_algorithm" validate:"required"`
+	SigningAlgorithm *string `json:"signing_algorithm,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
@@ -14016,26 +14677,29 @@ type ImportedCertificateMetadata struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated intermediate certificate.
-	IntermediateIncluded *bool `json:"intermediate_included" validate:"required"`
+	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
-	Issuer *string `json:"issuer" validate:"required"`
+	Issuer *string `json:"issuer,omitempty"`
 
 	// The identifier for the cryptographic algorithm used to generate the public key that is associated with the
 	// certificate.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated private key.
-	PrivateKeyIncluded *bool `json:"private_key_included" validate:"required"`
+	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
-	SerialNumber *string `json:"serial_number" validate:"required"`
+	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date and time that the certificate validity period begins and ends.
-	Validity *CertificateValidity `json:"validity" validate:"required"`
+	Validity *CertificateValidity `json:"validity,omitempty"`
+
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsrResponse `json:"managed_csr,omitempty"`
 }
 
 // Constants associated with the ImportedCertificateMetadata.SecretType property.
@@ -14204,6 +14868,11 @@ func UnmarshalImportedCertificateMetadata(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "validity-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "managed_csr", &obj.ManagedCsr, UnmarshalImportedCertificateManagedCsrResponse)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "managed_csr-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -14231,6 +14900,9 @@ type ImportedCertificateMetadataPatch struct {
 
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsr `json:"managed_csr,omitempty"`
 }
 
 func (*ImportedCertificateMetadataPatch) isaSecretMetadataPatch() bool {
@@ -14260,6 +14932,11 @@ func UnmarshalImportedCertificateMetadataPatch(m map[string]json.RawMessage, res
 		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "managed_csr", &obj.ManagedCsr, UnmarshalImportedCertificateManagedCsr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "managed_csr-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -14278,6 +14955,9 @@ func (importedCertificateMetadataPatch *ImportedCertificateMetadataPatch) AsPatc
 	}
 	if !core.IsNil(importedCertificateMetadataPatch.CustomMetadata) {
 		_patch["custom_metadata"] = importedCertificateMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(importedCertificateMetadataPatch.ManagedCsr) {
+		_patch["managed_csr"] = importedCertificateMetadataPatch.ManagedCsr.asPatch()
 	}
 
 	return
@@ -14301,7 +14981,7 @@ type ImportedCertificatePrototype struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -14312,7 +14992,7 @@ type ImportedCertificatePrototype struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
-	Certificate *string `json:"certificate" validate:"required"`
+	Certificate *string `json:"certificate,omitempty"`
 
 	// The PEM-encoded intermediate certificate that is associated with the root certificate. The data must be formatted on
 	// a single line with embedded newline characters.
@@ -14321,6 +15001,9 @@ type ImportedCertificatePrototype struct {
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
 	// with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The data specified to create the CSR and the private key.
+	ManagedCsr *ImportedCertificateManagedCsr `json:"managed_csr,omitempty"`
 
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
@@ -14344,11 +15027,10 @@ const (
 )
 
 // NewImportedCertificatePrototype : Instantiate ImportedCertificatePrototype (Generic Model Constructor)
-func (*SecretsManagerV2) NewImportedCertificatePrototype(secretType string, name string, certificate string) (_model *ImportedCertificatePrototype, err error) {
+func (*SecretsManagerV2) NewImportedCertificatePrototype(secretType string, name string) (_model *ImportedCertificatePrototype, err error) {
 	_model = &ImportedCertificatePrototype{
-		SecretType:  core.StringPtr(secretType),
-		Name:        core.StringPtr(name),
-		Certificate: core.StringPtr(certificate),
+		SecretType: core.StringPtr(secretType),
+		Name:       core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -14404,6 +15086,11 @@ func UnmarshalImportedCertificatePrototype(m map[string]json.RawMessage, result 
 		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "managed_csr", &obj.ManagedCsr, UnmarshalImportedCertificateManagedCsr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "managed_csr-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
@@ -14434,7 +15121,7 @@ type ImportedCertificateVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -14444,7 +15131,7 @@ type ImportedCertificateVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -14457,7 +15144,7 @@ type ImportedCertificateVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -14471,7 +15158,7 @@ type ImportedCertificateVersion struct {
 	Validity *CertificateValidity `json:"validity" validate:"required"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
-	Certificate *string `json:"certificate" validate:"required"`
+	Certificate *string `json:"certificate,omitempty"`
 
 	// The PEM-encoded intermediate certificate that is associated with the root certificate. The data must be formatted on
 	// a single line with embedded newline characters.
@@ -14480,6 +15167,9 @@ type ImportedCertificateVersion struct {
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
 	// with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
+
+	// The certificate signing request.
+	Csr *string `json:"csr,omitempty"`
 }
 
 // Constants associated with the ImportedCertificateVersion.SecretType property.
@@ -14601,6 +15291,11 @@ func UnmarshalImportedCertificateVersion(m map[string]json.RawMessage, result in
 		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -14621,7 +15316,7 @@ type ImportedCertificateVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -14631,7 +15326,7 @@ type ImportedCertificateVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -14644,7 +15339,7 @@ type ImportedCertificateVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -14860,7 +15555,7 @@ type KVSecret struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -14876,7 +15571,7 @@ type KVSecret struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -15053,7 +15748,7 @@ type KVSecretMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -15069,7 +15764,7 @@ type KVSecretMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -15306,7 +16001,7 @@ type KVSecretPrototype struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -15421,7 +16116,7 @@ type KVSecretVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -15431,7 +16126,7 @@ type KVSecretVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -15444,7 +16139,7 @@ type KVSecretVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -15574,7 +16269,7 @@ type KVSecretVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -15584,7 +16279,7 @@ type KVSecretVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -15597,7 +16292,7 @@ type KVSecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -15779,7 +16474,7 @@ type PrivateCertificate struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -15795,7 +16490,7 @@ type PrivateCertificate struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -16401,7 +17096,7 @@ func UnmarshalPrivateCertificateConfigurationActionRotateCRLPrototype(m map[stri
 	return
 }
 
-// PrivateCertificateConfigurationActionRotatePrototype : The request body to specify the properties of the action to rotate the private certificate configuration.
+// PrivateCertificateConfigurationActionRotatePrototype : The request body to specify the properties of the action to rotate an intermediate CA certificate.
 // This model "extends" ConfigurationActionPrototype
 type PrivateCertificateConfigurationActionRotatePrototype struct {
 	// The type of configuration action.
@@ -21228,7 +21923,7 @@ type PrivateCertificateMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -21244,7 +21939,7 @@ type PrivateCertificateMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -21613,7 +22308,7 @@ type PrivateCertificatePrototype struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -21843,7 +22538,7 @@ type PrivateCertificateVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -21853,7 +22548,7 @@ type PrivateCertificateVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -21866,7 +22561,7 @@ type PrivateCertificateVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -22115,7 +22810,7 @@ type PrivateCertificateVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -22125,7 +22820,7 @@ type PrivateCertificateVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -22138,7 +22833,7 @@ type PrivateCertificateVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -22324,7 +23019,7 @@ type PublicCertificate struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -22340,7 +23035,7 @@ type PublicCertificate struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -22372,7 +23067,7 @@ type PublicCertificate struct {
 	AltNames []string `json:"alt_names,omitempty"`
 
 	// The Common Name (CN) represents the server name protected by the SSL certificate.
-	CommonName *string `json:"common_name" validate:"required"`
+	CommonName *string `json:"common_name,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
@@ -23869,7 +24564,7 @@ type PublicCertificateMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -23885,7 +24580,7 @@ type PublicCertificateMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -23917,7 +24612,7 @@ type PublicCertificateMetadata struct {
 	AltNames []string `json:"alt_names,omitempty"`
 
 	// The Common Name (CN) represents the server name protected by the SSL certificate.
-	CommonName *string `json:"common_name" validate:"required"`
+	CommonName *string `json:"common_name,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// Arbitrary, username_password.
@@ -24247,7 +24942,7 @@ type PublicCertificatePrototype struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -24258,7 +24953,7 @@ type PublicCertificatePrototype struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The Common Name (CN) represents the server name protected by the SSL certificate.
-	CommonName *string `json:"common_name" validate:"required"`
+	CommonName *string `json:"common_name,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
@@ -24308,11 +25003,10 @@ const (
 )
 
 // NewPublicCertificatePrototype : Instantiate PublicCertificatePrototype (Generic Model Constructor)
-func (*SecretsManagerV2) NewPublicCertificatePrototype(secretType string, name string, commonName string, ca string, dns string) (_model *PublicCertificatePrototype, err error) {
+func (*SecretsManagerV2) NewPublicCertificatePrototype(secretType string, name string, ca string, dns string) (_model *PublicCertificatePrototype, err error) {
 	_model = &PublicCertificatePrototype{
 		SecretType: core.StringPtr(secretType),
 		Name:       core.StringPtr(name),
-		CommonName: core.StringPtr(commonName),
 		Ca:         core.StringPtr(ca),
 		Dns:        core.StringPtr(dns),
 	}
@@ -24486,7 +25180,7 @@ type PublicCertificateVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -24496,7 +25190,7 @@ type PublicCertificateVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -24509,7 +25203,7 @@ type PublicCertificateVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -24673,7 +25367,7 @@ type PublicCertificateVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -24683,7 +25377,7 @@ type PublicCertificateVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -24696,7 +25390,7 @@ type PublicCertificateVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -24894,7 +25588,7 @@ type ServiceCredentialsSecret struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -24910,7 +25604,7 @@ type ServiceCredentialsSecret struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -25138,7 +25832,7 @@ type ServiceCredentialsSecretMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -25154,7 +25848,7 @@ type ServiceCredentialsSecretMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -25481,7 +26175,7 @@ type ServiceCredentialsSecretPrototype struct {
 	// username_password, private_cert, public_cert, iam_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -25609,7 +26303,7 @@ type ServiceCredentialsSecretVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -25619,7 +26313,7 @@ type ServiceCredentialsSecretVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -25632,7 +26326,7 @@ type ServiceCredentialsSecretVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -25770,7 +26464,7 @@ type ServiceCredentialsSecretVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -25780,7 +26474,7 @@ type ServiceCredentialsSecretVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -25793,7 +26487,7 @@ type ServiceCredentialsSecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -25963,7 +26657,7 @@ type UsernamePasswordSecret struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -25979,7 +26673,7 @@ type UsernamePasswordSecret struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -26201,7 +26895,7 @@ type UsernamePasswordSecretMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -26217,7 +26911,7 @@ type UsernamePasswordSecretMetadata struct {
 	// The human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
@@ -26527,7 +27221,7 @@ type UsernamePasswordSecretPrototype struct {
 	// group.
 	Description *string `json:"description,omitempty"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -26677,7 +27371,7 @@ type UsernamePasswordSecretVersion struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -26687,7 +27381,7 @@ type UsernamePasswordSecretVersion struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -26700,7 +27394,7 @@ type UsernamePasswordSecretVersion struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -26838,7 +27532,7 @@ type UsernamePasswordSecretVersionMetadata struct {
 	// service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	ID *string `json:"id" validate:"required"`
 
 	// The human-readable name of your secret.
@@ -26848,7 +27542,7 @@ type UsernamePasswordSecretVersionMetadata struct {
 	// service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type" validate:"required"`
 
-	// A v4 UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id" validate:"required"`
 
 	// Indicates whether the secret payload is available in this secret version.
@@ -26861,7 +27555,7 @@ type UsernamePasswordSecretVersionMetadata struct {
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A v4 UUID identifier.
+	// A UUID identifier.
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
