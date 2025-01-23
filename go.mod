@@ -2,8 +2,6 @@ module github.com/IBM/secrets-manager-go-sdk/v2
 
 go 1.23
 
-replace golang.org/x/net => golang.org/x/net v0.34.0
-
 require (
 	github.com/IBM/go-sdk-core/v5 v5.18.5
 	github.com/go-openapi/strfmt v0.23.0
