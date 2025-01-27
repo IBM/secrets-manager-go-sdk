@@ -6548,13 +6548,6 @@ type ImportedCertificateManagedCsr struct {
 
 	// This field indicates whether the private key will be rotated.
 	RotateKeys *bool `json:"rotate_keys,omitempty"`
-
-	// The certificate signing request.
-	Csr *string `json:"csr,omitempty"`
-
-	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
-	// with embedded newline characters.
-	PrivateKey *string `json:"private_key,omitempty"`
 }
 
 // Constants associated with the ImportedCertificateManagedCsr.KeyType property.
@@ -6698,16 +6691,6 @@ func UnmarshalImportedCertificateManagedCsr(m map[string]json.RawMessage, result
 		err = core.SDKErrorf(err, "", "rotate_keys-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "csr", &obj.Csr)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "csr-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "private_key", &obj.PrivateKey)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "private_key-error", common.GetComponentInfo())
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -6792,12 +6775,6 @@ func (importedCertificateManagedCsr *ImportedCertificateManagedCsr) asPatch() (_
 	}
 	if !core.IsNil(importedCertificateManagedCsr.RotateKeys) {
 		_patch["rotate_keys"] = importedCertificateManagedCsr.RotateKeys
-	}
-	if !core.IsNil(importedCertificateManagedCsr.Csr) {
-		_patch["csr"] = importedCertificateManagedCsr.Csr
-	}
-	if !core.IsNil(importedCertificateManagedCsr.PrivateKey) {
-		_patch["private_key"] = importedCertificateManagedCsr.PrivateKey
 	}
 
 	return
@@ -9070,7 +9047,7 @@ type SecretLocks struct {
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 	// service_credentials, kv, and username_password.
-	SecretType *string `json:"secret_type,omitempty"`
+	SecretType *string `json:"secret_type" validate:"required"`
 
 	// The human-readable name of your secret.
 	SecretName *string `json:"secret_name,omitempty"`

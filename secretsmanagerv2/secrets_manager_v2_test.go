@@ -4506,7 +4506,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_action_revoke_certificate", "revocation_time_seconds": 21}`)
+					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_action_revoke_certificate", "revocation_time_seconds": 1577836800}`)
 				}))
 			})
 			It(`Invoke CreateSecretVersionAction successfully with retries`, func() {
@@ -4582,7 +4582,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_action_revoke_certificate", "revocation_time_seconds": 21}`)
+					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_action_revoke_certificate", "revocation_time_seconds": 1577836800}`)
 				}))
 			})
 			It(`Invoke CreateSecretVersionAction successfully`, func() {
@@ -8090,7 +8090,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_configuration_action_revoke_ca_certificate", "revocation_time_seconds": 21}`)
+					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_configuration_action_revoke_ca_certificate", "revocation_time_seconds": 1577836800}`)
 				}))
 			})
 			It(`Invoke CreateConfigurationAction successfully with retries`, func() {
@@ -8168,7 +8168,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_configuration_action_revoke_ca_certificate", "revocation_time_seconds": 21}`)
+					fmt.Fprintf(res, "%s", `{"action_type": "private_cert_configuration_action_revoke_ca_certificate", "revocation_time_seconds": 1577836800}`)
 				}))
 			})
 			It(`Invoke CreateConfigurationAction successfully`, func() {
@@ -9706,7 +9706,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
 			model.TTL = core.StringPtr("12h")
 			model.Format = core.StringPtr("pem")
-			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.MaxPathLength = core.Int64Ptr(int64(-1))
 			model.ExcludeCnFromSans = core.BoolPtr(true)
 			model.PermittedDnsDomains = []string{"testString"}
 			model.UseCsrValues = core.BoolPtr(true)
@@ -9829,7 +9829,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.PrivateKeyFormat = core.StringPtr("der")
 			model.KeyType = core.StringPtr("rsa")
 			model.KeyBits = core.Int64Ptr(int64(4096))
-			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.MaxPathLength = core.Int64Ptr(int64(-1))
 			model.ExcludeCnFromSans = core.BoolPtr(true)
 			model.PermittedDnsDomains = []string{"testString"}
 			model.Ou = []string{"testString"}
@@ -9913,8 +9913,6 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.PolicyIdentifiers = core.StringPtr("testString")
 			model.ExtKeyUsageOids = core.StringPtr("testString")
 			model.RotateKeys = core.BoolPtr(true)
-			model.Csr = core.StringPtr("testString")
-			model.PrivateKey = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10783,7 +10781,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
 			model.TTL = core.StringPtr("12h")
 			model.Format = core.StringPtr("pem")
-			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.MaxPathLength = core.Int64Ptr(int64(-1))
 			model.ExcludeCnFromSans = core.BoolPtr(true)
 			model.PermittedDnsDomains = []string{"testString"}
 			model.UseCsrValues = core.BoolPtr(true)
@@ -10821,7 +10819,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.OtherSans = []string{"2.5.4.5;UTF8:*.example.com"}
 			model.TTL = core.StringPtr("12h")
 			model.Format = core.StringPtr("pem")
-			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.MaxPathLength = core.Int64Ptr(int64(-1))
 			model.ExcludeCnFromSans = core.BoolPtr(true)
 			model.PermittedDnsDomains = []string{"testString"}
 			model.UseCsrValues = core.BoolPtr(true)
@@ -10959,7 +10957,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.PrivateKeyFormat = core.StringPtr("der")
 			model.KeyType = core.StringPtr("rsa")
 			model.KeyBits = core.Int64Ptr(int64(4096))
-			model.MaxPathLength = core.Int64Ptr(int64(38))
+			model.MaxPathLength = core.Int64Ptr(int64(-1))
 			model.ExcludeCnFromSans = core.BoolPtr(true)
 			model.PermittedDnsDomains = []string{"testString"}
 			model.Ou = []string{"testString"}
