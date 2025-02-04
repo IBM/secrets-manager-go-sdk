@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.98.0-8be2046a-20241205-162752
+ * IBM OpenAPI SDK Code Generator Version: 3.99.1-daeb6e46-20250131-173156
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -6490,8 +6490,7 @@ type ImportedCertificateManagedCsr struct {
 	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the certificate, in a
 	// comma-delimited list.
 	//
-	// The alternative names must The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
-	// `UTF8`.
+	// The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is `UTF8`.
 	OtherSans *string `json:"other_sans,omitempty"`
 
 	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
@@ -6523,7 +6522,7 @@ type ImportedCertificateManagedCsr struct {
 	//
 	// Allowable values for RSA keys are: `2048`, `3072`, `4096` and `8192`. Allowable values for EC keys are: `224`,
 	// `256`, `384`, and `521`. The default for RSA keys is `2048`. The default for EC keys is `256`. Ignored for ed25519
-	// key.
+	// keys.
 	KeyBits *int64 `json:"key_bits,omitempty"`
 
 	// The allowed key usage constraint to define for certificate, in a comma-delimited list.
@@ -6822,8 +6821,7 @@ type ImportedCertificateManagedCsrResponse struct {
 	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the certificate, in a
 	// comma-delimited list.
 	//
-	// The alternative names must The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is
-	// `UTF8`.
+	// The format is the same as OpenSSL: `<oid>:<type>:<value>` where the current valid type is `UTF8`.
 	OtherSans *string `json:"other_sans,omitempty"`
 
 	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
@@ -6855,7 +6853,7 @@ type ImportedCertificateManagedCsrResponse struct {
 	//
 	// Allowable values for RSA keys are: `2048`, `3072`, `4096` and `8192`. Allowable values for EC keys are: `224`,
 	// `256`, `384`, and `521`. The default for RSA keys is `2048`. The default for EC keys is `256`. Ignored for ed25519
-	// key.
+	// keys.
 	KeyBits *int64 `json:"key_bits" validate:"required"`
 
 	// The allowed key usage constraint to define for certificate, in a comma-delimited list.
