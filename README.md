@@ -35,7 +35,6 @@ The IBM Cloud Secrets Manager Go SDK allows developers to programmatically inter
 There are a few different ways to download and install the Secrets Manager Go SDK project for use by your Go application.
 
 #### `go get` command  
-
 Use this command to download and install the SDK:
 
 ```
