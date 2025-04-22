@@ -570,17 +570,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetSecretTask(getSecretTaskOptions *GetSecretTaskOptions)`, func() {
-			getSecretTaskOptions := &secretsmanagerv2.GetSecretTaskOptions{
-				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretIdForGetSecretLink,
-			}
 
-			secretTask, response, err := secretsManagerService.GetSecretTask(getSecretTaskOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(secretTask).ToNot(BeNil())
-		})
+		// The integration test for GetSecretTask has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`GetSecretTask()`, func() {})
 	})
 
 	Describe(`ReplaceSecretTask - Update a secret's task`, func() {
@@ -1064,16 +1057,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteSecretTask(deleteSecretTaskOptions *DeleteSecretTaskOptions)`, func() {
-			deleteSecretTaskOptions := &secretsmanagerv2.DeleteSecretTaskOptions{
-				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretIdForGetSecretLink,
-			}
 
-			response, err := secretsManagerService.DeleteSecretTask(deleteSecretTaskOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(204))
-		})
+		// The integration test for DeleteSecretTask has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`DeleteSecretTask()`, func() {})
 	})
 
 	Describe(`DeleteConfiguration - Delete a configuration`, func() {
