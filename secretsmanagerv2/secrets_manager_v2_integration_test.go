@@ -556,6 +556,43 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		// It(`CreateSecretVersionAction()`, func() {})
 	})
 
+	Describe(`ListSecretTasks - List secret tasks`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+
+		// The integration test for ListSecretTasks has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`ListSecretTasks()`, func() {})
+	})
+
+	Describe(`GetSecretTask - Get a secret's task`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetSecretTask(getSecretTaskOptions *GetSecretTaskOptions)`, func() {
+			getSecretTaskOptions := &secretsmanagerv2.GetSecretTaskOptions{
+				SecretID: &secretIdForGetSecretLink,
+				ID:       &secretIdForGetSecretLink,
+			}
+
+			secretTask, response, err := secretsManagerService.GetSecretTask(getSecretTaskOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(secretTask).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ReplaceSecretTask - Update a secret's task`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+
+		// The integration test for ReplaceSecretTask has been explicitly excluded from generation.
+		// A test for this operation must be developed manually.
+		// It(`ReplaceSecretTask()`, func() {})
+	})
+
 	Describe(`ListSecretsLocks - List secrets and their locks`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -795,7 +832,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 				Limit:       core.Int64Ptr(int64(10)),
 				Sort:        core.StringPtr("config_type"),
 				Search:      core.StringPtr("example"),
-				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 			}
 
 			listConfigurationsOptions.Offset = nil
@@ -823,7 +860,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 				Limit:       core.Int64Ptr(int64(10)),
 				Sort:        core.StringPtr("config_type"),
 				Search:      core.StringPtr("example"),
-				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 			}
 
 			// Test GetNext().
@@ -1013,10 +1050,27 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`DeleteSecret(deleteSecretOptions *DeleteSecretOptions)`, func() {
 			deleteSecretOptions := &secretsmanagerv2.DeleteSecretOptions{
-				ID: &secretIdForGetSecretLink,
+				ID:          &secretIdForGetSecretLink,
+				ForceDelete: core.BoolPtr(false),
 			}
 
 			response, err := secretsManagerService.DeleteSecret(deleteSecretOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`DeleteSecretTask - Delete a task`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteSecretTask(deleteSecretTaskOptions *DeleteSecretTaskOptions)`, func() {
+			deleteSecretTaskOptions := &secretsmanagerv2.DeleteSecretTaskOptions{
+				SecretID: &secretIdForGetSecretLink,
+				ID:       &secretIdForGetSecretLink,
+			}
+
+			response, err := secretsManagerService.DeleteSecretTask(deleteSecretTaskOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
 		})

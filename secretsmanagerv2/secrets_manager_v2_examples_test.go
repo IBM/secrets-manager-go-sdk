@@ -620,6 +620,82 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(201))
 			Expect(versionAction).ToNot(BeNil())
 		})
+		It(`ListSecretTasks request example`, func() {
+			fmt.Println("\nListSecretTasks() result:")
+			// begin-list_secret_tasks
+
+			listSecretTasksOptions := secretsManagerService.NewListSecretTasksOptions(
+				secretIdForGetSecretLink,
+			)
+
+			secretTaskCollection, response, err := secretsManagerService.ListSecretTasks(listSecretTasksOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(secretTaskCollection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-list_secret_tasks
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(secretTaskCollection).ToNot(BeNil())
+		})
+		It(`GetSecretTask request example`, func() {
+			fmt.Println("\nGetSecretTask() result:")
+			// begin-get_secret_task
+
+			getSecretTaskOptions := secretsManagerService.NewGetSecretTaskOptions(
+				secretIdForGetSecretLink,
+				secretIdForGetSecretLink,
+			)
+
+			secretTask, response, err := secretsManagerService.GetSecretTask(getSecretTaskOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(secretTask, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_secret_task
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(secretTask).ToNot(BeNil())
+		})
+		It(`ReplaceSecretTask request example`, func() {
+			fmt.Println("\nReplaceSecretTask() result:")
+			// begin-replace_secret_task
+
+			customCredentialsNewCredentialsModel := &secretsmanagerv2.CustomCredentialsNewCredentials{
+				ID:      core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5"),
+				Payload: map[string]interface{}{"anyKey": "anyValue"},
+			}
+
+			secretTaskPrototypeModel := &secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated{
+				Status:      core.StringPtr("credentials_created"),
+				Credentials: customCredentialsNewCredentialsModel,
+			}
+
+			replaceSecretTaskOptions := secretsManagerService.NewReplaceSecretTaskOptions(
+				secretIdForGetSecretLink,
+				secretIdForGetSecretLink,
+				secretTaskPrototypeModel,
+			)
+
+			secretTask, response, err := secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(secretTask, "", "  ")
+			fmt.Println(string(b))
+
+			// end-replace_secret_task
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(secretTask).ToNot(BeNil())
+		})
 		It(`ListSecretsLocks request example`, func() {
 			fmt.Println("\nListSecretsLocks() result:")
 			// begin-list_secrets_locks
@@ -736,7 +812,7 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 				Limit:       core.Int64Ptr(int64(10)),
 				Sort:        core.StringPtr("config_type"),
 				Search:      core.StringPtr("example"),
-				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
+				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 			}
 
 			pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptions)
@@ -997,6 +1073,27 @@ var _ = Describe(`SecretsManagerV2 Examples Tests`, func() {
 			}
 
 			// end-delete_secret
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
+		})
+		It(`DeleteSecretTask request example`, func() {
+			// begin-delete_secret_task
+
+			deleteSecretTaskOptions := secretsManagerService.NewDeleteSecretTaskOptions(
+				secretIdForGetSecretLink,
+				secretIdForGetSecretLink,
+			)
+
+			response, err := secretsManagerService.DeleteSecretTask(deleteSecretTaskOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteSecretTask(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_secret_task
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))

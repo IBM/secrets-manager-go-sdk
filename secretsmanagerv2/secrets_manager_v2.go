@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.99.1-daeb6e46-20250131-173156
+ * IBM OpenAPI SDK Code Generator Version: 3.104.0-b4a47c49-20250418-184351
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -810,6 +810,10 @@ func (secretsManager *SecretsManagerV2) DeleteSecretWithContext(ctx context.Cont
 	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecret")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
+	}
+
+	if deleteSecretOptions.ForceDelete != nil {
+		builder.AddQuery("force_delete", fmt.Sprint(*deleteSecretOptions.ForceDelete))
 	}
 
 	request, err := builder.Build()
@@ -1635,6 +1639,292 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx
 	return
 }
 
+// ListSecretTasks : List secret tasks
+// List secret tasks.
+//
+// Supported secret types: `custom_credentials`.
+func (secretsManager *SecretsManagerV2) ListSecretTasks(listSecretTasksOptions *ListSecretTasksOptions) (result *SecretTaskCollection, response *core.DetailedResponse, err error) {
+	result, response, err = secretsManager.ListSecretTasksWithContext(context.Background(), listSecretTasksOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ListSecretTasksWithContext is an alternate form of the ListSecretTasks method which supports a Context parameter
+func (secretsManager *SecretsManagerV2) ListSecretTasksWithContext(ctx context.Context, listSecretTasksOptions *ListSecretTasksOptions) (result *SecretTaskCollection, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(listSecretTasksOptions, "listSecretTasksOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(listSecretTasksOptions, "listSecretTasksOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_id": *listSecretTasksOptions.SecretID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/tasks`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range listSecretTasksOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretTasks")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "list_secret_tasks", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretTaskCollection)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetSecretTask : Get a secret's task
+// Get a task of a secret and its details by specifying the ID of the task.
+//
+// A successful request returns the task that is associated with your secret.
+//
+// Supported secret types: `custom_credentials`.
+func (secretsManager *SecretsManagerV2) GetSecretTask(getSecretTaskOptions *GetSecretTaskOptions) (result *SecretTask, response *core.DetailedResponse, err error) {
+	result, response, err = secretsManager.GetSecretTaskWithContext(context.Background(), getSecretTaskOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetSecretTaskWithContext is an alternate form of the GetSecretTask method which supports a Context parameter
+func (secretsManager *SecretsManagerV2) GetSecretTaskWithContext(ctx context.Context, getSecretTaskOptions *GetSecretTaskOptions) (result *SecretTask, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getSecretTaskOptions, "getSecretTaskOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getSecretTaskOptions, "getSecretTaskOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_id": *getSecretTaskOptions.SecretID,
+		"id":        *getSecretTaskOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/tasks/{id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range getSecretTaskOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretTask")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "get_secret_task", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretTask)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ReplaceSecretTask : Update a secret's task
+// A callback endpoint for updating a task with results.
+//
+// Supported secret types: `custom_credentials`.
+func (secretsManager *SecretsManagerV2) ReplaceSecretTask(replaceSecretTaskOptions *ReplaceSecretTaskOptions) (result *SecretTask, response *core.DetailedResponse, err error) {
+	result, response, err = secretsManager.ReplaceSecretTaskWithContext(context.Background(), replaceSecretTaskOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ReplaceSecretTaskWithContext is an alternate form of the ReplaceSecretTask method which supports a Context parameter
+func (secretsManager *SecretsManagerV2) ReplaceSecretTaskWithContext(ctx context.Context, replaceSecretTaskOptions *ReplaceSecretTaskOptions) (result *SecretTask, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(replaceSecretTaskOptions, "replaceSecretTaskOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(replaceSecretTaskOptions, "replaceSecretTaskOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_id": *replaceSecretTaskOptions.SecretID,
+		"id":        *replaceSecretTaskOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/tasks/{id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range replaceSecretTaskOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ReplaceSecretTask")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	_, err = builder.SetBodyContentJSON(replaceSecretTaskOptions.TaskPut)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = secretsManager.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "replace_secret_task", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecretTask)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteSecretTask : Delete a task
+// Delete a task by specifying the ID of the secret.
+//
+// Supported secret types: `custom_credentials`.
+func (secretsManager *SecretsManagerV2) DeleteSecretTask(deleteSecretTaskOptions *DeleteSecretTaskOptions) (response *core.DetailedResponse, err error) {
+	response, err = secretsManager.DeleteSecretTaskWithContext(context.Background(), deleteSecretTaskOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// DeleteSecretTaskWithContext is an alternate form of the DeleteSecretTask method which supports a Context parameter
+func (secretsManager *SecretsManagerV2) DeleteSecretTaskWithContext(ctx context.Context, deleteSecretTaskOptions *DeleteSecretTaskOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteSecretTaskOptions, "deleteSecretTaskOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(deleteSecretTaskOptions, "deleteSecretTaskOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"secret_id": *deleteSecretTaskOptions.SecretID,
+		"id":        *deleteSecretTaskOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = secretsManager.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(secretsManager.Service.Options.URL, `/api/v2/secrets/{secret_id}/tasks/{id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range deleteSecretTaskOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretTask")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	response, err = secretsManager.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_secret_task", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+
+	return
+}
+
 // ListSecretsLocks : List secrets and their locks
 // List the secrets and their locks in your Secrets Manager instance.
 func (secretsManager *SecretsManagerV2) ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) (result *SecretsLocksPaginatedCollection, response *core.DetailedResponse, err error) {
@@ -2229,11 +2519,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(
 // Add a configuration to the specified secret type.
 //
 // Use this operation to define the configurations that are required to create public certificates (`public_cert`),
-// private certificates (`private_cert`) and IAM Credentials secrets (`iam_credentials`).
+// private certificates (`private_cert`), IAM credentials secrets (`iam_credentials`) and custom credentials secrets
+// (`custom_credentials`).
 //
 // You can add multiple configurations for your instance as follows:
 //
-// - A single configuration for IAM Credentials.
+// - A single configuration for IAM credentials.
 // - Up to 10 CA configurations for public certificates.
 // - Up to 10 DNS configurations for public certificates.
 // - Up to 10 Root CA configurations for private certificates.
@@ -3120,10 +3411,12 @@ func UnmarshalChallengeResource(m map[string]json.RawMessage, result interface{}
 // - PrivateCertificateConfigurationRootCA
 // - PrivateCertificateConfigurationIntermediateCA
 // - PrivateCertificateConfigurationTemplate
+// - CustomCredentialsConfiguration
 type Configuration struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type,omitempty"`
 
 	// The unique name of your configuration.
@@ -3202,7 +3495,8 @@ type Configuration struct {
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The type of private key to generate.
@@ -3442,13 +3736,34 @@ type Configuration struct {
 
 	// The duration in seconds by which to backdate the `not_before` property of an issued private certificate.
 	NotBeforeDurationSeconds *int64 `json:"not_before_duration_seconds,omitempty"`
+
+	// The IAM API key used by the credentials provider to access this Secrets Manager instance.
+	CodeEngineKeyRef *string `json:"code_engine_key_ref,omitempty"`
+
+	// The IAM credentials secret ID that is used for setting up a custom credentials engine configuration.
+	ApiKeyRef *string `json:"api_key_ref,omitempty"`
+
+	// The parameters required to configure Code Engine.
+	CodeEngine *CustomCredentialsConfigurationCodeEngine `json:"code_engine,omitempty"`
+
+	// The schema that defines by the Code Engine job to be used as input and output formats for this custom credentials
+	// configuration.
+	Schema *CustomCredentialsConfigurationSchema `json:"schema,omitempty"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
 }
 
 // Constants associated with the Configuration.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	Configuration_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	Configuration_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	Configuration_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	Configuration_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -3463,6 +3778,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	Configuration_SecretType_Arbitrary          = "arbitrary"
+	Configuration_SecretType_CustomCredentials  = "custom_credentials"
 	Configuration_SecretType_IamCredentials     = "iam_credentials"
 	Configuration_SecretType_ImportedCert       = "imported_cert"
 	Configuration_SecretType_Kv                 = "kv"
@@ -3579,6 +3895,11 @@ func UnmarshalConfiguration(m map[string]json.RawMessage, result interface{}) (e
 		err = core.UnmarshalModel(m, "", result, UnmarshalPrivateCertificateConfigurationTemplate)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-PrivateCertificateConfigurationTemplate-error", common.GetComponentInfo())
+		}
+	} else if discValue == "custom_credentials_configuration" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsConfiguration)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsConfiguration-error", common.GetComponentInfo())
 		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'config_type': %s", discValue)
@@ -3978,10 +4299,12 @@ func UnmarshalConfigurationActionPrototype(m map[string]json.RawMessage, result 
 // - PrivateCertificateConfigurationRootCAMetadata
 // - PrivateCertificateConfigurationIntermediateCAMetadata
 // - PrivateCertificateConfigurationTemplateMetadata
+// - CustomCredentialsConfigurationMetadata
 type ConfigurationMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type,omitempty"`
 
 	// The unique name of your configuration.
@@ -4018,7 +4341,8 @@ type ConfigurationMetadata struct {
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The type of private key to generate.
@@ -4049,13 +4373,34 @@ type ConfigurationMetadata struct {
 
 	// The name of the intermediate certificate authority.
 	CertificateAuthority *string `json:"certificate_authority,omitempty"`
+
+	// The IAM API key used by the credentials provider to access this Secrets Manager instance.
+	CodeEngineKeyRef *string `json:"code_engine_key_ref,omitempty"`
+
+	// The IAM credentials secret ID that is used for setting up a custom credentials engine configuration.
+	ApiKeyRef *string `json:"api_key_ref,omitempty"`
+
+	// The parameters required to configure Code Engine.
+	CodeEngine *CustomCredentialsConfigurationCodeEngine `json:"code_engine,omitempty"`
+
+	// The schema that defines by the Code Engine job to be used as input and output formats for this custom credentials
+	// configuration.
+	Schema *CustomCredentialsConfigurationSchema `json:"schema,omitempty"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
 }
 
 // Constants associated with the ConfigurationMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	ConfigurationMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	ConfigurationMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	ConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	ConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -4070,6 +4415,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	ConfigurationMetadata_SecretType_Arbitrary          = "arbitrary"
+	ConfigurationMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ConfigurationMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ConfigurationMetadata_SecretType_ImportedCert       = "imported_cert"
 	ConfigurationMetadata_SecretType_Kv                 = "kv"
@@ -4172,6 +4518,11 @@ func UnmarshalConfigurationMetadata(m map[string]json.RawMessage, result interfa
 		err = core.UnmarshalModel(m, "", result, UnmarshalIAMCredentialsConfigurationMetadata)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsConfigurationMetadata-error", common.GetComponentInfo())
+		}
+	} else if discValue == "custom_credentials_configuration" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsConfigurationMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsConfigurationMetadata-error", common.GetComponentInfo())
 		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'config_type': %s", discValue)
@@ -4284,6 +4635,7 @@ func (resp *ConfigurationMetadataPaginatedCollection) GetNextOffset() (*int64, e
 // - PublicCertificateConfigurationCALetsEncryptPatch
 // - PublicCertificateConfigurationDNSCloudInternetServicesPatch
 // - PublicCertificateConfigurationDNSClassicInfrastructurePatch
+// - CustomCredentialsConfigurationPatch
 type ConfigurationPatch struct {
 	// An IBM Cloud API key that can create and manage service IDs. The API key must be assigned the Editor platform role
 	// on the Access Groups Service and the Operator platform role on the IAM Identity Service.  For more information, see
@@ -4537,6 +4889,12 @@ type ConfigurationPatch struct {
 	// For information about viewing and accessing your classic infrastructure API key, see the
 	// [docs](https://cloud.ibm.com/docs/account?topic=account-classic_keys).
 	ClassicInfrastructurePassword *string `json:"classic_infrastructure_password,omitempty"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
 }
 
 // Constants associated with the ConfigurationPatch.KeyType property.
@@ -4814,6 +5172,11 @@ func UnmarshalConfigurationPatch(m map[string]json.RawMessage, result interface{
 		err = core.SDKErrorf(err, "", "classic_infrastructure_password-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "task_timeout", &obj.TaskTimeout)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_timeout-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -4971,6 +5334,9 @@ func (configurationPatch *ConfigurationPatch) AsPatch() (_patch map[string]inter
 	if !core.IsNil(configurationPatch.ClassicInfrastructurePassword) {
 		_patch["classic_infrastructure_password"] = configurationPatch.ClassicInfrastructurePassword
 	}
+	if !core.IsNil(configurationPatch.TaskTimeout) {
+		_patch["task_timeout"] = configurationPatch.TaskTimeout
+	}
 
 	return
 }
@@ -4984,10 +5350,12 @@ func (configurationPatch *ConfigurationPatch) AsPatch() (_patch map[string]inter
 // - PrivateCertificateConfigurationIntermediateCAPrototype
 // - PrivateCertificateConfigurationTemplatePrototype
 // - IAMCredentialsConfigurationPrototype
+// - CustomCredentialsConfigurationPrototype
 type ConfigurationPrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type,omitempty"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -5310,13 +5678,27 @@ type ConfigurationPrototype struct {
 	//
 	// If it is set to `true`, the IAM credentials engine doesn't use the configured API key for credentials management.
 	Disabled *bool `json:"disabled,omitempty"`
+
+	// The IAM credentials secret ID that is used for setting up a custom credentials engine configuration.
+	ApiKeyRef *string `json:"api_key_ref,omitempty"`
+
+	// The parameters required to configure Code Engine.
+	CodeEngine *CustomCredentialsConfigurationCodeEngine `json:"code_engine,omitempty"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
 }
 
 // Constants associated with the ConfigurationPrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	ConfigurationPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	ConfigurationPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	ConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	ConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -5421,6 +5803,11 @@ func UnmarshalConfigurationPrototype(m map[string]json.RawMessage, result interf
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-IAMCredentialsConfigurationPrototype-error", common.GetComponentInfo())
 		}
+	} else if discValue == "custom_credentials_configuration" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsConfigurationPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsConfigurationPrototype-error", common.GetComponentInfo())
+		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'config_type': %s", discValue)
 		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
@@ -5446,6 +5833,7 @@ type CreateConfigurationActionOptions struct {
 // Constants associated with the CreateConfigurationActionOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	CreateConfigurationActionOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -5652,7 +6040,8 @@ type CreateSecretLocksBulkOptions struct {
 	// a secret version.
 	// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
 	// secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
-	// the data of the previous secret version if it doesn't have any locks.
+	// the data of the previous secret version if it doesn't have any locks. Not supported for custom credentials secret
+	// type.
 	Mode *string `json:"mode,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -5664,7 +6053,8 @@ type CreateSecretLocksBulkOptions struct {
 // a secret version.
 // - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
 // secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
-// the data of the previous secret version if it doesn't have any locks.
+// the data of the previous secret version if it doesn't have any locks. Not supported for custom credentials secret
+// type.
 const (
 	CreateSecretLocksBulkOptions_Mode_RemovePrevious          = "remove_previous"
 	CreateSecretLocksBulkOptions_Mode_RemovePreviousAndDelete = "remove_previous_and_delete"
@@ -5795,7 +6185,8 @@ type CreateSecretVersionLocksBulkOptions struct {
 	// a secret version.
 	// - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
 	// secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
-	// the data of the previous secret version if it doesn't have any locks.
+	// the data of the previous secret version if it doesn't have any locks. Not supported for custom credentials secret
+	// type.
 	Mode *string `json:"mode,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -5807,7 +6198,8 @@ type CreateSecretVersionLocksBulkOptions struct {
 // a secret version.
 // - `remove_previous`: Removes any other locks with matching names if they are found in the previous version of the
 // secret. - `remove_previous_and_delete`: Completes the same action as `remove_previous`, but also permanently deletes
-// the data of the previous secret version if it doesn't have any locks.
+// the data of the previous secret version if it doesn't have any locks. Not supported for custom credentials secret
+// type.
 const (
 	CreateSecretVersionLocksBulkOptions_Mode_RemovePrevious          = "remove_previous"
 	CreateSecretVersionLocksBulkOptions_Mode_RemovePreviousAndDelete = "remove_previous_and_delete"
@@ -5890,6 +6282,184 @@ func (options *CreateSecretVersionOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
+// CustomCredentialsConfigurationCodeEngine : The parameters required to configure Code Engine.
+type CustomCredentialsConfigurationCodeEngine struct {
+	// The Code Engine Job name used by this custom credentials configuration.
+	JobName *string `json:"job_name" validate:"required"`
+
+	// The Project ID of your Code Engine project used by this custom credentials configuration.
+	ProjectID *string `json:"project_id" validate:"required"`
+
+	// The region of the Code Engine project. For example us-south.
+	Region *string `json:"region" validate:"required"`
+}
+
+// NewCustomCredentialsConfigurationCodeEngine : Instantiate CustomCredentialsConfigurationCodeEngine (Generic Model Constructor)
+func (*SecretsManagerV2) NewCustomCredentialsConfigurationCodeEngine(jobName string, projectID string, region string) (_model *CustomCredentialsConfigurationCodeEngine, err error) {
+	_model = &CustomCredentialsConfigurationCodeEngine{
+		JobName:   core.StringPtr(jobName),
+		ProjectID: core.StringPtr(projectID),
+		Region:    core.StringPtr(region),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalCustomCredentialsConfigurationCodeEngine unmarshals an instance of CustomCredentialsConfigurationCodeEngine from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationCodeEngine(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationCodeEngine)
+	err = core.UnmarshalPrimitive(m, "job_name", &obj.JobName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "job_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "project_id", &obj.ProjectID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "project_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "region-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsConfigurationSchema : The schema that defines by the Code Engine job to be used as input and output formats for this custom credentials
+// configuration.
+type CustomCredentialsConfigurationSchema struct {
+	// custom credentials configuration schema parameter.
+	Parameters []CustomCredentialsConfigurationSchemaParameter `json:"parameters" validate:"required"`
+
+	// custom credentials configuration schema credentials format.
+	Credentials []CustomCredentialsConfigurationSchemaCredentials `json:"credentials" validate:"required"`
+}
+
+// UnmarshalCustomCredentialsConfigurationSchema unmarshals an instance of CustomCredentialsConfigurationSchema from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationSchema(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationSchema)
+	err = core.UnmarshalModel(m, "parameters", &obj.Parameters, UnmarshalCustomCredentialsConfigurationSchemaParameter)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "credentials", &obj.Credentials, UnmarshalCustomCredentialsConfigurationSchemaCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsConfigurationSchemaCredentials : The format of the credentials of a custom credentials schema, for example {"name":"access_token",
+// "format":"type:string, required:true"}.
+type CustomCredentialsConfigurationSchemaCredentials struct {
+	// The name of a parameter.
+	Name *string `json:"name" validate:"required"`
+
+	// The format of the custom credentials parameter, for example 'required:true, type:string', 'type:int,
+	// required:false', 'type:enum[val1|val2|val3], required:true', 'required:true, type:boolean'.
+	Format *string `json:"format" validate:"required"`
+}
+
+// UnmarshalCustomCredentialsConfigurationSchemaCredentials unmarshals an instance of CustomCredentialsConfigurationSchemaCredentials from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationSchemaCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationSchemaCredentials)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsConfigurationSchemaParameter : A parameter of a custom credentials schema, for example {"name":"user_name", "format":"type:string, required:true"}.
+type CustomCredentialsConfigurationSchemaParameter struct {
+	// The name of a parameter.
+	Name *string `json:"name" validate:"required"`
+
+	// The format of the custom credentials parameter, for example 'required:true, type:string', 'type:int,
+	// required:false', 'type:enum[val1|val2|val3], required:true', 'required:true, type:boolean'.
+	Format *string `json:"format" validate:"required"`
+
+	// The name of the environment variable of a custom credentials configuration schema parameter.
+	EnvVariableName *string `json:"env_variable_name,omitempty"`
+}
+
+// UnmarshalCustomCredentialsConfigurationSchemaParameter unmarshals an instance of CustomCredentialsConfigurationSchemaParameter from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationSchemaParameter(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationSchemaParameter)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "format", &obj.Format)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "format-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "env_variable_name", &obj.EnvVariableName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "env_variable_name-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsNewCredentials : Newly created credentials provided by the credentials provider.
+type CustomCredentialsNewCredentials struct {
+	// An identifier of credentials in the credentials provider that is used by the custom credentials secret type.
+	ID *string `json:"id" validate:"required"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	Payload map[string]interface{} `json:"payload" validate:"required"`
+}
+
+// NewCustomCredentialsNewCredentials : Instantiate CustomCredentialsNewCredentials (Generic Model Constructor)
+func (*SecretsManagerV2) NewCustomCredentialsNewCredentials(id string, payload map[string]interface{}) (_model *CustomCredentialsNewCredentials, err error) {
+	_model = &CustomCredentialsNewCredentials{
+		ID:      core.StringPtr(id),
+		Payload: payload,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalCustomCredentialsNewCredentials unmarshals an instance of CustomCredentialsNewCredentials from the specified map of raw messages.
+func UnmarshalCustomCredentialsNewCredentials(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsNewCredentials)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload", &obj.Payload)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "payload-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // DeleteConfigurationOptions : The DeleteConfiguration options.
 type DeleteConfigurationOptions struct {
 	// The name that uniquely identifies a configuration.
@@ -5905,6 +6475,7 @@ type DeleteConfigurationOptions struct {
 // Constants associated with the DeleteConfigurationOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	DeleteConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -6027,6 +6598,9 @@ type DeleteSecretOptions struct {
 	// The UUID that uniquely identifies your secret.
 	ID *string `json:"id" validate:"required,ne="`
 
+	// Set to `true` to force delete the secret. Available only for custom credentials secret type.
+	ForceDelete *bool `json:"force_delete,omitempty"`
+
 	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
@@ -6044,8 +6618,52 @@ func (_options *DeleteSecretOptions) SetID(id string) *DeleteSecretOptions {
 	return _options
 }
 
+// SetForceDelete : Allow user to set ForceDelete
+func (_options *DeleteSecretOptions) SetForceDelete(forceDelete bool) *DeleteSecretOptions {
+	_options.ForceDelete = core.BoolPtr(forceDelete)
+	return _options
+}
+
 // SetHeaders : Allow user to set Headers
 func (options *DeleteSecretOptions) SetHeaders(param map[string]string) *DeleteSecretOptions {
+	options.Headers = param
+	return options
+}
+
+// DeleteSecretTaskOptions : The DeleteSecretTask options.
+type DeleteSecretTaskOptions struct {
+	// The UUID that uniquely identifies your secret.
+	SecretID *string `json:"secret_id" validate:"required,ne="`
+
+	// The ID that uniquely identifies your task.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewDeleteSecretTaskOptions : Instantiate DeleteSecretTaskOptions
+func (*SecretsManagerV2) NewDeleteSecretTaskOptions(secretID string, id string) *DeleteSecretTaskOptions {
+	return &DeleteSecretTaskOptions{
+		SecretID: core.StringPtr(secretID),
+		ID:       core.StringPtr(id),
+	}
+}
+
+// SetSecretID : Allow user to set SecretID
+func (_options *DeleteSecretTaskOptions) SetSecretID(secretID string) *DeleteSecretTaskOptions {
+	_options.SecretID = core.StringPtr(secretID)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *DeleteSecretTaskOptions) SetID(id string) *DeleteSecretTaskOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteSecretTaskOptions) SetHeaders(param map[string]string) *DeleteSecretTaskOptions {
 	options.Headers = param
 	return options
 }
@@ -6152,6 +6770,7 @@ type GetConfigurationOptions struct {
 // Constants associated with the GetConfigurationOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
+	GetConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	GetConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -6244,6 +6863,7 @@ type GetSecretByNameTypeOptions struct {
 // service_credentials, kv, and username_password.
 const (
 	GetSecretByNameTypeOptions_SecretType_Arbitrary          = "arbitrary"
+	GetSecretByNameTypeOptions_SecretType_CustomCredentials  = "custom_credentials"
 	GetSecretByNameTypeOptions_SecretType_IamCredentials     = "iam_credentials"
 	GetSecretByNameTypeOptions_SecretType_ImportedCert       = "imported_cert"
 	GetSecretByNameTypeOptions_SecretType_Kv                 = "kv"
@@ -6366,6 +6986,44 @@ func (_options *GetSecretOptions) SetID(id string) *GetSecretOptions {
 
 // SetHeaders : Allow user to set Headers
 func (options *GetSecretOptions) SetHeaders(param map[string]string) *GetSecretOptions {
+	options.Headers = param
+	return options
+}
+
+// GetSecretTaskOptions : The GetSecretTask options.
+type GetSecretTaskOptions struct {
+	// The UUID that uniquely identifies your secret.
+	SecretID *string `json:"secret_id" validate:"required,ne="`
+
+	// The ID that uniquely identifies your task.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetSecretTaskOptions : Instantiate GetSecretTaskOptions
+func (*SecretsManagerV2) NewGetSecretTaskOptions(secretID string, id string) *GetSecretTaskOptions {
+	return &GetSecretTaskOptions{
+		SecretID: core.StringPtr(secretID),
+		ID:       core.StringPtr(id),
+	}
+}
+
+// SetSecretID : Allow user to set SecretID
+func (_options *GetSecretTaskOptions) SetSecretID(secretID string) *GetSecretTaskOptions {
+	_options.SecretID = core.StringPtr(secretID)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *GetSecretTaskOptions) SetID(id string) *GetSecretTaskOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetSecretTaskOptions) SetHeaders(param map[string]string) *GetSecretTaskOptions {
 	options.Headers = param
 	return options
 }
@@ -7082,7 +7740,7 @@ type ListConfigurationsOptions struct {
 	// You can apply multiple filters by using a comma-separated list of secret types.
 	//
 	// **Usage:** To retrieve a list of configurations that are associated with all secret types, use
-	// `..?secret_types=iam_credentials,public_cert,private_cert`.
+	// `..?secret_types=iam_credentials,public_cert,private_cert,custom_credentials`.
 	SecretTypes []string `json:"secret_types,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -7091,9 +7749,10 @@ type ListConfigurationsOptions struct {
 
 // Constants associated with the ListConfigurationsOptions.SecretTypes property.
 const (
-	ListConfigurationsOptions_SecretTypes_IamCredentials = "iam_credentials"
-	ListConfigurationsOptions_SecretTypes_PrivateCert    = "private_cert"
-	ListConfigurationsOptions_SecretTypes_PublicCert     = "public_cert"
+	ListConfigurationsOptions_SecretTypes_CustomCredentials = "custom_credentials"
+	ListConfigurationsOptions_SecretTypes_IamCredentials    = "iam_credentials"
+	ListConfigurationsOptions_SecretTypes_PrivateCert       = "private_cert"
+	ListConfigurationsOptions_SecretTypes_PublicCert        = "public_cert"
 )
 
 // NewListConfigurationsOptions : Instantiate ListConfigurationsOptions
@@ -7232,6 +7891,34 @@ func (_options *ListSecretLocksOptions) SetSearch(search string) *ListSecretLock
 
 // SetHeaders : Allow user to set Headers
 func (options *ListSecretLocksOptions) SetHeaders(param map[string]string) *ListSecretLocksOptions {
+	options.Headers = param
+	return options
+}
+
+// ListSecretTasksOptions : The ListSecretTasks options.
+type ListSecretTasksOptions struct {
+	// The UUID that uniquely identifies your secret.
+	SecretID *string `json:"secret_id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewListSecretTasksOptions : Instantiate ListSecretTasksOptions
+func (*SecretsManagerV2) NewListSecretTasksOptions(secretID string) *ListSecretTasksOptions {
+	return &ListSecretTasksOptions{
+		SecretID: core.StringPtr(secretID),
+	}
+}
+
+// SetSecretID : Allow user to set SecretID
+func (_options *ListSecretTasksOptions) SetSecretID(secretID string) *ListSecretTasksOptions {
+	_options.SecretID = core.StringPtr(secretID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListSecretTasksOptions) SetHeaders(param map[string]string) *ListSecretTasksOptions {
 	options.Headers = param
 	return options
 }
@@ -7494,6 +8181,7 @@ type ListSecretsOptions struct {
 // Constants associated with the ListSecretsOptions.SecretTypes property.
 const (
 	ListSecretsOptions_SecretTypes_Arbitrary          = "arbitrary"
+	ListSecretsOptions_SecretTypes_CustomCredentials  = "custom_credentials"
 	ListSecretsOptions_SecretTypes_IamCredentials     = "iam_credentials"
 	ListSecretsOptions_SecretTypes_ImportedCert       = "imported_cert"
 	ListSecretsOptions_SecretTypes_Kv                 = "kv"
@@ -8223,8 +8911,56 @@ func UnmarshalPublicCertificateRotationObject(m map[string]json.RawMessage, resu
 	return
 }
 
+// ReplaceSecretTaskOptions : The ReplaceSecretTask options.
+type ReplaceSecretTaskOptions struct {
+	// The UUID that uniquely identifies your secret.
+	SecretID *string `json:"secret_id" validate:"required,ne="`
+
+	// The ID that uniquely identifies your task.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// The request body to specify the properties for your secret task update.
+	TaskPut SecretTaskPrototypeIntf `json:"TaskPut" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewReplaceSecretTaskOptions : Instantiate ReplaceSecretTaskOptions
+func (*SecretsManagerV2) NewReplaceSecretTaskOptions(secretID string, id string, taskPut SecretTaskPrototypeIntf) *ReplaceSecretTaskOptions {
+	return &ReplaceSecretTaskOptions{
+		SecretID: core.StringPtr(secretID),
+		ID:       core.StringPtr(id),
+		TaskPut:  taskPut,
+	}
+}
+
+// SetSecretID : Allow user to set SecretID
+func (_options *ReplaceSecretTaskOptions) SetSecretID(secretID string) *ReplaceSecretTaskOptions {
+	_options.SecretID = core.StringPtr(secretID)
+	return _options
+}
+
+// SetID : Allow user to set ID
+func (_options *ReplaceSecretTaskOptions) SetID(id string) *ReplaceSecretTaskOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetTaskPut : Allow user to set TaskPut
+func (_options *ReplaceSecretTaskOptions) SetTaskPut(taskPut SecretTaskPrototypeIntf) *ReplaceSecretTaskOptions {
+	_options.TaskPut = taskPut
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ReplaceSecretTaskOptions) SetHeaders(param map[string]string) *ReplaceSecretTaskOptions {
+	options.Headers = param
+	return options
+}
+
 // RotationPolicy : This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-// username_password, private_cert, public_cert, iam_credentials.
+// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 // Models which "extend" this model:
 // - CommonRotationPolicy
 // - PublicCertificateRotationPolicy
@@ -8320,6 +9056,7 @@ func (rotationPolicy *RotationPolicy) asPatch() (_patch map[string]interface{}) 
 // - PublicCertificate
 // - ServiceCredentialsSecret
 // - UsernamePasswordSecret
+// - CustomCredentialsSecret
 type Secret struct {
 	// The unique identifier that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
@@ -8383,19 +9120,21 @@ type Secret struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The secret data that is assigned to an `arbitrary` secret.
 	Payload *string `json:"payload,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -8433,7 +9172,7 @@ type Secret struct {
 	ReuseApiKey *bool `json:"reuse_api_key,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -8543,6 +9282,29 @@ type Secret struct {
 
 	// The password that is assigned to an `username_password` secret.
 	Password *string `json:"password,omitempty"`
+
+	// The number of tasks that were created for this secret.
+	TaskCount *int64 `json:"task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	ProcessingTaskID *string `json:"processing_task_id,omitempty"`
+
+	// Number of queued tasks for this secret.
+	QueuedTaskCount *int64 `json:"queued_task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// The name of the custom credentials configuration.
+	Configuration *string `json:"configuration,omitempty"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	CredentialsContent map[string]interface{} `json:"credentials_content,omitempty"`
 }
 
 // Constants associated with the Secret.SecretType property.
@@ -8550,6 +9312,7 @@ type Secret struct {
 // service_credentials, kv, and username_password.
 const (
 	Secret_SecretType_Arbitrary          = "arbitrary"
+	Secret_SecretType_CustomCredentials  = "custom_credentials"
 	Secret_SecretType_IamCredentials     = "iam_credentials"
 	Secret_SecretType_ImportedCert       = "imported_cert"
 	Secret_SecretType_Kv                 = "kv"
@@ -8630,6 +9393,11 @@ func UnmarshalSecret(m map[string]json.RawMessage, result interface{}) (err erro
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecret)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecret-error", common.GetComponentInfo())
+		}
+	} else if discValue == "custom_credentials" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsSecret)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsSecret-error", common.GetComponentInfo())
 		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
@@ -9059,6 +9827,7 @@ type SecretLocks struct {
 // service_credentials, kv, and username_password.
 const (
 	SecretLocks_SecretType_Arbitrary          = "arbitrary"
+	SecretLocks_SecretType_CustomCredentials  = "custom_credentials"
 	SecretLocks_SecretType_IamCredentials     = "iam_credentials"
 	SecretLocks_SecretType_ImportedCert       = "imported_cert"
 	SecretLocks_SecretType_Kv                 = "kv"
@@ -9205,6 +9974,7 @@ func (resp *SecretLocksPaginatedCollection) GetNextOffset() (*int64, error) {
 // - PublicCertificateMetadata
 // - ServiceCredentialsSecretMetadata
 // - UsernamePasswordSecretMetadata
+// - CustomCredentialsSecretMetadata
 type SecretMetadata struct {
 	// The unique identifier that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
@@ -9268,16 +10038,18 @@ type SecretMetadata struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -9315,7 +10087,7 @@ type SecretMetadata struct {
 	ReuseApiKey *bool `json:"reuse_api_key,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -9386,6 +10158,25 @@ type SecretMetadata struct {
 
 	// Policy for auto-generated passwords.
 	PasswordGenerationPolicy *PasswordGenerationPolicyRO `json:"password_generation_policy,omitempty"`
+
+	// The number of tasks that were created for this secret.
+	TaskCount *int64 `json:"task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	ProcessingTaskID *string `json:"processing_task_id,omitempty"`
+
+	// Number of queued tasks for this secret.
+	QueuedTaskCount *int64 `json:"queued_task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// The name of the custom credentials configuration.
+	Configuration *string `json:"configuration,omitempty"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
 // Constants associated with the SecretMetadata.SecretType property.
@@ -9393,6 +10184,7 @@ type SecretMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	SecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	SecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	SecretMetadata_SecretType_IamCredentials     = "iam_credentials"
 	SecretMetadata_SecretType_ImportedCert       = "imported_cert"
 	SecretMetadata_SecretType_Kv                 = "kv"
@@ -9473,6 +10265,11 @@ func UnmarshalSecretMetadata(m map[string]json.RawMessage, result interface{}) (
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecretMetadata)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretMetadata-error", common.GetComponentInfo())
+		}
+	} else if discValue == "custom_credentials" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsSecretMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsSecretMetadata-error", common.GetComponentInfo())
 		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
@@ -9586,6 +10383,7 @@ func (resp *SecretMetadataPaginatedCollection) GetNextOffset() (*int64, error) {
 // - PublicCertificateMetadataPatch
 // - ServiceCredentialsSecretMetadataPatch
 // - UsernamePasswordSecretMetadataPatch
+// - CustomCredentialsSecretMetadataPatch
 type SecretMetadataPatch struct {
 	// A human-readable name to assign to your secret.
 	//
@@ -9613,16 +10411,17 @@ type SecretMetadataPatch struct {
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The data specified to create the CSR and the private key.
@@ -9631,6 +10430,9 @@ type SecretMetadataPatch struct {
 	// Policy patch for auto-generated passwords. Policy properties that are included in the patch are updated.
 	// Properties that are not included in the patch remain unchanged.
 	PasswordGenerationPolicy *PasswordGenerationPolicyPatch `json:"password_generation_policy,omitempty"`
+
+	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
 func (*SecretMetadataPatch) isaSecretMetadataPatch() bool {
@@ -9689,6 +10491,11 @@ func UnmarshalSecretMetadataPatch(m map[string]json.RawMessage, result interface
 		err = core.SDKErrorf(err, "", "password_generation_policy-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "parameters", &obj.Parameters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -9723,6 +10530,9 @@ func (secretMetadataPatch *SecretMetadataPatch) AsPatch() (_patch map[string]int
 	if !core.IsNil(secretMetadataPatch.PasswordGenerationPolicy) {
 		_patch["password_generation_policy"] = secretMetadataPatch.PasswordGenerationPolicy.asPatch()
 	}
+	if !core.IsNil(secretMetadataPatch.Parameters) {
+		_patch["parameters"] = secretMetadataPatch.Parameters
+	}
 
 	return
 }
@@ -9737,6 +10547,7 @@ func (secretMetadataPatch *SecretMetadataPatch) AsPatch() (_patch map[string]int
 // - PublicCertificatePrototype
 // - ServiceCredentialsSecretPrototype
 // - UsernamePasswordSecretPrototype
+// - CustomCredentialsSecretPrototype
 type SecretPrototype struct {
 	// The secret metadata that a user can customize.
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
@@ -9777,12 +10588,13 @@ type SecretPrototype struct {
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -9811,7 +10623,7 @@ type SecretPrototype struct {
 	ReuseApiKey *bool `json:"reuse_api_key,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
@@ -9899,6 +10711,12 @@ type SecretPrototype struct {
 
 	// Policy for auto-generated passwords.
 	PasswordGenerationPolicy *PasswordGenerationPolicy `json:"password_generation_policy,omitempty"`
+
+	// The name of the custom credentials configuration.
+	Configuration *string `json:"configuration,omitempty"`
+
+	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
 // Constants associated with the SecretPrototype.SecretType property.
@@ -9906,6 +10724,7 @@ type SecretPrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	SecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	SecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
 	SecretPrototype_SecretType_IamCredentials     = "iam_credentials"
 	SecretPrototype_SecretType_ImportedCert       = "imported_cert"
 	SecretPrototype_SecretType_Kv                 = "kv"
@@ -9991,8 +10810,261 @@ func UnmarshalSecretPrototype(m map[string]json.RawMessage, result interface{}) 
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretPrototype-error", common.GetComponentInfo())
 		}
+	} else if discValue == "custom_credentials" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsSecretPrototype)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsSecretPrototype-error", common.GetComponentInfo())
+		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
+	}
+	return
+}
+
+// SecretTask : Properties of a Secret's task.
+type SecretTask struct {
+	// A Secret Manager task identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreationDate *strfmt.DateTime `json:"creation_date" validate:"required"`
+
+	// The date when a resource was modified. The date format follows `RFC 3339`.
+	LastUpdateDate *strfmt.DateTime `json:"last_update_date" validate:"required"`
+
+	// The unique identifier that is associated with the entity that updated the resource.
+	UpdatedBy *string `json:"updated_by" validate:"required"`
+
+	// The type of the task, can be either "create_credentials" or "delete_credentials".
+	Type *string `json:"type" validate:"required"`
+
+	// The status of a task, could be one of: queued, processing, succeeded, failed.
+	Status *string `json:"status" validate:"required"`
+
+	// Information about what has initiated the task.
+	Trigger *string `json:"trigger" validate:"required"`
+
+	// A UUID identifier.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// A UUID identifier.
+	SecretVersionID *string `json:"secret_version_id,omitempty"`
+
+	// A collection of errors.
+	Errors []SecretTaskError `json:"errors,omitempty"`
+}
+
+// Constants associated with the SecretTask.Type property.
+// The type of the task, can be either "create_credentials" or "delete_credentials".
+const (
+	SecretTask_Type_CreateCredentials = "create_credentials"
+	SecretTask_Type_DeleteCredentials = "delete_credentials"
+)
+
+// Constants associated with the SecretTask.Status property.
+// The status of a task, could be one of: queued, processing, succeeded, failed.
+const (
+	SecretTask_Status_CredentialsCreated = "credentials_created"
+	SecretTask_Status_CredentialsDeleted = "credentials_deleted"
+	SecretTask_Status_Failed             = "failed"
+	SecretTask_Status_Processing         = "processing"
+	SecretTask_Status_Queued             = "queued"
+)
+
+// Constants associated with the SecretTask.Trigger property.
+// Information about what has initiated the task.
+const (
+	SecretTask_Trigger_AutomaticSecretRotation   = "automatic_secret_rotation"
+	SecretTask_Trigger_ManualSecretRotation      = "manual_secret_rotation"
+	SecretTask_Trigger_SecretCreation            = "secret_creation"
+	SecretTask_Trigger_SecretVersionDataDeletion = "secret_version_data_deletion"
+	SecretTask_Trigger_SecretVersionExpiration   = "secret_version_expiration"
+)
+
+// UnmarshalSecretTask unmarshals an instance of SecretTask from the specified map of raw messages.
+func UnmarshalSecretTask(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretTask)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "creation_date", &obj.CreationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "creation_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_update_date", &obj.LastUpdateDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_update_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_by", &obj.UpdatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "trigger", &obj.Trigger)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "trigger-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_version_id", &obj.SecretVersionID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_version_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "errors", &obj.Errors, UnmarshalSecretTaskError)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "errors-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretTaskCollection : A collection of tasks that are associated with a secret.
+type SecretTaskCollection struct {
+	// A collection of secret metadata.
+	Tasks []SecretTask `json:"tasks" validate:"required"`
+}
+
+// UnmarshalSecretTaskCollection unmarshals an instance of SecretTaskCollection from the specified map of raw messages.
+func UnmarshalSecretTaskCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretTaskCollection)
+	err = core.UnmarshalModel(m, "tasks", &obj.Tasks, UnmarshalSecretTask)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "tasks-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretTaskError : API Error.
+type SecretTaskError struct {
+	// An error code identifier.
+	Code *string `json:"code" validate:"required"`
+
+	// A human-readable message that provides details about the error.
+	Description *string `json:"description" validate:"required"`
+}
+
+// NewSecretTaskError : Instantiate SecretTaskError (Generic Model Constructor)
+func (*SecretsManagerV2) NewSecretTaskError(code string, description string) (_model *SecretTaskError, err error) {
+	_model = &SecretTaskError{
+		Code:        core.StringPtr(code),
+		Description: core.StringPtr(description),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalSecretTaskError unmarshals an instance of SecretTaskError from the specified map of raw messages.
+func UnmarshalSecretTaskError(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretTaskError)
+	err = core.UnmarshalPrimitive(m, "code", &obj.Code)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretTaskPrototype : The request body to specify the properties for your secret task update.
+// Models which "extend" this model:
+// - SecretTaskPrototypeUpdateSecretTaskCredentialsCreated
+// - SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted
+// - SecretTaskPrototypeUpdateSecretTaskFailed
+type SecretTaskPrototype struct {
+	// Describes the status of a secret's task.
+	Status *string `json:"status,omitempty"`
+
+	// Newly created credentials provided by the credentials provider.
+	Credentials *CustomCredentialsNewCredentials `json:"credentials,omitempty"`
+
+	// A collection of errors.
+	Errors []SecretTaskError `json:"errors,omitempty"`
+}
+
+// Constants associated with the SecretTaskPrototype.Status property.
+// Describes the status of a secret's task.
+const (
+	SecretTaskPrototype_Status_CredentialsCreated = "credentials_created"
+)
+
+func (*SecretTaskPrototype) isaSecretTaskPrototype() bool {
+	return true
+}
+
+type SecretTaskPrototypeIntf interface {
+	isaSecretTaskPrototype() bool
+}
+
+// UnmarshalSecretTaskPrototype unmarshals an instance of SecretTaskPrototype from the specified map of raw messages.
+func UnmarshalSecretTaskPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	// Retrieve discriminator value to determine correct "subclass".
+	var discValue string
+	err = core.UnmarshalPrimitive(m, "status", &discValue)
+	if err != nil {
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'status': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
+		return
+	}
+	if discValue == "" {
+		err = core.SDKErrorf(err, "required discriminator property 'status' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
+		return
+	}
+	if discValue == "credentials_created" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-SecretTaskPrototypeUpdateSecretTaskCredentialsCreated-error", common.GetComponentInfo())
+		}
+	} else if discValue == "credentials_deleted" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted-error", common.GetComponentInfo())
+		}
+	} else if discValue == "failed" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalSecretTaskPrototypeUpdateSecretTaskFailed)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-SecretTaskPrototypeUpdateSecretTaskFailed-error", common.GetComponentInfo())
+		}
+	} else {
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'status': %s", discValue)
 		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
 	return
@@ -10008,6 +11080,7 @@ func UnmarshalSecretPrototype(m map[string]json.RawMessage, result interface{}) 
 // - PublicCertificateVersion
 // - ServiceCredentialsSecretVersion
 // - UsernamePasswordSecretVersion
+// - CustomCredentialsSecretVersion
 type SecretVersion struct {
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -10049,7 +11122,8 @@ type SecretVersion struct {
 	SecretID *string `json:"secret_id,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The secret data that is assigned to an `arbitrary` secret.
@@ -10115,6 +11189,13 @@ type SecretVersion struct {
 
 	// The password that is assigned to an `username_password` secret.
 	Password *string `json:"password,omitempty"`
+
+	// Credentials created by the custom credentials system.
+	CredentialsID *string `json:"credentials_id,omitempty"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	CredentialsContent map[string]interface{} `json:"credentials_content,omitempty"`
 }
 
 // Constants associated with the SecretVersion.SecretType property.
@@ -10122,6 +11203,7 @@ type SecretVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	SecretVersion_SecretType_Arbitrary          = "arbitrary"
+	SecretVersion_SecretType_CustomCredentials  = "custom_credentials"
 	SecretVersion_SecretType_IamCredentials     = "iam_credentials"
 	SecretVersion_SecretType_ImportedCert       = "imported_cert"
 	SecretVersion_SecretType_Kv                 = "kv"
@@ -10200,6 +11282,11 @@ func UnmarshalSecretVersion(m map[string]json.RawMessage, result interface{}) (e
 		err = core.UnmarshalModel(m, "", result, UnmarshalUsernamePasswordSecretVersion)
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretVersion-error", common.GetComponentInfo())
+		}
+	} else if discValue == "custom_credentials" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsSecretVersion)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsSecretVersion-error", common.GetComponentInfo())
 		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
@@ -10412,6 +11499,7 @@ func (resp *SecretVersionLocksPaginatedCollection) GetNextOffset() (*int64, erro
 // - PublicCertificateVersionMetadata
 // - ServiceCredentialsSecretVersionMetadata
 // - UsernamePasswordSecretVersionMetadata
+// - CustomCredentialsSecretVersionMetadata
 type SecretVersionMetadata struct {
 	// Indicates whether the version of the secret was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
@@ -10453,7 +11541,8 @@ type SecretVersionMetadata struct {
 	SecretID *string `json:"secret_id,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The ID of the API key that is generated for this secret.
@@ -10477,6 +11566,9 @@ type SecretVersionMetadata struct {
 
 	// The source service resource key data of the generated service credentials.
 	ResourceKey *ServiceCredentialsResourceKey `json:"resource_key,omitempty"`
+
+	// Credentials created by the custom credentials system.
+	CredentialsID *string `json:"credentials_id,omitempty"`
 }
 
 // Constants associated with the SecretVersionMetadata.SecretType property.
@@ -10484,6 +11576,7 @@ type SecretVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	SecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	SecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	SecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	SecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	SecretVersionMetadata_SecretType_Kv                 = "kv"
@@ -10563,6 +11656,11 @@ func UnmarshalSecretVersionMetadata(m map[string]json.RawMessage, result interfa
 		if err != nil {
 			err = core.SDKErrorf(err, "", "unmarshal-UsernamePasswordSecretVersionMetadata-error", common.GetComponentInfo())
 		}
+	} else if discValue == "custom_credentials" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalCustomCredentialsSecretVersionMetadata)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-CustomCredentialsSecretVersionMetadata-error", common.GetComponentInfo())
+		}
 	} else {
 		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'secret_type': %s", discValue)
 		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
@@ -10635,6 +11733,7 @@ func (secretVersionMetadataPatch *SecretVersionMetadataPatch) AsPatch() (_patch 
 // - PublicCertificateVersionPrototype
 // - ServiceCredentialsSecretVersionPrototype
 // - UsernamePasswordSecretVersionPrototype
+// - CustomCredentialsSecretVersionPrototype
 type SecretVersionPrototype struct {
 	// The secret data that is assigned to an `arbitrary` secret.
 	Payload *string `json:"payload,omitempty"`
@@ -11360,6 +12459,7 @@ type UpdateConfigurationOptions struct {
 // Constants associated with the UpdateConfigurationOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	UpdateConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -11642,7 +12742,8 @@ type ArbitrarySecret struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The secret data that is assigned to an `arbitrary` secret.
@@ -11654,6 +12755,7 @@ type ArbitrarySecret struct {
 // service_credentials, kv, and username_password.
 const (
 	ArbitrarySecret_SecretType_Arbitrary          = "arbitrary"
+	ArbitrarySecret_SecretType_CustomCredentials  = "custom_credentials"
 	ArbitrarySecret_SecretType_IamCredentials     = "iam_credentials"
 	ArbitrarySecret_SecretType_ImportedCert       = "imported_cert"
 	ArbitrarySecret_SecretType_Kv                 = "kv"
@@ -11844,7 +12946,8 @@ type ArbitrarySecretMetadata struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
@@ -11853,6 +12956,7 @@ type ArbitrarySecretMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	ArbitrarySecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	ArbitrarySecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ArbitrarySecretMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ArbitrarySecretMetadata_SecretType_ImportedCert       = "imported_cert"
 	ArbitrarySecretMetadata_SecretType_Kv                 = "kv"
@@ -12107,6 +13211,7 @@ type ArbitrarySecretPrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	ArbitrarySecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	ArbitrarySecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
 	ArbitrarySecretPrototype_SecretType_IamCredentials     = "iam_credentials"
 	ArbitrarySecretPrototype_SecretType_ImportedCert       = "imported_cert"
 	ArbitrarySecretPrototype_SecretType_Kv                 = "kv"
@@ -12229,7 +13334,8 @@ type ArbitrarySecretVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The secret data that is assigned to an `arbitrary` secret.
@@ -12241,6 +13347,7 @@ type ArbitrarySecretVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	ArbitrarySecretVersion_SecretType_Arbitrary          = "arbitrary"
+	ArbitrarySecretVersion_SecretType_CustomCredentials  = "custom_credentials"
 	ArbitrarySecretVersion_SecretType_IamCredentials     = "iam_credentials"
 	ArbitrarySecretVersion_SecretType_ImportedCert       = "imported_cert"
 	ArbitrarySecretVersion_SecretType_Kv                 = "kv"
@@ -12382,7 +13489,8 @@ type ArbitrarySecretVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
@@ -12391,6 +13499,7 @@ type ArbitrarySecretVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	ArbitrarySecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	ArbitrarySecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ArbitrarySecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ArbitrarySecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	ArbitrarySecretVersionMetadata_SecretType_Kv                 = "kv"
@@ -12612,12 +13721,1611 @@ func (commonRotationPolicy *CommonRotationPolicy) asPatch() (_patch map[string]i
 	return
 }
 
+// CustomCredentialsConfiguration : The configuration of custom credentials.
+// This model "extends" Configuration
+type CustomCredentialsConfiguration struct {
+	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
+	ConfigType *string `json:"config_type" validate:"required"`
+
+	// The unique name of your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when a resource was modified. The date format follows `RFC 3339`.
+	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The IAM API key used by the credentials provider to access this Secrets Manager instance.
+	CodeEngineKeyRef *string `json:"code_engine_key_ref,omitempty"`
+
+	// The IAM credentials secret ID that is used for setting up a custom credentials engine configuration.
+	ApiKeyRef *string `json:"api_key_ref,omitempty"`
+
+	// The parameters required to configure Code Engine.
+	CodeEngine *CustomCredentialsConfigurationCodeEngine `json:"code_engine" validate:"required"`
+
+	// The schema that defines by the Code Engine job to be used as input and output formats for this custom credentials
+	// configuration.
+	Schema *CustomCredentialsConfigurationSchema `json:"schema" validate:"required"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
+}
+
+// Constants associated with the CustomCredentialsConfiguration.ConfigType property.
+// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
+const (
+	CustomCredentialsConfiguration_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
+	CustomCredentialsConfiguration_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
+	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
+	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
+	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
+	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
+	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
+)
+
+// Constants associated with the CustomCredentialsConfiguration.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsConfiguration_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsConfiguration_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsConfiguration_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsConfiguration_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsConfiguration_SecretType_Kv                 = "kv"
+	CustomCredentialsConfiguration_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsConfiguration_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsConfiguration_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsConfiguration_SecretType_UsernamePassword   = "username_password"
+)
+
+func (*CustomCredentialsConfiguration) isaConfiguration() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsConfiguration unmarshals an instance of CustomCredentialsConfiguration from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfiguration)
+	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code_engine_key_ref", &obj.CodeEngineKeyRef)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_engine_key_ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_ref", &obj.ApiKeyRef)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "code_engine", &obj.CodeEngine, UnmarshalCustomCredentialsConfigurationCodeEngine)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_engine-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "schema", &obj.Schema, UnmarshalCustomCredentialsConfigurationSchema)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "schema-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "task_timeout", &obj.TaskTimeout)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_timeout-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsConfigurationMetadata : Your custom credentials configuration metadata properties.
+// This model "extends" ConfigurationMetadata
+type CustomCredentialsConfigurationMetadata struct {
+	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
+	ConfigType *string `json:"config_type" validate:"required"`
+
+	// The unique name of your configuration.
+	Name *string `json:"name" validate:"required"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when a resource was modified. The date format follows `RFC 3339`.
+	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The IAM API key used by the credentials provider to access this Secrets Manager instance.
+	CodeEngineKeyRef *string `json:"code_engine_key_ref,omitempty"`
+
+	// The IAM credentials secret ID that is used for setting up a custom credentials engine configuration.
+	ApiKeyRef *string `json:"api_key_ref,omitempty"`
+
+	// The parameters required to configure Code Engine.
+	CodeEngine *CustomCredentialsConfigurationCodeEngine `json:"code_engine" validate:"required"`
+
+	// The schema that defines by the Code Engine job to be used as input and output formats for this custom credentials
+	// configuration.
+	Schema *CustomCredentialsConfigurationSchema `json:"schema" validate:"required"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
+}
+
+// Constants associated with the CustomCredentialsConfigurationMetadata.ConfigType property.
+// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
+const (
+	CustomCredentialsConfigurationMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
+	CustomCredentialsConfigurationMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
+	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
+	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
+	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
+	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
+	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
+)
+
+// Constants associated with the CustomCredentialsConfigurationMetadata.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsConfigurationMetadata_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsConfigurationMetadata_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsConfigurationMetadata_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsConfigurationMetadata_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsConfigurationMetadata_SecretType_Kv                 = "kv"
+	CustomCredentialsConfigurationMetadata_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsConfigurationMetadata_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsConfigurationMetadata_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsConfigurationMetadata_SecretType_UsernamePassword   = "username_password"
+)
+
+func (*CustomCredentialsConfigurationMetadata) isaConfigurationMetadata() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsConfigurationMetadata unmarshals an instance of CustomCredentialsConfigurationMetadata from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationMetadata)
+	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "code_engine_key_ref", &obj.CodeEngineKeyRef)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_engine_key_ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_ref", &obj.ApiKeyRef)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "code_engine", &obj.CodeEngine, UnmarshalCustomCredentialsConfigurationCodeEngine)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_engine-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "schema", &obj.Schema, UnmarshalCustomCredentialsConfigurationSchema)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "schema-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "task_timeout", &obj.TaskTimeout)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_timeout-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsConfigurationPatch : The configuration update of the custom credentials engine.
+// This model "extends" ConfigurationPatch
+type CustomCredentialsConfigurationPatch struct {
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
+}
+
+func (*CustomCredentialsConfigurationPatch) isaConfigurationPatch() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsConfigurationPatch unmarshals an instance of CustomCredentialsConfigurationPatch from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationPatch(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationPatch)
+	err = core.UnmarshalPrimitive(m, "task_timeout", &obj.TaskTimeout)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_timeout-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// AsPatch returns a generic map representation of the CustomCredentialsConfigurationPatch
+func (customCredentialsConfigurationPatch *CustomCredentialsConfigurationPatch) AsPatch() (_patch map[string]interface{}, err error) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(customCredentialsConfigurationPatch.TaskTimeout) {
+		_patch["task_timeout"] = customCredentialsConfigurationPatch.TaskTimeout
+	}
+
+	return
+}
+
+// CustomCredentialsConfigurationPrototype : CustomCredentialsConfigurationPrototype struct
+// This model "extends" ConfigurationPrototype
+type CustomCredentialsConfigurationPrototype struct {
+	// A human-readable unique name to assign to your configuration.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as an name for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
+	ConfigType *string `json:"config_type" validate:"required"`
+
+	// The IAM credentials secret ID that is used for setting up a custom credentials engine configuration.
+	ApiKeyRef *string `json:"api_key_ref,omitempty"`
+
+	// The parameters required to configure Code Engine.
+	CodeEngine *CustomCredentialsConfigurationCodeEngine `json:"code_engine" validate:"required"`
+
+	// Specifies the maximum allowed time for a Code Engine task to be completed. After this time elapses, the task state
+	// will changed to failed. The minimum value is 5 minutes and the maximum value is 24 hours. Default task time out is
+	// 10 minutes.  The value can be either an integer that specifies the number of seconds, or the string representation
+	// of a duration, such as `10m` or `2h`.
+	TaskTimeout *string `json:"task_timeout,omitempty"`
+}
+
+// Constants associated with the CustomCredentialsConfigurationPrototype.ConfigType property.
+// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
+const (
+	CustomCredentialsConfigurationPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
+	CustomCredentialsConfigurationPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
+	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
+	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
+	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
+	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
+	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
+)
+
+// NewCustomCredentialsConfigurationPrototype : Instantiate CustomCredentialsConfigurationPrototype (Generic Model Constructor)
+func (*SecretsManagerV2) NewCustomCredentialsConfigurationPrototype(name string, configType string, codeEngine *CustomCredentialsConfigurationCodeEngine) (_model *CustomCredentialsConfigurationPrototype, err error) {
+	_model = &CustomCredentialsConfigurationPrototype{
+		Name:       core.StringPtr(name),
+		ConfigType: core.StringPtr(configType),
+		CodeEngine: codeEngine,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*CustomCredentialsConfigurationPrototype) isaConfigurationPrototype() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsConfigurationPrototype unmarshals an instance of CustomCredentialsConfigurationPrototype from the specified map of raw messages.
+func UnmarshalCustomCredentialsConfigurationPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsConfigurationPrototype)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "config_type", &obj.ConfigType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "config_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "api_key_ref", &obj.ApiKeyRef)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key_ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "code_engine", &obj.CodeEngine, UnmarshalCustomCredentialsConfigurationCodeEngine)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "code_engine-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "task_timeout", &obj.TaskTimeout)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_timeout-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsSecret : Your custom credentials secret.
+// This model "extends" Secret
+type CustomCredentialsSecret struct {
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// A CRN that uniquely identifies an IBM Cloud resource.
+	Crn *string `json:"crn" validate:"required"`
+
+	// The secret metadata that a user can customize.
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group.
+	Description *string `json:"description,omitempty"`
+
+	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// A UUID identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
+	//
+	// Label can be between 2-64 characters, including spaces.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// The number of locks of the secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
+	// The human-readable name of your secret.
+	Name *string `json:"name,omitempty"`
+
+	// A UUID identifier, or `default` secret group.
+	SecretGroupID *string `json:"secret_group_id" validate:"required"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// The secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
+	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The date when a resource was modified. The date format follows `RFC 3339`.
+	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The number of versions of your secret.
+	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// The list of configurations that have a reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
+	// The date that the secret is scheduled for automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy.
+	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
+
+	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
+	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The number of tasks that were created for this secret.
+	TaskCount *int64 `json:"task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	ProcessingTaskID *string `json:"processing_task_id,omitempty"`
+
+	// Number of queued tasks for this secret.
+	QueuedTaskCount *int64 `json:"queued_task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// The name of the custom credentials configuration.
+	Configuration *string `json:"configuration" validate:"required"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	CredentialsContent map[string]interface{} `json:"credentials_content" validate:"required"`
+}
+
+// Constants associated with the CustomCredentialsSecret.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsSecret_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsSecret_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsSecret_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsSecret_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsSecret_SecretType_Kv                 = "kv"
+	CustomCredentialsSecret_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsSecret_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecret_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsSecret_SecretType_UsernamePassword   = "username_password"
+)
+
+// Constants associated with the CustomCredentialsSecret.StateDescription property.
+// A text representation of the secret state.
+const (
+	CustomCredentialsSecret_StateDescription_Active        = "active"
+	CustomCredentialsSecret_StateDescription_Deactivated   = "deactivated"
+	CustomCredentialsSecret_StateDescription_Destroyed     = "destroyed"
+	CustomCredentialsSecret_StateDescription_PreActivation = "pre_activation"
+	CustomCredentialsSecret_StateDescription_Suspended     = "suspended"
+)
+
+func (*CustomCredentialsSecret) isaSecret() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecret unmarshals an instance of CustomCredentialsSecret from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecret(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecret)
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "task_count", &obj.TaskCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "processing_task_id", &obj.ProcessingTaskID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "processing_task_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "queued_task_count", &obj.QueuedTaskCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "queued_task_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_failed_task_id", &obj.LastFailedTaskID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_failed_task_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "configuration", &obj.Configuration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "configuration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "parameters", &obj.Parameters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "credentials_content", &obj.CredentialsContent)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials_content-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsSecretMetadata : The metadata properties for your custom credentials secret.
+// This model "extends" SecretMetadata
+type CustomCredentialsSecretMetadata struct {
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// A CRN that uniquely identifies an IBM Cloud resource.
+	Crn *string `json:"crn" validate:"required"`
+
+	// The secret metadata that a user can customize.
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group.
+	Description *string `json:"description,omitempty"`
+
+	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// A UUID identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
+	//
+	// Label can be between 2-64 characters, including spaces.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// The number of locks of the secret.
+	LocksTotal *int64 `json:"locks_total,omitempty"`
+
+	// The human-readable name of your secret.
+	Name *string `json:"name,omitempty"`
+
+	// A UUID identifier, or `default` secret group.
+	SecretGroupID *string `json:"secret_group_id" validate:"required"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// The secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
+	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values.
+	State *int64 `json:"state,omitempty"`
+
+	// A text representation of the secret state.
+	StateDescription *string `json:"state_description,omitempty"`
+
+	// The date when a resource was modified. The date format follows `RFC 3339`.
+	UpdatedAt *strfmt.DateTime `json:"updated_at" validate:"required"`
+
+	// The number of versions of your secret.
+	VersionsTotal *int64 `json:"versions_total" validate:"required"`
+
+	// The list of configurations that have a reference to the secret.
+	ReferencedBy []string `json:"referenced_by,omitempty"`
+
+	// The date that the secret is scheduled for automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy.
+	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
+
+	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
+	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// The number of tasks that were created for this secret.
+	TaskCount *int64 `json:"task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	ProcessingTaskID *string `json:"processing_task_id,omitempty"`
+
+	// Number of queued tasks for this secret.
+	QueuedTaskCount *int64 `json:"queued_task_count,omitempty"`
+
+	// A Secret Manager task identifier.
+	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// The name of the custom credentials configuration.
+	Configuration *string `json:"configuration" validate:"required"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
+}
+
+// Constants associated with the CustomCredentialsSecretMetadata.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsSecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsSecretMetadata_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsSecretMetadata_SecretType_Kv                 = "kv"
+	CustomCredentialsSecretMetadata_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsSecretMetadata_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretMetadata_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsSecretMetadata_SecretType_UsernamePassword   = "username_password"
+)
+
+// Constants associated with the CustomCredentialsSecretMetadata.StateDescription property.
+// A text representation of the secret state.
+const (
+	CustomCredentialsSecretMetadata_StateDescription_Active        = "active"
+	CustomCredentialsSecretMetadata_StateDescription_Deactivated   = "deactivated"
+	CustomCredentialsSecretMetadata_StateDescription_Destroyed     = "destroyed"
+	CustomCredentialsSecretMetadata_StateDescription_PreActivation = "pre_activation"
+	CustomCredentialsSecretMetadata_StateDescription_Suspended     = "suspended"
+)
+
+func (*CustomCredentialsSecretMetadata) isaSecretMetadata() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecretMetadata unmarshals an instance of CustomCredentialsSecretMetadata from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecretMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecretMetadata)
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locks_total", &obj.LocksTotal)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "locks_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "state_description", &obj.StateDescription)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "state_description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "updated_at", &obj.UpdatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updated_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "versions_total", &obj.VersionsTotal)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "versions_total-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "referenced_by", &obj.ReferencedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "referenced_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "next_rotation_date", &obj.NextRotationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "next_rotation_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "task_count", &obj.TaskCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "task_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "processing_task_id", &obj.ProcessingTaskID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "processing_task_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "queued_task_count", &obj.QueuedTaskCount)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "queued_task_count-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_failed_task_id", &obj.LastFailedTaskID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_failed_task_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "configuration", &obj.Configuration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "configuration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "parameters", &obj.Parameters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsSecretMetadataPatch : CustomCredentialsSecretMetadataPatch struct
+// This model "extends" SecretMetadataPatch
+type CustomCredentialsSecretMetadataPatch struct {
+	// The secret metadata that a user can customize.
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group.
+	Description *string `json:"description,omitempty"`
+
+	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
+	//
+	// Label can be between 2-64 characters, including spaces.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// A human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret.
+	Name *string `json:"name,omitempty"`
+
+	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
+	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+
+	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
+}
+
+func (*CustomCredentialsSecretMetadataPatch) isaSecretMetadataPatch() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecretMetadataPatch unmarshals an instance of CustomCredentialsSecretMetadataPatch from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecretMetadataPatch(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecretMetadataPatch)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "parameters", &obj.Parameters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// AsPatch returns a generic map representation of the CustomCredentialsSecretMetadataPatch
+func (customCredentialsSecretMetadataPatch *CustomCredentialsSecretMetadataPatch) AsPatch() (_patch map[string]interface{}, err error) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.CustomMetadata) {
+		_patch["custom_metadata"] = customCredentialsSecretMetadataPatch.CustomMetadata
+	}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.Description) {
+		_patch["description"] = customCredentialsSecretMetadataPatch.Description
+	}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.Labels) {
+		_patch["labels"] = customCredentialsSecretMetadataPatch.Labels
+	}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.Name) {
+		_patch["name"] = customCredentialsSecretMetadataPatch.Name
+	}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.Rotation) {
+		_patch["rotation"] = customCredentialsSecretMetadataPatch.Rotation.asPatch()
+	}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.TTL) {
+		_patch["ttl"] = customCredentialsSecretMetadataPatch.TTL
+	}
+	if !core.IsNil(customCredentialsSecretMetadataPatch.Parameters) {
+		_patch["parameters"] = customCredentialsSecretMetadataPatch.Parameters
+	}
+
+	return
+}
+
+// CustomCredentialsSecretPrototype : CustomCredentialsSecretPrototype struct
+// This model "extends" SecretPrototype
+type CustomCredentialsSecretPrototype struct {
+	// The secret metadata that a user can customize.
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group.
+	Description *string `json:"description,omitempty"`
+
+	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
+	//
+	// Label can be between 2-64 characters, including spaces.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
+	Labels []string `json:"labels,omitempty"`
+
+	// A human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret.
+	Name *string `json:"name" validate:"required"`
+
+	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
+	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
+
+	// A UUID identifier, or `default` secret group.
+	SecretGroupID *string `json:"secret_group_id,omitempty"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	TTL *string `json:"ttl,omitempty"`
+
+	// The secret version metadata that a user can customize.
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
+
+	// The name of the custom credentials configuration.
+	Configuration *string `json:"configuration" validate:"required"`
+
+	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	Parameters map[string]interface{} `json:"parameters,omitempty"`
+}
+
+// Constants associated with the CustomCredentialsSecretPrototype.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsSecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsSecretPrototype_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsSecretPrototype_SecretType_Kv                 = "kv"
+	CustomCredentialsSecretPrototype_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsSecretPrototype_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretPrototype_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsSecretPrototype_SecretType_UsernamePassword   = "username_password"
+)
+
+// NewCustomCredentialsSecretPrototype : Instantiate CustomCredentialsSecretPrototype (Generic Model Constructor)
+func (*SecretsManagerV2) NewCustomCredentialsSecretPrototype(name string, secretType string, configuration string) (_model *CustomCredentialsSecretPrototype, err error) {
+	_model = &CustomCredentialsSecretPrototype{
+		Name:          core.StringPtr(name),
+		SecretType:    core.StringPtr(secretType),
+		Configuration: core.StringPtr(configuration),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*CustomCredentialsSecretPrototype) isaSecretPrototype() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecretPrototype unmarshals an instance of CustomCredentialsSecretPrototype from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecretPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecretPrototype)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "description-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "labels", &obj.Labels)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "labels-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "rotation", &obj.Rotation, UnmarshalRotationPolicy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "rotation-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ttl", &obj.TTL)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ttl-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "configuration", &obj.Configuration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "configuration-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "parameters", &obj.Parameters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "parameters-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsSecretVersion : Your custom credentials secret version.
+// This model "extends" SecretVersion
+type CustomCredentialsSecretVersion struct {
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// A UUID identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// The human-readable name of your secret.
+	SecretName *string `json:"secret_name,omitempty"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// A UUID identifier, or `default` secret group.
+	SecretGroupID *string `json:"secret_group_id" validate:"required"`
+
+	// Indicates whether the secret payload is available in this secret version.
+	PayloadAvailable *bool `json:"payload_available" validate:"required"`
+
+	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+	// for version `n-1`.
+	Alias *string `json:"alias,omitempty"`
+
+	// The secret version metadata that a user can customize.
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
+
+	// A UUID identifier.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// Credentials created by the custom credentials system.
+	CredentialsID *string `json:"credentials_id,omitempty"`
+
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
+	// 'boolean'.
+	CredentialsContent map[string]interface{} `json:"credentials_content" validate:"required"`
+}
+
+// Constants associated with the CustomCredentialsSecretVersion.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsSecretVersion_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsSecretVersion_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsSecretVersion_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsSecretVersion_SecretType_Kv                 = "kv"
+	CustomCredentialsSecretVersion_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsSecretVersion_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretVersion_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsSecretVersion_SecretType_UsernamePassword   = "username_password"
+)
+
+// Constants associated with the CustomCredentialsSecretVersion.Alias property.
+// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+// for version `n-1`.
+const (
+	CustomCredentialsSecretVersion_Alias_Current  = "current"
+	CustomCredentialsSecretVersion_Alias_Previous = "previous"
+)
+
+func (*CustomCredentialsSecretVersion) isaSecretVersion() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecretVersion unmarshals an instance of CustomCredentialsSecretVersion from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecretVersion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecretVersion)
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "credentials_id", &obj.CredentialsID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "credentials_content", &obj.CredentialsContent)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials_content-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsSecretVersionMetadata : The version metadata properties for your custom credentials secret.
+// This model "extends" SecretVersionMetadata
+type CustomCredentialsSecretVersionMetadata struct {
+	// Indicates whether the version of the secret was created by automatic rotation.
+	AutoRotated *bool `json:"auto_rotated,omitempty"`
+
+	// The unique identifier that is associated with the entity that created the secret.
+	CreatedBy *string `json:"created_by" validate:"required"`
+
+	// The date when the resource was created. The date format follows `RFC 3339`.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
+	// service API.
+	Downloaded *bool `json:"downloaded,omitempty"`
+
+	// A UUID identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// The human-readable name of your secret.
+	SecretName *string `json:"secret_name,omitempty"`
+
+	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password.
+	SecretType *string `json:"secret_type" validate:"required"`
+
+	// A UUID identifier, or `default` secret group.
+	SecretGroupID *string `json:"secret_group_id" validate:"required"`
+
+	// Indicates whether the secret payload is available in this secret version.
+	PayloadAvailable *bool `json:"payload_available" validate:"required"`
+
+	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+	// for version `n-1`.
+	Alias *string `json:"alias,omitempty"`
+
+	// The secret version metadata that a user can customize.
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
+
+	// A UUID identifier.
+	SecretID *string `json:"secret_id" validate:"required"`
+
+	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
+
+	// Credentials created by the custom credentials system.
+	CredentialsID *string `json:"credentials_id,omitempty"`
+}
+
+// Constants associated with the CustomCredentialsSecretVersionMetadata.SecretType property.
+// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password.
+const (
+	CustomCredentialsSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	CustomCredentialsSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
+	CustomCredentialsSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
+	CustomCredentialsSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
+	CustomCredentialsSecretVersionMetadata_SecretType_Kv                 = "kv"
+	CustomCredentialsSecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
+	CustomCredentialsSecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
+	CustomCredentialsSecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+)
+
+// Constants associated with the CustomCredentialsSecretVersionMetadata.Alias property.
+// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+// for version `n-1`.
+const (
+	CustomCredentialsSecretVersionMetadata_Alias_Current  = "current"
+	CustomCredentialsSecretVersionMetadata_Alias_Previous = "previous"
+)
+
+func (*CustomCredentialsSecretVersionMetadata) isaSecretVersionMetadata() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecretVersionMetadata unmarshals an instance of CustomCredentialsSecretVersionMetadata from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecretVersionMetadata(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecretVersionMetadata)
+	err = core.UnmarshalPrimitive(m, "auto_rotated", &obj.AutoRotated)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "auto_rotated-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_by", &obj.CreatedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "downloaded", &obj.Downloaded)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "downloaded-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_name", &obj.SecretName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_type", &obj.SecretType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_group_id", &obj.SecretGroupID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_group_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "payload_available", &obj.PayloadAvailable)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "payload_available-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "alias", &obj.Alias)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "alias-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secret_id", &obj.SecretID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secret_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "expiration_date", &obj.ExpirationDate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "expiration_date-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "credentials_id", &obj.CredentialsID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CustomCredentialsSecretVersionPrototype : CustomCredentialsSecretVersionPrototype struct
+// This model "extends" SecretVersionPrototype
+type CustomCredentialsSecretVersionPrototype struct {
+	// The secret metadata that a user can customize.
+	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
+
+	// The secret version metadata that a user can customize.
+	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
+}
+
+func (*CustomCredentialsSecretVersionPrototype) isaSecretVersionPrototype() bool {
+	return true
+}
+
+// UnmarshalCustomCredentialsSecretVersionPrototype unmarshals an instance of CustomCredentialsSecretVersionPrototype from the specified map of raw messages.
+func UnmarshalCustomCredentialsSecretVersionPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CustomCredentialsSecretVersionPrototype)
+	err = core.UnmarshalPrimitive(m, "custom_metadata", &obj.CustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version_custom_metadata", &obj.VersionCustomMetadata)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "version_custom_metadata-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // IAMCredentialsConfiguration : Properties that describe a Classic Infrastructure DNS configuration.
 // This model "extends" Configuration
 type IAMCredentialsConfiguration struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -12648,8 +15356,10 @@ type IAMCredentialsConfiguration struct {
 // Constants associated with the IAMCredentialsConfiguration.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	IAMCredentialsConfiguration_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	IAMCredentialsConfiguration_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -12664,6 +15374,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsConfiguration_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsConfiguration_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsConfiguration_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsConfiguration_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsConfiguration_SecretType_Kv                 = "kv"
@@ -12724,12 +15435,13 @@ func UnmarshalIAMCredentialsConfiguration(m map[string]json.RawMessage, result i
 	return
 }
 
-// IAMCredentialsConfigurationMetadata : Your IAMCredentials Configuration metadata properties.
+// IAMCredentialsConfigurationMetadata : Your IAM credentials configuration metadata properties.
 // This model "extends" ConfigurationMetadata
 type IAMCredentialsConfigurationMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -12755,8 +15467,10 @@ type IAMCredentialsConfigurationMetadata struct {
 // Constants associated with the IAMCredentialsConfigurationMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	IAMCredentialsConfigurationMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	IAMCredentialsConfigurationMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -12771,6 +15485,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsConfigurationMetadata_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsConfigurationMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsConfigurationMetadata_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsConfigurationMetadata_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsConfigurationMetadata_SecretType_Kv                 = "kv"
@@ -12885,7 +15600,8 @@ type IAMCredentialsConfigurationPrototype struct {
 
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The API key that is used to set the iam_credentials engine.
@@ -12900,8 +15616,10 @@ type IAMCredentialsConfigurationPrototype struct {
 // Constants associated with the IAMCredentialsConfigurationPrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	IAMCredentialsConfigurationPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	IAMCredentialsConfigurationPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -13021,12 +15739,13 @@ type IAMCredentialsSecret struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -13064,7 +15783,7 @@ type IAMCredentialsSecret struct {
 	ReuseApiKey *bool `json:"reuse_api_key" validate:"required"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -13074,7 +15793,8 @@ type IAMCredentialsSecret struct {
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The API key that is generated for this secret.
@@ -13090,6 +15810,7 @@ type IAMCredentialsSecret struct {
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsSecret_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsSecret_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsSecret_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsSecret_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsSecret_SecretType_Kv                 = "kv"
@@ -13325,12 +16046,13 @@ type IAMCredentialsSecretMetadata struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -13368,7 +16090,7 @@ type IAMCredentialsSecretMetadata struct {
 	ReuseApiKey *bool `json:"reuse_api_key" validate:"required"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -13378,7 +16100,8 @@ type IAMCredentialsSecretMetadata struct {
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
@@ -13387,6 +16110,7 @@ type IAMCredentialsSecretMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsSecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsSecretMetadata_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsSecretMetadata_SecretType_Kv                 = "kv"
@@ -13577,16 +16301,17 @@ type IAMCredentialsSecretMetadataPatch struct {
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 }
 
@@ -13685,12 +16410,13 @@ type IAMCredentialsSecretPrototype struct {
 	Labels []string `json:"labels,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl" validate:"required"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -13719,7 +16445,7 @@ type IAMCredentialsSecretPrototype struct {
 	ReuseApiKey *bool `json:"reuse_api_key" validate:"required"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
@@ -13734,6 +16460,7 @@ type IAMCredentialsSecretPrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsSecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsSecretPrototype_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsSecretPrototype_SecretType_Kv                 = "kv"
@@ -13928,7 +16655,8 @@ type IAMCredentialsSecretVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The ID of the API key that is generated for this secret.
@@ -13957,6 +16685,7 @@ type IAMCredentialsSecretVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsSecretVersion_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsSecretVersion_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsSecretVersion_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsSecretVersion_SecretType_Kv                 = "kv"
@@ -14108,7 +16837,8 @@ type IAMCredentialsSecretVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The ID of the API key that is generated for this secret.
@@ -14130,6 +16860,7 @@ type IAMCredentialsSecretVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	IAMCredentialsSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	IAMCredentialsSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	IAMCredentialsSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	IAMCredentialsSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	IAMCredentialsSecretVersionMetadata_SecretType_Kv                 = "kv"
@@ -14340,7 +17071,8 @@ type ImportedCertificate struct {
 	CommonName *string `json:"common_name,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated intermediate certificate.
@@ -14385,6 +17117,7 @@ type ImportedCertificate struct {
 // service_credentials, kv, and username_password.
 const (
 	ImportedCertificate_SecretType_Arbitrary          = "arbitrary"
+	ImportedCertificate_SecretType_CustomCredentials  = "custom_credentials"
 	ImportedCertificate_SecretType_IamCredentials     = "iam_credentials"
 	ImportedCertificate_SecretType_ImportedCert       = "imported_cert"
 	ImportedCertificate_SecretType_Kv                 = "kv"
@@ -14651,7 +17384,8 @@ type ImportedCertificateMetadata struct {
 	CommonName *string `json:"common_name,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated intermediate certificate.
@@ -14682,6 +17416,7 @@ type ImportedCertificateMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	ImportedCertificateMetadata_SecretType_Arbitrary          = "arbitrary"
+	ImportedCertificateMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ImportedCertificateMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ImportedCertificateMetadata_SecretType_ImportedCert       = "imported_cert"
 	ImportedCertificateMetadata_SecretType_Kv                 = "kv"
@@ -14992,6 +17727,7 @@ type ImportedCertificatePrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	ImportedCertificatePrototype_SecretType_Arbitrary          = "arbitrary"
+	ImportedCertificatePrototype_SecretType_CustomCredentials  = "custom_credentials"
 	ImportedCertificatePrototype_SecretType_IamCredentials     = "iam_credentials"
 	ImportedCertificatePrototype_SecretType_ImportedCert       = "imported_cert"
 	ImportedCertificatePrototype_SecretType_Kv                 = "kv"
@@ -15123,7 +17859,8 @@ type ImportedCertificateVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -15152,6 +17889,7 @@ type ImportedCertificateVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	ImportedCertificateVersion_SecretType_Arbitrary          = "arbitrary"
+	ImportedCertificateVersion_SecretType_CustomCredentials  = "custom_credentials"
 	ImportedCertificateVersion_SecretType_IamCredentials     = "iam_credentials"
 	ImportedCertificateVersion_SecretType_ImportedCert       = "imported_cert"
 	ImportedCertificateVersion_SecretType_Kv                 = "kv"
@@ -15318,7 +18056,8 @@ type ImportedCertificateVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -15333,6 +18072,7 @@ type ImportedCertificateVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	ImportedCertificateVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	ImportedCertificateVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ImportedCertificateVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ImportedCertificateVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	ImportedCertificateVersionMetadata_SecretType_Kv                 = "kv"
@@ -15578,6 +18318,7 @@ type KVSecret struct {
 // service_credentials, kv, and username_password.
 const (
 	KVSecret_SecretType_Arbitrary          = "arbitrary"
+	KVSecret_SecretType_CustomCredentials  = "custom_credentials"
 	KVSecret_SecretType_IamCredentials     = "iam_credentials"
 	KVSecret_SecretType_ImportedCert       = "imported_cert"
 	KVSecret_SecretType_Kv                 = "kv"
@@ -15768,6 +18509,7 @@ type KVSecretMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	KVSecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	KVSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	KVSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
 	KVSecretMetadata_SecretType_ImportedCert       = "imported_cert"
 	KVSecretMetadata_SecretType_Kv                 = "kv"
@@ -16001,6 +18743,7 @@ type KVSecretPrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	KVSecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	KVSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
 	KVSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
 	KVSecretPrototype_SecretType_ImportedCert       = "imported_cert"
 	KVSecretPrototype_SecretType_Kv                 = "kv"
@@ -16118,7 +18861,8 @@ type KVSecretVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The payload data of a key-value secret.
@@ -16130,6 +18874,7 @@ type KVSecretVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	KVSecretVersion_SecretType_Arbitrary          = "arbitrary"
+	KVSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
 	KVSecretVersion_SecretType_IamCredentials     = "iam_credentials"
 	KVSecretVersion_SecretType_ImportedCert       = "imported_cert"
 	KVSecretVersion_SecretType_Kv                 = "kv"
@@ -16271,7 +19016,8 @@ type KVSecretVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
@@ -16280,6 +19026,7 @@ type KVSecretVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	KVSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	KVSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	KVSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	KVSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	KVSecretVersionMetadata_SecretType_Kv                 = "kv"
@@ -16506,8 +19253,9 @@ type PrivateCertificate struct {
 	CommonName *string `json:"common_name" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer" validate:"required"`
@@ -16523,7 +19271,7 @@ type PrivateCertificate struct {
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -16557,6 +19305,7 @@ type PrivateCertificate struct {
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificate_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificate_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificate_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificate_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificate_SecretType_Kv                 = "kv"
@@ -18216,7 +20965,8 @@ func UnmarshalPrivateCertificateConfigurationCACertificate(m map[string]json.Raw
 type PrivateCertificateConfigurationIntermediateCA struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -18243,7 +20993,8 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -18348,8 +21099,10 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 // Constants associated with the PrivateCertificateConfigurationIntermediateCA.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationIntermediateCA_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -18364,6 +21117,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateConfigurationIntermediateCA_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateConfigurationIntermediateCA_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateConfigurationIntermediateCA_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateConfigurationIntermediateCA_SecretType_Kv                 = "kv"
@@ -18663,7 +21417,8 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCACSR(m map[string]json
 type PrivateCertificateConfigurationIntermediateCAMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -18690,7 +21445,8 @@ type PrivateCertificateConfigurationIntermediateCAMetadata struct {
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
@@ -18723,8 +21479,10 @@ type PrivateCertificateConfigurationIntermediateCAMetadata struct {
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -18739,6 +21497,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_Kv                 = "kv"
@@ -18961,7 +21720,8 @@ func (privateCertificateConfigurationIntermediateCAPatch *PrivateCertificateConf
 type PrivateCertificateConfigurationIntermediateCAPrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -19084,8 +21844,10 @@ type PrivateCertificateConfigurationIntermediateCAPrototype struct {
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAPrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -19298,7 +22060,8 @@ func UnmarshalPrivateCertificateConfigurationIntermediateCAPrototype(m map[strin
 type PrivateCertificateConfigurationRootCA struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -19325,7 +22088,8 @@ type PrivateCertificateConfigurationRootCA struct {
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The type of private key to generate.
@@ -19433,8 +22197,10 @@ type PrivateCertificateConfigurationRootCA struct {
 // Constants associated with the PrivateCertificateConfigurationRootCA.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationRootCA_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationRootCA_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -19449,6 +22215,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateConfigurationRootCA_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateConfigurationRootCA_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateConfigurationRootCA_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateConfigurationRootCA_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateConfigurationRootCA_SecretType_Kv                 = "kv"
@@ -19688,7 +22455,8 @@ func UnmarshalPrivateCertificateConfigurationRootCA(m map[string]json.RawMessage
 type PrivateCertificateConfigurationRootCAMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -19715,7 +22483,8 @@ type PrivateCertificateConfigurationRootCAMetadata struct {
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The type of private key to generate.
@@ -19739,8 +22508,10 @@ type PrivateCertificateConfigurationRootCAMetadata struct {
 // Constants associated with the PrivateCertificateConfigurationRootCAMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationRootCAMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -19755,6 +22526,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_Kv                 = "kv"
@@ -19957,7 +22729,8 @@ func (privateCertificateConfigurationRootCAPatch *PrivateCertificateConfiguratio
 type PrivateCertificateConfigurationRootCAPrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -20087,8 +22860,10 @@ type PrivateCertificateConfigurationRootCAPrototype struct {
 // Constants associated with the PrivateCertificateConfigurationRootCAPrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationRootCAPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -20295,7 +23070,8 @@ func UnmarshalPrivateCertificateConfigurationRootCAPrototype(m map[string]json.R
 type PrivateCertificateConfigurationTemplate struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -20485,8 +23261,10 @@ type PrivateCertificateConfigurationTemplate struct {
 // Constants associated with the PrivateCertificateConfigurationTemplate.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationTemplate_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationTemplate_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -20501,6 +23279,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateConfigurationTemplate_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateConfigurationTemplate_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateConfigurationTemplate_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateConfigurationTemplate_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateConfigurationTemplate_SecretType_Kv                 = "kv"
@@ -20753,7 +23532,8 @@ func UnmarshalPrivateCertificateConfigurationTemplate(m map[string]json.RawMessa
 type PrivateCertificateConfigurationTemplateMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -20779,8 +23559,10 @@ type PrivateCertificateConfigurationTemplateMetadata struct {
 // Constants associated with the PrivateCertificateConfigurationTemplateMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationTemplateMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -20795,6 +23577,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateConfigurationTemplateMetadata_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateConfigurationTemplateMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateConfigurationTemplateMetadata_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateConfigurationTemplateMetadata_SecretType_Kv                 = "kv"
@@ -21360,7 +24143,8 @@ func (privateCertificateConfigurationTemplatePatch *PrivateCertificateConfigurat
 type PrivateCertificateConfigurationTemplatePrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -21557,8 +24341,10 @@ type PrivateCertificateConfigurationTemplatePrototype struct {
 // Constants associated with the PrivateCertificateConfigurationTemplatePrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PrivateCertificateConfigurationTemplatePrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -21955,8 +24741,9 @@ type PrivateCertificateMetadata struct {
 	CommonName *string `json:"common_name" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
-	ExpirationDate *strfmt.DateTime `json:"expiration_date" validate:"required"`
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
+	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The distinguished name that identifies the entity that signed and issued the certificate.
 	Issuer *string `json:"issuer" validate:"required"`
@@ -21972,7 +24759,7 @@ type PrivateCertificateMetadata struct {
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -21993,6 +24780,7 @@ type PrivateCertificateMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateMetadata_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateMetadata_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateMetadata_SecretType_Kv                 = "kv"
@@ -22203,7 +24991,7 @@ type PrivateCertificateMetadataPatch struct {
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 }
 
@@ -22338,7 +25126,7 @@ type PrivateCertificatePrototype struct {
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
@@ -22353,6 +25141,7 @@ type PrivateCertificatePrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificatePrototype_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificatePrototype_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificatePrototype_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificatePrototype_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificatePrototype_SecretType_Kv                 = "kv"
@@ -22540,7 +25329,8 @@ type PrivateCertificateVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -22568,6 +25358,7 @@ type PrivateCertificateVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateVersion_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateVersion_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateVersion_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateVersion_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateVersion_SecretType_Kv                 = "kv"
@@ -22812,7 +25603,8 @@ type PrivateCertificateVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -22827,6 +25619,7 @@ type PrivateCertificateVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	PrivateCertificateVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	PrivateCertificateVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PrivateCertificateVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PrivateCertificateVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	PrivateCertificateVersionMetadata_SecretType_Kv                 = "kv"
@@ -23045,7 +25838,8 @@ type PublicCertificate struct {
 	CommonName *string `json:"common_name,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// Issuance information that is associated with your certificate.
@@ -23069,7 +25863,7 @@ type PublicCertificate struct {
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation" validate:"required"`
 
 	// Indicates whether the issued certificate is bundled with intermediate certificates.
@@ -23098,6 +25892,7 @@ type PublicCertificate struct {
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificate_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificate_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificate_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificate_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificate_SecretType_Kv                 = "kv"
@@ -23371,7 +26166,8 @@ func UnmarshalPublicCertificateActionValidateManualDNSPrototype(m map[string]jso
 type PublicCertificateConfigurationCALetsEncrypt struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -23405,8 +26201,10 @@ type PublicCertificateConfigurationCALetsEncrypt struct {
 // Constants associated with the PublicCertificateConfigurationCALetsEncrypt.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationCALetsEncrypt_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -23421,6 +26219,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateConfigurationCALetsEncrypt_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateConfigurationCALetsEncrypt_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateConfigurationCALetsEncrypt_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateConfigurationCALetsEncrypt_SecretType_Kv                 = "kv"
@@ -23498,7 +26297,8 @@ func UnmarshalPublicCertificateConfigurationCALetsEncrypt(m map[string]json.RawM
 type PublicCertificateConfigurationCALetsEncryptMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -23528,8 +26328,10 @@ type PublicCertificateConfigurationCALetsEncryptMetadata struct {
 // Constants associated with the PublicCertificateConfigurationCALetsEncryptMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -23544,6 +26346,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_Kv                 = "kv"
@@ -23692,7 +26495,8 @@ func (publicCertificateConfigurationCALetsEncryptPatch *PublicCertificateConfigu
 type PublicCertificateConfigurationCALetsEncryptPrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -23715,8 +26519,10 @@ type PublicCertificateConfigurationCALetsEncryptPrototype struct {
 // Constants associated with the PublicCertificateConfigurationCALetsEncryptPrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -23789,7 +26595,8 @@ func UnmarshalPublicCertificateConfigurationCALetsEncryptPrototype(m map[string]
 type PublicCertificateConfigurationDNSClassicInfrastructure struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -23824,8 +26631,10 @@ type PublicCertificateConfigurationDNSClassicInfrastructure struct {
 // Constants associated with the PublicCertificateConfigurationDNSClassicInfrastructure.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -23840,6 +26649,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_Kv                 = "kv"
@@ -23905,7 +26715,8 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructure(m map[strin
 type PublicCertificateConfigurationDNSClassicInfrastructureMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -23928,8 +26739,10 @@ type PublicCertificateConfigurationDNSClassicInfrastructureMetadata struct {
 // Constants associated with the PublicCertificateConfigurationDNSClassicInfrastructureMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -23944,6 +26757,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_Kv                 = "kv"
@@ -24049,7 +26863,8 @@ func (publicCertificateConfigurationDNSClassicInfrastructurePatch *PublicCertifi
 type PublicCertificateConfigurationDNSClassicInfrastructurePrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -24073,8 +26888,10 @@ type PublicCertificateConfigurationDNSClassicInfrastructurePrototype struct {
 // Constants associated with the PublicCertificateConfigurationDNSClassicInfrastructurePrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -24135,7 +26952,8 @@ func UnmarshalPublicCertificateConfigurationDNSClassicInfrastructurePrototype(m 
 type PublicCertificateConfigurationDNSCloudInternetServices struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -24179,8 +26997,10 @@ type PublicCertificateConfigurationDNSCloudInternetServices struct {
 // Constants associated with the PublicCertificateConfigurationDNSCloudInternetServices.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -24195,6 +27015,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_Kv                 = "kv"
@@ -24260,7 +27081,8 @@ func UnmarshalPublicCertificateConfigurationDNSCloudInternetServices(m map[strin
 type PublicCertificateConfigurationDNSCloudInternetServicesMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// The unique name of your configuration.
@@ -24283,8 +27105,10 @@ type PublicCertificateConfigurationDNSCloudInternetServicesMetadata struct {
 // Constants associated with the PublicCertificateConfigurationDNSCloudInternetServicesMetadata.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -24299,6 +27123,7 @@ const (
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_Kv                 = "kv"
@@ -24425,7 +27250,8 @@ func (publicCertificateConfigurationDNSCloudInternetServicesPatch *PublicCertifi
 type PublicCertificateConfigurationDNSCloudInternetServicesPrototype struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration.
 	ConfigType *string `json:"config_type" validate:"required"`
 
 	// A human-readable unique name to assign to your configuration.
@@ -24458,8 +27284,10 @@ type PublicCertificateConfigurationDNSCloudInternetServicesPrototype struct {
 // Constants associated with the PublicCertificateConfigurationDNSCloudInternetServicesPrototype.ConfigType property.
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
-// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template.
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration.
 const (
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
 	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
 	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
 	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
@@ -24590,7 +27418,8 @@ type PublicCertificateMetadata struct {
 	CommonName *string `json:"common_name,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// Issuance information that is associated with your certificate.
@@ -24614,7 +27443,7 @@ type PublicCertificateMetadata struct {
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation" validate:"required"`
 
 	// Indicates whether the issued certificate is bundled with intermediate certificates.
@@ -24632,6 +27461,7 @@ type PublicCertificateMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateMetadata_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateMetadata_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateMetadata_SecretType_Kv                 = "kv"
@@ -24837,7 +27667,7 @@ type PublicCertificateMetadataPatch struct {
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 }
 
@@ -24953,7 +27783,7 @@ type PublicCertificatePrototype struct {
 	BundleCerts *bool `json:"bundle_certs,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The secret metadata that a user can customize.
@@ -24968,6 +27798,7 @@ type PublicCertificatePrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificatePrototype_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificatePrototype_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificatePrototype_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificatePrototype_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificatePrototype_SecretType_Kv                 = "kv"
@@ -25182,7 +28013,8 @@ type PublicCertificateVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -25208,6 +28040,7 @@ type PublicCertificateVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateVersion_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateVersion_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateVersion_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateVersion_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateVersion_SecretType_Kv                 = "kv"
@@ -25369,7 +28202,8 @@ type PublicCertificateVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
@@ -25384,6 +28218,7 @@ type PublicCertificateVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	PublicCertificateVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	PublicCertificateVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	PublicCertificateVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	PublicCertificateVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	PublicCertificateVersionMetadata_SecretType_Kv                 = "kv"
@@ -25538,6 +28373,147 @@ func UnmarshalPublicCertificateVersionPrototype(m map[string]json.RawMessage, re
 	return
 }
 
+// SecretTaskPrototypeUpdateSecretTaskCredentialsCreated : Called by the credentials provider on a successful creation of credentials.
+// This model "extends" SecretTaskPrototype
+type SecretTaskPrototypeUpdateSecretTaskCredentialsCreated struct {
+	// Describes the status of a secret's task.
+	Status *string `json:"status" validate:"required"`
+
+	// Newly created credentials provided by the credentials provider.
+	Credentials *CustomCredentialsNewCredentials `json:"credentials" validate:"required"`
+}
+
+// Constants associated with the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated.Status property.
+// Describes the status of a secret's task.
+const (
+	SecretTaskPrototypeUpdateSecretTaskCredentialsCreated_Status_CredentialsCreated = "credentials_created"
+)
+
+// NewSecretTaskPrototypeUpdateSecretTaskCredentialsCreated : Instantiate SecretTaskPrototypeUpdateSecretTaskCredentialsCreated (Generic Model Constructor)
+func (*SecretsManagerV2) NewSecretTaskPrototypeUpdateSecretTaskCredentialsCreated(status string, credentials *CustomCredentialsNewCredentials) (_model *SecretTaskPrototypeUpdateSecretTaskCredentialsCreated, err error) {
+	_model = &SecretTaskPrototypeUpdateSecretTaskCredentialsCreated{
+		Status:      core.StringPtr(status),
+		Credentials: credentials,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*SecretTaskPrototypeUpdateSecretTaskCredentialsCreated) isaSecretTaskPrototype() bool {
+	return true
+}
+
+// UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsCreated unmarshals an instance of SecretTaskPrototypeUpdateSecretTaskCredentialsCreated from the specified map of raw messages.
+func UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsCreated(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "credentials", &obj.Credentials, UnmarshalCustomCredentialsNewCredentials)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "credentials-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted : This endpoint is called back by the credentials provider on a successful deletion of credentials.
+// This model "extends" SecretTaskPrototype
+type SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted struct {
+	// Describes the status of a secret's task.
+	Status *string `json:"status" validate:"required"`
+}
+
+// Constants associated with the SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted.Status property.
+// Describes the status of a secret's task.
+const (
+	SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted_Status_CredentialsDeleted = "credentials_deleted"
+)
+
+// NewSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted : Instantiate SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted (Generic Model Constructor)
+func (*SecretsManagerV2) NewSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted(status string) (_model *SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted, err error) {
+	_model = &SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted{
+		Status: core.StringPtr(status),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted) isaSecretTaskPrototype() bool {
+	return true
+}
+
+// UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted unmarshals an instance of SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted from the specified map of raw messages.
+func UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted)
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SecretTaskPrototypeUpdateSecretTaskFailed : Flag task as failed upon failure to create or delete credentials.
+// This model "extends" SecretTaskPrototype
+type SecretTaskPrototypeUpdateSecretTaskFailed struct {
+	// Describes the status of a secret's task.
+	Status *string `json:"status" validate:"required"`
+
+	// A collection of errors.
+	Errors []SecretTaskError `json:"errors" validate:"required"`
+}
+
+// Constants associated with the SecretTaskPrototypeUpdateSecretTaskFailed.Status property.
+// Describes the status of a secret's task.
+const (
+	SecretTaskPrototypeUpdateSecretTaskFailed_Status_Failed = "failed"
+)
+
+// NewSecretTaskPrototypeUpdateSecretTaskFailed : Instantiate SecretTaskPrototypeUpdateSecretTaskFailed (Generic Model Constructor)
+func (*SecretsManagerV2) NewSecretTaskPrototypeUpdateSecretTaskFailed(status string, errors []SecretTaskError) (_model *SecretTaskPrototypeUpdateSecretTaskFailed, err error) {
+	_model = &SecretTaskPrototypeUpdateSecretTaskFailed{
+		Status: core.StringPtr(status),
+		Errors: errors,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*SecretTaskPrototypeUpdateSecretTaskFailed) isaSecretTaskPrototype() bool {
+	return true
+}
+
+// UnmarshalSecretTaskPrototypeUpdateSecretTaskFailed unmarshals an instance of SecretTaskPrototypeUpdateSecretTaskFailed from the specified map of raw messages.
+func UnmarshalSecretTaskPrototypeUpdateSecretTaskFailed(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SecretTaskPrototypeUpdateSecretTaskFailed)
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "errors", &obj.Errors, UnmarshalSecretTaskError)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "errors-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ServiceCredentialsSecret : Your service credentials secret.
 // This model "extends" Secret
 type ServiceCredentialsSecret struct {
@@ -25609,20 +28585,22 @@ type ServiceCredentialsSecret struct {
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The properties of the resource key that was created for this source service instance.
@@ -25637,6 +28615,7 @@ type ServiceCredentialsSecret struct {
 // service_credentials, kv, and username_password.
 const (
 	ServiceCredentialsSecret_SecretType_Arbitrary          = "arbitrary"
+	ServiceCredentialsSecret_SecretType_CustomCredentials  = "custom_credentials"
 	ServiceCredentialsSecret_SecretType_IamCredentials     = "iam_credentials"
 	ServiceCredentialsSecret_SecretType_ImportedCert       = "imported_cert"
 	ServiceCredentialsSecret_SecretType_Kv                 = "kv"
@@ -25853,20 +28832,22 @@ type ServiceCredentialsSecretMetadata struct {
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The properties of the resource key that was created for this source service instance.
@@ -25878,6 +28859,7 @@ type ServiceCredentialsSecretMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	ServiceCredentialsSecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	ServiceCredentialsSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ServiceCredentialsSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ServiceCredentialsSecretMetadata_SecretType_ImportedCert       = "imported_cert"
 	ServiceCredentialsSecretMetadata_SecretType_Kv                 = "kv"
@@ -26043,16 +29025,17 @@ type ServiceCredentialsSecretMetadataPatch struct {
 	Name *string `json:"name,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 }
 
@@ -26147,7 +29130,7 @@ type ServiceCredentialsSecretPrototype struct {
 	Name *string `json:"name" validate:"required"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// A UUID identifier, or `default` secret group.
@@ -26161,12 +29144,13 @@ type ServiceCredentialsSecretPrototype struct {
 	SourceService *ServiceCredentialsSecretSourceService `json:"source_service" validate:"required"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
-	// iam_credentials, service_credentials. The TTL defines how long generated credentials remain valid. The value can be
-	// either an integer that specifies the number of seconds, or the string  representation of a duration, such as `1440m`
-	// or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The
-	// maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If it is set the minimum
-	// duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be
-	// applied only on the next secret rotation.
+	// iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated credentials remain
+	// valid. The value can be either an integer that specifies the number of seconds, or the string  representation of a
+	// duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is mandatory. The minimum
+	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
+	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
+	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
+	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// The secret version metadata that a user can customize.
@@ -26178,6 +29162,7 @@ type ServiceCredentialsSecretPrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	ServiceCredentialsSecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	ServiceCredentialsSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
 	ServiceCredentialsSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
 	ServiceCredentialsSecretPrototype_SecretType_ImportedCert       = "imported_cert"
 	ServiceCredentialsSecretPrototype_SecretType_Kv                 = "kv"
@@ -26305,7 +29290,8 @@ type ServiceCredentialsSecretVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The source service resource key data of the generated service credentials.
@@ -26320,6 +29306,7 @@ type ServiceCredentialsSecretVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	ServiceCredentialsSecretVersion_SecretType_Arbitrary          = "arbitrary"
+	ServiceCredentialsSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
 	ServiceCredentialsSecretVersion_SecretType_IamCredentials     = "iam_credentials"
 	ServiceCredentialsSecretVersion_SecretType_ImportedCert       = "imported_cert"
 	ServiceCredentialsSecretVersion_SecretType_Kv                 = "kv"
@@ -26466,7 +29453,8 @@ type ServiceCredentialsSecretVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The source service resource key data of the generated service credentials.
@@ -26478,6 +29466,7 @@ type ServiceCredentialsSecretVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	ServiceCredentialsSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	ServiceCredentialsSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	ServiceCredentialsSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	ServiceCredentialsSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	ServiceCredentialsSecretVersionMetadata_SecretType_Kv                 = "kv"
@@ -26672,11 +29661,12 @@ type UsernamePasswordSecret struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -26700,6 +29690,7 @@ type UsernamePasswordSecret struct {
 // service_credentials, kv, and username_password.
 const (
 	UsernamePasswordSecret_SecretType_Arbitrary          = "arbitrary"
+	UsernamePasswordSecret_SecretType_CustomCredentials  = "custom_credentials"
 	UsernamePasswordSecret_SecretType_IamCredentials     = "iam_credentials"
 	UsernamePasswordSecret_SecretType_ImportedCert       = "imported_cert"
 	UsernamePasswordSecret_SecretType_Kv                 = "kv"
@@ -26910,11 +29901,12 @@ type UsernamePasswordSecretMetadata struct {
 	ReferencedBy []string `json:"referenced_by,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The date that the secret is scheduled for automatic rotation.
@@ -26932,6 +29924,7 @@ type UsernamePasswordSecretMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	UsernamePasswordSecretMetadata_SecretType_Arbitrary          = "arbitrary"
+	UsernamePasswordSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	UsernamePasswordSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
 	UsernamePasswordSecretMetadata_SecretType_ImportedCert       = "imported_cert"
 	UsernamePasswordSecretMetadata_SecretType_Kv                 = "kv"
@@ -27092,7 +30085,7 @@ type UsernamePasswordSecretMetadataPatch struct {
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
@@ -27224,7 +30217,7 @@ type UsernamePasswordSecretPrototype struct {
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
-	// username_password, private_cert, public_cert, iam_credentials.
+	// username_password, private_cert, public_cert, iam_credentials, custom_credentials.
 	Rotation RotationPolicyIntf `json:"rotation,omitempty"`
 
 	// Policy for auto-generated passwords.
@@ -27236,6 +30229,7 @@ type UsernamePasswordSecretPrototype struct {
 // service_credentials, kv, and username_password.
 const (
 	UsernamePasswordSecretPrototype_SecretType_Arbitrary          = "arbitrary"
+	UsernamePasswordSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
 	UsernamePasswordSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
 	UsernamePasswordSecretPrototype_SecretType_ImportedCert       = "imported_cert"
 	UsernamePasswordSecretPrototype_SecretType_Kv                 = "kv"
@@ -27373,7 +30367,8 @@ type UsernamePasswordSecretVersion struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The username that is assigned to an `username_password` secret.
@@ -27388,6 +30383,7 @@ type UsernamePasswordSecretVersion struct {
 // service_credentials, kv, and username_password.
 const (
 	UsernamePasswordSecretVersion_SecretType_Arbitrary          = "arbitrary"
+	UsernamePasswordSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
 	UsernamePasswordSecretVersion_SecretType_IamCredentials     = "iam_credentials"
 	UsernamePasswordSecretVersion_SecretType_ImportedCert       = "imported_cert"
 	UsernamePasswordSecretVersion_SecretType_Kv                 = "kv"
@@ -27534,7 +30530,8 @@ type UsernamePasswordSecretVersionMetadata struct {
 	SecretID *string `json:"secret_id" validate:"required"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 }
 
@@ -27543,6 +30540,7 @@ type UsernamePasswordSecretVersionMetadata struct {
 // service_credentials, kv, and username_password.
 const (
 	UsernamePasswordSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
+	UsernamePasswordSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
 	UsernamePasswordSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
 	UsernamePasswordSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
 	UsernamePasswordSecretVersionMetadata_SecretType_Kv                 = "kv"
