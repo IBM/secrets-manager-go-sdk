@@ -2084,6 +2084,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteSecretPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
+					// TODO: Add check for force_delete query parameter
 					res.WriteHeader(204)
 				}))
 			})
@@ -2103,6 +2104,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the DeleteSecretOptions model
 				deleteSecretOptionsModel := new(secretsmanagerv2.DeleteSecretOptions)
 				deleteSecretOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				deleteSecretOptionsModel.ForceDelete = core.BoolPtr(false)
 				deleteSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2121,6 +2123,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				// Construct an instance of the DeleteSecretOptions model
 				deleteSecretOptionsModel := new(secretsmanagerv2.DeleteSecretOptions)
 				deleteSecretOptionsModel.ID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				deleteSecretOptionsModel.ForceDelete = core.BoolPtr(false)
 				deleteSecretOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -4696,6 +4699,809 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			})
 		})
 	})
+	Describe(`ListSecretTasks(listSecretTasksOptions *ListSecretTasksOptions) - Operation response error`, func() {
+		listSecretTasksPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSecretTasksPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ListSecretTasks with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the ListSecretTasksOptions model
+				listSecretTasksOptionsModel := new(secretsmanagerv2.ListSecretTasksOptions)
+				listSecretTasksOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				listSecretTasksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.ListSecretTasks(listSecretTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.ListSecretTasks(listSecretTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ListSecretTasks(listSecretTasksOptions *ListSecretTasksOptions)`, func() {
+		listSecretTasksPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSecretTasksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"tasks": [{"id": "sm-task-b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "creation_date": "2022-04-12T23:20:50.520Z", "last_update_date": "2022-04-12T23:20:50.520Z", "updated_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "type": "create_credentials", "status": "queued", "trigger": "secret_creation", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "errors": [{"code": "Code", "description": "Failed to create credentials"}]}]}`)
+				}))
+			})
+			It(`Invoke ListSecretTasks successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the ListSecretTasksOptions model
+				listSecretTasksOptionsModel := new(secretsmanagerv2.ListSecretTasksOptions)
+				listSecretTasksOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				listSecretTasksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.ListSecretTasksWithContext(ctx, listSecretTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.ListSecretTasks(listSecretTasksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.ListSecretTasksWithContext(ctx, listSecretTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(listSecretTasksPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"tasks": [{"id": "sm-task-b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "creation_date": "2022-04-12T23:20:50.520Z", "last_update_date": "2022-04-12T23:20:50.520Z", "updated_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "type": "create_credentials", "status": "queued", "trigger": "secret_creation", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "errors": [{"code": "Code", "description": "Failed to create credentials"}]}]}`)
+				}))
+			})
+			It(`Invoke ListSecretTasks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.ListSecretTasks(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the ListSecretTasksOptions model
+				listSecretTasksOptionsModel := new(secretsmanagerv2.ListSecretTasksOptions)
+				listSecretTasksOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				listSecretTasksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.ListSecretTasks(listSecretTasksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ListSecretTasks with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the ListSecretTasksOptions model
+				listSecretTasksOptionsModel := new(secretsmanagerv2.ListSecretTasksOptions)
+				listSecretTasksOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				listSecretTasksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.ListSecretTasks(listSecretTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the ListSecretTasksOptions model with no property values
+				listSecretTasksOptionsModelNew := new(secretsmanagerv2.ListSecretTasksOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.ListSecretTasks(listSecretTasksOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ListSecretTasks successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the ListSecretTasksOptions model
+				listSecretTasksOptionsModel := new(secretsmanagerv2.ListSecretTasksOptions)
+				listSecretTasksOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				listSecretTasksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.ListSecretTasks(listSecretTasksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretTask(getSecretTaskOptions *GetSecretTaskOptions) - Operation response error`, func() {
+		getSecretTaskPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks/sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretTaskPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSecretTask with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretTaskOptions model
+				getSecretTaskOptionsModel := new(secretsmanagerv2.GetSecretTaskOptions)
+				getSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				getSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				getSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.GetSecretTask(getSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.GetSecretTask(getSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSecretTask(getSecretTaskOptions *GetSecretTaskOptions)`, func() {
+		getSecretTaskPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks/sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretTaskPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "sm-task-b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "creation_date": "2022-04-12T23:20:50.520Z", "last_update_date": "2022-04-12T23:20:50.520Z", "updated_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "type": "create_credentials", "status": "queued", "trigger": "secret_creation", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "errors": [{"code": "Code", "description": "Failed to create credentials"}]}`)
+				}))
+			})
+			It(`Invoke GetSecretTask successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSecretTaskOptions model
+				getSecretTaskOptionsModel := new(secretsmanagerv2.GetSecretTaskOptions)
+				getSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				getSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				getSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.GetSecretTaskWithContext(ctx, getSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.GetSecretTask(getSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.GetSecretTaskWithContext(ctx, getSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSecretTaskPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "sm-task-b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "creation_date": "2022-04-12T23:20:50.520Z", "last_update_date": "2022-04-12T23:20:50.520Z", "updated_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "type": "create_credentials", "status": "queued", "trigger": "secret_creation", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "errors": [{"code": "Code", "description": "Failed to create credentials"}]}`)
+				}))
+			})
+			It(`Invoke GetSecretTask successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.GetSecretTask(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSecretTaskOptions model
+				getSecretTaskOptionsModel := new(secretsmanagerv2.GetSecretTaskOptions)
+				getSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				getSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				getSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.GetSecretTask(getSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSecretTask with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretTaskOptions model
+				getSecretTaskOptionsModel := new(secretsmanagerv2.GetSecretTaskOptions)
+				getSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				getSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				getSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.GetSecretTask(getSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSecretTaskOptions model with no property values
+				getSecretTaskOptionsModelNew := new(secretsmanagerv2.GetSecretTaskOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.GetSecretTask(getSecretTaskOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSecretTask successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecretTaskOptions model
+				getSecretTaskOptionsModel := new(secretsmanagerv2.GetSecretTaskOptions)
+				getSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				getSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				getSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.GetSecretTask(getSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ReplaceSecretTask(replaceSecretTaskOptions *ReplaceSecretTaskOptions) - Operation response error`, func() {
+		replaceSecretTaskPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks/sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(replaceSecretTaskPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke ReplaceSecretTask with error: Operation response processing error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the CustomCredentialsNewCredentials model
+				customCredentialsNewCredentialsModel := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+				customCredentialsNewCredentialsModel.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+				customCredentialsNewCredentialsModel.Payload = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated model
+				secretTaskPrototypeModel := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+				secretTaskPrototypeModel.Status = core.StringPtr("credentials_created")
+				secretTaskPrototypeModel.Credentials = customCredentialsNewCredentialsModel
+
+				// Construct an instance of the ReplaceSecretTaskOptions model
+				replaceSecretTaskOptionsModel := new(secretsmanagerv2.ReplaceSecretTaskOptions)
+				replaceSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				replaceSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				replaceSecretTaskOptionsModel.TaskPut = secretTaskPrototypeModel
+				replaceSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				secretsManagerService.EnableRetries(0, 0)
+				result, response, operationErr = secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`ReplaceSecretTask(replaceSecretTaskOptions *ReplaceSecretTaskOptions)`, func() {
+		replaceSecretTaskPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks/sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(replaceSecretTaskPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "sm-task-b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "creation_date": "2022-04-12T23:20:50.520Z", "last_update_date": "2022-04-12T23:20:50.520Z", "updated_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "type": "create_credentials", "status": "queued", "trigger": "secret_creation", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "errors": [{"code": "Code", "description": "Failed to create credentials"}]}`)
+				}))
+			})
+			It(`Invoke ReplaceSecretTask successfully with retries`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+				secretsManagerService.EnableRetries(0, 0)
+
+				// Construct an instance of the CustomCredentialsNewCredentials model
+				customCredentialsNewCredentialsModel := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+				customCredentialsNewCredentialsModel.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+				customCredentialsNewCredentialsModel.Payload = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated model
+				secretTaskPrototypeModel := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+				secretTaskPrototypeModel.Status = core.StringPtr("credentials_created")
+				secretTaskPrototypeModel.Credentials = customCredentialsNewCredentialsModel
+
+				// Construct an instance of the ReplaceSecretTaskOptions model
+				replaceSecretTaskOptionsModel := new(secretsmanagerv2.ReplaceSecretTaskOptions)
+				replaceSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				replaceSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				replaceSecretTaskOptionsModel.TaskPut = secretTaskPrototypeModel
+				replaceSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := secretsManagerService.ReplaceSecretTaskWithContext(ctx, replaceSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				secretsManagerService.DisableRetries()
+				result, response, operationErr := secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = secretsManagerService.ReplaceSecretTaskWithContext(ctx, replaceSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(replaceSecretTaskPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "sm-task-b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "creation_date": "2022-04-12T23:20:50.520Z", "last_update_date": "2022-04-12T23:20:50.520Z", "updated_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "type": "create_credentials", "status": "queued", "trigger": "secret_creation", "secret_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "secret_version_id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "errors": [{"code": "Code", "description": "Failed to create credentials"}]}`)
+				}))
+			})
+			It(`Invoke ReplaceSecretTask successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := secretsManagerService.ReplaceSecretTask(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CustomCredentialsNewCredentials model
+				customCredentialsNewCredentialsModel := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+				customCredentialsNewCredentialsModel.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+				customCredentialsNewCredentialsModel.Payload = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated model
+				secretTaskPrototypeModel := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+				secretTaskPrototypeModel.Status = core.StringPtr("credentials_created")
+				secretTaskPrototypeModel.Credentials = customCredentialsNewCredentialsModel
+
+				// Construct an instance of the ReplaceSecretTaskOptions model
+				replaceSecretTaskOptionsModel := new(secretsmanagerv2.ReplaceSecretTaskOptions)
+				replaceSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				replaceSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				replaceSecretTaskOptionsModel.TaskPut = secretTaskPrototypeModel
+				replaceSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke ReplaceSecretTask with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the CustomCredentialsNewCredentials model
+				customCredentialsNewCredentialsModel := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+				customCredentialsNewCredentialsModel.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+				customCredentialsNewCredentialsModel.Payload = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated model
+				secretTaskPrototypeModel := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+				secretTaskPrototypeModel.Status = core.StringPtr("credentials_created")
+				secretTaskPrototypeModel.Credentials = customCredentialsNewCredentialsModel
+
+				// Construct an instance of the ReplaceSecretTaskOptions model
+				replaceSecretTaskOptionsModel := new(secretsmanagerv2.ReplaceSecretTaskOptions)
+				replaceSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				replaceSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				replaceSecretTaskOptionsModel.TaskPut = secretTaskPrototypeModel
+				replaceSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the ReplaceSecretTaskOptions model with no property values
+				replaceSecretTaskOptionsModelNew := new(secretsmanagerv2.ReplaceSecretTaskOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke ReplaceSecretTask successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the CustomCredentialsNewCredentials model
+				customCredentialsNewCredentialsModel := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+				customCredentialsNewCredentialsModel.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+				customCredentialsNewCredentialsModel.Payload = map[string]interface{}{"anyKey": "anyValue"}
+
+				// Construct an instance of the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated model
+				secretTaskPrototypeModel := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+				secretTaskPrototypeModel.Status = core.StringPtr("credentials_created")
+				secretTaskPrototypeModel.Credentials = customCredentialsNewCredentialsModel
+
+				// Construct an instance of the ReplaceSecretTaskOptions model
+				replaceSecretTaskOptionsModel := new(secretsmanagerv2.ReplaceSecretTaskOptions)
+				replaceSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				replaceSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				replaceSecretTaskOptionsModel.TaskPut = secretTaskPrototypeModel
+				replaceSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteSecretTask(deleteSecretTaskOptions *DeleteSecretTaskOptions)`, func() {
+		deleteSecretTaskPath := "/api/v2/secrets/0b5571f7-21e6-42b7-91c5-3f5ac9793a46/tasks/sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteSecretTaskPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					res.WriteHeader(204)
+				}))
+			})
+			It(`Invoke DeleteSecretTask successfully`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				response, operationErr := secretsManagerService.DeleteSecretTask(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+
+				// Construct an instance of the DeleteSecretTaskOptions model
+				deleteSecretTaskOptionsModel := new(secretsmanagerv2.DeleteSecretTaskOptions)
+				deleteSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				deleteSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				deleteSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				response, operationErr = secretsManagerService.DeleteSecretTask(deleteSecretTaskOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+			})
+			It(`Invoke DeleteSecretTask with error: Operation validation and request error`, func() {
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2(&secretsmanagerv2.SecretsManagerV2Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(secretsManagerService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteSecretTaskOptions model
+				deleteSecretTaskOptionsModel := new(secretsmanagerv2.DeleteSecretTaskOptions)
+				deleteSecretTaskOptionsModel.SecretID = core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				deleteSecretTaskOptionsModel.ID = core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				deleteSecretTaskOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := secretsManagerService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				response, operationErr := secretsManagerService.DeleteSecretTask(deleteSecretTaskOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				// Construct a second instance of the DeleteSecretTaskOptions model with no property values
+				deleteSecretTaskOptionsModelNew := new(secretsmanagerv2.DeleteSecretTaskOptions)
+				// Invoke operation with invalid model (negative test)
+				response, operationErr = secretsManagerService.DeleteSecretTask(deleteSecretTaskOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) - Operation response error`, func() {
 		listSecretsLocksPath := "/api/v2/secrets_locks"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -7093,7 +7899,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
-				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := secretsManagerService.ListConfigurations(listConfigurationsOptionsModel)
@@ -7152,7 +7958,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
-				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -7219,7 +8025,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
-				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7243,7 +8049,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
-				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := secretsManagerService.SetServiceURL("")
@@ -7281,7 +8087,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				listConfigurationsOptionsModel.Sort = core.StringPtr("config_type")
 				listConfigurationsOptionsModel.Search = core.StringPtr("example")
-				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert"}
+				listConfigurationsOptionsModel.SecretTypes = []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"}
 				listConfigurationsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -7370,7 +8176,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Limit:       core.Int64Ptr(int64(10)),
 					Sort:        core.StringPtr("config_type"),
 					Search:      core.StringPtr("example"),
-					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
+					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 				}
 
 				pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptionsModel)
@@ -7398,7 +8204,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					Limit:       core.Int64Ptr(int64(10)),
 					Sort:        core.StringPtr("config_type"),
 					Search:      core.StringPtr("example"),
-					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert"},
+					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 				}
 
 				pager, err := secretsManagerService.NewConfigurationsPager(listConfigurationsOptionsModel)
@@ -9081,6 +9887,21 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(createSecretVersionOptionsModel.SecretVersionPrototype).To(Equal(secretVersionPrototypeModel))
 				Expect(createSecretVersionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCustomCredentialsConfigurationCodeEngine successfully`, func() {
+				jobName := "sm-custom-cred-job"
+				projectID := "15314cc3-85b4-4338-903f-c28cdee6d005"
+				region := "us-south"
+				_model, err := secretsManagerService.NewCustomCredentialsConfigurationCodeEngine(jobName, projectID, region)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewCustomCredentialsNewCredentials successfully`, func() {
+				id := "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5"
+				payload := map[string]interface{}{"anyKey": "anyValue"}
+				_model, err := secretsManagerService.NewCustomCredentialsNewCredentials(id, payload)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewDeleteConfigurationOptions successfully`, func() {
 				// Construct an instance of the DeleteConfigurationOptions model
 				name := "configuration-name"
@@ -9127,10 +9948,25 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				id := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
 				deleteSecretOptionsModel := secretsManagerService.NewDeleteSecretOptions(id)
 				deleteSecretOptionsModel.SetID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				deleteSecretOptionsModel.SetForceDelete(false)
 				deleteSecretOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteSecretOptionsModel).ToNot(BeNil())
 				Expect(deleteSecretOptionsModel.ID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
+				Expect(deleteSecretOptionsModel.ForceDelete).To(Equal(core.BoolPtr(false)))
 				Expect(deleteSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewDeleteSecretTaskOptions successfully`, func() {
+				// Construct an instance of the DeleteSecretTaskOptions model
+				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+				id := "sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+				deleteSecretTaskOptionsModel := secretsManagerService.NewDeleteSecretTaskOptions(secretID, id)
+				deleteSecretTaskOptionsModel.SetSecretID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				deleteSecretTaskOptionsModel.SetID("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				deleteSecretTaskOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteSecretTaskOptionsModel).ToNot(BeNil())
+				Expect(deleteSecretTaskOptionsModel.SecretID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
+				Expect(deleteSecretTaskOptionsModel.ID).To(Equal(core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")))
+				Expect(deleteSecretTaskOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteSecretVersionDataOptions successfully`, func() {
 				// Construct an instance of the DeleteSecretVersionDataOptions model
@@ -9232,6 +10068,19 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(getSecretOptionsModel.ID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
 				Expect(getSecretOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetSecretTaskOptions successfully`, func() {
+				// Construct an instance of the GetSecretTaskOptions model
+				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+				id := "sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+				getSecretTaskOptionsModel := secretsManagerService.NewGetSecretTaskOptions(secretID, id)
+				getSecretTaskOptionsModel.SetSecretID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				getSecretTaskOptionsModel.SetID("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				getSecretTaskOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSecretTaskOptionsModel).ToNot(BeNil())
+				Expect(getSecretTaskOptionsModel.SecretID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
+				Expect(getSecretTaskOptionsModel.ID).To(Equal(core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")))
+				Expect(getSecretTaskOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetSecretVersionMetadataOptions successfully`, func() {
 				// Construct an instance of the GetSecretVersionMetadataOptions model
 				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
@@ -9265,14 +10114,14 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				listConfigurationsOptionsModel.SetLimit(int64(10))
 				listConfigurationsOptionsModel.SetSort("config_type")
 				listConfigurationsOptionsModel.SetSearch("example")
-				listConfigurationsOptionsModel.SetSecretTypes([]string{"iam_credentials", "public_cert", "private_cert"})
+				listConfigurationsOptionsModel.SetSecretTypes([]string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"})
 				listConfigurationsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listConfigurationsOptionsModel).ToNot(BeNil())
 				Expect(listConfigurationsOptionsModel.Offset).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(listConfigurationsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(listConfigurationsOptionsModel.Sort).To(Equal(core.StringPtr("config_type")))
 				Expect(listConfigurationsOptionsModel.Search).To(Equal(core.StringPtr("example")))
-				Expect(listConfigurationsOptionsModel.SecretTypes).To(Equal([]string{"iam_credentials", "public_cert", "private_cert"}))
+				Expect(listConfigurationsOptionsModel.SecretTypes).To(Equal([]string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"}))
 				Expect(listConfigurationsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretGroupsOptions successfully`, func() {
@@ -9299,6 +10148,16 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(listSecretLocksOptionsModel.Sort).To(Equal(core.StringPtr("name")))
 				Expect(listSecretLocksOptionsModel.Search).To(Equal(core.StringPtr("example")))
 				Expect(listSecretLocksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewListSecretTasksOptions successfully`, func() {
+				// Construct an instance of the ListSecretTasksOptions model
+				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+				listSecretTasksOptionsModel := secretsManagerService.NewListSecretTasksOptions(secretID)
+				listSecretTasksOptionsModel.SetSecretID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				listSecretTasksOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(listSecretTasksOptionsModel).ToNot(BeNil())
+				Expect(listSecretTasksOptionsModel.SecretID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
+				Expect(listSecretTasksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListSecretVersionLocksOptions successfully`, func() {
 				// Construct an instance of the ListSecretVersionLocksOptions model
@@ -9372,9 +10231,48 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				_, err := secretsManagerService.NewPrivateCertificateCryptoKey(provider)
 				Expect(err).ToNot(BeNil())
 			})
+			It(`Invoke NewReplaceSecretTaskOptions successfully`, func() {
+				// Construct an instance of the CustomCredentialsNewCredentials model
+				customCredentialsNewCredentialsModel := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+				Expect(customCredentialsNewCredentialsModel).ToNot(BeNil())
+				customCredentialsNewCredentialsModel.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+				customCredentialsNewCredentialsModel.Payload = map[string]interface{}{"anyKey": "anyValue"}
+				Expect(customCredentialsNewCredentialsModel.ID).To(Equal(core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")))
+				Expect(customCredentialsNewCredentialsModel.Payload).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+
+				// Construct an instance of the SecretTaskPrototypeUpdateSecretTaskCredentialsCreated model
+				secretTaskPrototypeModel := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+				Expect(secretTaskPrototypeModel).ToNot(BeNil())
+				secretTaskPrototypeModel.Status = core.StringPtr("credentials_created")
+				secretTaskPrototypeModel.Credentials = customCredentialsNewCredentialsModel
+				Expect(secretTaskPrototypeModel.Status).To(Equal(core.StringPtr("credentials_created")))
+				Expect(secretTaskPrototypeModel.Credentials).To(Equal(customCredentialsNewCredentialsModel))
+
+				// Construct an instance of the ReplaceSecretTaskOptions model
+				secretID := "0b5571f7-21e6-42b7-91c5-3f5ac9793a46"
+				id := "sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95"
+				var taskPut secretsmanagerv2.SecretTaskPrototypeIntf = nil
+				replaceSecretTaskOptionsModel := secretsManagerService.NewReplaceSecretTaskOptions(secretID, id, taskPut)
+				replaceSecretTaskOptionsModel.SetSecretID("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")
+				replaceSecretTaskOptionsModel.SetID("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")
+				replaceSecretTaskOptionsModel.SetTaskPut(secretTaskPrototypeModel)
+				replaceSecretTaskOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(replaceSecretTaskOptionsModel).ToNot(BeNil())
+				Expect(replaceSecretTaskOptionsModel.SecretID).To(Equal(core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46")))
+				Expect(replaceSecretTaskOptionsModel.ID).To(Equal(core.StringPtr("sm-task-a436bebd-dbbd-5c0d-ab35-1232f1234f95")))
+				Expect(replaceSecretTaskOptionsModel.TaskPut).To(Equal(secretTaskPrototypeModel))
+				Expect(replaceSecretTaskOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewSecretLockPrototype successfully`, func() {
 				name := "lock-example"
 				_model, err := secretsManagerService.NewSecretLockPrototype(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretTaskError successfully`, func() {
+				code := "testString"
+				description := "Failed to create credentials"
+				_model, err := secretsManagerService.NewSecretTaskError(code, description)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -9463,6 +10361,21 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			It(`Invoke NewCommonRotationPolicy successfully`, func() {
 				autoRotate := true
 				_model, err := secretsManagerService.NewCommonRotationPolicy(autoRotate)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewCustomCredentialsConfigurationPrototype successfully`, func() {
+				name := "my-example-engine-config"
+				configType := "custom_credentials_configuration"
+				var codeEngine *secretsmanagerv2.CustomCredentialsConfigurationCodeEngine = nil
+				_, err := secretsManagerService.NewCustomCredentialsConfigurationPrototype(name, configType, codeEngine)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewCustomCredentialsSecretPrototype successfully`, func() {
+				name := "my-secret-example"
+				secretType := "custom_credentials"
+				configuration := "testString"
+				_model, err := secretsManagerService.NewCustomCredentialsSecretPrototype(name, secretType, configuration)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -9677,6 +10590,25 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				_, err := secretsManagerService.NewPublicCertificateVersionPrototype(rotation)
 				Expect(err).ToNot(BeNil())
 			})
+			It(`Invoke NewSecretTaskPrototypeUpdateSecretTaskCredentialsCreated successfully`, func() {
+				status := "credentials_created"
+				var credentials *secretsmanagerv2.CustomCredentialsNewCredentials = nil
+				_, err := secretsManagerService.NewSecretTaskPrototypeUpdateSecretTaskCredentialsCreated(status, credentials)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted successfully`, func() {
+				status := "credentials_deleted"
+				_model, err := secretsManagerService.NewSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted(status)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSecretTaskPrototypeUpdateSecretTaskFailed successfully`, func() {
+				status := "failed"
+				errors := []secretsmanagerv2.SecretTaskError{}
+				_model, err := secretsManagerService.NewSecretTaskPrototypeUpdateSecretTaskFailed(status, errors)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewServiceCredentialsSecretPrototype successfully`, func() {
 				name := "my-secret-example"
 				secretType := "service_credentials"
@@ -9787,6 +10719,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.CloudInternetServicesCrn = core.StringPtr("testString")
 			model.ClassicInfrastructureUsername = core.StringPtr("testString")
 			model.ClassicInfrastructurePassword = core.StringPtr("testString")
+			model.TaskTimeout = core.StringPtr("10m")
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -9871,6 +10804,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.NotBeforeDuration = core.StringPtr("30s")
 			model.ApiKey = core.StringPtr("testString")
 			model.Disabled = core.BoolPtr(false)
+			model.ApiKeyRef = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+			model.CodeEngine = nil
+			model.TaskTimeout = core.StringPtr("10m")
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -9883,6 +10819,45 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			err = secretsmanagerv2.UnmarshalConfigurationPrototype(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalCustomCredentialsConfigurationCodeEngine successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsConfigurationCodeEngine)
+			model.JobName = core.StringPtr("sm-custom-cred-job")
+			model.ProjectID = core.StringPtr("15314cc3-85b4-4338-903f-c28cdee6d005")
+			model.Region = core.StringPtr("us-south")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsConfigurationCodeEngine
+			err = secretsmanagerv2.UnmarshalCustomCredentialsConfigurationCodeEngine(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCustomCredentialsNewCredentials successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsNewCredentials)
+			model.ID = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+			model.Payload = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsNewCredentials
+			err = secretsmanagerv2.UnmarshalCustomCredentialsNewCredentials(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
 		})
 		It(`Invoke UnmarshalImportedCertificateManagedCsr successfully`, func() {
 			// Construct an instance of the model.
@@ -10117,6 +11092,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Rotation = nil
 			model.ManagedCsr = nil
 			model.PasswordGenerationPolicy = nil
+			model.Parameters = map[string]interface{}{"anyKey": "anyValue"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10172,6 +11148,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			model.Username = core.StringPtr("testString")
 			model.Password = core.StringPtr("testString")
 			model.PasswordGenerationPolicy = nil
+			model.Configuration = core.StringPtr("testString")
+			model.Parameters = map[string]interface{}{"anyKey": "anyValue"}
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -10182,6 +11160,44 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 			var result interface{}
 			err = secretsmanagerv2.UnmarshalSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+		})
+		It(`Invoke UnmarshalSecretTaskError successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretTaskError)
+			model.Code = core.StringPtr("testString")
+			model.Description = core.StringPtr("Failed to create credentials")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretTaskError
+			err = secretsmanagerv2.UnmarshalSecretTaskError(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretTaskPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretTaskPrototype)
+			model.Status = core.StringPtr("credentials_created")
+			model.Credentials = nil
+			model.Errors = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result interface{}
+			err = secretsmanagerv2.UnmarshalSecretTaskPrototype(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 		})
@@ -10406,6 +11422,117 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 			var result *secretsmanagerv2.CommonRotationPolicy
 			err = secretsmanagerv2.UnmarshalCommonRotationPolicy(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCustomCredentialsConfigurationPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsConfigurationPatch)
+			model.TaskTimeout = core.StringPtr("10m")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsConfigurationPatch
+			err = secretsmanagerv2.UnmarshalCustomCredentialsConfigurationPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCustomCredentialsConfigurationPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsConfigurationPrototype)
+			model.Name = core.StringPtr("my-example-engine-config")
+			model.ConfigType = core.StringPtr("custom_credentials_configuration")
+			model.ApiKeyRef = core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5")
+			model.CodeEngine = nil
+			model.TaskTimeout = core.StringPtr("10m")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsConfigurationPrototype
+			err = secretsmanagerv2.UnmarshalCustomCredentialsConfigurationPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCustomCredentialsSecretMetadataPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsSecretMetadataPatch)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.Name = core.StringPtr("my-secret-example")
+			model.Rotation = nil
+			model.TTL = core.StringPtr("1d")
+			model.Parameters = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsSecretMetadataPatch
+			err = secretsmanagerv2.UnmarshalCustomCredentialsSecretMetadataPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCustomCredentialsSecretPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsSecretPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Description = core.StringPtr("Extended description for this secret.")
+			model.Labels = []string{"my-label"}
+			model.Name = core.StringPtr("my-secret-example")
+			model.Rotation = nil
+			model.SecretGroupID = core.StringPtr("default")
+			model.SecretType = core.StringPtr("custom_credentials")
+			model.TTL = core.StringPtr("1d")
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.Configuration = core.StringPtr("testString")
+			model.Parameters = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsSecretPrototype
+			err = secretsmanagerv2.UnmarshalCustomCredentialsSecretPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalCustomCredentialsSecretVersionPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.CustomCredentialsSecretVersionPrototype)
+			model.CustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+			model.VersionCustomMetadata = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.CustomCredentialsSecretVersionPrototype
+			err = secretsmanagerv2.UnmarshalCustomCredentialsSecretVersionPrototype(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -11439,6 +12566,62 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 			var result *secretsmanagerv2.PublicCertificateVersionPrototype
 			err = secretsmanagerv2.UnmarshalPublicCertificateVersionPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsCreated successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated)
+			model.Status = core.StringPtr("credentials_created")
+			model.Credentials = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated
+			err = secretsmanagerv2.UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsCreated(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted)
+			model.Status = core.StringPtr("credentials_deleted")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsDeleted
+			err = secretsmanagerv2.UnmarshalSecretTaskPrototypeUpdateSecretTaskCredentialsDeleted(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecretTaskPrototypeUpdateSecretTaskFailed successfully`, func() {
+			// Construct an instance of the model.
+			model := new(secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskFailed)
+			model.Status = core.StringPtr("failed")
+			model.Errors = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskFailed
+			err = secretsmanagerv2.UnmarshalSecretTaskPrototypeUpdateSecretTaskFailed(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
