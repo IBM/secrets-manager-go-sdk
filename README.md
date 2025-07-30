@@ -42,7 +42,6 @@ go get -u github.com/IBM/secrets-manager-go-sdk/v2
 ```
 
 #### Go modules  
-
 If your application uses Go modules, you can add the following import to your Go application:
 
 ```go
