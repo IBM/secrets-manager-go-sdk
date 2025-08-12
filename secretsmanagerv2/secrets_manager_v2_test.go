@@ -1281,7 +1281,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully with retries`, func() {
@@ -1363,7 +1363,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke CreateSecret successfully`, func() {
@@ -1571,7 +1571,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully with retries`, func() {
@@ -1635,7 +1635,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_count": 0, "limit": 25, "offset": 25, "first": {"href": "Href"}, "next": {"href": "Href"}, "previous": {"href": "Href"}, "last": {"href": "Href"}, "secrets": [{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}]}`)
 				}))
 			})
 			It(`Invoke ListSecrets successfully`, func() {
@@ -1795,9 +1795,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.WriteHeader(200)
 					requestNumber++
 					if requestNumber == 1 {
-						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
+						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","retrieved_at":"2025-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else if requestNumber == 2 {
-						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
+						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","retrieved_at":"2025-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
 					} else {
 						res.WriteHeader(400)
 					}
@@ -1923,7 +1923,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully with retries`, func() {
@@ -1977,7 +1977,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecret successfully`, func() {
@@ -2206,7 +2206,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully with retries`, func() {
@@ -2260,7 +2260,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke GetSecretMetadata successfully`, func() {
@@ -2445,7 +2445,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully with retries`, func() {
@@ -2526,7 +2526,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z"}`)
 				}))
 			})
 			It(`Invoke UpdateSecretMetadata successfully`, func() {
@@ -2988,7 +2988,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretByNameType successfully with retries`, func() {
@@ -3044,7 +3044,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
+					fmt.Fprintf(res, "%s", `{"created_by": "iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21", "created_at": "2022-04-12T23:20:50.520Z", "retrieved_at": "2025-04-12T23:20:50.520Z", "crn": "Crn", "custom_metadata": {"anyKey": "anyValue"}, "description": "Extended description for this secret.", "downloaded": true, "id": "b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5", "labels": ["my-label"], "locks_total": 0, "name": "my-secret", "secret_group_id": "default", "secret_type": "arbitrary", "state": 0, "state_description": "active", "updated_at": "2022-04-12T23:20:50.520Z", "versions_total": 0, "referenced_by": ["my-example-engine-config"], "expiration_date": "2033-04-12T23:20:50.520Z", "payload": "secret-credentials"}`)
 				}))
 			})
 			It(`Invoke GetSecretByNameType successfully`, func() {
