@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.104.0-b4a47c49-20250418-184351
+ * IBM OpenAPI SDK Code Generator Version: 3.107.0-b68ebf7a-20250811-145645
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -219,12 +219,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretGroupWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range createSecretGroupOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretGroup")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretGroup")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretGroupOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -293,12 +293,12 @@ func (secretsManager *SecretsManagerV2) ListSecretGroupsWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range listSecretGroupsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretGroups")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretGroups")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretGroupsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -362,12 +362,12 @@ func (secretsManager *SecretsManagerV2) GetSecretGroupWithContext(ctx context.Co
 		return
 	}
 
-	for headerName, headerValue := range getSecretGroupOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretGroup")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretGroup")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretGroupOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -431,12 +431,12 @@ func (secretsManager *SecretsManagerV2) UpdateSecretGroupWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range updateSecretGroupOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateSecretGroup")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateSecretGroup")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateSecretGroupOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -510,12 +510,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretGroupWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretGroupOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretGroup")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretGroup")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSecretGroupOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -573,12 +573,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretWithContext(ctx context.Cont
 		return
 	}
 
-	for headerName, headerValue := range createSecretOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecret")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecret")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -640,12 +640,12 @@ func (secretsManager *SecretsManagerV2) ListSecretsWithContext(ctx context.Conte
 		return
 	}
 
-	for headerName, headerValue := range listSecretsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecrets")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecrets")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -734,12 +734,12 @@ func (secretsManager *SecretsManagerV2) GetSecretWithContext(ctx context.Context
 		return
 	}
 
-	for headerName, headerValue := range getSecretOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecret")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecret")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -803,12 +803,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretWithContext(ctx context.Cont
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecret")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecret")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSecretOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -866,12 +866,12 @@ func (secretsManager *SecretsManagerV2) GetSecretMetadataWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range getSecretMetadataOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretMetadata")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretMetadata")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretMetadataOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -935,12 +935,12 @@ func (secretsManager *SecretsManagerV2) UpdateSecretMetadataWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range updateSecretMetadataOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateSecretMetadata")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateSecretMetadata")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateSecretMetadataOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1011,12 +1011,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretActionWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range createSecretActionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretAction")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretAction")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretActionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1092,12 +1092,12 @@ func (secretsManager *SecretsManagerV2) GetSecretByNameTypeWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range getSecretByNameTypeOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretByNameType")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretByNameType")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretByNameTypeOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1161,12 +1161,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range createSecretVersionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretVersion")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretVersion")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretVersionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1239,12 +1239,12 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionsWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range listSecretVersionsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretVersions")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretVersions")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretVersionsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1313,12 +1313,12 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range getSecretVersionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretVersion")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretVersion")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretVersionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1389,12 +1389,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionDataWithContext(ctx c
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretVersionDataOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretVersionData")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretVersionData")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSecretVersionDataOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -1452,12 +1452,12 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionMetadataWithContext(ctx 
 		return
 	}
 
-	for headerName, headerValue := range getSecretVersionMetadataOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretVersionMetadata")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretVersionMetadata")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretVersionMetadataOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1522,12 +1522,12 @@ func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadataWithContext(c
 		return
 	}
 
-	for headerName, headerValue := range updateSecretVersionMetadataOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateSecretVersionMetadata")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateSecretVersionMetadata")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateSecretVersionMetadataOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1601,12 +1601,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx
 		return
 	}
 
-	for headerName, headerValue := range createSecretVersionActionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretVersionAction")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretVersionAction")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretVersionActionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1679,12 +1679,12 @@ func (secretsManager *SecretsManagerV2) ListSecretTasksWithContext(ctx context.C
 		return
 	}
 
-	for headerName, headerValue := range listSecretTasksOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretTasks")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretTasks")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretTasksOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1753,12 +1753,12 @@ func (secretsManager *SecretsManagerV2) GetSecretTaskWithContext(ctx context.Con
 		return
 	}
 
-	for headerName, headerValue := range getSecretTaskOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretTask")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetSecretTask")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecretTaskOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1825,12 +1825,12 @@ func (secretsManager *SecretsManagerV2) ReplaceSecretTaskWithContext(ctx context
 		return
 	}
 
-	for headerName, headerValue := range replaceSecretTaskOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ReplaceSecretTask")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ReplaceSecretTask")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range replaceSecretTaskOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1904,12 +1904,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretTaskWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretTaskOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretTask")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretTask")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSecretTaskOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -1954,12 +1954,12 @@ func (secretsManager *SecretsManagerV2) ListSecretsLocksWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range listSecretsLocksOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretsLocks")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretsLocks")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretsLocksOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2036,12 +2036,12 @@ func (secretsManager *SecretsManagerV2) ListSecretLocksWithContext(ctx context.C
 		return
 	}
 
-	for headerName, headerValue := range listSecretLocksOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretLocks")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretLocks")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretLocksOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2128,12 +2128,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretLocksBulkWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range createSecretLocksBulkOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretLocksBulk")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretLocksBulk")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretLocksBulkOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2220,12 +2220,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretLocksBulkWithContext(ctx con
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretLocksBulkOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretLocksBulk")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretLocksBulk")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSecretLocksBulkOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2294,12 +2294,12 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx co
 		return
 	}
 
-	for headerName, headerValue := range listSecretVersionLocksOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretVersionLocks")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListSecretVersionLocks")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listSecretVersionLocksOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2387,12 +2387,12 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulkWithContext(
 		return
 	}
 
-	for headerName, headerValue := range createSecretVersionLocksBulkOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretVersionLocksBulk")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateSecretVersionLocksBulk")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createSecretVersionLocksBulkOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2480,12 +2480,12 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(
 		return
 	}
 
-	for headerName, headerValue := range deleteSecretVersionLocksBulkOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretVersionLocksBulk")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteSecretVersionLocksBulk")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteSecretVersionLocksBulkOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2562,12 +2562,12 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range createConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2629,12 +2629,12 @@ func (secretsManager *SecretsManagerV2) ListConfigurationsWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range listConfigurationsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListConfigurations")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "ListConfigurations")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range listConfigurationsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2716,12 +2716,12 @@ func (secretsManager *SecretsManagerV2) GetConfigurationWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range getConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2788,12 +2788,12 @@ func (secretsManager *SecretsManagerV2) UpdateConfigurationWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range updateConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "UpdateConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range updateConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2867,12 +2867,12 @@ func (secretsManager *SecretsManagerV2) DeleteConfigurationWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range deleteConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	if deleteConfigurationOptions.XSmAcceptConfigurationType != nil {
@@ -2939,12 +2939,12 @@ func (secretsManager *SecretsManagerV2) CreateConfigurationActionWithContext(ctx
 		return
 	}
 
-	for headerName, headerValue := range createConfigurationActionOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateConfigurationAction")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateConfigurationAction")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createConfigurationActionOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3019,12 +3019,12 @@ func (secretsManager *SecretsManagerV2) CreateNotificationsRegistrationWithConte
 		return
 	}
 
-	for headerName, headerValue := range createNotificationsRegistrationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "CreateNotificationsRegistration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range createNotificationsRegistrationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3096,12 +3096,12 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationWithContext(
 		return
 	}
 
-	for headerName, headerValue := range getNotificationsRegistrationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetNotificationsRegistration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getNotificationsRegistrationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3158,12 +3158,12 @@ func (secretsManager *SecretsManagerV2) DeleteNotificationsRegistrationWithConte
 		return
 	}
 
-	for headerName, headerValue := range deleteNotificationsRegistrationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteNotificationsRegistration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "DeleteNotificationsRegistration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteNotificationsRegistrationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -3213,12 +3213,12 @@ func (secretsManager *SecretsManagerV2) GetNotificationsRegistrationTestWithCont
 		return
 	}
 
-	for headerName, headerValue := range getNotificationsRegistrationTestOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetNotificationsRegistrationTest")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("secrets_manager", "V2", "GetNotificationsRegistrationTest")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getNotificationsRegistrationTestOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -8139,7 +8139,7 @@ type ListSecretsOptions struct {
 	// character
 	//
 	//
-	// **Available values:** id | created_at | updated_at | expiration_date | secret_type | name
+	// **Available values:** id | created_at | updated_at | retrieved_at | expiration_date | secret_type | name
 	//
 	// **Usage:** To sort a list of secrets by their creation date, use
 	// `../secrets?sort=created_at`.
@@ -8992,6 +8992,7 @@ type RotationPolicy struct {
 // The units for the secret rotation time interval.
 const (
 	RotationPolicy_Unit_Day   = "day"
+	RotationPolicy_Unit_Hour  = "hour"
 	RotationPolicy_Unit_Month = "month"
 )
 
@@ -9067,6 +9068,10 @@ type Secret struct {
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
+
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn,omitempty"`
@@ -9298,6 +9303,9 @@ type Secret struct {
 
 	// A Secret Manager task identifier.
 	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// Indicates if the last rotation (automatic or manual) for the secret failed.
+	LastRotationFailed *bool `json:"last_rotation_failed,omitempty"`
 
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration,omitempty"`
@@ -9986,6 +9994,10 @@ type SecretMetadata struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn,omitempty"`
 
@@ -10174,6 +10186,9 @@ type SecretMetadata struct {
 
 	// A Secret Manager task identifier.
 	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// Indicates if the last rotation (automatic or manual) for the secret failed.
+	LastRotationFailed *bool `json:"last_rotation_failed,omitempty"`
 
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration,omitempty"`
@@ -12690,6 +12705,10 @@ type ArbitrarySecret struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -12796,6 +12815,11 @@ func UnmarshalArbitrarySecret(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
@@ -12893,6 +12917,10 @@ type ArbitrarySecretMetadata struct {
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
@@ -12995,6 +13023,11 @@ func UnmarshalArbitrarySecretMetadata(m map[string]json.RawMessage, result inter
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -13649,6 +13682,18 @@ func UnmarshalArbitrarySecretVersionPrototype(m map[string]json.RawMessage, resu
 }
 
 // CommonRotationPolicy : This field indicates whether Secrets Manager rotates your secrets automatically.
+//
+// Rotation interval cannot exceed the assiged TTL value.
+//
+// Custom Credentials: Minimum 6 hours, Maximum 3 months.
+//
+// Service Credentials: Minimum 1 day, Maximum 3 months.
+//
+// IAM Credentials: Minimum 1 day, Maximum 3 months.
+//
+// Private certificate: Minimum 1 day, Maximum 24 months.
+//
+// User credentials: Minimum 1 day, Maximum 24 months.
 // This model "extends" RotationPolicy
 type CommonRotationPolicy struct {
 	// This field indicates whether Secrets Manager rotates your secret automatically.
@@ -13668,6 +13713,7 @@ type CommonRotationPolicy struct {
 // The units for the secret rotation time interval.
 const (
 	CommonRotationPolicy_Unit_Day   = "day"
+	CommonRotationPolicy_Unit_Hour  = "hour"
 	CommonRotationPolicy_Unit_Month = "month"
 )
 
@@ -14147,6 +14193,10 @@ type CustomCredentialsSecret struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -14238,6 +14288,9 @@ type CustomCredentialsSecret struct {
 
 	// A Secret Manager task identifier.
 	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
+
+	// Indicates if the last rotation (automatic or manual) for the secret failed.
+	LastRotationFailed *bool `json:"last_rotation_failed,omitempty"`
 
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration" validate:"required"`
@@ -14293,6 +14346,11 @@ func UnmarshalCustomCredentialsSecret(m map[string]json.RawMessage, result inter
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
@@ -14408,6 +14466,11 @@ func UnmarshalCustomCredentialsSecret(m map[string]json.RawMessage, result inter
 		err = core.SDKErrorf(err, "", "last_failed_task_id-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "last_rotation_failed", &obj.LastRotationFailed)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_rotation_failed-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "configuration", &obj.Configuration)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "configuration-error", common.GetComponentInfo())
@@ -14435,6 +14498,10 @@ type CustomCredentialsSecretMetadata struct {
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
@@ -14528,6 +14595,9 @@ type CustomCredentialsSecretMetadata struct {
 	// A Secret Manager task identifier.
 	LastFailedTaskID *string `json:"last_failed_task_id,omitempty"`
 
+	// Indicates if the last rotation (automatic or manual) for the secret failed.
+	LastRotationFailed *bool `json:"last_rotation_failed,omitempty"`
+
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration" validate:"required"`
 
@@ -14576,6 +14646,11 @@ func UnmarshalCustomCredentialsSecretMetadata(m map[string]json.RawMessage, resu
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -14691,6 +14766,11 @@ func UnmarshalCustomCredentialsSecretMetadata(m map[string]json.RawMessage, resu
 	err = core.UnmarshalPrimitive(m, "last_failed_task_id", &obj.LastFailedTaskID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "last_failed_task_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_rotation_failed", &obj.LastRotationFailed)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "last_rotation_failed-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "configuration", &obj.Configuration)
@@ -15687,6 +15767,10 @@ type IAMCredentialsSecret struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -15851,6 +15935,11 @@ func UnmarshalIAMCredentialsSecret(m map[string]json.RawMessage, result interfac
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
@@ -15993,6 +16082,10 @@ type IAMCredentialsSecretMetadata struct {
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
@@ -16149,6 +16242,11 @@ func UnmarshalIAMCredentialsSecretMetadata(m map[string]json.RawMessage, result 
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -17008,6 +17106,10 @@ type ImportedCertificate struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -17156,6 +17258,11 @@ func UnmarshalImportedCertificate(m map[string]json.RawMessage, result interface
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -17321,6 +17428,10 @@ type ImportedCertificateMetadata struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -17455,6 +17566,11 @@ func UnmarshalImportedCertificateMetadata(m map[string]json.RawMessage, result i
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -18258,6 +18374,10 @@ type KVSecret struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -18359,6 +18479,11 @@ func UnmarshalKVSecret(m map[string]json.RawMessage, result interface{}) (err er
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
@@ -18451,6 +18576,10 @@ type KVSecretMetadata struct {
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
@@ -18548,6 +18677,11 @@ func UnmarshalKVSecretMetadata(m map[string]json.RawMessage, result interface{})
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -19184,6 +19318,10 @@ type PrivateCertificate struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -19344,6 +19482,11 @@ func UnmarshalPrivateCertificate(m map[string]json.RawMessage, result interface{
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -24672,6 +24815,10 @@ type PrivateCertificateMetadata struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -24819,6 +24966,11 @@ func UnmarshalPrivateCertificateMetadata(m map[string]json.RawMessage, result in
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -25775,6 +25927,10 @@ type PublicCertificate struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -25931,6 +26087,11 @@ func UnmarshalPublicCertificate(m map[string]json.RawMessage, result interface{}
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -27355,6 +27516,10 @@ type PublicCertificateMetadata struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -27500,6 +27665,11 @@ func UnmarshalPublicCertificateMetadata(m map[string]json.RawMessage, result int
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -28527,6 +28697,10 @@ type ServiceCredentialsSecret struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -28656,6 +28830,11 @@ func UnmarshalServiceCredentialsSecret(m map[string]json.RawMessage, result inte
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
@@ -28773,6 +28952,10 @@ type ServiceCredentialsSecretMetadata struct {
 
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
@@ -28898,6 +29081,11 @@ func UnmarshalServiceCredentialsSecretMetadata(m map[string]json.RawMessage, res
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
@@ -29609,6 +29797,10 @@ type UsernamePasswordSecret struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -29731,6 +29923,11 @@ func UnmarshalUsernamePasswordSecret(m map[string]json.RawMessage, result interf
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
@@ -29849,6 +30046,10 @@ type UsernamePasswordSecretMetadata struct {
 	// The date when the resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
+	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
+	// record of secret data retrieval.
+	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
+
 	// A CRN that uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn" validate:"required"`
 
@@ -29963,6 +30164,11 @@ func UnmarshalUsernamePasswordSecretMetadata(m map[string]json.RawMessage, resul
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retrieved_at", &obj.RetrievedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "retrieved_at-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
