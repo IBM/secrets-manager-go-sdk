@@ -1,3 +1,10 @@
+## [2.0.16](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.15...v2.0.16) (2025-09-28)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/go-openapi/strfmt to v0.24.0 ([1e3668f](https://github.com/IBM/secrets-manager-go-sdk/commit/1e3668ff0e3a8a488c2ec29cf1ceacc61630948c))
+
 ## [2.0.15](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.14...v2.0.15) (2025-08-25)
 
 ## [2.0.14](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.13...v2.0.14) (2025-08-02)
