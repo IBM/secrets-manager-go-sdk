@@ -5,5 +5,8 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.6",
     "@semantic-release/release-notes-generator": "^14.1.0"
+  },
+  "overrides": {
+    "glob": "11.1.0"
   }
 }
