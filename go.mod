@@ -2,7 +2,7 @@ module github.com/IBM/secrets-manager-go-sdk/v2
 
 go 1.24.0
 
-toolchain go1.24.6
+toolchain go1.25.4
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.21.2
