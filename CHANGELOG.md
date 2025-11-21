@@ -1,3 +1,10 @@
+## [2.0.18](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.17...v2.0.18) (2025-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/ibm/go-sdk-core/v5 to v5.21.2 ([7c2b996](https://github.com/IBM/secrets-manager-go-sdk/commit/7c2b9962cfbef899383308483963773042061230))
+
 ## [2.0.17](https://github.com/IBM/secrets-manager-go-sdk/compare/v2.0.16...v2.0.17) (2025-11-19)
 
 
