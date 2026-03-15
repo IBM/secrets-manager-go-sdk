@@ -6,7 +6,7 @@ toolchain go1.24.6
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.21.2
-	github.com/go-openapi/strfmt v0.26.0
+	github.com/go-openapi/strfmt v0.26.1
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.37.0
 	github.com/stretchr/testify v1.11.1
