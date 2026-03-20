@@ -1,27 +1,35 @@
 name: Create Release
 on:
   push:
-    branches: 
+    branches:
       - main
 jobs:
   build:
     name: Create Release
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           token: ${{ secrets.ADMIN_TOKEN }}
 
-      - name: setup nodejs
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '24'
 
-      - name: release using semantic-release
+      - name: Install bump-my-version
+        run: pip install bump-my-version
+
+      - name: Release using semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
           GIT_AUTHOR_NAME: secrets.automation.dev
@@ -29,10 +37,6 @@ jobs:
           GIT_COMMITTER_NAME: secrets.automation.dev
           GIT_COMMITTER_EMAIL: secrets.automation.dev@il.ibm.com
         run: |
-          sudo apt-get update
-          sudo apt-get install python3
-          pip install --user bumpversion
-          npm install @semantic-release/changelog
           npm install @semantic-release/exec
           npm install @semantic-release/git
           npm install @semantic-release/github
