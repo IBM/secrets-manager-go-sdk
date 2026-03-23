@@ -1,0 +1,8 @@
+[tool.bumpversion]
+current_version = "2.0.19"
+commit = false
+tag = false
+allow_dirty = true
+
+[[tool.bumpversion.files]]
+filename = "common/version.go"
