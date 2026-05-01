@@ -1,7 +1,7 @@
 //go:build integration
 
 /**
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,26 +42,26 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 	const externalConfigFile = "../secrets_manager_v2.env"
 
 	var (
-		err                   error
+		err          error
 		secretsManagerService *secretsmanagerv2.SecretsManagerV2
-		serviceURL            string
-		config                map[string]string
+		serviceURL   string
+		config       map[string]string
 
 		// Variables to hold link values
-		configurationNameForGetConfigurationLink          string
-		secretGroupIdForGetSecretGroupLink                string
-		secretIdForCreateSecretVersionLink                string
-		secretIdForCreateSecretVersionLocksLink           string
-		secretIdForGetSecretLink                          string
-		secretIdForGetSecretVersionLink                   string
-		secretIdForListSecretLocksLink                    string
-		secretIdForListSecretVersionLocksLink             string
-		secretNameLink                                    string
-		secretVersionIdForCreateSecretVersionLocksLink    string
-		secretVersionIdForDeleteSecretVersionLocksLink    string
-		secretVersionIdForGetSecretVersionLink            string
-		secretVersionIdForGetSecretVersionMetadataLink    string
-		secretVersionIdForListSecretVersionLocksLink      string
+		configurationNameForGetConfigurationLink string
+		secretGroupIdForGetSecretGroupLink string
+		secretIdForCreateSecretVersionLink string
+		secretIdForCreateSecretVersionLocksLink string
+		secretIdForGetSecretLink string
+		secretIdForGetSecretVersionLink string
+		secretIdForListSecretLocksLink string
+		secretIdForListSecretVersionLocksLink string
+		secretNameLink string
+		secretVersionIdForCreateSecretVersionLocksLink string
+		secretVersionIdForDeleteSecretVersionLocksLink string
+		secretVersionIdForGetSecretVersionLink string
+		secretVersionIdForGetSecretVersionMetadataLink string
+		secretVersionIdForListSecretVersionLocksLink string
 		secretVersionIdForUpdateSecretVersionMetadataLink string
 	)
 
@@ -114,7 +114,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateSecretGroup(createSecretGroupOptions *CreateSecretGroupOptions)`, func() {
 			createSecretGroupOptions := &secretsmanagerv2.CreateSecretGroupOptions{
-				Name:        core.StringPtr("my-secret-group"),
+				Name: core.StringPtr("my-secret-group"),
 				Description: core.StringPtr("Extended description for this group."),
 			}
 
@@ -134,14 +134,14 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateSecret(createSecretOptions *CreateSecretOptions)`, func() {
 			secretPrototypeModel := &secretsmanagerv2.ArbitrarySecretPrototype{
-				CustomMetadata:        map[string]interface{}{"anyKey": "anyValue"},
-				Description:           core.StringPtr("Description of my arbitrary secret."),
-				ExpirationDate:        CreateMockDateTime("2030-10-05T11:49:42Z"),
-				Labels:                []string{"dev", "us-south"},
-				Name:                  core.StringPtr("example-arbitrary-secret"),
-				SecretGroupID:         core.StringPtr("default"),
-				SecretType:            core.StringPtr("arbitrary"),
-				Payload:               core.StringPtr("secret-data"),
+				CustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
+				Description: core.StringPtr("Description of my arbitrary secret."),
+				ExpirationDate: CreateMockDateTime("2030-10-05T11:49:42Z"),
+				Labels: []string{"dev", "us-south"},
+				Name: core.StringPtr("example-arbitrary-secret"),
+				SecretGroupID: core.StringPtr("default"),
+				SecretType: core.StringPtr("arbitrary"),
+				Payload: core.StringPtr("secret-data"),
 				VersionCustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
 			}
 
@@ -161,15 +161,87 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`ListSecrets - List secrets`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListSecrets(listSecretsOptions *ListSecretsOptions) with pagination`, func(){
+			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
+				Offset: core.Int64Ptr(int64(0)),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("created_at"),
+				Search: core.StringPtr("example"),
+				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				SecretTypes: []string{"arbitrary", "kv"},
+				MatchAllLabels: []string{"dev", "us-south"},
+			}
+
+			listSecretsOptions.Offset = nil
+			listSecretsOptions.Limit = core.Int64Ptr(1)
+
+			var allResults []secretsmanagerv2.SecretMetadataIntf
+			for {
+				secretMetadataPaginatedCollection, response, err := secretsManagerService.ListSecrets(listSecretsOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(secretMetadataPaginatedCollection).ToNot(BeNil())
+				allResults = append(allResults, secretMetadataPaginatedCollection.Secrets...)
+
+				listSecretsOptions.Offset, err = secretMetadataPaginatedCollection.GetNextOffset()
+				Expect(err).To(BeNil())
+
+				if listSecretsOptions.Offset == nil {
+					break
+				}
+			}
+			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
+		})
+		It(`ListSecrets(listSecretsOptions *ListSecretsOptions) using SecretsPager`, func(){
+			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("created_at"),
+				Search: core.StringPtr("example"),
+				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+				SecretTypes: []string{"arbitrary", "kv"},
+				MatchAllLabels: []string{"dev", "us-south"},
+			}
+
+			// Test GetNext().
+			pager, err := secretsManagerService.NewSecretsPager(listSecretsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			var allResults []secretsmanagerv2.SecretMetadataIntf
+			for pager.HasNext() {
+				nextPage, err := pager.GetNext()
+				Expect(err).To(BeNil())
+				Expect(nextPage).ToNot(BeNil())
+				allResults = append(allResults, nextPage...)
+			}
+
+			// Test GetAll().
+			pager, err = secretsManagerService.NewSecretsPager(listSecretsOptions)
+			Expect(err).To(BeNil())
+			Expect(pager).ToNot(BeNil())
+
+			allItems, err := pager.GetAll()
+			Expect(err).To(BeNil())
+			Expect(allItems).ToNot(BeNil())
+
+			Expect(len(allItems)).To(Equal(len(allResults)))
+			fmt.Fprintf(GinkgoWriter, "ListSecrets() returned a total of %d item(s) using SecretsPager.\n", len(allResults))
+		})
+	})
+
 	Describe(`UpdateSecretMetadata - Update the metadata of a secret`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`UpdateSecretMetadata(updateSecretMetadataOptions *UpdateSecretMetadataOptions)`, func() {
 			secretMetadataPatchModel := &secretsmanagerv2.ArbitrarySecretMetadataPatch{
-				Name:           core.StringPtr("updated-arbitrary-secret-name-example"),
-				Description:    core.StringPtr("updated Arbitrary Secret description"),
-				Labels:         []string{"dev", "us-south"},
+				Name: core.StringPtr("updated-arbitrary-secret-name-example"),
+				Description: core.StringPtr("updated Arbitrary Secret description"),
+				Labels: []string{"dev", "us-south"},
 				CustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
 				ExpirationDate: CreateMockDateTime("2033-04-12T23:20:50.520Z"),
 			}
@@ -177,7 +249,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			Expect(asPatchErr).To(BeNil())
 
 			updateSecretMetadataOptions := &secretsmanagerv2.UpdateSecretMetadataOptions{
-				ID:                  &secretIdForGetSecretLink,
+				ID: &secretIdForGetSecretLink,
 				SecretMetadataPatch: secretMetadataPatchModelAsPatch,
 			}
 
@@ -228,15 +300,15 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateSecretLocksBulk(createSecretLocksBulkOptions *CreateSecretLocksBulkOptions)`, func() {
 			secretLockPrototypeModel := &secretsmanagerv2.SecretLockPrototype{
-				Name:        core.StringPtr("lock-example-1"),
+				Name: core.StringPtr("lock-example-1"),
 				Description: core.StringPtr("lock for consumer 1"),
-				Attributes:  map[string]interface{}{"anyKey": "anyValue"},
+				Attributes: map[string]interface{}{"anyKey": "anyValue"},
 			}
 
 			createSecretLocksBulkOptions := &secretsmanagerv2.CreateSecretLocksBulkOptions{
-				ID:    &secretIdForGetSecretLink,
+				ID: &secretIdForGetSecretLink,
 				Locks: []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
-				Mode:  core.StringPtr("remove_previous"),
+				Mode: core.StringPtr("remove_previous"),
 			}
 
 			secretLocks, response, err := secretsManagerService.CreateSecretLocksBulk(createSecretLocksBulkOptions)
@@ -259,10 +331,10 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateConfiguration(createConfigurationOptions *CreateConfigurationOptions)`, func() {
 			configurationPrototypeModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPrototype{
-				ConfigType:                  core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
-				Name:                        core.StringPtr("example-cloud-internet-services-config"),
+				ConfigType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
+				Name: core.StringPtr("example-cloud-internet-services-config"),
 				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
-				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
+				CloudInternetServicesCrn: core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 
 			createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
@@ -284,7 +356,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`ListSecretGroups(listSecretGroupsOptions *ListSecretGroupsOptions)`, func() {
-			listSecretGroupsOptions := &secretsmanagerv2.ListSecretGroupsOptions{}
+			listSecretGroupsOptions := &secretsmanagerv2.ListSecretGroupsOptions{
+			}
 
 			secretGroupCollection, response, err := secretsManagerService.ListSecretGroups(listSecretGroupsOptions)
 			Expect(err).To(BeNil())
@@ -315,14 +388,14 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`UpdateSecretGroup(updateSecretGroupOptions *UpdateSecretGroupOptions)`, func() {
 			secretGroupPatchModel := &secretsmanagerv2.SecretGroupPatch{
-				Name:        core.StringPtr("my-secret-group"),
+				Name: core.StringPtr("my-secret-group"),
 				Description: core.StringPtr("Extended description for this group."),
 			}
 			secretGroupPatchModelAsPatch, asPatchErr := secretGroupPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
 			updateSecretGroupOptions := &secretsmanagerv2.UpdateSecretGroupOptions{
-				ID:               &secretGroupIdForGetSecretGroupLink,
+				ID: &secretGroupIdForGetSecretGroupLink,
 				SecretGroupPatch: secretGroupPatchModelAsPatch,
 			}
 
@@ -330,78 +403,6 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(secretGroup).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListSecrets - List secrets`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListSecrets(listSecretsOptions *ListSecretsOptions) with pagination`, func() {
-			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
-				Offset:         core.Int64Ptr(int64(0)),
-				Limit:          core.Int64Ptr(int64(10)),
-				Sort:           core.StringPtr("created_at"),
-				Search:         core.StringPtr("example"),
-				Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
-				SecretTypes:    []string{"arbitrary", "kv"},
-				MatchAllLabels: []string{"dev", "us-south"},
-			}
-
-			listSecretsOptions.Offset = nil
-			listSecretsOptions.Limit = core.Int64Ptr(1)
-
-			var allResults []secretsmanagerv2.SecretMetadataIntf
-			for {
-				secretMetadataPaginatedCollection, response, err := secretsManagerService.ListSecrets(listSecretsOptions)
-				Expect(err).To(BeNil())
-				Expect(response.StatusCode).To(Equal(200))
-				Expect(secretMetadataPaginatedCollection).ToNot(BeNil())
-				allResults = append(allResults, secretMetadataPaginatedCollection.Secrets...)
-
-				listSecretsOptions.Offset, err = secretMetadataPaginatedCollection.GetNextOffset()
-				Expect(err).To(BeNil())
-
-				if listSecretsOptions.Offset == nil {
-					break
-				}
-			}
-			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
-		})
-		It(`ListSecrets(listSecretsOptions *ListSecretsOptions) using SecretsPager`, func() {
-			listSecretsOptions := &secretsmanagerv2.ListSecretsOptions{
-				Limit:          core.Int64Ptr(int64(10)),
-				Sort:           core.StringPtr("created_at"),
-				Search:         core.StringPtr("example"),
-				Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
-				SecretTypes:    []string{"arbitrary", "kv"},
-				MatchAllLabels: []string{"dev", "us-south"},
-			}
-
-			// Test GetNext().
-			pager, err := secretsManagerService.NewSecretsPager(listSecretsOptions)
-			Expect(err).To(BeNil())
-			Expect(pager).ToNot(BeNil())
-
-			var allResults []secretsmanagerv2.SecretMetadataIntf
-			for pager.HasNext() {
-				nextPage, err := pager.GetNext()
-				Expect(err).To(BeNil())
-				Expect(nextPage).ToNot(BeNil())
-				allResults = append(allResults, nextPage...)
-			}
-
-			// Test GetAll().
-			pager, err = secretsManagerService.NewSecretsPager(listSecretsOptions)
-			Expect(err).To(BeNil())
-			Expect(pager).ToNot(BeNil())
-
-			allItems, err := pager.GetAll()
-			Expect(err).To(BeNil())
-			Expect(allItems).ToNot(BeNil())
-
-			Expect(len(allItems)).To(Equal(len(allResults)))
-			fmt.Fprintf(GinkgoWriter, "ListSecrets() returned a total of %d item(s) using SecretsPager.\n", len(allResults))
 		})
 	})
 
@@ -442,9 +443,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for CreateSecretAction has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`CreateSecretAction()`, func() {})
+		  // The integration test for CreateSecretAction has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`CreateSecretAction()`, func() {})
 	})
 
 	Describe(`GetSecretByNameType - Get a secret by name`, func() {
@@ -453,8 +454,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`GetSecretByNameType(getSecretByNameTypeOptions *GetSecretByNameTypeOptions)`, func() {
 			getSecretByNameTypeOptions := &secretsmanagerv2.GetSecretByNameTypeOptions{
-				SecretType:      core.StringPtr("arbitrary"),
-				Name:            &secretNameLink,
+				SecretType: core.StringPtr("arbitrary"),
+				Name: &secretNameLink,
 				SecretGroupName: core.StringPtr("default"),
 			}
 
@@ -471,13 +472,13 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateSecretVersion(createSecretVersionOptions *CreateSecretVersionOptions)`, func() {
 			secretVersionPrototypeModel := &secretsmanagerv2.ArbitrarySecretVersionPrototype{
-				Payload:               core.StringPtr("updated secret credentials"),
-				CustomMetadata:        map[string]interface{}{"anyKey": "anyValue"},
+				Payload: core.StringPtr("updated secret credentials"),
+				CustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
 				VersionCustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
 			}
 
 			createSecretVersionOptions := &secretsmanagerv2.CreateSecretVersionOptions{
-				SecretID:               &secretIdForGetSecretLink,
+				SecretID: &secretIdForGetSecretLink,
 				SecretVersionPrototype: secretVersionPrototypeModel,
 			}
 
@@ -495,7 +496,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		It(`GetSecretVersion(getSecretVersionOptions *GetSecretVersionOptions)`, func() {
 			getSecretVersionOptions := &secretsmanagerv2.GetSecretVersionOptions{
 				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretVersionIdForGetSecretVersionLink,
+				ID: &secretVersionIdForGetSecretVersionLink,
 			}
 
 			secretVersion, response, err := secretsManagerService.GetSecretVersion(getSecretVersionOptions)
@@ -512,7 +513,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		It(`GetSecretVersionMetadata(getSecretVersionMetadataOptions *GetSecretVersionMetadataOptions)`, func() {
 			getSecretVersionMetadataOptions := &secretsmanagerv2.GetSecretVersionMetadataOptions{
 				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretVersionIdForGetSecretVersionLink,
+				ID: &secretVersionIdForGetSecretVersionLink,
 			}
 
 			secretVersionMetadata, response, err := secretsManagerService.GetSecretVersionMetadata(getSecretVersionMetadataOptions)
@@ -534,8 +535,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			Expect(asPatchErr).To(BeNil())
 
 			updateSecretVersionMetadataOptions := &secretsmanagerv2.UpdateSecretVersionMetadataOptions{
-				SecretID:                   &secretIdForGetSecretLink,
-				ID:                         &secretVersionIdForGetSecretVersionLink,
+				SecretID: &secretIdForGetSecretLink,
+				ID: &secretVersionIdForGetSecretVersionLink,
 				SecretVersionMetadataPatch: secretVersionMetadataPatchModelAsPatch,
 			}
 
@@ -551,9 +552,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for CreateSecretVersionAction has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`CreateSecretVersionAction()`, func() {})
+		  // The integration test for CreateSecretVersionAction has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`CreateSecretVersionAction()`, func() {})
 	})
 
 	Describe(`ListSecretTasks - List secret tasks`, func() {
@@ -561,9 +562,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for ListSecretTasks has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`ListSecretTasks()`, func() {})
+		  // The integration test for ListSecretTasks has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`ListSecretTasks()`, func() {})
 	})
 
 	Describe(`GetSecretTask - Get a secret's task`, func() {
@@ -571,9 +572,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for GetSecretTask has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`GetSecretTask()`, func() {})
+		  // The integration test for GetSecretTask has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`GetSecretTask()`, func() {})
 	})
 
 	Describe(`ReplaceSecretTask - Update a secret's task`, func() {
@@ -581,19 +582,19 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for ReplaceSecretTask has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`ReplaceSecretTask()`, func() {})
+		  // The integration test for ReplaceSecretTask has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`ReplaceSecretTask()`, func() {})
 	})
 
 	Describe(`ListSecretsLocks - List secrets and their locks`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) with pagination`, func() {
+		It(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) with pagination`, func(){
 			listSecretsLocksOptions := &secretsmanagerv2.ListSecretsLocksOptions{
 				Offset: core.Int64Ptr(int64(0)),
-				Limit:  core.Int64Ptr(int64(10)),
+				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("example"),
 				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 			}
@@ -618,9 +619,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			}
 			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
 		})
-		It(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) using SecretsLocksPager`, func() {
+		It(`ListSecretsLocks(listSecretsLocksOptions *ListSecretsLocksOptions) using SecretsLocksPager`, func(){
 			listSecretsLocksOptions := &secretsmanagerv2.ListSecretsLocksOptions{
-				Limit:  core.Int64Ptr(int64(10)),
+				Limit: core.Int64Ptr(int64(10)),
 				Search: core.StringPtr("example"),
 				Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 			}
@@ -656,12 +657,12 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions) with pagination`, func() {
+		It(`ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions) with pagination`, func(){
 			listSecretLocksOptions := &secretsmanagerv2.ListSecretLocksOptions{
-				ID:     &secretIdForGetSecretLink,
+				ID: &secretIdForGetSecretLink,
 				Offset: core.Int64Ptr(int64(0)),
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("name"),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("name"),
 				Search: core.StringPtr("example"),
 			}
 
@@ -685,11 +686,11 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			}
 			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
 		})
-		It(`ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions) using SecretLocksPager`, func() {
+		It(`ListSecretLocks(listSecretLocksOptions *ListSecretLocksOptions) using SecretLocksPager`, func(){
 			listSecretLocksOptions := &secretsmanagerv2.ListSecretLocksOptions{
-				ID:     &secretIdForGetSecretLink,
-				Limit:  core.Int64Ptr(int64(10)),
-				Sort:   core.StringPtr("name"),
+				ID: &secretIdForGetSecretLink,
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("name"),
 				Search: core.StringPtr("example"),
 			}
 
@@ -726,16 +727,16 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions *CreateSecretVersionLocksBulkOptions)`, func() {
 			secretLockPrototypeModel := &secretsmanagerv2.SecretLockPrototype{
-				Name:        core.StringPtr("lock-example-1"),
+				Name: core.StringPtr("lock-example-1"),
 				Description: core.StringPtr("lock for consumer 1"),
-				Attributes:  map[string]interface{}{"anyKey": "anyValue"},
+				Attributes: map[string]interface{}{"anyKey": "anyValue"},
 			}
 
 			createSecretVersionLocksBulkOptions := &secretsmanagerv2.CreateSecretVersionLocksBulkOptions{
 				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretVersionIdForGetSecretVersionLink,
-				Locks:    []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
-				Mode:     core.StringPtr("remove_previous"),
+				ID: &secretVersionIdForGetSecretVersionLink,
+				Locks: []secretsmanagerv2.SecretLockPrototype{*secretLockPrototypeModel},
+				Mode: core.StringPtr("remove_previous"),
 			}
 
 			secretLocks, response, err := secretsManagerService.CreateSecretVersionLocksBulk(createSecretVersionLocksBulkOptions)
@@ -749,14 +750,14 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions) with pagination`, func() {
+		It(`ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions) with pagination`, func(){
 			listSecretVersionLocksOptions := &secretsmanagerv2.ListSecretVersionLocksOptions{
 				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretVersionIdForGetSecretVersionLink,
-				Offset:   core.Int64Ptr(int64(0)),
-				Limit:    core.Int64Ptr(int64(10)),
-				Sort:     core.StringPtr("name"),
-				Search:   core.StringPtr("example"),
+				ID: &secretVersionIdForGetSecretVersionLink,
+				Offset: core.Int64Ptr(int64(0)),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("name"),
+				Search: core.StringPtr("example"),
 			}
 
 			listSecretVersionLocksOptions.Offset = nil
@@ -779,13 +780,13 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			}
 			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
 		})
-		It(`ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions) using SecretVersionLocksPager`, func() {
+		It(`ListSecretVersionLocks(listSecretVersionLocksOptions *ListSecretVersionLocksOptions) using SecretVersionLocksPager`, func(){
 			listSecretVersionLocksOptions := &secretsmanagerv2.ListSecretVersionLocksOptions{
 				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretVersionIdForGetSecretVersionLink,
-				Limit:    core.Int64Ptr(int64(10)),
-				Sort:     core.StringPtr("name"),
-				Search:   core.StringPtr("example"),
+				ID: &secretVersionIdForGetSecretVersionLink,
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("name"),
+				Search: core.StringPtr("example"),
 			}
 
 			// Test GetNext().
@@ -819,12 +820,12 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) with pagination`, func() {
+		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) with pagination`, func(){
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Offset:      core.Int64Ptr(int64(0)),
-				Limit:       core.Int64Ptr(int64(10)),
-				Sort:        core.StringPtr("config_type"),
-				Search:      core.StringPtr("example"),
+				Offset: core.Int64Ptr(int64(0)),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("config_type"),
+				Search: core.StringPtr("example"),
 				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 			}
 
@@ -848,11 +849,11 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			}
 			fmt.Fprintf(GinkgoWriter, "Retrieved a total of %d item(s) with pagination.\n", len(allResults))
 		})
-		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) using ConfigurationsPager`, func() {
+		It(`ListConfigurations(listConfigurationsOptions *ListConfigurationsOptions) using ConfigurationsPager`, func(){
 			listConfigurationsOptions := &secretsmanagerv2.ListConfigurationsOptions{
-				Limit:       core.Int64Ptr(int64(10)),
-				Sort:        core.StringPtr("config_type"),
-				Search:      core.StringPtr("example"),
+				Limit: core.Int64Ptr(int64(10)),
+				Sort: core.StringPtr("config_type"),
+				Search: core.StringPtr("example"),
 				SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 			}
 
@@ -889,7 +890,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`GetConfiguration(getConfigurationOptions *GetConfigurationOptions)`, func() {
 			getConfigurationOptions := &secretsmanagerv2.GetConfigurationOptions{
-				Name:                       &configurationNameForGetConfigurationLink,
+				Name: &configurationNameForGetConfigurationLink,
 				XSmAcceptConfigurationType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 			}
 
@@ -907,14 +908,14 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		It(`UpdateConfiguration(updateConfigurationOptions *UpdateConfigurationOptions)`, func() {
 			configurationPatchModel := &secretsmanagerv2.PublicCertificateConfigurationDNSCloudInternetServicesPatch{
 				CloudInternetServicesApikey: core.StringPtr("5ipu_ykv0PMp2MhxQnDMn7VzrkSlBwi3BOI8uthi_EXZ"),
-				CloudInternetServicesCrn:    core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
+				CloudInternetServicesCrn: core.StringPtr("crn:v1:bluemix:public:internet-svcs:global:a/128e84fcca45c1224aae525d31ef2b52:009a0357-1460-42b4-b903-10580aba7dd8::"),
 			}
 			configurationPatchModelAsPatch, asPatchErr := configurationPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
 			updateConfigurationOptions := &secretsmanagerv2.UpdateConfigurationOptions{
-				Name:                       &configurationNameForGetConfigurationLink,
-				ConfigurationPatch:         configurationPatchModelAsPatch,
+				Name: &configurationNameForGetConfigurationLink,
+				ConfigurationPatch: configurationPatchModelAsPatch,
 				XSmAcceptConfigurationType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 			}
 
@@ -930,9 +931,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for CreateConfigurationAction has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`CreateConfigurationAction()`, func() {})
+		  // The integration test for CreateConfigurationAction has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`CreateConfigurationAction()`, func() {})
 	})
 
 	Describe(`CreateNotificationsRegistration - Register with Event Notifications instance`, func() {
@@ -941,8 +942,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`CreateNotificationsRegistration(createNotificationsRegistrationOptions *CreateNotificationsRegistrationOptions)`, func() {
 			createNotificationsRegistrationOptions := &secretsmanagerv2.CreateNotificationsRegistrationOptions{
-				EventNotificationsInstanceCrn:       core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/22018f3c34ff4ff193698d15ca316946:578ad1a4-2fd8-4e66-95d5-79a842ba91f8::"),
-				EventNotificationsSourceName:        core.StringPtr("My Secrets Manager"),
+				EventNotificationsInstanceCrn: core.StringPtr("crn:v1:bluemix:public:event-notifications:us-south:a/22018f3c34ff4ff193698d15ca316946:578ad1a4-2fd8-4e66-95d5-79a842ba91f8::"),
+				EventNotificationsSourceName: core.StringPtr("My Secrets Manager"),
 				EventNotificationsSourceDescription: core.StringPtr("Optional description of this source in an Event Notifications instance."),
 			}
 
@@ -958,7 +959,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetNotificationsRegistration(getNotificationsRegistrationOptions *GetNotificationsRegistrationOptions)`, func() {
-			getNotificationsRegistrationOptions := &secretsmanagerv2.GetNotificationsRegistrationOptions{}
+			getNotificationsRegistrationOptions := &secretsmanagerv2.GetNotificationsRegistrationOptions{
+			}
 
 			notificationsRegistration, response, err := secretsManagerService.GetNotificationsRegistration(getNotificationsRegistrationOptions)
 			Expect(err).To(BeNil())
@@ -972,9 +974,9 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for GetNotificationsRegistrationTest has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`GetNotificationsRegistrationTest()`, func() {})
+		  // The integration test for GetNotificationsRegistrationTest has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`GetNotificationsRegistrationTest()`, func() {})
 	})
 
 	Describe(`DeleteSecretGroup - Delete a secret group`, func() {
@@ -992,23 +994,13 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteSecretVersionData - Delete the data of a secret version`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-
-		// The integration test for DeleteSecretVersionData has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`DeleteSecretVersionData()`, func() {})
-	})
-
 	Describe(`DeleteSecretLocksBulk - Delete secret locks`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`DeleteSecretLocksBulk(deleteSecretLocksBulkOptions *DeleteSecretLocksBulkOptions)`, func() {
 			deleteSecretLocksBulkOptions := &secretsmanagerv2.DeleteSecretLocksBulkOptions{
-				ID:   &secretIdForGetSecretLink,
+				ID: &secretIdForGetSecretLink,
 				Name: []string{"lock-example-1"},
 			}
 
@@ -1026,8 +1018,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		It(`DeleteSecretVersionLocksBulk(deleteSecretVersionLocksBulkOptions *DeleteSecretVersionLocksBulkOptions)`, func() {
 			deleteSecretVersionLocksBulkOptions := &secretsmanagerv2.DeleteSecretVersionLocksBulkOptions{
 				SecretID: &secretIdForGetSecretLink,
-				ID:       &secretVersionIdForGetSecretVersionLink,
-				Name:     []string{"lock-example-1"},
+				ID: &secretVersionIdForGetSecretVersionLink,
+				Name: []string{"lock-example-1"},
 			}
 
 			secretLocks, response, err := secretsManagerService.DeleteSecretVersionLocksBulk(deleteSecretVersionLocksBulkOptions)
@@ -1043,7 +1035,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`DeleteSecret(deleteSecretOptions *DeleteSecretOptions)`, func() {
 			deleteSecretOptions := &secretsmanagerv2.DeleteSecretOptions{
-				ID:          &secretIdForGetSecretLink,
+				ID: &secretIdForGetSecretLink,
 				ForceDelete: core.BoolPtr(false),
 			}
 
@@ -1053,14 +1045,24 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`DeleteSecretVersionData - Delete the data of a secret version`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+
+		  // The integration test for DeleteSecretVersionData has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`DeleteSecretVersionData()`, func() {})
+	})
+
 	Describe(`DeleteSecretTask - Delete a task`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 
-		// The integration test for DeleteSecretTask has been explicitly excluded from generation.
-		// A test for this operation must be developed manually.
-		// It(`DeleteSecretTask()`, func() {})
+		  // The integration test for DeleteSecretTask has been explicitly excluded from generation.
+		  // A test for this operation must be developed manually.
+		  // It(`DeleteSecretTask()`, func() {})
 	})
 
 	Describe(`DeleteConfiguration - Delete a configuration`, func() {
@@ -1069,7 +1071,7 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 		})
 		It(`DeleteConfiguration(deleteConfigurationOptions *DeleteConfigurationOptions)`, func() {
 			deleteConfigurationOptions := &secretsmanagerv2.DeleteConfigurationOptions{
-				Name:                       &configurationNameForGetConfigurationLink,
+				Name: &configurationNameForGetConfigurationLink,
 				XSmAcceptConfigurationType: core.StringPtr("public_cert_configuration_dns_cloud_internet_services"),
 			}
 
@@ -1084,7 +1086,8 @@ var _ = Describe(`SecretsManagerV2 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions *DeleteNotificationsRegistrationOptions)`, func() {
-			deleteNotificationsRegistrationOptions := &secretsmanagerv2.DeleteNotificationsRegistrationOptions{}
+			deleteNotificationsRegistrationOptions := &secretsmanagerv2.DeleteNotificationsRegistrationOptions{
+			}
 
 			response, err := secretsManagerService.DeleteNotificationsRegistration(deleteNotificationsRegistrationOptions)
 			Expect(err).To(BeNil())
