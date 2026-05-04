@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.107.0-b68ebf7a-20250811-145645
+ * IBM OpenAPI SDK Code Generator Version: 3.114.0-a902401e-20260427-192904
  */
 
 // Package secretsmanagerv2 : Operations and models for the SecretsManagerV2 service
@@ -55,7 +55,7 @@ const ParameterizedServiceURL = "https://{instance_id}.{region}.secrets-manager.
 
 var defaultUrlVariables = map[string]string{
 	"instance_id": "provide-here-your-smgr-instanceuuid",
-	"region":      "us-south",
+	"region": "us-south",
 }
 
 // SecretsManagerV2Options : Service options
@@ -1078,8 +1078,8 @@ func (secretsManager *SecretsManagerV2) GetSecretByNameTypeWithContext(ctx conte
 	}
 
 	pathParamsMap := map[string]string{
-		"secret_type":       *getSecretByNameTypeOptions.SecretType,
-		"name":              *getSecretByNameTypeOptions.Name,
+		"secret_type": *getSecretByNameTypeOptions.SecretType,
+		"name": *getSecretByNameTypeOptions.Name,
 		"secret_group_name": *getSecretByNameTypeOptions.SecretGroupName,
 	}
 
@@ -1301,7 +1301,7 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionWithContext(ctx context.
 
 	pathParamsMap := map[string]string{
 		"secret_id": *getSecretVersionOptions.SecretID,
-		"id":        *getSecretVersionOptions.ID,
+		"id": *getSecretVersionOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1377,7 +1377,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionDataWithContext(ctx c
 
 	pathParamsMap := map[string]string{
 		"secret_id": *deleteSecretVersionDataOptions.SecretID,
-		"id":        *deleteSecretVersionDataOptions.ID,
+		"id": *deleteSecretVersionDataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -1440,7 +1440,7 @@ func (secretsManager *SecretsManagerV2) GetSecretVersionMetadataWithContext(ctx 
 
 	pathParamsMap := map[string]string{
 		"secret_id": *getSecretVersionMetadataOptions.SecretID,
-		"id":        *getSecretVersionMetadataOptions.ID,
+		"id": *getSecretVersionMetadataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1510,7 +1510,7 @@ func (secretsManager *SecretsManagerV2) UpdateSecretVersionMetadataWithContext(c
 
 	pathParamsMap := map[string]string{
 		"secret_id": *updateSecretVersionMetadataOptions.SecretID,
-		"id":        *updateSecretVersionMetadataOptions.ID,
+		"id": *updateSecretVersionMetadataOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1589,7 +1589,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionActionWithContext(ctx
 
 	pathParamsMap := map[string]string{
 		"secret_id": *createSecretVersionActionOptions.SecretID,
-		"id":        *createSecretVersionActionOptions.ID,
+		"id": *createSecretVersionActionOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -1741,7 +1741,7 @@ func (secretsManager *SecretsManagerV2) GetSecretTaskWithContext(ctx context.Con
 
 	pathParamsMap := map[string]string{
 		"secret_id": *getSecretTaskOptions.SecretID,
-		"id":        *getSecretTaskOptions.ID,
+		"id": *getSecretTaskOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1813,7 +1813,7 @@ func (secretsManager *SecretsManagerV2) ReplaceSecretTaskWithContext(ctx context
 
 	pathParamsMap := map[string]string{
 		"secret_id": *replaceSecretTaskOptions.SecretID,
-		"id":        *replaceSecretTaskOptions.ID,
+		"id": *replaceSecretTaskOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -1892,7 +1892,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretTaskWithContext(ctx context.
 
 	pathParamsMap := map[string]string{
 		"secret_id": *deleteSecretTaskOptions.SecretID,
-		"id":        *deleteSecretTaskOptions.ID,
+		"id": *deleteSecretTaskOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -2282,7 +2282,7 @@ func (secretsManager *SecretsManagerV2) ListSecretVersionLocksWithContext(ctx co
 
 	pathParamsMap := map[string]string{
 		"secret_id": *listSecretVersionLocksOptions.SecretID,
-		"id":        *listSecretVersionLocksOptions.ID,
+		"id": *listSecretVersionLocksOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -2375,7 +2375,7 @@ func (secretsManager *SecretsManagerV2) CreateSecretVersionLocksBulkWithContext(
 
 	pathParamsMap := map[string]string{
 		"secret_id": *createSecretVersionLocksBulkOptions.SecretID,
-		"id":        *createSecretVersionLocksBulkOptions.ID,
+		"id": *createSecretVersionLocksBulkOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -2468,7 +2468,7 @@ func (secretsManager *SecretsManagerV2) DeleteSecretVersionLocksBulkWithContext(
 
 	pathParamsMap := map[string]string{
 		"secret_id": *deleteSecretVersionLocksBulkOptions.SecretID,
-		"id":        *deleteSecretVersionLocksBulkOptions.ID,
+		"id": *deleteSecretVersionLocksBulkOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -3276,11 +3276,11 @@ type CertificateIssuanceInfo struct {
 // Constants associated with the CertificateIssuanceInfo.StateDescription property.
 // A text representation of the secret state.
 const (
-	CertificateIssuanceInfo_StateDescription_Active        = "active"
-	CertificateIssuanceInfo_StateDescription_Deactivated   = "deactivated"
-	CertificateIssuanceInfo_StateDescription_Destroyed     = "destroyed"
+	CertificateIssuanceInfo_StateDescription_Active = "active"
+	CertificateIssuanceInfo_StateDescription_Deactivated = "deactivated"
+	CertificateIssuanceInfo_StateDescription_Destroyed = "destroyed"
 	CertificateIssuanceInfo_StateDescription_PreActivation = "pre_activation"
-	CertificateIssuanceInfo_StateDescription_Suspended     = "suspended"
+	CertificateIssuanceInfo_StateDescription_Suspended = "suspended"
 )
 
 // UnmarshalCertificateIssuanceInfo unmarshals an instance of CertificateIssuanceInfo from the specified map of raw messages.
@@ -3767,12 +3767,12 @@ type Configuration struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	Configuration_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	Configuration_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	Configuration_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	Configuration_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	Configuration_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	Configuration_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	Configuration_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	Configuration_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	Configuration_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	Configuration_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	Configuration_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	Configuration_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	Configuration_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	Configuration_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -3781,28 +3781,28 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	Configuration_SecretType_Arbitrary          = "arbitrary"
-	Configuration_SecretType_CustomCredentials  = "custom_credentials"
-	Configuration_SecretType_IamCredentials     = "iam_credentials"
-	Configuration_SecretType_ImportedCert       = "imported_cert"
-	Configuration_SecretType_Kv                 = "kv"
-	Configuration_SecretType_PrivateCert        = "private_cert"
-	Configuration_SecretType_PublicCert         = "public_cert"
+	Configuration_SecretType_Arbitrary = "arbitrary"
+	Configuration_SecretType_CustomCredentials = "custom_credentials"
+	Configuration_SecretType_IamCredentials = "iam_credentials"
+	Configuration_SecretType_ImportedCert = "imported_cert"
+	Configuration_SecretType_Kv = "kv"
+	Configuration_SecretType_PrivateCert = "private_cert"
+	Configuration_SecretType_PublicCert = "public_cert"
 	Configuration_SecretType_ServiceCredentials = "service_credentials"
-	Configuration_SecretType_UsernamePassword   = "username_password"
+	Configuration_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the Configuration.LetsEncryptEnvironment property.
 // The configuration of the Let's Encrypt CA environment.
 const (
 	Configuration_LetsEncryptEnvironment_Production = "production"
-	Configuration_LetsEncryptEnvironment_Staging    = "staging"
+	Configuration_LetsEncryptEnvironment_Staging = "staging"
 )
 
 // Constants associated with the Configuration.KeyType property.
 // The type of private key to generate.
 const (
-	Configuration_KeyType_Ec  = "ec"
+	Configuration_KeyType_Ec = "ec"
 	Configuration_KeyType_Rsa = "rsa"
 )
 
@@ -3812,24 +3812,24 @@ const (
 // `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 const (
 	Configuration_Status_CertificateTemplateRequired = "certificate_template_required"
-	Configuration_Status_Configured                  = "configured"
-	Configuration_Status_Expired                     = "expired"
-	Configuration_Status_Revoked                     = "revoked"
-	Configuration_Status_SignedCertificateRequired   = "signed_certificate_required"
-	Configuration_Status_SigningRequired             = "signing_required"
+	Configuration_Status_Configured = "configured"
+	Configuration_Status_Expired = "expired"
+	Configuration_Status_Revoked = "revoked"
+	Configuration_Status_SignedCertificateRequired = "signed_certificate_required"
+	Configuration_Status_SigningRequired = "signing_required"
 )
 
 // Constants associated with the Configuration.Format property.
 // The format of the returned data.
 const (
-	Configuration_Format_Pem       = "pem"
+	Configuration_Format_Pem = "pem"
 	Configuration_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the Configuration.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	Configuration_PrivateKeyFormat_Der   = "der"
+	Configuration_PrivateKeyFormat_Der = "der"
 	Configuration_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
@@ -3842,7 +3842,6 @@ const (
 	Configuration_SigningMethod_External = "external"
 	Configuration_SigningMethod_Internal = "internal"
 )
-
 func (*Configuration) isaConfiguration() bool {
 	return true
 }
@@ -3921,7 +3920,8 @@ func UnmarshalConfiguration(m map[string]json.RawMessage, result interface{}) (e
 // - PrivateCertificateConfigurationActionSetSigned
 // - PrivateCertificateConfigurationActionRotateCRL
 type ConfigurationAction struct {
-	// The type of configuration action.
+	// The type of configuration action or the type of configuration action or the type of configuration action or the type
+	// of configuration action or the type of configuration action or the type of configuration action.
 	ActionType *string `json:"action_type,omitempty"`
 
 	// The timestamp of the certificate revocation.
@@ -3934,17 +3934,20 @@ type ConfigurationAction struct {
 	// configuration.
 	Config *PrivateCertificateConfigurationRotateAction `json:"config,omitempty"`
 
-	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate or the Common Name (CN)
+	// represents the server name that is protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
 	AltNames []string `json:"alt_names,omitempty"`
 
-	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list or the IP Subject
+	// Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IpSans *string `json:"ip_sans,omitempty"`
 
-	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list or the URI Subject
+	// Alternative Names to define for the CA certificate, in a comma-delimited list.
 	UriSans *string `json:"uri_sans,omitempty"`
 
 	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
@@ -3957,19 +3960,31 @@ type ConfigurationAction struct {
 	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, for example '12h'. The value can't
+	// exceed the `max_ttl` that is defined in the associated certificate template or the time-to-live (TTL) to assign to a
+	// private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '12h'. The value can't
 	// exceed the `max_ttl` that is defined in the associated certificate template.
 	TTL *string `json:"ttl,omitempty"`
 
-	// The format of the returned data.
+	// The format of the returned data or the format of the returned data.
 	Format *string `json:"format,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero or the maximum path length to encode in the
+	// generated certificate. `-1` means no limit.
 	//
 	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
 	// signing certificate. A limit of `0` means a literal path length of zero.
 	MaxPathLength *int64 `json:"max_path_length,omitempty"`
 
 	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
+	// useful if the common name is a human-readable identifier, instead of a hostname or an email address or this
+	// parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
 	//
 	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
 	// useful if the common name is a human-readable identifier, instead of a hostname or an email address.
@@ -3979,6 +3994,16 @@ type ConfigurationAction struct {
 	PermittedDnsDomains []string `json:"permitted_dns_domains,omitempty"`
 
 	// This field indicates whether to use values from a certificate signing request (CSR) to complete a
+	// `private_cert_configuration_action_sign_csr` action. If it is set to `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than by using the
+	// values that are provided in the other parameters to this operation.
+	//
+	// 2) Any key usage, for example, non-repudiation, that is requested in the CSR are added to the basic set of key
+	// usages used for CA certificates that are signed by the intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate or this field indicates
+	// whether to use values from a certificate signing request (CSR) to complete a
 	// `private_cert_configuration_action_sign_csr` action. If it is set to `true`, then:
 	//
 	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than by using the
@@ -4015,6 +4040,11 @@ type ConfigurationAction struct {
 	// that is in the certificate's distinguished name (DN).
 	//
 	// **Note:** This field is not related to the `serial_number` field that is returned in the API response. The
+	// `serial_number` field represents the certificate's randomly assigned serial number or the requested value for the
+	// [`serialNumber`](https://datatracker.ietf.org/doc/html/rfc4519#section-2.31) attribute that is in the certificate's
+	// distinguished name (DN).
+	//
+	// **Note:** This field is not related to the `serial_number` field that is returned in the API response. The
 	// `serial_number` field represents the certificate's randomly assigned serial number.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
@@ -4035,23 +4065,23 @@ type ConfigurationAction struct {
 }
 
 // Constants associated with the ConfigurationAction.ActionType property.
-// The type of configuration action.
+// The type of configuration action or the type of configuration action or the type of configuration action or the type
+// of configuration action or the type of configuration action or the type of configuration action.
 const (
 	ConfigurationAction_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	ConfigurationAction_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	ConfigurationAction_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	ConfigurationAction_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	ConfigurationAction_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	ConfigurationAction_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	ConfigurationAction_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	ConfigurationAction_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	ConfigurationAction_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	ConfigurationAction_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	ConfigurationAction_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // Constants associated with the ConfigurationAction.Format property.
-// The format of the returned data.
+// The format of the returned data or the format of the returned data.
 const (
-	ConfigurationAction_Format_Pem       = "pem"
+	ConfigurationAction_Format_Pem = "pem"
 	ConfigurationAction_Format_PemBundle = "pem_bundle"
 )
-
 func (*ConfigurationAction) isaConfigurationAction() bool {
 	return true
 }
@@ -4120,20 +4150,24 @@ func UnmarshalConfigurationAction(m map[string]json.RawMessage, result interface
 // - PrivateCertificateConfigurationActionSignIntermediatePrototype
 // - PrivateCertificateConfigurationActionSetSignedPrototype
 type ConfigurationActionPrototype struct {
-	// The type of configuration action.
+	// The type of configuration action or the type of configuration action or the type of configuration action or the type
+	// of configuration action or the type of configuration action or the type of configuration action.
 	ActionType *string `json:"action_type,omitempty"`
 
-	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate or the Common Name (CN)
+	// represents the server name that is protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
 	AltNames []string `json:"alt_names,omitempty"`
 
-	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	// The IP Subject Alternative Names to define for the CA certificate, in a comma-delimited list or the IP Subject
+	// Alternative Names to define for the CA certificate, in a comma-delimited list.
 	IpSans *string `json:"ip_sans,omitempty"`
 
-	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list.
+	// The URI Subject Alternative Names to define for the CA certificate, in a comma-delimited list or the URI Subject
+	// Alternative Names to define for the CA certificate, in a comma-delimited list.
 	UriSans *string `json:"uri_sans,omitempty"`
 
 	// The custom Object Identifier (OID) or UTF8-string Subject Alternative Names to define for the CA certificate.
@@ -4146,19 +4180,31 @@ type ConfigurationActionPrototype struct {
 	// The time-to-live (TTL) to assign to a private certificate.
 	//
 	// The value can be supplied as a string representation of a duration in hours, for example '12h'. The value can't
+	// exceed the `max_ttl` that is defined in the associated certificate template or the time-to-live (TTL) to assign to a
+	// private certificate.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '12h'. The value can't
 	// exceed the `max_ttl` that is defined in the associated certificate template.
 	TTL *string `json:"ttl,omitempty"`
 
-	// The format of the returned data.
+	// The format of the returned data or the format of the returned data.
 	Format *string `json:"format,omitempty"`
 
 	// The maximum path length to encode in the generated certificate. `-1` means no limit.
+	//
+	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
+	// signing certificate. A limit of `0` means a literal path length of zero or the maximum path length to encode in the
+	// generated certificate. `-1` means no limit.
 	//
 	// If the signing certificate has a maximum path length set, the path length is set to one less than that of the
 	// signing certificate. A limit of `0` means a literal path length of zero.
 	MaxPathLength *int64 `json:"max_path_length,omitempty"`
 
 	// This parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
+	//
+	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
+	// useful if the common name is a human-readable identifier, instead of a hostname or an email address or this
+	// parameter controls whether the common name is excluded from Subject Alternative Names (SANs).
 	//
 	// If the common name is set to `true`, it is not included in DNS, or email SANs if they apply. This field can be
 	// useful if the common name is a human-readable identifier, instead of a hostname or an email address.
@@ -4168,6 +4214,16 @@ type ConfigurationActionPrototype struct {
 	PermittedDnsDomains []string `json:"permitted_dns_domains,omitempty"`
 
 	// This field indicates whether to use values from a certificate signing request (CSR) to complete a
+	// `private_cert_configuration_action_sign_csr` action. If it is set to `true`, then:
+	//
+	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than by using the
+	// values that are provided in the other parameters to this operation.
+	//
+	// 2) Any key usage, for example, non-repudiation, that is requested in the CSR are added to the basic set of key
+	// usages used for CA certificates that are signed by the intermediate authority.
+	//
+	// 3) Extensions that are requested in the CSR are copied into the issued private certificate or this field indicates
+	// whether to use values from a certificate signing request (CSR) to complete a
 	// `private_cert_configuration_action_sign_csr` action. If it is set to `true`, then:
 	//
 	// 1) Subject information, including names and alternate names, are preserved from the CSR rather than by using the
@@ -4204,6 +4260,11 @@ type ConfigurationActionPrototype struct {
 	// that is in the certificate's distinguished name (DN).
 	//
 	// **Note:** This field is not related to the `serial_number` field that is returned in the API response. The
+	// `serial_number` field represents the certificate's randomly assigned serial number or the requested value for the
+	// [`serialNumber`](https://datatracker.ietf.org/doc/html/rfc4519#section-2.31) attribute that is in the certificate's
+	// distinguished name (DN).
+	//
+	// **Note:** This field is not related to the `serial_number` field that is returned in the API response. The
 	// `serial_number` field represents the certificate's randomly assigned serial number.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
@@ -4218,23 +4279,23 @@ type ConfigurationActionPrototype struct {
 }
 
 // Constants associated with the ConfigurationActionPrototype.ActionType property.
-// The type of configuration action.
+// The type of configuration action or the type of configuration action or the type of configuration action or the type
+// of configuration action or the type of configuration action or the type of configuration action.
 const (
 	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	ConfigurationActionPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // Constants associated with the ConfigurationActionPrototype.Format property.
-// The format of the returned data.
+// The format of the returned data or the format of the returned data.
 const (
-	ConfigurationActionPrototype_Format_Pem       = "pem"
+	ConfigurationActionPrototype_Format_Pem = "pem"
 	ConfigurationActionPrototype_Format_PemBundle = "pem_bundle"
 )
-
 func (*ConfigurationActionPrototype) isaConfigurationActionPrototype() bool {
 	return true
 }
@@ -4308,23 +4369,74 @@ type ConfigurationMetadata struct {
 	// The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
 	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
-	// custom_credentials_configuration.
+	// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+	// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+	// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+	// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration or
+	// the configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+	// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+	// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+	// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration or
+	// the configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+	// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+	// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+	// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration or
+	// the configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+	// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+	// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+	// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+	// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+	// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+	// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration.
 	ConfigType *string `json:"config_type,omitempty"`
 
-	// The unique name of your configuration.
+	// The unique name of your configuration or the unique name of your configuration or the unique name of your
+	// configuration or the unique name of your configuration or the unique name of your configuration or the unique name
+	// of your configuration or the unique name of your configuration or the unique name of your configuration.
 	Name *string `json:"name,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-	// service_credentials, kv, and username_password.
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+	// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
-	// The unique identifier that is associated with the entity that created the secret.
+	// The unique identifier that is associated with the entity that created the secret or the unique identifier that is
+	// associated with the entity that created the secret or the unique identifier that is associated with the entity that
+	// created the secret or the unique identifier that is associated with the entity that created the secret or the unique
+	// identifier that is associated with the entity that created the secret or the unique identifier that is associated
+	// with the entity that created the secret or the unique identifier that is associated with the entity that created the
+	// secret or the unique identifier that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The date when the resource was created. The date format follows `RFC 3339`.
+	// The date when the resource was created. The date format follows `RFC 3339` or the date when the resource was
+	// created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows `RFC
+	// 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the resource
+	// was created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows
+	// `RFC 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the
+	// resource was created. The date format follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
-	// The date when a resource was modified. The date format follows `RFC 3339`.
+	// The date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339` or
+	// the date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339` or
+	// the date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// This parameter indicates whether the API key configuration is disabled.
@@ -4337,22 +4449,31 @@ type ConfigurationMetadata struct {
 	// Let's Encrypt-provided value. For a list of supported chains, see: https://letsencrypt.org/certificates/.
 	LetsEncryptPreferredChain *string `json:"lets_encrypt_preferred_chain,omitempty"`
 
-	// The Common Name (CN) represents the server name that is protected by the SSL certificate.
+	// The Common Name (CN) represents the server name that is protected by the SSL certificate or the Common Name (CN)
+	// represents the server name that is protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
 	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
-	// certificates that are issued by this certificate authority.
+	// certificates that are issued by this certificate authority or this field determines whether to encode the
+	// certificate revocation list (CRL) distribution points in the certificates that are issued by this certificate
+	// authority.
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
-	// custom_credentials.
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
-	// The type of private key to generate.
+	// The type of private key to generate or the type of private key to generate.
 	KeyType *string `json:"key_type,omitempty"`
 
 	// The number of bits to use to generate the private key.
+	//
+	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
+	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256` or the number of bits to use to generate
+	// the private key.
 	//
 	// Allowable values for RSA keys are: `2048` and `4096`. Allowable values for EC keys are: `224`, `256`, `384`, and
 	// `521`. The default for RSA keys is `2048`. The default for EC keys is `256`.
@@ -4360,6 +4481,9 @@ type ConfigurationMetadata struct {
 
 	// The status of the certificate authority. The status of a root certificate authority is either `configured` or
 	// `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked` or the status
+	// of the certificate authority. The status of a root certificate authority is either `configured` or `expired`. For
+	// intermediate certificate authorities, possible statuses include `signing_required`,
 	// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 	Status *string `json:"status,omitempty"`
 
@@ -4402,58 +4526,95 @@ type ConfigurationMetadata struct {
 // The configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
 // public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
-// custom_credentials_configuration.
+// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration or
+// the configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration or
+// the configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration or
+// the configuration type. Can be one of: iam_credentials_configuration, public_cert_configuration_ca_lets_encrypt,
+// public_cert_configuration_dns_classic_infrastructure, public_cert_configuration_dns_cloud_internet_services,
+// private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
+// custom_credentials_configuration or the configuration type. Can be one of: iam_credentials_configuration,
+// public_cert_configuration_ca_lets_encrypt, public_cert_configuration_dns_classic_infrastructure,
+// public_cert_configuration_dns_cloud_internet_services, private_cert_configuration_root_ca,
+// private_cert_configuration_intermediate_ca, private_cert_configuration_template, custom_credentials_configuration.
 const (
-	ConfigurationMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	ConfigurationMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	ConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	ConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	ConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	ConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	ConfigurationMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	ConfigurationMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	ConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	ConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	ConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	ConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	ConfigurationMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	ConfigurationMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
 
 // Constants associated with the ConfigurationMetadata.SecretType property.
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-// service_credentials, kv, and username_password.
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password.
 const (
-	ConfigurationMetadata_SecretType_Arbitrary          = "arbitrary"
-	ConfigurationMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ConfigurationMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ConfigurationMetadata_SecretType_ImportedCert       = "imported_cert"
-	ConfigurationMetadata_SecretType_Kv                 = "kv"
-	ConfigurationMetadata_SecretType_PrivateCert        = "private_cert"
-	ConfigurationMetadata_SecretType_PublicCert         = "public_cert"
+	ConfigurationMetadata_SecretType_Arbitrary = "arbitrary"
+	ConfigurationMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ConfigurationMetadata_SecretType_IamCredentials = "iam_credentials"
+	ConfigurationMetadata_SecretType_ImportedCert = "imported_cert"
+	ConfigurationMetadata_SecretType_Kv = "kv"
+	ConfigurationMetadata_SecretType_PrivateCert = "private_cert"
+	ConfigurationMetadata_SecretType_PublicCert = "public_cert"
 	ConfigurationMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ConfigurationMetadata_SecretType_UsernamePassword   = "username_password"
+	ConfigurationMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ConfigurationMetadata.LetsEncryptEnvironment property.
 // The configuration of the Let's Encrypt CA environment.
 const (
 	ConfigurationMetadata_LetsEncryptEnvironment_Production = "production"
-	ConfigurationMetadata_LetsEncryptEnvironment_Staging    = "staging"
+	ConfigurationMetadata_LetsEncryptEnvironment_Staging = "staging"
 )
 
 // Constants associated with the ConfigurationMetadata.KeyType property.
-// The type of private key to generate.
+// The type of private key to generate or the type of private key to generate.
 const (
-	ConfigurationMetadata_KeyType_Ec  = "ec"
+	ConfigurationMetadata_KeyType_Ec = "ec"
 	ConfigurationMetadata_KeyType_Rsa = "rsa"
 )
 
 // Constants associated with the ConfigurationMetadata.Status property.
 // The status of the certificate authority. The status of a root certificate authority is either `configured` or
 // `expired`. For intermediate certificate authorities, possible statuses include `signing_required`,
+// `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked` or the status of
+// the certificate authority. The status of a root certificate authority is either `configured` or `expired`. For
+// intermediate certificate authorities, possible statuses include `signing_required`,
 // `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 const (
 	ConfigurationMetadata_Status_CertificateTemplateRequired = "certificate_template_required"
-	ConfigurationMetadata_Status_Configured                  = "configured"
-	ConfigurationMetadata_Status_Expired                     = "expired"
-	ConfigurationMetadata_Status_Revoked                     = "revoked"
-	ConfigurationMetadata_Status_SignedCertificateRequired   = "signed_certificate_required"
-	ConfigurationMetadata_Status_SigningRequired             = "signing_required"
+	ConfigurationMetadata_Status_Configured = "configured"
+	ConfigurationMetadata_Status_Expired = "expired"
+	ConfigurationMetadata_Status_Revoked = "revoked"
+	ConfigurationMetadata_Status_SignedCertificateRequired = "signed_certificate_required"
+	ConfigurationMetadata_Status_SigningRequired = "signing_required"
 )
 
 // Constants associated with the ConfigurationMetadata.SigningMethod property.
@@ -4465,7 +4626,6 @@ const (
 	ConfigurationMetadata_SigningMethod_External = "external"
 	ConfigurationMetadata_SigningMethod_Internal = "internal"
 )
-
 func (*ConfigurationMetadata) isaConfigurationMetadata() bool {
 	return true
 }
@@ -4657,10 +4817,28 @@ type ConfigurationPatch struct {
 	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
 	// response, this value is returned in seconds (integer).
 	//
+	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`) or the maximum time-to-live (TTL) for
+	// certificates that are created by this CA.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
+	// response, this value is returned in seconds (integer).
+	//
+	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`) or the maximum time-to-live (TTL) for
+	// certificates that are created by this CA.
+	//
+	// The value can be supplied as a string representation of a duration in hours, for example '8760h'. In the API
+	// response, this value is returned in seconds (integer).
+	//
 	// Minimum value is one hour (`1h`). Maximum value is 100 years (`876000h`).
 	MaxTTL *string `json:"max_ttl,omitempty"`
 
 	// The time until the certificate revocation list (CRL) expires.
+	//
+	// The value can be supplied as a string representation of a duration in hours, such as `48h`. The default is 72 hours.
+	// In the API response, this value is returned in seconds (integer).
+	//
+	// **Note:** The CRL is rotated automatically before it expires or the time until the certificate revocation list (CRL)
+	// expires.
 	//
 	// The value can be supplied as a string representation of a duration in hours, such as `48h`. The default is 72 hours.
 	// In the API response, this value is returned in seconds (integer).
@@ -4671,15 +4849,22 @@ type ConfigurationPatch struct {
 	// This field disables or enables certificate revocation list (CRL) building.
 	//
 	// If CRL building is disabled, a signed but zero-length CRL is returned when you're downloading the CRL. If CRL
+	// building is enabled, it rebuilds the CRL or this field disables or enables certificate revocation list (CRL)
+	// building.
+	//
+	// If CRL building is disabled, a signed but zero-length CRL is returned when you're downloading the CRL. If CRL
 	// building is enabled, it rebuilds the CRL.
 	CrlDisable *bool `json:"crl_disable,omitempty"`
 
 	// This field determines whether to encode the certificate revocation list (CRL) distribution points in the
-	// certificates that are issued by this certificate authority.
+	// certificates that are issued by this certificate authority or this field determines whether to encode the
+	// certificate revocation list (CRL) distribution points in the certificates that are issued by this certificate
+	// authority.
 	CrlDistributionPointsEncoded *bool `json:"crl_distribution_points_encoded,omitempty"`
 
 	// This field determines whether to encode the URL of the issuing certificate in the certificates that are issued by
-	// this certificate authority.
+	// this certificate authority or this field determines whether to encode the URL of the issuing certificate in the
+	// certificates that are issued by this certificate authority.
 	IssuingCertificatesUrlsEncoded *bool `json:"issuing_certificates_urls_encoded,omitempty"`
 
 	// This field scopes the creation of private certificates to only the secret groups that you specify.
@@ -4904,7 +5089,7 @@ type ConfigurationPatch struct {
 // Constants associated with the ConfigurationPatch.KeyType property.
 // The type of private key to generate.
 const (
-	ConfigurationPatch_KeyType_Ec  = "ec"
+	ConfigurationPatch_KeyType_Ec = "ec"
 	ConfigurationPatch_KeyType_Rsa = "rsa"
 )
 
@@ -4912,9 +5097,8 @@ const (
 // The configuration of the Let's Encrypt CA environment.
 const (
 	ConfigurationPatch_LetsEncryptEnvironment_Production = "production"
-	ConfigurationPatch_LetsEncryptEnvironment_Staging    = "staging"
+	ConfigurationPatch_LetsEncryptEnvironment_Staging = "staging"
 )
-
 func (*ConfigurationPatch) isaConfigurationPatch() bool {
 	return true
 }
@@ -5702,12 +5886,12 @@ type ConfigurationPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	ConfigurationPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	ConfigurationPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	ConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	ConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	ConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	ConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	ConfigurationPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	ConfigurationPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	ConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	ConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	ConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	ConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	ConfigurationPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	ConfigurationPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -5716,27 +5900,27 @@ const (
 // The configuration of the Let's Encrypt CA environment.
 const (
 	ConfigurationPrototype_LetsEncryptEnvironment_Production = "production"
-	ConfigurationPrototype_LetsEncryptEnvironment_Staging    = "staging"
+	ConfigurationPrototype_LetsEncryptEnvironment_Staging = "staging"
 )
 
 // Constants associated with the ConfigurationPrototype.Format property.
 // The format of the returned data.
 const (
-	ConfigurationPrototype_Format_Pem       = "pem"
+	ConfigurationPrototype_Format_Pem = "pem"
 	ConfigurationPrototype_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the ConfigurationPrototype.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	ConfigurationPrototype_PrivateKeyFormat_Der   = "der"
+	ConfigurationPrototype_PrivateKeyFormat_Der = "der"
 	ConfigurationPrototype_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
 // Constants associated with the ConfigurationPrototype.KeyType property.
 // The type of private key to generate.
 const (
-	ConfigurationPrototype_KeyType_Ec  = "ec"
+	ConfigurationPrototype_KeyType_Ec = "ec"
 	ConfigurationPrototype_KeyType_Rsa = "rsa"
 )
 
@@ -5749,7 +5933,6 @@ const (
 	ConfigurationPrototype_SigningMethod_External = "external"
 	ConfigurationPrototype_SigningMethod_Internal = "internal"
 )
-
 func (*ConfigurationPrototype) isaConfigurationPrototype() bool {
 	return true
 }
@@ -5837,12 +6020,12 @@ type CreateConfigurationActionOptions struct {
 // Constants associated with the CreateConfigurationActionOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
-	CreateConfigurationActionOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	CreateConfigurationActionOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	CreateConfigurationActionOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -5850,7 +6033,7 @@ const (
 // NewCreateConfigurationActionOptions : Instantiate CreateConfigurationActionOptions
 func (*SecretsManagerV2) NewCreateConfigurationActionOptions(name string, configActionPrototype ConfigurationActionPrototypeIntf) *CreateConfigurationActionOptions {
 	return &CreateConfigurationActionOptions{
-		Name:                  core.StringPtr(name),
+		Name: core.StringPtr(name),
 		ConfigActionPrototype: configActionPrototype,
 	}
 }
@@ -5926,7 +6109,7 @@ type CreateNotificationsRegistrationOptions struct {
 func (*SecretsManagerV2) NewCreateNotificationsRegistrationOptions(eventNotificationsInstanceCrn string, eventNotificationsSourceName string) *CreateNotificationsRegistrationOptions {
 	return &CreateNotificationsRegistrationOptions{
 		EventNotificationsInstanceCrn: core.StringPtr(eventNotificationsInstanceCrn),
-		EventNotificationsSourceName:  core.StringPtr(eventNotificationsSourceName),
+		EventNotificationsSourceName: core.StringPtr(eventNotificationsSourceName),
 	}
 }
 
@@ -5969,7 +6152,7 @@ type CreateSecretActionOptions struct {
 // NewCreateSecretActionOptions : Instantiate CreateSecretActionOptions
 func (*SecretsManagerV2) NewCreateSecretActionOptions(id string, secretActionPrototype SecretActionPrototypeIntf) *CreateSecretActionOptions {
 	return &CreateSecretActionOptions{
-		ID:                    core.StringPtr(id),
+		ID: core.StringPtr(id),
 		SecretActionPrototype: secretActionPrototype,
 	}
 }
@@ -6060,14 +6243,14 @@ type CreateSecretLocksBulkOptions struct {
 // the data of the previous secret version if it doesn't have any locks. Not supported for custom credentials secret
 // type.
 const (
-	CreateSecretLocksBulkOptions_Mode_RemovePrevious          = "remove_previous"
+	CreateSecretLocksBulkOptions_Mode_RemovePrevious = "remove_previous"
 	CreateSecretLocksBulkOptions_Mode_RemovePreviousAndDelete = "remove_previous_and_delete"
 )
 
 // NewCreateSecretLocksBulkOptions : Instantiate CreateSecretLocksBulkOptions
 func (*SecretsManagerV2) NewCreateSecretLocksBulkOptions(id string, locks []SecretLockPrototype) *CreateSecretLocksBulkOptions {
 	return &CreateSecretLocksBulkOptions{
-		ID:    core.StringPtr(id),
+		ID: core.StringPtr(id),
 		Locks: locks,
 	}
 }
@@ -6143,8 +6326,8 @@ type CreateSecretVersionActionOptions struct {
 // NewCreateSecretVersionActionOptions : Instantiate CreateSecretVersionActionOptions
 func (*SecretsManagerV2) NewCreateSecretVersionActionOptions(secretID string, id string, secretVersionActionPrototype SecretVersionActionPrototypeIntf) *CreateSecretVersionActionOptions {
 	return &CreateSecretVersionActionOptions{
-		SecretID:                     core.StringPtr(secretID),
-		ID:                           core.StringPtr(id),
+		SecretID: core.StringPtr(secretID),
+		ID: core.StringPtr(id),
 		SecretVersionActionPrototype: secretVersionActionPrototype,
 	}
 }
@@ -6205,7 +6388,7 @@ type CreateSecretVersionLocksBulkOptions struct {
 // the data of the previous secret version if it doesn't have any locks. Not supported for custom credentials secret
 // type.
 const (
-	CreateSecretVersionLocksBulkOptions_Mode_RemovePrevious          = "remove_previous"
+	CreateSecretVersionLocksBulkOptions_Mode_RemovePrevious = "remove_previous"
 	CreateSecretVersionLocksBulkOptions_Mode_RemovePreviousAndDelete = "remove_previous_and_delete"
 )
 
@@ -6213,8 +6396,8 @@ const (
 func (*SecretsManagerV2) NewCreateSecretVersionLocksBulkOptions(secretID string, id string, locks []SecretLockPrototype) *CreateSecretVersionLocksBulkOptions {
 	return &CreateSecretVersionLocksBulkOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
-		Locks:    locks,
+		ID: core.StringPtr(id),
+		Locks: locks,
 	}
 }
 
@@ -6263,7 +6446,7 @@ type CreateSecretVersionOptions struct {
 // NewCreateSecretVersionOptions : Instantiate CreateSecretVersionOptions
 func (*SecretsManagerV2) NewCreateSecretVersionOptions(secretID string, secretVersionPrototype SecretVersionPrototypeIntf) *CreateSecretVersionOptions {
 	return &CreateSecretVersionOptions{
-		SecretID:               core.StringPtr(secretID),
+		SecretID: core.StringPtr(secretID),
 		SecretVersionPrototype: secretVersionPrototype,
 	}
 }
@@ -6301,9 +6484,9 @@ type CustomCredentialsConfigurationCodeEngine struct {
 // NewCustomCredentialsConfigurationCodeEngine : Instantiate CustomCredentialsConfigurationCodeEngine (Generic Model Constructor)
 func (*SecretsManagerV2) NewCustomCredentialsConfigurationCodeEngine(jobName string, projectID string, region string) (_model *CustomCredentialsConfigurationCodeEngine, err error) {
 	_model = &CustomCredentialsConfigurationCodeEngine{
-		JobName:   core.StringPtr(jobName),
+		JobName: core.StringPtr(jobName),
 		ProjectID: core.StringPtr(projectID),
-		Region:    core.StringPtr(region),
+		Region: core.StringPtr(region),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -6429,15 +6612,15 @@ type CustomCredentialsNewCredentials struct {
 	// An identifier of credentials in the credentials provider that is used by the custom credentials secret type.
 	ID *string `json:"id" validate:"required"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	Payload map[string]interface{} `json:"payload" validate:"required"`
 }
 
 // NewCustomCredentialsNewCredentials : Instantiate CustomCredentialsNewCredentials (Generic Model Constructor)
 func (*SecretsManagerV2) NewCustomCredentialsNewCredentials(id string, payload map[string]interface{}) (_model *CustomCredentialsNewCredentials, err error) {
 	_model = &CustomCredentialsNewCredentials{
-		ID:      core.StringPtr(id),
+		ID: core.StringPtr(id),
 		Payload: payload,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -6479,12 +6662,12 @@ type DeleteConfigurationOptions struct {
 // Constants associated with the DeleteConfigurationOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
-	DeleteConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	DeleteConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	DeleteConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	DeleteConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	DeleteConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	DeleteConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -6650,7 +6833,7 @@ type DeleteSecretTaskOptions struct {
 func (*SecretsManagerV2) NewDeleteSecretTaskOptions(secretID string, id string) *DeleteSecretTaskOptions {
 	return &DeleteSecretTaskOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -6689,7 +6872,7 @@ type DeleteSecretVersionDataOptions struct {
 func (*SecretsManagerV2) NewDeleteSecretVersionDataOptions(secretID string, id string) *DeleteSecretVersionDataOptions {
 	return &DeleteSecretVersionDataOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -6731,7 +6914,7 @@ type DeleteSecretVersionLocksBulkOptions struct {
 func (*SecretsManagerV2) NewDeleteSecretVersionLocksBulkOptions(secretID string, id string) *DeleteSecretVersionLocksBulkOptions {
 	return &DeleteSecretVersionLocksBulkOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -6774,12 +6957,12 @@ type GetConfigurationOptions struct {
 // Constants associated with the GetConfigurationOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
-	GetConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	GetConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	GetConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	GetConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	GetConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	GetConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	GetConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	GetConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	GetConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -6866,22 +7049,22 @@ type GetSecretByNameTypeOptions struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	GetSecretByNameTypeOptions_SecretType_Arbitrary          = "arbitrary"
-	GetSecretByNameTypeOptions_SecretType_CustomCredentials  = "custom_credentials"
-	GetSecretByNameTypeOptions_SecretType_IamCredentials     = "iam_credentials"
-	GetSecretByNameTypeOptions_SecretType_ImportedCert       = "imported_cert"
-	GetSecretByNameTypeOptions_SecretType_Kv                 = "kv"
-	GetSecretByNameTypeOptions_SecretType_PrivateCert        = "private_cert"
-	GetSecretByNameTypeOptions_SecretType_PublicCert         = "public_cert"
+	GetSecretByNameTypeOptions_SecretType_Arbitrary = "arbitrary"
+	GetSecretByNameTypeOptions_SecretType_CustomCredentials = "custom_credentials"
+	GetSecretByNameTypeOptions_SecretType_IamCredentials = "iam_credentials"
+	GetSecretByNameTypeOptions_SecretType_ImportedCert = "imported_cert"
+	GetSecretByNameTypeOptions_SecretType_Kv = "kv"
+	GetSecretByNameTypeOptions_SecretType_PrivateCert = "private_cert"
+	GetSecretByNameTypeOptions_SecretType_PublicCert = "public_cert"
 	GetSecretByNameTypeOptions_SecretType_ServiceCredentials = "service_credentials"
-	GetSecretByNameTypeOptions_SecretType_UsernamePassword   = "username_password"
+	GetSecretByNameTypeOptions_SecretType_UsernamePassword = "username_password"
 )
 
 // NewGetSecretByNameTypeOptions : Instantiate GetSecretByNameTypeOptions
 func (*SecretsManagerV2) NewGetSecretByNameTypeOptions(secretType string, name string, secretGroupName string) *GetSecretByNameTypeOptions {
 	return &GetSecretByNameTypeOptions{
-		SecretType:      core.StringPtr(secretType),
-		Name:            core.StringPtr(name),
+		SecretType: core.StringPtr(secretType),
+		Name: core.StringPtr(name),
 		SecretGroupName: core.StringPtr(secretGroupName),
 	}
 }
@@ -7010,7 +7193,7 @@ type GetSecretTaskOptions struct {
 func (*SecretsManagerV2) NewGetSecretTaskOptions(secretID string, id string) *GetSecretTaskOptions {
 	return &GetSecretTaskOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -7049,7 +7232,7 @@ type GetSecretVersionMetadataOptions struct {
 func (*SecretsManagerV2) NewGetSecretVersionMetadataOptions(secretID string, id string) *GetSecretVersionMetadataOptions {
 	return &GetSecretVersionMetadataOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -7088,7 +7271,7 @@ type GetSecretVersionOptions struct {
 func (*SecretsManagerV2) NewGetSecretVersionOptions(secretID string, id string) *GetSecretVersionOptions {
 	return &GetSecretVersionOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -7214,9 +7397,9 @@ type ImportedCertificateManagedCsr struct {
 // Constants associated with the ImportedCertificateManagedCsr.KeyType property.
 // The type of private key to generate.
 const (
-	ImportedCertificateManagedCsr_KeyType_Ec      = "ec"
+	ImportedCertificateManagedCsr_KeyType_Ec = "ec"
 	ImportedCertificateManagedCsr_KeyType_Ed25519 = "ed25519"
-	ImportedCertificateManagedCsr_KeyType_Rsa     = "rsa"
+	ImportedCertificateManagedCsr_KeyType_Rsa = "rsa"
 )
 
 // UnmarshalImportedCertificateManagedCsr unmarshals an instance of ImportedCertificateManagedCsr from the specified map of raw messages.
@@ -7552,9 +7735,9 @@ type ImportedCertificateManagedCsrResponse struct {
 // Constants associated with the ImportedCertificateManagedCsrResponse.KeyType property.
 // The type of private key to generate.
 const (
-	ImportedCertificateManagedCsrResponse_KeyType_Ec      = "ec"
+	ImportedCertificateManagedCsrResponse_KeyType_Ec = "ec"
 	ImportedCertificateManagedCsrResponse_KeyType_Ed25519 = "ed25519"
-	ImportedCertificateManagedCsrResponse_KeyType_Rsa     = "rsa"
+	ImportedCertificateManagedCsrResponse_KeyType_Rsa = "rsa"
 )
 
 // UnmarshalImportedCertificateManagedCsrResponse unmarshals an instance of ImportedCertificateManagedCsrResponse from the specified map of raw messages.
@@ -7754,9 +7937,9 @@ type ListConfigurationsOptions struct {
 // Constants associated with the ListConfigurationsOptions.SecretTypes property.
 const (
 	ListConfigurationsOptions_SecretTypes_CustomCredentials = "custom_credentials"
-	ListConfigurationsOptions_SecretTypes_IamCredentials    = "iam_credentials"
-	ListConfigurationsOptions_SecretTypes_PrivateCert       = "private_cert"
-	ListConfigurationsOptions_SecretTypes_PublicCert        = "public_cert"
+	ListConfigurationsOptions_SecretTypes_IamCredentials = "iam_credentials"
+	ListConfigurationsOptions_SecretTypes_PrivateCert = "private_cert"
+	ListConfigurationsOptions_SecretTypes_PublicCert = "public_cert"
 )
 
 // NewListConfigurationsOptions : Instantiate ListConfigurationsOptions
@@ -7973,7 +8156,7 @@ type ListSecretVersionLocksOptions struct {
 func (*SecretsManagerV2) NewListSecretVersionLocksOptions(secretID string, id string) *ListSecretVersionLocksOptions {
 	return &ListSecretVersionLocksOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
+		ID: core.StringPtr(id),
 	}
 }
 
@@ -8184,15 +8367,15 @@ type ListSecretsOptions struct {
 
 // Constants associated with the ListSecretsOptions.SecretTypes property.
 const (
-	ListSecretsOptions_SecretTypes_Arbitrary          = "arbitrary"
-	ListSecretsOptions_SecretTypes_CustomCredentials  = "custom_credentials"
-	ListSecretsOptions_SecretTypes_IamCredentials     = "iam_credentials"
-	ListSecretsOptions_SecretTypes_ImportedCert       = "imported_cert"
-	ListSecretsOptions_SecretTypes_Kv                 = "kv"
-	ListSecretsOptions_SecretTypes_PrivateCert        = "private_cert"
-	ListSecretsOptions_SecretTypes_PublicCert         = "public_cert"
+	ListSecretsOptions_SecretTypes_Arbitrary = "arbitrary"
+	ListSecretsOptions_SecretTypes_CustomCredentials = "custom_credentials"
+	ListSecretsOptions_SecretTypes_IamCredentials = "iam_credentials"
+	ListSecretsOptions_SecretTypes_ImportedCert = "imported_cert"
+	ListSecretsOptions_SecretTypes_Kv = "kv"
+	ListSecretsOptions_SecretTypes_PrivateCert = "private_cert"
+	ListSecretsOptions_SecretTypes_PublicCert = "public_cert"
 	ListSecretsOptions_SecretTypes_ServiceCredentials = "service_credentials"
-	ListSecretsOptions_SecretTypes_UsernamePassword   = "username_password"
+	ListSecretsOptions_SecretTypes_UsernamePassword = "username_password"
 )
 
 // NewListSecretsOptions : Instantiate ListSecretsOptions
@@ -8499,7 +8682,7 @@ type PrivateCertificateCAData struct {
 	// The type of private key to generate.
 	PrivateKeyType *string `json:"private_key_type,omitempty"`
 
-	// The certificate expiration time.
+	// The certificate expiration time or the certificate expiration time.
 	Expiration *int64 `json:"expiration,omitempty"`
 
 	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
@@ -8515,10 +8698,9 @@ type PrivateCertificateCAData struct {
 // Constants associated with the PrivateCertificateCAData.PrivateKeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateCAData_PrivateKeyType_Ec  = "ec"
+	PrivateCertificateCAData_PrivateKeyType_Ec = "ec"
 	PrivateCertificateCAData_PrivateKeyType_Rsa = "rsa"
 )
-
 func (*PrivateCertificateCAData) isaPrivateCertificateCAData() bool {
 	return true
 }
@@ -8663,7 +8845,7 @@ type PrivateCertificateConfigurationRotateAction struct {
 // Constants associated with the PrivateCertificateConfigurationRotateAction.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationRotateAction_Format_Pem       = "pem"
+	PrivateCertificateConfigurationRotateAction_Format_Pem = "pem"
 	PrivateCertificateConfigurationRotateAction_Format_PemBundle = "pem_bundle"
 )
 
@@ -8859,7 +9041,6 @@ type PrivateCertificateCryptoProvider struct {
 const (
 	PrivateCertificateCryptoProvider_Type_HyperProtectCryptoServices = "hyper_protect_crypto_services"
 )
-
 func (*PrivateCertificateCryptoProvider) isaPrivateCertificateCryptoProvider() bool {
 	return true
 }
@@ -8934,8 +9115,8 @@ type ReplaceSecretTaskOptions struct {
 func (*SecretsManagerV2) NewReplaceSecretTaskOptions(secretID string, id string, taskPut SecretTaskPrototypeIntf) *ReplaceSecretTaskOptions {
 	return &ReplaceSecretTaskOptions{
 		SecretID: core.StringPtr(secretID),
-		ID:       core.StringPtr(id),
-		TaskPut:  taskPut,
+		ID: core.StringPtr(id),
+		TaskPut: taskPut,
 	}
 }
 
@@ -8972,6 +9153,9 @@ type RotationPolicy struct {
 	// This field indicates whether Secrets Manager rotates your secret automatically.
 	//
 	// The default is `false`. If `auto_rotate` is set to `true` the service rotates your secret based on the defined
+	// interval or this field indicates whether Secrets Manager rotates your secret automatically.
+	//
+	// The default is `false`. If `auto_rotate` is set to `true` the service rotates your secret based on the defined
 	// interval.
 	AutoRotate *bool `json:"auto_rotate,omitempty"`
 
@@ -8991,11 +9175,10 @@ type RotationPolicy struct {
 // Constants associated with the RotationPolicy.Unit property.
 // The units for the secret rotation time interval.
 const (
-	RotationPolicy_Unit_Day   = "day"
-	RotationPolicy_Unit_Hour  = "hour"
+	RotationPolicy_Unit_Day = "day"
+	RotationPolicy_Unit_Hour = "hour"
 	RotationPolicy_Unit_Month = "month"
 )
-
 func (*RotationPolicy) isaRotationPolicy() bool {
 	return true
 }
@@ -9063,17 +9246,43 @@ func (rotationPolicy *RotationPolicy) asPatch() (_patch map[string]interface{}) 
 // - UsernamePasswordSecret
 // - CustomCredentialsSecret
 type Secret struct {
-	// The unique identifier that is associated with the entity that created the secret.
+	// The unique identifier that is associated with the entity that created the secret or the unique identifier that is
+	// associated with the entity that created the secret or the unique identifier that is associated with the entity that
+	// created the secret or the unique identifier that is associated with the entity that created the secret or the unique
+	// identifier that is associated with the entity that created the secret or the unique identifier that is associated
+	// with the entity that created the secret or the unique identifier that is associated with the entity that created the
+	// secret or the unique identifier that is associated with the entity that created the secret or the unique identifier
+	// that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The date when the resource was created. The date format follows `RFC 3339`.
+	// The date when the resource was created. The date format follows `RFC 3339` or the date when the resource was
+	// created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows `RFC
+	// 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the resource
+	// was created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows
+	// `RFC 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the
+	// resource was created. The date format follows `RFC 3339` or the date when the resource was created. The date format
+	// follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
-	// record of secret data retrieval.
+	// record of secret data retrieval or the date when the data of the secret was last retrieved. The date format follows
+	// RFC 3339. Epoch date if there is no record of secret data retrieval or the date when the data of the secret was last
+	// retrieved. The date format follows RFC 3339. Epoch date if there is no record of secret data retrieval or the date
+	// when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no record
+	// of secret data retrieval or the date when the data of the secret was last retrieved. The date format follows RFC
+	// 3339. Epoch date if there is no record of secret data retrieval or the date when the data of the secret was last
+	// retrieved. The date format follows RFC 3339. Epoch date if there is no record of secret data retrieval or the date
+	// when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no record
+	// of secret data retrieval or the date when the data of the secret was last retrieved. The date format follows RFC
+	// 3339. Epoch date if there is no record of secret data retrieval or the date when the data of the secret was last
+	// retrieved. The date format follows RFC 3339. Epoch date if there is no record of secret data retrieval.
 	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
-	// A CRN that uniquely identifies an IBM Cloud resource.
+	// A CRN that uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a
+	// CRN that uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a CRN
+	// that uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a CRN that
+	// uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a CRN that
+	// uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn,omitempty"`
 
 	// The secret metadata that a user can customize.
@@ -9082,14 +9291,48 @@ type Secret struct {
 	// An extended description of your secret.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
 	// group.
 	Description *string `json:"description,omitempty"`
 
 	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
-	// service API.
+	// service API or this field indicates whether the secret data that is associated with a secret version was retrieved
+	// in a call to the service API or this field indicates whether the secret data that is associated with a secret
+	// version was retrieved in a call to the service API or this field indicates whether the secret data that is
+	// associated with a secret version was retrieved in a call to the service API or this field indicates whether the
+	// secret data that is associated with a secret version was retrieved in a call to the service API or this field
+	// indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API or this field indicates whether the secret data that is associated with a secret version was retrieved in a call
+	// to the service API or this field indicates whether the secret data that is associated with a secret version was
+	// retrieved in a call to the service API or this field indicates whether the secret data that is associated with a
+	// secret version was retrieved in a call to the service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A UUID identifier.
+	// A UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID
+	// identifier or a UUID identifier or a UUID identifier or a UUID identifier.
 	ID *string `json:"id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -9099,30 +9342,74 @@ type Secret struct {
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
 
-	// The number of locks of the secret.
+	// The number of locks of the secret or the number of locks of the secret or the number of locks of the secret or the
+	// number of locks of the secret or the number of locks of the secret or the number of locks of the secret or the
+	// number of locks of the secret or the number of locks of the secret or the number of locks of the secret.
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
-	// The human-readable name of your secret.
+	// The human-readable name of your secret or the human-readable name of your secret or the human-readable name of your
+	// secret or the human-readable name of your secret or the human-readable name of your secret or the human-readable
+	// name of your secret or the human-readable name of your secret or the human-readable name of your secret or the
+	// human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier,
+	// or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret
+	// group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID
+	// identifier, or `default` secret group or a UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-	// service_credentials, kv, and username_password.
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+	// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
 	// The secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
+	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on
+	// `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`,
+	// `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are
+	// integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and
+	// `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are integers and correspond to
+	// the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the
+	// secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
+	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on
+	// `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`,
+	// `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are
+	// integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and
+	// `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are integers and correspond to
+	// the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the
+	// secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
 	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values.
 	State *int64 `json:"state,omitempty"`
 
-	// A text representation of the secret state.
+	// A text representation of the secret state or a text representation of the secret state or a text representation of
+	// the secret state or a text representation of the secret state or a text representation of the secret state or a text
+	// representation of the secret state or a text representation of the secret state or a text representation of the
+	// secret state or a text representation of the secret state.
 	StateDescription *string `json:"state_description,omitempty"`
 
-	// The date when a resource was modified. The date format follows `RFC 3339`.
+	// The date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339` or
+	// the date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339` or
+	// the date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// The number of versions of your secret.
+	// The number of versions of your secret or the number of versions of your secret or the number of versions of your
+	// secret or the number of versions of your secret or the number of versions of your secret or the number of versions
+	// of your secret or the number of versions of your secret or the number of versions of your secret or the number of
+	// versions of your secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
 	// The list of configurations that have a reference to the secret.
@@ -9130,7 +9417,22 @@ type Secret struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
-	// custom_credentials.
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials or the date when the
+	// secret material expires. The date format follows the `RFC 3339` format. Supported secret types: arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The secret data that is assigned to an `arbitrary` secret.
@@ -9143,7 +9445,22 @@ type Secret struct {
 	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
 	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
 	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
-	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	// is optional. The minimum duration is 1 day. The maximum is 90 days or the time-to-live (TTL) or lease duration to
+	// assign to credentials that are generated. Supported secret types: iam_credentials, service_credentials,
+	// custom_credentials. The TTL defines how long generated credentials remain valid. The value can be either an integer
+	// that specifies the number of seconds, or the string  representation of a duration, such as `1440m` or `24h`. For the
+	// iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The maximum is 90 days.
+	// For the service_credentials secret type, the TTL field is optional. If it is set the minimum duration is 1 day. The
+	// maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be applied only on the next
+	// secret rotation. For the custom_credentials secret type, the TTL field is optional. The minimum duration is 1 day.
+	// The maximum is 90 days or the time-to-live (TTL) or lease duration to assign to credentials that are generated.
+	// Supported secret types: iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated
+	// credentials remain valid. The value can be either an integer that specifies the number of seconds, or the string
+	// representation of a duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is
+	// mandatory. The minimum duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the
+	// TTL field is optional. If it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is
+	// set to 0. After the TTL is modified, it will be applied only on the next secret rotation. For the custom_credentials
+	// secret type, the TTL field is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -9187,6 +9504,22 @@ type Secret struct {
 	// The date that the secret is scheduled for automatic rotation.
 	//
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
 	// secrets that can be auto-rotated and an existing rotation policy.
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
@@ -9198,30 +9531,44 @@ type Secret struct {
 	ApiKey *string `json:"api_key,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
-	// certificate.
+	// certificate or the identifier for the cryptographic algorithm that is used by the issuing certificate authority to
+	// sign a certificate or the identifier for the cryptographic algorithm that is used by the issuing certificate
+	// authority to sign a certificate.
 	SigningAlgorithm *string `json:"signing_algorithm,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
 	AltNames []string `json:"alt_names,omitempty"`
 
-	// The Common Name (CN) represents the server name protected by the SSL certificate.
+	// The Common Name (CN) represents the server name protected by the SSL certificate or the Common Name (CN) represents
+	// the server name that is protected by the SSL certificate or the Common Name (CN) represents the server name
+	// protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated intermediate certificate.
 	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
 
-	// The distinguished name that identifies the entity that signed and issued the certificate.
+	// The distinguished name that identifies the entity that signed and issued the certificate or the distinguished name
+	// that identifies the entity that signed and issued the certificate or the distinguished name that identifies the
+	// entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
 
 	// The identifier for the cryptographic algorithm used to generate the public key that is associated with the
-	// certificate.
+	// certificate or the identifier for the cryptographic algorithm used to generate the public key that is associated
+	// with the certificate or the identifier for the cryptographic algorithm that is used to generate the public key that
+	// is associated with the certificate.
+	//
+	// The algorithm that you select determines the encryption algorithm (`RSA` or `ECDSA`) and key size to be used to
+	// generate keys and sign certificates. For longer living certificates, it is recommended to use longer keys to provide
+	// more encryption protection. Allowed values:  `RSA2048`, `RSA4096`, `ECDSA256`, and `ECDSA384`.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated private key.
 	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
 
-	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
+	// The unique serial number that was assigned to a certificate by the issuing certificate authority or the unique
+	// serial number that was assigned to a certificate by the issuing certificate authority or the unique serial number
+	// that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date and time that the certificate validity period begins and ends.
@@ -9230,15 +9577,20 @@ type Secret struct {
 	// The data specified to create the CSR and the private key.
 	ManagedCsr *ImportedCertificateManagedCsrResponse `json:"managed_csr,omitempty"`
 
-	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
+	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters or your
+	// PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters or your
+	// PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
 	Certificate *string `json:"certificate,omitempty"`
 
 	// The PEM-encoded intermediate certificate that is associated with the root certificate. The data must be formatted on
-	// a single line with embedded newline characters.
+	// a single line with embedded newline characters or the PEM-encoded intermediate certificate that is associated with
+	// the root certificate. The data must be formatted on a single line with embedded newline characters.
 	Intermediate *string `json:"intermediate,omitempty"`
 
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
-	// with embedded newline characters.
+	// with embedded newline characters or the PEM-encoded private key that is associated with the certificate. The data
+	// must be formatted on a single line with embedded newline characters or the PEM-encoded private key that is
+	// associated with the certificate. The data must be formatted on a single line with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The certificate signing request.
@@ -9310,40 +9662,53 @@ type Secret struct {
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration,omitempty"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	CredentialsContent map[string]interface{} `json:"credentials_content,omitempty"`
 }
 
 // Constants associated with the Secret.SecretType property.
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-// service_credentials, kv, and username_password.
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password.
 const (
-	Secret_SecretType_Arbitrary          = "arbitrary"
-	Secret_SecretType_CustomCredentials  = "custom_credentials"
-	Secret_SecretType_IamCredentials     = "iam_credentials"
-	Secret_SecretType_ImportedCert       = "imported_cert"
-	Secret_SecretType_Kv                 = "kv"
-	Secret_SecretType_PrivateCert        = "private_cert"
-	Secret_SecretType_PublicCert         = "public_cert"
+	Secret_SecretType_Arbitrary = "arbitrary"
+	Secret_SecretType_CustomCredentials = "custom_credentials"
+	Secret_SecretType_IamCredentials = "iam_credentials"
+	Secret_SecretType_ImportedCert = "imported_cert"
+	Secret_SecretType_Kv = "kv"
+	Secret_SecretType_PrivateCert = "private_cert"
+	Secret_SecretType_PublicCert = "public_cert"
 	Secret_SecretType_ServiceCredentials = "service_credentials"
-	Secret_SecretType_UsernamePassword   = "username_password"
+	Secret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the Secret.StateDescription property.
-// A text representation of the secret state.
+// A text representation of the secret state or a text representation of the secret state or a text representation of
+// the secret state or a text representation of the secret state or a text representation of the secret state or a text
+// representation of the secret state or a text representation of the secret state or a text representation of the
+// secret state or a text representation of the secret state.
 const (
-	Secret_StateDescription_Active        = "active"
-	Secret_StateDescription_Deactivated   = "deactivated"
-	Secret_StateDescription_Destroyed     = "destroyed"
+	Secret_StateDescription_Active = "active"
+	Secret_StateDescription_Deactivated = "deactivated"
+	Secret_StateDescription_Destroyed = "destroyed"
 	Secret_StateDescription_PreActivation = "pre_activation"
-	Secret_StateDescription_Suspended     = "suspended"
+	Secret_StateDescription_Suspended = "suspended"
 )
-
 func (*Secret) isaSecret() bool {
 	return true
 }
@@ -9423,7 +9788,7 @@ func UnmarshalSecret(m map[string]json.RawMessage, result interface{}) (err erro
 // - PublicCertificateActionValidateManualDNS
 // - PrivateCertificateActionRevoke
 type SecretAction struct {
-	// The type of secret action.
+	// The type of secret action or the type of secret action.
 	ActionType *string `json:"action_type,omitempty"`
 
 	// The timestamp of the certificate revocation.
@@ -9431,12 +9796,11 @@ type SecretAction struct {
 }
 
 // Constants associated with the SecretAction.ActionType property.
-// The type of secret action.
+// The type of secret action or the type of secret action.
 const (
-	SecretAction_ActionType_PrivateCertActionRevokeCertificate   = "private_cert_action_revoke_certificate"
+	SecretAction_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 	SecretAction_ActionType_PublicCertActionValidateDnsChallenge = "public_cert_action_validate_dns_challenge"
 )
-
 func (*SecretAction) isaSecretAction() bool {
 	return true
 }
@@ -9481,17 +9845,16 @@ func UnmarshalSecretAction(m map[string]json.RawMessage, result interface{}) (er
 // - PrivateCertificateActionRevokePrototype
 // - PublicCertificateActionValidateManualDNSPrototype
 type SecretActionPrototype struct {
-	// The type of secret action.
+	// The type of secret action or the type of secret action.
 	ActionType *string `json:"action_type,omitempty"`
 }
 
 // Constants associated with the SecretActionPrototype.ActionType property.
-// The type of secret action.
+// The type of secret action or the type of secret action.
 const (
-	SecretActionPrototype_ActionType_PrivateCertActionRevokeCertificate   = "private_cert_action_revoke_certificate"
+	SecretActionPrototype_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 	SecretActionPrototype_ActionType_PublicCertActionValidateDnsChallenge = "public_cert_action_validate_dns_challenge"
 )
-
 func (*SecretActionPrototype) isaSecretActionPrototype() bool {
 	return true
 }
@@ -9703,7 +10066,7 @@ type SecretLock struct {
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	SecretLock_SecretVersionAlias_Current  = "current"
+	SecretLock_SecretVersionAlias_Current = "current"
 	SecretLock_SecretVersionAlias_Previous = "previous"
 )
 
@@ -9838,15 +10201,15 @@ type SecretLocks struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	SecretLocks_SecretType_Arbitrary          = "arbitrary"
-	SecretLocks_SecretType_CustomCredentials  = "custom_credentials"
-	SecretLocks_SecretType_IamCredentials     = "iam_credentials"
-	SecretLocks_SecretType_ImportedCert       = "imported_cert"
-	SecretLocks_SecretType_Kv                 = "kv"
-	SecretLocks_SecretType_PrivateCert        = "private_cert"
-	SecretLocks_SecretType_PublicCert         = "public_cert"
+	SecretLocks_SecretType_Arbitrary = "arbitrary"
+	SecretLocks_SecretType_CustomCredentials = "custom_credentials"
+	SecretLocks_SecretType_IamCredentials = "iam_credentials"
+	SecretLocks_SecretType_ImportedCert = "imported_cert"
+	SecretLocks_SecretType_Kv = "kv"
+	SecretLocks_SecretType_PrivateCert = "private_cert"
+	SecretLocks_SecretType_PublicCert = "public_cert"
 	SecretLocks_SecretType_ServiceCredentials = "service_credentials"
-	SecretLocks_SecretType_UsernamePassword   = "username_password"
+	SecretLocks_SecretType_UsernamePassword = "username_password"
 )
 
 // UnmarshalSecretLocks unmarshals an instance of SecretLocks from the specified map of raw messages.
@@ -9988,17 +10351,43 @@ func (resp *SecretLocksPaginatedCollection) GetNextOffset() (*int64, error) {
 // - UsernamePasswordSecretMetadata
 // - CustomCredentialsSecretMetadata
 type SecretMetadata struct {
-	// The unique identifier that is associated with the entity that created the secret.
+	// The unique identifier that is associated with the entity that created the secret or the unique identifier that is
+	// associated with the entity that created the secret or the unique identifier that is associated with the entity that
+	// created the secret or the unique identifier that is associated with the entity that created the secret or the unique
+	// identifier that is associated with the entity that created the secret or the unique identifier that is associated
+	// with the entity that created the secret or the unique identifier that is associated with the entity that created the
+	// secret or the unique identifier that is associated with the entity that created the secret or the unique identifier
+	// that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The date when the resource was created. The date format follows `RFC 3339`.
+	// The date when the resource was created. The date format follows `RFC 3339` or the date when the resource was
+	// created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows `RFC
+	// 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the resource
+	// was created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows
+	// `RFC 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the
+	// resource was created. The date format follows `RFC 3339` or the date when the resource was created. The date format
+	// follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The date when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no
-	// record of secret data retrieval.
+	// record of secret data retrieval or the date when the data of the secret was last retrieved. The date format follows
+	// RFC 3339. Epoch date if there is no record of secret data retrieval or the date when the data of the secret was last
+	// retrieved. The date format follows RFC 3339. Epoch date if there is no record of secret data retrieval or the date
+	// when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no record
+	// of secret data retrieval or the date when the data of the secret was last retrieved. The date format follows RFC
+	// 3339. Epoch date if there is no record of secret data retrieval or the date when the data of the secret was last
+	// retrieved. The date format follows RFC 3339. Epoch date if there is no record of secret data retrieval or the date
+	// when the data of the secret was last retrieved. The date format follows RFC 3339. Epoch date if there is no record
+	// of secret data retrieval or the date when the data of the secret was last retrieved. The date format follows RFC
+	// 3339. Epoch date if there is no record of secret data retrieval or the date when the data of the secret was last
+	// retrieved. The date format follows RFC 3339. Epoch date if there is no record of secret data retrieval.
 	RetrievedAt *strfmt.DateTime `json:"retrieved_at,omitempty"`
 
-	// A CRN that uniquely identifies an IBM Cloud resource.
+	// A CRN that uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a
+	// CRN that uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a CRN
+	// that uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a CRN that
+	// uniquely identifies an IBM Cloud resource or a CRN that uniquely identifies an IBM Cloud resource or a CRN that
+	// uniquely identifies an IBM Cloud resource.
 	Crn *string `json:"crn,omitempty"`
 
 	// The secret metadata that a user can customize.
@@ -10007,14 +10396,48 @@ type SecretMetadata struct {
 	// An extended description of your secret.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
 	// group.
 	Description *string `json:"description,omitempty"`
 
 	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
-	// service API.
+	// service API or this field indicates whether the secret data that is associated with a secret version was retrieved
+	// in a call to the service API or this field indicates whether the secret data that is associated with a secret
+	// version was retrieved in a call to the service API or this field indicates whether the secret data that is
+	// associated with a secret version was retrieved in a call to the service API or this field indicates whether the
+	// secret data that is associated with a secret version was retrieved in a call to the service API or this field
+	// indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API or this field indicates whether the secret data that is associated with a secret version was retrieved in a call
+	// to the service API or this field indicates whether the secret data that is associated with a secret version was
+	// retrieved in a call to the service API or this field indicates whether the secret data that is associated with a
+	// secret version was retrieved in a call to the service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A UUID identifier.
+	// A UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID
+	// identifier or a UUID identifier or a UUID identifier or a UUID identifier.
 	ID *string `json:"id,omitempty"`
 
 	// Labels that you can use to search secrets in your instance. Only 30 labels can be created.
@@ -10024,30 +10447,74 @@ type SecretMetadata struct {
 	// To protect your privacy, do not use personal data, such as your name or location, as a label for your secret.
 	Labels []string `json:"labels,omitempty"`
 
-	// The number of locks of the secret.
+	// The number of locks of the secret or the number of locks of the secret or the number of locks of the secret or the
+	// number of locks of the secret or the number of locks of the secret or the number of locks of the secret or the
+	// number of locks of the secret or the number of locks of the secret or the number of locks of the secret.
 	LocksTotal *int64 `json:"locks_total,omitempty"`
 
-	// The human-readable name of your secret.
+	// The human-readable name of your secret or the human-readable name of your secret or the human-readable name of your
+	// secret or the human-readable name of your secret or the human-readable name of your secret or the human-readable
+	// name of your secret or the human-readable name of your secret or the human-readable name of your secret or the
+	// human-readable name of your secret.
 	Name *string `json:"name,omitempty"`
 
-	// A UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier,
+	// or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret
+	// group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID
+	// identifier, or `default` secret group or a UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-	// service_credentials, kv, and username_password.
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+	// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
 	// The secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
+	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on
+	// `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`,
+	// `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are
+	// integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and
+	// `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are integers and correspond to
+	// the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the
+	// secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
+	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on
+	// `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`,
+	// `Deactivated = 3`, and `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are
+	// integers and correspond to the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and
+	// `Destroyed = 5` values or the secret state that is based on `NIST SP 800-57`. States are integers and correspond to
+	// the `Pre-activation = 0`, `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values or the
+	// secret state that is based on `NIST SP 800-57`. States are integers and correspond to the `Pre-activation = 0`,
 	// `Active = 1`,  `Suspended = 2`, `Deactivated = 3`, and `Destroyed = 5` values.
 	State *int64 `json:"state,omitempty"`
 
-	// A text representation of the secret state.
+	// A text representation of the secret state or a text representation of the secret state or a text representation of
+	// the secret state or a text representation of the secret state or a text representation of the secret state or a text
+	// representation of the secret state or a text representation of the secret state or a text representation of the
+	// secret state or a text representation of the secret state.
 	StateDescription *string `json:"state_description,omitempty"`
 
-	// The date when a resource was modified. The date format follows `RFC 3339`.
+	// The date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339` or
+	// the date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339` or
+	// the date when a resource was modified. The date format follows `RFC 3339` or the date when a resource was modified.
+	// The date format follows `RFC 3339` or the date when a resource was modified. The date format follows `RFC 3339`.
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// The number of versions of your secret.
+	// The number of versions of your secret or the number of versions of your secret or the number of versions of your
+	// secret or the number of versions of your secret or the number of versions of your secret or the number of versions
+	// of your secret or the number of versions of your secret or the number of versions of your secret or the number of
+	// versions of your secret.
 	VersionsTotal *int64 `json:"versions_total,omitempty"`
 
 	// The list of configurations that have a reference to the secret.
@@ -10055,7 +10522,22 @@ type SecretMetadata struct {
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
-	// custom_credentials.
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials or the date when the
+	// secret material expires. The date format follows the `RFC 3339` format. Supported secret types: arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
@@ -10065,7 +10547,22 @@ type SecretMetadata struct {
 	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
 	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
 	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
-	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	// is optional. The minimum duration is 1 day. The maximum is 90 days or the time-to-live (TTL) or lease duration to
+	// assign to credentials that are generated. Supported secret types: iam_credentials, service_credentials,
+	// custom_credentials. The TTL defines how long generated credentials remain valid. The value can be either an integer
+	// that specifies the number of seconds, or the string  representation of a duration, such as `1440m` or `24h`. For the
+	// iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The maximum is 90 days.
+	// For the service_credentials secret type, the TTL field is optional. If it is set the minimum duration is 1 day. The
+	// maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be applied only on the next
+	// secret rotation. For the custom_credentials secret type, the TTL field is optional. The minimum duration is 1 day.
+	// The maximum is 90 days or the time-to-live (TTL) or lease duration to assign to credentials that are generated.
+	// Supported secret types: iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated
+	// credentials remain valid. The value can be either an integer that specifies the number of seconds, or the string
+	// representation of a duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is
+	// mandatory. The minimum duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the
+	// TTL field is optional. If it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is
+	// set to 0. After the TTL is modified, it will be applied only on the next secret rotation. For the custom_credentials
+	// secret type, the TTL field is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// Access Groups that you can use for an `iam_credentials` secret.
@@ -10109,34 +10606,64 @@ type SecretMetadata struct {
 	// The date that the secret is scheduled for automatic rotation.
 	//
 	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
+	// secrets that can be auto-rotated and an existing rotation policy or the date that the secret is scheduled for
+	// automatic rotation.
+	//
+	// The service automatically creates a new version of the secret on its next rotation date. This field exists only for
 	// secrets that can be auto-rotated and an existing rotation policy.
 	NextRotationDate *strfmt.DateTime `json:"next_rotation_date,omitempty"`
 
 	// The identifier for the cryptographic algorithm that is used by the issuing certificate authority to sign a
-	// certificate.
+	// certificate or the identifier for the cryptographic algorithm that is used by the issuing certificate authority to
+	// sign a certificate or the identifier for the cryptographic algorithm that is used by the issuing certificate
+	// authority to sign a certificate.
 	SigningAlgorithm *string `json:"signing_algorithm,omitempty"`
 
 	// With the Subject Alternative Name field, you can specify additional hostnames to be protected by a single SSL
 	// certificate.
 	AltNames []string `json:"alt_names,omitempty"`
 
-	// The Common Name (CN) represents the server name protected by the SSL certificate.
+	// The Common Name (CN) represents the server name protected by the SSL certificate or the Common Name (CN) represents
+	// the server name that is protected by the SSL certificate or the Common Name (CN) represents the server name
+	// protected by the SSL certificate.
 	CommonName *string `json:"common_name,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated intermediate certificate.
 	IntermediateIncluded *bool `json:"intermediate_included,omitempty"`
 
-	// The distinguished name that identifies the entity that signed and issued the certificate.
+	// The distinguished name that identifies the entity that signed and issued the certificate or the distinguished name
+	// that identifies the entity that signed and issued the certificate or the distinguished name that identifies the
+	// entity that signed and issued the certificate.
 	Issuer *string `json:"issuer,omitempty"`
 
 	// The identifier for the cryptographic algorithm used to generate the public key that is associated with the
-	// certificate.
+	// certificate or the identifier for the cryptographic algorithm used to generate the public key that is associated
+	// with the certificate or the identifier for the cryptographic algorithm that is used to generate the public key that
+	// is associated with the certificate.
+	//
+	// The algorithm that you select determines the encryption algorithm (`RSA` or `ECDSA`) and key size to be used to
+	// generate keys and sign certificates. For longer living certificates, it is recommended to use longer keys to provide
+	// more encryption protection. Allowed values:  `RSA2048`, `RSA4096`, `ECDSA256`, and `ECDSA384`.
 	KeyAlgorithm *string `json:"key_algorithm,omitempty"`
 
 	// Indicates whether the certificate was imported with an associated private key.
 	PrivateKeyIncluded *bool `json:"private_key_included,omitempty"`
 
-	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
+	// The unique serial number that was assigned to a certificate by the issuing certificate authority or the unique
+	// serial number that was assigned to a certificate by the issuing certificate authority or the unique serial number
+	// that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date and time that the certificate validity period begins and ends.
@@ -10193,36 +10720,49 @@ type SecretMetadata struct {
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration,omitempty"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
 // Constants associated with the SecretMetadata.SecretType property.
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-// service_credentials, kv, and username_password.
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password.
 const (
-	SecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	SecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	SecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	SecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	SecretMetadata_SecretType_Kv                 = "kv"
-	SecretMetadata_SecretType_PrivateCert        = "private_cert"
-	SecretMetadata_SecretType_PublicCert         = "public_cert"
+	SecretMetadata_SecretType_Arbitrary = "arbitrary"
+	SecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	SecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	SecretMetadata_SecretType_ImportedCert = "imported_cert"
+	SecretMetadata_SecretType_Kv = "kv"
+	SecretMetadata_SecretType_PrivateCert = "private_cert"
+	SecretMetadata_SecretType_PublicCert = "public_cert"
 	SecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	SecretMetadata_SecretType_UsernamePassword   = "username_password"
+	SecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the SecretMetadata.StateDescription property.
-// A text representation of the secret state.
+// A text representation of the secret state or a text representation of the secret state or a text representation of
+// the secret state or a text representation of the secret state or a text representation of the secret state or a text
+// representation of the secret state or a text representation of the secret state or a text representation of the
+// secret state or a text representation of the secret state.
 const (
-	SecretMetadata_StateDescription_Active        = "active"
-	SecretMetadata_StateDescription_Deactivated   = "deactivated"
-	SecretMetadata_StateDescription_Destroyed     = "destroyed"
+	SecretMetadata_StateDescription_Active = "active"
+	SecretMetadata_StateDescription_Deactivated = "deactivated"
+	SecretMetadata_StateDescription_Destroyed = "destroyed"
 	SecretMetadata_StateDescription_PreActivation = "pre_activation"
-	SecretMetadata_StateDescription_Suspended     = "suspended"
+	SecretMetadata_StateDescription_Suspended = "suspended"
 )
-
 func (*SecretMetadata) isaSecretMetadata() bool {
 	return true
 }
@@ -10406,10 +10946,58 @@ func (resp *SecretMetadataPaginatedCollection) GetNextOffset() (*int64, error) {
 type SecretMetadataPatch struct {
 	// A human-readable name to assign to your secret.
 	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret or a
+	// human-readable name to assign to your secret.
+	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a name for your secret.
 	Name *string `json:"name,omitempty"`
 
 	// An extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
+	//
+	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
+	// group or an extended description of your secret.
 	//
 	// To protect your privacy, do not use personal data, such as your name or location, as a description for your secret
 	// group.
@@ -10426,7 +11014,8 @@ type SecretMetadataPatch struct {
 	CustomMetadata map[string]interface{} `json:"custom_metadata,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
-	// Arbitrary, username_password.
+	// Arbitrary, username_password or the date when the secret material expires. The date format follows the `RFC 3339`
+	// format. Supported secret types: Arbitrary, username_password.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
 	// The time-to-live (TTL) or lease duration to assign to credentials that are generated. Supported secret types:
@@ -10436,7 +11025,22 @@ type SecretMetadataPatch struct {
 	// duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the TTL field is optional. If
 	// it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is set to 0. After the TTL is
 	// modified, it will be applied only on the next secret rotation. For the custom_credentials secret type, the TTL field
-	// is optional. The minimum duration is 1 day. The maximum is 90 days.
+	// is optional. The minimum duration is 1 day. The maximum is 90 days or the time-to-live (TTL) or lease duration to
+	// assign to credentials that are generated. Supported secret types: iam_credentials, service_credentials,
+	// custom_credentials. The TTL defines how long generated credentials remain valid. The value can be either an integer
+	// that specifies the number of seconds, or the string  representation of a duration, such as `1440m` or `24h`. For the
+	// iam_credentials secret type, the TTL field is mandatory. The minimum duration is 1 minute. The maximum is 90 days.
+	// For the service_credentials secret type, the TTL field is optional. If it is set the minimum duration is 1 day. The
+	// maximum is 90 days. By default, the TTL is set to 0. After the TTL is modified, it will be applied only on the next
+	// secret rotation. For the custom_credentials secret type, the TTL field is optional. The minimum duration is 1 day.
+	// The maximum is 90 days or the time-to-live (TTL) or lease duration to assign to credentials that are generated.
+	// Supported secret types: iam_credentials, service_credentials, custom_credentials. The TTL defines how long generated
+	// credentials remain valid. The value can be either an integer that specifies the number of seconds, or the string
+	// representation of a duration, such as `1440m` or `24h`. For the iam_credentials secret type, the TTL field is
+	// mandatory. The minimum duration is 1 minute. The maximum is 90 days. For the service_credentials secret type, the
+	// TTL field is optional. If it is set the minimum duration is 1 day. The maximum is 90 days. By default, the TTL is
+	// set to 0. After the TTL is modified, it will be applied only on the next secret rotation. For the custom_credentials
+	// secret type, the TTL field is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
 	// This field indicates whether Secrets Manager rotates your secrets automatically. Supported secret types:
@@ -10450,10 +11054,9 @@ type SecretMetadataPatch struct {
 	// Properties that are not included in the patch remain unchanged.
 	PasswordGenerationPolicy *PasswordGenerationPolicyPatch `json:"password_generation_policy,omitempty"`
 
-	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	// The parameters that are passed to custom credentials engine. Allowed types are string, integer, and boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
-
 func (*SecretMetadataPatch) isaSecretMetadataPatch() bool {
 	return true
 }
@@ -10734,7 +11337,7 @@ type SecretPrototype struct {
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration,omitempty"`
 
-	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	// The parameters that are passed to custom credentials engine. Allowed types are string, integer, and boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
@@ -10742,31 +11345,30 @@ type SecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	SecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	SecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	SecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	SecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	SecretPrototype_SecretType_Kv                 = "kv"
-	SecretPrototype_SecretType_PrivateCert        = "private_cert"
-	SecretPrototype_SecretType_PublicCert         = "public_cert"
+	SecretPrototype_SecretType_Arbitrary = "arbitrary"
+	SecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	SecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	SecretPrototype_SecretType_ImportedCert = "imported_cert"
+	SecretPrototype_SecretType_Kv = "kv"
+	SecretPrototype_SecretType_PrivateCert = "private_cert"
+	SecretPrototype_SecretType_PublicCert = "public_cert"
 	SecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	SecretPrototype_SecretType_UsernamePassword   = "username_password"
+	SecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the SecretPrototype.Format property.
 // The format of the returned data.
 const (
-	SecretPrototype_Format_Pem       = "pem"
+	SecretPrototype_Format_Pem = "pem"
 	SecretPrototype_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the SecretPrototype.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	SecretPrototype_PrivateKeyFormat_Der   = "der"
+	SecretPrototype_PrivateKeyFormat_Der = "der"
 	SecretPrototype_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
-
 func (*SecretPrototype) isaSecretPrototype() bool {
 	return true
 }
@@ -10889,19 +11491,19 @@ const (
 const (
 	SecretTask_Status_CredentialsCreated = "credentials_created"
 	SecretTask_Status_CredentialsDeleted = "credentials_deleted"
-	SecretTask_Status_Failed             = "failed"
-	SecretTask_Status_Processing         = "processing"
-	SecretTask_Status_Queued             = "queued"
+	SecretTask_Status_Failed = "failed"
+	SecretTask_Status_Processing = "processing"
+	SecretTask_Status_Queued = "queued"
 )
 
 // Constants associated with the SecretTask.Trigger property.
 // Information about what has initiated the task.
 const (
-	SecretTask_Trigger_AutomaticSecretRotation   = "automatic_secret_rotation"
-	SecretTask_Trigger_ManualSecretRotation      = "manual_secret_rotation"
-	SecretTask_Trigger_SecretCreation            = "secret_creation"
+	SecretTask_Trigger_AutomaticSecretRotation = "automatic_secret_rotation"
+	SecretTask_Trigger_ManualSecretRotation = "manual_secret_rotation"
+	SecretTask_Trigger_SecretCreation = "secret_creation"
 	SecretTask_Trigger_SecretVersionDataDeletion = "secret_version_data_deletion"
-	SecretTask_Trigger_SecretVersionExpiration   = "secret_version_expiration"
+	SecretTask_Trigger_SecretVersionExpiration = "secret_version_expiration"
 )
 
 // UnmarshalSecretTask unmarshals an instance of SecretTask from the specified map of raw messages.
@@ -10996,7 +11598,7 @@ type SecretTaskError struct {
 // NewSecretTaskError : Instantiate SecretTaskError (Generic Model Constructor)
 func (*SecretsManagerV2) NewSecretTaskError(code string, description string) (_model *SecretTaskError, err error) {
 	_model = &SecretTaskError{
-		Code:        core.StringPtr(code),
+		Code: core.StringPtr(code),
 		Description: core.StringPtr(description),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -11044,7 +11646,6 @@ type SecretTaskPrototype struct {
 const (
 	SecretTaskPrototype_Status_CredentialsCreated = "credentials_created"
 )
-
 func (*SecretTaskPrototype) isaSecretTaskPrototype() bool {
 	return true
 }
@@ -11101,47 +11702,125 @@ func UnmarshalSecretTaskPrototype(m map[string]json.RawMessage, result interface
 // - UsernamePasswordSecretVersion
 // - CustomCredentialsSecretVersion
 type SecretVersion struct {
-	// Indicates whether the version of the secret was created by automatic rotation.
+	// Indicates whether the version of the secret was created by automatic rotation or indicates whether the version of
+	// the secret was created by automatic rotation or indicates whether the version of the secret was created by automatic
+	// rotation or indicates whether the version of the secret was created by automatic rotation or indicates whether the
+	// version of the secret was created by automatic rotation or indicates whether the version of the secret was created
+	// by automatic rotation or indicates whether the version of the secret was created by automatic rotation or indicates
+	// whether the version of the secret was created by automatic rotation or indicates whether the version of the secret
+	// was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
-	// The unique identifier that is associated with the entity that created the secret.
+	// The unique identifier that is associated with the entity that created the secret or the unique identifier that is
+	// associated with the entity that created the secret or the unique identifier that is associated with the entity that
+	// created the secret or the unique identifier that is associated with the entity that created the secret or the unique
+	// identifier that is associated with the entity that created the secret or the unique identifier that is associated
+	// with the entity that created the secret or the unique identifier that is associated with the entity that created the
+	// secret or the unique identifier that is associated with the entity that created the secret or the unique identifier
+	// that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The date when the resource was created. The date format follows `RFC 3339`.
+	// The date when the resource was created. The date format follows `RFC 3339` or the date when the resource was
+	// created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows `RFC
+	// 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the resource
+	// was created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows
+	// `RFC 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the
+	// resource was created. The date format follows `RFC 3339` or the date when the resource was created. The date format
+	// follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
-	// service API.
+	// service API or this field indicates whether the secret data that is associated with a secret version was retrieved
+	// in a call to the service API or this field indicates whether the secret data that is associated with a secret
+	// version was retrieved in a call to the service API or this field indicates whether the secret data that is
+	// associated with a secret version was retrieved in a call to the service API or this field indicates whether the
+	// secret data that is associated with a secret version was retrieved in a call to the service API or this field
+	// indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API or this field indicates whether the secret data that is associated with a secret version was retrieved in a call
+	// to the service API or this field indicates whether the secret data that is associated with a secret version was
+	// retrieved in a call to the service API or this field indicates whether the secret data that is associated with a
+	// secret version was retrieved in a call to the service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A UUID identifier.
+	// A UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID
+	// identifier or a UUID identifier or a UUID identifier or a UUID identifier.
 	ID *string `json:"id,omitempty"`
 
-	// The human-readable name of your secret.
+	// The human-readable name of your secret or the human-readable name of your secret or the human-readable name of your
+	// secret or the human-readable name of your secret or the human-readable name of your secret or the human-readable
+	// name of your secret or the human-readable name of your secret or the human-readable name of your secret or the
+	// human-readable name of your secret.
 	SecretName *string `json:"secret_name,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-	// service_credentials, kv, and username_password.
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+	// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
-	// A UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier,
+	// or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret
+	// group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID
+	// identifier, or `default` secret group or a UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
-	// Indicates whether the secret payload is available in this secret version.
+	// Indicates whether the secret payload is available in this secret version or indicates whether the secret payload is
+	// available in this secret version or indicates whether the secret payload is available in this secret version or
+	// indicates whether the secret payload is available in this secret version or indicates whether the secret payload is
+	// available in this secret version or indicates whether the secret payload is available in this secret version or
+	// indicates whether the secret payload is available in this secret version or indicates whether the secret payload is
+	// available in this secret version or indicates whether the secret payload is available in this secret version.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
 	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
-	// for version `n-1`.
+	// for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+	// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+	// for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes the secret
+	// version. 'Current' is used for version `n` and 'previous' is used for version `n-1` or a human-readable alias that
+	// describes the secret version. 'Current' is used for version `n` and 'previous' is used for version `n-1` or a
+	// human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used for
+	// version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+	// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+	// for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes the secret
+	// version. 'Current' is used for version `n` and 'previous' is used for version `n-1`.
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A UUID identifier.
+	// A UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID
+	// identifier or a UUID identifier or a UUID identifier or a UUID identifier.
 	SecretID *string `json:"secret_id,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials or the date when the
+	// secret material expires. The date format follows the `RFC 3339` format. Supported secret types: arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials or the date when the
+	// secret material expires. The date format follows the `RFC 3339` format. Supported secret types: arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
 	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
@@ -11168,21 +11847,28 @@ type SecretVersion struct {
 	// see the `reuse_api_key` field.
 	ApiKey *string `json:"api_key,omitempty"`
 
-	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
+	// The unique serial number that was assigned to a certificate by the issuing certificate authority or the unique
+	// serial number that was assigned to a certificate by the issuing certificate authority or the unique serial number
+	// that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date and time that the certificate validity period begins and ends.
 	Validity *CertificateValidity `json:"validity,omitempty"`
 
-	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
+	// Your PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters or your
+	// PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters or your
+	// PEM-encoded certificate. The data must be formatted on a single line with embedded newline characters.
 	Certificate *string `json:"certificate,omitempty"`
 
 	// The PEM-encoded intermediate certificate that is associated with the root certificate. The data must be formatted on
-	// a single line with embedded newline characters.
+	// a single line with embedded newline characters or the PEM-encoded intermediate certificate that is associated with
+	// the root certificate. The data must be formatted on a single line with embedded newline characters.
 	Intermediate *string `json:"intermediate,omitempty"`
 
 	// The PEM-encoded private key that is associated with the certificate. The data must be formatted on a single line
-	// with embedded newline characters.
+	// with embedded newline characters or the PEM-encoded private key that is associated with the certificate. The data
+	// must be formatted on a single line with embedded newline characters or the PEM-encoded private key that is
+	// associated with the certificate. The data must be formatted on a single line with embedded newline characters.
 	PrivateKey *string `json:"private_key,omitempty"`
 
 	// The certificate signing request.
@@ -11212,34 +11898,53 @@ type SecretVersion struct {
 	// Credentials created by the custom credentials system.
 	CredentialsID *string `json:"credentials_id,omitempty"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	CredentialsContent map[string]interface{} `json:"credentials_content,omitempty"`
 }
 
 // Constants associated with the SecretVersion.SecretType property.
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-// service_credentials, kv, and username_password.
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password.
 const (
-	SecretVersion_SecretType_Arbitrary          = "arbitrary"
-	SecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	SecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	SecretVersion_SecretType_ImportedCert       = "imported_cert"
-	SecretVersion_SecretType_Kv                 = "kv"
-	SecretVersion_SecretType_PrivateCert        = "private_cert"
-	SecretVersion_SecretType_PublicCert         = "public_cert"
+	SecretVersion_SecretType_Arbitrary = "arbitrary"
+	SecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	SecretVersion_SecretType_IamCredentials = "iam_credentials"
+	SecretVersion_SecretType_ImportedCert = "imported_cert"
+	SecretVersion_SecretType_Kv = "kv"
+	SecretVersion_SecretType_PrivateCert = "private_cert"
+	SecretVersion_SecretType_PublicCert = "public_cert"
 	SecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	SecretVersion_SecretType_UsernamePassword   = "username_password"
+	SecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the SecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
-// for version `n-1`.
+// for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+// for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes the secret version.
+// 'Current' is used for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes
+// the secret version. 'Current' is used for version `n` and 'previous' is used for version `n-1` or a human-readable
+// alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used for version `n-1`
+// or a human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+// for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+// for version `n` and 'previous' is used for version `n-1`.
 const (
-	SecretVersion_Alias_Current  = "current"
+	SecretVersion_Alias_Current = "current"
 	SecretVersion_Alias_Previous = "previous"
 )
-
 func (*SecretVersion) isaSecretVersion() bool {
 	return true
 }
@@ -11327,7 +12032,6 @@ type SecretVersionActionPrototype struct {
 const (
 	SecretVersionActionPrototype_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 )
-
 func (*SecretVersionActionPrototype) isaSecretVersionActionPrototype() bool {
 	return true
 }
@@ -11382,7 +12086,7 @@ type SecretVersionLocks struct {
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	SecretVersionLocks_VersionAlias_Current  = "current"
+	SecretVersionLocks_VersionAlias_Current = "current"
 	SecretVersionLocks_VersionAlias_Previous = "previous"
 )
 
@@ -11520,47 +12224,125 @@ func (resp *SecretVersionLocksPaginatedCollection) GetNextOffset() (*int64, erro
 // - UsernamePasswordSecretVersionMetadata
 // - CustomCredentialsSecretVersionMetadata
 type SecretVersionMetadata struct {
-	// Indicates whether the version of the secret was created by automatic rotation.
+	// Indicates whether the version of the secret was created by automatic rotation or indicates whether the version of
+	// the secret was created by automatic rotation or indicates whether the version of the secret was created by automatic
+	// rotation or indicates whether the version of the secret was created by automatic rotation or indicates whether the
+	// version of the secret was created by automatic rotation or indicates whether the version of the secret was created
+	// by automatic rotation or indicates whether the version of the secret was created by automatic rotation or indicates
+	// whether the version of the secret was created by automatic rotation or indicates whether the version of the secret
+	// was created by automatic rotation.
 	AutoRotated *bool `json:"auto_rotated,omitempty"`
 
-	// The unique identifier that is associated with the entity that created the secret.
+	// The unique identifier that is associated with the entity that created the secret or the unique identifier that is
+	// associated with the entity that created the secret or the unique identifier that is associated with the entity that
+	// created the secret or the unique identifier that is associated with the entity that created the secret or the unique
+	// identifier that is associated with the entity that created the secret or the unique identifier that is associated
+	// with the entity that created the secret or the unique identifier that is associated with the entity that created the
+	// secret or the unique identifier that is associated with the entity that created the secret or the unique identifier
+	// that is associated with the entity that created the secret.
 	CreatedBy *string `json:"created_by,omitempty"`
 
-	// The date when the resource was created. The date format follows `RFC 3339`.
+	// The date when the resource was created. The date format follows `RFC 3339` or the date when the resource was
+	// created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows `RFC
+	// 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the resource
+	// was created. The date format follows `RFC 3339` or the date when the resource was created. The date format follows
+	// `RFC 3339` or the date when the resource was created. The date format follows `RFC 3339` or the date when the
+	// resource was created. The date format follows `RFC 3339` or the date when the resource was created. The date format
+	// follows `RFC 3339`.
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// This field indicates whether the secret data that is associated with a secret version was retrieved in a call to the
-	// service API.
+	// service API or this field indicates whether the secret data that is associated with a secret version was retrieved
+	// in a call to the service API or this field indicates whether the secret data that is associated with a secret
+	// version was retrieved in a call to the service API or this field indicates whether the secret data that is
+	// associated with a secret version was retrieved in a call to the service API or this field indicates whether the
+	// secret data that is associated with a secret version was retrieved in a call to the service API or this field
+	// indicates whether the secret data that is associated with a secret version was retrieved in a call to the service
+	// API or this field indicates whether the secret data that is associated with a secret version was retrieved in a call
+	// to the service API or this field indicates whether the secret data that is associated with a secret version was
+	// retrieved in a call to the service API or this field indicates whether the secret data that is associated with a
+	// secret version was retrieved in a call to the service API.
 	Downloaded *bool `json:"downloaded,omitempty"`
 
-	// A UUID identifier.
+	// A UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID
+	// identifier or a UUID identifier or a UUID identifier or a UUID identifier.
 	ID *string `json:"id,omitempty"`
 
-	// The human-readable name of your secret.
+	// The human-readable name of your secret or the human-readable name of your secret or the human-readable name of your
+	// secret or the human-readable name of your secret or the human-readable name of your secret or the human-readable
+	// name of your secret or the human-readable name of your secret or the human-readable name of your secret or the
+	// human-readable name of your secret.
 	SecretName *string `json:"secret_name,omitempty"`
 
 	// The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-	// service_credentials, kv, and username_password.
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+	// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+	// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+	// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+	// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+	// iam_credentials, service_credentials, kv, and username_password.
 	SecretType *string `json:"secret_type,omitempty"`
 
-	// A UUID identifier, or `default` secret group.
+	// A UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier,
+	// or `default` secret group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret
+	// group or a UUID identifier, or `default` secret group or a UUID identifier, or `default` secret group or a UUID
+	// identifier, or `default` secret group or a UUID identifier, or `default` secret group.
 	SecretGroupID *string `json:"secret_group_id,omitempty"`
 
-	// Indicates whether the secret payload is available in this secret version.
+	// Indicates whether the secret payload is available in this secret version or indicates whether the secret payload is
+	// available in this secret version or indicates whether the secret payload is available in this secret version or
+	// indicates whether the secret payload is available in this secret version or indicates whether the secret payload is
+	// available in this secret version or indicates whether the secret payload is available in this secret version or
+	// indicates whether the secret payload is available in this secret version or indicates whether the secret payload is
+	// available in this secret version or indicates whether the secret payload is available in this secret version.
 	PayloadAvailable *bool `json:"payload_available,omitempty"`
 
 	// A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
-	// for version `n-1`.
+	// for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+	// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+	// for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes the secret
+	// version. 'Current' is used for version `n` and 'previous' is used for version `n-1` or a human-readable alias that
+	// describes the secret version. 'Current' is used for version `n` and 'previous' is used for version `n-1` or a
+	// human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used for
+	// version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+	// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+	// for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes the secret
+	// version. 'Current' is used for version `n` and 'previous' is used for version `n-1`.
 	Alias *string `json:"alias,omitempty"`
 
 	// The secret version metadata that a user can customize.
 	VersionCustomMetadata map[string]interface{} `json:"version_custom_metadata,omitempty"`
 
-	// A UUID identifier.
+	// A UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID identifier or a UUID
+	// identifier or a UUID identifier or a UUID identifier or a UUID identifier.
 	SecretID *string `json:"secret_id,omitempty"`
 
 	// The date when the secret material expires. The date format follows the `RFC 3339` format. Supported secret types:
 	// arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials or the date when the
+	// secret material expires. The date format follows the `RFC 3339` format. Supported secret types: arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
+	// custom_credentials or the date when the secret material expires. The date format follows the `RFC 3339` format.
+	// Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials,
+	// username_password, and custom_credentials or the date when the secret material expires. The date format follows the
+	// `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+	// service_credentials, username_password, and custom_credentials or the date when the secret material expires. The
+	// date format follows the `RFC 3339` format. Supported secret types: arbitrary, imported_cert, public_cert,
+	// private_cert, iam_credentials, service_credentials, username_password, and custom_credentials or the date when the
+	// secret material expires. The date format follows the `RFC 3339` format. Supported secret types: arbitrary,
+	// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, username_password, and
 	// custom_credentials.
 	ExpirationDate *strfmt.DateTime `json:"expiration_date,omitempty"`
 
@@ -11577,7 +12359,9 @@ type SecretVersionMetadata struct {
 	// the `access_groups` parameter.
 	ServiceID *string `json:"service_id,omitempty"`
 
-	// The unique serial number that was assigned to a certificate by the issuing certificate authority.
+	// The unique serial number that was assigned to a certificate by the issuing certificate authority or the unique
+	// serial number that was assigned to a certificate by the issuing certificate authority or the unique serial number
+	// that was assigned to a certificate by the issuing certificate authority.
 	SerialNumber *string `json:"serial_number,omitempty"`
 
 	// The date and time that the certificate validity period begins and ends.
@@ -11592,27 +12376,46 @@ type SecretVersionMetadata struct {
 
 // Constants associated with the SecretVersionMetadata.SecretType property.
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
-// service_credentials, kv, and username_password.
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password or the secret type. Supported types are arbitrary,
+// imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the
+// secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
+// service_credentials, kv, and username_password or the secret type. Supported types are arbitrary, imported_cert,
+// public_cert, private_cert, iam_credentials, service_credentials, kv, and username_password or the secret type.
+// Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials, service_credentials, kv,
+// and username_password or the secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert,
+// iam_credentials, service_credentials, kv, and username_password.
 const (
-	SecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	SecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	SecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	SecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	SecretVersionMetadata_SecretType_Kv                 = "kv"
-	SecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	SecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	SecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	SecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	SecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	SecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	SecretVersionMetadata_SecretType_Kv = "kv"
+	SecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	SecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	SecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	SecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	SecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the SecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
-// for version `n-1`.
+// for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+// for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes the secret version.
+// 'Current' is used for version `n` and 'previous' is used for version `n-1` or a human-readable alias that describes
+// the secret version. 'Current' is used for version `n` and 'previous' is used for version `n-1` or a human-readable
+// alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used for version `n-1`
+// or a human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
+// for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used for version `n` and
+// 'previous' is used for version `n-1` or a human-readable alias that describes the secret version. 'Current' is used
+// for version `n` and 'previous' is used for version `n-1`.
 const (
-	SecretVersionMetadata_Alias_Current  = "current"
+	SecretVersionMetadata_Alias_Current = "current"
 	SecretVersionMetadata_Alias_Previous = "previous"
 )
-
 func (*SecretVersionMetadata) isaSecretVersionMetadata() bool {
 	return true
 }
@@ -11790,7 +12593,6 @@ type SecretVersionPrototype struct {
 	// generates a new random password for your secret.
 	Password *string `json:"password,omitempty"`
 }
-
 func (*SecretVersionPrototype) isaSecretVersionPrototype() bool {
 	return true
 }
@@ -12478,12 +13280,12 @@ type UpdateConfigurationOptions struct {
 // Constants associated with the UpdateConfigurationOptions.XSmAcceptConfigurationType property.
 // The configuration type of this configuration - use this header to resolve 300 error responses.
 const (
-	UpdateConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	UpdateConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	UpdateConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	UpdateConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	UpdateConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	UpdateConfigurationOptions_XSmAcceptConfigurationType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -12491,7 +13293,7 @@ const (
 // NewUpdateConfigurationOptions : Instantiate UpdateConfigurationOptions
 func (*SecretsManagerV2) NewUpdateConfigurationOptions(name string, configurationPatch map[string]interface{}) *UpdateConfigurationOptions {
 	return &UpdateConfigurationOptions{
-		Name:               core.StringPtr(name),
+		Name: core.StringPtr(name),
 		ConfigurationPatch: configurationPatch,
 	}
 }
@@ -12535,7 +13337,7 @@ type UpdateSecretGroupOptions struct {
 // NewUpdateSecretGroupOptions : Instantiate UpdateSecretGroupOptions
 func (*SecretsManagerV2) NewUpdateSecretGroupOptions(id string, secretGroupPatch map[string]interface{}) *UpdateSecretGroupOptions {
 	return &UpdateSecretGroupOptions{
-		ID:               core.StringPtr(id),
+		ID: core.StringPtr(id),
 		SecretGroupPatch: secretGroupPatch,
 	}
 }
@@ -12573,7 +13375,7 @@ type UpdateSecretMetadataOptions struct {
 // NewUpdateSecretMetadataOptions : Instantiate UpdateSecretMetadataOptions
 func (*SecretsManagerV2) NewUpdateSecretMetadataOptions(id string, secretMetadataPatch map[string]interface{}) *UpdateSecretMetadataOptions {
 	return &UpdateSecretMetadataOptions{
-		ID:                  core.StringPtr(id),
+		ID: core.StringPtr(id),
 		SecretMetadataPatch: secretMetadataPatch,
 	}
 }
@@ -12615,8 +13417,8 @@ type UpdateSecretVersionMetadataOptions struct {
 // NewUpdateSecretVersionMetadataOptions : Instantiate UpdateSecretVersionMetadataOptions
 func (*SecretsManagerV2) NewUpdateSecretVersionMetadataOptions(secretID string, id string, secretVersionMetadataPatch map[string]interface{}) *UpdateSecretVersionMetadataOptions {
 	return &UpdateSecretVersionMetadataOptions{
-		SecretID:                   core.StringPtr(secretID),
-		ID:                         core.StringPtr(id),
+		SecretID: core.StringPtr(secretID),
+		ID: core.StringPtr(id),
 		SecretVersionMetadataPatch: secretVersionMetadataPatch,
 	}
 }
@@ -12661,7 +13463,6 @@ type VersionAction struct {
 const (
 	VersionAction_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 )
-
 func (*VersionAction) isaVersionAction() bool {
 	return true
 }
@@ -12777,25 +13578,25 @@ type ArbitrarySecret struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ArbitrarySecret_SecretType_Arbitrary          = "arbitrary"
-	ArbitrarySecret_SecretType_CustomCredentials  = "custom_credentials"
-	ArbitrarySecret_SecretType_IamCredentials     = "iam_credentials"
-	ArbitrarySecret_SecretType_ImportedCert       = "imported_cert"
-	ArbitrarySecret_SecretType_Kv                 = "kv"
-	ArbitrarySecret_SecretType_PrivateCert        = "private_cert"
-	ArbitrarySecret_SecretType_PublicCert         = "public_cert"
+	ArbitrarySecret_SecretType_Arbitrary = "arbitrary"
+	ArbitrarySecret_SecretType_CustomCredentials = "custom_credentials"
+	ArbitrarySecret_SecretType_IamCredentials = "iam_credentials"
+	ArbitrarySecret_SecretType_ImportedCert = "imported_cert"
+	ArbitrarySecret_SecretType_Kv = "kv"
+	ArbitrarySecret_SecretType_PrivateCert = "private_cert"
+	ArbitrarySecret_SecretType_PublicCert = "public_cert"
 	ArbitrarySecret_SecretType_ServiceCredentials = "service_credentials"
-	ArbitrarySecret_SecretType_UsernamePassword   = "username_password"
+	ArbitrarySecret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ArbitrarySecret.StateDescription property.
 // A text representation of the secret state.
 const (
-	ArbitrarySecret_StateDescription_Active        = "active"
-	ArbitrarySecret_StateDescription_Deactivated   = "deactivated"
-	ArbitrarySecret_StateDescription_Destroyed     = "destroyed"
+	ArbitrarySecret_StateDescription_Active = "active"
+	ArbitrarySecret_StateDescription_Deactivated = "deactivated"
+	ArbitrarySecret_StateDescription_Destroyed = "destroyed"
 	ArbitrarySecret_StateDescription_PreActivation = "pre_activation"
-	ArbitrarySecret_StateDescription_Suspended     = "suspended"
+	ArbitrarySecret_StateDescription_Suspended = "suspended"
 )
 
 func (*ArbitrarySecret) isaSecret() bool {
@@ -12987,25 +13788,25 @@ type ArbitrarySecretMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ArbitrarySecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	ArbitrarySecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ArbitrarySecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ArbitrarySecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	ArbitrarySecretMetadata_SecretType_Kv                 = "kv"
-	ArbitrarySecretMetadata_SecretType_PrivateCert        = "private_cert"
-	ArbitrarySecretMetadata_SecretType_PublicCert         = "public_cert"
+	ArbitrarySecretMetadata_SecretType_Arbitrary = "arbitrary"
+	ArbitrarySecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ArbitrarySecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	ArbitrarySecretMetadata_SecretType_ImportedCert = "imported_cert"
+	ArbitrarySecretMetadata_SecretType_Kv = "kv"
+	ArbitrarySecretMetadata_SecretType_PrivateCert = "private_cert"
+	ArbitrarySecretMetadata_SecretType_PublicCert = "public_cert"
 	ArbitrarySecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ArbitrarySecretMetadata_SecretType_UsernamePassword   = "username_password"
+	ArbitrarySecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ArbitrarySecretMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	ArbitrarySecretMetadata_StateDescription_Active        = "active"
-	ArbitrarySecretMetadata_StateDescription_Deactivated   = "deactivated"
-	ArbitrarySecretMetadata_StateDescription_Destroyed     = "destroyed"
+	ArbitrarySecretMetadata_StateDescription_Active = "active"
+	ArbitrarySecretMetadata_StateDescription_Deactivated = "deactivated"
+	ArbitrarySecretMetadata_StateDescription_Destroyed = "destroyed"
 	ArbitrarySecretMetadata_StateDescription_PreActivation = "pre_activation"
-	ArbitrarySecretMetadata_StateDescription_Suspended     = "suspended"
+	ArbitrarySecretMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*ArbitrarySecretMetadata) isaSecretMetadata() bool {
@@ -13247,23 +14048,23 @@ type ArbitrarySecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ArbitrarySecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	ArbitrarySecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	ArbitrarySecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	ArbitrarySecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	ArbitrarySecretPrototype_SecretType_Kv                 = "kv"
-	ArbitrarySecretPrototype_SecretType_PrivateCert        = "private_cert"
-	ArbitrarySecretPrototype_SecretType_PublicCert         = "public_cert"
+	ArbitrarySecretPrototype_SecretType_Arbitrary = "arbitrary"
+	ArbitrarySecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	ArbitrarySecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	ArbitrarySecretPrototype_SecretType_ImportedCert = "imported_cert"
+	ArbitrarySecretPrototype_SecretType_Kv = "kv"
+	ArbitrarySecretPrototype_SecretType_PrivateCert = "private_cert"
+	ArbitrarySecretPrototype_SecretType_PublicCert = "public_cert"
 	ArbitrarySecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	ArbitrarySecretPrototype_SecretType_UsernamePassword   = "username_password"
+	ArbitrarySecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewArbitrarySecretPrototype : Instantiate ArbitrarySecretPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewArbitrarySecretPrototype(name string, secretType string, payload string) (_model *ArbitrarySecretPrototype, err error) {
 	_model = &ArbitrarySecretPrototype{
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 		SecretType: core.StringPtr(secretType),
-		Payload:    core.StringPtr(payload),
+		Payload: core.StringPtr(payload),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -13383,22 +14184,22 @@ type ArbitrarySecretVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ArbitrarySecretVersion_SecretType_Arbitrary          = "arbitrary"
-	ArbitrarySecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	ArbitrarySecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	ArbitrarySecretVersion_SecretType_ImportedCert       = "imported_cert"
-	ArbitrarySecretVersion_SecretType_Kv                 = "kv"
-	ArbitrarySecretVersion_SecretType_PrivateCert        = "private_cert"
-	ArbitrarySecretVersion_SecretType_PublicCert         = "public_cert"
+	ArbitrarySecretVersion_SecretType_Arbitrary = "arbitrary"
+	ArbitrarySecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	ArbitrarySecretVersion_SecretType_IamCredentials = "iam_credentials"
+	ArbitrarySecretVersion_SecretType_ImportedCert = "imported_cert"
+	ArbitrarySecretVersion_SecretType_Kv = "kv"
+	ArbitrarySecretVersion_SecretType_PrivateCert = "private_cert"
+	ArbitrarySecretVersion_SecretType_PublicCert = "public_cert"
 	ArbitrarySecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	ArbitrarySecretVersion_SecretType_UsernamePassword   = "username_password"
+	ArbitrarySecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ArbitrarySecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	ArbitrarySecretVersion_Alias_Current  = "current"
+	ArbitrarySecretVersion_Alias_Current = "current"
 	ArbitrarySecretVersion_Alias_Previous = "previous"
 )
 
@@ -13535,22 +14336,22 @@ type ArbitrarySecretVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ArbitrarySecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	ArbitrarySecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ArbitrarySecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ArbitrarySecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	ArbitrarySecretVersionMetadata_SecretType_Kv                 = "kv"
-	ArbitrarySecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	ArbitrarySecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	ArbitrarySecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	ArbitrarySecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ArbitrarySecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	ArbitrarySecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	ArbitrarySecretVersionMetadata_SecretType_Kv = "kv"
+	ArbitrarySecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	ArbitrarySecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	ArbitrarySecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ArbitrarySecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	ArbitrarySecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ArbitrarySecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	ArbitrarySecretVersionMetadata_Alias_Current  = "current"
+	ArbitrarySecretVersionMetadata_Alias_Current = "current"
 	ArbitrarySecretVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -13712,8 +14513,8 @@ type CommonRotationPolicy struct {
 // Constants associated with the CommonRotationPolicy.Unit property.
 // The units for the secret rotation time interval.
 const (
-	CommonRotationPolicy_Unit_Day   = "day"
-	CommonRotationPolicy_Unit_Hour  = "hour"
+	CommonRotationPolicy_Unit_Day = "day"
+	CommonRotationPolicy_Unit_Hour = "hour"
 	CommonRotationPolicy_Unit_Month = "month"
 )
 
@@ -13822,12 +14623,12 @@ type CustomCredentialsConfiguration struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	CustomCredentialsConfiguration_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	CustomCredentialsConfiguration_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CustomCredentialsConfiguration_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	CustomCredentialsConfiguration_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	CustomCredentialsConfiguration_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	CustomCredentialsConfiguration_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -13836,15 +14637,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsConfiguration_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsConfiguration_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsConfiguration_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsConfiguration_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsConfiguration_SecretType_Kv                 = "kv"
-	CustomCredentialsConfiguration_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsConfiguration_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsConfiguration_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsConfiguration_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsConfiguration_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsConfiguration_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsConfiguration_SecretType_Kv = "kv"
+	CustomCredentialsConfiguration_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsConfiguration_SecretType_PublicCert = "public_cert"
 	CustomCredentialsConfiguration_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsConfiguration_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsConfiguration_SecretType_UsernamePassword = "username_password"
 )
 
 func (*CustomCredentialsConfiguration) isaConfiguration() bool {
@@ -13964,12 +14765,12 @@ type CustomCredentialsConfigurationMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	CustomCredentialsConfigurationMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	CustomCredentialsConfigurationMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CustomCredentialsConfigurationMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	CustomCredentialsConfigurationMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	CustomCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	CustomCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -13978,15 +14779,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsConfigurationMetadata_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsConfigurationMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsConfigurationMetadata_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsConfigurationMetadata_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsConfigurationMetadata_SecretType_Kv                 = "kv"
-	CustomCredentialsConfigurationMetadata_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsConfigurationMetadata_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsConfigurationMetadata_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsConfigurationMetadata_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsConfigurationMetadata_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsConfigurationMetadata_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsConfigurationMetadata_SecretType_Kv = "kv"
+	CustomCredentialsConfigurationMetadata_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsConfigurationMetadata_SecretType_PublicCert = "public_cert"
 	CustomCredentialsConfigurationMetadata_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsConfigurationMetadata_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsConfigurationMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 func (*CustomCredentialsConfigurationMetadata) isaConfigurationMetadata() bool {
@@ -14124,12 +14925,12 @@ type CustomCredentialsConfigurationPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	CustomCredentialsConfigurationPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	CustomCredentialsConfigurationPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	CustomCredentialsConfigurationPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	CustomCredentialsConfigurationPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	CustomCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	CustomCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -14137,7 +14938,7 @@ const (
 // NewCustomCredentialsConfigurationPrototype : Instantiate CustomCredentialsConfigurationPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewCustomCredentialsConfigurationPrototype(name string, configType string, codeEngine *CustomCredentialsConfigurationCodeEngine) (_model *CustomCredentialsConfigurationPrototype, err error) {
 	_model = &CustomCredentialsConfigurationPrototype{
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 		ConfigType: core.StringPtr(configType),
 		CodeEngine: codeEngine,
 	}
@@ -14295,12 +15096,12 @@ type CustomCredentialsSecret struct {
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration" validate:"required"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	CredentialsContent map[string]interface{} `json:"credentials_content" validate:"required"`
 }
 
@@ -14308,25 +15109,25 @@ type CustomCredentialsSecret struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsSecret_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsSecret_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsSecret_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsSecret_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsSecret_SecretType_Kv                 = "kv"
-	CustomCredentialsSecret_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsSecret_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecret_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsSecret_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsSecret_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsSecret_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsSecret_SecretType_Kv = "kv"
+	CustomCredentialsSecret_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsSecret_SecretType_PublicCert = "public_cert"
 	CustomCredentialsSecret_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsSecret_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsSecret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the CustomCredentialsSecret.StateDescription property.
 // A text representation of the secret state.
 const (
-	CustomCredentialsSecret_StateDescription_Active        = "active"
-	CustomCredentialsSecret_StateDescription_Deactivated   = "deactivated"
-	CustomCredentialsSecret_StateDescription_Destroyed     = "destroyed"
+	CustomCredentialsSecret_StateDescription_Active = "active"
+	CustomCredentialsSecret_StateDescription_Deactivated = "deactivated"
+	CustomCredentialsSecret_StateDescription_Destroyed = "destroyed"
 	CustomCredentialsSecret_StateDescription_PreActivation = "pre_activation"
-	CustomCredentialsSecret_StateDescription_Suspended     = "suspended"
+	CustomCredentialsSecret_StateDescription_Suspended = "suspended"
 )
 
 func (*CustomCredentialsSecret) isaSecret() bool {
@@ -14601,8 +15402,8 @@ type CustomCredentialsSecretMetadata struct {
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration" validate:"required"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
@@ -14610,25 +15411,25 @@ type CustomCredentialsSecretMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsSecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsSecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsSecretMetadata_SecretType_Kv                 = "kv"
-	CustomCredentialsSecretMetadata_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsSecretMetadata_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretMetadata_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsSecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsSecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsSecretMetadata_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsSecretMetadata_SecretType_Kv = "kv"
+	CustomCredentialsSecretMetadata_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsSecretMetadata_SecretType_PublicCert = "public_cert"
 	CustomCredentialsSecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsSecretMetadata_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsSecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the CustomCredentialsSecretMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	CustomCredentialsSecretMetadata_StateDescription_Active        = "active"
-	CustomCredentialsSecretMetadata_StateDescription_Deactivated   = "deactivated"
-	CustomCredentialsSecretMetadata_StateDescription_Destroyed     = "destroyed"
+	CustomCredentialsSecretMetadata_StateDescription_Active = "active"
+	CustomCredentialsSecretMetadata_StateDescription_Deactivated = "deactivated"
+	CustomCredentialsSecretMetadata_StateDescription_Destroyed = "destroyed"
 	CustomCredentialsSecretMetadata_StateDescription_PreActivation = "pre_activation"
-	CustomCredentialsSecretMetadata_StateDescription_Suspended     = "suspended"
+	CustomCredentialsSecretMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*CustomCredentialsSecretMetadata) isaSecretMetadata() bool {
@@ -14825,7 +15626,7 @@ type CustomCredentialsSecretMetadataPatch struct {
 	// is optional. The minimum duration is 1 day. The maximum is 90 days.
 	TTL *string `json:"ttl,omitempty"`
 
-	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	// The parameters that are passed to custom credentials engine. Allowed types are string, integer, and boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
@@ -14954,7 +15755,7 @@ type CustomCredentialsSecretPrototype struct {
 	// The name of the custom credentials configuration.
 	Configuration *string `json:"configuration" validate:"required"`
 
-	// The parameters that are passed to custom credentials engine. Allowed types are 'string', 'integer' and 'boolean'.
+	// The parameters that are passed to custom credentials engine. Allowed types are string, integer, and boolean.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
 }
 
@@ -14962,22 +15763,22 @@ type CustomCredentialsSecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsSecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsSecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsSecretPrototype_SecretType_Kv                 = "kv"
-	CustomCredentialsSecretPrototype_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsSecretPrototype_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretPrototype_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsSecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsSecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsSecretPrototype_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsSecretPrototype_SecretType_Kv = "kv"
+	CustomCredentialsSecretPrototype_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsSecretPrototype_SecretType_PublicCert = "public_cert"
 	CustomCredentialsSecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsSecretPrototype_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsSecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewCustomCredentialsSecretPrototype : Instantiate CustomCredentialsSecretPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewCustomCredentialsSecretPrototype(name string, secretType string, configuration string) (_model *CustomCredentialsSecretPrototype, err error) {
 	_model = &CustomCredentialsSecretPrototype{
-		Name:          core.StringPtr(name),
-		SecretType:    core.StringPtr(secretType),
+		Name: core.StringPtr(name),
+		SecretType: core.StringPtr(secretType),
 		Configuration: core.StringPtr(configuration),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -15103,8 +15904,8 @@ type CustomCredentialsSecretVersion struct {
 	// Credentials created by the custom credentials system.
 	CredentialsID *string `json:"credentials_id,omitempty"`
 
-	// The fields that can be passed to and from the custom credentials engine. Allowed types are 'string', 'integer' and
-	// 'boolean'.
+	// The fields that can be passed to and from the custom credentials engine. Allowed types are string, integer, and
+	// boolean.
 	CredentialsContent map[string]interface{} `json:"credentials_content" validate:"required"`
 }
 
@@ -15112,22 +15913,22 @@ type CustomCredentialsSecretVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsSecretVersion_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsSecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsSecretVersion_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsSecretVersion_SecretType_Kv                 = "kv"
-	CustomCredentialsSecretVersion_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsSecretVersion_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretVersion_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsSecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsSecretVersion_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsSecretVersion_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsSecretVersion_SecretType_Kv = "kv"
+	CustomCredentialsSecretVersion_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsSecretVersion_SecretType_PublicCert = "public_cert"
 	CustomCredentialsSecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsSecretVersion_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsSecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the CustomCredentialsSecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	CustomCredentialsSecretVersion_Alias_Current  = "current"
+	CustomCredentialsSecretVersion_Alias_Current = "current"
 	CustomCredentialsSecretVersion_Alias_Previous = "previous"
 )
 
@@ -15272,22 +16073,22 @@ type CustomCredentialsSecretVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	CustomCredentialsSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	CustomCredentialsSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	CustomCredentialsSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	CustomCredentialsSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	CustomCredentialsSecretVersionMetadata_SecretType_Kv                 = "kv"
-	CustomCredentialsSecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	CustomCredentialsSecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	CustomCredentialsSecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	CustomCredentialsSecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	CustomCredentialsSecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	CustomCredentialsSecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	CustomCredentialsSecretVersionMetadata_SecretType_Kv = "kv"
+	CustomCredentialsSecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	CustomCredentialsSecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	CustomCredentialsSecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	CustomCredentialsSecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	CustomCredentialsSecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the CustomCredentialsSecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	CustomCredentialsSecretVersionMetadata_Alias_Current  = "current"
+	CustomCredentialsSecretVersionMetadata_Alias_Current = "current"
 	CustomCredentialsSecretVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -15443,12 +16244,12 @@ type IAMCredentialsConfiguration struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	IAMCredentialsConfiguration_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	IAMCredentialsConfiguration_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	IAMCredentialsConfiguration_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	IAMCredentialsConfiguration_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	IAMCredentialsConfiguration_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	IAMCredentialsConfiguration_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	IAMCredentialsConfiguration_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	IAMCredentialsConfiguration_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	IAMCredentialsConfiguration_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -15457,15 +16258,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsConfiguration_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsConfiguration_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsConfiguration_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsConfiguration_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsConfiguration_SecretType_Kv                 = "kv"
-	IAMCredentialsConfiguration_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsConfiguration_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsConfiguration_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsConfiguration_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsConfiguration_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsConfiguration_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsConfiguration_SecretType_Kv = "kv"
+	IAMCredentialsConfiguration_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsConfiguration_SecretType_PublicCert = "public_cert"
 	IAMCredentialsConfiguration_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsConfiguration_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsConfiguration_SecretType_UsernamePassword = "username_password"
 )
 
 func (*IAMCredentialsConfiguration) isaConfiguration() bool {
@@ -15554,12 +16355,12 @@ type IAMCredentialsConfigurationMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	IAMCredentialsConfigurationMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	IAMCredentialsConfigurationMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	IAMCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	IAMCredentialsConfigurationMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	IAMCredentialsConfigurationMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	IAMCredentialsConfigurationMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	IAMCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	IAMCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	IAMCredentialsConfigurationMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -15568,15 +16369,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsConfigurationMetadata_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsConfigurationMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsConfigurationMetadata_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsConfigurationMetadata_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsConfigurationMetadata_SecretType_Kv                 = "kv"
-	IAMCredentialsConfigurationMetadata_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsConfigurationMetadata_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsConfigurationMetadata_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsConfigurationMetadata_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsConfigurationMetadata_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsConfigurationMetadata_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsConfigurationMetadata_SecretType_Kv = "kv"
+	IAMCredentialsConfigurationMetadata_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsConfigurationMetadata_SecretType_PublicCert = "public_cert"
 	IAMCredentialsConfigurationMetadata_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsConfigurationMetadata_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsConfigurationMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 func (*IAMCredentialsConfigurationMetadata) isaConfigurationMetadata() bool {
@@ -15703,12 +16504,12 @@ type IAMCredentialsConfigurationPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	IAMCredentialsConfigurationPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	IAMCredentialsConfigurationPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	IAMCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	IAMCredentialsConfigurationPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	IAMCredentialsConfigurationPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	IAMCredentialsConfigurationPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	IAMCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	IAMCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	IAMCredentialsConfigurationPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -15716,9 +16517,9 @@ const (
 // NewIAMCredentialsConfigurationPrototype : Instantiate IAMCredentialsConfigurationPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewIAMCredentialsConfigurationPrototype(name string, configType string, apiKey string) (_model *IAMCredentialsConfigurationPrototype, err error) {
 	_model = &IAMCredentialsConfigurationPrototype{
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 		ConfigType: core.StringPtr(configType),
-		ApiKey:     core.StringPtr(apiKey),
+		ApiKey: core.StringPtr(apiKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -15897,25 +16698,25 @@ type IAMCredentialsSecret struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsSecret_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsSecret_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsSecret_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsSecret_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsSecret_SecretType_Kv                 = "kv"
-	IAMCredentialsSecret_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsSecret_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsSecret_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsSecret_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsSecret_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsSecret_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsSecret_SecretType_Kv = "kv"
+	IAMCredentialsSecret_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsSecret_SecretType_PublicCert = "public_cert"
 	IAMCredentialsSecret_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsSecret_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsSecret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the IAMCredentialsSecret.StateDescription property.
 // A text representation of the secret state.
 const (
-	IAMCredentialsSecret_StateDescription_Active        = "active"
-	IAMCredentialsSecret_StateDescription_Deactivated   = "deactivated"
-	IAMCredentialsSecret_StateDescription_Destroyed     = "destroyed"
+	IAMCredentialsSecret_StateDescription_Active = "active"
+	IAMCredentialsSecret_StateDescription_Deactivated = "deactivated"
+	IAMCredentialsSecret_StateDescription_Destroyed = "destroyed"
 	IAMCredentialsSecret_StateDescription_PreActivation = "pre_activation"
-	IAMCredentialsSecret_StateDescription_Suspended     = "suspended"
+	IAMCredentialsSecret_StateDescription_Suspended = "suspended"
 )
 
 func (*IAMCredentialsSecret) isaSecret() bool {
@@ -16206,25 +17007,25 @@ type IAMCredentialsSecretMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsSecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsSecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsSecretMetadata_SecretType_Kv                 = "kv"
-	IAMCredentialsSecretMetadata_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsSecretMetadata_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsSecretMetadata_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsSecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsSecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsSecretMetadata_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsSecretMetadata_SecretType_Kv = "kv"
+	IAMCredentialsSecretMetadata_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsSecretMetadata_SecretType_PublicCert = "public_cert"
 	IAMCredentialsSecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsSecretMetadata_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsSecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the IAMCredentialsSecretMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	IAMCredentialsSecretMetadata_StateDescription_Active        = "active"
-	IAMCredentialsSecretMetadata_StateDescription_Deactivated   = "deactivated"
-	IAMCredentialsSecretMetadata_StateDescription_Destroyed     = "destroyed"
+	IAMCredentialsSecretMetadata_StateDescription_Active = "active"
+	IAMCredentialsSecretMetadata_StateDescription_Deactivated = "deactivated"
+	IAMCredentialsSecretMetadata_StateDescription_Destroyed = "destroyed"
 	IAMCredentialsSecretMetadata_StateDescription_PreActivation = "pre_activation"
-	IAMCredentialsSecretMetadata_StateDescription_Suspended     = "suspended"
+	IAMCredentialsSecretMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*IAMCredentialsSecretMetadata) isaSecretMetadata() bool {
@@ -16561,23 +17362,23 @@ type IAMCredentialsSecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsSecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsSecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsSecretPrototype_SecretType_Kv                 = "kv"
-	IAMCredentialsSecretPrototype_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsSecretPrototype_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsSecretPrototype_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsSecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsSecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsSecretPrototype_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsSecretPrototype_SecretType_Kv = "kv"
+	IAMCredentialsSecretPrototype_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsSecretPrototype_SecretType_PublicCert = "public_cert"
 	IAMCredentialsSecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsSecretPrototype_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsSecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewIAMCredentialsSecretPrototype : Instantiate IAMCredentialsSecretPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewIAMCredentialsSecretPrototype(secretType string, name string, ttl string, reuseApiKey bool) (_model *IAMCredentialsSecretPrototype, err error) {
 	_model = &IAMCredentialsSecretPrototype{
-		SecretType:  core.StringPtr(secretType),
-		Name:        core.StringPtr(name),
-		TTL:         core.StringPtr(ttl),
+		SecretType: core.StringPtr(secretType),
+		Name: core.StringPtr(name),
+		TTL: core.StringPtr(ttl),
 		ReuseApiKey: core.BoolPtr(reuseApiKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -16786,22 +17587,22 @@ type IAMCredentialsSecretVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsSecretVersion_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsSecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsSecretVersion_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsSecretVersion_SecretType_Kv                 = "kv"
-	IAMCredentialsSecretVersion_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsSecretVersion_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsSecretVersion_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsSecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsSecretVersion_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsSecretVersion_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsSecretVersion_SecretType_Kv = "kv"
+	IAMCredentialsSecretVersion_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsSecretVersion_SecretType_PublicCert = "public_cert"
 	IAMCredentialsSecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsSecretVersion_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsSecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the IAMCredentialsSecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	IAMCredentialsSecretVersion_Alias_Current  = "current"
+	IAMCredentialsSecretVersion_Alias_Current = "current"
 	IAMCredentialsSecretVersion_Alias_Previous = "previous"
 )
 
@@ -16961,22 +17762,22 @@ type IAMCredentialsSecretVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	IAMCredentialsSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	IAMCredentialsSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	IAMCredentialsSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	IAMCredentialsSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	IAMCredentialsSecretVersionMetadata_SecretType_Kv                 = "kv"
-	IAMCredentialsSecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	IAMCredentialsSecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	IAMCredentialsSecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	IAMCredentialsSecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	IAMCredentialsSecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	IAMCredentialsSecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	IAMCredentialsSecretVersionMetadata_SecretType_Kv = "kv"
+	IAMCredentialsSecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	IAMCredentialsSecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	IAMCredentialsSecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	IAMCredentialsSecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	IAMCredentialsSecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the IAMCredentialsSecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	IAMCredentialsSecretVersionMetadata_Alias_Current  = "current"
+	IAMCredentialsSecretVersionMetadata_Alias_Current = "current"
 	IAMCredentialsSecretVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -17222,25 +18023,25 @@ type ImportedCertificate struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ImportedCertificate_SecretType_Arbitrary          = "arbitrary"
-	ImportedCertificate_SecretType_CustomCredentials  = "custom_credentials"
-	ImportedCertificate_SecretType_IamCredentials     = "iam_credentials"
-	ImportedCertificate_SecretType_ImportedCert       = "imported_cert"
-	ImportedCertificate_SecretType_Kv                 = "kv"
-	ImportedCertificate_SecretType_PrivateCert        = "private_cert"
-	ImportedCertificate_SecretType_PublicCert         = "public_cert"
+	ImportedCertificate_SecretType_Arbitrary = "arbitrary"
+	ImportedCertificate_SecretType_CustomCredentials = "custom_credentials"
+	ImportedCertificate_SecretType_IamCredentials = "iam_credentials"
+	ImportedCertificate_SecretType_ImportedCert = "imported_cert"
+	ImportedCertificate_SecretType_Kv = "kv"
+	ImportedCertificate_SecretType_PrivateCert = "private_cert"
+	ImportedCertificate_SecretType_PublicCert = "public_cert"
 	ImportedCertificate_SecretType_ServiceCredentials = "service_credentials"
-	ImportedCertificate_SecretType_UsernamePassword   = "username_password"
+	ImportedCertificate_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ImportedCertificate.StateDescription property.
 // A text representation of the secret state.
 const (
-	ImportedCertificate_StateDescription_Active        = "active"
-	ImportedCertificate_StateDescription_Deactivated   = "deactivated"
-	ImportedCertificate_StateDescription_Destroyed     = "destroyed"
+	ImportedCertificate_StateDescription_Active = "active"
+	ImportedCertificate_StateDescription_Deactivated = "deactivated"
+	ImportedCertificate_StateDescription_Destroyed = "destroyed"
 	ImportedCertificate_StateDescription_PreActivation = "pre_activation"
-	ImportedCertificate_StateDescription_Suspended     = "suspended"
+	ImportedCertificate_StateDescription_Suspended = "suspended"
 )
 
 func (*ImportedCertificate) isaSecret() bool {
@@ -17530,25 +18331,25 @@ type ImportedCertificateMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ImportedCertificateMetadata_SecretType_Arbitrary          = "arbitrary"
-	ImportedCertificateMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ImportedCertificateMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ImportedCertificateMetadata_SecretType_ImportedCert       = "imported_cert"
-	ImportedCertificateMetadata_SecretType_Kv                 = "kv"
-	ImportedCertificateMetadata_SecretType_PrivateCert        = "private_cert"
-	ImportedCertificateMetadata_SecretType_PublicCert         = "public_cert"
+	ImportedCertificateMetadata_SecretType_Arbitrary = "arbitrary"
+	ImportedCertificateMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ImportedCertificateMetadata_SecretType_IamCredentials = "iam_credentials"
+	ImportedCertificateMetadata_SecretType_ImportedCert = "imported_cert"
+	ImportedCertificateMetadata_SecretType_Kv = "kv"
+	ImportedCertificateMetadata_SecretType_PrivateCert = "private_cert"
+	ImportedCertificateMetadata_SecretType_PublicCert = "public_cert"
 	ImportedCertificateMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ImportedCertificateMetadata_SecretType_UsernamePassword   = "username_password"
+	ImportedCertificateMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ImportedCertificateMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	ImportedCertificateMetadata_StateDescription_Active        = "active"
-	ImportedCertificateMetadata_StateDescription_Deactivated   = "deactivated"
-	ImportedCertificateMetadata_StateDescription_Destroyed     = "destroyed"
+	ImportedCertificateMetadata_StateDescription_Active = "active"
+	ImportedCertificateMetadata_StateDescription_Deactivated = "deactivated"
+	ImportedCertificateMetadata_StateDescription_Destroyed = "destroyed"
 	ImportedCertificateMetadata_StateDescription_PreActivation = "pre_activation"
-	ImportedCertificateMetadata_StateDescription_Suspended     = "suspended"
+	ImportedCertificateMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*ImportedCertificateMetadata) isaSecretMetadata() bool {
@@ -17846,22 +18647,22 @@ type ImportedCertificatePrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ImportedCertificatePrototype_SecretType_Arbitrary          = "arbitrary"
-	ImportedCertificatePrototype_SecretType_CustomCredentials  = "custom_credentials"
-	ImportedCertificatePrototype_SecretType_IamCredentials     = "iam_credentials"
-	ImportedCertificatePrototype_SecretType_ImportedCert       = "imported_cert"
-	ImportedCertificatePrototype_SecretType_Kv                 = "kv"
-	ImportedCertificatePrototype_SecretType_PrivateCert        = "private_cert"
-	ImportedCertificatePrototype_SecretType_PublicCert         = "public_cert"
+	ImportedCertificatePrototype_SecretType_Arbitrary = "arbitrary"
+	ImportedCertificatePrototype_SecretType_CustomCredentials = "custom_credentials"
+	ImportedCertificatePrototype_SecretType_IamCredentials = "iam_credentials"
+	ImportedCertificatePrototype_SecretType_ImportedCert = "imported_cert"
+	ImportedCertificatePrototype_SecretType_Kv = "kv"
+	ImportedCertificatePrototype_SecretType_PrivateCert = "private_cert"
+	ImportedCertificatePrototype_SecretType_PublicCert = "public_cert"
 	ImportedCertificatePrototype_SecretType_ServiceCredentials = "service_credentials"
-	ImportedCertificatePrototype_SecretType_UsernamePassword   = "username_password"
+	ImportedCertificatePrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewImportedCertificatePrototype : Instantiate ImportedCertificatePrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewImportedCertificatePrototype(secretType string, name string) (_model *ImportedCertificatePrototype, err error) {
 	_model = &ImportedCertificatePrototype{
 		SecretType: core.StringPtr(secretType),
-		Name:       core.StringPtr(name),
+		Name: core.StringPtr(name),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -18008,22 +18809,22 @@ type ImportedCertificateVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ImportedCertificateVersion_SecretType_Arbitrary          = "arbitrary"
-	ImportedCertificateVersion_SecretType_CustomCredentials  = "custom_credentials"
-	ImportedCertificateVersion_SecretType_IamCredentials     = "iam_credentials"
-	ImportedCertificateVersion_SecretType_ImportedCert       = "imported_cert"
-	ImportedCertificateVersion_SecretType_Kv                 = "kv"
-	ImportedCertificateVersion_SecretType_PrivateCert        = "private_cert"
-	ImportedCertificateVersion_SecretType_PublicCert         = "public_cert"
+	ImportedCertificateVersion_SecretType_Arbitrary = "arbitrary"
+	ImportedCertificateVersion_SecretType_CustomCredentials = "custom_credentials"
+	ImportedCertificateVersion_SecretType_IamCredentials = "iam_credentials"
+	ImportedCertificateVersion_SecretType_ImportedCert = "imported_cert"
+	ImportedCertificateVersion_SecretType_Kv = "kv"
+	ImportedCertificateVersion_SecretType_PrivateCert = "private_cert"
+	ImportedCertificateVersion_SecretType_PublicCert = "public_cert"
 	ImportedCertificateVersion_SecretType_ServiceCredentials = "service_credentials"
-	ImportedCertificateVersion_SecretType_UsernamePassword   = "username_password"
+	ImportedCertificateVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ImportedCertificateVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	ImportedCertificateVersion_Alias_Current  = "current"
+	ImportedCertificateVersion_Alias_Current = "current"
 	ImportedCertificateVersion_Alias_Previous = "previous"
 )
 
@@ -18191,22 +18992,22 @@ type ImportedCertificateVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ImportedCertificateVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	ImportedCertificateVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ImportedCertificateVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ImportedCertificateVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	ImportedCertificateVersionMetadata_SecretType_Kv                 = "kv"
-	ImportedCertificateVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	ImportedCertificateVersionMetadata_SecretType_PublicCert         = "public_cert"
+	ImportedCertificateVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	ImportedCertificateVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ImportedCertificateVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	ImportedCertificateVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	ImportedCertificateVersionMetadata_SecretType_Kv = "kv"
+	ImportedCertificateVersionMetadata_SecretType_PrivateCert = "private_cert"
+	ImportedCertificateVersionMetadata_SecretType_PublicCert = "public_cert"
 	ImportedCertificateVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ImportedCertificateVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	ImportedCertificateVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ImportedCertificateVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	ImportedCertificateVersionMetadata_Alias_Current  = "current"
+	ImportedCertificateVersionMetadata_Alias_Current = "current"
 	ImportedCertificateVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -18441,25 +19242,25 @@ type KVSecret struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	KVSecret_SecretType_Arbitrary          = "arbitrary"
-	KVSecret_SecretType_CustomCredentials  = "custom_credentials"
-	KVSecret_SecretType_IamCredentials     = "iam_credentials"
-	KVSecret_SecretType_ImportedCert       = "imported_cert"
-	KVSecret_SecretType_Kv                 = "kv"
-	KVSecret_SecretType_PrivateCert        = "private_cert"
-	KVSecret_SecretType_PublicCert         = "public_cert"
+	KVSecret_SecretType_Arbitrary = "arbitrary"
+	KVSecret_SecretType_CustomCredentials = "custom_credentials"
+	KVSecret_SecretType_IamCredentials = "iam_credentials"
+	KVSecret_SecretType_ImportedCert = "imported_cert"
+	KVSecret_SecretType_Kv = "kv"
+	KVSecret_SecretType_PrivateCert = "private_cert"
+	KVSecret_SecretType_PublicCert = "public_cert"
 	KVSecret_SecretType_ServiceCredentials = "service_credentials"
-	KVSecret_SecretType_UsernamePassword   = "username_password"
+	KVSecret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the KVSecret.StateDescription property.
 // A text representation of the secret state.
 const (
-	KVSecret_StateDescription_Active        = "active"
-	KVSecret_StateDescription_Deactivated   = "deactivated"
-	KVSecret_StateDescription_Destroyed     = "destroyed"
+	KVSecret_StateDescription_Active = "active"
+	KVSecret_StateDescription_Deactivated = "deactivated"
+	KVSecret_StateDescription_Destroyed = "destroyed"
 	KVSecret_StateDescription_PreActivation = "pre_activation"
-	KVSecret_StateDescription_Suspended     = "suspended"
+	KVSecret_StateDescription_Suspended = "suspended"
 )
 
 func (*KVSecret) isaSecret() bool {
@@ -18641,25 +19442,25 @@ type KVSecretMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	KVSecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	KVSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	KVSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	KVSecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	KVSecretMetadata_SecretType_Kv                 = "kv"
-	KVSecretMetadata_SecretType_PrivateCert        = "private_cert"
-	KVSecretMetadata_SecretType_PublicCert         = "public_cert"
+	KVSecretMetadata_SecretType_Arbitrary = "arbitrary"
+	KVSecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	KVSecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	KVSecretMetadata_SecretType_ImportedCert = "imported_cert"
+	KVSecretMetadata_SecretType_Kv = "kv"
+	KVSecretMetadata_SecretType_PrivateCert = "private_cert"
+	KVSecretMetadata_SecretType_PublicCert = "public_cert"
 	KVSecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	KVSecretMetadata_SecretType_UsernamePassword   = "username_password"
+	KVSecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the KVSecretMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	KVSecretMetadata_StateDescription_Active        = "active"
-	KVSecretMetadata_StateDescription_Deactivated   = "deactivated"
-	KVSecretMetadata_StateDescription_Destroyed     = "destroyed"
+	KVSecretMetadata_StateDescription_Active = "active"
+	KVSecretMetadata_StateDescription_Deactivated = "deactivated"
+	KVSecretMetadata_StateDescription_Destroyed = "destroyed"
 	KVSecretMetadata_StateDescription_PreActivation = "pre_activation"
-	KVSecretMetadata_StateDescription_Suspended     = "suspended"
+	KVSecretMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*KVSecretMetadata) isaSecretMetadata() bool {
@@ -18880,23 +19681,23 @@ type KVSecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	KVSecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	KVSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	KVSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	KVSecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	KVSecretPrototype_SecretType_Kv                 = "kv"
-	KVSecretPrototype_SecretType_PrivateCert        = "private_cert"
-	KVSecretPrototype_SecretType_PublicCert         = "public_cert"
+	KVSecretPrototype_SecretType_Arbitrary = "arbitrary"
+	KVSecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	KVSecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	KVSecretPrototype_SecretType_ImportedCert = "imported_cert"
+	KVSecretPrototype_SecretType_Kv = "kv"
+	KVSecretPrototype_SecretType_PrivateCert = "private_cert"
+	KVSecretPrototype_SecretType_PublicCert = "public_cert"
 	KVSecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	KVSecretPrototype_SecretType_UsernamePassword   = "username_password"
+	KVSecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewKVSecretPrototype : Instantiate KVSecretPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewKVSecretPrototype(secretType string, name string, data map[string]interface{}) (_model *KVSecretPrototype, err error) {
 	_model = &KVSecretPrototype{
 		SecretType: core.StringPtr(secretType),
-		Name:       core.StringPtr(name),
-		Data:       data,
+		Name: core.StringPtr(name),
+		Data: data,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -19011,22 +19812,22 @@ type KVSecretVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	KVSecretVersion_SecretType_Arbitrary          = "arbitrary"
-	KVSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	KVSecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	KVSecretVersion_SecretType_ImportedCert       = "imported_cert"
-	KVSecretVersion_SecretType_Kv                 = "kv"
-	KVSecretVersion_SecretType_PrivateCert        = "private_cert"
-	KVSecretVersion_SecretType_PublicCert         = "public_cert"
+	KVSecretVersion_SecretType_Arbitrary = "arbitrary"
+	KVSecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	KVSecretVersion_SecretType_IamCredentials = "iam_credentials"
+	KVSecretVersion_SecretType_ImportedCert = "imported_cert"
+	KVSecretVersion_SecretType_Kv = "kv"
+	KVSecretVersion_SecretType_PrivateCert = "private_cert"
+	KVSecretVersion_SecretType_PublicCert = "public_cert"
 	KVSecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	KVSecretVersion_SecretType_UsernamePassword   = "username_password"
+	KVSecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the KVSecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	KVSecretVersion_Alias_Current  = "current"
+	KVSecretVersion_Alias_Current = "current"
 	KVSecretVersion_Alias_Previous = "previous"
 )
 
@@ -19163,22 +19964,22 @@ type KVSecretVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	KVSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	KVSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	KVSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	KVSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	KVSecretVersionMetadata_SecretType_Kv                 = "kv"
-	KVSecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	KVSecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	KVSecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	KVSecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	KVSecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	KVSecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	KVSecretVersionMetadata_SecretType_Kv = "kv"
+	KVSecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	KVSecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	KVSecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	KVSecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	KVSecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the KVSecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	KVSecretVersionMetadata_Alias_Current  = "current"
+	KVSecretVersionMetadata_Alias_Current = "current"
 	KVSecretVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -19446,25 +20247,25 @@ type PrivateCertificate struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificate_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificate_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificate_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificate_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificate_SecretType_Kv                 = "kv"
-	PrivateCertificate_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificate_SecretType_PublicCert         = "public_cert"
+	PrivateCertificate_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificate_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificate_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificate_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificate_SecretType_Kv = "kv"
+	PrivateCertificate_SecretType_PrivateCert = "private_cert"
+	PrivateCertificate_SecretType_PublicCert = "public_cert"
 	PrivateCertificate_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificate_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificate_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificate.StateDescription property.
 // A text representation of the secret state.
 const (
-	PrivateCertificate_StateDescription_Active        = "active"
-	PrivateCertificate_StateDescription_Deactivated   = "deactivated"
-	PrivateCertificate_StateDescription_Destroyed     = "destroyed"
+	PrivateCertificate_StateDescription_Active = "active"
+	PrivateCertificate_StateDescription_Deactivated = "deactivated"
+	PrivateCertificate_StateDescription_Destroyed = "destroyed"
 	PrivateCertificate_StateDescription_PreActivation = "pre_activation"
-	PrivateCertificate_StateDescription_Suspended     = "suspended"
+	PrivateCertificate_StateDescription_Suspended = "suspended"
 )
 
 func (*PrivateCertificate) isaSecret() bool {
@@ -19671,7 +20472,7 @@ type PrivateCertificateActionRevoke struct {
 // Constants associated with the PrivateCertificateActionRevoke.ActionType property.
 // The type of secret action.
 const (
-	PrivateCertificateActionRevoke_ActionType_PrivateCertActionRevokeCertificate   = "private_cert_action_revoke_certificate"
+	PrivateCertificateActionRevoke_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 	PrivateCertificateActionRevoke_ActionType_PublicCertActionValidateDnsChallenge = "public_cert_action_validate_dns_challenge"
 )
 
@@ -19706,7 +20507,7 @@ type PrivateCertificateActionRevokePrototype struct {
 // Constants associated with the PrivateCertificateActionRevokePrototype.ActionType property.
 // The type of secret action.
 const (
-	PrivateCertificateActionRevokePrototype_ActionType_PrivateCertActionRevokeCertificate   = "private_cert_action_revoke_certificate"
+	PrivateCertificateActionRevokePrototype_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 	PrivateCertificateActionRevokePrototype_ActionType_PublicCertActionValidateDnsChallenge = "public_cert_action_validate_dns_challenge"
 )
 
@@ -19752,11 +20553,11 @@ type PrivateCertificateConfigurationActionRevoke struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRevoke_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 func (*PrivateCertificateConfigurationActionRevoke) isaConfigurationAction() bool {
@@ -19791,11 +20592,11 @@ type PrivateCertificateConfigurationActionRevokePrototype struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRevokePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // NewPrivateCertificateConfigurationActionRevokePrototype : Instantiate PrivateCertificateConfigurationActionRevokePrototype (Generic Model Constructor)
@@ -19844,11 +20645,11 @@ type PrivateCertificateConfigurationActionRotate struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRotate_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 func (*PrivateCertificateConfigurationActionRotate) isaConfigurationAction() bool {
@@ -19892,11 +20693,11 @@ type PrivateCertificateConfigurationActionRotateCRL struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRotateCRL_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 func (*PrivateCertificateConfigurationActionRotateCRL) isaConfigurationAction() bool {
@@ -19932,11 +20733,11 @@ type PrivateCertificateConfigurationActionRotateCRLPrototype struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRotateCRLPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // NewPrivateCertificateConfigurationActionRotateCRLPrototype : Instantiate PrivateCertificateConfigurationActionRotateCRLPrototype (Generic Model Constructor)
@@ -19978,11 +20779,11 @@ type PrivateCertificateConfigurationActionRotatePrototype struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionRotatePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // NewPrivateCertificateConfigurationActionRotatePrototype : Instantiate PrivateCertificateConfigurationActionRotatePrototype (Generic Model Constructor)
@@ -20028,11 +20829,11 @@ type PrivateCertificateConfigurationActionSetSigned struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionSetSigned_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 func (*PrivateCertificateConfigurationActionSetSigned) isaConfigurationAction() bool {
@@ -20071,17 +20872,17 @@ type PrivateCertificateConfigurationActionSetSignedPrototype struct {
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionSetSignedPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // NewPrivateCertificateConfigurationActionSetSignedPrototype : Instantiate PrivateCertificateConfigurationActionSetSignedPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionSetSignedPrototype(actionType string, certificate string) (_model *PrivateCertificateConfigurationActionSetSignedPrototype, err error) {
 	_model = &PrivateCertificateConfigurationActionSetSignedPrototype{
-		ActionType:  core.StringPtr(actionType),
+		ActionType: core.StringPtr(actionType),
 		Certificate: core.StringPtr(certificate),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -20212,7 +21013,7 @@ type PrivateCertificateConfigurationActionSignCSR struct {
 // Constants associated with the PrivateCertificateConfigurationActionSignCSR.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationActionSignCSR_Format_Pem       = "pem"
+	PrivateCertificateConfigurationActionSignCSR_Format_Pem = "pem"
 	PrivateCertificateConfigurationActionSignCSR_Format_PemBundle = "pem_bundle"
 )
 
@@ -20220,11 +21021,11 @@ const (
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionSignCSR_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 func (*PrivateCertificateConfigurationActionSignCSR) isaConfigurationAction() bool {
@@ -20445,7 +21246,7 @@ type PrivateCertificateConfigurationActionSignCSRPrototype struct {
 // Constants associated with the PrivateCertificateConfigurationActionSignCSRPrototype.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationActionSignCSRPrototype_Format_Pem       = "pem"
+	PrivateCertificateConfigurationActionSignCSRPrototype_Format_Pem = "pem"
 	PrivateCertificateConfigurationActionSignCSRPrototype_Format_PemBundle = "pem_bundle"
 )
 
@@ -20453,18 +21254,18 @@ const (
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionSignCSRPrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // NewPrivateCertificateConfigurationActionSignCSRPrototype : Instantiate PrivateCertificateConfigurationActionSignCSRPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionSignCSRPrototype(actionType string, csr string) (_model *PrivateCertificateConfigurationActionSignCSRPrototype, err error) {
 	_model = &PrivateCertificateConfigurationActionSignCSRPrototype{
 		ActionType: core.StringPtr(actionType),
-		Csr:        core.StringPtr(csr),
+		Csr: core.StringPtr(csr),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -20687,7 +21488,7 @@ type PrivateCertificateConfigurationActionSignIntermediate struct {
 // Constants associated with the PrivateCertificateConfigurationActionSignIntermediate.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationActionSignIntermediate_Format_Pem       = "pem"
+	PrivateCertificateConfigurationActionSignIntermediate_Format_Pem = "pem"
 	PrivateCertificateConfigurationActionSignIntermediate_Format_PemBundle = "pem_bundle"
 )
 
@@ -20695,11 +21496,11 @@ const (
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionSignIntermediate_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 func (*PrivateCertificateConfigurationActionSignIntermediate) isaConfigurationAction() bool {
@@ -20916,7 +21717,7 @@ type PrivateCertificateConfigurationActionSignIntermediatePrototype struct {
 // Constants associated with the PrivateCertificateConfigurationActionSignIntermediatePrototype.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationActionSignIntermediatePrototype_Format_Pem       = "pem"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_Format_Pem = "pem"
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_Format_PemBundle = "pem_bundle"
 )
 
@@ -20924,17 +21725,17 @@ const (
 // The type of configuration action.
 const (
 	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRevokeCaCertificate = "private_cert_configuration_action_revoke_ca_certificate"
-	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRotateCrl           = "private_cert_configuration_action_rotate_crl"
-	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate  = "private_cert_configuration_action_rotate_intermediate"
-	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSetSigned           = "private_cert_configuration_action_set_signed"
-	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSignCsr             = "private_cert_configuration_action_sign_csr"
-	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate    = "private_cert_configuration_action_sign_intermediate"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRotateCrl = "private_cert_configuration_action_rotate_crl"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionRotateIntermediate = "private_cert_configuration_action_rotate_intermediate"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSetSigned = "private_cert_configuration_action_set_signed"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSignCsr = "private_cert_configuration_action_sign_csr"
+	PrivateCertificateConfigurationActionSignIntermediatePrototype_ActionType_PrivateCertConfigurationActionSignIntermediate = "private_cert_configuration_action_sign_intermediate"
 )
 
 // NewPrivateCertificateConfigurationActionSignIntermediatePrototype : Instantiate PrivateCertificateConfigurationActionSignIntermediatePrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificateConfigurationActionSignIntermediatePrototype(actionType string, intermediateCertificateAuthority string) (_model *PrivateCertificateConfigurationActionSignIntermediatePrototype, err error) {
 	_model = &PrivateCertificateConfigurationActionSignIntermediatePrototype{
-		ActionType:                       core.StringPtr(actionType),
+		ActionType: core.StringPtr(actionType),
 		IntermediateCertificateAuthority: core.StringPtr(intermediateCertificateAuthority),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -21249,12 +22050,12 @@ type PrivateCertificateConfigurationIntermediateCA struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationIntermediateCA_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationIntermediateCA_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationIntermediateCA_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationIntermediateCA_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationIntermediateCA_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationIntermediateCA_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -21263,21 +22064,21 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateConfigurationIntermediateCA_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_Kv                 = "kv"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_Kv = "kv"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_PublicCert = "public_cert"
 	PrivateCertificateConfigurationIntermediateCA_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateConfigurationIntermediateCA_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateConfigurationIntermediateCA_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCA.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationIntermediateCA_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationIntermediateCA_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationIntermediateCA_KeyType_Rsa = "rsa"
 )
 
@@ -21297,24 +22098,24 @@ const (
 // `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 const (
 	PrivateCertificateConfigurationIntermediateCA_Status_CertificateTemplateRequired = "certificate_template_required"
-	PrivateCertificateConfigurationIntermediateCA_Status_Configured                  = "configured"
-	PrivateCertificateConfigurationIntermediateCA_Status_Expired                     = "expired"
-	PrivateCertificateConfigurationIntermediateCA_Status_Revoked                     = "revoked"
-	PrivateCertificateConfigurationIntermediateCA_Status_SignedCertificateRequired   = "signed_certificate_required"
-	PrivateCertificateConfigurationIntermediateCA_Status_SigningRequired             = "signing_required"
+	PrivateCertificateConfigurationIntermediateCA_Status_Configured = "configured"
+	PrivateCertificateConfigurationIntermediateCA_Status_Expired = "expired"
+	PrivateCertificateConfigurationIntermediateCA_Status_Revoked = "revoked"
+	PrivateCertificateConfigurationIntermediateCA_Status_SignedCertificateRequired = "signed_certificate_required"
+	PrivateCertificateConfigurationIntermediateCA_Status_SigningRequired = "signing_required"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCA.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationIntermediateCA_Format_Pem       = "pem"
+	PrivateCertificateConfigurationIntermediateCA_Format_Pem = "pem"
 	PrivateCertificateConfigurationIntermediateCA_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCA.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	PrivateCertificateConfigurationIntermediateCA_PrivateKeyFormat_Der   = "der"
+	PrivateCertificateConfigurationIntermediateCA_PrivateKeyFormat_Der = "der"
 	PrivateCertificateConfigurationIntermediateCA_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
@@ -21524,7 +22325,7 @@ type PrivateCertificateConfigurationIntermediateCACSR struct {
 // Constants associated with the PrivateCertificateConfigurationIntermediateCACSR.PrivateKeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationIntermediateCACSR_PrivateKeyType_Ec  = "ec"
+	PrivateCertificateConfigurationIntermediateCACSR_PrivateKeyType_Ec = "ec"
 	PrivateCertificateConfigurationIntermediateCACSR_PrivateKeyType_Rsa = "rsa"
 )
 
@@ -21629,12 +22430,12 @@ type PrivateCertificateConfigurationIntermediateCAMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationIntermediateCAMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -21643,21 +22444,21 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_Kv                 = "kv"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_Kv = "kv"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_PublicCert = "public_cert"
 	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateConfigurationIntermediateCAMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAMetadata.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationIntermediateCAMetadata_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationIntermediateCAMetadata_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationIntermediateCAMetadata_KeyType_Rsa = "rsa"
 )
 
@@ -21677,11 +22478,11 @@ const (
 // `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 const (
 	PrivateCertificateConfigurationIntermediateCAMetadata_Status_CertificateTemplateRequired = "certificate_template_required"
-	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Configured                  = "configured"
-	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Expired                     = "expired"
-	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Revoked                     = "revoked"
-	PrivateCertificateConfigurationIntermediateCAMetadata_Status_SignedCertificateRequired   = "signed_certificate_required"
-	PrivateCertificateConfigurationIntermediateCAMetadata_Status_SigningRequired             = "signing_required"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Configured = "configured"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Expired = "expired"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_Revoked = "revoked"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_SignedCertificateRequired = "signed_certificate_required"
+	PrivateCertificateConfigurationIntermediateCAMetadata_Status_SigningRequired = "signing_required"
 )
 
 func (*PrivateCertificateConfigurationIntermediateCAMetadata) isaConfigurationMetadata() bool {
@@ -21994,12 +22795,12 @@ type PrivateCertificateConfigurationIntermediateCAPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationIntermediateCAPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -22017,32 +22818,32 @@ const (
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAPrototype.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationIntermediateCAPrototype_Format_Pem       = "pem"
+	PrivateCertificateConfigurationIntermediateCAPrototype_Format_Pem = "pem"
 	PrivateCertificateConfigurationIntermediateCAPrototype_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAPrototype.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	PrivateCertificateConfigurationIntermediateCAPrototype_PrivateKeyFormat_Der   = "der"
+	PrivateCertificateConfigurationIntermediateCAPrototype_PrivateKeyFormat_Der = "der"
 	PrivateCertificateConfigurationIntermediateCAPrototype_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
 // Constants associated with the PrivateCertificateConfigurationIntermediateCAPrototype.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationIntermediateCAPrototype_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationIntermediateCAPrototype_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationIntermediateCAPrototype_KeyType_Rsa = "rsa"
 )
 
 // NewPrivateCertificateConfigurationIntermediateCAPrototype : Instantiate PrivateCertificateConfigurationIntermediateCAPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificateConfigurationIntermediateCAPrototype(configType string, name string, maxTTL string, signingMethod string, commonName string) (_model *PrivateCertificateConfigurationIntermediateCAPrototype, err error) {
 	_model = &PrivateCertificateConfigurationIntermediateCAPrototype{
-		ConfigType:    core.StringPtr(configType),
-		Name:          core.StringPtr(name),
-		MaxTTL:        core.StringPtr(maxTTL),
+		ConfigType: core.StringPtr(configType),
+		Name: core.StringPtr(name),
+		MaxTTL: core.StringPtr(maxTTL),
 		SigningMethod: core.StringPtr(signingMethod),
-		CommonName:    core.StringPtr(commonName),
+		CommonName: core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -22347,12 +23148,12 @@ type PrivateCertificateConfigurationRootCA struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationRootCA_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationRootCA_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationRootCA_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationRootCA_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationRootCA_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationRootCA_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationRootCA_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationRootCA_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationRootCA_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -22361,21 +23162,21 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateConfigurationRootCA_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateConfigurationRootCA_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateConfigurationRootCA_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateConfigurationRootCA_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateConfigurationRootCA_SecretType_Kv                 = "kv"
-	PrivateCertificateConfigurationRootCA_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateConfigurationRootCA_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateConfigurationRootCA_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateConfigurationRootCA_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateConfigurationRootCA_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateConfigurationRootCA_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateConfigurationRootCA_SecretType_Kv = "kv"
+	PrivateCertificateConfigurationRootCA_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateConfigurationRootCA_SecretType_PublicCert = "public_cert"
 	PrivateCertificateConfigurationRootCA_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateConfigurationRootCA_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateConfigurationRootCA_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateConfigurationRootCA.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationRootCA_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationRootCA_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationRootCA_KeyType_Rsa = "rsa"
 )
 
@@ -22385,24 +23186,24 @@ const (
 // `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 const (
 	PrivateCertificateConfigurationRootCA_Status_CertificateTemplateRequired = "certificate_template_required"
-	PrivateCertificateConfigurationRootCA_Status_Configured                  = "configured"
-	PrivateCertificateConfigurationRootCA_Status_Expired                     = "expired"
-	PrivateCertificateConfigurationRootCA_Status_Revoked                     = "revoked"
-	PrivateCertificateConfigurationRootCA_Status_SignedCertificateRequired   = "signed_certificate_required"
-	PrivateCertificateConfigurationRootCA_Status_SigningRequired             = "signing_required"
+	PrivateCertificateConfigurationRootCA_Status_Configured = "configured"
+	PrivateCertificateConfigurationRootCA_Status_Expired = "expired"
+	PrivateCertificateConfigurationRootCA_Status_Revoked = "revoked"
+	PrivateCertificateConfigurationRootCA_Status_SignedCertificateRequired = "signed_certificate_required"
+	PrivateCertificateConfigurationRootCA_Status_SigningRequired = "signing_required"
 )
 
 // Constants associated with the PrivateCertificateConfigurationRootCA.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationRootCA_Format_Pem       = "pem"
+	PrivateCertificateConfigurationRootCA_Format_Pem = "pem"
 	PrivateCertificateConfigurationRootCA_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the PrivateCertificateConfigurationRootCA.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Der   = "der"
+	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Der = "der"
 	PrivateCertificateConfigurationRootCA_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
@@ -22658,12 +23459,12 @@ type PrivateCertificateConfigurationRootCAMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationRootCAMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationRootCAMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationRootCAMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -22672,21 +23473,21 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_Kv                 = "kv"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_Kv = "kv"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_PublicCert = "public_cert"
 	PrivateCertificateConfigurationRootCAMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateConfigurationRootCAMetadata_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateConfigurationRootCAMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateConfigurationRootCAMetadata.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationRootCAMetadata_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationRootCAMetadata_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationRootCAMetadata_KeyType_Rsa = "rsa"
 )
 
@@ -22696,11 +23497,11 @@ const (
 // `signed_certificate_required`, `certificate_template_required`, `configured`, `expired` or `revoked`.
 const (
 	PrivateCertificateConfigurationRootCAMetadata_Status_CertificateTemplateRequired = "certificate_template_required"
-	PrivateCertificateConfigurationRootCAMetadata_Status_Configured                  = "configured"
-	PrivateCertificateConfigurationRootCAMetadata_Status_Expired                     = "expired"
-	PrivateCertificateConfigurationRootCAMetadata_Status_Revoked                     = "revoked"
-	PrivateCertificateConfigurationRootCAMetadata_Status_SignedCertificateRequired   = "signed_certificate_required"
-	PrivateCertificateConfigurationRootCAMetadata_Status_SigningRequired             = "signing_required"
+	PrivateCertificateConfigurationRootCAMetadata_Status_Configured = "configured"
+	PrivateCertificateConfigurationRootCAMetadata_Status_Expired = "expired"
+	PrivateCertificateConfigurationRootCAMetadata_Status_Revoked = "revoked"
+	PrivateCertificateConfigurationRootCAMetadata_Status_SignedCertificateRequired = "signed_certificate_required"
+	PrivateCertificateConfigurationRootCAMetadata_Status_SigningRequired = "signing_required"
 )
 
 func (*PrivateCertificateConfigurationRootCAMetadata) isaConfigurationMetadata() bool {
@@ -23010,12 +23811,12 @@ type PrivateCertificateConfigurationRootCAPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationRootCAPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationRootCAPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationRootCAPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -23023,21 +23824,21 @@ const (
 // Constants associated with the PrivateCertificateConfigurationRootCAPrototype.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificateConfigurationRootCAPrototype_Format_Pem       = "pem"
+	PrivateCertificateConfigurationRootCAPrototype_Format_Pem = "pem"
 	PrivateCertificateConfigurationRootCAPrototype_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the PrivateCertificateConfigurationRootCAPrototype.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	PrivateCertificateConfigurationRootCAPrototype_PrivateKeyFormat_Der   = "der"
+	PrivateCertificateConfigurationRootCAPrototype_PrivateKeyFormat_Der = "der"
 	PrivateCertificateConfigurationRootCAPrototype_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
 // Constants associated with the PrivateCertificateConfigurationRootCAPrototype.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationRootCAPrototype_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationRootCAPrototype_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationRootCAPrototype_KeyType_Rsa = "rsa"
 )
 
@@ -23045,8 +23846,8 @@ const (
 func (*SecretsManagerV2) NewPrivateCertificateConfigurationRootCAPrototype(configType string, name string, maxTTL string, commonName string) (_model *PrivateCertificateConfigurationRootCAPrototype, err error) {
 	_model = &PrivateCertificateConfigurationRootCAPrototype{
 		ConfigType: core.StringPtr(configType),
-		Name:       core.StringPtr(name),
-		MaxTTL:     core.StringPtr(maxTTL),
+		Name: core.StringPtr(name),
+		MaxTTL: core.StringPtr(maxTTL),
 		CommonName: core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -23411,12 +24212,12 @@ type PrivateCertificateConfigurationTemplate struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationTemplate_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationTemplate_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationTemplate_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationTemplate_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationTemplate_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationTemplate_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationTemplate_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationTemplate_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationTemplate_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -23425,21 +24226,21 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateConfigurationTemplate_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateConfigurationTemplate_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateConfigurationTemplate_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateConfigurationTemplate_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateConfigurationTemplate_SecretType_Kv                 = "kv"
-	PrivateCertificateConfigurationTemplate_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateConfigurationTemplate_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateConfigurationTemplate_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateConfigurationTemplate_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateConfigurationTemplate_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateConfigurationTemplate_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateConfigurationTemplate_SecretType_Kv = "kv"
+	PrivateCertificateConfigurationTemplate_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateConfigurationTemplate_SecretType_PublicCert = "public_cert"
 	PrivateCertificateConfigurationTemplate_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateConfigurationTemplate_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateConfigurationTemplate_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateConfigurationTemplate.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationTemplate_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationTemplate_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationTemplate_KeyType_Rsa = "rsa"
 )
 
@@ -23709,12 +24510,12 @@ type PrivateCertificateConfigurationTemplateMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationTemplateMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationTemplateMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationTemplateMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -23723,15 +24524,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_Kv                 = "kv"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_Kv = "kv"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_PublicCert = "public_cert"
 	PrivateCertificateConfigurationTemplateMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateConfigurationTemplateMetadata_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateConfigurationTemplateMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 func (*PrivateCertificateConfigurationTemplateMetadata) isaConfigurationMetadata() bool {
@@ -23965,7 +24766,7 @@ type PrivateCertificateConfigurationTemplatePatch struct {
 // Constants associated with the PrivateCertificateConfigurationTemplatePatch.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationTemplatePatch_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationTemplatePatch_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationTemplatePatch_KeyType_Rsa = "rsa"
 )
 
@@ -24491,12 +25292,12 @@ type PrivateCertificateConfigurationTemplatePrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PrivateCertificateConfigurationTemplatePrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PrivateCertificateConfigurationTemplatePrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PrivateCertificateConfigurationTemplatePrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -24504,15 +25305,15 @@ const (
 // Constants associated with the PrivateCertificateConfigurationTemplatePrototype.KeyType property.
 // The type of private key to generate.
 const (
-	PrivateCertificateConfigurationTemplatePrototype_KeyType_Ec  = "ec"
+	PrivateCertificateConfigurationTemplatePrototype_KeyType_Ec = "ec"
 	PrivateCertificateConfigurationTemplatePrototype_KeyType_Rsa = "rsa"
 )
 
 // NewPrivateCertificateConfigurationTemplatePrototype : Instantiate PrivateCertificateConfigurationTemplatePrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificateConfigurationTemplatePrototype(configType string, name string, certificateAuthority string) (_model *PrivateCertificateConfigurationTemplatePrototype, err error) {
 	_model = &PrivateCertificateConfigurationTemplatePrototype{
-		ConfigType:           core.StringPtr(configType),
-		Name:                 core.StringPtr(name),
+		ConfigType: core.StringPtr(configType),
+		Name: core.StringPtr(name),
 		CertificateAuthority: core.StringPtr(certificateAuthority),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -24763,10 +25564,10 @@ const (
 // NewPrivateCertificateCryptoProviderHPCS : Instantiate PrivateCertificateCryptoProviderHPCS (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificateCryptoProviderHPCS(typeVar string, instanceCrn string, pinIamCredentialsSecretID string, privateKeystoreID string) (_model *PrivateCertificateCryptoProviderHPCS, err error) {
 	_model = &PrivateCertificateCryptoProviderHPCS{
-		Type:                      core.StringPtr(typeVar),
-		InstanceCrn:               core.StringPtr(instanceCrn),
+		Type: core.StringPtr(typeVar),
+		InstanceCrn: core.StringPtr(instanceCrn),
 		PinIamCredentialsSecretID: core.StringPtr(pinIamCredentialsSecretID),
-		PrivateKeystoreID:         core.StringPtr(privateKeystoreID),
+		PrivateKeystoreID: core.StringPtr(privateKeystoreID),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -24930,25 +25731,25 @@ type PrivateCertificateMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateMetadata_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateMetadata_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateMetadata_SecretType_Kv                 = "kv"
-	PrivateCertificateMetadata_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateMetadata_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateMetadata_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateMetadata_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateMetadata_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateMetadata_SecretType_Kv = "kv"
+	PrivateCertificateMetadata_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateMetadata_SecretType_PublicCert = "public_cert"
 	PrivateCertificateMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateMetadata_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	PrivateCertificateMetadata_StateDescription_Active        = "active"
-	PrivateCertificateMetadata_StateDescription_Deactivated   = "deactivated"
-	PrivateCertificateMetadata_StateDescription_Destroyed     = "destroyed"
+	PrivateCertificateMetadata_StateDescription_Active = "active"
+	PrivateCertificateMetadata_StateDescription_Deactivated = "deactivated"
+	PrivateCertificateMetadata_StateDescription_Destroyed = "destroyed"
 	PrivateCertificateMetadata_StateDescription_PreActivation = "pre_activation"
-	PrivateCertificateMetadata_StateDescription_Suspended     = "suspended"
+	PrivateCertificateMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*PrivateCertificateMetadata) isaSecretMetadata() bool {
@@ -25296,38 +26097,38 @@ type PrivateCertificatePrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificatePrototype_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificatePrototype_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificatePrototype_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificatePrototype_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificatePrototype_SecretType_Kv                 = "kv"
-	PrivateCertificatePrototype_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificatePrototype_SecretType_PublicCert         = "public_cert"
+	PrivateCertificatePrototype_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificatePrototype_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificatePrototype_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificatePrototype_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificatePrototype_SecretType_Kv = "kv"
+	PrivateCertificatePrototype_SecretType_PrivateCert = "private_cert"
+	PrivateCertificatePrototype_SecretType_PublicCert = "public_cert"
 	PrivateCertificatePrototype_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificatePrototype_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificatePrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificatePrototype.Format property.
 // The format of the returned data.
 const (
-	PrivateCertificatePrototype_Format_Pem       = "pem"
+	PrivateCertificatePrototype_Format_Pem = "pem"
 	PrivateCertificatePrototype_Format_PemBundle = "pem_bundle"
 )
 
 // Constants associated with the PrivateCertificatePrototype.PrivateKeyFormat property.
 // The format of the generated private key.
 const (
-	PrivateCertificatePrototype_PrivateKeyFormat_Der   = "der"
+	PrivateCertificatePrototype_PrivateKeyFormat_Der = "der"
 	PrivateCertificatePrototype_PrivateKeyFormat_Pkcs8 = "pkcs8"
 )
 
 // NewPrivateCertificatePrototype : Instantiate PrivateCertificatePrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPrivateCertificatePrototype(secretType string, name string, certificateTemplate string, commonName string) (_model *PrivateCertificatePrototype, err error) {
 	_model = &PrivateCertificatePrototype{
-		SecretType:          core.StringPtr(secretType),
-		Name:                core.StringPtr(name),
+		SecretType: core.StringPtr(secretType),
+		Name: core.StringPtr(name),
 		CertificateTemplate: core.StringPtr(certificateTemplate),
-		CommonName:          core.StringPtr(commonName),
+		CommonName: core.StringPtr(commonName),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -25513,22 +26314,22 @@ type PrivateCertificateVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateVersion_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateVersion_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateVersion_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateVersion_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateVersion_SecretType_Kv                 = "kv"
-	PrivateCertificateVersion_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateVersion_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateVersion_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateVersion_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateVersion_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateVersion_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateVersion_SecretType_Kv = "kv"
+	PrivateCertificateVersion_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateVersion_SecretType_PublicCert = "public_cert"
 	PrivateCertificateVersion_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateVersion_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	PrivateCertificateVersion_Alias_Current  = "current"
+	PrivateCertificateVersion_Alias_Current = "current"
 	PrivateCertificateVersion_Alias_Previous = "previous"
 )
 
@@ -25774,22 +26575,22 @@ type PrivateCertificateVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PrivateCertificateVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	PrivateCertificateVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PrivateCertificateVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PrivateCertificateVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	PrivateCertificateVersionMetadata_SecretType_Kv                 = "kv"
-	PrivateCertificateVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	PrivateCertificateVersionMetadata_SecretType_PublicCert         = "public_cert"
+	PrivateCertificateVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	PrivateCertificateVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PrivateCertificateVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	PrivateCertificateVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	PrivateCertificateVersionMetadata_SecretType_Kv = "kv"
+	PrivateCertificateVersionMetadata_SecretType_PrivateCert = "private_cert"
+	PrivateCertificateVersionMetadata_SecretType_PublicCert = "public_cert"
 	PrivateCertificateVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PrivateCertificateVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	PrivateCertificateVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PrivateCertificateVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	PrivateCertificateVersionMetadata_Alias_Current  = "current"
+	PrivateCertificateVersionMetadata_Alias_Current = "current"
 	PrivateCertificateVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -26051,25 +26852,25 @@ type PublicCertificate struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificate_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificate_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificate_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificate_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificate_SecretType_Kv                 = "kv"
-	PublicCertificate_SecretType_PrivateCert        = "private_cert"
-	PublicCertificate_SecretType_PublicCert         = "public_cert"
+	PublicCertificate_SecretType_Arbitrary = "arbitrary"
+	PublicCertificate_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificate_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificate_SecretType_ImportedCert = "imported_cert"
+	PublicCertificate_SecretType_Kv = "kv"
+	PublicCertificate_SecretType_PrivateCert = "private_cert"
+	PublicCertificate_SecretType_PublicCert = "public_cert"
 	PublicCertificate_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificate_SecretType_UsernamePassword   = "username_password"
+	PublicCertificate_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PublicCertificate.StateDescription property.
 // A text representation of the secret state.
 const (
-	PublicCertificate_StateDescription_Active        = "active"
-	PublicCertificate_StateDescription_Deactivated   = "deactivated"
-	PublicCertificate_StateDescription_Destroyed     = "destroyed"
+	PublicCertificate_StateDescription_Active = "active"
+	PublicCertificate_StateDescription_Deactivated = "deactivated"
+	PublicCertificate_StateDescription_Destroyed = "destroyed"
 	PublicCertificate_StateDescription_PreActivation = "pre_activation"
-	PublicCertificate_StateDescription_Suspended     = "suspended"
+	PublicCertificate_StateDescription_Suspended = "suspended"
 )
 
 func (*PublicCertificate) isaSecret() bool {
@@ -26263,7 +27064,7 @@ type PublicCertificateActionValidateManualDNS struct {
 // Constants associated with the PublicCertificateActionValidateManualDNS.ActionType property.
 // The type of secret action.
 const (
-	PublicCertificateActionValidateManualDNS_ActionType_PrivateCertActionRevokeCertificate   = "private_cert_action_revoke_certificate"
+	PublicCertificateActionValidateManualDNS_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 	PublicCertificateActionValidateManualDNS_ActionType_PublicCertActionValidateDnsChallenge = "public_cert_action_validate_dns_challenge"
 )
 
@@ -26294,7 +27095,7 @@ type PublicCertificateActionValidateManualDNSPrototype struct {
 // Constants associated with the PublicCertificateActionValidateManualDNSPrototype.ActionType property.
 // The type of secret action.
 const (
-	PublicCertificateActionValidateManualDNSPrototype_ActionType_PrivateCertActionRevokeCertificate   = "private_cert_action_revoke_certificate"
+	PublicCertificateActionValidateManualDNSPrototype_ActionType_PrivateCertActionRevokeCertificate = "private_cert_action_revoke_certificate"
 	PublicCertificateActionValidateManualDNSPrototype_ActionType_PublicCertActionValidateDnsChallenge = "public_cert_action_validate_dns_challenge"
 )
 
@@ -26369,12 +27170,12 @@ type PublicCertificateConfigurationCALetsEncrypt struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationCALetsEncrypt_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationCALetsEncrypt_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationCALetsEncrypt_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -26383,22 +27184,22 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_Kv                 = "kv"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_PublicCert         = "public_cert"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_Kv = "kv"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_PrivateCert = "private_cert"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_PublicCert = "public_cert"
 	PublicCertificateConfigurationCALetsEncrypt_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateConfigurationCALetsEncrypt_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateConfigurationCALetsEncrypt_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PublicCertificateConfigurationCALetsEncrypt.LetsEncryptEnvironment property.
 // The configuration of the Let's Encrypt CA environment.
 const (
 	PublicCertificateConfigurationCALetsEncrypt_LetsEncryptEnvironment_Production = "production"
-	PublicCertificateConfigurationCALetsEncrypt_LetsEncryptEnvironment_Staging    = "staging"
+	PublicCertificateConfigurationCALetsEncrypt_LetsEncryptEnvironment_Staging = "staging"
 )
 
 func (*PublicCertificateConfigurationCALetsEncrypt) isaConfiguration() bool {
@@ -26496,12 +27297,12 @@ type PublicCertificateConfigurationCALetsEncryptMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationCALetsEncryptMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -26510,22 +27311,22 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_Kv                 = "kv"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_PublicCert         = "public_cert"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_Kv = "kv"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_PrivateCert = "private_cert"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_PublicCert = "public_cert"
 	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateConfigurationCALetsEncryptMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PublicCertificateConfigurationCALetsEncryptMetadata.LetsEncryptEnvironment property.
 // The configuration of the Let's Encrypt CA environment.
 const (
 	PublicCertificateConfigurationCALetsEncryptMetadata_LetsEncryptEnvironment_Production = "production"
-	PublicCertificateConfigurationCALetsEncryptMetadata_LetsEncryptEnvironment_Staging    = "staging"
+	PublicCertificateConfigurationCALetsEncryptMetadata_LetsEncryptEnvironment_Staging = "staging"
 )
 
 func (*PublicCertificateConfigurationCALetsEncryptMetadata) isaConfigurationMetadata() bool {
@@ -26598,7 +27399,7 @@ type PublicCertificateConfigurationCALetsEncryptPatch struct {
 // The configuration of the Let's Encrypt CA environment.
 const (
 	PublicCertificateConfigurationCALetsEncryptPatch_LetsEncryptEnvironment_Production = "production"
-	PublicCertificateConfigurationCALetsEncryptPatch_LetsEncryptEnvironment_Staging    = "staging"
+	PublicCertificateConfigurationCALetsEncryptPatch_LetsEncryptEnvironment_Staging = "staging"
 )
 
 // NewPublicCertificateConfigurationCALetsEncryptPatch : Instantiate PublicCertificateConfigurationCALetsEncryptPatch (Generic Model Constructor)
@@ -26687,12 +27488,12 @@ type PublicCertificateConfigurationCALetsEncryptPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationCALetsEncryptPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -26701,16 +27502,16 @@ const (
 // The configuration of the Let's Encrypt CA environment.
 const (
 	PublicCertificateConfigurationCALetsEncryptPrototype_LetsEncryptEnvironment_Production = "production"
-	PublicCertificateConfigurationCALetsEncryptPrototype_LetsEncryptEnvironment_Staging    = "staging"
+	PublicCertificateConfigurationCALetsEncryptPrototype_LetsEncryptEnvironment_Staging = "staging"
 )
 
 // NewPublicCertificateConfigurationCALetsEncryptPrototype : Instantiate PublicCertificateConfigurationCALetsEncryptPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPublicCertificateConfigurationCALetsEncryptPrototype(configType string, name string, letsEncryptEnvironment string, letsEncryptPrivateKey string) (_model *PublicCertificateConfigurationCALetsEncryptPrototype, err error) {
 	_model = &PublicCertificateConfigurationCALetsEncryptPrototype{
-		ConfigType:             core.StringPtr(configType),
-		Name:                   core.StringPtr(name),
+		ConfigType: core.StringPtr(configType),
+		Name: core.StringPtr(name),
 		LetsEncryptEnvironment: core.StringPtr(letsEncryptEnvironment),
-		LetsEncryptPrivateKey:  core.StringPtr(letsEncryptPrivateKey),
+		LetsEncryptPrivateKey: core.StringPtr(letsEncryptPrivateKey),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -26799,12 +27600,12 @@ type PublicCertificateConfigurationDNSClassicInfrastructure struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationDNSClassicInfrastructure_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -26813,15 +27614,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_Kv                 = "kv"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_PublicCert         = "public_cert"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_Kv = "kv"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_PrivateCert = "private_cert"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_PublicCert = "public_cert"
 	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateConfigurationDNSClassicInfrastructure_SecretType_UsernamePassword = "username_password"
 )
 
 func (*PublicCertificateConfigurationDNSClassicInfrastructure) isaConfiguration() bool {
@@ -26907,12 +27708,12 @@ type PublicCertificateConfigurationDNSClassicInfrastructureMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -26921,15 +27722,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_Kv                 = "kv"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_PublicCert         = "public_cert"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_Kv = "kv"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_PrivateCert = "private_cert"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_PublicCert = "public_cert"
 	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateConfigurationDNSClassicInfrastructureMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 func (*PublicCertificateConfigurationDNSClassicInfrastructureMetadata) isaConfigurationMetadata() bool {
@@ -27056,12 +27857,12 @@ type PublicCertificateConfigurationDNSClassicInfrastructurePrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationDNSClassicInfrastructurePrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -27069,8 +27870,8 @@ const (
 // NewPublicCertificateConfigurationDNSClassicInfrastructurePrototype : Instantiate PublicCertificateConfigurationDNSClassicInfrastructurePrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPublicCertificateConfigurationDNSClassicInfrastructurePrototype(configType string, name string, classicInfrastructureUsername string, classicInfrastructurePassword string) (_model *PublicCertificateConfigurationDNSClassicInfrastructurePrototype, err error) {
 	_model = &PublicCertificateConfigurationDNSClassicInfrastructurePrototype{
-		ConfigType:                    core.StringPtr(configType),
-		Name:                          core.StringPtr(name),
+		ConfigType: core.StringPtr(configType),
+		Name: core.StringPtr(name),
 		ClassicInfrastructureUsername: core.StringPtr(classicInfrastructureUsername),
 		ClassicInfrastructurePassword: core.StringPtr(classicInfrastructurePassword),
 	}
@@ -27165,12 +27966,12 @@ type PublicCertificateConfigurationDNSCloudInternetServices struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationDNSCloudInternetServices_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -27179,15 +27980,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_Kv                 = "kv"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_PublicCert         = "public_cert"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_Kv = "kv"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_PrivateCert = "private_cert"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_PublicCert = "public_cert"
 	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateConfigurationDNSCloudInternetServices_SecretType_UsernamePassword = "username_password"
 )
 
 func (*PublicCertificateConfigurationDNSCloudInternetServices) isaConfiguration() bool {
@@ -27273,12 +28074,12 @@ type PublicCertificateConfigurationDNSCloudInternetServicesMetadata struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -27287,15 +28088,15 @@ const (
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_Kv                 = "kv"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_PublicCert         = "public_cert"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_Kv = "kv"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_PrivateCert = "private_cert"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_PublicCert = "public_cert"
 	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateConfigurationDNSCloudInternetServicesMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 func (*PublicCertificateConfigurationDNSCloudInternetServicesMetadata) isaConfigurationMetadata() bool {
@@ -27452,12 +28253,12 @@ type PublicCertificateConfigurationDNSCloudInternetServicesPrototype struct {
 // private_cert_configuration_root_ca, private_cert_configuration_intermediate_ca, private_cert_configuration_template,
 // custom_credentials_configuration.
 const (
-	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_CustomCredentialsConfiguration                  = "custom_credentials_configuration"
-	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_IamCredentialsConfiguration                     = "iam_credentials_configuration"
-	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationIntermediateCa          = "private_cert_configuration_intermediate_ca"
-	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationRootCa                  = "private_cert_configuration_root_ca"
-	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationTemplate                = "private_cert_configuration_template"
-	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt            = "public_cert_configuration_ca_lets_encrypt"
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_CustomCredentialsConfiguration = "custom_credentials_configuration"
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_IamCredentialsConfiguration = "iam_credentials_configuration"
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationIntermediateCa = "private_cert_configuration_intermediate_ca"
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationRootCa = "private_cert_configuration_root_ca"
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PrivateCertConfigurationTemplate = "private_cert_configuration_template"
+	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PublicCertConfigurationCaLetsEncrypt = "public_cert_configuration_ca_lets_encrypt"
 	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PublicCertConfigurationDnsClassicInfrastructure = "public_cert_configuration_dns_classic_infrastructure"
 	PublicCertificateConfigurationDNSCloudInternetServicesPrototype_ConfigType_PublicCertConfigurationDnsCloudInternetServices = "public_cert_configuration_dns_cloud_internet_services"
 )
@@ -27465,8 +28266,8 @@ const (
 // NewPublicCertificateConfigurationDNSCloudInternetServicesPrototype : Instantiate PublicCertificateConfigurationDNSCloudInternetServicesPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPublicCertificateConfigurationDNSCloudInternetServicesPrototype(configType string, name string, cloudInternetServicesCrn string) (_model *PublicCertificateConfigurationDNSCloudInternetServicesPrototype, err error) {
 	_model = &PublicCertificateConfigurationDNSCloudInternetServicesPrototype{
-		ConfigType:               core.StringPtr(configType),
-		Name:                     core.StringPtr(name),
+		ConfigType: core.StringPtr(configType),
+		Name: core.StringPtr(name),
 		CloudInternetServicesCrn: core.StringPtr(cloudInternetServicesCrn),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -27629,25 +28430,25 @@ type PublicCertificateMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateMetadata_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateMetadata_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateMetadata_SecretType_Kv                 = "kv"
-	PublicCertificateMetadata_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateMetadata_SecretType_PublicCert         = "public_cert"
+	PublicCertificateMetadata_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateMetadata_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateMetadata_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateMetadata_SecretType_Kv = "kv"
+	PublicCertificateMetadata_SecretType_PrivateCert = "private_cert"
+	PublicCertificateMetadata_SecretType_PublicCert = "public_cert"
 	PublicCertificateMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateMetadata_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PublicCertificateMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	PublicCertificateMetadata_StateDescription_Active        = "active"
-	PublicCertificateMetadata_StateDescription_Deactivated   = "deactivated"
-	PublicCertificateMetadata_StateDescription_Destroyed     = "destroyed"
+	PublicCertificateMetadata_StateDescription_Active = "active"
+	PublicCertificateMetadata_StateDescription_Deactivated = "deactivated"
+	PublicCertificateMetadata_StateDescription_Destroyed = "destroyed"
 	PublicCertificateMetadata_StateDescription_PreActivation = "pre_activation"
-	PublicCertificateMetadata_StateDescription_Suspended     = "suspended"
+	PublicCertificateMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*PublicCertificateMetadata) isaSecretMetadata() bool {
@@ -27971,24 +28772,24 @@ type PublicCertificatePrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificatePrototype_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificatePrototype_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificatePrototype_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificatePrototype_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificatePrototype_SecretType_Kv                 = "kv"
-	PublicCertificatePrototype_SecretType_PrivateCert        = "private_cert"
-	PublicCertificatePrototype_SecretType_PublicCert         = "public_cert"
+	PublicCertificatePrototype_SecretType_Arbitrary = "arbitrary"
+	PublicCertificatePrototype_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificatePrototype_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificatePrototype_SecretType_ImportedCert = "imported_cert"
+	PublicCertificatePrototype_SecretType_Kv = "kv"
+	PublicCertificatePrototype_SecretType_PrivateCert = "private_cert"
+	PublicCertificatePrototype_SecretType_PublicCert = "public_cert"
 	PublicCertificatePrototype_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificatePrototype_SecretType_UsernamePassword   = "username_password"
+	PublicCertificatePrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewPublicCertificatePrototype : Instantiate PublicCertificatePrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewPublicCertificatePrototype(secretType string, name string, ca string, dns string) (_model *PublicCertificatePrototype, err error) {
 	_model = &PublicCertificatePrototype{
 		SecretType: core.StringPtr(secretType),
-		Name:       core.StringPtr(name),
-		Ca:         core.StringPtr(ca),
-		Dns:        core.StringPtr(dns),
+		Name: core.StringPtr(name),
+		Ca: core.StringPtr(ca),
+		Dns: core.StringPtr(dns),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -28213,22 +29014,22 @@ type PublicCertificateVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateVersion_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateVersion_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateVersion_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateVersion_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateVersion_SecretType_Kv                 = "kv"
-	PublicCertificateVersion_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateVersion_SecretType_PublicCert         = "public_cert"
+	PublicCertificateVersion_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateVersion_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateVersion_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateVersion_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateVersion_SecretType_Kv = "kv"
+	PublicCertificateVersion_SecretType_PrivateCert = "private_cert"
+	PublicCertificateVersion_SecretType_PublicCert = "public_cert"
 	PublicCertificateVersion_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateVersion_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PublicCertificateVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	PublicCertificateVersion_Alias_Current  = "current"
+	PublicCertificateVersion_Alias_Current = "current"
 	PublicCertificateVersion_Alias_Previous = "previous"
 )
 
@@ -28391,22 +29192,22 @@ type PublicCertificateVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	PublicCertificateVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	PublicCertificateVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	PublicCertificateVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	PublicCertificateVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	PublicCertificateVersionMetadata_SecretType_Kv                 = "kv"
-	PublicCertificateVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	PublicCertificateVersionMetadata_SecretType_PublicCert         = "public_cert"
+	PublicCertificateVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	PublicCertificateVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	PublicCertificateVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	PublicCertificateVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	PublicCertificateVersionMetadata_SecretType_Kv = "kv"
+	PublicCertificateVersionMetadata_SecretType_PrivateCert = "private_cert"
+	PublicCertificateVersionMetadata_SecretType_PublicCert = "public_cert"
 	PublicCertificateVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	PublicCertificateVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	PublicCertificateVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the PublicCertificateVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	PublicCertificateVersionMetadata_Alias_Current  = "current"
+	PublicCertificateVersionMetadata_Alias_Current = "current"
 	PublicCertificateVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -28566,7 +29367,7 @@ const (
 // NewSecretTaskPrototypeUpdateSecretTaskCredentialsCreated : Instantiate SecretTaskPrototypeUpdateSecretTaskCredentialsCreated (Generic Model Constructor)
 func (*SecretsManagerV2) NewSecretTaskPrototypeUpdateSecretTaskCredentialsCreated(status string, credentials *CustomCredentialsNewCredentials) (_model *SecretTaskPrototypeUpdateSecretTaskCredentialsCreated, err error) {
 	_model = &SecretTaskPrototypeUpdateSecretTaskCredentialsCreated{
-		Status:      core.StringPtr(status),
+		Status: core.StringPtr(status),
 		Credentials: credentials,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -28792,25 +29593,25 @@ type ServiceCredentialsSecret struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ServiceCredentialsSecret_SecretType_Arbitrary          = "arbitrary"
-	ServiceCredentialsSecret_SecretType_CustomCredentials  = "custom_credentials"
-	ServiceCredentialsSecret_SecretType_IamCredentials     = "iam_credentials"
-	ServiceCredentialsSecret_SecretType_ImportedCert       = "imported_cert"
-	ServiceCredentialsSecret_SecretType_Kv                 = "kv"
-	ServiceCredentialsSecret_SecretType_PrivateCert        = "private_cert"
-	ServiceCredentialsSecret_SecretType_PublicCert         = "public_cert"
+	ServiceCredentialsSecret_SecretType_Arbitrary = "arbitrary"
+	ServiceCredentialsSecret_SecretType_CustomCredentials = "custom_credentials"
+	ServiceCredentialsSecret_SecretType_IamCredentials = "iam_credentials"
+	ServiceCredentialsSecret_SecretType_ImportedCert = "imported_cert"
+	ServiceCredentialsSecret_SecretType_Kv = "kv"
+	ServiceCredentialsSecret_SecretType_PrivateCert = "private_cert"
+	ServiceCredentialsSecret_SecretType_PublicCert = "public_cert"
 	ServiceCredentialsSecret_SecretType_ServiceCredentials = "service_credentials"
-	ServiceCredentialsSecret_SecretType_UsernamePassword   = "username_password"
+	ServiceCredentialsSecret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ServiceCredentialsSecret.StateDescription property.
 // A text representation of the secret state.
 const (
-	ServiceCredentialsSecret_StateDescription_Active        = "active"
-	ServiceCredentialsSecret_StateDescription_Deactivated   = "deactivated"
-	ServiceCredentialsSecret_StateDescription_Destroyed     = "destroyed"
+	ServiceCredentialsSecret_StateDescription_Active = "active"
+	ServiceCredentialsSecret_StateDescription_Deactivated = "deactivated"
+	ServiceCredentialsSecret_StateDescription_Destroyed = "destroyed"
 	ServiceCredentialsSecret_StateDescription_PreActivation = "pre_activation"
-	ServiceCredentialsSecret_StateDescription_Suspended     = "suspended"
+	ServiceCredentialsSecret_StateDescription_Suspended = "suspended"
 )
 
 func (*ServiceCredentialsSecret) isaSecret() bool {
@@ -29045,25 +29846,25 @@ type ServiceCredentialsSecretMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ServiceCredentialsSecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	ServiceCredentialsSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ServiceCredentialsSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ServiceCredentialsSecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	ServiceCredentialsSecretMetadata_SecretType_Kv                 = "kv"
-	ServiceCredentialsSecretMetadata_SecretType_PrivateCert        = "private_cert"
-	ServiceCredentialsSecretMetadata_SecretType_PublicCert         = "public_cert"
+	ServiceCredentialsSecretMetadata_SecretType_Arbitrary = "arbitrary"
+	ServiceCredentialsSecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ServiceCredentialsSecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	ServiceCredentialsSecretMetadata_SecretType_ImportedCert = "imported_cert"
+	ServiceCredentialsSecretMetadata_SecretType_Kv = "kv"
+	ServiceCredentialsSecretMetadata_SecretType_PrivateCert = "private_cert"
+	ServiceCredentialsSecretMetadata_SecretType_PublicCert = "public_cert"
 	ServiceCredentialsSecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ServiceCredentialsSecretMetadata_SecretType_UsernamePassword   = "username_password"
+	ServiceCredentialsSecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ServiceCredentialsSecretMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	ServiceCredentialsSecretMetadata_StateDescription_Active        = "active"
-	ServiceCredentialsSecretMetadata_StateDescription_Deactivated   = "deactivated"
-	ServiceCredentialsSecretMetadata_StateDescription_Destroyed     = "destroyed"
+	ServiceCredentialsSecretMetadata_StateDescription_Active = "active"
+	ServiceCredentialsSecretMetadata_StateDescription_Deactivated = "deactivated"
+	ServiceCredentialsSecretMetadata_StateDescription_Destroyed = "destroyed"
 	ServiceCredentialsSecretMetadata_StateDescription_PreActivation = "pre_activation"
-	ServiceCredentialsSecretMetadata_StateDescription_Suspended     = "suspended"
+	ServiceCredentialsSecretMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*ServiceCredentialsSecretMetadata) isaSecretMetadata() bool {
@@ -29353,22 +30154,22 @@ type ServiceCredentialsSecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ServiceCredentialsSecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	ServiceCredentialsSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	ServiceCredentialsSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	ServiceCredentialsSecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	ServiceCredentialsSecretPrototype_SecretType_Kv                 = "kv"
-	ServiceCredentialsSecretPrototype_SecretType_PrivateCert        = "private_cert"
-	ServiceCredentialsSecretPrototype_SecretType_PublicCert         = "public_cert"
+	ServiceCredentialsSecretPrototype_SecretType_Arbitrary = "arbitrary"
+	ServiceCredentialsSecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	ServiceCredentialsSecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	ServiceCredentialsSecretPrototype_SecretType_ImportedCert = "imported_cert"
+	ServiceCredentialsSecretPrototype_SecretType_Kv = "kv"
+	ServiceCredentialsSecretPrototype_SecretType_PrivateCert = "private_cert"
+	ServiceCredentialsSecretPrototype_SecretType_PublicCert = "public_cert"
 	ServiceCredentialsSecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	ServiceCredentialsSecretPrototype_SecretType_UsernamePassword   = "username_password"
+	ServiceCredentialsSecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewServiceCredentialsSecretPrototype : Instantiate ServiceCredentialsSecretPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewServiceCredentialsSecretPrototype(name string, secretType string, sourceService *ServiceCredentialsSecretSourceService) (_model *ServiceCredentialsSecretPrototype, err error) {
 	_model = &ServiceCredentialsSecretPrototype{
-		Name:          core.StringPtr(name),
-		SecretType:    core.StringPtr(secretType),
+		Name: core.StringPtr(name),
+		SecretType: core.StringPtr(secretType),
 		SourceService: sourceService,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -29497,22 +30298,22 @@ type ServiceCredentialsSecretVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ServiceCredentialsSecretVersion_SecretType_Arbitrary          = "arbitrary"
-	ServiceCredentialsSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	ServiceCredentialsSecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	ServiceCredentialsSecretVersion_SecretType_ImportedCert       = "imported_cert"
-	ServiceCredentialsSecretVersion_SecretType_Kv                 = "kv"
-	ServiceCredentialsSecretVersion_SecretType_PrivateCert        = "private_cert"
-	ServiceCredentialsSecretVersion_SecretType_PublicCert         = "public_cert"
+	ServiceCredentialsSecretVersion_SecretType_Arbitrary = "arbitrary"
+	ServiceCredentialsSecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	ServiceCredentialsSecretVersion_SecretType_IamCredentials = "iam_credentials"
+	ServiceCredentialsSecretVersion_SecretType_ImportedCert = "imported_cert"
+	ServiceCredentialsSecretVersion_SecretType_Kv = "kv"
+	ServiceCredentialsSecretVersion_SecretType_PrivateCert = "private_cert"
+	ServiceCredentialsSecretVersion_SecretType_PublicCert = "public_cert"
 	ServiceCredentialsSecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	ServiceCredentialsSecretVersion_SecretType_UsernamePassword   = "username_password"
+	ServiceCredentialsSecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ServiceCredentialsSecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	ServiceCredentialsSecretVersion_Alias_Current  = "current"
+	ServiceCredentialsSecretVersion_Alias_Current = "current"
 	ServiceCredentialsSecretVersion_Alias_Previous = "previous"
 )
 
@@ -29657,22 +30458,22 @@ type ServiceCredentialsSecretVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	ServiceCredentialsSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	ServiceCredentialsSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	ServiceCredentialsSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	ServiceCredentialsSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	ServiceCredentialsSecretVersionMetadata_SecretType_Kv                 = "kv"
-	ServiceCredentialsSecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	ServiceCredentialsSecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	ServiceCredentialsSecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	ServiceCredentialsSecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	ServiceCredentialsSecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	ServiceCredentialsSecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	ServiceCredentialsSecretVersionMetadata_SecretType_Kv = "kv"
+	ServiceCredentialsSecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	ServiceCredentialsSecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	ServiceCredentialsSecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	ServiceCredentialsSecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	ServiceCredentialsSecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the ServiceCredentialsSecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	ServiceCredentialsSecretVersionMetadata_Alias_Current  = "current"
+	ServiceCredentialsSecretVersionMetadata_Alias_Current = "current"
 	ServiceCredentialsSecretVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -29885,25 +30686,25 @@ type UsernamePasswordSecret struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	UsernamePasswordSecret_SecretType_Arbitrary          = "arbitrary"
-	UsernamePasswordSecret_SecretType_CustomCredentials  = "custom_credentials"
-	UsernamePasswordSecret_SecretType_IamCredentials     = "iam_credentials"
-	UsernamePasswordSecret_SecretType_ImportedCert       = "imported_cert"
-	UsernamePasswordSecret_SecretType_Kv                 = "kv"
-	UsernamePasswordSecret_SecretType_PrivateCert        = "private_cert"
-	UsernamePasswordSecret_SecretType_PublicCert         = "public_cert"
+	UsernamePasswordSecret_SecretType_Arbitrary = "arbitrary"
+	UsernamePasswordSecret_SecretType_CustomCredentials = "custom_credentials"
+	UsernamePasswordSecret_SecretType_IamCredentials = "iam_credentials"
+	UsernamePasswordSecret_SecretType_ImportedCert = "imported_cert"
+	UsernamePasswordSecret_SecretType_Kv = "kv"
+	UsernamePasswordSecret_SecretType_PrivateCert = "private_cert"
+	UsernamePasswordSecret_SecretType_PublicCert = "public_cert"
 	UsernamePasswordSecret_SecretType_ServiceCredentials = "service_credentials"
-	UsernamePasswordSecret_SecretType_UsernamePassword   = "username_password"
+	UsernamePasswordSecret_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the UsernamePasswordSecret.StateDescription property.
 // A text representation of the secret state.
 const (
-	UsernamePasswordSecret_StateDescription_Active        = "active"
-	UsernamePasswordSecret_StateDescription_Deactivated   = "deactivated"
-	UsernamePasswordSecret_StateDescription_Destroyed     = "destroyed"
+	UsernamePasswordSecret_StateDescription_Active = "active"
+	UsernamePasswordSecret_StateDescription_Deactivated = "deactivated"
+	UsernamePasswordSecret_StateDescription_Destroyed = "destroyed"
 	UsernamePasswordSecret_StateDescription_PreActivation = "pre_activation"
-	UsernamePasswordSecret_StateDescription_Suspended     = "suspended"
+	UsernamePasswordSecret_StateDescription_Suspended = "suspended"
 )
 
 func (*UsernamePasswordSecret) isaSecret() bool {
@@ -30128,25 +30929,25 @@ type UsernamePasswordSecretMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	UsernamePasswordSecretMetadata_SecretType_Arbitrary          = "arbitrary"
-	UsernamePasswordSecretMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	UsernamePasswordSecretMetadata_SecretType_IamCredentials     = "iam_credentials"
-	UsernamePasswordSecretMetadata_SecretType_ImportedCert       = "imported_cert"
-	UsernamePasswordSecretMetadata_SecretType_Kv                 = "kv"
-	UsernamePasswordSecretMetadata_SecretType_PrivateCert        = "private_cert"
-	UsernamePasswordSecretMetadata_SecretType_PublicCert         = "public_cert"
+	UsernamePasswordSecretMetadata_SecretType_Arbitrary = "arbitrary"
+	UsernamePasswordSecretMetadata_SecretType_CustomCredentials = "custom_credentials"
+	UsernamePasswordSecretMetadata_SecretType_IamCredentials = "iam_credentials"
+	UsernamePasswordSecretMetadata_SecretType_ImportedCert = "imported_cert"
+	UsernamePasswordSecretMetadata_SecretType_Kv = "kv"
+	UsernamePasswordSecretMetadata_SecretType_PrivateCert = "private_cert"
+	UsernamePasswordSecretMetadata_SecretType_PublicCert = "public_cert"
 	UsernamePasswordSecretMetadata_SecretType_ServiceCredentials = "service_credentials"
-	UsernamePasswordSecretMetadata_SecretType_UsernamePassword   = "username_password"
+	UsernamePasswordSecretMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the UsernamePasswordSecretMetadata.StateDescription property.
 // A text representation of the secret state.
 const (
-	UsernamePasswordSecretMetadata_StateDescription_Active        = "active"
-	UsernamePasswordSecretMetadata_StateDescription_Deactivated   = "deactivated"
-	UsernamePasswordSecretMetadata_StateDescription_Destroyed     = "destroyed"
+	UsernamePasswordSecretMetadata_StateDescription_Active = "active"
+	UsernamePasswordSecretMetadata_StateDescription_Deactivated = "deactivated"
+	UsernamePasswordSecretMetadata_StateDescription_Destroyed = "destroyed"
 	UsernamePasswordSecretMetadata_StateDescription_PreActivation = "pre_activation"
-	UsernamePasswordSecretMetadata_StateDescription_Suspended     = "suspended"
+	UsernamePasswordSecretMetadata_StateDescription_Suspended = "suspended"
 )
 
 func (*UsernamePasswordSecretMetadata) isaSecretMetadata() bool {
@@ -30438,23 +31239,23 @@ type UsernamePasswordSecretPrototype struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	UsernamePasswordSecretPrototype_SecretType_Arbitrary          = "arbitrary"
-	UsernamePasswordSecretPrototype_SecretType_CustomCredentials  = "custom_credentials"
-	UsernamePasswordSecretPrototype_SecretType_IamCredentials     = "iam_credentials"
-	UsernamePasswordSecretPrototype_SecretType_ImportedCert       = "imported_cert"
-	UsernamePasswordSecretPrototype_SecretType_Kv                 = "kv"
-	UsernamePasswordSecretPrototype_SecretType_PrivateCert        = "private_cert"
-	UsernamePasswordSecretPrototype_SecretType_PublicCert         = "public_cert"
+	UsernamePasswordSecretPrototype_SecretType_Arbitrary = "arbitrary"
+	UsernamePasswordSecretPrototype_SecretType_CustomCredentials = "custom_credentials"
+	UsernamePasswordSecretPrototype_SecretType_IamCredentials = "iam_credentials"
+	UsernamePasswordSecretPrototype_SecretType_ImportedCert = "imported_cert"
+	UsernamePasswordSecretPrototype_SecretType_Kv = "kv"
+	UsernamePasswordSecretPrototype_SecretType_PrivateCert = "private_cert"
+	UsernamePasswordSecretPrototype_SecretType_PublicCert = "public_cert"
 	UsernamePasswordSecretPrototype_SecretType_ServiceCredentials = "service_credentials"
-	UsernamePasswordSecretPrototype_SecretType_UsernamePassword   = "username_password"
+	UsernamePasswordSecretPrototype_SecretType_UsernamePassword = "username_password"
 )
 
 // NewUsernamePasswordSecretPrototype : Instantiate UsernamePasswordSecretPrototype (Generic Model Constructor)
 func (*SecretsManagerV2) NewUsernamePasswordSecretPrototype(secretType string, name string, username string) (_model *UsernamePasswordSecretPrototype, err error) {
 	_model = &UsernamePasswordSecretPrototype{
 		SecretType: core.StringPtr(secretType),
-		Name:       core.StringPtr(name),
-		Username:   core.StringPtr(username),
+		Name: core.StringPtr(name),
+		Username: core.StringPtr(username),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	if err != nil {
@@ -30592,22 +31393,22 @@ type UsernamePasswordSecretVersion struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	UsernamePasswordSecretVersion_SecretType_Arbitrary          = "arbitrary"
-	UsernamePasswordSecretVersion_SecretType_CustomCredentials  = "custom_credentials"
-	UsernamePasswordSecretVersion_SecretType_IamCredentials     = "iam_credentials"
-	UsernamePasswordSecretVersion_SecretType_ImportedCert       = "imported_cert"
-	UsernamePasswordSecretVersion_SecretType_Kv                 = "kv"
-	UsernamePasswordSecretVersion_SecretType_PrivateCert        = "private_cert"
-	UsernamePasswordSecretVersion_SecretType_PublicCert         = "public_cert"
+	UsernamePasswordSecretVersion_SecretType_Arbitrary = "arbitrary"
+	UsernamePasswordSecretVersion_SecretType_CustomCredentials = "custom_credentials"
+	UsernamePasswordSecretVersion_SecretType_IamCredentials = "iam_credentials"
+	UsernamePasswordSecretVersion_SecretType_ImportedCert = "imported_cert"
+	UsernamePasswordSecretVersion_SecretType_Kv = "kv"
+	UsernamePasswordSecretVersion_SecretType_PrivateCert = "private_cert"
+	UsernamePasswordSecretVersion_SecretType_PublicCert = "public_cert"
 	UsernamePasswordSecretVersion_SecretType_ServiceCredentials = "service_credentials"
-	UsernamePasswordSecretVersion_SecretType_UsernamePassword   = "username_password"
+	UsernamePasswordSecretVersion_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the UsernamePasswordSecretVersion.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	UsernamePasswordSecretVersion_Alias_Current  = "current"
+	UsernamePasswordSecretVersion_Alias_Current = "current"
 	UsernamePasswordSecretVersion_Alias_Previous = "previous"
 )
 
@@ -30749,22 +31550,22 @@ type UsernamePasswordSecretVersionMetadata struct {
 // The secret type. Supported types are arbitrary, imported_cert, public_cert, private_cert, iam_credentials,
 // service_credentials, kv, and username_password.
 const (
-	UsernamePasswordSecretVersionMetadata_SecretType_Arbitrary          = "arbitrary"
-	UsernamePasswordSecretVersionMetadata_SecretType_CustomCredentials  = "custom_credentials"
-	UsernamePasswordSecretVersionMetadata_SecretType_IamCredentials     = "iam_credentials"
-	UsernamePasswordSecretVersionMetadata_SecretType_ImportedCert       = "imported_cert"
-	UsernamePasswordSecretVersionMetadata_SecretType_Kv                 = "kv"
-	UsernamePasswordSecretVersionMetadata_SecretType_PrivateCert        = "private_cert"
-	UsernamePasswordSecretVersionMetadata_SecretType_PublicCert         = "public_cert"
+	UsernamePasswordSecretVersionMetadata_SecretType_Arbitrary = "arbitrary"
+	UsernamePasswordSecretVersionMetadata_SecretType_CustomCredentials = "custom_credentials"
+	UsernamePasswordSecretVersionMetadata_SecretType_IamCredentials = "iam_credentials"
+	UsernamePasswordSecretVersionMetadata_SecretType_ImportedCert = "imported_cert"
+	UsernamePasswordSecretVersionMetadata_SecretType_Kv = "kv"
+	UsernamePasswordSecretVersionMetadata_SecretType_PrivateCert = "private_cert"
+	UsernamePasswordSecretVersionMetadata_SecretType_PublicCert = "public_cert"
 	UsernamePasswordSecretVersionMetadata_SecretType_ServiceCredentials = "service_credentials"
-	UsernamePasswordSecretVersionMetadata_SecretType_UsernamePassword   = "username_password"
+	UsernamePasswordSecretVersionMetadata_SecretType_UsernamePassword = "username_password"
 )
 
 // Constants associated with the UsernamePasswordSecretVersionMetadata.Alias property.
 // A human-readable alias that describes the secret version. 'Current' is used for version `n` and 'previous' is used
 // for version `n-1`.
 const (
-	UsernamePasswordSecretVersionMetadata_Alias_Current  = "current"
+	UsernamePasswordSecretVersionMetadata_Alias_Current = "current"
 	UsernamePasswordSecretVersionMetadata_Alias_Previous = "previous"
 )
 
@@ -30884,11 +31685,13 @@ func UnmarshalUsernamePasswordSecretVersionPrototype(m map[string]json.RawMessag
 	return
 }
 
+//
 // SecretsPager can be used to simplify the use of the "ListSecrets" method.
+//
 type SecretsPager struct {
-	hasNext     bool
-	options     *ListSecretsOptions
-	client      *SecretsManagerV2
+	hasNext bool
+	options *ListSecretsOptions
+	client  *SecretsManagerV2
 	pageContext struct {
 		next *int64
 	}
@@ -30976,11 +31779,13 @@ func (pager *SecretsPager) GetAll() (allItems []SecretMetadataIntf, err error) {
 	return
 }
 
+//
 // SecretsLocksPager can be used to simplify the use of the "ListSecretsLocks" method.
+//
 type SecretsLocksPager struct {
-	hasNext     bool
-	options     *ListSecretsLocksOptions
-	client      *SecretsManagerV2
+	hasNext bool
+	options *ListSecretsLocksOptions
+	client  *SecretsManagerV2
 	pageContext struct {
 		next *int64
 	}
@@ -31068,11 +31873,13 @@ func (pager *SecretsLocksPager) GetAll() (allItems []SecretLocks, err error) {
 	return
 }
 
+//
 // SecretLocksPager can be used to simplify the use of the "ListSecretLocks" method.
+//
 type SecretLocksPager struct {
-	hasNext     bool
-	options     *ListSecretLocksOptions
-	client      *SecretsManagerV2
+	hasNext bool
+	options *ListSecretLocksOptions
+	client  *SecretsManagerV2
 	pageContext struct {
 		next *int64
 	}
@@ -31160,11 +31967,13 @@ func (pager *SecretLocksPager) GetAll() (allItems []SecretLock, err error) {
 	return
 }
 
+//
 // SecretVersionLocksPager can be used to simplify the use of the "ListSecretVersionLocks" method.
+//
 type SecretVersionLocksPager struct {
-	hasNext     bool
-	options     *ListSecretVersionLocksOptions
-	client      *SecretsManagerV2
+	hasNext bool
+	options *ListSecretVersionLocksOptions
+	client  *SecretsManagerV2
 	pageContext struct {
 		next *int64
 	}
@@ -31252,11 +32061,13 @@ func (pager *SecretVersionLocksPager) GetAll() (allItems []SecretLock, err error
 	return
 }
 
+//
 // ConfigurationsPager can be used to simplify the use of the "ListConfigurations" method.
+//
 type ConfigurationsPager struct {
-	hasNext     bool
-	options     *ListConfigurationsOptions
-	client      *SecretsManagerV2
+	hasNext bool
+	options *ListConfigurationsOptions
+	client  *SecretsManagerV2
 	pageContext struct {
 		next *int64
 	}
