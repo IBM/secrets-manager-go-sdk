@@ -23,16 +23,17 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.8 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/nxadm/tail v1.4.11 // indirect
 	github.com/oklog/ulid/v2 v2.1.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/crypto v0.50.0 // indirect
-	golang.org/x/net v0.53.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
-	golang.org/x/text v0.36.0 // indirect
+	golang.org/x/crypto v0.51.0 // indirect
+	golang.org/x/net v0.54.0 // indirect
+	golang.org/x/sys v0.44.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
