@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.23.3
-	github.com/go-openapi/strfmt v0.27.0
+	github.com/go-openapi/strfmt v0.27.1
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.42.1
 	github.com/stretchr/testify v1.12.1
