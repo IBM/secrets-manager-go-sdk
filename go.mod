@@ -3,7 +3,7 @@ module github.com/IBM/secrets-manager-go-sdk/v2
 go 1.26.0
 
 require (
-	github.com/IBM/go-sdk-core/v5 v5.23.5
+	github.com/IBM/go-sdk-core/v5 v5.24.0
 	github.com/go-openapi/strfmt v0.27.2
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.44.0
@@ -14,10 +14,10 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.15 // indirect
-	github.com/go-openapi/errors v0.22.8 // indirect
-	github.com/go-playground/locales v0.14.1 // indirect
-	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.30.4 // indirect
+	github.com/go-openapi/errors v0.22.9 // indirect
+	github.com/go-playground/locales v0.14.2 // indirect
+	github.com/go-playground/universal-translator v0.18.2 // indirect
+	github.com/go-playground/validator/v10 v10.30.5 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
