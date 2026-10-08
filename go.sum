@@ -10,6 +10,8 @@ github.com/IBM/go-sdk-core/v5 v5.23.5 h1:ZJeheBX3Wq01c1Mw0uYtf4SwXB9Oy11hGlx4nZU
 github.com/IBM/go-sdk-core/v5 v5.23.5/go.mod h1:STTfOZKIy3y4WowRDXYQTXb24nrAnIcm0dcxRXrinTk=
 github.com/IBM/go-sdk-core/v5 v5.24.0 h1:lEqilPTZpEknpAQ30sldR5zy8D583Cn/ENaYoLzXr08=
 github.com/IBM/go-sdk-core/v5 v5.24.0/go.mod h1:1PTdGMZrm1FLVLgPwL3XFCGK8InuXR0v+2TZgoR2vCA=
+github.com/IBM/go-sdk-core/v5 v5.25.0 h1:wQEw6Cb9akKekjF22GsreARg6lmEszonVk3pzzS1fWw=
+github.com/IBM/go-sdk-core/v5 v5.25.0/go.mod h1:B4JsTbYRtgrTY+jjDARcPtITOMLEbyYtB4FblDn2RdQ=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
