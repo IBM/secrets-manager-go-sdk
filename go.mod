@@ -3,7 +3,7 @@ module github.com/IBM/secrets-manager-go-sdk/v2
 go 1.26.0
 
 require (
-	github.com/IBM/go-sdk-core/v5 v5.25.0
+	github.com/IBM/go-sdk-core/v5 v5.25.1
 	github.com/go-openapi/strfmt v0.27.3
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.44.0
@@ -29,10 +29,10 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
-	golang.org/x/crypto v0.57.0 // indirect
-	golang.org/x/net v0.59.0 // indirect
-	golang.org/x/sys v0.48.0 // indirect
-	golang.org/x/text v0.42.0 // indirect
+	golang.org/x/crypto v0.58.0 // indirect
+	golang.org/x/net v0.61.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/text v0.43.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
