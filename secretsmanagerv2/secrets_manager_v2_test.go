@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,13 +68,14 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"SECRETS_MANAGER_URL":       "https://secretsmanagerv2/api",
+				"SECRETS_MANAGER_URL": "https://secretsmanagerv2/api",
 				"SECRETS_MANAGER_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2UsingExternalConfig(&secretsmanagerv2.SecretsManagerV2Options{})
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2UsingExternalConfig(&secretsmanagerv2.SecretsManagerV2Options{
+				})
 				Expect(secretsManagerService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -103,7 +104,8 @@ var _ = Describe(`SecretsManagerV2`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2UsingExternalConfig(&secretsmanagerv2.SecretsManagerV2Options{})
+				secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2UsingExternalConfig(&secretsmanagerv2.SecretsManagerV2Options{
+				})
 				err := secretsManagerService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(secretsManagerService).ToNot(BeNil())
@@ -121,12 +123,13 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"SECRETS_MANAGER_URL":       "https://secretsmanagerv2/api",
+				"SECRETS_MANAGER_URL": "https://secretsmanagerv2/api",
 				"SECRETS_MANAGER_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2UsingExternalConfig(&secretsmanagerv2.SecretsManagerV2Options{})
+			secretsManagerService, serviceErr := secretsmanagerv2.NewSecretsManagerV2UsingExternalConfig(&secretsmanagerv2.SecretsManagerV2Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(secretsManagerService).To(BeNil())
@@ -137,7 +140,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"SECRETS_MANAGER_AUTH_TYPE": "NOAuth",
+				"SECRETS_MANAGER_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -1782,7 +1785,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1794,11 +1797,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","retrieved_at":"2025-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"secrets":[{"created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","retrieved_at":"2025-04-12T23:20:50.520Z","crn":"Crn","custom_metadata":{"anyKey":"anyValue"},"description":"Extended description for this secret.","downloaded":true,"id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","labels":["my-label"],"locks_total":0,"name":"my-secret","secret_group_id":"default","secret_type":"arbitrary","state":0,"state_description":"active","updated_at":"2022-04-12T23:20:50.520Z","versions_total":0,"referenced_by":["my-example-engine-config"],"expiration_date":"2033-04-12T23:20:50.520Z"}]}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -1812,11 +1816,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretsOptionsModel := &secretsmanagerv2.ListSecretsOptions{
-					Limit:          core.Int64Ptr(int64(10)),
-					Sort:           core.StringPtr("created_at"),
-					Search:         core.StringPtr("example"),
-					Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
-					SecretTypes:    []string{"arbitrary", "kv"},
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("created_at"),
+					Search: core.StringPtr("example"),
+					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+					SecretTypes: []string{"arbitrary", "kv"},
 					MatchAllLabels: []string{"dev", "us-south"},
 				}
 
@@ -1842,11 +1846,11 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretsOptionsModel := &secretsmanagerv2.ListSecretsOptions{
-					Limit:          core.Int64Ptr(int64(10)),
-					Sort:           core.StringPtr("created_at"),
-					Search:         core.StringPtr("example"),
-					Groups:         []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
-					SecretTypes:    []string{"arbitrary", "kv"},
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("created_at"),
+					Search: core.StringPtr("example"),
+					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
+					SecretTypes: []string{"arbitrary", "kv"},
 					MatchAllLabels: []string{"dev", "us-south"},
 				}
 
@@ -5771,7 +5775,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -5783,11 +5787,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"secrets_locks":[{"secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_group_id":"default","secret_type":"arbitrary","secret_name":"my-secret","versions":[{"version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","version_alias":"current","locks":["lock-example"],"payload_available":true}]}],"total_count":2,"limit":1}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"secrets_locks":[{"secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_group_id":"default","secret_type":"arbitrary","secret_name":"my-secret","versions":[{"version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","version_alias":"current","locks":["lock-example"],"payload_available":true}]}],"total_count":2,"limit":1}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -5801,7 +5806,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretsLocksOptionsModel := &secretsmanagerv2.ListSecretsLocksOptions{
-					Limit:  core.Int64Ptr(int64(10)),
+					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("example"),
 					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 				}
@@ -5828,7 +5833,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretsLocksOptionsModel := &secretsmanagerv2.ListSecretsLocksOptions{
-					Limit:  core.Int64Ptr(int64(10)),
+					Limit: core.Int64Ptr(int64(10)),
 					Search: core.StringPtr("example"),
 					Groups: []string{"default", "cac40995-c37a-4dcb-9506-472869077634"},
 				}
@@ -6128,7 +6133,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6140,11 +6145,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -6158,9 +6164,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretLocksOptionsModel := &secretsmanagerv2.ListSecretLocksOptions{
-					ID:     core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46"),
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("name"),
+					ID: core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("name"),
 					Search: core.StringPtr("example"),
 				}
 
@@ -6186,9 +6192,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listSecretLocksOptionsModel := &secretsmanagerv2.ListSecretLocksOptions{
-					ID:     core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46"),
-					Limit:  core.Int64Ptr(int64(10)),
-					Sort:   core.StringPtr("name"),
+					ID: core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("name"),
 					Search: core.StringPtr("example"),
 				}
 
@@ -6996,7 +7002,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -7008,11 +7014,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"total_count":2,"limit":1,"locks":[{"name":"lock-example","description":"Description","attributes":{"anyKey":"anyValue"},"created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","secret_group_id":"default","secret_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_id":"b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5","secret_version_alias":"current"}]}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -7027,10 +7034,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				listSecretVersionLocksOptionsModel := &secretsmanagerv2.ListSecretVersionLocksOptions{
 					SecretID: core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46"),
-					ID:       core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535"),
-					Limit:    core.Int64Ptr(int64(10)),
-					Sort:     core.StringPtr("name"),
-					Search:   core.StringPtr("example"),
+					ID: core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("name"),
+					Search: core.StringPtr("example"),
 				}
 
 				pager, err := secretsManagerService.NewSecretVersionLocksPager(listSecretVersionLocksOptionsModel)
@@ -7056,10 +7063,10 @@ var _ = Describe(`SecretsManagerV2`, func() {
 
 				listSecretVersionLocksOptionsModel := &secretsmanagerv2.ListSecretVersionLocksOptions{
 					SecretID: core.StringPtr("0b5571f7-21e6-42b7-91c5-3f5ac9793a46"),
-					ID:       core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535"),
-					Limit:    core.Int64Ptr(int64(10)),
-					Sort:     core.StringPtr("name"),
-					Search:   core.StringPtr("example"),
+					ID: core.StringPtr("eb4cf24d-9cae-424b-945e-159788a5f535"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("name"),
+					Search: core.StringPtr("example"),
 				}
 
 				pager, err := secretsManagerService.NewSecretVersionLocksPager(listSecretVersionLocksOptionsModel)
@@ -8143,7 +8150,7 @@ var _ = Describe(`SecretsManagerV2`, func() {
 		})
 		Context(`Using mock server endpoint - paginated response`, func() {
 			BeforeEach(func() {
-				var requestNumber int = 0
+				requestNumber := 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8155,11 +8162,12 @@ var _ = Describe(`SecretsManagerV2`, func() {
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					requestNumber++
-					if requestNumber == 1 {
+					switch requestNumber {
+					case 1:
 						fmt.Fprintf(res, "%s", `{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","disabled":true}],"limit":1}`)
-					} else if requestNumber == 2 {
+					case 2:
 						fmt.Fprintf(res, "%s", `{"total_count":2,"configurations":[{"config_type":"iam_credentials_configuration","name":"my-secret-engine-config","secret_type":"arbitrary","created_by":"iam-ServiceId-e4a2f0a4-3c76-4bef-b1f2-fbeae11c0f21","created_at":"2022-04-12T23:20:50.520Z","updated_at":"2022-04-12T23:20:50.520Z","disabled":true}],"limit":1}`)
-					} else {
+					default:
 						res.WriteHeader(400)
 					}
 				}))
@@ -8173,9 +8181,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listConfigurationsOptionsModel := &secretsmanagerv2.ListConfigurationsOptions{
-					Limit:       core.Int64Ptr(int64(10)),
-					Sort:        core.StringPtr("config_type"),
-					Search:      core.StringPtr("example"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("config_type"),
+					Search: core.StringPtr("example"),
 					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 				}
 
@@ -8201,9 +8209,9 @@ var _ = Describe(`SecretsManagerV2`, func() {
 				Expect(secretsManagerService).ToNot(BeNil())
 
 				listConfigurationsOptionsModel := &secretsmanagerv2.ListConfigurationsOptions{
-					Limit:       core.Int64Ptr(int64(10)),
-					Sort:        core.StringPtr("config_type"),
-					Search:      core.StringPtr("example"),
+					Limit: core.Int64Ptr(int64(10)),
+					Sort: core.StringPtr("config_type"),
+					Search: core.StringPtr("example"),
 					SecretTypes: []string{"iam_credentials", "public_cert", "private_cert", "custom_credentials"},
 				}
 
