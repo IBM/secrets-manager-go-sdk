@@ -21,15 +21,15 @@ package secretsmanagerv2_test
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"strings"
-	"time"
-
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/IBM/secrets-manager-go-sdk/v2/secretsmanagerv2"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"log"
+	"math/rand"
+	"os"
+	"strings"
+	"time"
 )
 
 /**
@@ -62,6 +62,13 @@ var (
 
 	iamConfigType = "iam_credentials_configuration"
 	iamConfigName = "iam_config"
+
+	customCredentialsConfigType          = "custom_credentials_configuration"
+	customCredentialsConfigName          = "custom_credentials_config"
+	customCredentialsCodeEngineProjectId string
+	customCredentialsTestSecretId        string
+	customCredentialsTestTaskId          string
+	customCredentialsSetupWasInitialized = false
 )
 
 var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
@@ -86,6 +93,11 @@ var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
 			serviceURL = config["URL"]
 			if serviceURL == "" {
 				Skip("Unable to load service URL configuration property, skipping tests")
+			}
+
+			customCredentialsCodeEngineProjectId = config["CODE_ENGINE_PROJECT_ID"]
+			if customCredentialsCodeEngineProjectId == "" {
+				Skip("Unable to load Code Engine project ID configuration property, skipping tests")
 			}
 
 			fmt.Fprintf(GinkgoWriter, "Service URL: %v\n", serviceURL)
@@ -120,7 +132,7 @@ var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
 			createPrivateCert(privateCertSecretName1, templateConfigName1)
 		})
 		AfterEach(func() {
-			deleteSecret(privateCertSecretId)
+			deleteSecret(privateCertSecretId, false)
 			deleteConfig(templateConfigName1, templateConfigType)
 			deleteConfig(interCaConfigName, interCaConfigType)
 			deleteConfig(rootCaConfigName, rootCaConfigType)
@@ -152,7 +164,7 @@ var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
 			createPrivateCert(privateCertSecretName2, templateConfigName2)
 		})
 		AfterEach(func() {
-			deleteSecret(privateCertSecretId)
+			deleteSecret(privateCertSecretId, false)
 			deleteConfig(templateConfigName2, templateConfigType)
 			deleteConfig(interCaConfigName, interCaConfigType)
 			deleteConfig(rootCaConfigName, rootCaConfigType)
@@ -205,11 +217,11 @@ var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 			createIAMConfig()
-			createIAMCredSecret()
+			createIAMCredSecret(false)
 			getIAMCredSecret()
 		})
 		AfterEach(func() {
-			deleteSecret(iamCredSecretId)
+			deleteSecret(iamCredSecretId, false)
 		})
 
 		It(`DeleteSecretVersionData(deleteSecretVersionDataOptions *DeleteSecretVersionDataOptions)`, func() {
@@ -221,6 +233,87 @@ var _ = Describe(`SecretsManagerV2 Manual Tests`, func() {
 			response, err := secretsManagerService.DeleteSecretVersionData(deleteSecretVersionDataOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(204))
+		})
+	})
+
+	Describe(`Secret tasks`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+			if customCredentialsSetupWasInitialized == false {
+				Expect(createCustomCredentialsConfig()).To(BeNil(), "failed to create custom credentials configuration")
+				Expect(createCustomCredentials()).To(BeNil(), "failed to create custom credentials")
+				customCredentialsSetupWasInitialized = true
+			}
+		})
+		AfterSuite(func() {
+			deleteSecret(customCredentialsTestSecretId, true)
+			deleteConfig(customCredentialsConfigName, customCredentialsConfigType)
+			deleteSecret(iamCredSecretId, false)
+		})
+		Describe(`ListSecretTasks - List secret tasks`, func() {
+			It(`ListSecretTasks(listSecretTasksOptions *ListSecretTasksOptions)`, func() {
+				listSecretTasksOptions := &secretsmanagerv2.ListSecretTasksOptions{
+					SecretID: &customCredentialsTestSecretId,
+				}
+
+				secretTaskCollection, response, err := secretsManagerService.ListSecretTasks(listSecretTasksOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(secretTaskCollection).ToNot(BeNil())
+			})
+		})
+
+		Describe(`GetSecretTask - Get a secret's task`, func() {
+			It(`GetSecretTask(getSecretTaskOptions *GetSecretTaskOptions)`, func() {
+				getSecretTaskOptions := &secretsmanagerv2.GetSecretTaskOptions{
+					SecretID: &customCredentialsTestSecretId,
+					ID:       &customCredentialsTestTaskId,
+				}
+
+				secretTask, response, err := secretsManagerService.GetSecretTask(getSecretTaskOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(secretTask).ToNot(BeNil())
+			})
+		})
+
+		Describe(`ReplaceSecretTask - Update a secret's task`, func() {
+			It(`ReplaceSecretTask(replaceSecretTaskOptions *ReplaceSecretTaskOptions)`, func() {
+				customCredentialsNewCredentialsModel := &secretsmanagerv2.CustomCredentialsNewCredentials{
+					ID:      core.StringPtr("b49ad24d-81d4-5ebc-b9b9-b0937d1c84d5"),
+					Payload: map[string]interface{}{"credentials": "apikey"},
+				}
+
+				secretTaskPrototypeModel := &secretsmanagerv2.SecretTaskPrototypeUpdateSecretTaskCredentialsCreated{
+					Status:      core.StringPtr("credentials_created"),
+					Credentials: customCredentialsNewCredentialsModel,
+				}
+
+				replaceSecretTaskOptions := &secretsmanagerv2.ReplaceSecretTaskOptions{
+					SecretID: &customCredentialsTestSecretId,
+					ID:       &customCredentialsTestTaskId,
+					TaskPut:  secretTaskPrototypeModel,
+				}
+
+				secretTask, response, err := secretsManagerService.ReplaceSecretTask(replaceSecretTaskOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(200))
+				Expect(secretTask).ToNot(BeNil())
+			})
+		})
+
+		Describe(`DeleteSecretTask - Delete a task`, func() {
+			It(`DeleteSecretTask(deleteSecretTaskOptions *DeleteSecretTaskOptions)`, func() {
+				deleteSecretTaskOptions := &secretsmanagerv2.DeleteSecretTaskOptions{
+					SecretID: &customCredentialsTestSecretId,
+					ID:       &customCredentialsTestTaskId,
+				}
+
+				response, err := secretsManagerService.DeleteSecretTask(deleteSecretTaskOptions)
+				Expect(err).To(BeNil())
+				Expect(response.StatusCode).To(Equal(204))
+				customCredentialsTestTaskId = ""
+			})
 		})
 	})
 
@@ -237,12 +330,15 @@ func deleteConfig(configName string, configType string) {
 	Expect(response.StatusCode).To(Equal(204))
 }
 
-func deleteSecret(secretId string) {
+func deleteSecret(secretId string, forceDelete bool) {
 	if secretId == "" {
 		return
 	}
 	deleteSecretOptions := &secretsmanagerv2.DeleteSecretOptions{
 		ID: &secretId,
+	}
+	if forceDelete {
+		deleteSecretOptions.ForceDelete = core.BoolPtr(true)
 	}
 
 	response, err := secretsManagerService.DeleteSecret(deleteSecretOptions)
@@ -361,7 +457,7 @@ func createConfiguration(createConfigurationOptions *secretsmanagerv2.CreateConf
 	Expect(configuration).ToNot(BeNil())
 }
 
-func createIAMCredSecret() {
+func createIAMCredSecret(reuse bool) {
 	secretPrototypeModel := &secretsmanagerv2.IAMCredentialsSecretPrototype{
 		SecretType:            core.StringPtr("iam_credentials"),
 		Name:                  core.StringPtr("integration-iam-credentials"),
@@ -369,9 +465,17 @@ func createIAMCredSecret() {
 		Labels:                []string{"integration", "test"},
 		CustomMetadata:        map[string]interface{}{"anyKey": "anyValue"},
 		VersionCustomMetadata: map[string]interface{}{"anyKey": "anyValue"},
-		TTL:                   core.StringPtr("1h"),
-		ReuseApiKey:           core.BoolPtr(false),
+		TTL:                   core.StringPtr("60d"),
+		ReuseApiKey:           core.BoolPtr(reuse),
 		AccessGroups:          []string{config["ACCESS_GROUP"]},
+	}
+
+	if reuse {
+		secretPrototypeModel.Rotation = &secretsmanagerv2.RotationPolicy{
+			AutoRotate: core.BoolPtr(true),
+			Interval:   core.Int64Ptr(30),
+			Unit:       core.StringPtr("day"),
+		}
 	}
 
 	createSecretOptions := &secretsmanagerv2.CreateSecretOptions{
@@ -395,6 +499,86 @@ func getIAMCredSecret() {
 	Expect(err).To(BeNil())
 	Expect(response.StatusCode).To(Equal(200))
 	Expect(secret).ToNot(BeNil())
+}
+
+func createCustomCredentialsSecret() (string, error) {
+	name := fmt.Sprintf("secret_%d", rand.Intn(1000))
+
+	customCredentialsSecretPrototype := &secretsmanagerv2.CustomCredentialsSecretPrototype{
+		Description:   core.StringPtr("Generated by Secrets Manager GO SDK"),
+		Name:          &name,
+		SecretType:    core.StringPtr(secretsmanagerv2.Configuration_SecretType_CustomCredentials),
+		Configuration: core.StringPtr(customCredentialsConfigName),
+		Parameters: map[string]interface{}{
+			"scope": "admin",
+			"ttl":   3600,
+			"hmac":  true,
+		},
+	}
+
+	options := secretsManagerService.NewCreateSecretOptions(customCredentialsSecretPrototype)
+	secret, _, err := secretsManagerService.CreateSecret(options)
+	if err != nil {
+		return "", err
+	}
+	secretId := *secret.(*secretsmanagerv2.CustomCredentialsSecret).ID
+
+	return secretId, nil
+}
+
+func createCustomCredentialsConfig() error {
+	createIAMCredSecret(true)
+
+	if customCredentialsCodeEngineProjectId == "" {
+		return fmt.Errorf("missing SECRETS_MANAGER_CODE_ENGINE_PROJECT_ID in configuration file.")
+	}
+
+	configurationPrototypeModel := &secretsmanagerv2.CustomCredentialsConfigurationPrototype{
+		Name:       core.StringPtr(customCredentialsConfigName),
+		ConfigType: core.StringPtr(customCredentialsConfigType),
+		ApiKeyRef:  &iamCredSecretId,
+		CodeEngine: &secretsmanagerv2.CustomCredentialsConfigurationCodeEngine{
+			JobName:   core.StringPtr("permanent-job-for-sdk-test"),
+			ProjectID: &customCredentialsCodeEngineProjectId,
+			Region:    core.StringPtr("us-south"),
+		},
+		TaskTimeout: core.StringPtr("10m"),
+	}
+
+	createConfigurationOptions := &secretsmanagerv2.CreateConfigurationOptions{
+		ConfigurationPrototype: configurationPrototypeModel,
+	}
+	createConfiguration(createConfigurationOptions, false)
+	return nil
+}
+
+func createCustomCredentials() error {
+	// Create test secret
+	var err error
+	if customCredentialsTestSecretId, err = createCustomCredentialsSecret(); err != nil {
+		return err
+	}
+	// Get the first task ID
+	tasks, err := getCustomCredentialsTasks(customCredentialsTestSecretId)
+	if len(tasks) == 0 {
+		return fmt.Errorf("no tasks found for test secret")
+	}
+
+	customCredentialsTestTaskId = *tasks[0].ID
+	return nil
+}
+
+func getCustomCredentialsTasks(secretId string) ([]secretsmanagerv2.SecretTask, error) {
+	collection, _, err := secretsManagerService.ListSecretTasks(&secretsmanagerv2.ListSecretTasksOptions{
+		SecretID: core.StringPtr(secretId),
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return collection.Tasks, nil
+
 }
 
 //
