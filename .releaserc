@@ -24,7 +24,8 @@
         "assets": [
           ".bumpversion.toml",
           "common/version.go"
-        }
+        ]
+      }
     ],
     "@semantic-release/github"
   ]
